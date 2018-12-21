@@ -98,6 +98,7 @@
             this.btnNuevo.Size = new System.Drawing.Size(23, 22);
             this.btnNuevo.Text = "toolStripButton1";
             this.btnNuevo.ToolTipText = "Nuevo (Ctrl + N)";
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnEditar
             // 
@@ -108,6 +109,7 @@
             this.btnEditar.Size = new System.Drawing.Size(23, 22);
             this.btnEditar.Text = "toolStripButton2";
             this.btnEditar.ToolTipText = "Editar (Ctrl + F4)";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnEliminar
             // 

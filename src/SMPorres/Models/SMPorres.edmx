@@ -4,25 +4,24 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SMPorres_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMPorres_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Carreras">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
-          <Property Name="Importe1Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe2Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe3Vto" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Importe1Vto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Importe2Vto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Importe3Vto" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SMPorres_DevModelStoreContainer">
           <EntitySet Name="Carreras" EntityType="Self.Carreras" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SMPorres_DevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -37,7 +36,7 @@
           <Property Name="Importe2Vto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Importe3Vto" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityContainer Name="SMPorresEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />

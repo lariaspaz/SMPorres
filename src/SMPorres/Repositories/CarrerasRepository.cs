@@ -36,7 +36,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.Carreras.Max(c => c.Id) + 1;
+                var id = db.Carreras.Max(c1 => c1.Id) + 1;
                 var c = new Carrera {
                     Nombre = nombre,
                     Duracion = duración,
