@@ -80,6 +80,7 @@
       <DependentUpon>frmListado.cs</DependentUpon>
     </Compile>
     <Compile Include="Lib\Components\Forms.cs" />
+    <Compile Include="Lib\System.Windows.Forms\CustomMessageBox.cs" />
     <Compile Include="Models\Carrera.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -101,6 +102,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CarrerasRepository.cs" />
+    <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carreras\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>

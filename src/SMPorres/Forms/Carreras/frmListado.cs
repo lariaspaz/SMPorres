@@ -88,7 +88,23 @@ namespace SMPorres.Forms.Carreras
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-
+            using (var f = new frmEdición())
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var c = CarrerasRepository.Insertar(f.Nombre, f.Duración, f.Importe1Vto, 
+                            f.Importe2Vto, f.Importe3Vto, f.Estado);
+                        ConsultarDatos();
+                        dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                    }
+                }
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)

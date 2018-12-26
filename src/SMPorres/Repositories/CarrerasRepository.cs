@@ -31,13 +31,14 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static Carrera Insertar(string nombre, short duración, decimal importe1Vto, decimal importe2Vto, 
+        public static Carrera Insertar(string nombre, short duración, decimal importe1Vto, decimal importe2Vto,
             decimal importe3Vto, short estado)
         {
             using (var db = new SMPorresEntities())
             {
                 var id = db.Carreras.Max(c1 => c1.Id) + 1;
-                var c = new Carrera {
+                var c = new Carrera
+                {
                     Nombre = nombre,
                     Duracion = duración,
                     Importe1Vto = importe1Vto,
@@ -48,6 +49,36 @@ namespace SMPorres.Repositories
                 db.Carreras.Add(c);
                 db.SaveChanges();
                 return c;
+            }
+        }
+
+        public static void Actualizar(decimal id, string nombre, short duración, decimal importe1Vto, decimal importe2Vto,
+            decimal importe3Vto, short estado)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.Carreras.Any(t => t.Id == id))
+                {
+                    throw new Exception(String.Format("No existe la carrera {0} - {1}", id, nombre));
+                }
+                var c = db.Carreras.Find(id);
+                c.Nombre = nombre;
+                c.Duracion = duración;
+                c.Importe1Vto = importe1Vto;
+                c.Importe2Vto = importe2Vto;
+                c.Importe3Vto = importe3Vto;
+                c.Estado = estado;
+                db.SaveChanges();
+            }
+        }
+
+        public static void Eliminar(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var c = db.Carreras.Find(id);
+                db.Carreras.Remove(c);
+                db.SaveChanges();
             }
         }
     }
