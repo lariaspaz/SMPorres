@@ -30,7 +30,7 @@ namespace SMPorres.Forms.Carreras
                                        c.Id,
                                        c.Nombre,
                                        c.Duracion,
-                                       DescripciónEstado = (c.Estado == 1 ? "Activa" : "Baja"),
+                                       DescripciónEstado = (c.Estado == 1 ? "Habilitada" : "Baja"),
                                        c.Estado
                                    });
         }
@@ -64,7 +64,7 @@ namespace SMPorres.Forms.Carreras
             dgvDatos.Columns[2].HeaderText = "Duración";
             dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvDatos.Columns[2].DefaultCellStyle.Format = "C2";
+            dgvDatos.Columns[2].DefaultCellStyle.Format = "d";
 
             dgvDatos.Columns[3].HeaderText = "Estado";
             dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -109,7 +109,47 @@ namespace SMPorres.Forms.Carreras
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            var id = (decimal)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var m = CarrerasRepository.ObtenerCarreraPorId(id);
+            using (var f = new frmEdición(m))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        CarrerasRepository.Actualizar(m.Id, f.Nombre, f.Duración, f.Importe1Vto, f.Importe2Vto,
+                            f.Importe3Vto, f.Estado);
+                        ConsultarDatos();
+                        dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError(ex.Message);
+                    }
+                }
+            }
+        }
 
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            var id = (decimal)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var m = CarrerasRepository.ObtenerCarreraPorId(id);
+            if (MessageBox.Show("¿Está seguro de que desea contrasentar el movimiento seleccionado?",
+                "Contrasentar Movimiento", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                try
+                {
+                    CarrerasRepository.Eliminar(m.Id);
+                    ConsultarDatos();
+                    dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowError(ex.Message);
+                }
+            }
         }
     }
 }

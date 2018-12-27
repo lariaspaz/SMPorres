@@ -1,4 +1,6 @@
-﻿using SMPorres.Models;
+﻿using Finanzas.Lib.Extensions;
+using SMPorres.Lib.Validations;
+using SMPorres.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,8 @@ namespace SMPorres.Forms.Carreras
 {
     public partial class frmEdición : Form
     {
+        private FormValidations _validator;
+
         public frmEdición()
         {
             InitializeComponent();
@@ -22,24 +26,20 @@ namespace SMPorres.Forms.Carreras
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            //txtDescripción.Select();
             this.Text = "Nueva transacción";
-            //cbRubros.DataSource = RubrosRepository.ObtenerRubros();
-            //cbRubros.ValueMember = "Id";
-            //cbRubros.DisplayMember = "Descripcion";
-            //cbRubros.SelectedValue = idRubro;
+            txtNombre.Select();
+            _validator = new FormValidations(this, errorProvider1);
         }
 
         public frmEdición(Carrera carrera) : this()
         {
             this.Text = "Edición de transacción";
-            //cbRubros.DataSource = RubrosRepository.ObtenerRubros();
-            //cbRubros.ValueMember = "Id";
-            //cbRubros.DisplayMember = "Descripcion";
-            //cbRubros.SelectedValue = transacción.IdRubro;
-            //txtDescripción.Text = transacción.Descripcion;
-            //ckEsDébito.Checked = transacción.EsDebito;
-            //ckHabilitada.Checked = transacción.Estado == 1;
+            txtNombre.Text = carrera.Nombre;
+            txtDuración.Text = carrera.Duracion.ToString();
+            txtImporte1Vto.Text = String.Format("{0:n}", carrera.Importe1Vto);
+            txtImporte2Vto.Text = String.Format("{0:n}", carrera.Importe2Vto);
+            txtImporte3Vto.Text = String.Format("{0:n}", carrera.Importe3Vto);
+            ckEstado.Checked = carrera.Estado == 1;
         }
 
         public string Nombre
@@ -54,12 +54,7 @@ namespace SMPorres.Forms.Carreras
         {
             get
             {
-                short i;
-                if (!Int16.TryParse(txtDuración.Text, out i))
-                {
-                    i = 0;
-                }
-                return i;
+                return (short)txtImporte1Vto.IntValue;
             }
         }
 
@@ -67,12 +62,7 @@ namespace SMPorres.Forms.Carreras
         {
             get
             {
-                decimal i;
-                if (!Decimal.TryParse(txtImporte1Vto.Text, out i))
-                {
-                    i = 0;
-                }
-                return i;
+                return txtImporte1Vto.DecValue;
             }
         }
 
@@ -80,12 +70,7 @@ namespace SMPorres.Forms.Carreras
         {
             get
             {
-                decimal i;
-                if (!Decimal.TryParse(txtImporte2Vto.Text, out i))
-                {
-                    i = 0;
-                }
-                return i;
+                return txtImporte2Vto.DecValue;
             }
         }
 
@@ -93,12 +78,7 @@ namespace SMPorres.Forms.Carreras
         {
             get
             {
-                decimal i;
-                if (!Decimal.TryParse(txtImporte3Vto.Text, out i))
-                {
-                    i = 0;
-                }
-                return i;
+                return txtImporte3Vto.DecValue;
             }
         }
 
@@ -109,5 +89,23 @@ namespace SMPorres.Forms.Carreras
                 return (short)(ckEstado.Checked ? 1 : 0);
             }
         }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.None;
+            if (this.ValidarDatos())
+            {
+                DialogResult = DialogResult.OK;
+            }
+        }
+
+        private bool ValidarDatos()
+        {
+            return
+                _validator.Validar(txtDuración, Duración > 0, "No puede ser menor o igual que cero") &&
+                _validator.Validar(txtImporte1Vto, Importe1Vto > 0, "No puede ser menor o igual que cero") &&
+                _validator.Validar(txtImporte2Vto, Importe2Vto > 0, "No puede ser menor o igual que cero") &&
+                _validator.Validar(txtImporte3Vto, Importe3Vto > 0, "No puede ser menor o igual que cero");
+        }        
     }
 }

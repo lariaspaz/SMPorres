@@ -1,4 +1,5 @@
-﻿using SMPorres.Models;
+﻿using SMPorres.Lib;
+using SMPorres.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,15 +37,17 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.Carreras.Max(c1 => c1.Id) + 1;
+                var id = db.Carreras.Any() ? db.Carreras.Max(c1 => c1.Id) + 1 : 1;
                 var c = new Carrera
                 {
+                    Id = id,
                     Nombre = nombre,
                     Duracion = duración,
                     Importe1Vto = importe1Vto,
                     Importe2Vto = importe2Vto,
                     Importe3Vto = importe3Vto,
-                    Estado = estado
+                    Estado = estado,
+                    FechaEstado = Configuration.CurrentDate
                 };
                 db.Carreras.Add(c);
                 db.SaveChanges();
@@ -67,18 +70,34 @@ namespace SMPorres.Repositories
                 c.Importe1Vto = importe1Vto;
                 c.Importe2Vto = importe2Vto;
                 c.Importe3Vto = importe3Vto;
-                c.Estado = estado;
+                if (c.Estado != estado)
+                {
+                    c.Estado = estado;
+                    c.FechaEstado = Configuration.CurrentDate;
+                }
                 db.SaveChanges();
             }
         }
 
-        public static void Eliminar(int id)
+        public static void Eliminar(decimal id)
         {
             using (var db = new SMPorresEntities())
             {
+                if (!db.Carreras.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe la carrera con Id " + id);
+                }
                 var c = db.Carreras.Find(id);
                 db.Carreras.Remove(c);
                 db.SaveChanges();
+            }
+        }
+
+        internal static Carrera ObtenerCarreraPorId(decimal id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.Carreras.Find(id);
             }
         }
     }
