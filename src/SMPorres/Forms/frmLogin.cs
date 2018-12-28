@@ -21,7 +21,10 @@ namespace SMPorres.Forms
             var repo = new UsuariosRepository();
             if (_validator.Validar(txtUsuario, repo.VerificarLoginUsuario(txtUsuario.Text, txtContraseña.Text),
                 "El usuario o la contraseña son incorrectos"))
+            {
+                Session.CurrentUser = repo.ObtenerUsuario(txtUsuario.Text);
                 DialogResult = DialogResult.OK;
+            }
             else
                 DialogResult = DialogResult.None;
         }

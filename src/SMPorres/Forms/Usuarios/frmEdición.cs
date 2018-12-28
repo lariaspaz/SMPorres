@@ -48,26 +48,6 @@ namespace SMPorres.Forms.Usuarios
         private bool ValidarDatos()
         {
             bool result = true;
-            //if (String.IsNullOrWhiteSpace(txtNombre.Text))
-            //{
-            //    errorProvider1.SetError(txtNombre, "No puede estar vacío");
-            //    new ToolTip().ShowError(this, txtNombre, "No puede estar vacío");
-            //    result = false;
-            //}
-            //else
-            //{
-            //    errorProvider1.SetError(txtNombre, "");
-            //}
-            //if (String.IsNullOrWhiteSpace(txtNombreCompleto.Text))
-            //{
-            //    errorProvider1.SetError(txtNombreCompleto, "No puede estar vacío");
-            //    new ToolTip().ShowError(this, txtNombreCompleto, "No puede estar vacío");
-            //    result = false;
-            //}
-            //else
-            //{
-            //    errorProvider1.SetError(txtNombreCompleto, "");
-            //}
             result = ValidarTextBoxVacío(txtNombre, this, errorProvider1) &&
                         ValidarTextBoxVacío(txtNombreCompleto, this, errorProvider1);
             return result;
