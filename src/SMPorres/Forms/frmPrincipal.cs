@@ -37,5 +37,10 @@ namespace SMPorres.Forms
         {
             Close();
         }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Usuarios.frmListado()) f.ShowDialog();
+        }
     }
 }

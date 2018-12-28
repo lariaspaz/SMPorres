@@ -1,5 +1,4 @@
-﻿using Finanzas.Lib.Extensions;
-using SMPorres.Lib;
+﻿using SMPorres.Lib;
 using SMPorres.Lib.Validations;
 using SMPorres.Repositories;
 using System;
