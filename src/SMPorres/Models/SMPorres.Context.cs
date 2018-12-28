@@ -26,5 +26,6 @@ namespace SMPorres.Models
         }
     
         public virtual DbSet<Carrera> Carreras { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
     }
 }

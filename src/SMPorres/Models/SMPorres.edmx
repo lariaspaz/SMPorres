@@ -9,17 +9,30 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
-          <Property Name="Importe1Vto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe2Vto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe3Vto" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Importe1Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Importe2Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Importe3Vto" Type="numeric" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+          <Property Name="FechaBaja" Type="datetime" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SMPorres_DevModelStoreContainer">
           <EntitySet Name="Carreras" EntityType="Self.Carreras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -36,11 +49,24 @@
           <Property Name="Importe2Vto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Importe3Vto" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityContainer Name="SMPorresEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />
+          <EntitySet Name="Usuarios" EntityType="SMPorres_DevModel.Usuario" />
         </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="Byte" Nullable="false" />
+          <Property Name="FechaBaja" Type="DateTime" Precision="3" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -58,6 +84,19 @@
                 <ScalarProperty Name="Importe3Vto" ColumnName="Importe3Vto" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="FechaEstado" ColumnName="FechaEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="FechaBaja" ColumnName="FechaBaja" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -23,6 +23,16 @@ namespace SMPorres.Forms
             using (var f = new Carreras.frmListado()) f.ShowDialog();
         }
 
+        internal bool Inicializar()
+        {
+            if (new frmLogin().ShowDialog() == DialogResult.OK)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();

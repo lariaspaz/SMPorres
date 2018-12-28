@@ -16,7 +16,16 @@ namespace SMPorres
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frmPrincipal());
+            //Application.Run(new Forms.frmPrincipal());
+            var f = new Forms.frmPrincipal();
+            if (f.Inicializar())
+            {
+                Application.Run(f);
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
     }
 }
