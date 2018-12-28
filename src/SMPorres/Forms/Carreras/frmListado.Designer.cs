@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.dgvDatos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
@@ -65,15 +65,16 @@
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDatos.EvenRowColor = System.Drawing.Color.Empty;
             this.dgvDatos.Location = new System.Drawing.Point(3, 28);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
+            this.dgvDatos.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(766, 562);
             this.dgvDatos.TabIndex = 0;
             this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
-            this.dgvDatos.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvDatos_RowPrePaint);
             // 
             // toolStrip1
             // 
@@ -160,7 +161,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dgvDatos;
+        private CustomLibrary.ComponentModel.CustomDataGridView dgvDatos;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnEditar;

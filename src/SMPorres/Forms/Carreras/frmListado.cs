@@ -1,48 +1,32 @@
 ﻿using CustomLibrary.Extensions.Controls;
 using SMPorres.Repositories;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SMPorres.Lib.Components;
 
 namespace SMPorres.Forms.Carreras
 {
-    public partial class frmListado : Form
+    public partial class frmListado : Lib.AppForms.FormBase
     {
         public frmListado()
         {
             InitializeComponent();
-            Lib.Components.Forms.InitForm(this);
             ConsultarDatos();
         }
 
         private void ConsultarDatos()
         {
             dgvDatos.SetDataSource(from c in CarrerasRepository.ObtenerCarreras()
+                                   orderby c.Id
                                    select new
                                    {
                                        c.Id,
                                        c.Nombre,
-                                       c.Duracion,
+                                       Duracion = String.Format("{0} años", c.Duracion),
                                        DescripciónEstado = (c.Estado == 1 ? "Habilitada" : "Baja"),
                                        c.Estado
                                    });
-        }
-
-        private void dgvDatos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            if (e.RowIndex % 2 == 0)
-            {
-                dgvDatos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.AliceBlue;
-                //dgvDatos.Rows[e.RowIndex].Cells[1].Style.BackColor = Color.AliceBlue;
-            }
-            dgvDatos.Rows[e.RowIndex].Cells[0].Style.BackColor = SystemColors.ButtonFace;
         }
 
         private void dgvDatos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -101,7 +85,7 @@ namespace SMPorres.Forms.Carreras
                     }
                     catch (Exception ex)
                     {
-                        CustomMessageBox.ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                        ShowError("Error al intentar grabar los datos: \n" + ex.Message);
                     }
                 }
             }
@@ -109,9 +93,7 @@ namespace SMPorres.Forms.Carreras
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            int rowindex = dgvDatos.CurrentCell.RowIndex;
-            var id = (decimal)dgvDatos.Rows[rowindex].Cells[0].Value;
-            var m = CarrerasRepository.ObtenerCarreraPorId(id);
+            Models.Carrera m = ObtenerCarreraSeleccionada();
             using (var f = new frmEdición(m))
             {
                 if (f.ShowDialog() == DialogResult.OK)
@@ -125,19 +107,25 @@ namespace SMPorres.Forms.Carreras
                     }
                     catch (Exception ex)
                     {
-                        CustomMessageBox.ShowError(ex.Message);
+                        ShowError("Error al intentar grabar los datos: \n" + ex.Message);
                     }
                 }
             }
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private Models.Carrera ObtenerCarreraSeleccionada()
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
             var id = (decimal)dgvDatos.Rows[rowindex].Cells[0].Value;
             var m = CarrerasRepository.ObtenerCarreraPorId(id);
-            if (MessageBox.Show("¿Está seguro de que desea contrasentar el movimiento seleccionado?",
-                "Contrasentar Movimiento", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            return m;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Models.Carrera m = ObtenerCarreraSeleccionada();
+            if (MessageBox.Show("¿Está seguro de que desea eliminar la carrera seleccionada?",
+                "Eliminar carrera", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
                 try
                 {
@@ -147,7 +135,7 @@ namespace SMPorres.Forms.Carreras
                 }
                 catch (Exception ex)
                 {
-                    CustomMessageBox.ShowError(ex.Message);
+                    ShowError(ex.Message);
                 }
             }
         }

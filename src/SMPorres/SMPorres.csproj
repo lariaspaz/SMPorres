@@ -81,7 +81,9 @@
     </Compile>
     <Compile Include="Lib\Components\Forms.cs" />
     <Compile Include="Lib\Configuration.cs" />
-    <Compile Include="Lib\System.Windows.Forms\CustomMessageBox.cs" />
+    <Compile Include="Lib\AppForms\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Lib\Validations\FormValidations.cs" />
     <Compile Include="Models\Carrera.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>

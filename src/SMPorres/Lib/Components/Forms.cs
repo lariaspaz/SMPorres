@@ -8,14 +8,14 @@ namespace SMPorres.Lib.Components
 {
     public static class Forms
     {
-        public static void InitForm(System.Windows.Forms.Form f)
-        {
-            f.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            f.MaximizeBox = false;
-            f.MinimizeBox = false;
-            f.ShowInTaskbar = false;
-            f.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            f.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-        }
+        //public static void InitForm(System.Windows.Forms.Form f)
+        //{
+        //    f.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+        //    f.MaximizeBox = false;
+        //    f.MinimizeBox = false;
+        //    f.ShowInTaskbar = false;
+        //    f.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+        //    f.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        //}
     }
 }
