@@ -27,5 +27,12 @@ namespace SMPorres.Models
     
         public virtual DbSet<Carrera> Carreras { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Alumno> Alumnos { get; set; }
+        public virtual DbSet<Barrio> Barrios { get; set; }
+        public virtual DbSet<Departamento> Departamentos { get; set; }
+        public virtual DbSet<Domicilio> Domicilios { get; set; }
+        public virtual DbSet<Localidad> Localidads { get; set; }
+        public virtual DbSet<Provincia> Provincias { get; set; }
+        public virtual DbSet<TipoDocumento> TipoDocumentoes { get; set; }
     }
 }

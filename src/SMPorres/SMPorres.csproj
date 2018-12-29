@@ -110,7 +110,25 @@
     </Compile>
     <Compile Include="Lib\Session.cs" />
     <Compile Include="Lib\Validations\FormValidations.cs" />
+    <Compile Include="Models\Alumno.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Barrio.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Carrera.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Departamento.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domicilio.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Localidad.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Provincia.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SMPorres.Context.cs">
@@ -127,6 +145,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SMPorres.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoDocumento.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>

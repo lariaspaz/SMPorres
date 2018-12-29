@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SMPorres_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumnos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
+          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
+          <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdDomicilio" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Barrios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdLocalidad" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Carreras">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,6 +41,46 @@
           <Property Name="Estado" Type="smallint" Nullable="false" />
           <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdProvincia" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Domicilios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdBarrio" Type="int" Nullable="false" />
+          <Property Name="IdLocalidad" Type="int" Nullable="false" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="IdProvincia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Localidades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provincias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,9 +93,160 @@
           <Property Name="FechaBaja" Type="datetime" />
           <Property Name="NombreCompleto" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Alumnos_Domicilios">
+          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="1" />
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumnos">
+              <PropertyRef Name="IdDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumnos_TiposDocumento">
+          <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDocumento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumnos">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barrios_Localidades">
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
+          <End Role="Barrios" Type="Self.Barrios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Barrios">
+              <PropertyRef Name="IdLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departamentos_Provincias">
+          <End Role="Provincias" Type="Self.Provincias" Multiplicity="1" />
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departamentos">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Barrios">
+          <End Role="Barrios" Type="Self.Barrios" Multiplicity="1" />
+          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barrios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilios">
+              <PropertyRef Name="IdBarrio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilios">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Localidades">
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
+          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilios">
+              <PropertyRef Name="IdLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Provincias">
+          <End Role="Provincias" Type="Self.Provincias" Multiplicity="1" />
+          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilios">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidades_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Localidades">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SMPorres_DevModelStoreContainer">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Barrios" EntityType="Self.Barrios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carreras" EntityType="Self.Carreras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alumnos_Domicilios" Association="Self.FK_Alumnos_Domicilios">
+            <End Role="Domicilios" EntitySet="Domicilios" />
+            <End Role="Alumnos" EntitySet="Alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="Self.FK_Alumnos_TiposDocumento">
+            <End Role="TiposDocumento" EntitySet="TiposDocumento" />
+            <End Role="Alumnos" EntitySet="Alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barrios_Localidades" Association="Self.FK_Barrios_Localidades">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="Barrios" EntitySet="Barrios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departamentos_Provincias" Association="Self.FK_Departamentos_Provincias">
+            <End Role="Provincias" EntitySet="Provincias" />
+            <End Role="Departamentos" EntitySet="Departamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Barrios" Association="Self.FK_Domicilios_Barrios">
+            <End Role="Barrios" EntitySet="Barrios" />
+            <End Role="Domicilios" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Departamentos" Association="Self.FK_Domicilios_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Domicilios" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Localidades" Association="Self.FK_Domicilios_Localidades">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="Domicilios" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Provincias" Association="Self.FK_Domicilios_Provincias">
+            <End Role="Provincias" EntitySet="Provincias" />
+            <End Role="Domicilios" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidades_Departamentos" Association="Self.FK_Localidades_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Localidades" EntitySet="Localidades" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -54,6 +268,49 @@
         <EntityContainer Name="SMPorresEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />
           <EntitySet Name="Usuarios" EntityType="SMPorres_DevModel.Usuario" />
+          <EntitySet Name="Alumnos" EntityType="SMPorres_DevModel.Alumno" />
+          <EntitySet Name="Barrios" EntityType="SMPorres_DevModel.Barrio" />
+          <EntitySet Name="Departamentos" EntityType="SMPorres_DevModel.Departamento" />
+          <EntitySet Name="Domicilios" EntityType="SMPorres_DevModel.Domicilio" />
+          <EntitySet Name="Localidads" EntityType="SMPorres_DevModel.Localidad" />
+          <EntitySet Name="Provincias" EntityType="SMPorres_DevModel.Provincia" />
+          <EntitySet Name="TipoDocumentoes" EntityType="SMPorres_DevModel.TipoDocumento" />
+          <AssociationSet Name="FK_Alumnos_Domicilios" Association="SMPorres_DevModel.FK_Alumnos_Domicilios">
+            <End Role="Domicilio" EntitySet="Domicilios" />
+            <End Role="Alumno" EntitySet="Alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento">
+            <End Role="TiposDocumento" EntitySet="TipoDocumentoes" />
+            <End Role="Alumno" EntitySet="Alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barrios_Localidades" Association="SMPorres_DevModel.FK_Barrios_Localidades">
+            <End Role="Localidade" EntitySet="Localidads" />
+            <End Role="Barrio" EntitySet="Barrios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Barrios" Association="SMPorres_DevModel.FK_Domicilios_Barrios">
+            <End Role="Barrio" EntitySet="Barrios" />
+            <End Role="Domicilio" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departamentos_Provincias" Association="SMPorres_DevModel.FK_Departamentos_Provincias">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Departamento" EntitySet="Departamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Departamentos" Association="SMPorres_DevModel.FK_Domicilios_Departamentos">
+            <End Role="Departamento" EntitySet="Departamentos" />
+            <End Role="Domicilio" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidades_Departamentos" Association="SMPorres_DevModel.FK_Localidades_Departamentos">
+            <End Role="Departamento" EntitySet="Departamentos" />
+            <End Role="Localidade" EntitySet="Localidads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Localidades" Association="SMPorres_DevModel.FK_Domicilios_Localidades">
+            <End Role="Localidade" EntitySet="Localidads" />
+            <End Role="Domicilio" EntitySet="Domicilios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domicilios_Provincias" Association="SMPorres_DevModel.FK_Domicilios_Provincias">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Domicilio" EntitySet="Domicilios" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -67,6 +324,195 @@
           <Property Name="FechaBaja" Type="DateTime" Precision="3" />
           <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdDomicilio" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Domicilio" Relationship="SMPorres_DevModel.FK_Alumnos_Domicilios" FromRole="Alumno" ToRole="Domicilio" />
+          <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
+        </EntityType>
+        <EntityType Name="Barrio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Localidad" Relationship="SMPorres_DevModel.FK_Barrios_Localidades" FromRole="Barrio" ToRole="Localidade" />
+          <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Barrios" FromRole="Barrio" ToRole="Domicilio" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdProvincia" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Provincia" Relationship="SMPorres_DevModel.FK_Departamentos_Provincias" FromRole="Departamento" ToRole="Provincia" />
+          <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Departamentos" FromRole="Departamento" ToRole="Domicilio" />
+          <NavigationProperty Name="Localidades" Relationship="SMPorres_DevModel.FK_Localidades_Departamentos" FromRole="Departamento" ToRole="Localidade" />
+        </EntityType>
+        <EntityType Name="Domicilio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdBarrio" Type="Int32" Nullable="false" />
+          <Property Name="IdLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="IdProvincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alumnos" Relationship="SMPorres_DevModel.FK_Alumnos_Domicilios" FromRole="Domicilio" ToRole="Alumno" />
+          <NavigationProperty Name="Barrio" Relationship="SMPorres_DevModel.FK_Domicilios_Barrios" FromRole="Domicilio" ToRole="Barrio" />
+          <NavigationProperty Name="Departamento" Relationship="SMPorres_DevModel.FK_Domicilios_Departamentos" FromRole="Domicilio" ToRole="Departamento" />
+          <NavigationProperty Name="Localidad" Relationship="SMPorres_DevModel.FK_Domicilios_Localidades" FromRole="Domicilio" ToRole="Localidade" />
+          <NavigationProperty Name="Provincia" Relationship="SMPorres_DevModel.FK_Domicilios_Provincias" FromRole="Domicilio" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Barrios" Relationship="SMPorres_DevModel.FK_Barrios_Localidades" FromRole="Localidade" ToRole="Barrio" />
+          <NavigationProperty Name="Departamento" Relationship="SMPorres_DevModel.FK_Localidades_Departamentos" FromRole="Localidade" ToRole="Departamento" />
+          <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Localidades" FromRole="Localidade" ToRole="Domicilio" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departamentos" Relationship="SMPorres_DevModel.FK_Departamentos_Provincias" FromRole="Provincia" ToRole="Departamento" />
+          <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Provincias" FromRole="Provincia" ToRole="Domicilio" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumnos" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="TiposDocumento" ToRole="Alumno" />
+        </EntityType>
+        <Association Name="FK_Alumnos_Domicilios">
+          <End Type="SMPorres_DevModel.Domicilio" Role="Domicilio" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domicilio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="IdDomicilio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumnos_TiposDocumento">
+          <End Type="SMPorres_DevModel.TipoDocumento" Role="TiposDocumento" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDocumento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barrios_Localidades">
+          <End Type="SMPorres_DevModel.Localidad" Role="Localidade" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Barrio" Role="Barrio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Barrio">
+              <PropertyRef Name="IdLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Barrios">
+          <End Type="SMPorres_DevModel.Barrio" Role="Barrio" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Domicilio" Role="Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barrio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="IdBarrio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departamentos_Provincias">
+          <End Type="SMPorres_DevModel.Provincia" Role="Provincia" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Departamento" Role="Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Departamentos">
+          <End Type="SMPorres_DevModel.Departamento" Role="Departamento" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Domicilio" Role="Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidades_Departamentos">
+          <End Type="SMPorres_DevModel.Departamento" Role="Departamento" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Localidad" Role="Localidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Localidade">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Localidades">
+          <End Type="SMPorres_DevModel.Localidad" Role="Localidade" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Domicilio" Role="Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="IdLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domicilios_Provincias">
+          <End Type="SMPorres_DevModel.Provincia" Role="Provincia" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Domicilio" Role="Domicilio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domicilio">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -100,6 +546,76 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Alumnos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumnos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdDomicilio" ColumnName="IdDomicilio" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barrios">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Barrio">
+              <MappingFragment StoreEntitySet="Barrios">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domicilios">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Domicilio">
+              <MappingFragment StoreEntitySet="Domicilios">
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="IdBarrio" ColumnName="IdBarrio" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Localidads">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Localidad">
+              <MappingFragment StoreEntitySet="Localidades">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincias">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincias">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumentoes">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.TipoDocumento">
+              <MappingFragment StoreEntitySet="TiposDocumento">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -114,7 +630,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
