@@ -4,9 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0f3b513c0d05411285ef10c4b15716e2" Name="Diagram1">
+      <Diagram DiagramId="0f3b513c0d05411285ef10c4b15716e2" Name="Diagram1" ZoomLevel="108">
         <EntityTypeShape EntityType="SMPorres_DevModel.Carrera" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.Usuario" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Usuario" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Alumno" Width="1.5" PointX="7.375" PointY="0.625" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Barrio" Width="1.5" PointX="7.375" PointY="4.125" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Departamento" Width="1.5" PointX="4.375" PointY="6.875" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Domicilio" Width="1.5" PointX="5.375" PointY="2.625" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Localidad" Width="1.5" PointX="6.5" PointY="6.75" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Provincia" Width="1.5" PointX="3.375" PointY="3.375" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.5" PointX="5.375" PointY="0.625" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_Domicilios" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Barrios_Localidades" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Barrios" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Departamentos_Provincias" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Departamentos" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Localidades_Departamentos" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Localidades" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Provincias" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
