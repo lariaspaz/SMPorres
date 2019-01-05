@@ -23,7 +23,9 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Localidades_Departamentos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Localidades" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Provincias" />
-      </Diagram>
+        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

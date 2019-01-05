@@ -14,7 +14,13 @@ namespace SMPorres.Models
     
     public partial class Carrera
     {
-        public decimal Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Carrera()
+        {
+            this.Cursos = new HashSet<Curso>();
+        }
+    
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public short Duracion { get; set; }
         public decimal Importe1Vto { get; set; }
@@ -22,5 +28,8 @@ namespace SMPorres.Models
         public decimal Importe3Vto { get; set; }
         public short Estado { get; set; }
         public System.DateTime FechaEstado { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Curso> Cursos { get; set; }
     }
 }

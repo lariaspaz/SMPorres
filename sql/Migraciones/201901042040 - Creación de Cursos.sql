@@ -1,0 +1,34 @@
+/****** Object:  Table [dbo].[Cursos]    Script Date: 04/01/2019 08:39:52 p.m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Cursos](
+	[Id] [int] NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[IdCarrera] [int] NOT NULL,
+ CONSTRAINT [PK_Cursos] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Cursos]  WITH CHECK ADD  CONSTRAINT [FK_Cursos_Carreras] FOREIGN KEY([IdCarrera])
+REFERENCES [dbo].[Carreras] ([Id])
+ON UPDATE CASCADE
+GO
+
+ALTER TABLE [dbo].[Cursos] CHECK CONSTRAINT [FK_Cursos_Carreras]
+GO
+
+

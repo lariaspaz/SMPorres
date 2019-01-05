@@ -34,5 +34,6 @@ namespace SMPorres.Models
         public virtual DbSet<Localidad> Localidads { get; set; }
         public virtual DbSet<Provincia> Provincias { get; set; }
         public virtual DbSet<TipoDocumento> TipoDocumentoes { get; set; }
+        public virtual DbSet<Curso> Cursos { get; set; }
     }
 }
