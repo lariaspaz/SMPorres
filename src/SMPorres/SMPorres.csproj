@@ -155,7 +155,6 @@
     <Compile Include="Models\Alumno.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AlumnosViewModel.cs" />
     <Compile Include="Models\Barrio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -171,7 +170,6 @@
     <Compile Include="Models\Domicilio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DomicilioModel.cs" />
     <Compile Include="Models\GrupoUsuario.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -212,9 +210,8 @@
     <EmbeddedResource Include="Forms\Alumnos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Alumnos\frmListado.resx">
+    <EmbeddedResource Include="Forms\Alumnos\frmListado.resx" />
     <Compile Include="Repositories\CursosRepository.cs" />
-    <Compile Include="Repositories\UsuariosRepository.cs" />
     <EmbeddedResource Include="Forms\Cursos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>

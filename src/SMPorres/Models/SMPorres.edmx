@@ -282,7 +282,8 @@
             <End Role="Localidades" EntitySet="Localidades" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+	</edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SMPorres_DevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -562,8 +563,11 @@
           <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="Byte" />
         </EntityType>
-      </Schema>
         <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdCarrera" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />

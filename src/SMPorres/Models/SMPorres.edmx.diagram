@@ -21,10 +21,10 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Localidades_Departamentos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Localidades" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Provincias" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.875" PointX="2.625" PointY="1.125" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.5" PointX="5.375" PointY="0.875" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento1" />
         <EntityTypeShape EntityType="SMPorres_DevModel.GrupoUsuario" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="3.125" PointY="0.75" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" />
       </Diagram>
     </edmx:Diagrams>
