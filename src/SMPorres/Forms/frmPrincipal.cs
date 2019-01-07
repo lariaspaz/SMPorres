@@ -47,5 +47,15 @@ namespace SMPorres.Forms
         {
             using (var f = new frmCambiarContraseña()) f.ShowDialog();
         }
+
+        private void alumnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Alumnos.frmListado()) f.ShowDialog();
+        }
+
+        private void gruposDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new UsuariosGrupos.frmListado()) f.ShowDialog();
+        }
     }
 }

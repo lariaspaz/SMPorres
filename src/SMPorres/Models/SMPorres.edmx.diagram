@@ -13,9 +13,7 @@
         <EntityTypeShape EntityType="SMPorres_DevModel.Domicilio" Width="1.5" PointX="5.375" PointY="2.625" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Localidad" Width="1.5" PointX="6.5" PointY="6.75" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Provincia" Width="1.5" PointX="3.375" PointY="3.375" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.5" PointX="5.375" PointY="0.625" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_Domicilios" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Barrios_Localidades" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Barrios" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Departamentos_Provincias" />
@@ -23,6 +21,9 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Localidades_Departamentos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Localidades" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Provincias" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.875" PointX="2.625" PointY="1.125" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento1" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.GrupoUsuario" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

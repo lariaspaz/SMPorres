@@ -12,20 +12,10 @@ namespace SMPorres.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Alumno
+    public partial class GrupoUsuario
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public int IdTipoDocumento { get; set; }
-        public decimal NroDocumento { get; set; }
-        public System.DateTime FechaNacimiento { get; set; }
-        public string EMail { get; set; }
-        public string Direccion { get; set; }
-        public int IdDomicilio { get; set; }
-        public byte Estado { get; set; }
-    
-        public virtual Domicilio Domicilio { get; set; }
-        public virtual TipoDocumento TipoDocumento1 { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<byte> Estado { get; set; }
     }
 }

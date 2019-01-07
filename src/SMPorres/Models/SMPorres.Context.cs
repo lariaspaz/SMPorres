@@ -33,6 +33,7 @@ namespace SMPorres.Models
         public virtual DbSet<Domicilio> Domicilios { get; set; }
         public virtual DbSet<Localidad> Localidads { get; set; }
         public virtual DbSet<Provincia> Provincias { get; set; }
-        public virtual DbSet<TipoDocumento> TipoDocumentoes { get; set; }
+        public virtual DbSet<TipoDocumento> TipoDocumentos { get; set; }
+        public virtual DbSet<GrupoUsuario> GrupoUsuarios { get; set; }
     }
 }
