@@ -32,7 +32,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
           <Property Name="Importe1Vto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -40,6 +40,14 @@
           <Property Name="Importe3Vto" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
           <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cursos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCarrera" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Departamentos">
           <Key>
@@ -137,6 +145,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cursos_Carreras">
+          <End Role="Carreras" Type="Self.Carreras" Multiplicity="1" />
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carreras">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cursos">
+              <PropertyRef Name="IdCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Departamentos_Provincias">
           <End Role="Provincias" Type="Self.Provincias" Multiplicity="1" />
           <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="*" />
@@ -213,6 +233,7 @@
           <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Barrios" EntityType="Self.Barrios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carreras" EntityType="Self.Carreras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrupoUsuarios" EntityType="Self.GrupoUsuarios" Schema="dbo" store:Type="Tables" />
@@ -231,6 +252,10 @@
           <AssociationSet Name="FK_Barrios_Localidades" Association="Self.FK_Barrios_Localidades">
             <End Role="Localidades" EntitySet="Localidades" />
             <End Role="Barrios" EntitySet="Barrios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cursos_Carreras" Association="Self.FK_Cursos_Carreras">
+            <End Role="Carreras" EntitySet="Carreras" />
+            <End Role="Cursos" EntitySet="Cursos" />
           </AssociationSet>
           <AssociationSet Name="FK_Departamentos_Provincias" Association="Self.FK_Departamentos_Provincias">
             <End Role="Provincias" EntitySet="Provincias" />
@@ -265,14 +290,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Importe1Vto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Importe2Vto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Importe3Vto" Type="Decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
         <EntityContainer Name="SMPorresEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />
@@ -321,7 +347,12 @@
             <End Role="Alumno" EntitySet="Alumnos" />
           </AssociationSet>
           <EntitySet Name="GrupoUsuarios" EntityType="SMPorres_DevModel.GrupoUsuario" />
-        </EntityContainer>
+          <EntitySet Name="Cursos" EntityType="SMPorres_DevModel.Curso" />
+          <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
+            <End Role="Carrera" EntitySet="Carreras" />
+            <End Role="Curso" EntitySet="Cursos" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="Id" />
@@ -532,6 +563,24 @@
           <Property Name="Estado" Type="Byte" />
         </EntityType>
       </Schema>
+        <EntityType Name="Curso">
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCarrera" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
+        </EntityType>
+        <Association Name="FK_Cursos_Carreras">
+          <End Type="SMPorres_DevModel.Carrera" Role="Carrera" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="IdCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -639,6 +688,15 @@
               <MappingFragment StoreEntitySet="GrupoUsuarios">
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cursos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
+              <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

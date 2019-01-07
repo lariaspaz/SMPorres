@@ -56,6 +56,11 @@ namespace SMPorres.Forms
         private void gruposDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var f = new UsuariosGrupos.frmListado()) f.ShowDialog();
+		}
+		
+        private void cursosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Cursos.frmListado()) f.ShowDialog();
         }
     }
 }
