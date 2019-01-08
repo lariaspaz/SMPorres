@@ -134,7 +134,7 @@ namespace SMPorres.Forms.Alumnos
             {
                 var Localidades =
                     (
-                        from l in db.Localidads
+                        from l in db.Localidades
                         where l.IdDepartamento == idDepartamento
                         select new
                         {

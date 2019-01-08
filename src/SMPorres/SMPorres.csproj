@@ -115,16 +115,16 @@
     <Compile Include="Forms\Carreras\frmListado.Designer.cs">
       <DependentUpon>frmListado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GrupoUsuarios\frmEdición.cs">
+    <Compile Include="Forms\Grupos\frmEdición.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GrupoUsuarios\frmEdición.Designer.cs">
+    <Compile Include="Forms\Grupos\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GrupoUsuarios\frmListado.cs">
+    <Compile Include="Forms\Grupos\frmListado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GrupoUsuarios\frmListado.Designer.cs">
+    <Compile Include="Forms\Grupos\frmListado.Designer.cs">
       <DependentUpon>frmListado.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Usuarios\frmCambiarContraseña.cs">
@@ -170,7 +170,7 @@
     <Compile Include="Models\Domicilio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GrupoUsuario.cs">
+    <Compile Include="Models\Grupos.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Localidad.cs">
@@ -205,7 +205,7 @@
     <Compile Include="Repositories\AlumnosRepository.cs" />
     <Compile Include="Repositories\CarrerasRepository.cs" />
     <Compile Include="Repositories\DomiciliosRepository.cs" />
-    <Compile Include="Repositories\GrupoUsuariosRepository.cs" />
+    <Compile Include="Repositories\GruposRepository.cs" />
     <Compile Include="Repositories\UsuariosRepository.cs" />
     <EmbeddedResource Include="Forms\Alumnos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
@@ -233,10 +233,10 @@
     <EmbeddedResource Include="Forms\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GrupoUsuarios\frmEdición.resx">
+    <EmbeddedResource Include="Forms\Grupos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GrupoUsuarios\frmListado.resx">
+    <EmbeddedResource Include="Forms\Grupos\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Usuarios\frmCambiarContraseña.resx">

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMPorres_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+	<Schema Namespace="SMPorres_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alumnos">
           <Key>
             <PropertyRef Name="Id" />
@@ -35,11 +35,11 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
-          <Property Name="Importe1Vto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe2Vto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe3Vto" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Importe1Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Importe2Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Importe3Vto" Type="numeric" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Cursos">
           <Key>
@@ -67,13 +67,21 @@
           <Property Name="IdDepartamento" Type="int" Nullable="false" />
           <Property Name="IdProvincia" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="GrupoUsuarios">
+        <EntityType Name="Grupos">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="30" />
-          <Property Name="Estado" Type="tinyint" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GruposUsuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Localidades">
           <Key>
@@ -118,18 +126,6 @@
             </Principal>
             <Dependent Role="Alumnos">
               <PropertyRef Name="IdDomicilio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Alumnos_TiposDocumento">
-          <End Role="TipoDocumentos" Type="Self.TipoDocumentos" Multiplicity="1" />
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumentos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Alumnos">
-              <PropertyRef Name="IdTipoDocumento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -217,6 +213,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GruposUsuarios_Grupos">
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+          <End Role="GruposUsuarios" Type="Self.GruposUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposUsuarios">
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposUsuarios_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="GruposUsuarios" Type="Self.GruposUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposUsuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Localidades_Departamentos">
           <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
           <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
@@ -236,17 +256,14 @@
           <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GrupoUsuarios" EntityType="Self.GrupoUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GruposUsuarios" EntityType="Self.GruposUsuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumentos" EntityType="Self.TipoDocumentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Alumnos_Domicilios" Association="Self.FK_Alumnos_Domicilios">
             <End Role="Domicilios" EntitySet="Domicilios" />
-            <End Role="Alumnos" EntitySet="Alumnos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="Self.FK_Alumnos_TiposDocumento">
-            <End Role="TipoDocumentos" EntitySet="TipoDocumentos" />
             <End Role="Alumnos" EntitySet="Alumnos" />
           </AssociationSet>
           <AssociationSet Name="FK_Barrios_Localidades" Association="Self.FK_Barrios_Localidades">
@@ -277,13 +294,20 @@
             <End Role="Provincias" EntitySet="Provincias" />
             <End Role="Domicilios" EntitySet="Domicilios" />
           </AssociationSet>
+          <AssociationSet Name="FK_GruposUsuarios_Grupos" Association="Self.FK_GruposUsuarios_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="GruposUsuarios" EntitySet="GruposUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposUsuarios_Usuarios" Association="Self.FK_GruposUsuarios_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="GruposUsuarios" EntitySet="GruposUsuarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_Localidades_Departamentos" Association="Self.FK_Localidades_Departamentos">
             <End Role="Departamentos" EntitySet="Departamentos" />
             <End Role="Localidades" EntitySet="Localidades" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-	</edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SMPorres_DevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -308,14 +332,14 @@
           <EntitySet Name="Barrios" EntityType="SMPorres_DevModel.Barrio" />
           <EntitySet Name="Departamentos" EntityType="SMPorres_DevModel.Departamento" />
           <EntitySet Name="Domicilios" EntityType="SMPorres_DevModel.Domicilio" />
-          <EntitySet Name="Localidads" EntityType="SMPorres_DevModel.Localidad" />
+          <EntitySet Name="Localidades" EntityType="SMPorres_DevModel.Localidad" />
           <EntitySet Name="Provincias" EntityType="SMPorres_DevModel.Provincia" />
           <AssociationSet Name="FK_Alumnos_Domicilios" Association="SMPorres_DevModel.FK_Alumnos_Domicilios">
             <End Role="Domicilio" EntitySet="Domicilios" />
             <End Role="Alumno" EntitySet="Alumnos" />
           </AssociationSet>
           <AssociationSet Name="FK_Barrios_Localidades" Association="SMPorres_DevModel.FK_Barrios_Localidades">
-            <End Role="Localidade" EntitySet="Localidads" />
+            <End Role="Localidade" EntitySet="Localidades" />
             <End Role="Barrio" EntitySet="Barrios" />
           </AssociationSet>
           <AssociationSet Name="FK_Domicilios_Barrios" Association="SMPorres_DevModel.FK_Domicilios_Barrios">
@@ -332,10 +356,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Localidades_Departamentos" Association="SMPorres_DevModel.FK_Localidades_Departamentos">
             <End Role="Departamento" EntitySet="Departamentos" />
-            <End Role="Localidade" EntitySet="Localidads" />
+            <End Role="Localidade" EntitySet="Localidades" />
           </AssociationSet>
           <AssociationSet Name="FK_Domicilios_Localidades" Association="SMPorres_DevModel.FK_Domicilios_Localidades">
-            <End Role="Localidade" EntitySet="Localidads" />
+            <End Role="Localidade" EntitySet="Localidades" />
             <End Role="Domicilio" EntitySet="Domicilios" />
           </AssociationSet>
           <AssociationSet Name="FK_Domicilios_Provincias" Association="SMPorres_DevModel.FK_Domicilios_Provincias">
@@ -347,11 +371,20 @@
             <End Role="TipoDocumento" EntitySet="TipoDocumentos" />
             <End Role="Alumno" EntitySet="Alumnos" />
           </AssociationSet>
-          <EntitySet Name="GrupoUsuarios" EntityType="SMPorres_DevModel.GrupoUsuario" />
           <EntitySet Name="Cursos" EntityType="SMPorres_DevModel.Curso" />
           <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
             <End Role="Carrera" EntitySet="Carreras" />
             <End Role="Curso" EntitySet="Cursos" />
+          </AssociationSet>
+          <EntitySet Name="Grupos" EntityType="SMPorres_DevModel.Grupos" />
+          <EntitySet Name="GruposUsuarios" EntityType="SMPorres_DevModel.GruposUsuario" />
+          <AssociationSet Name="FK_GruposUsuarios_Grupos" Association="SMPorres_DevModel.FK_GruposUsuarios_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="GruposUsuario" EntitySet="GruposUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposUsuarios_Usuarios" Association="SMPorres_DevModel.FK_GruposUsuarios_Usuarios">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="GruposUsuario" EntitySet="GruposUsuarios" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
@@ -365,6 +398,7 @@
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <Property Name="FechaBaja" Type="DateTime" Precision="3" />
           <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GruposUsuarios" Relationship="SMPorres_DevModel.FK_GruposUsuarios_Usuarios" FromRole="Usuario" ToRole="GruposUsuario" />
         </EntityType>
         <EntityType Name="Alumno">
           <Key>
@@ -555,14 +589,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="GrupoUsuario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Byte" />
-        </EntityType>
         <EntityType Name="Curso">
           <Key>
             <PropertyRef Name="Id" />
@@ -581,6 +607,49 @@
             </Principal>
             <Dependent Role="Curso">
               <PropertyRef Name="IdCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Grupos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="GruposUsuarios" Relationship="SMPorres_DevModel.FK_GruposUsuarios_Grupos" FromRole="Grupos" ToRole="GruposUsuario" />
+        </EntityType>
+        <EntityType Name="GruposUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grupos" Relationship="SMPorres_DevModel.FK_GruposUsuarios_Grupos" FromRole="GruposUsuario" ToRole="Grupos" />
+          <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_GruposUsuarios_Usuarios" FromRole="GruposUsuario" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_GruposUsuarios_Grupos">
+          <End Type="SMPorres_DevModel.Grupos" Role="Grupos" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.GruposUsuario" Role="GruposUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposUsuario">
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposUsuarios_Usuarios">
+          <End Type="SMPorres_DevModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.GruposUsuario" Role="GruposUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposUsuario">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -662,7 +731,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Localidads">
+          <EntitySetMapping Name="Localidades">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Localidad">
               <MappingFragment StoreEntitySet="Localidades">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -687,20 +756,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GrupoUsuarios">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.GrupoUsuario">
-              <MappingFragment StoreEntitySet="GrupoUsuarios">
+          <EntitySetMapping Name="Cursos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
+              <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grupos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Grupos">
+              <MappingFragment StoreEntitySet="Grupos">
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cursos">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
-              <MappingFragment StoreEntitySet="Cursos">
-                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <EntitySetMapping Name="GruposUsuarios">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.GruposUsuario">
+              <MappingFragment StoreEntitySet="GruposUsuarios">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

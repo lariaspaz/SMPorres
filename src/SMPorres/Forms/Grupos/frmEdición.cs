@@ -30,7 +30,7 @@ namespace SMPorres.Forms.GrupoUsuarios
             _validator = new FormValidations(this, errorProvider1);
         }
 
-        public frmEdición(GrupoUsuario grupo) : this()
+        public frmEdición(Grupos grupo) : this()
         {
             this.Text = "Edición de transacción";
             txtGrupo.Text = grupo.Descripcion;

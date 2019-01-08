@@ -7,16 +7,16 @@ using SMPorres.Models;
 
 namespace SMPorres.Repositories
 {
-    class GrupoUsuariosRepository
+    class GruposRepository
     {
-        public static IList<GrupoUsuario> ObtenerGrupoUsuarios()
+        public static IList<Grupos> ObtenerGrupoUsuarios()
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from g in db.GrupoUsuarios select g)
+                var query = (from g in db.Grupos select g)
                                 .ToList()
                                 .Select(
-                                    g => new GrupoUsuario
+                                    g => new Grupos
                                     {
                                         Id = g.Id,
                                         Descripcion = g.Descripcion,
@@ -26,28 +26,28 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static GrupoUsuario Insertar(string descripción, byte estado)
+        public static Grupos Insertar(string descripción, byte estado)
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.GrupoUsuarios.Any() ? db.GrupoUsuarios.Max(c1 => c1.Id) + 1 : 1;
-                var g = new GrupoUsuario
+                var id = db.Grupos.Any() ? db.Grupos.Max(c1 => c1.Id) + 1 : 1;
+                var g = new Grupos
                 {
                     Id = id,
                     Descripcion = descripción,
                     Estado = estado
                 };
-                db.GrupoUsuarios.Add(g);
+                db.Grupos.Add(g);
                 db.SaveChanges();
                 return g;
             }
         }
 
-        internal static GrupoUsuario ObtenerGrupoUsuarioPorId(decimal id)
+        internal static Grupos ObtenerGrupoPorId(decimal id)
         {
             using (var db = new SMPorresEntities())
             {
-                return db.GrupoUsuarios.Find(id);
+                return db.Grupos.Find(id);
             }
         }
 
@@ -55,11 +55,11 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                if (!db.GrupoUsuarios.Any(t => t.Id == id))
+                if (!db.Grupos.Any(t => t.Id == id))
                 {
                     throw new Exception(String.Format("No existe el grupo {0} - {1}", id, descripción));
                 }
-                var c = db.GrupoUsuarios.Find(id);
+                var c = db.Grupos.Find(id);
                 c.Descripcion = descripción;
                 if (c.Estado != estado)
                 {

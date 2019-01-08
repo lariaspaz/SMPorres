@@ -23,7 +23,7 @@ namespace SMPorres.Forms.UsuariosGrupos
 
         private void ConsultarDatos()
         {
-            dgvDatos.SetDataSource(from a in GrupoUsuariosRepository.ObtenerGrupoUsuarios()
+            dgvDatos.SetDataSource(from a in GruposRepository.ObtenerGrupoUsuarios()
                                    orderby a.Id
                                    select new
                                    {
@@ -69,7 +69,7 @@ namespace SMPorres.Forms.UsuariosGrupos
                 {
                     try
                     {
-                        var g = GrupoUsuariosRepository.Insertar(f.Grupo, f.Estado);
+                        var g = GruposRepository.Insertar(f.Grupo, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == g.Id);
                     }
@@ -88,14 +88,14 @@ namespace SMPorres.Forms.UsuariosGrupos
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            Models.GrupoUsuario g = ObtenerGrupoUsuarioSeleccionada();
+            Models.Grupos g = ObtenerGrupoUsuarioSeleccionada();
             using (var f = new frmEdición(g))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        GrupoUsuariosRepository.Actualizar(g.Id, f.Grupo, f.Estado);
+                        GruposRepository.Actualizar(g.Id, f.Grupo, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == g.Id);
                     }
@@ -107,11 +107,11 @@ namespace SMPorres.Forms.UsuariosGrupos
             }
         }
 
-        private Models.GrupoUsuario ObtenerGrupoUsuarioSeleccionada()
+        private Models.Grupos ObtenerGrupoUsuarioSeleccionada()
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
             var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-            var g = GrupoUsuariosRepository.ObtenerGrupoUsuarioPorId(id);
+            var g = GruposRepository.ObtenerGrupoPorId(id);
             return g;
         }
     }

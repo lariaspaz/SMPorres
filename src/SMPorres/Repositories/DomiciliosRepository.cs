@@ -71,14 +71,14 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.Localidads.Any() ? db.Localidads.Max(l1 => l1.Id) + 1 : 1;
+                var id = db.Localidades.Any() ? db.Localidades.Max(l1 => l1.Id) + 1 : 1;
                 var l = new Localidad
                 {
                     Id = id,
                     IdDepartamento = idDepartamento,
                     Nombre = localidad
                 };
-                db.Localidads.Add(l);
+                db.Localidades.Add(l);
                 db.SaveChanges();
                 return l;
             }
