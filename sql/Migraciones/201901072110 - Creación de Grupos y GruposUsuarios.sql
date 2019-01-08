@@ -1,6 +1,3 @@
-exec sp_rename 'Localidads', 'Localidades'
-go
-
 
 /****** Object:  Table [dbo].[Grupos]    Script Date: 07/01/2019 10:23:59 p.m. ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Grupos]') AND type in (N'U'))
