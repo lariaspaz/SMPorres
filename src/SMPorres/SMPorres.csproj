@@ -33,9 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CustomLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\dotnet-customlibrary\src\CustomLibrary\bin\Release\CustomLibrary.dll</HintPath>
+    <Reference Include="CustomLibrary">
+      <HintPath>..\..\lib\Custom Library\CustomLibrary.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -213,8 +212,10 @@
     <EmbeddedResource Include="Forms\Alumnos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Alumnos\frmListado.resx" />
     <Compile Include="Repositories\CursosRepository.cs" />
+    <EmbeddedResource Include="Forms\Alumnos\frmListado.resx">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cursos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>

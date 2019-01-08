@@ -54,7 +54,7 @@
             this.dgvDatos.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(747, 236);
+            this.dgvDatos.Size = new System.Drawing.Size(747, 503);
             this.dgvDatos.TabIndex = 2;
             this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
             // 
@@ -125,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 261);
+            this.ClientSize = new System.Drawing.Size(747, 528);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.toolStrip1);
             this.KeyPreview = true;

@@ -50,7 +50,6 @@ namespace SMPorres.Forms.Alumnos
             var id = (Int32)dgvDatos.Rows[rowindex].Cells[0].Value;
             var a = AlumnosRepository.ObtenerAlumnoPorId(id);
             return a;
-
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -128,7 +127,7 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var a = AlumnosRepository.Insertar(f.Nombre, f.Apellido, f.IdTipoDoc, f.NroDoc,
+                        var a = AlumnosRepository.Insertar(f.Nombre, f.Apellido, f.IdTipoDocumento, f.NroDocumento,
                             f.FechaNacimiento, f.Email, f.Dirección, f.IdDomicilio, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);
@@ -150,7 +149,7 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        AlumnosRepository.Actualizar(a.Id, f.Nombre, f.Apellido, f.IdTipoDoc, f.NroDoc,
+                        AlumnosRepository.Actualizar(a.Id, f.Nombre, f.Apellido, f.IdTipoDocumento, f.NroDocumento,
                             f.FechaNacimiento, f.Email, f.Dirección, f.IdDomicilio, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);

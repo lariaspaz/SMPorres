@@ -47,7 +47,6 @@
             this.cbProvincia = new System.Windows.Forms.ComboBox();
             this.txtNumDocumento = new CustomLibrary.ComponentModel.NumericTextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.cbDomicilio = new System.Windows.Forms.ComboBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -72,7 +71,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(255, 9);
+            this.btnAceptar.Location = new System.Drawing.Point(286, 6);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -83,7 +82,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(336, 9);
+            this.btnCancelar.Location = new System.Drawing.Point(367, 6);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -102,7 +101,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(466, 343);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(454, 343);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panel1
@@ -114,7 +113,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 308);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(466, 35);
+            this.panel1.Size = new System.Drawing.Size(454, 35);
             this.panel1.TabIndex = 0;
             // 
             // bevel1
@@ -127,7 +126,7 @@
             this.bevel1.Margin = new System.Windows.Forms.Padding(0);
             this.bevel1.Name = "bevel1";
             this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bevel1.Size = new System.Drawing.Size(466, 23);
+            this.bevel1.Size = new System.Drawing.Size(454, 23);
             this.bevel1.TabIndex = 3;
             this.bevel1.Text = "bevel1";
             // 
@@ -145,7 +144,6 @@
             this.panel2.Controls.Add(this.cbProvincia);
             this.panel2.Controls.Add(this.txtNumDocumento);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.cbDomicilio);
             this.panel2.Controls.Add(this.txtDireccion);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.txtEmail);
@@ -164,7 +162,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(460, 302);
+            this.panel2.Size = new System.Drawing.Size(448, 302);
             this.panel2.TabIndex = 1;
             // 
             // btnBarrio
@@ -173,7 +171,7 @@
             this.btnBarrio.Location = new System.Drawing.Point(414, 223);
             this.btnBarrio.Name = "btnBarrio";
             this.btnBarrio.Size = new System.Drawing.Size(23, 23);
-            this.btnBarrio.TabIndex = 38;
+            this.btnBarrio.TabIndex = 15;
             this.btnBarrio.UseVisualStyleBackColor = true;
             this.btnBarrio.Click += new System.EventHandler(this.btnBarrio_Click);
             // 
@@ -183,7 +181,7 @@
             this.btnLocalidad.Location = new System.Drawing.Point(414, 195);
             this.btnLocalidad.Name = "btnLocalidad";
             this.btnLocalidad.Size = new System.Drawing.Size(23, 23);
-            this.btnLocalidad.TabIndex = 37;
+            this.btnLocalidad.TabIndex = 14;
             this.btnLocalidad.UseVisualStyleBackColor = true;
             this.btnLocalidad.Click += new System.EventHandler(this.btnLocalidad_Click);
             // 
@@ -193,7 +191,7 @@
             this.btnDepartamentos.Location = new System.Drawing.Point(414, 168);
             this.btnDepartamentos.Name = "btnDepartamentos";
             this.btnDepartamentos.Size = new System.Drawing.Size(23, 23);
-            this.btnDepartamentos.TabIndex = 36;
+            this.btnDepartamentos.TabIndex = 13;
             this.btnDepartamentos.UseVisualStyleBackColor = true;
             this.btnDepartamentos.Click += new System.EventHandler(this.btnDepartamentos_Click);
             // 
@@ -201,12 +199,10 @@
             // 
             this.cbBarrio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBarrio.FormattingEnabled = true;
-            this.cbBarrio.Items.AddRange(new object[] {
-            "1"});
             this.cbBarrio.Location = new System.Drawing.Point(95, 223);
             this.cbBarrio.Name = "cbBarrio";
             this.cbBarrio.Size = new System.Drawing.Size(313, 21);
-            this.cbBarrio.TabIndex = 35;
+            this.cbBarrio.TabIndex = 9;
             // 
             // label12
             // 
@@ -221,12 +217,10 @@
             // 
             this.cbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocalidad.FormattingEnabled = true;
-            this.cbLocalidad.Items.AddRange(new object[] {
-            "1"});
             this.cbLocalidad.Location = new System.Drawing.Point(95, 196);
             this.cbLocalidad.Name = "cbLocalidad";
             this.cbLocalidad.Size = new System.Drawing.Size(313, 21);
-            this.cbLocalidad.TabIndex = 33;
+            this.cbLocalidad.TabIndex = 8;
             this.cbLocalidad.SelectionChangeCommitted += new System.EventHandler(this.cbLocalidad_SelectionChangeCommitted);
             // 
             // label11
@@ -242,12 +236,10 @@
             // 
             this.cbDepartamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDepartamento.FormattingEnabled = true;
-            this.cbDepartamento.Items.AddRange(new object[] {
-            "1"});
             this.cbDepartamento.Location = new System.Drawing.Point(95, 169);
             this.cbDepartamento.Name = "cbDepartamento";
             this.cbDepartamento.Size = new System.Drawing.Size(313, 21);
-            this.cbDepartamento.TabIndex = 31;
+            this.cbDepartamento.TabIndex = 7;
             this.cbDepartamento.SelectionChangeCommitted += new System.EventHandler(this.cbDepartamento_SelectionChangeCommitted);
             // 
             // label10
@@ -263,21 +255,18 @@
             // 
             this.cbProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProvincia.FormattingEnabled = true;
-            this.cbProvincia.Items.AddRange(new object[] {
-            "1"});
             this.cbProvincia.Location = new System.Drawing.Point(95, 142);
             this.cbProvincia.Name = "cbProvincia";
             this.cbProvincia.Size = new System.Drawing.Size(313, 21);
-            this.cbProvincia.TabIndex = 29;
+            this.cbProvincia.TabIndex = 6;
             this.cbProvincia.SelectionChangeCommitted += new System.EventHandler(this.cbProvincia_SelectionChangeCommitted);
             // 
             // txtNumDocumento
             // 
-            this.txtNumDocumento.Digits = 2;
             this.txtNumDocumento.Location = new System.Drawing.Point(281, 63);
             this.txtNumDocumento.Name = "txtNumDocumento";
             this.txtNumDocumento.Size = new System.Drawing.Size(127, 20);
-            this.txtNumDocumento.TabIndex = 18;
+            this.txtNumDocumento.TabIndex = 3;
             this.txtNumDocumento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
@@ -289,23 +278,12 @@
             this.label9.TabIndex = 27;
             this.label9.Text = "Provincia: ";
             // 
-            // cbDomicilio
-            // 
-            this.cbDomicilio.FormattingEnabled = true;
-            this.cbDomicilio.Items.AddRange(new object[] {
-            "1"});
-            this.cbDomicilio.Location = new System.Drawing.Point(387, 86);
-            this.cbDomicilio.Name = "cbDomicilio";
-            this.cbDomicilio.Size = new System.Drawing.Size(21, 21);
-            this.cbDomicilio.TabIndex = 26;
-            this.cbDomicilio.Visible = false;
-            // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(95, 250);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(313, 20);
-            this.txtDireccion.TabIndex = 24;
+            this.txtDireccion.TabIndex = 10;
             // 
             // label7
             // 
@@ -321,7 +299,7 @@
             this.txtEmail.Location = new System.Drawing.Point(95, 116);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(313, 20);
-            this.txtEmail.TabIndex = 22;
+            this.txtEmail.TabIndex = 5;
             // 
             // label6
             // 
@@ -347,7 +325,7 @@
             this.dtpFechaNac.Location = new System.Drawing.Point(95, 90);
             this.dtpFechaNac.Name = "dtpFechaNac";
             this.dtpFechaNac.Size = new System.Drawing.Size(97, 20);
-            this.dtpFechaNac.TabIndex = 20;
+            this.dtpFechaNac.TabIndex = 4;
             // 
             // label4
             // 
@@ -369,20 +347,21 @@
             // 
             // cbTipoDoc
             // 
+            this.cbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoDoc.FormattingEnabled = true;
             this.cbTipoDoc.Items.AddRange(new object[] {
             "1"});
             this.cbTipoDoc.Location = new System.Drawing.Point(95, 63);
             this.cbTipoDoc.Name = "cbTipoDoc";
             this.cbTipoDoc.Size = new System.Drawing.Size(121, 21);
-            this.cbTipoDoc.TabIndex = 16;
+            this.cbTipoDoc.TabIndex = 2;
             // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(95, 37);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(313, 20);
-            this.txtApellido.TabIndex = 14;
+            this.txtApellido.TabIndex = 1;
             // 
             // label2
             // 
@@ -408,7 +387,7 @@
             this.ckEstado.Location = new System.Drawing.Point(95, 276);
             this.ckEstado.Name = "ckEstado";
             this.ckEstado.Size = new System.Drawing.Size(73, 17);
-            this.ckEstado.TabIndex = 28;
+            this.ckEstado.TabIndex = 11;
             this.ckEstado.Text = "Habilitada";
             this.ckEstado.UseVisualStyleBackColor = true;
             // 
@@ -417,7 +396,7 @@
             this.txtNombre.Location = new System.Drawing.Point(95, 11);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(313, 20);
-            this.txtNombre.TabIndex = 2;
+            this.txtNombre.TabIndex = 0;
             // 
             // label1
             // 
@@ -438,7 +417,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(466, 343);
+            this.ClientSize = new System.Drawing.Size(454, 343);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";
@@ -471,7 +450,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpFechaNac;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cbDomicilio;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtEmail;
