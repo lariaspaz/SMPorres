@@ -173,6 +173,9 @@
     <Compile Include="Models\Grupos.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GruposUsuario.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Localidad.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>

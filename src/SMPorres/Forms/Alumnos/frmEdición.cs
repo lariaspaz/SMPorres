@@ -175,7 +175,7 @@ namespace SMPorres.Forms.Alumnos
             {
                 var TiposDoc =
                     (
-                        from d in db.TipoDocumentos
+                        from d in db.TiposDocumento
                         select new
                         {
                             Id = d.Id,

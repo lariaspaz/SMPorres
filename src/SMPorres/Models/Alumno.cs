@@ -26,6 +26,6 @@ namespace SMPorres.Models
         public byte Estado { get; set; }
     
         public virtual Domicilio Domicilio { get; set; }
-        public virtual TipoDocumento TipoDocumento1 { get; set; }
+        public virtual TipoDocumento TiposDocumento { get; set; }
     }
 }

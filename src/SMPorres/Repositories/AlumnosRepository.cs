@@ -14,7 +14,7 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var query = (from a in db.Alumnos
-                             join td in db.TipoDocumentos
+                             join td in db.TiposDocumento
                              on a.IdTipoDocumento equals td.Id
                              where a.Estado == 1 select a)
                              .ToList()

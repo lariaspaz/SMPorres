@@ -7,7 +7,7 @@
       <Diagram DiagramId="0f3b513c0d05411285ef10c4b15716e2" Name="Diagram1" ZoomLevel="108">
         <EntityTypeShape EntityType="SMPorres_DevModel.Carrera" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Usuario" Width="1.5" PointX="0.5" PointY="5.125" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.Alumno" Width="1.5" PointX="7.375" PointY="0.625" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Alumno" Width="1.625" PointX="7.375" PointY="0.625" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Barrio" Width="1.5" PointX="7.375" PointY="4.125" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Departamento" Width="1.5" PointX="4.375" PointY="6.875" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Domicilio" Width="1.5" PointX="5.375" PointY="2.625" />
@@ -21,14 +21,14 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Localidades_Departamentos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Localidades" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Domicilios_Provincias" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.5" PointX="5.375" PointY="0.875" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento1" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="3.125" PointY="0.75" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Grupos" Width="1.5" PointX="2.75" PointY="5.625" />
         <EntityTypeShape EntityType="SMPorres_DevModel.GruposUsuario" Width="1.5" PointX="1.75" PointY="7.875" />
         <AssociationConnector Association="SMPorres_DevModel.FK_GruposUsuarios_Grupos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_GruposUsuarios_Usuarios" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.5" PointX="5.375" PointY="0.625" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
