@@ -14,10 +14,18 @@ namespace SMPorres.Models
     
     public partial class Curso
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Curso()
+        {
+            this.CursosAlumnos = new HashSet<CursosAlumno>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int IdCarrera { get; set; }
     
         public virtual Carrera Carrera { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CursosAlumno> CursosAlumnos { get; set; }
     }
 }

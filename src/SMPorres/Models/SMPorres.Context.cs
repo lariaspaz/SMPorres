@@ -37,5 +37,6 @@ namespace SMPorres.Models
         public virtual DbSet<Grupos> Grupos { get; set; }
         public virtual DbSet<GruposUsuario> GruposUsuarios { get; set; }
         public virtual DbSet<TipoDocumento> TiposDocumento { get; set; }
+        public virtual DbSet<CursosAlumno> CursosAlumnos { get; set; }
     }
 }

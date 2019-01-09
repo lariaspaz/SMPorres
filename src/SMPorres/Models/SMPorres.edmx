@@ -49,6 +49,14 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCarrera" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CursosAlumnos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="IdAlumno" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Departamentos">
           <Key>
             <PropertyRef Name="Id" />
@@ -102,8 +110,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" Type="int" />
-          <Property Name="Descripcion" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -130,8 +138,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Alumnos_TiposDocumento">
-          <End Type="Self.TiposDocumento" Multiplicity="1" Role="TiposDocumento" />
-          <End Type="Self.Alumnos" Multiplicity="*" Role="Alumnos" />
+          <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposDocumento">
               <PropertyRef Name="Id" />
@@ -162,6 +170,30 @@
             </Principal>
             <Dependent Role="Cursos">
               <PropertyRef Name="IdCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursosAlumnos_Alumnos">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
+          <End Role="CursosAlumnos" Type="Self.CursosAlumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursosAlumnos">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursosAlumnos_Cursos">
+          <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
+          <End Role="CursosAlumnos" Type="Self.CursosAlumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursosAlumnos">
+              <PropertyRef Name="IdCurso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -266,6 +298,7 @@
           <EntitySet Name="Barrios" EntityType="Self.Barrios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carreras" EntityType="Self.Carreras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CursosAlumnos" EntityType="Self.CursosAlumnos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
@@ -279,8 +312,8 @@
             <End Role="Alumnos" EntitySet="Alumnos" />
           </AssociationSet>
           <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="Self.FK_Alumnos_TiposDocumento">
-            <End EntitySet="TiposDocumento" Role="TiposDocumento" />
-            <End EntitySet="Alumnos" Role="Alumnos" />
+            <End Role="TiposDocumento" EntitySet="TiposDocumento" />
+            <End Role="Alumnos" EntitySet="Alumnos" />
           </AssociationSet>
           <AssociationSet Name="FK_Barrios_Localidades" Association="Self.FK_Barrios_Localidades">
             <End Role="Localidades" EntitySet="Localidades" />
@@ -289,6 +322,14 @@
           <AssociationSet Name="FK_Cursos_Carreras" Association="Self.FK_Cursos_Carreras">
             <End Role="Carreras" EntitySet="Carreras" />
             <End Role="Cursos" EntitySet="Cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursosAlumnos_Alumnos" Association="Self.FK_CursosAlumnos_Alumnos">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="CursosAlumnos" EntitySet="CursosAlumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursosAlumnos_Cursos" Association="Self.FK_CursosAlumnos_Cursos">
+            <End Role="Cursos" EntitySet="Cursos" />
+            <End Role="CursosAlumnos" EntitySet="CursosAlumnos" />
           </AssociationSet>
           <AssociationSet Name="FK_Departamentos_Provincias" Association="Self.FK_Departamentos_Provincias">
             <End Role="Provincias" EntitySet="Provincias" />
@@ -402,6 +443,15 @@
             <End Role="TiposDocumento" EntitySet="TiposDocumento" />
             <End Role="Alumno" EntitySet="Alumnos" />
           </AssociationSet>
+          <EntitySet Name="CursosAlumnos" EntityType="SMPorres_DevModel.CursosAlumno" />
+          <AssociationSet Name="FK_CursosAlumnos_Alumnos" Association="SMPorres_DevModel.FK_CursosAlumnos_Alumnos">
+            <End Role="Alumno" EntitySet="Alumnos" />
+            <End Role="CursosAlumno" EntitySet="CursosAlumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursosAlumnos_Cursos" Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="CursosAlumno" EntitySet="CursosAlumnos" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -432,6 +482,7 @@
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Domicilio" Relationship="SMPorres_DevModel.FK_Alumnos_Domicilios" FromRole="Alumno" ToRole="Domicilio" />
           <NavigationProperty Name="TiposDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
+          <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
         </EntityType>
         <EntityType Name="Barrio">
           <Key>
@@ -593,6 +644,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdCarrera" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
+          <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="Curso" ToRole="CursosAlumno" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
           <End Type="SMPorres_DevModel.Carrera" Role="Carrera" Multiplicity="1" />
@@ -666,6 +718,40 @@
             </Principal>
             <Dependent Role="Alumno">
               <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CursosAlumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="CursosAlumno" ToRole="Alumno" />
+          <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="CursosAlumno" ToRole="Curso" />
+        </EntityType>
+        <Association Name="FK_CursosAlumnos_Alumnos">
+          <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.CursosAlumno" Role="CursosAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursosAlumno">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursosAlumnos_Cursos">
+          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.CursosAlumno" Role="CursosAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursosAlumno">
+              <PropertyRef Name="IdCurso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -795,6 +881,15 @@
             <EntityTypeMapping TypeName="SMPorres_DevModel.TipoDocumento">
               <MappingFragment StoreEntitySet="TiposDocumento">
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CursosAlumnos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.CursosAlumno">
+              <MappingFragment StoreEntitySet="CursosAlumnos">
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -169,6 +169,9 @@
     <Compile Include="Models\Curso.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CursosAlumno.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -306,6 +309,8 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
       <LastGenOutput>SMPorres.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\control_rewind_blue.png" />
+    <None Include="Resources\control_fastforward_blue.png" />
     <None Include="Resources\arrow_refresh.png" />
     <None Include="Resources\page_white_edit.png" />
     <None Include="Resources\door.png" />

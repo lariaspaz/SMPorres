@@ -62,5 +62,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Cursos.frmListado()) f.ShowDialog();
         }
+
+        private void asignarAlumnosACursosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Alumnos.frmAsignarAlumnosACursos()) f.ShowDialog();
+        }
     }
 }
