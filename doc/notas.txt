@@ -1,0 +1,8 @@
+- Los nombres de los métodos van en letra capital
+- Las variables locales van en minúsculas, no es necesario que sean palabras largas pero sí se deben entender en forma completa a qué hacen referencia. Ej: td en vez de TiposDocumento
+- La comparación por cadena vacía Nombre != ""  se hace de manera segura !String.IsNullOrEmpty(Nombre.Trim())
+- Las propiedades de una clase van con nombre completos: Ej: NroDocumento en vez de NroDoc
+- Las variables de clase (globales a una clase) van con guión bajo adelante y nombre completo. Ej: _idDomicilio en vez de idDom
+- Los valores de un control se acceden mediante propiedades también en la misma clase en la que fue declarado el control, para que si se tiene que hacer un tratamiento especial al valor del control se lo haga dentro del getter de la propiedad. Ej: Nombre (es una propiedad de la clase en la que se hace txtNombre.Text.Trim()) en vez de txtNombre.Text
+- Los controles NumericTextBox tienen una propiedad Digits en la que se configura la cantidad de dígitos decimales que va a tener el número que se va a escribir
+- Darle un tamaño en tiempo de diseño a los formularios, no ponerlos maximizados
