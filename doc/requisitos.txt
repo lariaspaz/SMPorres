@@ -1,0 +1,55 @@
+Funcionamiento del Sistema
+	primer semana de Febrero 2019
+	
+Extraer BD
+	BD Alumnos
+	Estado de cuenta de alumnos, para corroborar como funciona
+
+Diseño
+	Codigo de barras BSE (único medio de pago 2019)
+	
+Cobranzas
+	alta de carreras
+		Importe
+		Vencimiento
+		punitorios
+	registrar clientes/alumnos
+	fijar mediante parametrización
+		vencimientos
+		montos
+	*	generar boletas de cobro (llamadas chequeras)
+	*	registrar boletas generadas
+	*	leer archivo de rendición bse y actualizar pagos informados por BSE
+	actualizar estado de cuenta de cada cliente/alumno
+	asignar becas (por persona al inicio del año)
+	Permirir cancelar cursado de cliente/alumno, no generar boletas a alumnos que no cursan
+web
+	login para cada cliente/alumno
+	mostrar estado de cuenta (cuotas pagadas, a vencer, vencidas)
+	notificar si pierden beca por falta de pago de boletas
+	imprimir boleta de pago
+	
+informes
+	deuda cliente/alumno (al día, moroso) por cuotas e importe
+	situacion geográfica
+	edades
+	
+perfiles
+	usuarios
+	parametrización
+
+sistema NACIONAL
+	determinar extensión y formato de archivo de carga
+	
+a futuro
+	agregar formas de pago(Moratorias, Caja Municipal,...)
+	Seguimiento académico
+		reinscripción 2020, sí están al día
+		inscripción al año
+		inscripción a carrera
+		inscripción a materias
+	Sistema NACIONAL, que lleva contabilidad, emparejado
+	
+Profesionales Actuales
+	Carlos Vega
+	Federico Rosse
