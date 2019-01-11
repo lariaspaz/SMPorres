@@ -9,7 +9,7 @@ namespace SMPorres.Repositories
 {
     class GruposRepository
     {
-        public static IList<Grupos> ObtenerGrupoUsuarios()
+        public static IList<Grupos> ObtenerGrupos()
         {
             using (var db = new SMPorresEntities())
             {

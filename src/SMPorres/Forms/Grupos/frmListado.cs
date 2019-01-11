@@ -23,7 +23,7 @@ namespace SMPorres.Forms.UsuariosGrupos
 
         private void ConsultarDatos()
         {
-            dgvDatos.SetDataSource(from a in GruposRepository.ObtenerGrupoUsuarios()
+            dgvDatos.SetDataSource(from a in GruposRepository.ObtenerGrupos()
                                    orderby a.Id
                                    select new
                                    {
