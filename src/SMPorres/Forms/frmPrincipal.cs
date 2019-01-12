@@ -72,5 +72,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Usuarios.frmAsignarUsuariosAGrupos()) f.ShowDialog();
         }
+
+        private void panelDeAlumnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Alumnos.frmPanelAlumno()) f.ShowDialog();
+        }
     }
 }

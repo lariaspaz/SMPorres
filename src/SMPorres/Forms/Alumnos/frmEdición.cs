@@ -1,16 +1,10 @@
-﻿using SMPorres.Lib.Validations;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using SMPorres.Lib.AppForms;
+using SMPorres.Lib.Validations;
 using SMPorres.Models;
 using SMPorres.Repositories;
-using SMPorres.Forms.Domicilios;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SMPorres.Forms.Alumnos
 {
@@ -25,9 +19,6 @@ namespace SMPorres.Forms.Alumnos
             txtNombre.Select();
             _validator = new FormValidations(this, errorProvider1);
             CargarProvincias();
-            CargarDepartamentos(IdProvincia);
-            CargarLocalidades(IdDepartamento);
-            CargarBarrios(IdLocalidad);
             CargarTiposDocumento();
         }
 
@@ -78,100 +69,57 @@ namespace SMPorres.Forms.Alumnos
 
         private void CargarProvincias()
         {
+            var p = ProvinciasRepository.ObtenerProvincias();
             cbProvincia.DataSource = null;
-            using (var db = new Models.SMPorresEntities())
+            cbProvincia.DataSource = p;
+            cbProvincia.DisplayMember = "Nombre";
+            cbProvincia.ValueMember = "Id";
+            if (p.Any())
             {
-                var provincias = (from p in db.Provincias select new { Id = p.Id, Provincia = p.Nombre })
-                                    .ToList();
-                cbProvincia.DataSource = provincias;
-                cbProvincia.DisplayMember = "Provincia";
-                cbProvincia.ValueMember = "Id";
+                cbProvincia.SelectedIndex = 0;
+                CargarDepartamentos(IdProvincia);
             }
         }
 
         private void CargarDepartamentos(int idProvincia)
         {
             cbDepartamento.DataSource = null;
-            using (var db = new Models.SMPorresEntities())
-            {
-                var deptos = (from d in db.Departamentos
-                              where d.IdProvincia == idProvincia
-                              select new
-                              {
-                                  Id = d.Id,
-                                  Departamento = d.Nombre
-                              }
-                             ).ToList();
-
-                cbDepartamento.DataSource = deptos;
-                cbDepartamento.DisplayMember = "Departamento";
-                cbDepartamento.ValueMember = "Id";
-            }
+            var d = DepartamentosRepository.ObtenerDepartamentosPorProvincia(idProvincia);
+            cbDepartamento.DataSource = d;
+            cbDepartamento.DisplayMember = "Nombre";
+            cbDepartamento.ValueMember = "Id";
+            if (d.Any()) cbDepartamento.SelectedIndex = 0;
+            CargarLocalidades(IdDepartamento);
         }
 
         private void CargarLocalidades(int idDepartamento)
         {
             cbLocalidad.DataSource = null;
-            using (var db = new Models.SMPorresEntities())
-            {
-                var Localidades =
-                    (
-                        from l in db.Localidades
-                        where l.IdDepartamento == idDepartamento
-                        select new
-                        {
-                            Id = l.Id,
-                            Localidad = l.Nombre
-                        }
-                    ).ToList();
-
-                cbLocalidad.DataSource = Localidades;
-                cbLocalidad.DisplayMember = "Localidad";
-                cbLocalidad.ValueMember = "Id";
-            }
+            var l = LocalidadesRepository.ObtenerLocalidadesPorDepartamento(idDepartamento);
+            cbLocalidad.DataSource = l;
+            cbLocalidad.DisplayMember = "Nombre";
+            cbLocalidad.ValueMember = "Id";
+            if (l.Any()) cbLocalidad.SelectedIndex = 0;
+            CargarBarrios(IdLocalidad);
         }
 
         private void CargarBarrios(int idLocalidad)
         {
             cbBarrio.DataSource = null;
-            using (var db = new Models.SMPorresEntities())
-            {
-                var Barrios =
-                    (
-                        from b in db.Barrios
-                        where b.IdLocalidad == idLocalidad
-                        select new
-                        {
-                            Id = b.Id,
-                            Barrio = b.Nombre
-                        }
-                    ).ToList();
-
-                cbBarrio.DataSource = Barrios;
-                cbBarrio.DisplayMember = "Barrio";
-                cbBarrio.ValueMember = "Id";
-            }
+            var b = BarriosRepository.ObtenerBarriosPorLocalidad(idLocalidad);
+            cbBarrio.DataSource = b;
+            cbBarrio.DisplayMember = "Nombre";
+            cbBarrio.ValueMember = "Id";
+            if (b.Any()) cbBarrio.SelectedIndex = 0;
         }
 
         private void CargarTiposDocumento()
         {
-            using (var db = new Models.SMPorresEntities())
-            {
-                var TiposDoc =
-                    (
-                        from d in db.TiposDocumento
-                        select new
-                        {
-                            Id = d.Id,
-                            TipoDoc = d.Descripcion
-                        }
-                    ).ToList();
-
-                cbTipoDoc.DataSource = TiposDoc;
-                cbTipoDoc.DisplayMember = "TipoDoc";
-                cbTipoDoc.ValueMember = "Id";
-                cbTipoDoc.SelectedIndex = 0;
-            }
+            var td = TiposDocumentoRepository.ObtenerTiposDocumento();
+            cbTipoDoc.DataSource = td;
+            cbTipoDoc.DisplayMember = "Descripcion";
+            cbTipoDoc.ValueMember = "Id";
+            if (td.Any()) cbTipoDoc.SelectedIndex = 0;
         }
 
         private bool ValidarDatos()
@@ -251,7 +199,7 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                return DomiciliosRepository.obtenerIdDomicilio(
+                return DomiciliosRepository.ObtenerIdDomicilio(
                     Convert.ToInt32(cbProvincia.SelectedValue),
                     Convert.ToInt32(cbDepartamento.SelectedValue),
                     Convert.ToInt32(cbLocalidad.SelectedValue),
@@ -301,13 +249,13 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnDepartamentos_Click(object sender, EventArgs e)
         {
-            using (var f = new frmDomicilios(IdProvincia, cbProvincia.Text))
+            using (var f = new frmInputQuery("Nuevo departamento", "Nuevo departamento de " + cbProvincia.Text + ":"))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        DomiciliosRepository.InsertarDepartamento(IdProvincia, f.Hijo);
+                        DepartamentosRepository.Insertar(IdProvincia, f.Descripción.Trim());
                         CargarDepartamentos(IdProvincia);
                     }
                     catch (Exception ex)
@@ -320,13 +268,13 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnLocalidad_Click(object sender, EventArgs e)
         {
-            using (var f = new frmDomicilios(IdProvincia, IdDepartamento, cbDepartamento.Text))
+            using (var f = new frmInputQuery("Nueva localidad", "Nueva localidad de " + cbDepartamento.Text + ":"))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        DomiciliosRepository.InsertarLocalidad(IdDepartamento, f.Hijo);
+                        LocalidadesRepository.Insertar(IdDepartamento, f.Descripción.Trim());
                         CargarLocalidades(IdDepartamento);
                     }
                     catch (Exception ex)
@@ -339,13 +287,14 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnBarrio_Click(object sender, EventArgs e)
         {
-            using (var f = new frmDomicilios(IdProvincia, IdDepartamento, IdLocalidad, cbLocalidad.Text))
+            var s = String.Format("Nuevo barrio de {0}, {1}:", cbLocalidad.Text, cbDepartamento.Text);
+            using (var f = new frmInputQuery("Nuevo barrio", s))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        var loc = DomiciliosRepository.InsertarBarrio(IdLocalidad, f.Hijo);
+                        BarriosRepository.Insertar(IdLocalidad, f.Descripción.Trim());
                         CargarBarrios(IdLocalidad);
                     }
                     catch (Exception ex)
