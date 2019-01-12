@@ -65,7 +65,7 @@ namespace SMPorres.Forms
 
         private void asignarAlumnosACursosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new Alumnos.frmAsignarAlumnosACursos2()) f.ShowDialog();
+            using (var f = new Alumnos.frmAsignarAlumnosACursos()) f.ShowDialog();
         }
 
         private void asignarUsuariosAGruposToolStripMenuItem_Click(object sender, EventArgs e)

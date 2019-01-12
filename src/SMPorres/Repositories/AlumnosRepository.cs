@@ -36,6 +36,14 @@ namespace SMPorres.Repositories
             }
         }
 
+        internal static Alumno BuscarAlumnoPorNroDocumento(decimal nroDocumento)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.Alumnos.FirstOrDefault(a => a.NroDocumento == nroDocumento);
+            }
+        }
+
         internal static Alumno ObtenerAlumnoPorId(decimal id)
         {
             using (var db = new SMPorresEntities())
