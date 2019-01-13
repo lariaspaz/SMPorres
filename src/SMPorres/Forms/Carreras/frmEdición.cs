@@ -25,14 +25,14 @@ namespace SMPorres.Forms.Carreras
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nueva transacción";
+            this.Text = "Nueva carrera";
             txtNombre.Select();
             _validator = new FormValidations(this, errorProvider1);
         }
 
         public frmEdición(Carrera carrera) : this()
         {
-            this.Text = "Edición de transacción";
+            this.Text = "Edición de carrera";
             txtNombre.Text = carrera.Nombre;
             txtDuración.Text = carrera.Duracion.ToString();
             txtImporte1Vto.Text = String.Format("{0:n}", carrera.Importe1Vto);
