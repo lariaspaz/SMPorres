@@ -63,6 +63,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbSexo = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -132,6 +134,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.cbSexo);
             this.panel2.Controls.Add(this.btnBarrio);
             this.panel2.Controls.Add(this.btnLocalidad);
             this.panel2.Controls.Add(this.btnDepartamentos);
@@ -330,7 +334,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(225, 67);
+            this.label4.Location = new System.Drawing.Point(228, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 19;
@@ -411,6 +415,27 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(241, 93);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(37, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Sexo: ";
+            // 
+            // cbSexo
+            // 
+            this.cbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSexo.FormattingEnabled = true;
+            this.cbSexo.Items.AddRange(new object[] {
+            "F",
+            "M"});
+            this.cbSexo.Location = new System.Drawing.Point(281, 89);
+            this.cbSexo.Name = "cbSexo";
+            this.cbSexo.Size = new System.Drawing.Size(121, 21);
+            this.cbSexo.TabIndex = 35;
+            // 
             // frmEdición
             // 
             this.AcceptButton = this.btnAceptar;
@@ -466,5 +491,7 @@
         private System.Windows.Forms.Button btnBarrio;
         private System.Windows.Forms.Button btnLocalidad;
         private System.Windows.Forms.Button btnDepartamentos;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbSexo;
     }
 }

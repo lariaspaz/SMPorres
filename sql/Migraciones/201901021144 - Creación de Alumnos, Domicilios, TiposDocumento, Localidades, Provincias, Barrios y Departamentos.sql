@@ -85,7 +85,8 @@ CREATE TABLE [dbo].[Alumnos] (
     [FechaNacimiento] datetime  NOT NULL,
     [EMail] varchar(255)  NOT NULL,
     [Direccion] varchar(255)  NOT NULL,
-    [IdDomicilio] int  NOT NULL,
+    [Sexo] char(1) NOT NULL,
+	[IdDomicilio] int  NOT NULL,
     [Estado] tinyint  NOT NULL
 );
 GO
@@ -131,8 +132,8 @@ CREATE TABLE [dbo].[Provincias] (
 );
 GO
 
--- Creating table 'TipoDocumentoes'
-CREATE TABLE [dbo].[TipoDocumentoes] (
+-- Creating table 'TipoDocumentos'
+CREATE TABLE [dbo].[TipoDocumentos] (
     [Id] int  NOT NULL,
     [Descripcion] varchar(50)  NOT NULL
 );
@@ -178,9 +179,9 @@ ADD CONSTRAINT [PK_Provincias]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'TipoDocumentoes'
-ALTER TABLE [dbo].[TipoDocumentoes]
-ADD CONSTRAINT [PK_TipoDocumentoes]
+-- Creating primary key on [Id] in table 'TipoDocumentos'
+ALTER TABLE [dbo].[TipoDocumentos]
+ADD CONSTRAINT [PK_TipoDocumentos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -207,7 +208,7 @@ GO
 ALTER TABLE [dbo].[Alumnos]
 ADD CONSTRAINT [FK_Alumnos_TiposDocumento]
     FOREIGN KEY ([IdTipoDocumento])
-    REFERENCES [dbo].[TipoDocumentoes]
+    REFERENCES [dbo].[TipoDocumentos]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO

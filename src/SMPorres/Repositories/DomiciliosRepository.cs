@@ -25,12 +25,50 @@ namespace SMPorres.Repositories
                 if (idDom <= 0)
                 {
                     idDom = Insertar(provincia, departamento, localidad, barrio);
-                    //idDom = db.Domicilios.DefaultIfEmpty().Max(d1 => d1 == null ? 0 : d1.Id) + 1;
                 }
             }
             return idDom;
         }
 
+        
+
+        internal static Domicilio ObtenerDomiciliosPorId(int idDomicilio)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.Domicilios.Find(idDomicilio);
+            }
+        }
+
+        internal static string ObtenerProvincia(int idProvincia)
+        {
+            using (var db = new Models.SMPorresEntities())
+            {
+                return (from p in db.Provincias where p.Id == idProvincia select p.Nombre).FirstOrDefault();
+            }
+        }
+
+        internal static string ObtenerDepartamento(int idDepartamento)
+        {
+            using (var db = new Models.SMPorresEntities())
+            {
+                return (from d in db.Departamentos where d.Id == idDepartamento select d.Nombre).FirstOrDefault();
+            }
+        }
+        internal static string ObtenerLocalidad(int idLocalidad)
+        {
+            using (var db = new Models.SMPorresEntities())
+            {
+                return (from l in db.Localidades where l.Id == idLocalidad select l.Nombre).FirstOrDefault();
+            }
+        }
+        internal static string ObtenerBarrio(int idBarrio)
+        {
+            using (var db = new Models.SMPorresEntities())
+            {
+                return (from b in db.Barrios where b.Id == idBarrio select b.Nombre).FirstOrDefault();
+            }
+        }
         public static int Insertar(int provincia, int departamento, int localidad, int barrio)
         {
             using (var db = new SMPorresEntities())

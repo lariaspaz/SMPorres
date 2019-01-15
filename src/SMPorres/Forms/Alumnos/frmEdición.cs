@@ -20,6 +20,7 @@ namespace SMPorres.Forms.Alumnos
             _validator = new FormValidations(this, errorProvider1);
             CargarProvincias();
             CargarTiposDocumento();
+            cbSexo.SelectedIndex = 0;
         }
 
         public frmEdición(Alumno alumno) : this()
@@ -34,6 +35,7 @@ namespace SMPorres.Forms.Alumnos
             txtDireccion.Text = alumno.Direccion;
             CargarDomicilio(alumno.IdDomicilio);
             ckEstado.Checked = alumno.Estado == 1;
+            cbSexo.Text = alumno.sexo;
         }
 
         private void CargarDomicilio(int idDomicilio)
@@ -192,6 +194,22 @@ namespace SMPorres.Forms.Alumnos
             get
             {
                 return Convert.ToInt32(cbTipoDoc.SelectedValue);
+            }
+        }
+
+        public char Sexo
+        {
+            get
+            {
+                if (cbSexo.SelectedIndex == 1)
+                {
+                    return 'M';
+                }
+                else
+                {
+                    return 'F';
+                }
+                    //return Convert.ToChar(cbSexo.SelectedText.Trim());
             }
         }
 

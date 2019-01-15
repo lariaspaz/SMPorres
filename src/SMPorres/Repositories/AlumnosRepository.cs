@@ -30,7 +30,8 @@ namespace SMPorres.Repositories
                                         EMail = a.EMail,
                                         Direccion = a.Direccion,
                                         IdDomicilio = a.IdDomicilio,
-                                        Estado = a.Estado
+                                        Estado = a.Estado,
+                                        sexo = a.sexo
                                     });
                 return query.OrderBy(a => a.Apellido).ToList();
             }
@@ -61,7 +62,7 @@ namespace SMPorres.Repositories
         }
 
         public static void Actualizar(decimal id, string nombre, string apellido, Int32 idTipoDoc, decimal nroDoc,
-            DateTime fechaNac, string email, string dirección, Int32 idDomicilio, byte estado)
+            DateTime fechaNac, string email, string dirección, Int32 idDomicilio, byte estado, char sexo)
         {
             using (var db = new SMPorresEntities())
             {
@@ -83,6 +84,7 @@ namespace SMPorres.Repositories
                 {
                     a.Estado = estado;
                 }
+                a.sexo = sexo.ToString();
                 db.SaveChanges();
             }
         }
@@ -102,7 +104,7 @@ namespace SMPorres.Repositories
         }
 
         public static Alumno Insertar(string nombre, string apellido, Int32 idTipoDoc, decimal nroDoc,
-            DateTime fechaNac, string email, string dirección, Int32 idDomicilio, byte estado)
+            DateTime fechaNac, string email, string dirección, Int32 idDomicilio, byte estado, char sexo)
         {
             using (var db = new SMPorresEntities())
             {
@@ -119,7 +121,8 @@ namespace SMPorres.Repositories
                     EMail = email,
                     Direccion = dirección,
                     IdDomicilio = idDomicilio,
-                    Estado = estado
+                    Estado = estado,
+                    sexo = sexo.ToString()
                 };
                 db.Alumnos.Add(a);
                 db.SaveChanges();

@@ -31,6 +31,7 @@ namespace SMPorres.Models
         public string Direccion { get; set; }
         public int IdDomicilio { get; set; }
         public byte Estado { get; set; }
+        public string sexo { get; set; }
     
         public virtual Domicilio Domicilio { get; set; }
         public virtual TipoDocumento TiposDocumento { get; set; }

@@ -31,12 +31,28 @@ namespace SMPorres.Forms.Alumnos
                                        a.Apellido,
                                        a.IdTipoDocumento,
                                        a.NroDocumento,
-                                       a.FechaNacimiento,
+                                       FechaNacimiento = String.Format("{0:dd/mm/yyyy}", a.FechaNacimiento),
                                        a.EMail,
                                        a.Direccion,
                                        a.IdDomicilio,
-                                       a.Estado
+                                       a.Estado,
+                                       a.sexo
                                    });
+        }
+
+        private void ConsultarDireccionEMail(int IdDomicilio)
+        {
+            var d = new Models.Domicilio();
+            d = DomiciliosRepository.ObtenerDomiciliosPorId(IdDomicilio);
+
+            txtProvincia.Text = DomiciliosRepository.ObtenerProvincia(d.IdProvincia);
+            txtDepartamento.Text = DomiciliosRepository.ObtenerDepartamento(d.IdDepartamento);
+            txtLocalidad.Text = DomiciliosRepository.ObtenerLocalidad(d.IdLocalidad);
+            txtBarrio.Text = DomiciliosRepository.ObtenerBarrio(d.IdBarrio);
+
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            txtDireccion.Text = (string)dgvDatos.Rows[rowindex].Cells[7].Value;
+            txtEMail.Text = (string)dgvDatos.Rows[rowindex].Cells[6].Value;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -112,11 +128,18 @@ namespace SMPorres.Forms.Alumnos
             dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
-            dgvDatos.Columns[6].HeaderText = "Email";
-            dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            //dgvDatos.Columns[6].HeaderText = "Email";
+            //dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
+            dgvDatos.Columns[6].Visible = false;
+            dgvDatos.Columns[7].Visible = false;
+            dgvDatos.Columns[8].Visible = false;
             dgvDatos.Columns[9].Visible = false;
+
+            dgvDatos.Columns[10].HeaderText = "Sexo";
+            dgvDatos.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -128,7 +151,7 @@ namespace SMPorres.Forms.Alumnos
                     try
                     {
                         var a = AlumnosRepository.Insertar(f.Nombre, f.Apellido, f.IdTipoDocumento, f.NroDocumento,
-                            f.FechaNacimiento, f.Email, f.Dirección, f.IdDomicilio, f.Estado);
+                            f.FechaNacimiento, f.Email, f.Dirección, f.IdDomicilio, f.Estado, f.Sexo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);
                     }
@@ -150,7 +173,7 @@ namespace SMPorres.Forms.Alumnos
                     try
                     {
                         AlumnosRepository.Actualizar(a.Id, f.Nombre, f.Apellido, f.IdTipoDocumento, f.NroDocumento,
-                            f.FechaNacimiento, f.Email, f.Dirección, f.IdDomicilio, f.Estado);
+                            f.FechaNacimiento, f.Email, f.Dirección, f.IdDomicilio, f.Estado, f.Sexo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);
                     }
@@ -160,6 +183,18 @@ namespace SMPorres.Forms.Alumnos
                     }
                 }
             }
+        }
+
+        private void dgvDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtProvincia.Text = "";
+            txtDepartamento.Text = "";
+            txtLocalidad.Text = "";
+            txtBarrio.Text = "";
+            txtEMail.Text = "";
+
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            ConsultarDireccionEMail((Int32)dgvDatos.Rows[rowindex].Cells[8].Value);
         }
     }
 }
