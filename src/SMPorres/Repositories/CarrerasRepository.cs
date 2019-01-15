@@ -22,9 +22,7 @@ namespace SMPorres.Repositories
                                         Id = c.Id,
                                         Nombre = c.Nombre,
                                         Duracion = c.Duracion,
-                                        Importe1Vto = c.Importe1Vto,
-                                        Importe2Vto = c.Importe2Vto,
-                                        Importe3Vto = c.Importe3Vto,
+                                        Importe = c.Importe,
                                         Estado = c.Estado,
                                         FechaEstado = c.FechaEstado
                                     });
@@ -32,8 +30,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static Carrera Insertar(string nombre, short duración, decimal importe1Vto, decimal importe2Vto,
-            decimal importe3Vto, short estado)
+        public static Carrera Insertar(string nombre, short duración, decimal importe, short estado)
         {
             using (var db = new SMPorresEntities())
             {
@@ -43,9 +40,7 @@ namespace SMPorres.Repositories
                     Id = id,
                     Nombre = nombre,
                     Duracion = duración,
-                    Importe1Vto = importe1Vto,
-                    Importe2Vto = importe2Vto,
-                    Importe3Vto = importe3Vto,
+                    Importe = importe,
                     Estado = estado,
                     FechaEstado = Configuration.CurrentDate
                 };
@@ -55,8 +50,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void Actualizar(decimal id, string nombre, short duración, decimal importe1Vto, decimal importe2Vto,
-            decimal importe3Vto, short estado)
+        public static void Actualizar(decimal id, string nombre, short duración, decimal importe, short estado)
         {
             using (var db = new SMPorresEntities())
             {
@@ -67,9 +61,7 @@ namespace SMPorres.Repositories
                 var c = db.Carreras.Find(id);
                 c.Nombre = nombre;
                 c.Duracion = duración;
-                c.Importe1Vto = importe1Vto;
-                c.Importe2Vto = importe2Vto;
-                c.Importe3Vto = importe3Vto;
+                c.Importe = importe;
                 if (c.Estado != estado)
                 {
                     c.Estado = estado;

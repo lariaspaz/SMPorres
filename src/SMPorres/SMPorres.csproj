@@ -196,6 +196,9 @@
     <Compile Include="Models\Localidad.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanesPago.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>

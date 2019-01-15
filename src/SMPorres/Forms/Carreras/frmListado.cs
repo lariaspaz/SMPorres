@@ -78,8 +78,7 @@ namespace SMPorres.Forms.Carreras
                 {
                     try
                     {
-                        var c = CarrerasRepository.Insertar(f.Nombre, f.Duración, f.Importe1Vto, 
-                            f.Importe2Vto, f.Importe3Vto, f.Estado);
+                        var c = CarrerasRepository.Insertar(f.Nombre, f.Duración, f.Importe, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }
@@ -100,8 +99,7 @@ namespace SMPorres.Forms.Carreras
                 {
                     try
                     {
-                        CarrerasRepository.Actualizar(m.Id, f.Nombre, f.Duración, f.Importe1Vto, f.Importe2Vto,
-                            f.Importe3Vto, f.Estado);
+                        CarrerasRepository.Actualizar(m.Id, f.Nombre, f.Duración, f.Importe, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
                     }
@@ -116,7 +114,7 @@ namespace SMPorres.Forms.Carreras
         private Models.Carrera ObtenerCarreraSeleccionada()
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
-            var id = (decimal)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
             var m = CarrerasRepository.ObtenerCarreraPorId(id);
             return m;
         }

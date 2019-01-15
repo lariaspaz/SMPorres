@@ -35,9 +35,7 @@ namespace SMPorres.Forms.Carreras
             this.Text = "Edición de carrera";
             txtNombre.Text = carrera.Nombre;
             txtDuración.Text = carrera.Duracion.ToString();
-            txtImporte1Vto.Text = String.Format("{0:n}", carrera.Importe1Vto);
-            txtImporte2Vto.Text = String.Format("{0:n}", carrera.Importe2Vto);
-            txtImporte3Vto.Text = String.Format("{0:n}", carrera.Importe3Vto);
+            txtImporte.Text = String.Format("{0:n}", carrera.Importe);
             ckEstado.Checked = carrera.Estado == 1;
         }
 
@@ -53,31 +51,15 @@ namespace SMPorres.Forms.Carreras
         {
             get
             {
-                return (short)txtImporte1Vto.IntValue;
+                return (short)txtImporte.IntValue;
             }
         }
 
-        public decimal Importe1Vto
+        public decimal Importe
         {
             get
             {
-                return txtImporte1Vto.DecValue;
-            }
-        }
-
-        public decimal Importe2Vto
-        {
-            get
-            {
-                return txtImporte2Vto.DecValue;
-            }
-        }
-
-        public decimal Importe3Vto
-        {
-            get
-            {
-                return txtImporte3Vto.DecValue;
+                return txtImporte.DecValue;
             }
         }
 
@@ -101,10 +83,9 @@ namespace SMPorres.Forms.Carreras
         private bool ValidarDatos()
         {
             return
+                _validator.Validar(txtNombre, !String.IsNullOrEmpty(Nombre.Trim()), "No puede estar vacío") &&
                 _validator.Validar(txtDuración, Duración > 0, "No puede ser menor o igual que cero") &&
-                _validator.Validar(txtImporte1Vto, Importe1Vto > 0, "No puede ser menor o igual que cero") &&
-                _validator.Validar(txtImporte2Vto, Importe2Vto > 0, "No puede ser menor o igual que cero") &&
-                _validator.Validar(txtImporte3Vto, Importe3Vto > 0, "No puede ser menor o igual que cero");
+                _validator.Validar(txtImporte, Importe > 0, "No puede ser menor o igual que cero");
         }        
     }
 }

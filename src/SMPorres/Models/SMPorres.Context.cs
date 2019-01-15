@@ -25,7 +25,6 @@ namespace SMPorres.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Carrera> Carreras { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Alumno> Alumnos { get; set; }
         public virtual DbSet<Barrio> Barrios { get; set; }
@@ -38,5 +37,7 @@ namespace SMPorres.Models
         public virtual DbSet<GruposUsuario> GruposUsuarios { get; set; }
         public virtual DbSet<TipoDocumento> TiposDocumento { get; set; }
         public virtual DbSet<CursosAlumno> CursosAlumnos { get; set; }
+        public virtual DbSet<Carrera> Carreras { get; set; }
+        public virtual DbSet<PlanesPago> PlanesPagoes { get; set; }
     }
 }

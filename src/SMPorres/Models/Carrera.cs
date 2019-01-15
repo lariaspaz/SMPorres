@@ -23,9 +23,7 @@ namespace SMPorres.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public short Duracion { get; set; }
-        public decimal Importe1Vto { get; set; }
-        public decimal Importe2Vto { get; set; }
-        public decimal Importe3Vto { get; set; }
+        public decimal Importe { get; set; }
         public short Estado { get; set; }
         public System.DateTime FechaEstado { get; set; }
     

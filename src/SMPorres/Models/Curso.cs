@@ -18,14 +18,17 @@ namespace SMPorres.Models
         public Curso()
         {
             this.CursosAlumnos = new HashSet<CursosAlumno>();
+            this.PlanesPagoes = new HashSet<PlanesPago>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int IdCarrera { get; set; }
     
-        public virtual Carrera Carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CursosAlumno> CursosAlumnos { get; set; }
+        public virtual Carrera Carrera { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlanesPago> PlanesPagoes { get; set; }
     }
 }
