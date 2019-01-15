@@ -12,31 +12,36 @@ namespace SMPorres.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PlanesPago
+    public partial class Pago
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PlanesPago()
+        public Pago()
         {
-            this.Pagos = new HashSet<Pago>();
+            this.PagosAsientos = new HashSet<Pago>();
         }
     
-        public int Id { get; set; }
-        public int IdAlumno { get; set; }
-        public int IdCurso { get; set; }
+        public int IdPago { get; set; }
+        public int IdPlanPago { get; set; }
+        public System.DateTime Fecha { get; set; }
         public short NroCuota { get; set; }
-        public short CantidadCuotas { get; set; }
+        public decimal ImportePagado { get; set; }
         public decimal ImporteCuota { get; set; }
+        public short PorcDescPagoTermino { get; set; }
+        public decimal ImportePagoTermino { get; set; }
         public short PorcentajeBeca { get; set; }
+        public Nullable<int> IdBecaAlumno { get; set; }
+        public decimal Recargo { get; set; }
+        public int IdMedioPago { get; set; }
+        public Nullable<int> IdArchivo { get; set; }
+        public short EsContrasiento { get; set; }
+        public Nullable<int> IdPagoAsiento { get; set; }
         public int IdUsuario { get; set; }
         public System.DateTime FechaGrabacion { get; set; }
-        public short Estado { get; set; }
-        public int IdUsuarioEstado { get; set; }
     
-        public virtual Alumno Alumno { get; set; }
-        public virtual Curso Curso { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        public virtual Usuario UsuarioEstado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pagos { get; set; }
+        public virtual ICollection<Pago> PagosAsientos { get; set; }
+        public virtual Pago PagoAsiento { get; set; }
+        public virtual PlanesPago PlanesPago { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }
