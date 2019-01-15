@@ -23,9 +23,9 @@ namespace SMPorres.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public short Duracion { get; set; }
-        public decimal Importe { get; set; }
         public short Estado { get; set; }
         public System.DateTime FechaEstado { get; set; }
+        public decimal Importe { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Curso> Cursos { get; set; }

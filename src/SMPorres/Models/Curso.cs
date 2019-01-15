@@ -27,8 +27,8 @@ namespace SMPorres.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CursosAlumno> CursosAlumnos { get; set; }
-        public virtual Carrera Carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanesPago> PlanesPagoes { get; set; }
+        public virtual Carrera Carrera { get; set; }
     }
 }

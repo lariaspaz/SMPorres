@@ -37,10 +37,10 @@ namespace SMPorres.Models
         public virtual DbSet<GruposUsuario> GruposUsuarios { get; set; }
         public virtual DbSet<TipoDocumento> TiposDocumento { get; set; }
         public virtual DbSet<CursosAlumno> CursosAlumnos { get; set; }
-        public virtual DbSet<Carrera> Carreras { get; set; }
         public virtual DbSet<PlanesPago> PlanesPagoes { get; set; }
         public virtual DbSet<Configuracion> Configuracions { get; set; }
         public virtual DbSet<Cuota> Cuotas { get; set; }
         public virtual DbSet<Pago> Pagos { get; set; }
+        public virtual DbSet<Carrera> Carreras { get; set; }
     }
 }

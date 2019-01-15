@@ -36,12 +36,9 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
-          <Property Name="Importe1Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe2Vto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Importe3Vto" Type="numeric" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
           <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
-          <Property Name="Importe" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Importe" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -606,15 +603,10 @@
             <End Role="Curso" EntitySet="Cursos" />
             <End Role="CursosAlumno" EntitySet="CursosAlumnos" />
           </AssociationSet>
-          <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />
           <EntitySet Name="PlanesPagoes" EntityType="SMPorres_DevModel.PlanesPago" />
           <AssociationSet Name="FK_PlanesPago_Alumnos" Association="SMPorres_DevModel.FK_PlanesPago_Alumnos">
             <End Role="Alumno" EntitySet="Alumnos" />
             <End Role="PlanesPago" EntitySet="PlanesPagoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
-            <End Role="Carrera" EntitySet="Carreras" />
-            <End Role="Curso" EntitySet="Cursos" />
           </AssociationSet>
           <AssociationSet Name="FK_PlanesPago_Cursos" Association="SMPorres_DevModel.FK_PlanesPago_Cursos">
             <End Role="Curso" EntitySet="Cursos" />
@@ -642,6 +634,11 @@
           <AssociationSet Name="FK_Pagos_Usuarios" Association="SMPorres_DevModel.FK_Pagos_Usuarios">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Pago" EntitySet="Pagos" />
+          </AssociationSet>
+          <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />
+          <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
+            <End Role="Carrera" EntitySet="Carreras" />
+            <End Role="Curso" EntitySet="Cursos" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
@@ -840,8 +837,8 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdCarrera" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="Curso" ToRole="CursosAlumno" />
-          <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
           <NavigationProperty Name="PlanesPagoes" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanesPago" />
+          <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
         </EntityType>
         <EntityType Name="Grupos">
           <Key>
@@ -940,21 +937,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Carrera">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Duracion" Type="Int16" Nullable="false" />
-          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
-          <Property Name="Importe1Vto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Importe2Vto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Importe3Vto" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-        </EntityType>
         <EntityType Name="PlanesPago">
           <Key>
             <PropertyRef Name="Id" />
@@ -985,18 +967,6 @@
             </Principal>
             <Dependent Role="PlanesPago">
               <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cursos_Carreras">
-          <End Type="SMPorres_DevModel.Carrera" Role="Carrera" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Curso">
-              <PropertyRef Name="IdCarrera" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1112,6 +1082,30 @@
             </Principal>
             <Dependent Role="Pago">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Duracion" Type="Int16" Nullable="false" />
+          <Property Name="Estado" Type="Int16" Nullable="false" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
+        </EntityType>
+        <Association Name="FK_Cursos_Carreras">
+          <End Type="SMPorres_DevModel.Carrera" Role="Carrera" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="IdCarrera" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1241,21 +1235,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Carreras">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.Carrera">
-              <MappingFragment StoreEntitySet="Carreras">
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="Importe3Vto" ColumnName="Importe3Vto" />
-                <ScalarProperty Name="Importe2Vto" ColumnName="Importe2Vto" />
-                <ScalarProperty Name="Importe1Vto" ColumnName="Importe1Vto" />
-                <ScalarProperty Name="FechaEstado" ColumnName="FechaEstado" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PlanesPagoes">
             <EntityTypeMapping TypeName="SMPorres_DevModel.PlanesPago">
               <MappingFragment StoreEntitySet="PlanesPago">
@@ -1312,6 +1291,18 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
                 <ScalarProperty Name="IdPago" ColumnName="IdPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carreras">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Carrera">
+              <MappingFragment StoreEntitySet="Carreras">
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="FechaEstado" ColumnName="FechaEstado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
