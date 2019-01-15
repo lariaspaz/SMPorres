@@ -84,6 +84,18 @@
     <Compile Include="Forms\Alumnos\frmPanelAlumno.Designer.cs">
       <DependentUpon>frmPanelAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Carreras\frmEdición.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cuotas\frmListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cuotas\frmListado.Designer.cs">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Cursos\frmEdición.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,10 +120,10 @@
     <Compile Include="Forms\frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Carreras\frmEdición.cs">
+    <Compile Include="Forms\Cuotas\frmEdición.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
+    <Compile Include="Forms\Cuotas\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Carreras\frmListado.cs">
@@ -175,6 +187,12 @@
     <Compile Include="Models\Carrera.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Configuracion.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cuota.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Curso.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -194,6 +212,9 @@
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Localidad.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PlanesPago.cs">
@@ -226,6 +247,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AlumnosRepository.cs" />
+    <Compile Include="Repositories\CuotasRepository.cs" />
     <Compile Include="Repositories\TiposDocumentoRepository.cs" />
     <Compile Include="Repositories\BarriosRepository.cs" />
     <Compile Include="Repositories\DepartamentosRepository.cs" />
@@ -250,13 +272,19 @@
     <EmbeddedResource Include="Forms\Alumnos\frmPanelAlumno.resx">
       <DependentUpon>frmPanelAlumno.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Cuotas\frmListado.resx">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cursos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Cursos\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
+    <EmbeddedResource Include="Forms\Cuotas\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carreras\frmListado.resx">

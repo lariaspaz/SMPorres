@@ -30,6 +30,8 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelDeAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ediciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,8 +45,7 @@
             this.gruposDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelDeAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cuotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +71,18 @@
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
+            // panelDeAlumnosToolStripMenuItem
+            // 
+            this.panelDeAlumnosToolStripMenuItem.Name = "panelDeAlumnosToolStripMenuItem";
+            this.panelDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.panelDeAlumnosToolStripMenuItem.Text = "Panel de alumnos";
+            this.panelDeAlumnosToolStripMenuItem.Click += new System.EventHandler(this.panelDeAlumnosToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(165, 6);
+            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
@@ -82,6 +95,7 @@
             this.ediciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alumnosToolStripMenuItem,
             this.carrerasToolStripMenuItem,
+            this.cuotasToolStripMenuItem,
             this.cursosToolStripMenuItem,
             this.toolStripMenuItem1,
             this.asignarAlumnosACursosToolStripMenuItem});
@@ -167,17 +181,12 @@
             this.asignarUsuariosAGruposToolStripMenuItem.Text = "Asignar usuarios a Grupos";
             this.asignarUsuariosAGruposToolStripMenuItem.Click += new System.EventHandler(this.asignarUsuariosAGruposToolStripMenuItem_Click);
             // 
-            // panelDeAlumnosToolStripMenuItem
+            // cuotasToolStripMenuItem
             // 
-            this.panelDeAlumnosToolStripMenuItem.Name = "panelDeAlumnosToolStripMenuItem";
-            this.panelDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.panelDeAlumnosToolStripMenuItem.Text = "Panel de alumnos";
-            this.panelDeAlumnosToolStripMenuItem.Click += new System.EventHandler(this.panelDeAlumnosToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(165, 6);
+            this.cuotasToolStripMenuItem.Name = "cuotasToolStripMenuItem";
+            this.cuotasToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.cuotasToolStripMenuItem.Text = "Cuotas";
+            this.cuotasToolStripMenuItem.Click += new System.EventHandler(this.cuotasToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -216,6 +225,7 @@
         private System.Windows.Forms.ToolStripMenuItem asignarUsuariosAGruposToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem panelDeAlumnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem cuotasToolStripMenuItem;
     }
 }
 
