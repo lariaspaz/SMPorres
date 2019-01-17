@@ -82,5 +82,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Cuotas.frmListado()) f.ShowDialog();
         }
+
+        private void configuraciónGeneralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new frmConfiguración()) f.ShowDialog();
+        }
     }
 }

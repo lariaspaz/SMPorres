@@ -620,7 +620,7 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="PlanesPago" EntitySet="PlanesPagoes" />
           </AssociationSet>
-          <EntitySet Name="Configuracions" EntityType="SMPorres_DevModel.Configuracion" />
+          <EntitySet Name="Configuraciones" EntityType="SMPorres_DevModel.Configuracion" />
           <EntitySet Name="Cuotas" EntityType="SMPorres_DevModel.Cuota" />
           <EntitySet Name="Pagos" EntityType="SMPorres_DevModel.Pago" />
           <AssociationSet Name="FK_Pagos_Pagos" Association="SMPorres_DevModel.FK_Pagos_Pagos">
@@ -1252,7 +1252,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Configuracions">
+          <EntitySetMapping Name="Configuraciones">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Configuracion">
               <MappingFragment StoreEntitySet="Configuracion">
                 <ScalarProperty Name="InteresPorMora" ColumnName="InteresPorMora" />

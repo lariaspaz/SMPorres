@@ -12,19 +12,13 @@ using System.Windows.Forms;
 
 namespace SMPorres.Forms.Carreras
 {
-    public partial class frmEdición : Form
+    public partial class frmEdición : Lib.AppForms.FormBase
     {
         private FormValidations _validator;
 
         public frmEdición()
         {
             InitializeComponent();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nueva carrera";
             txtNombre.Select();
             _validator = new FormValidations(this, errorProvider1);
