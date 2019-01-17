@@ -39,11 +39,29 @@ namespace SMPorres.Forms.Alumnos
         private void ConsultarDatos()
         {
             var a = AlumnosRepository.BuscarAlumnoPorNroDocumento(txtNroDocumento.DecValue);
-            if (_validator.Validar(txtNroDocumento, a != null, "No existe el alumno"))
+            if (!_validator.Validar(txtNroDocumento, a != null, "No existe el alumno"))
             {
                 return;
             }
             txtNombre.Text = a.Apellido + ", " + a.Nombre;
+        }
+
+        private void frmPanelAlumno_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) btnSalir.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.N) btnNuevo.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.F4) btnEditar.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.Delete) btnEliminar.PerformClick();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            ConsultarDatos();
         }
     }
 }
