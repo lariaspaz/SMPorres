@@ -35,7 +35,7 @@ namespace SMPorres.Forms.Alumnos
             txtDireccion.Text = alumno.Direccion;
             CargarDomicilio(alumno.IdDomicilio);
             ckEstado.Checked = alumno.Estado == 1;
-            cbSexo.Text = alumno.sexo;
+            cbSexo.Text = alumno.Sexo;
         }
 
         private void CargarDomicilio(int idDomicilio)

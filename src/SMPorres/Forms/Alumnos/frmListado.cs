@@ -36,7 +36,7 @@ namespace SMPorres.Forms.Alumnos
                                        a.Direccion,
                                        a.IdDomicilio,
                                        a.Estado,
-                                       a.sexo
+                                       a.Sexo
                                    });
         }
 

@@ -31,7 +31,7 @@ namespace SMPorres.Repositories
                                         Direccion = a.Direccion,
                                         IdDomicilio = a.IdDomicilio,
                                         Estado = a.Estado,
-                                        sexo = a.sexo
+                                        Sexo = a.Sexo
                                     });
                 return query.OrderBy(a => a.Apellido).ToList();
             }
@@ -84,7 +84,7 @@ namespace SMPorres.Repositories
                 {
                     a.Estado = estado;
                 }
-                a.sexo = sexo.ToString();
+                a.Sexo = sexo.ToString();
                 db.SaveChanges();
             }
         }
@@ -122,7 +122,7 @@ namespace SMPorres.Repositories
                     Direccion = dirección,
                     IdDomicilio = idDomicilio,
                     Estado = estado,
-                    sexo = sexo.ToString()
+                    Sexo = sexo.ToString()
                 };
                 db.Alumnos.Add(a);
                 db.SaveChanges();

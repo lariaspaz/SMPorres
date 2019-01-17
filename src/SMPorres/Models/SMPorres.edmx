@@ -675,7 +675,7 @@
           <NavigationProperty Name="TiposDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPagoes" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="Barrio">
           <Key>
@@ -1131,7 +1131,7 @@
           <EntitySetMapping Name="Alumnos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Alumno">
               <MappingFragment StoreEntitySet="Alumnos">
-                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="Sexo" ColumnName="sexo" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdDomicilio" ColumnName="IdDomicilio" />
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
