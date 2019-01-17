@@ -40,14 +40,15 @@
             this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarAlumnosACursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.configuraciónGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gruposDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.configuraciónGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,51 +148,6 @@
             this.asignarAlumnosACursosToolStripMenuItem.Text = "Asignar alumnos a cursos";
             this.asignarAlumnosACursosToolStripMenuItem.Click += new System.EventHandler(this.asignarAlumnosACursosToolStripMenuItem_Click);
             // 
-            // seguridadToolStripMenuItem
-            // 
-            this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usuariosToolStripMenuItem,
-            this.cambiarContraseñaToolStripMenuItem,
-            this.gruposDeUsuariosToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.asignarUsuariosAGruposToolStripMenuItem});
-            this.seguridadToolStripMenuItem.Name = "seguridadToolStripMenuItem";
-            this.seguridadToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.seguridadToolStripMenuItem.Text = "Seguridad";
-            // 
-            // usuariosToolStripMenuItem
-            // 
-            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.usuariosToolStripMenuItem.Text = "Usuarios";
-            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
-            // 
-            // cambiarContraseñaToolStripMenuItem
-            // 
-            this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
-            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
-            this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
-            // 
-            // gruposDeUsuariosToolStripMenuItem
-            // 
-            this.gruposDeUsuariosToolStripMenuItem.Name = "gruposDeUsuariosToolStripMenuItem";
-            this.gruposDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.gruposDeUsuariosToolStripMenuItem.Text = "Grupos";
-            this.gruposDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gruposDeUsuariosToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(208, 6);
-            // 
-            // asignarUsuariosAGruposToolStripMenuItem
-            // 
-            this.asignarUsuariosAGruposToolStripMenuItem.Name = "asignarUsuariosAGruposToolStripMenuItem";
-            this.asignarUsuariosAGruposToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.asignarUsuariosAGruposToolStripMenuItem.Text = "Asignar usuarios a Grupos";
-            this.asignarUsuariosAGruposToolStripMenuItem.Click += new System.EventHandler(this.asignarUsuariosAGruposToolStripMenuItem_Click);
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -203,6 +159,59 @@
             this.configuraciónGeneralToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.configuraciónGeneralToolStripMenuItem.Text = "Configuración general";
             this.configuraciónGeneralToolStripMenuItem.Click += new System.EventHandler(this.configuraciónGeneralToolStripMenuItem_Click);
+            // 
+            // seguridadToolStripMenuItem
+            // 
+            this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.usuariosToolStripMenuItem,
+            this.cambiarContraseñaToolStripMenuItem,
+            this.gruposDeUsuariosToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.asignarUsuariosAGruposToolStripMenuItem,
+            this.asignarPermisosAGruposYUsuariosToolStripMenuItem});
+            this.seguridadToolStripMenuItem.Name = "seguridadToolStripMenuItem";
+            this.seguridadToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.seguridadToolStripMenuItem.Text = "Seguridad";
+            // 
+            // usuariosToolStripMenuItem
+            // 
+            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.usuariosToolStripMenuItem.Text = "Usuarios";
+            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
+            // 
+            // cambiarContraseñaToolStripMenuItem
+            // 
+            this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
+            this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
+            this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
+            // 
+            // gruposDeUsuariosToolStripMenuItem
+            // 
+            this.gruposDeUsuariosToolStripMenuItem.Name = "gruposDeUsuariosToolStripMenuItem";
+            this.gruposDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.gruposDeUsuariosToolStripMenuItem.Text = "Grupos";
+            this.gruposDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gruposDeUsuariosToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(269, 6);
+            // 
+            // asignarUsuariosAGruposToolStripMenuItem
+            // 
+            this.asignarUsuariosAGruposToolStripMenuItem.Name = "asignarUsuariosAGruposToolStripMenuItem";
+            this.asignarUsuariosAGruposToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.asignarUsuariosAGruposToolStripMenuItem.Text = "Asignar usuarios a Grupos";
+            this.asignarUsuariosAGruposToolStripMenuItem.Click += new System.EventHandler(this.asignarUsuariosAGruposToolStripMenuItem_Click);
+            // 
+            // asignarPermisosAGruposYUsuariosToolStripMenuItem
+            // 
+            this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Name = "asignarPermisosAGruposYUsuariosToolStripMenuItem";
+            this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Text = "Asignar permisos a Grupos y Usuarios";
+            this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosAGruposYUsuariosToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -244,6 +253,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem configuraciónGeneralToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asignarPermisosAGruposYUsuariosToolStripMenuItem;
     }
 }
 

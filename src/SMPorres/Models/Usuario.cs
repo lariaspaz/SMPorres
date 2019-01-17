@@ -21,6 +21,7 @@ namespace SMPorres.Models
             this.PlanesPagos = new HashSet<PlanesPago>();
             this.PlanesPagosEstado = new HashSet<PlanesPago>();
             this.Pagos = new HashSet<Pago>();
+            this.UsuariosItemsMenus = new HashSet<UsuariosItemsMenu>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace SMPorres.Models
         public virtual ICollection<PlanesPago> PlanesPagosEstado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pagos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuariosItemsMenu> UsuariosItemsMenus { get; set; }
     }
 }

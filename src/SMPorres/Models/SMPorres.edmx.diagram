@@ -43,6 +43,13 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Usuarios" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Carrera" Width="1.5" PointX="0.875" PointY="0.75" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.GruposItemsMenu" Width="1.5" PointX="5.25" PointY="15" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.ItemsMenu" Width="1.5" PointX="0.75" PointY="14.5" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.UsuariosItemsMenu" Width="1.5" PointX="3" PointY="13.5" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_GruposItemsMenu_Grupos" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_GruposItemsMenus_ItemsMenu" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_UsuariosItemsMenu_ItemsMenu" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_UsuariosItemsMenu_Usuarios" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

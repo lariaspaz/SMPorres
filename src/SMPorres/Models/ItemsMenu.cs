@@ -12,22 +12,23 @@ namespace SMPorres.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Grupos
+    public partial class ItemsMenu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Grupos()
+        public ItemsMenu()
         {
-            this.GruposUsuarios = new HashSet<GruposUsuario>();
             this.GruposItemsMenus = new HashSet<GruposItemsMenu>();
+            this.UsuariosItemsMenus = new HashSet<UsuariosItemsMenu>();
         }
     
         public int Id { get; set; }
+        public Nullable<int> IdPadre { get; set; }
+        public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public byte Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GruposUsuario> GruposUsuarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GruposItemsMenu> GruposItemsMenus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuariosItemsMenu> UsuariosItemsMenus { get; set; }
     }
 }

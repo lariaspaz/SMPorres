@@ -87,5 +87,10 @@ namespace SMPorres.Forms
         {
             using (var f = new frmConfiguración()) f.ShowDialog();
         }
+
+        private void asignarPermisosAGruposYUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new MenuItems.frmAsignarUsuariosyGruposAMenuItems()) f.ShowDialog();
+        }
     }
 }

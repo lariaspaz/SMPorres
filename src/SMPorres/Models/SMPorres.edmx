@@ -99,6 +99,14 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
         </EntityType>
+        <EntityType Name="GruposItemsMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="IdItemMenu" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="GruposUsuarios">
           <Key>
             <PropertyRef Name="Id" />
@@ -106,6 +114,15 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdGrupo" Type="int" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemsMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdPadre" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Localidades">
           <Key>
@@ -178,6 +195,14 @@
           <Property Name="Estado" Type="tinyint" Nullable="false" />
           <Property Name="FechaBaja" Type="datetime" />
           <Property Name="NombreCompleto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsuariosItemsMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdItemMenu" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Alumnos_Domicilios">
           <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="1" />
@@ -311,6 +336,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GruposItemsMenu_Grupos">
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+          <End Role="GruposItemsMenu" Type="Self.GruposItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposItemsMenu">
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposItemsMenus_ItemsMenu">
+          <End Role="ItemsMenu" Type="Self.ItemsMenu" Multiplicity="1" />
+          <End Role="GruposItemsMenu" Type="Self.GruposItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemsMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposItemsMenu">
+              <PropertyRef Name="IdItemMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GruposUsuarios_Grupos">
           <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
           <End Role="GruposUsuarios" Type="Self.GruposUsuarios" Multiplicity="*" />
@@ -431,6 +480,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UsuariosItemsMenu_ItemsMenu">
+          <End Role="ItemsMenu" Type="Self.ItemsMenu" Multiplicity="1" />
+          <End Role="UsuariosItemsMenu" Type="Self.UsuariosItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemsMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsuariosItemsMenu">
+              <PropertyRef Name="IdItemMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosItemsMenu_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="UsuariosItemsMenu" Type="Self.UsuariosItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsuariosItemsMenu">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SMPorres_DevModelStoreContainer">
           <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Barrios" EntityType="Self.Barrios" Schema="dbo" store:Type="Tables" />
@@ -442,13 +515,16 @@
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Domicilios" EntityType="Self.Domicilios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GruposItemsMenu" EntityType="Self.GruposItemsMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GruposUsuarios" EntityType="Self.GruposUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemsMenu" EntityType="Self.ItemsMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlanesPago" EntityType="Self.PlanesPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuariosItemsMenu" EntityType="Self.UsuariosItemsMenu" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Alumnos_Domicilios" Association="Self.FK_Alumnos_Domicilios">
             <End Role="Domicilios" EntitySet="Domicilios" />
             <End Role="Alumnos" EntitySet="Alumnos" />
@@ -493,6 +569,14 @@
             <End Role="Provincias" EntitySet="Provincias" />
             <End Role="Domicilios" EntitySet="Domicilios" />
           </AssociationSet>
+          <AssociationSet Name="FK_GruposItemsMenu_Grupos" Association="Self.FK_GruposItemsMenu_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="GruposItemsMenu" EntitySet="GruposItemsMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposItemsMenus_ItemsMenu" Association="Self.FK_GruposItemsMenus_ItemsMenu">
+            <End Role="ItemsMenu" EntitySet="ItemsMenu" />
+            <End Role="GruposItemsMenu" EntitySet="GruposItemsMenu" />
+          </AssociationSet>
           <AssociationSet Name="FK_GruposUsuarios_Grupos" Association="Self.FK_GruposUsuarios_Grupos">
             <End Role="Grupos" EntitySet="Grupos" />
             <End Role="GruposUsuarios" EntitySet="GruposUsuarios" />
@@ -532,6 +616,14 @@
           <AssociationSet Name="FK_PlanesPago_Usuarios1" Association="Self.FK_PlanesPago_Usuarios1">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="PlanesPago" EntitySet="PlanesPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosItemsMenu_ItemsMenu" Association="Self.FK_UsuariosItemsMenu_ItemsMenu">
+            <End Role="ItemsMenu" EntitySet="ItemsMenu" />
+            <End Role="UsuariosItemsMenu" EntitySet="UsuariosItemsMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosItemsMenu_Usuarios" Association="Self.FK_UsuariosItemsMenu_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuariosItemsMenu" EntitySet="UsuariosItemsMenu" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -640,6 +732,25 @@
             <End Role="Carrera" EntitySet="Carreras" />
             <End Role="Curso" EntitySet="Cursos" />
           </AssociationSet>
+          <EntitySet Name="GruposItemsMenus" EntityType="SMPorres_DevModel.GruposItemsMenu" />
+          <EntitySet Name="ItemsMenus" EntityType="SMPorres_DevModel.ItemsMenu" />
+          <EntitySet Name="UsuariosItemsMenus" EntityType="SMPorres_DevModel.UsuariosItemsMenu" />
+          <AssociationSet Name="FK_GruposItemsMenu_Grupos" Association="SMPorres_DevModel.FK_GruposItemsMenu_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="GruposItemsMenu" EntitySet="GruposItemsMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GruposItemsMenus_ItemsMenu" Association="SMPorres_DevModel.FK_GruposItemsMenus_ItemsMenu">
+            <End Role="ItemsMenu" EntitySet="ItemsMenus" />
+            <End Role="GruposItemsMenu" EntitySet="GruposItemsMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosItemsMenu_ItemsMenu" Association="SMPorres_DevModel.FK_UsuariosItemsMenu_ItemsMenu">
+            <End Role="ItemsMenu" EntitySet="ItemsMenus" />
+            <End Role="UsuariosItemsMenu" EntitySet="UsuariosItemsMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosItemsMenu_Usuarios" Association="SMPorres_DevModel.FK_UsuariosItemsMenu_Usuarios">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="UsuariosItemsMenu" EntitySet="UsuariosItemsMenus" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -656,6 +767,7 @@
           <NavigationProperty Name="PlanesPagos" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios" FromRole="Usuario" ToRole="PlanesPago" />
           <NavigationProperty Name="PlanesPagosEstado" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios1" FromRole="Usuario" ToRole="PlanesPago" />
           <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Usuario" ToRole="Pago" />
+          <NavigationProperty Name="UsuariosItemsMenus" Relationship="SMPorres_DevModel.FK_UsuariosItemsMenu_Usuarios" FromRole="Usuario" ToRole="UsuariosItemsMenu" />
         </EntityType>
         <EntityType Name="Alumno">
           <Key>
@@ -848,6 +960,7 @@
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <NavigationProperty Name="GruposUsuarios" Relationship="SMPorres_DevModel.FK_GruposUsuarios_Grupos" FromRole="Grupos" ToRole="GruposUsuario" />
+          <NavigationProperty Name="GruposItemsMenus" Relationship="SMPorres_DevModel.FK_GruposItemsMenu_Grupos" FromRole="Grupos" ToRole="GruposItemsMenu" />
         </EntityType>
         <EntityType Name="GruposUsuario">
           <Key>
@@ -1109,6 +1222,85 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GruposItemsMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="IdItemMenu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grupos" Relationship="SMPorres_DevModel.FK_GruposItemsMenu_Grupos" FromRole="GruposItemsMenu" ToRole="Grupos" />
+          <NavigationProperty Name="ItemsMenu" Relationship="SMPorres_DevModel.FK_GruposItemsMenus_ItemsMenu" FromRole="GruposItemsMenu" ToRole="ItemsMenu" />
+        </EntityType>
+        <EntityType Name="ItemsMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdPadre" Type="Int32" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GruposItemsMenus" Relationship="SMPorres_DevModel.FK_GruposItemsMenus_ItemsMenu" FromRole="ItemsMenu" ToRole="GruposItemsMenu" />
+          <NavigationProperty Name="UsuariosItemsMenus" Relationship="SMPorres_DevModel.FK_UsuariosItemsMenu_ItemsMenu" FromRole="ItemsMenu" ToRole="UsuariosItemsMenu" />
+        </EntityType>
+        <EntityType Name="UsuariosItemsMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdItemMenu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemsMenu" Relationship="SMPorres_DevModel.FK_UsuariosItemsMenu_ItemsMenu" FromRole="UsuariosItemsMenu" ToRole="ItemsMenu" />
+          <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_UsuariosItemsMenu_Usuarios" FromRole="UsuariosItemsMenu" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_GruposItemsMenu_Grupos">
+          <End Type="SMPorres_DevModel.Grupos" Role="Grupos" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.GruposItemsMenu" Role="GruposItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposItemsMenu">
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GruposItemsMenus_ItemsMenu">
+          <End Type="SMPorres_DevModel.ItemsMenu" Role="ItemsMenu" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.GruposItemsMenu" Role="GruposItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemsMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GruposItemsMenu">
+              <PropertyRef Name="IdItemMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosItemsMenu_ItemsMenu">
+          <End Type="SMPorres_DevModel.ItemsMenu" Role="ItemsMenu" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.UsuariosItemsMenu" Role="UsuariosItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemsMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsuariosItemsMenu">
+              <PropertyRef Name="IdItemMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosItemsMenu_Usuarios">
+          <End Type="SMPorres_DevModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.UsuariosItemsMenu" Role="UsuariosItemsMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsuariosItemsMenu">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1302,6 +1494,34 @@
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Duracion" ColumnName="Duracion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GruposItemsMenus">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.GruposItemsMenu">
+              <MappingFragment StoreEntitySet="GruposItemsMenu">
+                <ScalarProperty Name="IdItemMenu" ColumnName="IdItemMenu" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemsMenus">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.ItemsMenu">
+              <MappingFragment StoreEntitySet="ItemsMenu">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPadre" ColumnName="IdPadre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuariosItemsMenus">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.UsuariosItemsMenu">
+              <MappingFragment StoreEntitySet="UsuariosItemsMenu">
+                <ScalarProperty Name="IdItemMenu" ColumnName="IdItemMenu" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
