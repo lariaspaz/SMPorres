@@ -42,6 +42,7 @@
             this.rbUsuarios = new System.Windows.Forms.RadioButton();
             this.rbGrupos = new System.Windows.Forms.RadioButton();
             this.lbMenu = new System.Windows.Forms.ListBox();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -107,6 +108,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.Control;
+            this.panel6.Controls.Add(this.btnSalir);
             this.panel6.Controls.Add(this.btnQuitar);
             this.panel6.Controls.Add(this.btnAsignar);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
@@ -206,10 +208,22 @@
             this.lbMenu.Size = new System.Drawing.Size(328, 210);
             this.lbMenu.TabIndex = 3;
             // 
+            // btnSalir
+            // 
+            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
+            this.btnSalir.Location = new System.Drawing.Point(4, 430);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(27, 27);
+            this.btnSalir.TabIndex = 3;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // frmAsignarUsuariosyGruposAMenuItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnSalir;
             this.ClientSize = new System.Drawing.Size(680, 468);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmAsignarUsuariosyGruposAMenuItems";
@@ -242,5 +256,6 @@
         private System.Windows.Forms.RadioButton rbUsuarios;
         private System.Windows.Forms.RadioButton rbGrupos;
         private System.Windows.Forms.ListBox lbMenu;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

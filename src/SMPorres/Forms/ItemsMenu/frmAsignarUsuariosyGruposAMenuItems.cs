@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using SMPorres.Models;
 using SMPorres.Repositories;
 using static SMPorres.Repositories.ItemsMenuRepository;
+using SMPorres.Lib.AppForms;
 
 namespace SMPorres.Forms.MenuItems
 {
-    public partial class frmAsignarUsuariosyGruposAMenuItems : Form
+    public partial class frmAsignarUsuariosyGruposAMenuItems : FormBase
     {
         public frmAsignarUsuariosyGruposAMenuItems()
         {
@@ -29,62 +30,6 @@ namespace SMPorres.Forms.MenuItems
             lbMenu.ValueMember = "Id";
             lbMenu.DisplayMember = "Descripcion";
         }
-
-        private void GenerarTreeView()
-        {
-            //List<ItemsMenu> itemMenu = ItemsMenuRepository.ObtenerItemsMenu().ToList();
-            //List<ItemsMenu> padres = ItemsMenuRepository.ObtenerPadresItemsMenu().ToList();
-
-            //foreach (var it in padres)
-            //{
-            //    TreeNode node = new TreeNode(it.Descripcion);
-            //    treeView1.Nodes.Add(node);
-            //
-            //    var hijos = ObtenerHijosPorId(it.Id);
-            //    
-            //    foreach (var h in hijos)
-            //    {
-            //        TreeNode nodoh = new TreeNode(h.Descripcion);
-            //        treeView1.Nodes.Add(nodoh);
-            //    }
-            //}
-
-            //foreach (var item in itemMenu)
-            //{
-            //    TreeNode nodoNuevo = new TreeNode(item.Descripcion);
-            //    //Filtramos con LinQ para buscar si existe el nodo
-            //    var nodo = (from TreeNode t in treeView1.Nodes
-            //                where t.Text == nodoNuevo.Text
-            //                select t).FirstOrDefault();
-            //    //Si no existe, lo añadimos al treeView
-            //    if (nodo == null)
-            //    {
-            //        treeView1.Nodes.Add(nodoNuevo);
-            //    }
-            //    else //si existe, lo añadimos al nodo que ya existe
-            //    {
-            //        nodo.Nodes.Add(nodoNuevo);
-            //    }
-            //}
-        }
-
-        //private void CrearNodoHijo(List<CategoriaJerarquica> categoriaList, TreeNode parentNode)
-        //{
-        //    categoriaList.ForEach(x =>
-        //    {
-        //    TreeNode node = new TreeNode(x.Descripcion);    //, Convert.ToString(x.IdCategoria));
-        //
-        //        if (x.CategoriaHija != null)
-        //        {
-        //            CrearNodoHijo(x.CategoriaHija, node);
-        //        }
-        //
-        //        if (parentNode == null)
-        //            treeView1.Nodes.Add(node);
-        //        else
-        //            parentNode.Nodes.Add(node);
-        //    });
-        //}
 
         private int IdGrupo
         {
@@ -213,5 +158,9 @@ namespace SMPorres.Forms.MenuItems
             lbMenu.ValueMember = "Id";
         }
 
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

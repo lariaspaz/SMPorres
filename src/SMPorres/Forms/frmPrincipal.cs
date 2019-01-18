@@ -16,6 +16,45 @@ namespace SMPorres.Forms
         public frmPrincipal()
         {
             InitializeComponent();
+            //RecorrerMenu();
+        }
+
+        private void RecorrerMenu()
+        {
+            Font fntOriginal = this.menuStrip1.Items[0].Font;
+
+            foreach (ToolStripMenuItem mnuitOpcion in this.menuStrip1.Items)
+
+            {
+                // si esta opción despliega un submenú
+                // llamar a un método para hacer cambios
+                // en las opciones del submenú
+
+                if (mnuitOpcion.DropDownItems.Count > 0)
+
+                {
+                    this.CambiarOpcionesMenu(mnuitOpcion.DropDownItems, 0);
+                }
+            }
+        }
+
+        //private void CambiarOpcionesMenu(ToolStripItemCollection colOpcionesMenu, Font fntTipoOriginal)
+        private void CambiarOpcionesMenu(ToolStripItemCollection colOpcionesMenu, int idPadre)
+        {
+
+            // recorrer el submenú
+            foreach (ToolStripItem itmOpcion in colOpcionesMenu)
+            {
+                // si esta opción a su vez despliega un nuevo submenú
+                // llamar recursivamente a este método para cambiar sus opciones
+                // guardar menu
+                if ( ((ToolStripMenuItem)itmOpcion).DropDownItems.Count > 0)
+                {
+                        this.CambiarOpcionesMenu(((ToolStripMenuItem)itmOpcion).DropDownItems,
+                        Convert.ToInt32(itmOpcion));
+                }
+            }
+
         }
 
         private void carrerasToolStripMenuItem_Click(object sender, EventArgs e)

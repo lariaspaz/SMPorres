@@ -43,6 +43,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnAsignar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -192,6 +193,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.Control;
+            this.panel6.Controls.Add(this.btnSalir);
             this.panel6.Controls.Add(this.btnQuitar);
             this.panel6.Controls.Add(this.btnAsignar);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
@@ -220,10 +222,22 @@
             this.btnAsignar.UseVisualStyleBackColor = true;
             this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
             // 
+            // btnSalir
+            // 
+            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
+            this.btnSalir.Location = new System.Drawing.Point(5, 363);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(27, 27);
+            this.btnSalir.TabIndex = 3;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // frmAsignarUsuariosAGrupos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnSalir;
             this.ClientSize = new System.Drawing.Size(586, 482);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmAsignarUsuariosAGrupos";
@@ -262,5 +276,6 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnAsignar;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
