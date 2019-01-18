@@ -21,8 +21,9 @@ namespace SMPorres.Forms
         {
             InitializeComponent();
             var conf = ConfiguracionRepository.ObtenerConfiguracion();
-            txtDescPagoTérmino.Text = conf.DescuentoPagoTermino.ToString();
-            txtInterésPorMora.Text = conf.InteresPorMora.ToString();
+            txtDescPagoTérmino.DecValue =(decimal) conf.DescuentoPagoTermino;
+            txtInterésPorMora.DecValue = (decimal) conf.InteresPorMora;
+            txtCicloLectivo.IntValue = conf.CicloLectivo;
             this.Text = "Configuración general";
             txtDescPagoTérmino.Select();
             _validator = new FormValidations(this, errorProvider1);
@@ -32,7 +33,7 @@ namespace SMPorres.Forms
         {
             get
             {
-                return (double) txtDescPagoTérmino.DecValue;
+                return (double)txtDescPagoTérmino.DecValue;
             }
         }
 
@@ -40,7 +41,15 @@ namespace SMPorres.Forms
         {
             get
             {
-                return (double) txtInterésPorMora.DecValue;
+                return (double)txtInterésPorMora.DecValue;
+            }
+        }
+
+        public short CicloLectivo
+        {
+            get
+            {
+                return (short) txtCicloLectivo.IntValue;
             }
         }
 
@@ -51,7 +60,7 @@ namespace SMPorres.Forms
             {
                 try
                 {
-                    ConfiguracionRepository.Actualizar(DescuentoPagoATérmino, InterésPorMora);
+                    ConfiguracionRepository.Actualizar(DescuentoPagoATérmino, InterésPorMora, CicloLectivo);
                     DialogResult = DialogResult.OK;
                 }
                 catch (Exception ex)
@@ -65,7 +74,8 @@ namespace SMPorres.Forms
         {
             return
                 _validator.Validar(txtDescPagoTérmino, DescuentoPagoATérmino >= 0, "No puede ser menor que cero") &&
-                _validator.Validar(txtInterésPorMora, InterésPorMora >= 0, "No puede ser menor que cero");
-        }        
+                _validator.Validar(txtInterésPorMora, InterésPorMora >= 0, "No puede ser menor que cero") &&
+                _validator.Validar(txtCicloLectivo, CicloLectivo >= 2019, "No puede ser menor que 2019");
+        }
     }
 }

@@ -19,10 +19,10 @@ namespace SMPorres.Forms.MenuItems
         {
             InitializeComponent();
             //GenerarTreeView();
-            cargarMenu();
+            CargarMenu();
         }
 
-        private void cargarMenu()
+        private void CargarMenu()
         {
             var menu = ItemsMenuRepository.ObtenerItemsMenu().ToList();
             lbMenu.DataSource = menu;
@@ -86,7 +86,7 @@ namespace SMPorres.Forms.MenuItems
         //    });
         //}
 
-    private int IdGrupo
+        private int IdGrupo
         {
             get
             {
@@ -141,14 +141,14 @@ namespace SMPorres.Forms.MenuItems
                     GruposItemsMenuRepository.Insertar(IdGrupo, idItemMenu.Id);
                     ConsultarGrupos(IdGrupo);
                 }
-                if(rbUsuarios.Checked==true)
+                if (rbUsuarios.Checked == true)
                 {
                     var idItemMenu = ItemsMenuRepository.ObtenerItemMenuPorDescripcion(lbMenu.Text);
                     if (idItemMenu == null || IdUsuario <= 0) return;
                     UsuariosItemsMenuRepository.Insertar(IdUsuario, idItemMenu.Id);
                     ConsultarUsuarios(IdUsuario);
                 }
-            }     
+            }
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
@@ -167,7 +167,7 @@ namespace SMPorres.Forms.MenuItems
                 UsuariosItemsMenuRepository.Eliminar(IdUsuario, idItemMenu.Id);
                 ConsultarUsuarios(IdUsuario);
             }
- 
+
         }
 
         private void lbSinAsignar_DoubleClick(object sender, EventArgs e)
@@ -176,7 +176,8 @@ namespace SMPorres.Forms.MenuItems
             {
                 labelAsignados.Text = "Asignados a " + lbSinAsignar.Text;
                 ConsultarGrupos(IdGrupo);
-            }else
+            }
+            else
             {
                 labelAsignados.Text = "Asignados a " + lbSinAsignar.Text;
                 ConsultarUsuarios(IdUsuario);

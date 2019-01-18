@@ -40,6 +40,8 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtCicloLectivo = new CustomLibrary.ComponentModel.NumericTextBox();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -48,6 +50,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.txtCicloLectivo);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.txtInterésPorMora);
             this.panel2.Controls.Add(this.txtDescPagoTérmino);
@@ -55,7 +59,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(309, 69);
+            this.panel2.Size = new System.Drawing.Size(309, 93);
             this.panel2.TabIndex = 1;
             // 
             // label3
@@ -70,20 +74,34 @@
             // 
             // txtInterésPorMora
             // 
+            this.txtInterésPorMora.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             this.txtInterésPorMora.Digits = 2;
+            this.txtInterésPorMora.IntValue = ((long)(0));
             this.txtInterésPorMora.Location = new System.Drawing.Point(192, 37);
             this.txtInterésPorMora.Name = "txtInterésPorMora";
             this.txtInterésPorMora.Size = new System.Drawing.Size(100, 20);
             this.txtInterésPorMora.TabIndex = 2;
+            this.txtInterésPorMora.Text = "0,00";
             this.txtInterésPorMora.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtDescPagoTérmino
             // 
+            this.txtDescPagoTérmino.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             this.txtDescPagoTérmino.Digits = 2;
+            this.txtDescPagoTérmino.IntValue = ((long)(0));
             this.txtDescPagoTérmino.Location = new System.Drawing.Point(192, 11);
             this.txtDescPagoTérmino.Name = "txtDescPagoTérmino";
             this.txtDescPagoTérmino.Size = new System.Drawing.Size(100, 20);
             this.txtDescPagoTérmino.TabIndex = 1;
+            this.txtDescPagoTérmino.Text = "0,00";
             this.txtDescPagoTérmino.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
@@ -108,7 +126,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(315, 110);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(315, 134);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -117,7 +135,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 75);
+            this.panel1.Location = new System.Drawing.Point(0, 99);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(315, 35);
@@ -161,13 +179,38 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(112, 66);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Ciclo Lectivo: ";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtCicloLectivo
+            // 
+            this.txtCicloLectivo.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtCicloLectivo.IntValue = ((long)(0));
+            this.txtCicloLectivo.Location = new System.Drawing.Point(192, 63);
+            this.txtCicloLectivo.Name = "txtCicloLectivo";
+            this.txtCicloLectivo.Size = new System.Drawing.Size(100, 20);
+            this.txtCicloLectivo.TabIndex = 8;
+            this.txtCicloLectivo.Text = "0";
+            this.txtCicloLectivo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // frmConfiguración
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(315, 110);
+            this.ClientSize = new System.Drawing.Size(315, 134);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmConfiguración";
             this.Text = "frmEdición";
@@ -193,5 +236,7 @@
         private CustomLibrary.ComponentModel.NumericTextBox txtDescPagoTérmino;
         private CustomLibrary.ComponentModel.NumericTextBox txtInterésPorMora;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private CustomLibrary.ComponentModel.NumericTextBox txtCicloLectivo;
     }
 }

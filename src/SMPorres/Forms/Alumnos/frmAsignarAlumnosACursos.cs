@@ -20,6 +20,7 @@ namespace SMPorres.Forms.Alumnos
             cbCarreras.DataSource = CarrerasRepository.ObtenerCarreras().OrderBy(c => c.Nombre).ToList();
             cbCarreras.DisplayMember = "Nombre";
             cbCarreras.ValueMember = "Id";
+            lblCicloLectivo.Text = String.Format("Ciclo Lectivo {0:n0}", ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo);
         }
 
         private int IdCarrera

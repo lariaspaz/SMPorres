@@ -1,4 +1,5 @@
-﻿using SMPorres.Lib.AppForms;
+﻿using CustomLibrary.Extensions.Controls;
+using SMPorres.Lib.AppForms;
 using SMPorres.Lib.Validations;
 using SMPorres.Repositories;
 using System;
@@ -44,6 +45,16 @@ namespace SMPorres.Forms.Alumnos
                 return;
             }
             txtNombre.Text = a.Apellido + ", " + a.Nombre;
+
+            dgvCursos.SetDataSource(from ca in CursosAlumnosRepository.ObtenerCursosPorAlumno(a.Id)
+                                    orderby ca.Id
+                                    select new
+                                    {
+                                        ca.Id,
+                                        ca.Nombre,
+                                        Carrera = ca.Carrera.Nombre
+                                    });
+
         }
 
         private void frmPanelAlumno_KeyDown(object sender, KeyEventArgs e)

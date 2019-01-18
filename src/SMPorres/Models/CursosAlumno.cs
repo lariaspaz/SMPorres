@@ -17,6 +17,7 @@ namespace SMPorres.Models
         public int Id { get; set; }
         public int IdCurso { get; set; }
         public int IdAlumno { get; set; }
+        public short CicloLectivo { get; set; }
     
         public virtual Alumno Alumno { get; set; }
         public virtual Curso Curso { get; set; }

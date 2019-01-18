@@ -17,5 +17,6 @@ namespace SMPorres.Models
         public int Id { get; set; }
         public double DescuentoPagoTermino { get; set; }
         public double InteresPorMora { get; set; }
+        public short CicloLectivo { get; set; }
     }
 }

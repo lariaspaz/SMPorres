@@ -36,12 +36,38 @@ namespace SMPorres.Repositories
             }
         }
 
+        internal static List<Curso> ObtenerCursosPorAlumno(int idAlumno)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = (from ca in db.CursosAlumnos
+                             join c in db.Cursos on ca.IdCurso equals c.Id
+                             where ca.IdAlumno == idAlumno
+                             select c)
+                            .ToList()
+                            .Select(
+                                c => new Curso
+                                {
+                                    Id = c.Id,
+                                    Nombre = c.Nombre,
+                                    Carrera = c.Carrera
+                                }
+                            );
+                return query.OrderBy(c => c.Nombre).ToList();
+            }
+        }
+
         internal static void Insertar(int idCurso, int idAlumno)
         {
             using (var db = new SMPorresEntities())
             {
                 var id = db.CursosAlumnos.Any() ? db.CursosAlumnos.Max(c1 => c1.Id) + 1 : 1;
-                var ca = new CursosAlumno { Id = id, IdCurso = idCurso, IdAlumno = idAlumno};
+                var ca = new CursosAlumno {
+                    Id = id,
+                    IdCurso = idCurso,
+                    IdAlumno = idAlumno,
+                    CicloLectivo = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo
+                };
                 db.CursosAlumnos.Add(ca);
                 db.SaveChanges();
             }
