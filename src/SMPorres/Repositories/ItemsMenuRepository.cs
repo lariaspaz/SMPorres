@@ -9,6 +9,54 @@ namespace SMPorres.Repositories
 {
     class ItemsMenuRepository
     {
+        public static void Actualizar(string nombre, string descripción, string nombrePadre)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var padre = ObtenerMenuItem(nombrePadre) ?? new ItemsMenu { Id = 0 };
+                if (!db.ItemsMenus.Any(im => im.Nombre == nombre && padre.Nombre == nombrePadre))
+                {
+                    var im = new ItemsMenu();
+                    im.Id = db.ItemsMenus.Any() ? db.ItemsMenus.Max(c1 => c1.Id) + 1 : 1;
+                    im.Nombre = nombre;
+                    im.Descripcion = descripción;
+                    im.IdPadre = padre.Id;
+                    db.ItemsMenus.Add(im);
+                }
+                else
+                {
+                    var im = db.ItemsMenus.First(im1 => im1.Nombre == nombre);
+                    im.Nombre = nombre;
+                    im.Descripcion = descripción;
+                    im.IdPadre = padre.Id;
+                }
+                db.SaveChanges();
+            }
+        }
+
+        public static void EliminarItemsInexistentes(IList<string> menuItemsNames)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                foreach (var item in db.ItemsMenus)
+                {
+                    if (!menuItemsNames.Contains(item.Nombre))
+                    {
+                        db.ItemsMenus.Remove(item);
+                    }
+                }
+                db.SaveChanges();
+            }
+        }
+
+        private static ItemsMenu ObtenerMenuItem(string nombre)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.ItemsMenus.FirstOrDefault(im => im.Nombre == nombre);
+            }
+        }
+
         public static IList<ItemsMenu> ObtenerItemsMenu()
         {
             using (var db = new SMPorresEntities())
@@ -31,7 +79,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from c in db.ItemsMenus where c.IdPadre==0 select c)
+                var query = (from c in db.ItemsMenus where c.IdPadre == 0 select c)
                                 .ToList()
                                 .Select(
                                     c => new ItemsMenu
@@ -133,12 +181,12 @@ namespace SMPorres.Repositories
 
                 return query;
             }
-            
+
         }
 
         private static List<CategoriaJerarquica> ObtenerHijos(int idCategoria, List<ItemsMenu> items)
         {
-                        List<CategoriaJerarquica> query = (from item in items
+            List<CategoriaJerarquica> query = (from item in items
                                                let tieneHijos = items.Where(o => o.IdPadre == item.Id).Any()
                                                where item.Id == idCategoria
                                                select new CategoriaJerarquica
@@ -150,8 +198,5 @@ namespace SMPorres.Repositories
 
             return query;
         }
-
-
-
     }
 }

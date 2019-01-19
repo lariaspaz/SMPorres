@@ -1246,7 +1246,7 @@
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="GruposItemsMenus" Relationship="SMPorres_DevModel.FK_GruposItemsMenus_ItemsMenu" FromRole="ItemsMenu" ToRole="GruposItemsMenu" />
           <NavigationProperty Name="UsuariosItemsMenus" Relationship="SMPorres_DevModel.FK_UsuariosItemsMenu_ItemsMenu" FromRole="ItemsMenu" ToRole="UsuariosItemsMenu" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="UsuariosItemsMenu">
           <Key>
             <PropertyRef Name="Id" />

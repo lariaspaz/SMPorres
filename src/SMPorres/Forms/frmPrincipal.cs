@@ -8,53 +8,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMPorres.Forms;
+using SMPorres.Repositories;
 
 namespace SMPorres.Forms
 {
     public partial class frmPrincipal : Form
     {
+        IList<string> _menuItems;
+
         public frmPrincipal()
         {
             InitializeComponent();
-            //RecorrerMenu();
+            _menuItems = new List<string>();
+            RecorrerMenu(this.menuStrip1.Items, null);
+            ItemsMenuRepository.EliminarItemsInexistentes(_menuItems);
         }
 
-        private void RecorrerMenu()
+        private void RecorrerMenu(ToolStripItemCollection items, string nombrePadre)
         {
-            Font fntOriginal = this.menuStrip1.Items[0].Font;
-
-            foreach (ToolStripMenuItem mnuitOpcion in this.menuStrip1.Items)
-
+            foreach (var m in items)
             {
-                // si esta opción despliega un submenú
-                // llamar a un método para hacer cambios
-                // en las opciones del submenú
-
-                if (mnuitOpcion.DropDownItems.Count > 0)
-
+                if (m is ToolStripMenuItem)
                 {
-                    this.CambiarOpcionesMenu(mnuitOpcion.DropDownItems, 0);
+                    var m1 = (ToolStripMenuItem)m;
+                    listBox1.Items.Add(m1.Text);
+                    _menuItems.Add(m1.Name);
+                    ItemsMenuRepository.Actualizar(m1.Name, m1.Text, nombrePadre);
+                    this.RecorrerMenu(m1.DropDownItems, m1.Name);
                 }
             }
-        }
-
-        //private void CambiarOpcionesMenu(ToolStripItemCollection colOpcionesMenu, Font fntTipoOriginal)
-        private void CambiarOpcionesMenu(ToolStripItemCollection colOpcionesMenu, int idPadre)
-        {
-
-            // recorrer el submenú
-            foreach (ToolStripItem itmOpcion in colOpcionesMenu)
-            {
-                // si esta opción a su vez despliega un nuevo submenú
-                // llamar recursivamente a este método para cambiar sus opciones
-                // guardar menu
-                if ( ((ToolStripMenuItem)itmOpcion).DropDownItems.Count > 0)
-                {
-                        this.CambiarOpcionesMenu(((ToolStripMenuItem)itmOpcion).DropDownItems,
-                        Convert.ToInt32(itmOpcion));
-                }
-            }
-
         }
 
         private void carrerasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,8 +77,8 @@ namespace SMPorres.Forms
         private void gruposDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var f = new UsuariosGrupos.frmListado()) f.ShowDialog();
-		}
-		
+        }
+
         private void cursosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var f = new Cursos.frmListado()) f.ShowDialog();
