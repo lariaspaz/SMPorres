@@ -30,6 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblCicloLectivo = new System.Windows.Forms.Label();
             this.cbCursos = new System.Windows.Forms.ComboBox();
             this.cbCarreras = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,7 +46,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnAsignar = new System.Windows.Forms.Button();
-            this.lblCicloLectivo = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -87,6 +88,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(589, 92);
             this.panel1.TabIndex = 0;
+            // 
+            // lblCicloLectivo
+            // 
+            this.lblCicloLectivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCicloLectivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCicloLectivo.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblCicloLectivo.Location = new System.Drawing.Point(194, 65);
+            this.lblCicloLectivo.Name = "lblCicloLectivo";
+            this.lblCicloLectivo.Size = new System.Drawing.Size(201, 18);
+            this.lblCicloLectivo.TabIndex = 5;
+            this.lblCicloLectivo.Text = "Ciclo Lectivo 2.019";
+            this.lblCicloLectivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cbCursos
             // 
@@ -217,6 +230,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.Control;
+            this.panel6.Controls.Add(this.btnSalir);
             this.panel6.Controls.Add(this.btnQuitar);
             this.panel6.Controls.Add(this.btnAsignar);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
@@ -245,22 +259,21 @@
             this.btnAsignar.UseVisualStyleBackColor = true;
             this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
             // 
-            // lblCicloLectivo
+            // btnSalir
             // 
-            this.lblCicloLectivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCicloLectivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCicloLectivo.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCicloLectivo.Location = new System.Drawing.Point(194, 65);
-            this.lblCicloLectivo.Name = "lblCicloLectivo";
-            this.lblCicloLectivo.Size = new System.Drawing.Size(201, 18);
-            this.lblCicloLectivo.TabIndex = 5;
-            this.lblCicloLectivo.Text = "Ciclo Lectivo 2.019";
-            this.lblCicloLectivo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
+            this.btnSalir.Location = new System.Drawing.Point(3, 324);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(27, 27);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // frmAsignarAlumnosACursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnSalir;
             this.ClientSize = new System.Drawing.Size(595, 465);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmAsignarAlumnosACursos";
@@ -302,5 +315,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblCicloLectivo;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
