@@ -1,0 +1,106 @@
+1	1	1	0	No Especificado	NoEsp
+2	1	1	0	No Especificado	NoEsp
+7	1	1	0	No Especificado	NoEsp
+20	1	1	0	No Especificado	NoEsp
+27	1	1	0	No Especificado	NoEsp
+30	1	1	0	No Especificado	NoEsp
+31	1	1	0	No Especificado	NoEsp
+32	1	1	0	No Especificado	NoEsp
+33	1	1	0	No Especificado	NoEsp
+34	1	1	0	No Especificado	NoEsp
+36	1	1	0	No Especificado	NoEsp
+38	1	1	0	No Especificado	NoEsp
+39	1	1	0	No Especificado	NoEsp
+41	1	1	0	No Especificado	NoEsp
+43	1	1	0	No Especificado	NoEsp
+44	1	1	0	No Especificado	NoEsp
+45	1	1	0	No Especificado	NoEsp
+46	1	1	0	No Especificado	NoEsp
+47	1	1	0	No Especificado	NoEsp
+48	1	1	0	No Especificado	NoEsp
+49	1	1	0	No Especificado	NoEsp
+51	1	1	0	No Especificado	NoEsp
+52	1	1	0	No Especificado	NoEsp
+53	1	1	0	No Especificado	NoEsp
+54	1	2	0	Buenos Aires	Bs As
+54	2	3	0	Catamarca	Catam
+54	3	16	0	Chaco	Chaco
+54	4	17	0	Chubut	Chub
+54	5	4	0	Cordoba	Cordo
+54	6	5	0	Corrientes	Corr
+54	7	6	0	Entre Rios	ERios
+54	8	18	0	Formosa	Form
+54	9	7	0	Jujuy	Jujuy
+54	10	19	0	La Pampa	Pampa
+54	11	8	0	La Rioja	Rioja
+54	12	9	0	Mendoza	Mdza
+54	13	20	0	Misiones	Misio
+54	14	21	0	Neuquen	Neuq
+54	15	22	0	Rio Negro	RioNe
+54	16	10	0	Salta	Salta
+54	17	11	0	San Juan	SanJu
+54	18	12	0	San Luis	SanLu
+54	19	23	0	Santa Cruz	StaCr
+54	20	13	0	Santa Fe	StaFe
+54	21	14	0	Santiago del Estero	SgoEs
+54	22	24	0	Tierra del Fuego	TdelF
+54	23	15	0	Tucumán	Tucum
+54	24	1	0	Capital Federal	CaFed
+55	1	1	0	No Especificado	NoEsp
+56	1	1	0	No Especificado	NoEsp
+57	1	1	0	No Especificado	NoEsp
+61	1	1	0	No Especificado	NoESp
+64	1	1	0	No Especificado	NoEsp
+65	1	1	0	No Especificado	NoEsp
+66	1	1	0	No Especificado	NoEsp
+81	1	1	0	No Especificado	NoEsp
+82	1	1	0	No Especificado	NoEsp
+84	1	1	0	No Especificado	NoEsp
+86	1	1	0	No Especificado	NoEsp
+90	1	1	0	No Especificado	NoEsp
+91	1	1	0	No Especificado	NoEsp
+92	1	1	0	No Especificado	NoEsp
+94	1	1	0	No Especificado	NoEsp
+98	1	1	0	No Especificado	NoEsp
+218	1	1	0	No Especificado	NoEsp
+250	1	1	0	No Especificado	NoEsp
+252	1	1	0	No Especificado	NoEsp
+298	1	1	0	No Especificado	NoEsp
+299	1	1	0	No Especificado	NoEsp
+351	1	1	0	No Especificado	NoEsp
+352	1	1	0	No Especificado	NoEsp
+353	1	1	0	No Especificado	NoEsp
+354	1	1	0	No Especificado	NoEsp
+356	1	1	0	No Especificado	NoEsp
+357	1	1	0	No Especificado	NoEsp
+358	1	1	0	No Especificado	NoEsp
+359	1	1	0	No Especificado	NoEsp
+370	1	1	0	No Especificado	NoEsp
+376	1	1	0	No Especificado	NoEsp
+377	1	1	0	No Especificado	NoEsp
+381	1	1	0	No Especificado	NoEsp
+385	1	1	0	No Especificado	NoEsp
+386	1	1	0	No Especificado	NoEsp
+387	1	1	0	No Especificado	NoEsp
+389	1	1	0	No Especificado	NoEsp
+420	1	1	0	No Especificado	NoEsp
+421	1	1	0	No Especificado	NoEsp
+500	1	1	0	No Especificado	NoEsp
+503	1	1	0	No Especificado	NOEsp
+505	1	1	0	No Especificado	NoEsp
+506	1	1	0	No Especificado	NoEsp
+509	1	1	0	No Especificado	NoEsp
+591	1	1	0	No Especificado	NoEsp
+593	1	1	0	No Especificado	NoEsp
+595	1	1	0	No Especificado	NoEsp
+598	1	1	0	No Especificado	NoEsp
+852	1	1	0	No Especificado	NoEso
+880	1	1	0	No Especificado	NoEsp
+886	1	1	0	No Especificado	NoEsp
+961	1	1	0	No Especificado	NoEsp
+962	1	1	0	No Especificado	NoEsp
+964	1	1	0	No Especificado	NoEsp
+965	1	1	0	No Especificado	NoEsp
+971	1	1	0	No Especificado	NoEsp
+972	1	1	0	No Especificado	NoEsp
+9999	1	1	0	No Especificado	NoEsp
