@@ -16,19 +16,30 @@ namespace SMPorres.Forms.MenuItems
 {
     public partial class frmAsignarUsuariosyGruposAMenuItems : FormBase
     {
+        private IList<ItemsMenu> _itemsMenu;
+
         public frmAsignarUsuariosyGruposAMenuItems()
         {
             InitializeComponent();
-            //GenerarTreeView();
-            CargarMenu();
+            _itemsMenu = ItemsMenuRepository.ObtenerItemsMenu();
+            var tn = tvItemsMenu.Nodes.Add("SMP");
+            CargarMenu(tn, _itemsMenu.Where(im => im.IdPadre == 0).ToList());
+            tvItemsMenu.ExpandAll();
+            tvItemsMenu.SelectedNode = tn.FirstNode;
+            rbGrupos.Checked = true;
         }
 
-        private void CargarMenu()
+        private void CargarMenu(TreeNode padre, List<ItemsMenu> items)
         {
-            var menu = ItemsMenuRepository.ObtenerItemsMenu().ToList();
-            lbMenu.DataSource = menu;
-            lbMenu.ValueMember = "Id";
-            lbMenu.DisplayMember = "Descripcion";
+            foreach (var item in items)
+            {
+                TreeNode tn = new TreeNode();
+                tn.Text = item.Descripcion;
+                tn.Name = item.Nombre;
+                tn.Tag = item;
+                padre.Nodes.Add(tn);
+                CargarMenu(tn, _itemsMenu.Where(im => im.IdPadre == item.Id).ToList());
+            }
         }
 
         private int IdGrupo
@@ -47,52 +58,63 @@ namespace SMPorres.Forms.MenuItems
             }
         }
 
-        private void rbGrupos_CheckedChanged(object sender, EventArgs e)
+        public ItemsMenu ItemMenu
         {
-            lbSinAsignar.DataSource = GruposRepository.ObtenerGrupos();
-            lbSinAsignar.DisplayMember = "Descripcion";
-            lbSinAsignar.ValueMember = "Id";
-            ConsultarGrupos((int)lbSinAsignar.SelectedValue);
+            get
+            {
+                if (tvItemsMenu.SelectedNode != null && tvItemsMenu.SelectedNode.Tag is ItemsMenu)
+                {
+                    return (ItemsMenu)tvItemsMenu.SelectedNode.Tag;
+                }
+                else
+                {
+                    return new ItemsMenu();
+                }
+
+            }
         }
 
-        private void ConsultarGrupos(int idGrupo)
+        private void rbGrupos_CheckedChanged(object sender, EventArgs e)
         {
-            var sinAsignar = GruposRepository.ObtenerGrupos();
-            lbSinAsignar.DataSource = sinAsignar;
-            lbSinAsignar.DisplayMember = "Descripcion";
-            lbSinAsignar.ValueMember = "Id";
-            lbSinAsignar.SelectedIndex = idGrupo - 1;
+            if (rbGrupos.Checked)
+            {
+                ConsultarGrupos();
+            }
+        }
 
-            var asignados = GruposItemsMenuRepository.ObtenerItemsMenuPorGrupoId(idGrupo).ToList();
-            lbAsignados.DataSource = asignados;
+        private void ConsultarGrupos()
+        {
+            Consultar(GruposItemsMenuRepository.ObtenerGruposPorItemMenu, false, lbSinAsignar);
+            Consultar(GruposItemsMenuRepository.ObtenerGruposPorItemMenu, true, lbAsignados);
+        }
+
+        private void Consultar<T>(Func<int, bool, List<T>> consulta, bool asignados, ListBox lbAsignados)
+        {
+            var datos = consulta(ItemMenu.Id, asignados);
+            lbAsignados.DataSource = datos;
             lbAsignados.ValueMember = "Id";
-            lbAsignados.DisplayMember = "Descripcion";
-            labelAsignados.Text = "Asignados a " + lbSinAsignar.Text;
-
-            var itemsMenu = ItemsMenuRepository.ObtenerItemsMenu().Where(u => !asignados.Any(u2 => u2.Id == u.Id)).ToList();
-            lbMenu.DataSource = itemsMenu;
-            lbMenu.DisplayMember = "Descripcion";
-            lbMenu.ValueMember = "Id";
+            if (typeof(T).Name == "Usuario")
+            {
+                lbAsignados.DisplayMember = "NombreCompleto";
+            }
+            else
+            {
+                lbAsignados.DisplayMember = "Descripcion";
+            }
+            lblAsignados.Text = "Asignados a " + ItemMenu.Descripcion;
         }
 
         private void btnAsignar_Click(object sender, EventArgs e)
         {
-            using (var db = new Models.SMPorresEntities())
+            if (rbGrupos.Checked == true)
             {
-                if (rbGrupos.Checked == true)
-                {
-                    var idItemMenu = ItemsMenuRepository.ObtenerItemMenuPorDescripcion(lbMenu.Text);
-                    if (idItemMenu == null || IdGrupo <= 0) return;
-                    GruposItemsMenuRepository.Insertar(IdGrupo, idItemMenu.Id);
-                    ConsultarGrupos(IdGrupo);
-                }
-                if (rbUsuarios.Checked == true)
-                {
-                    var idItemMenu = ItemsMenuRepository.ObtenerItemMenuPorDescripcion(lbMenu.Text);
-                    if (idItemMenu == null || IdUsuario <= 0) return;
-                    UsuariosItemsMenuRepository.Insertar(IdUsuario, idItemMenu.Id);
-                    ConsultarUsuarios(IdUsuario);
-                }
+                GruposItemsMenuRepository.Insertar(IdGrupo, ItemMenu.Id);
+                ConsultarGrupos();
+            }
+            else
+            {
+                UsuariosItemsMenuRepository.Insertar(IdUsuario, ItemMenu.Id);
+                ConsultarUsuarios();
             }
         }
 
@@ -100,67 +122,48 @@ namespace SMPorres.Forms.MenuItems
         {
             if (rbGrupos.Checked == true)
             {
-                var idItemMenu = ItemsMenuRepository.ObtenerItemMenuPorDescripcion(lbAsignados.Text);
-                if (idItemMenu == null || IdUsuario <= 0) return;
-                GruposItemsMenuRepository.Eliminar(IdGrupo, idItemMenu.Id);
-                ConsultarGrupos(IdGrupo);
+                var id = ((Grupos)lbAsignados.SelectedItem).Id;
+                GruposItemsMenuRepository.Eliminar(id, ItemMenu.Id);
+                ConsultarGrupos();
             }
             if (rbUsuarios.Checked == true)
             {
-                var idItemMenu = ItemsMenuRepository.ObtenerItemMenuPorDescripcion(lbAsignados.Text);
-                if (idItemMenu == null || IdUsuario <= 0) return;
-                UsuariosItemsMenuRepository.Eliminar(IdUsuario, idItemMenu.Id);
-                ConsultarUsuarios(IdUsuario);
+                var id = ((Usuario)lbAsignados.SelectedItem).Id;
+                UsuariosItemsMenuRepository.Eliminar(id, ItemMenu.Id);
+                ConsultarUsuarios();
             }
 
-        }
-
-        private void lbSinAsignar_DoubleClick(object sender, EventArgs e)
-        {
-            if (rbGrupos.Checked == true)
-            {
-                labelAsignados.Text = "Asignados a " + lbSinAsignar.Text;
-                ConsultarGrupos(IdGrupo);
-            }
-            else
-            {
-                labelAsignados.Text = "Asignados a " + lbSinAsignar.Text;
-                ConsultarUsuarios(IdUsuario);
-            }
         }
 
         private void rbUsuarios_CheckedChanged(object sender, EventArgs e)
         {
-            lbSinAsignar.DataSource = UsuariosRepository.ObtenerUsuarios();
-            lbSinAsignar.DisplayMember = "Nombre";
-            lbSinAsignar.ValueMember = "Id";
-            labelAsignados.Text = "Asignados a " + lbSinAsignar.Text;
-            ConsultarUsuarios((int)lbSinAsignar.SelectedValue);
+            if (rbUsuarios.Checked)
+            {
+                ConsultarUsuarios();
+            }
         }
 
-        private void ConsultarUsuarios(int idUsuario)
+        private void ConsultarUsuarios()
         {
-            var sinAsignar = UsuariosRepository.ObtenerUsuarios();
-            lbSinAsignar.DataSource = sinAsignar;
-            lbSinAsignar.DisplayMember = "Nombre";
-            lbSinAsignar.ValueMember = "Id";
-            lbSinAsignar.SelectedIndex = idUsuario - 1;
-
-            var asignados = UsuariosItemsMenuRepository.ObtenerItemsMenuPorUsuarioId(idUsuario).ToList();
-            lbAsignados.DataSource = asignados;
-            lbAsignados.ValueMember = "Id";
-            lbAsignados.DisplayMember = "Descripcion";
-            labelAsignados.Text = "Asignados a " + lbSinAsignar.Text;
-
-            var itemsMenu = ItemsMenuRepository.ObtenerItemsMenu().Where(u => !asignados.Any(u2 => u2.Id == u.Id)).ToList();
-            lbMenu.DataSource = itemsMenu;
-            lbMenu.DisplayMember = "Descripcion";
-            lbMenu.ValueMember = "Id";
+            Consultar(GruposItemsMenuRepository.ObtenerUsuariosPorItemMenu, false, lbSinAsignar);
+            Consultar(GruposItemsMenuRepository.ObtenerUsuariosPorItemMenu, true, lbAsignados);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void tvItemsMenu_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (rbGrupos.Checked)
+            {
+                ConsultarGrupos();
+            }
+            else
+            {
+                ConsultarUsuarios();
+            }
         }
     }
 }

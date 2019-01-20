@@ -31,7 +31,6 @@ namespace SMPorres.Forms
                 if (m is ToolStripMenuItem)
                 {
                     var m1 = (ToolStripMenuItem)m;
-                    listBox1.Items.Add(m1.Text);
                     _menuItems.Add(m1.Name);
                     ItemsMenuRepository.Actualizar(m1.Name, m1.Text, nombrePadre);
                     this.RecorrerMenu(m1.DropDownItems, m1.Name);

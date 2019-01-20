@@ -32,8 +32,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbAsignados = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.labelAsignados = new System.Windows.Forms.Label();
+            this.lblAsignados = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnAsignar = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -41,8 +42,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbUsuarios = new System.Windows.Forms.RadioButton();
             this.rbGrupos = new System.Windows.Forms.RadioButton();
-            this.lbMenu = new System.Windows.Forms.ListBox();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.tvItemsMenu = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -88,22 +88,22 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.labelAsignados);
+            this.panel3.Controls.Add(this.lblAsignados);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(37, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(297, 22);
             this.panel3.TabIndex = 5;
             // 
-            // labelAsignados
+            // lblAsignados
             // 
-            this.labelAsignados.AutoSize = true;
-            this.labelAsignados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAsignados.Location = new System.Drawing.Point(6, 5);
-            this.labelAsignados.Name = "labelAsignados";
-            this.labelAsignados.Size = new System.Drawing.Size(65, 13);
-            this.labelAsignados.TabIndex = 1;
-            this.labelAsignados.Text = "Asignados";
+            this.lblAsignados.AutoSize = true;
+            this.lblAsignados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAsignados.Location = new System.Drawing.Point(6, 5);
+            this.lblAsignados.Name = "lblAsignados";
+            this.lblAsignados.Size = new System.Drawing.Size(65, 13);
+            this.lblAsignados.TabIndex = 1;
+            this.lblAsignados.Text = "Asignados";
             // 
             // panel6
             // 
@@ -116,6 +116,17 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(37, 462);
             this.panel6.TabIndex = 4;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
+            this.btnSalir.Location = new System.Drawing.Point(4, 430);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(27, 27);
+            this.btnSalir.TabIndex = 3;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnQuitar
             // 
@@ -143,7 +154,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.lbSinAsignar, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lbMenu, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tvItemsMenu, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -163,7 +174,6 @@
             this.lbSinAsignar.Name = "lbSinAsignar";
             this.lbSinAsignar.Size = new System.Drawing.Size(328, 210);
             this.lbSinAsignar.TabIndex = 1;
-            this.lbSinAsignar.DoubleClick += new System.EventHandler(this.lbSinAsignar_DoubleClick);
             // 
             // panel1
             // 
@@ -199,25 +209,14 @@
             this.rbGrupos.UseVisualStyleBackColor = true;
             this.rbGrupos.CheckedChanged += new System.EventHandler(this.rbGrupos_CheckedChanged);
             // 
-            // lbMenu
+            // tvItemsMenu
             // 
-            this.lbMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbMenu.FormattingEnabled = true;
-            this.lbMenu.Location = new System.Drawing.Point(3, 3);
-            this.lbMenu.Name = "lbMenu";
-            this.lbMenu.Size = new System.Drawing.Size(328, 210);
-            this.lbMenu.TabIndex = 3;
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
-            this.btnSalir.Location = new System.Drawing.Point(4, 430);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(27, 27);
-            this.btnSalir.TabIndex = 3;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.tvItemsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvItemsMenu.Location = new System.Drawing.Point(3, 3);
+            this.tvItemsMenu.Name = "tvItemsMenu";
+            this.tvItemsMenu.Size = new System.Drawing.Size(328, 210);
+            this.tvItemsMenu.TabIndex = 3;
+            this.tvItemsMenu.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvItemsMenu_AfterSelect);
             // 
             // frmAsignarUsuariosyGruposAMenuItems
             // 
@@ -244,18 +243,18 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ListBox lbAsignados;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label labelAsignados;
+        private System.Windows.Forms.Label lblAsignados;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnAsignar;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ListBox lbSinAsignar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rbUsuarios;
         private System.Windows.Forms.RadioButton rbGrupos;
-        private System.Windows.Forms.ListBox lbMenu;
-        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TreeView tvItemsMenu;
     }
 }

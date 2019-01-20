@@ -14,12 +14,6 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var query = (
-
-                    //from u in db.Usuarios
-                    //join gu in db.GruposUsuarios on u.Id equals gu.IdUsuario
-                    //where u.Estado == 1 && gu.IdGrupo == idGrupo
-                    //select u)
-
                             from it in db.ItemsMenus
                              join gim in db.GruposItemsMenus on it.Id equals gim.IdItemMenu
                              where gim.IdGrupo == idGrupo
@@ -34,6 +28,68 @@ namespace SMPorres.Repositories
                                         Descripcion = u.Descripcion
                                     });
                 return query.OrderBy(u => u.Nombre).ToList();
+            }
+        }
+
+        public static List<Grupos> ObtenerGruposPorItemMenu(int idItemMenu, bool asignados)
+        {
+            using (var db = new SMPorresEntities())
+            {                
+                var query = (from gim in db.GruposItemsMenus
+                             join g in db.Grupos on gim.IdGrupo equals g.Id
+                             where gim.IdItemMenu == idItemMenu
+                             select g)
+                             .ToList()
+                             .Select(
+                                t => new Grupos
+                                {
+                                    Id = t.Id,
+                                    Descripcion = t.Descripcion
+                                }
+                             );
+                if (asignados)
+                {
+                    return query.ToList();
+                }
+                else
+                {
+                    var grupos = db.Grupos.ToList();
+                    grupos.RemoveAll(g => query.Select(g1 => g1.Id).Contains(g.Id));
+                    return grupos;
+                }
+            }
+        }
+
+        public static List<Usuario> ObtenerUsuariosPorItemMenu(int idItemMenu, bool asignados)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = (from uim in db.UsuariosItemsMenus
+                             join u in db.Usuarios on uim.IdUsuario equals u.Id
+                             where uim.IdItemMenu == idItemMenu
+                             select u)
+                             .ToList()
+                             .Select(
+                                t => new Usuario
+                                {
+                                    Id = t.Id,
+                                    NombreCompleto = t.NombreCompleto
+                                }
+                             );
+                if (asignados)
+                {
+                    return query.ToList();
+                }
+                else
+                {
+                    var usuarios = db.Usuarios.ToList();
+                    usuarios.RemoveAll(u => query.Select(u1 => u1.Id).Contains(u.Id));
+                    return usuarios.Select(
+                                u => new Usuario {
+                                    Id = u.Id,
+                                    NombreCompleto = u.NombreCompleto })
+                                .ToList();
+                }
             }
         }
 
