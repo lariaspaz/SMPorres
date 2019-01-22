@@ -1,4 +1,5 @@
 ﻿using CustomLibrary.Extensions.Controls;
+using SMPorres.Prints;
 using SMPorres.Repositories;
 using System;
 using System.Collections.Generic;
@@ -195,6 +196,11 @@ namespace SMPorres.Forms.Alumnos
 
             int rowindex = dgvDatos.CurrentCell.RowIndex;
             ConsultarDireccionEMail((Int32)dgvDatos.Rows[rowindex].Cells[8].Value);
+        }
+
+        private void bntPrint_Click(object sender, EventArgs e)
+        {
+            using (var f = new ListadoAlumnosXCurso()) f.ShowDialog();
         }
     }
 }

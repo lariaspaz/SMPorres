@@ -30,11 +30,7 @@
         {
             this.dgvDatos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtEMail = new System.Windows.Forms.TextBox();
@@ -49,6 +45,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtProvincia = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
+            this.btnEditar = new System.Windows.Forms.ToolStripButton();
+            this.bntPrint = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -81,6 +82,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnEditar,
+            this.bntPrint,
             this.btnEliminar,
             this.toolStripSeparator1,
             this.btnSalir});
@@ -90,54 +92,10 @@
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnNuevo
-            // 
-            this.btnNuevo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNuevo.Image = global::SMPorres.Properties.Resources.add;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(23, 22);
-            this.btnNuevo.Text = "toolStripButton1";
-            this.btnNuevo.ToolTipText = "Nuevo (Ctrl + N)";
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEditar.Image = global::SMPorres.Properties.Resources.page_white_edit;
-            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(23, 22);
-            this.btnEditar.Text = "toolStripButton2";
-            this.btnEditar.ToolTipText = "Editar (Ctrl + F4)";
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEliminar.Image = global::SMPorres.Properties.Resources.cross;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(23, 22);
-            this.btnEliminar.Text = "toolStripButton3";
-            this.btnEliminar.ToolTipText = "Eliminar (Ctrl + Delete)";
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(23, 22);
-            this.btnSalir.Text = "toolStripButton4";
-            this.btnSalir.ToolTipText = "Salir (Escape)";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -178,7 +136,7 @@
             // 
             // txtEMail
             // 
-            this.txtEMail.Location = new System.Drawing.Point(47, 67);
+            this.txtEMail.Location = new System.Drawing.Point(608, 45);
             this.txtEMail.Name = "txtEMail";
             this.txtEMail.Size = new System.Drawing.Size(209, 20);
             this.txtEMail.TabIndex = 12;
@@ -186,7 +144,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 70);
+            this.label1.Location = new System.Drawing.Point(572, 48);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 11;
@@ -194,15 +152,15 @@
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(691, 29);
+            this.txtDireccion.Location = new System.Drawing.Point(346, 45);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(174, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(196, 20);
             this.txtDireccion.TabIndex = 10;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(688, 13);
+            this.label6.Location = new System.Drawing.Point(292, 48);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 9;
@@ -210,15 +168,15 @@
             // 
             // txtBarrio
             // 
-            this.txtBarrio.Location = new System.Drawing.Point(511, 29);
+            this.txtBarrio.Location = new System.Drawing.Point(69, 45);
             this.txtBarrio.Name = "txtBarrio";
-            this.txtBarrio.Size = new System.Drawing.Size(174, 20);
+            this.txtBarrio.Size = new System.Drawing.Size(188, 20);
             this.txtBarrio.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(508, 13);
+            this.label5.Location = new System.Drawing.Point(33, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 7;
@@ -226,51 +184,106 @@
             // 
             // txtLocalidad
             // 
-            this.txtLocalidad.Location = new System.Drawing.Point(352, 29);
+            this.txtLocalidad.Location = new System.Drawing.Point(608, 10);
             this.txtLocalidad.Name = "txtLocalidad";
-            this.txtLocalidad.Size = new System.Drawing.Size(153, 20);
+            this.txtLocalidad.Size = new System.Drawing.Size(209, 20);
             this.txtLocalidad.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(349, 13);
+            this.label4.Location = new System.Drawing.Point(552, 13);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Localidad:";
+            this.label4.Text = "Localidad";
             // 
             // txtDepartamento
             // 
-            this.txtDepartamento.Location = new System.Drawing.Point(192, 29);
+            this.txtDepartamento.Location = new System.Drawing.Point(346, 10);
             this.txtDepartamento.Name = "txtDepartamento";
-            this.txtDepartamento.Size = new System.Drawing.Size(154, 20);
+            this.txtDepartamento.Size = new System.Drawing.Size(196, 20);
             this.txtDepartamento.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(189, 13);
+            this.label3.Location = new System.Drawing.Point(269, 13);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Departamento:";
+            this.label3.Text = "Departamento";
             // 
             // txtProvincia
             // 
-            this.txtProvincia.Location = new System.Drawing.Point(12, 29);
+            this.txtProvincia.Location = new System.Drawing.Point(69, 10);
             this.txtProvincia.Name = "txtProvincia";
-            this.txtProvincia.Size = new System.Drawing.Size(174, 20);
+            this.txtProvincia.Size = new System.Drawing.Size(188, 20);
             this.txtProvincia.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 13);
+            this.label2.Location = new System.Drawing.Point(15, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Provincia:";
+            this.label2.Text = "Provincia";
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNuevo.Image = global::SMPorres.Properties.Resources.add;
+            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(23, 22);
+            this.btnNuevo.Text = "toolStripButton1";
+            this.btnNuevo.ToolTipText = "Nuevo (Ctrl + N)";
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEditar.Image = global::SMPorres.Properties.Resources.page_white_edit;
+            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(23, 22);
+            this.btnEditar.Text = "toolStripButton2";
+            this.btnEditar.ToolTipText = "Editar (Ctrl + F4)";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // bntPrint
+            // 
+            this.bntPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bntPrint.Image = global::SMPorres.Properties.Resources.printer;
+            this.bntPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bntPrint.Name = "bntPrint";
+            this.bntPrint.Size = new System.Drawing.Size(23, 22);
+            this.bntPrint.Text = "toolStripButton3";
+            this.bntPrint.ToolTipText = "Eliminar (Ctrl + Delete)";
+            this.bntPrint.Click += new System.EventHandler(this.bntPrint_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEliminar.Image = global::SMPorres.Properties.Resources.cross;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(23, 22);
+            this.btnEliminar.Text = "toolStripButton3";
+            this.btnEliminar.ToolTipText = "Eliminar (Ctrl + Delete)";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(23, 22);
+            this.btnSalir.Text = "toolStripButton4";
+            this.btnSalir.ToolTipText = "Salir (Escape)";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // frmListado
             // 
@@ -317,5 +330,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtProvincia;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripButton bntPrint;
     }
 }
