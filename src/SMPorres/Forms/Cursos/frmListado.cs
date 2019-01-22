@@ -122,6 +122,13 @@ namespace SMPorres.Forms.Cursos
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             var c = ObtenerCursoSeleccionado();
+            if (CursosRepository.AlumnoAsignado(c.Id))
+            {
+                MessageBox.Show("No puede eliminar el curso, porque tiene alumnos asignados...",
+                    "Atención", MessageBoxButtons.OK);
+                return;
+            }
+
             if (MessageBox.Show("¿Está seguro de que desea eliminar el curso seleccionado?",
                 "Eliminar curso", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {

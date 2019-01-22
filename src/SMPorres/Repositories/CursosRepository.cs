@@ -79,5 +79,20 @@ namespace SMPorres.Repositories
                 return db.Cursos.Find(id);
             }
         }
+
+        public static bool AlumnoAsignado(decimal id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.CursosAlumnos.Any(t => t.IdCurso == id))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
     }
 }

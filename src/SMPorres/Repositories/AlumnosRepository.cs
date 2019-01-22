@@ -16,7 +16,8 @@ namespace SMPorres.Repositories
                 var query = (from a in db.Alumnos
                              join td in db.TiposDocumento
                              on a.IdTipoDocumento equals td.Id
-                             where a.Estado == 1 select a)
+                             where a.Estado == 1
+                             select a)
                              .ToList()
                                 .Select(
                                     a => new Alumno
@@ -93,7 +94,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                if(!db.Alumnos.Any(t => t.Id == id))
+                if (!db.Alumnos.Any(t => t.Id == id))
                 {
                     throw new Exception("No existe el alumno con Id " + id);
                 }
@@ -129,6 +130,21 @@ namespace SMPorres.Repositories
                 return a;
             }
         }
+
+        public static bool CursoAsignado(decimal id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.CursosAlumnos.Any(t => t.IdAlumno == id))
+                {
+                    return false;
+                }else
+                {
+                    return true;
+                }
+            }
+        }
+
 
     }
 }

@@ -92,5 +92,21 @@ namespace SMPorres.Repositories
                 return db.Carreras.Find(id);
             }
         }
+
+        public static bool CursoAsignado(decimal id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.Cursos.Any(t => t.IdCarrera == id))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
     }
 }

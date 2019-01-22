@@ -122,6 +122,13 @@ namespace SMPorres.Forms.Carreras
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Models.Carrera m = ObtenerCarreraSeleccionada();
+            if (CarrerasRepository.CursoAsignado(m.Id))
+            {
+                MessageBox.Show("No puede eliminar la carrera, porque tiene cursos asignados...",
+                    "Atención", MessageBoxButtons.OK);
+                return;
+            }
+
             if (MessageBox.Show("¿Está seguro de que desea eliminar la carrera seleccionada?",
                 "Eliminar carrera", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {

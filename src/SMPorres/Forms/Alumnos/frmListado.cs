@@ -72,6 +72,13 @@ namespace SMPorres.Forms.Alumnos
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Models.Alumno a = ObtenerAlumnoSeleccionado();
+            if (AlumnosRepository.CursoAsignado(a.Id))
+            {
+                MessageBox.Show("No puede eliminar el alumno, porque está asigado a un curso...",
+                    "Atención", MessageBoxButtons.OK);
+                return;
+            }
+            
             if (MessageBox.Show("¿Está seguro de que desea eliminar el alumno seleccionado?",
                 "Eliminar alumnos", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
