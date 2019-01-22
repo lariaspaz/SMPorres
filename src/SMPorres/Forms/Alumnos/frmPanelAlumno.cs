@@ -1,4 +1,5 @@
 ﻿using CustomLibrary.Extensions.Controls;
+using CustomLibrary.Lib.Extensions;
 using SMPorres.Lib.AppForms;
 using SMPorres.Lib.Validations;
 using SMPorres.Repositories;
@@ -46,14 +47,19 @@ namespace SMPorres.Forms.Alumnos
             }
             txtNombre.Text = a.Apellido + ", " + a.Nombre;
 
-            dgvCursos.SetDataSource(from ca in CursosAlumnosRepository.ObtenerCursosPorAlumno(a.Id)
-                                    orderby ca.Id
-                                    select new
-                                    {
-                                        ca.Id,
-                                        ca.Nombre,
-                                        Carrera = ca.Carrera.Nombre
-                                    });
+            var cursos = from ca in CursosAlumnosRepository.ObtenerCursosPorAlumno(a.Id)
+                         orderby ca.Id
+                         select new
+                         {
+                             ca.Id,
+                             ca.Nombre,
+                             Carrera = ca.Carrera.Nombre
+                         };
+            if (!cursos.Any())
+            {
+                new ToolTip().ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
+            }
+            dgvCursos.SetDataSource(cursos);
 
         }
 
@@ -73,6 +79,27 @@ namespace SMPorres.Forms.Alumnos
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             ConsultarDatos();
+        }
+
+        private void dgvCursos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            //foreach (DataGridViewColumn c in dgvCursos.Columns)
+            //{
+            //    c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //    //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //}
+
+            dgvCursos.Columns[0].HeaderText = "Código";
+            dgvCursos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvCursos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            dgvCursos.Columns[1].HeaderText = "Nombre";
+            dgvCursos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvCursos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dgvCursos.Columns[2].HeaderText = "Carrera";
+            dgvCursos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvCursos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
     }
 }

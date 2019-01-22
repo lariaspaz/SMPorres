@@ -44,8 +44,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.dgvCursos = new CustomLibrary.ComponentModel.CustomDataGridView();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -108,6 +108,7 @@
             this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(321, 20);
             this.txtNombre.TabIndex = 4;
+            this.txtNombre.TabStop = false;
             // 
             // btnConsultar
             // 
@@ -203,6 +204,18 @@
             this.panel2.Size = new System.Drawing.Size(719, 100);
             this.panel2.TabIndex = 2;
             // 
+            // dgvCursos
+            // 
+            this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCursos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCursos.EvenRowColor = System.Drawing.Color.Empty;
+            this.dgvCursos.Location = new System.Drawing.Point(0, 23);
+            this.dgvCursos.Name = "dgvCursos";
+            this.dgvCursos.OddRowColor = System.Drawing.Color.Empty;
+            this.dgvCursos.Size = new System.Drawing.Size(719, 77);
+            this.dgvCursos.TabIndex = 1;
+            this.dgvCursos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCursos_DataBindingComplete);
+            // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -216,17 +229,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Cursos en los que se inscribió el alumno";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dgvCursos
-            // 
-            this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCursos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCursos.EvenRowColor = System.Drawing.Color.Empty;
-            this.dgvCursos.Location = new System.Drawing.Point(0, 23);
-            this.dgvCursos.Name = "dgvCursos";
-            this.dgvCursos.OddRowColor = System.Drawing.Color.Empty;
-            this.dgvCursos.Size = new System.Drawing.Size(719, 77);
-            this.dgvCursos.TabIndex = 1;
             // 
             // frmPanelAlumno
             // 
