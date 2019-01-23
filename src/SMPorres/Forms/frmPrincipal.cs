@@ -28,10 +28,9 @@ namespace SMPorres.Forms
 
         private void CargarPermisosGruposDeUsuarioActual()
         {
-            //obtener grupos por id de usuario
             List<Grupos> grupos = new List<Grupos>();
             grupos = GruposRepository.ObtenerGruposPorIdUsuario(Lib.Session.CurrentUser.Id);
-            //Obtener items menu para cada grupo de usuario
+            
             if (grupos == null) return;
 
             foreach (var item in grupos)
@@ -41,7 +40,10 @@ namespace SMPorres.Forms
 
                 foreach (var i in itemsMenu)
                 {
-                    //_permisos = _permisos.Add(i);
+                    if (!_permisos.Contains(i))
+                    {
+                        _permisos.Add(i);
+                    }
                 }
                 
             }
