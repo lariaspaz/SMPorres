@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMPorres.Forms;
 using SMPorres.Repositories;
+using SMPorres.Models;
 
 namespace SMPorres.Forms
 {
     public partial class frmPrincipal : Form
     {
         IList<string> _menuItems;
+        IList<ItemsMenu> _permisos;
 
         public frmPrincipal()
         {
@@ -22,6 +24,66 @@ namespace SMPorres.Forms
             _menuItems = new List<string>();
             RecorrerMenu(this.menuStrip1.Items, null);
             ItemsMenuRepository.EliminarItemsInexistentes(_menuItems);
+        }
+
+        private void CargarPermisosGruposDeUsuarioActual()
+        {
+            //obtener grupos por id de usuario
+            List<Grupos> grupos = new List<Grupos>();
+            grupos = GruposRepository.ObtenerGruposPorIdUsuario(Lib.Session.CurrentUser.Id);
+            //Obtener items menu para cada grupo de usuario
+            if (grupos == null) return;
+
+            foreach (var item in grupos)
+            {
+                List<ItemsMenu> itemsMenu = new List<ItemsMenu>();
+                itemsMenu = (List<ItemsMenu>)ItemsMenuRepository.ObtenerItemsMenuPorIdGrupo(item.Id);
+
+                foreach (var i in itemsMenu)
+                {
+                    //_permisos = _permisos.Add(i);
+                }
+                
+            }
+        }
+
+        private void CargarPermisosUsuarioActual()
+        {
+            if (Lib.Session.CurrentUser == null)
+            {
+                _permisos = null;
+            }
+            else
+            {
+                _permisos = ItemsMenuRepository.ObtenerItemsMenu(Lib.Session.CurrentUser.Id);
+            }
+        }
+
+        private void ArmarMenu(ToolStripItemCollection items, string nombrePadre)
+        {
+            foreach (var m in items)
+            {
+                if (m is ToolStripMenuItem)
+                {
+                    var m1 = (ToolStripMenuItem)m;
+
+                    bool itemautorizado = false;
+                    foreach (var i in _permisos)
+                    {
+                        if (i.Nombre == m1.Name)
+                        {
+                            itemautorizado = true;
+                        }
+                    }
+
+                    if (!itemautorizado)
+                    {
+                        m1.Enabled = false;
+                        m1.Visible = false;
+                    }
+                    this.ArmarMenu(m1.DropDownItems, m1.Name);
+                }
+            }
         }
 
         private void RecorrerMenu(ToolStripItemCollection items, string nombrePadre)
@@ -47,6 +109,10 @@ namespace SMPorres.Forms
         {
             if (new frmLogin().ShowDialog() == DialogResult.OK)
             {
+                CargarPermisosUsuarioActual();
+                CargarPermisosGruposDeUsuarioActual();
+                ArmarMenu(this.menuStrip1.Items, null);
+
                 return true;
             }
 
