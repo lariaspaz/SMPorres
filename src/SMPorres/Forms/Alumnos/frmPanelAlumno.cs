@@ -27,7 +27,14 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnBuscarAlumno_Click(object sender, EventArgs e)
         {
-
+            using (var f = new frmBuscarAlumnos())
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    txtNroDocumento.DecValue = f.AlumnoSeleccionado.NroDocumento;
+                    ConsultarDatos();
+                }
+            }
         }
 
         private void txtNroDocumento_KeyDown(object sender, KeyEventArgs e)

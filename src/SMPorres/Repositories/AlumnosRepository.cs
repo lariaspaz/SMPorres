@@ -38,6 +38,39 @@ namespace SMPorres.Repositories
             }
         }
 
+        public static IList<Alumno> BuscarAlumnosPorDocumento(string nroDocumento)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = db.Alumnos.Where(a => a.NroDocumento.ToString().Contains(nroDocumento))
+                            .ToList()
+                            .Select(
+                                a => new Alumno {
+                                        Id = a.Id,
+                                        NroDocumento = a.NroDocumento,
+                                        Nombre = a.Nombre + " " + a.Apellido
+                                });
+                return query.ToList();
+            }
+        }
+
+        public static IList<Alumno> BuscarAlumnosPorNombre(string nombre)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = db.Alumnos.Where(a => (a.Nombre + a.Apellido).Contains(nombre))
+                            .ToList()
+                            .Select(
+                                a => new Alumno
+                                {
+                                    Id = a.Id,
+                                    NroDocumento = a.NroDocumento,
+                                    Nombre = a.Nombre + " " + a.Apellido
+                                });
+                return query.ToList();
+            }
+        }
+
         internal static Alumno BuscarAlumnoPorNroDocumento(decimal nroDocumento)
         {
             using (var db = new SMPorresEntities())

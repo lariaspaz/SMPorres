@@ -73,6 +73,12 @@
     <Compile Include="Forms\Alumnos\frmAsignarAlumnosACursos.Designer.cs">
       <DependentUpon>frmAsignarAlumnosACursos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Alumnos\frmBuscarAlumnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Alumnos\frmBuscarAlumnos.Designer.cs">
+      <DependentUpon>frmBuscarAlumnos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Alumnos\frmEdición.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +316,9 @@
     <Compile Include="Repositories\UsuariosRepository.cs" />
     <EmbeddedResource Include="Forms\Alumnos\frmAsignarAlumnosACursos.resx">
       <DependentUpon>frmAsignarAlumnosACursos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Alumnos\frmBuscarAlumnos.resx">
+      <DependentUpon>frmBuscarAlumnos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Alumnos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
