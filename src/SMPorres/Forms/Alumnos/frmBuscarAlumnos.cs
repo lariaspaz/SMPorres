@@ -86,6 +86,7 @@ namespace SMPorres.Forms.Alumnos
             dgvDatos.Columns[0].HeaderText = "Código";
             dgvDatos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[0].Visible = false;
 
             dgvDatos.Columns[1].HeaderText = "Documento";
             dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

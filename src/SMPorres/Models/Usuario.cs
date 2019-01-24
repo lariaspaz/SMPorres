@@ -18,8 +18,8 @@ namespace SMPorres.Models
         public Usuario()
         {
             this.GruposUsuarios = new HashSet<GruposUsuario>();
-            this.PlanesPagos = new HashSet<PlanesPago>();
-            this.PlanesPagosEstado = new HashSet<PlanesPago>();
+            this.PlanesPagos = new HashSet<PlanPago>();
+            this.PlanesPagosEstado = new HashSet<PlanPago>();
             this.Pagos = new HashSet<Pago>();
             this.UsuariosItemsMenus = new HashSet<UsuariosItemsMenu>();
         }
@@ -35,9 +35,9 @@ namespace SMPorres.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GruposUsuario> GruposUsuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanesPago> PlanesPagos { get; set; }
+        public virtual ICollection<PlanPago> PlanesPagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanesPago> PlanesPagosEstado { get; set; }
+        public virtual ICollection<PlanPago> PlanesPagosEstado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

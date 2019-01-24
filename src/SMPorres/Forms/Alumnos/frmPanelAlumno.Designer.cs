@@ -46,11 +46,28 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvCursos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvPlanesPago = new CustomLibrary.ComponentModel.CustomDataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dgvPagos = new CustomLibrary.ComponentModel.CustomDataGridView();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnGenerarPlanPago = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).BeginInit();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -230,11 +247,116 @@
             this.label3.Text = "Cursos en los que se inscribió el alumno";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.tabControl1);
+            this.panel3.Controls.Add(this.toolStrip2);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 164);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(719, 193);
+            this.panel3.TabIndex = 3;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(719, 168);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dgvPlanesPago);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(711, 142);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Planes de pago";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvPlanesPago
+            // 
+            this.dgvPlanesPago.AllowUserToAddRows = false;
+            this.dgvPlanesPago.AllowUserToDeleteRows = false;
+            this.dgvPlanesPago.AllowUserToResizeRows = false;
+            this.dgvPlanesPago.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPlanesPago.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlanesPago.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPlanesPago.EvenRowColor = System.Drawing.Color.Empty;
+            this.dgvPlanesPago.Location = new System.Drawing.Point(3, 3);
+            this.dgvPlanesPago.MultiSelect = false;
+            this.dgvPlanesPago.Name = "dgvPlanesPago";
+            this.dgvPlanesPago.OddRowColor = System.Drawing.Color.AliceBlue;
+            this.dgvPlanesPago.ReadOnly = true;
+            this.dgvPlanesPago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPlanesPago.Size = new System.Drawing.Size(705, 136);
+            this.dgvPlanesPago.TabIndex = 1;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgvPagos);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(711, 142);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Pagos";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dgvPagos
+            // 
+            this.dgvPagos.AllowUserToAddRows = false;
+            this.dgvPagos.AllowUserToDeleteRows = false;
+            this.dgvPagos.AllowUserToResizeRows = false;
+            this.dgvPagos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPagos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPagos.EvenRowColor = System.Drawing.Color.Empty;
+            this.dgvPagos.Location = new System.Drawing.Point(3, 3);
+            this.dgvPagos.MultiSelect = false;
+            this.dgvPagos.Name = "dgvPagos";
+            this.dgvPagos.OddRowColor = System.Drawing.Color.AliceBlue;
+            this.dgvPagos.ReadOnly = true;
+            this.dgvPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPagos.Size = new System.Drawing.Size(705, 136);
+            this.dgvPagos.TabIndex = 1;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnGenerarPlanPago,
+            this.toolStripSeparator2});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(719, 25);
+            this.toolStrip2.TabIndex = 1;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // btnGenerarPlanPago
+            // 
+            this.btnGenerarPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnGenerarPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGenerarPlanPago.Name = "btnGenerarPlanPago";
+            this.btnGenerarPlanPago.Size = new System.Drawing.Size(124, 22);
+            this.btnGenerarPlanPago.Text = "Generar Plan de Pago";
+            this.btnGenerarPlanPago.Click += new System.EventHandler(this.btnGenerarPlanPago_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // frmPanelAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 357);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -249,6 +371,15 @@
             this.toolStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).EndInit();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +403,15 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
         private CustomLibrary.ComponentModel.CustomDataGridView dgvCursos;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private CustomLibrary.ComponentModel.CustomDataGridView dgvPlanesPago;
+        private CustomLibrary.ComponentModel.CustomDataGridView dgvPagos;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton btnGenerarPlanPago;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

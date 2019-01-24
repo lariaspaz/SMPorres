@@ -30,7 +30,7 @@
         <EntityTypeShape EntityType="SMPorres_DevModel.CursosAlumno" Width="1.5" PointX="9.75" PointY="1.375" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos" ></AssociationConnector>
-        <EntityTypeShape EntityType="SMPorres_DevModel.PlanesPago" Width="1.5" PointX="12" PointY="0.75" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.PlanPago" Width="1.5" PointX="12" PointY="0.75" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Alumnos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Usuarios" />

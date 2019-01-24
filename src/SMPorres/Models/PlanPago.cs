@@ -12,10 +12,10 @@ namespace SMPorres.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PlanesPago
+    public partial class PlanPago
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PlanesPago()
+        public PlanPago()
         {
             this.Pagos = new HashSet<Pago>();
         }

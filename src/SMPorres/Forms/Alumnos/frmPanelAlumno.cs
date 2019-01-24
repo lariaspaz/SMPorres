@@ -64,10 +64,16 @@ namespace SMPorres.Forms.Alumnos
                          };
             if (!cursos.Any())
             {
-                new ToolTip().ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
+                toolTip1.ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
+                dgvCursos.DataSource = null;
+                btnGenerarPlanPago.Enabled = false;
             }
-            dgvCursos.SetDataSource(cursos);
-
+            else
+            {
+                dgvCursos.SetDataSource(cursos);
+                dgvPlanesPago.SetDataSource(PlanesPagoRepository.ObtenerPlanesPagoPorAlumnoYCurso(a.Id, CursoSeleccionado.Id));
+                btnGenerarPlanPago.Enabled = true;
+            }
         }
 
         private void frmPanelAlumno_KeyDown(object sender, KeyEventArgs e)
@@ -107,6 +113,22 @@ namespace SMPorres.Forms.Alumnos
             dgvCursos.Columns[2].HeaderText = "Carrera";
             dgvCursos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvCursos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private Models.Curso CursoSeleccionado
+        {
+            get
+            {
+                int rowindex = dgvCursos.CurrentCell.RowIndex;
+                var id = (int)dgvCursos.Rows[rowindex].Cells[0].Value;
+                var c = CursosRepository.ObtenerCursoPorId(id);
+                return c;
+            }
+        }
+
+        private void btnGenerarPlanPago_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

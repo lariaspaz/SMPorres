@@ -113,11 +113,9 @@ namespace SMPorres.Forms
             {
                 CargarPermisosUsuarioActual();
                 CargarPermisosGruposDeUsuarioActual();
-                ArmarMenu(this.menuStrip1.Items, null);
-
+                //ArmarMenu(this.menuStrip1.Items, null);
                 return true;
             }
-
             return false;
         }
 

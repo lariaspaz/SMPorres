@@ -697,22 +697,22 @@
             <End Role="Curso" EntitySet="Cursos" />
             <End Role="CursosAlumno" EntitySet="CursosAlumnos" />
           </AssociationSet>
-          <EntitySet Name="PlanesPagoes" EntityType="SMPorres_DevModel.PlanesPago" />
+          <EntitySet Name="PlanesPago" EntityType="SMPorres_DevModel.PlanPago" />
           <AssociationSet Name="FK_PlanesPago_Alumnos" Association="SMPorres_DevModel.FK_PlanesPago_Alumnos">
             <End Role="Alumno" EntitySet="Alumnos" />
-            <End Role="PlanesPago" EntitySet="PlanesPagoes" />
+            <End Role="PlanesPago" EntitySet="PlanesPago" />
           </AssociationSet>
           <AssociationSet Name="FK_PlanesPago_Cursos" Association="SMPorres_DevModel.FK_PlanesPago_Cursos">
             <End Role="Curso" EntitySet="Cursos" />
-            <End Role="PlanesPago" EntitySet="PlanesPagoes" />
+            <End Role="PlanesPago" EntitySet="PlanesPago" />
           </AssociationSet>
           <AssociationSet Name="FK_PlanesPago_Usuarios" Association="SMPorres_DevModel.FK_PlanesPago_Usuarios">
             <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="PlanesPago" EntitySet="PlanesPagoes" />
+            <End Role="PlanesPago" EntitySet="PlanesPago" />
           </AssociationSet>
           <AssociationSet Name="FK_PlanesPago_Usuarios1" Association="SMPorres_DevModel.FK_PlanesPago_Usuarios1">
             <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="PlanesPago" EntitySet="PlanesPagoes" />
+            <End Role="PlanesPago" EntitySet="PlanesPago" />
           </AssociationSet>
           <EntitySet Name="Configuraciones" EntityType="SMPorres_DevModel.Configuracion" />
           <EntitySet Name="Cuotas" EntityType="SMPorres_DevModel.Cuota" />
@@ -722,7 +722,7 @@
             <End Role="Pago1" EntitySet="Pagos" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_PlanesPago" Association="SMPorres_DevModel.FK_Pagos_PlanesPago">
-            <End Role="PlanesPago" EntitySet="PlanesPagoes" />
+            <End Role="PlanesPago" EntitySet="PlanesPago" />
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_Usuarios" Association="SMPorres_DevModel.FK_Pagos_Usuarios">
@@ -1053,7 +1053,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PlanesPago">
+        <EntityType Name="PlanPago">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1076,7 +1076,7 @@
         </EntityType>
         <Association Name="FK_PlanesPago_Alumnos">
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.PlanesPago" Role="PlanesPago" Multiplicity="*" />
+          <End Type="SMPorres_DevModel.PlanPago" Role="PlanesPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumno">
               <PropertyRef Name="Id" />
@@ -1088,7 +1088,7 @@
         </Association>
         <Association Name="FK_PlanesPago_Cursos">
           <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.PlanesPago" Role="PlanesPago" Multiplicity="*" />
+          <End Type="SMPorres_DevModel.PlanPago" Role="PlanesPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Curso">
               <PropertyRef Name="Id" />
@@ -1100,7 +1100,7 @@
         </Association>
         <Association Name="FK_PlanesPago_Usuarios">
           <End Type="SMPorres_DevModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.PlanesPago" Role="PlanesPago" Multiplicity="*" />
+          <End Type="SMPorres_DevModel.PlanPago" Role="PlanesPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -1112,7 +1112,7 @@
         </Association>
         <Association Name="FK_PlanesPago_Usuarios1">
           <End Type="SMPorres_DevModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.PlanesPago" Role="PlanesPago" Multiplicity="*" />
+          <End Type="SMPorres_DevModel.PlanPago" Role="PlanesPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -1179,7 +1179,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pagos_PlanesPago">
-          <End Type="SMPorres_DevModel.PlanesPago" Role="PlanesPago" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.PlanPago" Role="PlanesPago" Multiplicity="1" />
           <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PlanesPago">
@@ -1432,8 +1432,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PlanesPagoes">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.PlanesPago">
+          <EntitySetMapping Name="PlanesPago">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.PlanPago">
               <MappingFragment StoreEntitySet="PlanesPago">
                 <ScalarProperty Name="IdUsuarioEstado" ColumnName="IdUsuarioEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />

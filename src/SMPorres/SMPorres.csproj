@@ -248,7 +248,7 @@
     <Compile Include="Models\Pago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlanesPago.cs">
+    <Compile Include="Models\PlanPago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Provincia.cs">
@@ -302,6 +302,7 @@
     <Compile Include="Repositories\CuotasRepository.cs" />
     <Compile Include="Repositories\GruposItemsMenuRepository.cs" />
     <Compile Include="Repositories\ItemsMenuRepository.cs" />
+    <Compile Include="Repositories\PlanesPagoRepository.cs" />
     <Compile Include="Repositories\TiposDocumentoRepository.cs" />
     <Compile Include="Repositories\BarriosRepository.cs" />
     <Compile Include="Repositories\DepartamentosRepository.cs" />
