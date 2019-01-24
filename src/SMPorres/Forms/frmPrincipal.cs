@@ -26,17 +26,17 @@ namespace SMPorres.Forms
             ItemsMenuRepository.EliminarItemsInexistentes(_menuItems);
         }
 
-        private void CargarPermisosGruposDeUsuarioActual()
+        private void CargarPermisosGruposDeUsuarioActual(int idusuario)
         {
             List<Grupos> grupos = new List<Grupos>();
-            grupos = GruposRepository.ObtenerGruposPorIdUsuario(Lib.Session.CurrentUser.Id);
+            grupos = GruposUsuariosRepository.ObtenerGruposPorIdUsuario(idusuario);
             
             if (grupos == null) return;
 
             foreach (var item in grupos)
             {
                 List<ItemsMenu> itemsMenu = new List<ItemsMenu>();
-                itemsMenu = (List<ItemsMenu>)ItemsMenuRepository.ObtenerItemsMenuPorIdGrupo(item.Id);
+                itemsMenu = (List<ItemsMenu>)GruposItemsMenuRepository.ObtenerItemsMenuPorIdGrupo(item.Id);
 
                 foreach (var i in itemsMenu)
                 {
@@ -49,43 +49,30 @@ namespace SMPorres.Forms
             }
         }
 
-        private void CargarPermisosUsuarioActual()
+        private void CargarPermisosUsuarioActual(int idusuario)
         {
-            if (Lib.Session.CurrentUser == null)
-            {
-                _permisos = null;
-            }
-            else
-            {
-                _permisos = ItemsMenuRepository.ObtenerItemsMenu(Lib.Session.CurrentUser.Id);
-            }
+            _permisos = ItemsMenuRepository.ObtenerItemsMenu(idusuario);
         }
 
-        private void ArmarMenu(ToolStripItemCollection items, string nombrePadre)
+        private void ArmarMenu(ToolStripItemCollection items)
         {
-            foreach (var m in items)
+            foreach (var i in items)
             {
-                if (m is ToolStripMenuItem)
+                if (i is ToolStripMenuItem)
                 {
-                    var m1 = (ToolStripMenuItem)m;
-
-                    bool itemautorizado = false;
-                    foreach (var i in _permisos)
+                    var m = (ToolStripMenuItem)i;
+                    if (!_permisos.Any(p => p.Nombre == m.Name ))
                     {
-                        if (i.Nombre == m1.Name)
-                        {
-                            itemautorizado = true;
-                        }
+                        m.Enabled = false;
+                        //m.Enabled = !_permisos.Any(p => p.Nombre == m.Name);
+                        m.Visible = false;
+                        //m.Visible = m.Enabled;
                     }
-
-                    if (!itemautorizado)
-                    {
-                        m1.Enabled = false;
-                        m1.Visible = false;
-                    }
-                    this.ArmarMenu(m1.DropDownItems, m1.Name);
+                    ArmarMenu(m.DropDownItems);
                 }
+               
             }
+            
         }
 
         private void RecorrerMenu(ToolStripItemCollection items, string nombrePadre)
@@ -111,9 +98,10 @@ namespace SMPorres.Forms
         {
             if (new frmLogin().ShowDialog() == DialogResult.OK)
             {
-                CargarPermisosUsuarioActual();
-                CargarPermisosGruposDeUsuarioActual();
-                //ArmarMenu(this.menuStrip1.Items, null);
+                int idUsuario = Lib.Session.CurrentUser.Id;
+                CargarPermisosUsuarioActual(idUsuario);
+                CargarPermisosGruposDeUsuarioActual(idUsuario);
+                ArmarMenu(menuStrip1.Items);
                 return true;
             }
             return false;

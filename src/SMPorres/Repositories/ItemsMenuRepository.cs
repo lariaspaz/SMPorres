@@ -97,26 +97,6 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static IList<ItemsMenu> ObtenerItemsMenuPorIdGrupo(int idgrupo)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                var query = (from gi in db.GruposItemsMenus
-                             join im in db.ItemsMenus
-                             on gi.IdItemMenu equals im.Id
-                             where gi.IdGrupo == idgrupo
-                             select im)
-                             .ToList()
-                             .Select(
-                             im => new ItemsMenu
-                             {
-                                 Id = im.Id,
-                                 IdPadre = im.IdPadre,
-                                 Nombre = im.Nombre,
-                                 Descripcion = im.Descripcion
-                             });
-                return query.OrderBy(q => q.Id).ToList();
-            }
-        }
+        
     }
 }
