@@ -169,6 +169,12 @@
     <Compile Include="Forms\ItemsMenu\frmAsignarUsuariosyGruposAMenuItems.Designer.cs">
       <DependentUpon>frmAsignarUsuariosyGruposAMenuItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PlanesPago\frmEdición.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlanesPago\frmEdición.Designer.cs">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Usuarios\frmAsignarUsuariosAGrupos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemsMenu\frmAsignarUsuariosyGruposAMenuItems.resx">
       <DependentUpon>frmAsignarUsuariosyGruposAMenuItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlanesPago\frmEdición.resx">
+      <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Usuarios\frmAsignarUsuariosAGrupos.resx">
       <DependentUpon>frmAsignarUsuariosAGrupos.cs</DependentUpon>

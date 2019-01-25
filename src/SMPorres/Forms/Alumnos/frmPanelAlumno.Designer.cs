@@ -296,6 +296,7 @@
             this.dgvPlanesPago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPlanesPago.Size = new System.Drawing.Size(705, 136);
             this.dgvPlanesPago.TabIndex = 1;
+            this.dgvPlanesPago.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPlanesPago_DataBindingComplete);
             // 
             // tabPage2
             // 

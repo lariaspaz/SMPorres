@@ -1,4 +1,5 @@
-﻿using SMPorres.Models;
+﻿using SMPorres.Lib;
+using SMPorres.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,33 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 return (from pp in db.PlanesPago
-                       where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso
-                       select pp).ToList();
+                        where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso
+                        select pp).ToList();
+            }
+        }
+
+        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1;                
+                var pp = new PlanPago
+                {
+                    Id = id,
+                    IdAlumno = idAlumno,
+                    IdCurso = idCurso,
+                    CantidadCuotas = 10,
+                    NroCuota = 1,
+                    ImporteCuota = 0,
+                    PorcentajeBeca = porcentajeBeca,
+                    Estado = 1,
+                    IdUsuarioEstado = Session.CurrentUser.Id,
+                    FechaGrabacion = Configuration.CurrentDate,
+                    IdUsuario = Session.CurrentUser.Id
+                };
+                db.PlanesPago.Add(pp);
+                db.SaveChanges();
+                return pp;
             }
         }
     }

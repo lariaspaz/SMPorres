@@ -128,7 +128,28 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnGenerarPlanPago_Click(object sender, EventArgs e)
         {
-            
+            string curso = CursoSeleccionado.Nombre + " de " + CursoSeleccionado.Carrera;
+            using (var f = new PlanesPago.frmEdición(txtNombre.Text, curso))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        //var c = PlanesPagoRepository.Insertar();
+                        //ConsultarDatos();
+                        //dgvDatos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void dgvPlanesPago_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+
         }
     }
 }
