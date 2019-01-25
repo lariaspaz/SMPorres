@@ -55,5 +55,26 @@ namespace SMPorres.Repositories
             }
         }
 
+        internal static List<Grupos> ObtenerGruposPorIdUsuario(decimal idusuario)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = (from g in db.Grupos
+                             join gu in db.GruposUsuarios
+                             on g.Id equals gu.IdGrupo
+                             where gu.IdUsuario == idusuario
+                             select g)
+                                .ToList()
+                                .Select(
+                                    g => new Grupos
+                                    {
+                                        Id = g.Id,
+                                        Descripcion = g.Descripcion,
+                                        Estado = g.Estado
+                                    });
+                return query.OrderBy(g => g.Descripcion).ToList();
+            }
+        }
+
     }
 }
