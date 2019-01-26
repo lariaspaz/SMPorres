@@ -65,6 +65,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCarrera" Type="int" Nullable="false" />
+          <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="CursosAlumnos">
           <Key>
@@ -953,6 +954,7 @@
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="Curso" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPagoes" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanesPago" />
           <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
+          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Grupos">
           <Key>
@@ -1390,6 +1392,7 @@
           <EntitySetMapping Name="Cursos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
               <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
                 <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

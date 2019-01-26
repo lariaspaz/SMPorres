@@ -33,7 +33,8 @@ namespace SMPorres.Forms.Cursos
                       {
                           c.Id,
                           c.Nombre,
-                          c.IdCarrera
+                          c.IdCarrera,
+                          c.ImporteCuota
                       };
             dgvDatos.SetDataSource(qry.ToList());
         }
@@ -55,6 +56,11 @@ namespace SMPorres.Forms.Cursos
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvDatos.Columns[2].Visible = false;
+
+            dgvDatos.Columns[3].HeaderText = "Imp. Cta";
+            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[3].DefaultCellStyle.Format = "n2";
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)
@@ -78,7 +84,7 @@ namespace SMPorres.Forms.Cursos
                 {
                     try
                     {
-                        var c = CursosRepository.Insertar(f.Nombre, f.IdCarrera);
+                        var c = CursosRepository.Insertar(f.Nombre, f.IdCarrera, f.ImporteCuota);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }
@@ -99,7 +105,7 @@ namespace SMPorres.Forms.Cursos
                 {
                     try
                     {
-                        CursosRepository.Actualizar(c.Id, f.Nombre, f.IdCarrera);
+                        CursosRepository.Actualizar(c.Id, f.Nombre, f.IdCarrera, f.ImporteCuota);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }

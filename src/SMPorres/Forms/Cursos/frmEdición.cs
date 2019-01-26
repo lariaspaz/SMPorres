@@ -34,6 +34,7 @@ namespace SMPorres.Forms.Cursos
             this.Text = "Edición de curso";
             txtNombre.Text = curso.Nombre;
             cbCarreras.SelectedValue = curso.IdCarrera;
+            txtImporteCuota.DecValue = curso.ImporteCuota;
         }
 
         public string Nombre
@@ -52,6 +53,14 @@ namespace SMPorres.Forms.Cursos
             }
         }
 
+        public decimal ImporteCuota
+        {
+            get
+            {
+                return txtImporteCuota.DecValue;
+            }
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
@@ -63,8 +72,8 @@ namespace SMPorres.Forms.Cursos
 
         private bool ValidarDatos()
         {
-            return _validator.Validar(txtNombre, !String.IsNullOrEmpty(txtNombre.Text.Trim()), 
-                "No puede estar vacío");
+            return _validator.Validar(txtNombre, !String.IsNullOrEmpty(txtNombre.Text.Trim()), "No puede estar vacío") &&
+                _validator.Validar(txtImporteCuota, txtImporteCuota.DecValue >= 0, "No puede ser menor que 0");
         }        
     }
 }

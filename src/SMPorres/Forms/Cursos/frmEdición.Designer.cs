@@ -40,6 +40,8 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtImporteCuota = new CustomLibrary.ComponentModel.NumericTextBox();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -48,6 +50,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtImporteCuota);
+            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cbCarreras);
             this.panel2.Controls.Add(this.txtNombre);
             this.panel2.Controls.Add(this.label2);
@@ -55,7 +59,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(422, 68);
+            this.panel2.Size = new System.Drawing.Size(422, 142);
             this.panel2.TabIndex = 1;
             // 
             // cbCarreras
@@ -104,7 +108,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(428, 109);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(428, 183);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -113,7 +117,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 74);
+            this.panel1.Location = new System.Drawing.Point(0, 148);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(428, 35);
@@ -157,13 +161,38 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(45, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Importe de cuota:";
+            // 
+            // txtImporteCuota
+            // 
+            this.txtImporteCuota.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.txtImporteCuota.Digits = 2;
+            this.txtImporteCuota.IntValue = ((long)(0));
+            this.txtImporteCuota.Location = new System.Drawing.Point(141, 64);
+            this.txtImporteCuota.Name = "txtImporteCuota";
+            this.txtImporteCuota.Size = new System.Drawing.Size(100, 20);
+            this.txtImporteCuota.TabIndex = 4;
+            this.txtImporteCuota.Text = "0,00";
+            this.txtImporteCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // frmEdición
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(428, 109);
+            this.ClientSize = new System.Drawing.Size(428, 183);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";
@@ -189,5 +218,7 @@
         private CustomLibrary.ComponentModel.Bevel bevel1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ComboBox cbCarreras;
+        private CustomLibrary.ComponentModel.NumericTextBox txtImporteCuota;
+        private System.Windows.Forms.Label label3;
     }
 }
