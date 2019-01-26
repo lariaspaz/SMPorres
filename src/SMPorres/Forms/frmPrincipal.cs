@@ -30,7 +30,7 @@ namespace SMPorres.Forms
         {
             List<Grupos> grupos = new List<Grupos>();
             grupos = GruposUsuariosRepository.ObtenerGruposPorIdUsuario(idusuario);
-            
+
             if (grupos == null) return;
 
             foreach (var item in grupos)
@@ -45,7 +45,7 @@ namespace SMPorres.Forms
                         _permisos.Add(i);
                     }
                 }
-                
+
             }
         }
 
@@ -61,18 +61,11 @@ namespace SMPorres.Forms
                 if (i is ToolStripMenuItem)
                 {
                     var m = (ToolStripMenuItem)i;
-                    if (!_permisos.Any(p => p.Nombre == m.Name ))
-                    {
-                        m.Enabled = false;
-                        //m.Enabled = !_permisos.Any(p => p.Nombre == m.Name);
-                        m.Visible = false;
-                        //m.Visible = m.Enabled;
-                    }
+                    m.Enabled = _permisos.Any(p => p.Nombre == m.Name);
+                    m.Visible = m.Enabled;
                     ArmarMenu(m.DropDownItems);
                 }
-               
             }
-            
         }
 
         private void RecorrerMenu(ToolStripItemCollection items, string nombrePadre)
@@ -102,6 +95,10 @@ namespace SMPorres.Forms
                 CargarPermisosUsuarioActual(idUsuario);
                 CargarPermisosGruposDeUsuarioActual(idUsuario);
                 ArmarMenu(menuStrip1.Items);
+                archivoToolStripMenuItem.Enabled = true;
+                archivoToolStripMenuItem.Visible = true;
+                salirToolStripMenuItem.Enabled = true;
+                salirToolStripMenuItem.Visible = true;
                 return true;
             }
             return false;
