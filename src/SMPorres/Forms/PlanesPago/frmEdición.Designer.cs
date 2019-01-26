@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtPorcentajeBeca = new CustomLibrary.ComponentModel.NumericTextBox();
+            this.txtCuota = new System.Windows.Forms.TextBox();
+            this.txtCurso = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtAlumno = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,12 +45,6 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCurso = new System.Windows.Forms.TextBox();
-            this.txtCuota = new System.Windows.Forms.TextBox();
-            this.txtPorcentajeBeca = new CustomLibrary.ComponentModel.NumericTextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -67,6 +67,64 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(307, 122);
             this.panel2.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(201, 93);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "%";
+            // 
+            // txtPorcentajeBeca
+            // 
+            this.txtPorcentajeBeca.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPorcentajeBeca.IntValue = ((long)(0));
+            this.txtPorcentajeBeca.Location = new System.Drawing.Point(95, 90);
+            this.txtPorcentajeBeca.Name = "txtPorcentajeBeca";
+            this.txtPorcentajeBeca.Size = new System.Drawing.Size(100, 20);
+            this.txtPorcentajeBeca.TabIndex = 6;
+            this.txtPorcentajeBeca.Text = "0";
+            this.txtPorcentajeBeca.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtCuota
+            // 
+            this.txtCuota.Location = new System.Drawing.Point(95, 63);
+            this.txtCuota.Name = "txtCuota";
+            this.txtCuota.ReadOnly = true;
+            this.txtCuota.Size = new System.Drawing.Size(100, 20);
+            this.txtCuota.TabIndex = 5;
+            // 
+            // txtCurso
+            // 
+            this.txtCurso.Location = new System.Drawing.Point(95, 37);
+            this.txtCurso.Name = "txtCurso";
+            this.txtCurso.ReadOnly = true;
+            this.txtCurso.Size = new System.Drawing.Size(200, 20);
+            this.txtCurso.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(51, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Beca: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Próxima Cuota:";
             // 
             // txtAlumno
             // 
@@ -158,65 +216,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Próxima Cuota:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(51, 93);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Beca: ";
-            // 
-            // txtCurso
-            // 
-            this.txtCurso.Location = new System.Drawing.Point(95, 37);
-            this.txtCurso.Name = "txtCurso";
-            this.txtCurso.ReadOnly = true;
-            this.txtCurso.Size = new System.Drawing.Size(200, 20);
-            this.txtCurso.TabIndex = 4;
-            // 
-            // txtCuota
-            // 
-            this.txtCuota.Location = new System.Drawing.Point(95, 63);
-            this.txtCuota.Name = "txtCuota";
-            this.txtCuota.ReadOnly = true;
-            this.txtCuota.Size = new System.Drawing.Size(100, 20);
-            this.txtCuota.TabIndex = 5;
-            // 
-            // txtPorcentajeBeca
-            // 
-            this.txtPorcentajeBeca.DecValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            196608});
-            this.txtPorcentajeBeca.Digits = 3;
-            this.txtPorcentajeBeca.IntValue = ((long)(0));
-            this.txtPorcentajeBeca.Location = new System.Drawing.Point(95, 90);
-            this.txtPorcentajeBeca.Name = "txtPorcentajeBeca";
-            this.txtPorcentajeBeca.Size = new System.Drawing.Size(100, 20);
-            this.txtPorcentajeBeca.TabIndex = 6;
-            this.txtPorcentajeBeca.Text = "0,000";
-            this.txtPorcentajeBeca.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(201, 93);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(15, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "%";
             // 
             // frmEdición
             // 

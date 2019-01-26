@@ -60,7 +60,7 @@ namespace SMPorres.Forms.Cursos
             dgvDatos.Columns[3].HeaderText = "Imp. Cta";
             dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvDatos.Columns[3].DefaultCellStyle.Format = "n2";
+            dgvDatos.Columns[3].DefaultCellStyle.Format = "C2";
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)

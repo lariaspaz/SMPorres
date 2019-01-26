@@ -12,12 +12,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SMPorres.Models;
 
 namespace SMPorres.Forms.Alumnos
 {
     public partial class frmPanelAlumno : FormBase
     {
         private FormValidations _validator;
+        private Alumno _alumno;
 
         public frmPanelAlumno()
         {
@@ -47,14 +49,14 @@ namespace SMPorres.Forms.Alumnos
 
         private void ConsultarDatos()
         {
-            var a = AlumnosRepository.BuscarAlumnoPorNroDocumento(txtNroDocumento.DecValue);
-            if (!_validator.Validar(txtNroDocumento, a != null, "No existe el alumno"))
+            _alumno = AlumnosRepository.BuscarAlumnoPorNroDocumento(txtNroDocumento.DecValue);
+            if (!_validator.Validar(txtNroDocumento, _alumno != null, "No existe el alumno"))
             {
                 return;
             }
-            txtNombre.Text = a.Apellido + ", " + a.Nombre;
+            txtNombre.Text = _alumno.Apellido + ", " + _alumno.Nombre;
 
-            var cursos = from ca in CursosAlumnosRepository.ObtenerCursosPorAlumno(a.Id)
+            var cursos = from ca in CursosAlumnosRepository.ObtenerCursosPorAlumno(_alumno.Id)
                          orderby ca.Id
                          select new
                          {
@@ -71,9 +73,22 @@ namespace SMPorres.Forms.Alumnos
             else
             {
                 dgvCursos.SetDataSource(cursos);
-                dgvPlanesPago.SetDataSource(PlanesPagoRepository.ObtenerPlanesPagoPorAlumnoYCurso(a.Id, CursoSeleccionado.Id));
+                ConsultarPlanesPago();
                 btnGenerarPlanPago.Enabled = true;
             }
+        }
+
+        private void ConsultarPlanesPago()
+        {
+            var query = from pp in PlanesPagoRepository.ObtenerPlanesPagoPorAlumnoYCurso(_alumno.Id, CursoSeleccionado.Id)
+                        select new {
+                            Id = pp.Id,
+                            ProximaCuota = String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
+                            ImporteCuota = pp.ImporteCuota,
+                            PorcentajeBeca = pp.PorcentajeBeca,
+                            Estado = pp.LeyendaEstado
+                        };
+            dgvPlanesPago.SetDataSource(query.ToList());
         }
 
         private void frmPanelAlumno_KeyDown(object sender, KeyEventArgs e)
@@ -102,6 +117,7 @@ namespace SMPorres.Forms.Alumnos
             //    //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //}
 
+
             dgvCursos.Columns[0].HeaderText = "Código";
             dgvCursos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvCursos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -126,18 +142,27 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
+        private string CarreraSeleccionada
+        {
+            get
+            {
+                int rowindex = dgvCursos.CurrentCell.RowIndex;
+                return (string)dgvCursos.Rows[rowindex].Cells[2].Value;
+            }
+        }
+
         private void btnGenerarPlanPago_Click(object sender, EventArgs e)
         {
-            string curso = CursoSeleccionado.Nombre + " de " + CursoSeleccionado.Carrera;
+            string curso = CursoSeleccionado.Nombre + " de " + CarreraSeleccionada;
             using (var f = new PlanesPago.frmEdición(txtNombre.Text, curso))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        //var c = PlanesPagoRepository.Insertar();
-                        //ConsultarDatos();
-                        //dgvDatos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca);
+                        ConsultarPlanesPago();
+                        dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }
                     catch (Exception ex)
                     {
@@ -149,7 +174,40 @@ namespace SMPorres.Forms.Alumnos
 
         private void dgvPlanesPago_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            //CantidadCuotas = pp.CantidadCuotas,
+            //NroCuota = pp.NroCuota,
+            //ImporteCuota = pp.ImporteCuota,
+            //PorcentajeBeca = pp.PorcentajeBeca,
+            //Estado = pp.Estado,
+            //FechaGrabacion = pp.FechaGrabacion
 
+            //foreach (DataGridViewColumn c in dgvCursos.Columns)
+            //{
+            //    c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //    //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //}
+
+            dgvPlanesPago.Columns[0].HeaderText = "Código";
+            dgvPlanesPago.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvPlanesPago.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            dgvPlanesPago.Columns[1].HeaderText = "Próx. Cuota";
+            dgvPlanesPago.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPlanesPago.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            dgvPlanesPago.Columns[2].HeaderText = "Importe Cuota";
+            dgvPlanesPago.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPlanesPago.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvPlanesPago.Columns[2].DefaultCellStyle.Format = "C2";
+
+            dgvPlanesPago.Columns[3].HeaderText = "Porc. Beca";
+            dgvPlanesPago.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPlanesPago.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvPlanesPago.Columns[3].DefaultCellStyle.Format = "0\\%";
+
+            dgvPlanesPago.Columns[4].HeaderText = "Estado";
+            dgvPlanesPago.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPlanesPago.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
     }
 }

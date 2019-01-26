@@ -236,6 +236,7 @@
     <Compile Include="Models\Domicilio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EstadoPlanPago.cs" />
     <Compile Include="Models\Grupos.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -257,6 +258,7 @@
     <Compile Include="Models\PlanPago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanPago.Ext.cs" />
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>

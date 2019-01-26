@@ -36,11 +36,11 @@ namespace SMPorres.Forms.PlanesPago
             txtPorcentajeBeca.DecValue = plan.PorcentajeBeca;
         }
 
-        public decimal PorcentajeBeca
+        public short PorcentajeBeca
         {
             get
             {
-                return txtPorcentajeBeca.DecValue;
+                return (short) txtPorcentajeBeca.IntValue;
             }
         }
 

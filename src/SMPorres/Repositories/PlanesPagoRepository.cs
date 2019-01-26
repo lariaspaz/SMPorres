@@ -10,7 +10,7 @@ namespace SMPorres.Repositories
 {
     class PlanesPagoRepository
     {
-        internal static List<PlanPago> ObtenerPlanesPagoPorAlumnoYCurso1(int idAlumno, int idCurso)
+        internal static List<PlanPago> ObtenerPlanesPagoPorAlumnoYCurso(int idAlumno, int idCurso)
         {
             using (var db = new SMPorresEntities())
             {
@@ -35,38 +35,34 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static IEnumerable<PlanPago> ObtenerPlanesPagoPorAlumnoYCurso(int idAlumno, int idCurso)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                return (from pp in db.PlanesPago
-                        where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso
-                        select pp).ToList();
-            }
-        }
-
         public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca)
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1;                
-                var pp = new PlanPago
+                if (db.PlanesPago.Any(pp => pp.IdAlumno == idAlumno && pp.IdCurso == idCurso & pp.Estado == (short)EstadoPlanPago.Vigente))
+                {
+                    throw new Exception("El alumno ya tiene un plan de pago vigente en el curso seleccionado.");
+                }
+
+                var curso = CursosRepository.ObtenerCursoPorId(idCurso);
+                var id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1;
+                var plan = new PlanPago
                 {
                     Id = id,
                     IdAlumno = idAlumno,
                     IdCurso = idCurso,
                     CantidadCuotas = 10,
                     NroCuota = 1,
-                    ImporteCuota = 0,
+                    ImporteCuota = curso.ImporteCuota,
                     PorcentajeBeca = porcentajeBeca,
-                    Estado = 1,
+                    Estado = (short)EstadoPlanPago.Vigente,
                     IdUsuarioEstado = Session.CurrentUser.Id,
                     FechaGrabacion = Configuration.CurrentDate,
                     IdUsuario = Session.CurrentUser.Id
                 };
-                db.PlanesPago.Add(pp);
+                db.PlanesPago.Add(plan);
                 db.SaveChanges();
-                return pp;
+                return plan;
             }
         }
     }
