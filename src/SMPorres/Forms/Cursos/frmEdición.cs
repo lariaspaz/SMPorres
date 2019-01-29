@@ -16,8 +16,6 @@ namespace SMPorres.Forms.Cursos
 {
     public partial class frmEdición : FormBase
     {
-        private FormValidations _validator;
-
         public frmEdición()
         {
             InitializeComponent();

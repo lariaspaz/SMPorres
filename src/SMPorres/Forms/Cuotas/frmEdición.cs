@@ -15,8 +15,6 @@ namespace SMPorres.Forms.Cuotas
 {
     public partial class frmEdición : FormBase
     {
-        private FormValidations _validator;
-
         public frmEdición()
         {
             InitializeComponent();

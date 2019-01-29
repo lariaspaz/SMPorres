@@ -18,7 +18,6 @@ namespace SMPorres.Forms.Alumnos
 {
     public partial class frmPanelAlumno : FormBase
     {
-        private FormValidations _validator;
         private Alumno _alumno;
 
         public frmPanelAlumno()

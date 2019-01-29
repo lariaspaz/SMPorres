@@ -15,8 +15,6 @@ namespace SMPorres.Forms
 {
     public partial class frmConfiguración : Lib.AppForms.FormBase
     {
-        private FormValidations _validator;
-
         public frmConfiguración()
         {
             InitializeComponent();

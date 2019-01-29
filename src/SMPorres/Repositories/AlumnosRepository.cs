@@ -14,9 +14,7 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var query = (from a in db.Alumnos
-                             join td in db.TiposDocumento
-                             on a.IdTipoDocumento equals td.Id
-                             where a.Estado == 1
+                             join td in db.TiposDocumento on a.IdTipoDocumento equals td.Id
                              select a)
                              .ToList()
                                 .Select(
@@ -40,35 +38,28 @@ namespace SMPorres.Repositories
 
         public static IList<Alumno> BuscarAlumnosPorDocumento(string nroDocumento)
         {
-            using (var db = new SMPorresEntities())
-            {
-                var query = db.Alumnos.Where(a => a.NroDocumento.ToString().Contains(nroDocumento))
-                            .ToList()
-                            .Select(
-                                a => new Alumno {
-                                        Id = a.Id,
-                                        NroDocumento = a.NroDocumento,
-                                        Nombre = a.Nombre + " " + a.Apellido
-                                });
-                return query.ToList();
-            }
+            var query = ObtenerAlumnos().Where(a => a.NroDocumento.ToString().Contains(nroDocumento))
+                        .Select(
+                            a => new Alumno
+                            {
+                                Id = a.Id,
+                                NroDocumento = a.NroDocumento,
+                                Nombre = a.Nombre + " " + a.Apellido
+                            });
+            return query.ToList();
         }
 
         public static IList<Alumno> BuscarAlumnosPorNombre(string nombre)
         {
-            using (var db = new SMPorresEntities())
-            {
-                var query = db.Alumnos.Where(a => (a.Nombre + a.Apellido).Contains(nombre))
-                            .ToList()
-                            .Select(
-                                a => new Alumno
-                                {
-                                    Id = a.Id,
-                                    NroDocumento = a.NroDocumento,
-                                    Nombre = a.Nombre + " " + a.Apellido
-                                });
-                return query.ToList();
-            }
+            var query = ObtenerAlumnos().Where(a => (a.Nombre + a.Apellido).Contains(nombre))
+                        .Select(
+                            a => new Alumno
+                            {
+                                Id = a.Id,
+                                NroDocumento = a.NroDocumento,
+                                Nombre = a.Nombre + " " + a.Apellido
+                            });
+            return query.ToList();
         }
 
         internal static Alumno BuscarAlumnoPorNroDocumento(decimal nroDocumento)
@@ -149,7 +140,6 @@ namespace SMPorres.Repositories
                     Nombre = nombre,
                     Apellido = apellido,
                     IdTipoDocumento = idTipoDoc,
-                    //TipoDocumento = idTipoDoc,
                     NroDocumento = nroDoc,
                     FechaNacimiento = fechaNac,
                     EMail = email,
@@ -171,7 +161,8 @@ namespace SMPorres.Repositories
                 if (!db.CursosAlumnos.Any(t => t.IdAlumno == id))
                 {
                     return false;
-                }else
+                }
+                else
                 {
                     return true;
                 }

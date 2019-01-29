@@ -1,5 +1,6 @@
 ﻿using CustomLibrary.Extensions.Controls;
 using SMPorres.Lib.AppForms;
+using SMPorres.Lib.Validations;
 using SMPorres.Repositories;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,13 @@ namespace SMPorres.Forms.Alumnos
             InitializeComponent();
             cbTipo.SelectedIndex = 0;
             dgvDatos.DataSource = null;
+            _validator = new FormValidations(this, errorProvider1);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            if (!ValidarDatos()) return;
+
             dgvDatos.DataSource = null;
             IList<Models.Alumno> result;
             if (cbTipo.SelectedIndex == 0)
@@ -96,6 +100,11 @@ namespace SMPorres.Forms.Alumnos
             dgvDatos.Columns[2].HeaderText = "Nombre";
             dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private bool ValidarDatos()
+        {
+            return _validator.Validar(txtDato, !String.IsNullOrEmpty(txtDato.Text.Trim()), "No puede estar vacío");
         }
     }
 }

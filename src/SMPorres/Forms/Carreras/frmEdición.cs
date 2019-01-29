@@ -14,8 +14,6 @@ namespace SMPorres.Forms.Carreras
 {
     public partial class frmEdición : Lib.AppForms.FormBase
     {
-        private FormValidations _validator;
-
         public frmEdición()
         {
             InitializeComponent();

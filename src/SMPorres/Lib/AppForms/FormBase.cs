@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMPorres.Lib.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace SMPorres.Lib.AppForms
 {
     public class FormBase : Form
     {
+        protected FormValidations _validator;
+
         protected FormBase()
         {
             FormBorderStyle = FormBorderStyle.FixedSingle;

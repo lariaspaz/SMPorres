@@ -35,6 +35,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbSexo = new System.Windows.Forms.ComboBox();
             this.btnBarrio = new System.Windows.Forms.Button();
             this.btnLocalidad = new System.Windows.Forms.Button();
             this.btnDepartamentos = new System.Windows.Forms.Button();
@@ -63,8 +65,6 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label13 = new System.Windows.Forms.Label();
-            this.cbSexo = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -169,6 +169,24 @@
             this.panel2.Size = new System.Drawing.Size(448, 302);
             this.panel2.TabIndex = 1;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(241, 93);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(37, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Sexo: ";
+            // 
+            // cbSexo
+            // 
+            this.cbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSexo.FormattingEnabled = true;
+            this.cbSexo.Location = new System.Drawing.Point(281, 89);
+            this.cbSexo.Name = "cbSexo";
+            this.cbSexo.Size = new System.Drawing.Size(121, 21);
+            this.cbSexo.TabIndex = 35;
+            // 
             // btnBarrio
             // 
             this.btnBarrio.Image = global::SMPorres.Properties.Resources.add;
@@ -267,10 +285,17 @@
             // 
             // txtNumDocumento
             // 
+            this.txtNumDocumento.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtNumDocumento.IntValue = ((long)(0));
             this.txtNumDocumento.Location = new System.Drawing.Point(281, 63);
             this.txtNumDocumento.Name = "txtNumDocumento";
             this.txtNumDocumento.Size = new System.Drawing.Size(127, 20);
             this.txtNumDocumento.TabIndex = 3;
+            this.txtNumDocumento.Text = "0";
             this.txtNumDocumento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
@@ -414,27 +439,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(241, 93);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(37, 13);
-            this.label13.TabIndex = 36;
-            this.label13.Text = "Sexo: ";
-            // 
-            // cbSexo
-            // 
-            this.cbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSexo.FormattingEnabled = true;
-            this.cbSexo.Items.AddRange(new object[] {
-            "F",
-            "M"});
-            this.cbSexo.Location = new System.Drawing.Point(281, 89);
-            this.cbSexo.Name = "cbSexo";
-            this.cbSexo.Size = new System.Drawing.Size(121, 21);
-            this.cbSexo.TabIndex = 35;
             // 
             // frmEdición
             // 

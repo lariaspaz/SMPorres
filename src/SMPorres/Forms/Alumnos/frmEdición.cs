@@ -3,15 +3,14 @@ using SMPorres.Lib.Validations;
 using SMPorres.Models;
 using SMPorres.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace SMPorres.Forms.Alumnos
 {
-    public partial class frmEdición : Lib.AppForms.FormBase
+    public partial class frmEdición : FormBase
     {
-        private FormValidations _validator;
-
         public frmEdición()
         {
             InitializeComponent();
@@ -20,6 +19,12 @@ namespace SMPorres.Forms.Alumnos
             _validator = new FormValidations(this, errorProvider1);
             CargarProvincias();
             CargarTiposDocumento();
+            var sexos = new Dictionary<char, string>();
+            sexos.Add('F', "Femenino");
+            sexos.Add('M', "Masculino");
+            cbSexo.DataSource = new BindingSource(sexos, null);
+            cbSexo.ValueMember = "Key";
+            cbSexo.DisplayMember = "Value";
             cbSexo.SelectedIndex = 0;
         }
 
@@ -35,7 +40,7 @@ namespace SMPorres.Forms.Alumnos
             txtDireccion.Text = alumno.Direccion;
             CargarDomicilio(alumno.IdDomicilio);
             ckEstado.Checked = alumno.Estado == 1;
-            cbSexo.Text = alumno.Sexo;
+            Sexo = (alumno.Sexo ?? "M")[0];
         }
 
         private void CargarDomicilio(int idDomicilio)
@@ -58,11 +63,6 @@ namespace SMPorres.Forms.Alumnos
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
-
-            /*Busca domicilio asocido*/
-            //_idDomicilio = DomiciliosRepository.obtenerIdDomicilio(Convert.ToInt32(cbProvincia.SelectedValue), Convert.ToInt32(cbDepartamento.SelectedValue),
-            //        Convert.ToInt32(cbLocalidad.SelectedValue), Convert.ToInt32(cbBarrio.SelectedValue));
-
             if (this.ValidarDatos())
             {
                 DialogResult = DialogResult.OK;
@@ -72,7 +72,6 @@ namespace SMPorres.Forms.Alumnos
         private void CargarProvincias()
         {
             var p = ProvinciasRepository.ObtenerProvincias();
-            cbProvincia.DataSource = null;
             cbProvincia.DataSource = p;
             cbProvincia.DisplayMember = "Nombre";
             cbProvincia.ValueMember = "Id";
@@ -85,7 +84,6 @@ namespace SMPorres.Forms.Alumnos
 
         private void CargarDepartamentos(int idProvincia)
         {
-            cbDepartamento.DataSource = null;
             var d = DepartamentosRepository.ObtenerDepartamentosPorProvincia(idProvincia);
             cbDepartamento.DataSource = d;
             cbDepartamento.DisplayMember = "Nombre";
@@ -96,7 +94,6 @@ namespace SMPorres.Forms.Alumnos
 
         private void CargarLocalidades(int idDepartamento)
         {
-            cbLocalidad.DataSource = null;
             var l = LocalidadesRepository.ObtenerLocalidadesPorDepartamento(idDepartamento);
             cbLocalidad.DataSource = l;
             cbLocalidad.DisplayMember = "Nombre";
@@ -107,7 +104,6 @@ namespace SMPorres.Forms.Alumnos
 
         private void CargarBarrios(int idLocalidad)
         {
-            cbBarrio.DataSource = null;
             var b = BarriosRepository.ObtenerBarriosPorLocalidad(idLocalidad);
             cbBarrio.DataSource = b;
             cbBarrio.DisplayMember = "Nombre";
@@ -199,17 +195,13 @@ namespace SMPorres.Forms.Alumnos
 
         public char Sexo
         {
+            private set
+            {
+                cbSexo.SelectedValue = value;
+            }
             get
             {
-                if (cbSexo.SelectedIndex == 1)
-                {
-                    return 'M';
-                }
-                else
-                {
-                    return 'F';
-                }
-                    //return Convert.ToChar(cbSexo.SelectedText.Trim());
+                return (char)cbSexo.SelectedValue;
             }
         }
 
@@ -217,12 +209,11 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                return DomiciliosRepository.ObtenerIdDomicilio(
-                    Convert.ToInt32(cbProvincia.SelectedValue),
-                    Convert.ToInt32(cbDepartamento.SelectedValue),
-                    Convert.ToInt32(cbLocalidad.SelectedValue),
-                    Convert.ToInt32(cbBarrio.SelectedValue)
-                    );
+                if (IdProvincia == 0 || IdDepartamento == 0 || IdLocalidad == 0 || IdBarrio == 0)
+                {
+                    return 0;
+                }
+                return DomiciliosRepository.ObtenerIdDomicilio(IdProvincia, IdDepartamento, IdLocalidad, IdBarrio);
             }
         }
 
@@ -247,6 +238,14 @@ namespace SMPorres.Forms.Alumnos
             get
             {
                 return Convert.ToInt32(cbLocalidad.SelectedValue);
+            }
+        }
+
+        public int IdBarrio
+        {
+            get
+            {
+                return Convert.ToInt32(cbBarrio.SelectedValue);
             }
         }
 

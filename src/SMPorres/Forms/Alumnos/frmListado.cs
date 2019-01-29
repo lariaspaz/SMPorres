@@ -44,7 +44,7 @@ namespace SMPorres.Forms.Alumnos
         private void ConsultarDireccionEMail(int IdDomicilio)
         {
             var d = new Models.Domicilio();
-            d = DomiciliosRepository.ObtenerDomiciliosPorId(IdDomicilio);
+            d = DomiciliosRepository.ObtenerDomicilioPorId(IdDomicilio);
 
             txtProvincia.Text = DomiciliosRepository.ObtenerProvincia(d.IdProvincia);
             txtDepartamento.Text = DomiciliosRepository.ObtenerDepartamento(d.IdDepartamento);

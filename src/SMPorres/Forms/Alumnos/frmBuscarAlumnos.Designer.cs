@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.dgvDatos = new CustomLibrary.ComponentModel.CustomDataGridView();
@@ -35,14 +36,16 @@
             this.txtDato = new System.Windows.Forms.TextBox();
             this.cbTipo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuscar
             // 
             this.btnBuscar.Image = global::SMPorres.Properties.Resources.zoom;
-            this.btnBuscar.Location = new System.Drawing.Point(327, 10);
+            this.btnBuscar.Location = new System.Drawing.Point(332, 10);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 3;
@@ -55,7 +58,7 @@
             // 
             this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
-            this.btnSalir.Location = new System.Drawing.Point(407, 10);
+            this.btnSalir.Location = new System.Drawing.Point(412, 10);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 4;
@@ -73,6 +76,7 @@
             this.dgvDatos.Location = new System.Drawing.Point(0, 43);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.OddRowColor = System.Drawing.Color.AliceBlue;
+            this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(498, 219);
             this.dgvDatos.TabIndex = 1;
@@ -93,7 +97,7 @@
             // 
             // txtDato
             // 
-            this.txtDato.Location = new System.Drawing.Point(145, 11);
+            this.txtDato.Location = new System.Drawing.Point(137, 11);
             this.txtDato.Name = "txtDato";
             this.txtDato.Size = new System.Drawing.Size(176, 20);
             this.txtDato.TabIndex = 2;
@@ -107,7 +111,7 @@
             this.cbTipo.Items.AddRange(new object[] {
             "Documento",
             "Nombre"});
-            this.cbTipo.Location = new System.Drawing.Point(61, 11);
+            this.cbTipo.Location = new System.Drawing.Point(53, 11);
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(78, 21);
             this.cbTipo.TabIndex = 1;
@@ -115,11 +119,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 15);
+            this.label1.Location = new System.Drawing.Point(9, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Buscar: ";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmBuscarAlumnos
             // 
@@ -136,6 +144,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -149,5 +158,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

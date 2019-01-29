@@ -7,32 +7,30 @@ using SMPorres.Models;
 
 namespace SMPorres.Repositories
 {
-    class DomiciliosRepository
+    internal class DomiciliosRepository
     {
-        public static int ObtenerIdDomicilio(int provincia, int departamento, int localidad, int barrio)
+        internal static int ObtenerIdDomicilio(int idProvincia, int idDepartamento, 
+            int idLocalidad, int idBarrio)
         {
-            int idDom = 0;
-            using (var db = new Models.SMPorresEntities())
+            int id;
+            using (var db = new SMPorresEntities())
             {
-                idDom = (from d in db.Domicilios
-                         where
-                            d.IdProvincia == provincia &
-                            d.IdDepartamento == departamento &
-                            d.IdLocalidad == localidad &
-                            d.IdBarrio == barrio
-                         select d.Id).FirstOrDefault();
+                id = (from d in db.Domicilios
+                      where d.IdProvincia == idProvincia &
+                            d.IdDepartamento == idDepartamento &
+                            d.IdLocalidad == idLocalidad &
+                            d.IdBarrio == idBarrio
+                      select d.Id).FirstOrDefault();
 
-                if (idDom <= 0)
+                if (id == 0)
                 {
-                    idDom = Insertar(provincia, departamento, localidad, barrio);
+                    id = Insertar(idProvincia, idDepartamento, idLocalidad, idBarrio);
                 }
             }
-            return idDom;
+            return id;
         }
 
-        
-
-        internal static Domicilio ObtenerDomiciliosPorId(int idDomicilio)
+        internal static Domicilio ObtenerDomicilioPorId(int idDomicilio)
         {
             using (var db = new SMPorresEntities())
             {
@@ -42,7 +40,7 @@ namespace SMPorres.Repositories
 
         internal static string ObtenerProvincia(int idProvincia)
         {
-            using (var db = new Models.SMPorresEntities())
+            using (var db = new SMPorresEntities())
             {
                 return (from p in db.Provincias where p.Id == idProvincia select p.Nombre).FirstOrDefault();
             }
@@ -50,41 +48,44 @@ namespace SMPorres.Repositories
 
         internal static string ObtenerDepartamento(int idDepartamento)
         {
-            using (var db = new Models.SMPorresEntities())
+            using (var db = new SMPorresEntities())
             {
                 return (from d in db.Departamentos where d.Id == idDepartamento select d.Nombre).FirstOrDefault();
             }
         }
+
         internal static string ObtenerLocalidad(int idLocalidad)
         {
-            using (var db = new Models.SMPorresEntities())
+            using (var db = new SMPorresEntities())
             {
                 return (from l in db.Localidades where l.Id == idLocalidad select l.Nombre).FirstOrDefault();
             }
         }
+
         internal static string ObtenerBarrio(int idBarrio)
         {
-            using (var db = new Models.SMPorresEntities())
+            using (var db = new SMPorresEntities())
             {
                 return (from b in db.Barrios where b.Id == idBarrio select b.Nombre).FirstOrDefault();
             }
         }
-        public static int Insertar(int provincia, int departamento, int localidad, int barrio)
+
+        public static int Insertar(int idProvincia, int idDepartamento, int idLocalidad, int idBarrio)
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.Domicilios.Any() ? db.Domicilios.Max(a1 => a1.Id) + 1 : 1;
-                var a = new Domicilio
+                var id = db.Domicilios.Any() ? db.Domicilios.Max(d => d.Id) + 1 : 1;
+                var dom = new Domicilio
                 {
                     Id = id,
-                    IdProvincia = provincia,
-                    IdDepartamento = departamento,
-                    IdLocalidad = localidad,
-                    IdBarrio = barrio
+                    IdProvincia = idProvincia,
+                    IdDepartamento = idDepartamento,
+                    IdLocalidad = idLocalidad,
+                    IdBarrio = idBarrio
                 };
-                db.Domicilios.Add(a);
+                db.Domicilios.Add(dom);
                 db.SaveChanges();
-                return a.Id;
+                return dom.Id;
             }
         }
      }

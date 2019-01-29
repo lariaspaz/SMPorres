@@ -1,4 +1,5 @@
 ﻿using SMPorres.Lib.AppForms;
+using SMPorres.Models;
 using SMPorres.Repositories;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace SMPorres.Forms.Alumnos
             cbCarreras.DataSource = CarrerasRepository.ObtenerCarreras().OrderBy(c => c.Nombre).ToList();
             cbCarreras.DisplayMember = "Nombre";
             cbCarreras.ValueMember = "Id";
-            
+
             lblCicloLectivo.Text = String.Format("Ciclo Lectivo {0:n0}", ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo);
         }
 
@@ -62,7 +63,10 @@ namespace SMPorres.Forms.Alumnos
             lbAsignados.DataSource = asignados;
             lbAsignados.ValueMember = "Id";
             lbAsignados.DisplayMember = "Nombre";
-            var sinAsignar = AlumnosRepository.ObtenerAlumnos().Where(a => !asignados.Any(a2 => a2.Id == a.Id)).ToList();
+            var sinAsignar = AlumnosRepository.ObtenerAlumnos()
+                                .Where(a => a.Estado == (byte)EstadoAlumno.Activo)
+                                .Where(a => !asignados.Any(a2 => a2.Id == a.Id))
+                                .ToList();
             lbSinAsignar.DataSource = sinAsignar;
             lbSinAsignar.DisplayMember = "Nombre";
             lbSinAsignar.ValueMember = "Id";
@@ -106,7 +110,7 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnAsignar_Click(object sender, EventArgs e)
         {
-            var idAlumno = (int) lbSinAsignar.SelectedValue;
+            var idAlumno = (int)lbSinAsignar.SelectedValue;
             CursosAlumnosRepository.Insertar(IdCurso, idAlumno);
             ConsultarAlumnos();
         }

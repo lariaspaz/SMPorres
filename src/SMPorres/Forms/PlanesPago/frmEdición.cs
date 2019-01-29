@@ -16,8 +16,6 @@ namespace SMPorres.Forms.PlanesPago
 {
     public partial class frmEdición : FormBase
     {
-        private FormValidations _validator;
-
         public frmEdición(string alumno, string curso)
         {
             InitializeComponent();

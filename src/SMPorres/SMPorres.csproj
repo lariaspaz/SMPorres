@@ -236,6 +236,7 @@
     <Compile Include="Models\Domicilio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EstadoAlumno.cs" />
     <Compile Include="Models\EstadoPlanPago.cs" />
     <Compile Include="Models\Grupos.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>

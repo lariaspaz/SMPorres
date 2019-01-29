@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SMPorres.Models
 {
-    public enum EstadoPlanPago : short
+    public enum EstadoPlanPago
     {
         /// <summary>
         /// El plan de pago está vigente, las cuotas se pueden seguir abonando normalmente.
