@@ -34,7 +34,7 @@ namespace SMPorres.Models
         public string Sexo { get; set; }
     
         public virtual Domicilio Domicilio { get; set; }
-        public virtual TipoDocumento TiposDocumento { get; set; }
+        public virtual TipoDocumento TipoDocumento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CursosAlumno> CursosAlumnos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

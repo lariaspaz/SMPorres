@@ -24,13 +24,15 @@ namespace SMPorres.Repositories
                                         Nombre = a.Nombre,
                                         Apellido = a.Apellido,
                                         IdTipoDocumento = a.IdTipoDocumento,
+                                        TipoDocumento = a.TipoDocumento,
                                         NroDocumento = a.NroDocumento,
                                         FechaNacimiento = a.FechaNacimiento,
                                         EMail = a.EMail,
                                         Direccion = a.Direccion,
                                         IdDomicilio = a.IdDomicilio,
+                                        Domicilio = a.Domicilio,
                                         Estado = a.Estado,
-                                        Sexo = a.Sexo
+                                        Sexo = a.Sexo                                                                                
                                     });
                 return query.OrderBy(a => a.Apellido).ToList();
             }
@@ -86,31 +88,41 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void Actualizar(decimal id, string nombre, string apellido, Int32 idTipoDoc, decimal nroDoc,
-            DateTime fechaNac, string email, string dirección, Int32 idDomicilio, byte estado, char sexo)
+        public static void Actualizar(decimal id, string nombre, string apellido, int idTipoDocumento, decimal nroDocumento,
+            DateTime fechaNacimiento, string email, string dirección, Domicilio domicilio, byte estado, char sexo)
         {
             using (var db = new SMPorresEntities())
             {
-                if (!db.Alumnos.Any(t => t.Id == id))
+                var trx = db.Database.BeginTransaction();
+                try
                 {
-                    throw new Exception(String.Format("No existe el alumno {0} - {1}, {2}", id, apellido, nombre));
-                }
-                var a = db.Alumnos.Find(id);
-                a.Nombre = nombre;
-                a.Apellido = apellido;
-                a.IdTipoDocumento = idTipoDoc;
-                a.NroDocumento = nroDoc;
-                a.FechaNacimiento = fechaNac;
-                a.EMail = email;
-                a.Direccion = dirección;
-                a.IdDomicilio = idDomicilio;
-                a.Estado = estado;
-                if (a.Estado != estado)
-                {
+                    if (!db.Alumnos.Any(t => t.Id == id))
+                    {
+                        throw new Exception(String.Format("No existe el alumno {0} - {1}, {2}", id, apellido, nombre));
+                    }
+                    var a = db.Alumnos.Find(id);
+                    a.Nombre = nombre;
+                    a.Apellido = apellido;
+                    a.IdTipoDocumento = idTipoDocumento;
+                    a.NroDocumento = nroDocumento;
+                    a.FechaNacimiento = fechaNacimiento;
+                    a.EMail = email;
+                    a.Direccion = dirección;
+                    a.IdDomicilio = DomiciliosRepository.ObtenerIdDomicilio(db, domicilio);
                     a.Estado = estado;
+                    if (a.Estado != estado)
+                    {
+                        a.Estado = estado;
+                    }
+                    a.Sexo = sexo.ToString();
+                    db.SaveChanges();
+                    trx.Commit();
                 }
-                a.Sexo = sexo.ToString();
-                db.SaveChanges();
+                catch (Exception)
+                {
+                    trx.Rollback();
+                    throw;
+                }
             }
         }
 
@@ -122,53 +134,74 @@ namespace SMPorres.Repositories
                 {
                     throw new Exception("No existe el alumno con Id " + id);
                 }
-                var a = db.Alumnos.Find(id);
-                db.Alumnos.Remove(a);
+                var cursos = from a in db.Alumnos
+                            join t in db.CursosAlumnos on a.Id equals t.IdAlumno
+                            where a.Id == id
+                            select t.Curso.Nombre;
+                if (cursos.Any())
+                {
+                    var s = " - " + String.Join("\n - ", cursos);
+                    throw new Exception(String.Format("El alumno está asignado a los cursos:\n{1}", cursos.Count(), s));
+                }
+
+                var planes = from a in db.Alumnos
+                             join p in db.PlanesPago on a.Id equals p.IdAlumno
+                             where a.Id == id
+                             select p.Curso.Nombre;
+                if (planes.Any())
+                {
+                    var s = " - " + String.Join("\n - ", planes);
+                    throw new Exception(String.Format("El alumno tiene {0} planes de pago en los cursos:\n{1}", planes.Count(), planes));
+                }
+
+                var domics = from a in db.Alumnos
+                             join d in db.Domicilios on a.IdDomicilio equals d.Id
+                             where a.Id == id
+                             select d;
+                if (domics.Count() == 1)
+                {
+                    db.Domicilios.Remove(domics.First());
+                }
+                var alumno = db.Alumnos.Find(id);
+                db.Alumnos.Remove(alumno);
                 db.SaveChanges();
             }
         }
 
-        public static Alumno Insertar(string nombre, string apellido, Int32 idTipoDoc, decimal nroDoc,
-            DateTime fechaNac, string email, string dirección, Int32 idDomicilio, byte estado, char sexo)
+        public static Alumno Insertar(string nombre, string apellido, int idTipoDocumento, decimal nroDocumento,
+            DateTime fechaNacimiento, string email, string dirección, Domicilio domicilio, byte estado, char sexo)
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.Alumnos.Any() ? db.Alumnos.Max(a1 => a1.Id) + 1 : 1;
-                var a = new Alumno
+                var trx = db.Database.BeginTransaction();
+                try
                 {
-                    Id = id,
-                    Nombre = nombre,
-                    Apellido = apellido,
-                    IdTipoDocumento = idTipoDoc,
-                    NroDocumento = nroDoc,
-                    FechaNacimiento = fechaNac,
-                    EMail = email,
-                    Direccion = dirección,
-                    IdDomicilio = idDomicilio,
-                    Estado = estado,
-                    Sexo = sexo.ToString()
-                };
-                db.Alumnos.Add(a);
-                db.SaveChanges();
-                return a;
-            }
-        }
-
-        public static bool CursoAsignado(decimal id)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                if (!db.CursosAlumnos.Any(t => t.IdAlumno == id))
-                {
-                    return false;
+                    var id = db.Alumnos.Any() ? db.Alumnos.Max(a1 => a1.Id) + 1 : 1;
+                    var a = new Alumno
+                    {
+                        Id = id,
+                        Nombre = nombre,
+                        Apellido = apellido,
+                        IdTipoDocumento = idTipoDocumento,
+                        NroDocumento = nroDocumento,
+                        FechaNacimiento = fechaNacimiento,
+                        EMail = email,
+                        Direccion = dirección,
+                        IdDomicilio = DomiciliosRepository.ObtenerIdDomicilio(db, domicilio),
+                        Estado = estado,
+                        Sexo = sexo.ToString()
+                    };
+                    db.Alumnos.Add(a);
+                    db.SaveChanges();
+                    trx.Commit();
+                    return a;
                 }
-                else
+                catch (Exception)
                 {
-                    return true;
+                    trx.Rollback();
+                    throw;
                 }
             }
         }
-
-
     }
 }

@@ -34,7 +34,7 @@ namespace SMPorres.Forms.Alumnos
             txtNombre.Text = alumno.Nombre;
             txtApellido.Text = alumno.Apellido;
             cbTipoDoc.SelectedIndex = alumno.IdTipoDocumento - 1;
-            txtNumDocumento.Text = alumno.NroDocumento.ToString();
+            txtNroDocumento.Text = alumno.NroDocumento.ToString();
             dtpFechaNac.Text = alumno.FechaNacimiento.ToString();
             txtEmail.Text = alumno.EMail;
             txtDireccion.Text = alumno.Direccion;
@@ -45,19 +45,28 @@ namespace SMPorres.Forms.Alumnos
 
         private void CargarDomicilio(int? idDomicilio)
         {
-            Models.Domicilio d = AlumnosRepository.ObtenerDomicilio(idDomicilio);
+            var d = AlumnosRepository.ObtenerDomicilio(idDomicilio);
 
-            CargarProvincias();
-            cbProvincia.SelectedValue = d.IdProvincia;
+            if (d == null)
+            {
+                cbProvincia.SelectedIndex = -1;
+                cbDepartamento.SelectedIndex = -1;
+                cbLocalidad.SelectedIndex = -1;
+                cbBarrio.SelectedIndex = -1;
+            }
+            else
+            {
+                cbProvincia.SelectedValue = d.IdProvincia;
 
-            CargarDepartamentos(d.IdProvincia);
-            cbDepartamento.SelectedValue = d.IdDepartamento;
+                CargarDepartamentos(d.IdProvincia);
+                cbDepartamento.SelectedValue = d.IdDepartamento;
 
-            CargarLocalidades(d.IdDepartamento);
-            cbLocalidad.SelectedValue = d.IdLocalidad;
+                CargarLocalidades(d.IdDepartamento);
+                cbLocalidad.SelectedValue = d.IdLocalidad;
 
-            CargarBarrios(d.IdLocalidad);
-            cbBarrio.SelectedValue = d.IdBarrio;
+                CargarBarrios(d.IdLocalidad);
+                cbBarrio.SelectedValue = d.IdBarrio;
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -125,7 +134,7 @@ namespace SMPorres.Forms.Alumnos
             return
                 _validator.Validar(txtNombre, !String.IsNullOrEmpty(Nombre), "No puede estar vacío") &&
                 _validator.Validar(txtApellido, !String.IsNullOrEmpty(Apellido), "No puede estar vacío") &&
-                _validator.Validar(txtNumDocumento, NroDocumento > 0, "No puede ser menor o igual que cero") &&
+                _validator.Validar(txtNroDocumento, NroDocumento > 0, "No puede ser menor o igual que cero") &&
                 _validator.Validar(txtDireccion, Dirección != "", "No puede estar vacío");
         }
 
@@ -149,7 +158,7 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                return txtNumDocumento.DecValue;
+                return txtNroDocumento.DecValue;
             }
         }
 
@@ -205,15 +214,20 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
-        public int IdDomicilio
+        public Domicilio Domicilio
         {
             get
             {
                 if (IdProvincia == 0 || IdDepartamento == 0 || IdLocalidad == 0 || IdBarrio == 0)
                 {
-                    return 0;
+                    return null;
                 }
-                return DomiciliosRepository.ObtenerIdDomicilio(IdProvincia, IdDepartamento, IdLocalidad, IdBarrio);
+                var dom = new Domicilio();
+                dom.IdProvincia = IdProvincia;
+                dom.IdDepartamento = IdDepartamento;
+                dom.IdLocalidad = IdLocalidad;
+                dom.IdBarrio = IdBarrio;
+                return dom;
             }
         }
 

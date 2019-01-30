@@ -9,25 +9,46 @@ namespace SMPorres.Repositories
 {
     internal class DomiciliosRepository
     {
-        internal static int ObtenerIdDomicilio(int idProvincia, int idDepartamento, 
+        internal static Domicilio ObtenerDomicilio(int idProvincia, int idDepartamento,
             int idLocalidad, int idBarrio)
         {
-            int id;
+            Domicilio dom;
             using (var db = new SMPorresEntities())
             {
-                id = (from d in db.Domicilios
-                      where d.IdProvincia == idProvincia &
-                            d.IdDepartamento == idDepartamento &
-                            d.IdLocalidad == idLocalidad &
-                            d.IdBarrio == idBarrio
-                      select d.Id).FirstOrDefault();
+                dom = (from d in db.Domicilios
+                       where d.IdProvincia == idProvincia &
+                             d.IdDepartamento == idDepartamento &
+                             d.IdLocalidad == idLocalidad &
+                             d.IdBarrio == idBarrio
+                       select d).FirstOrDefault();
 
-                if (id == 0)
+                if (dom == null)
                 {
-                    id = Insertar(idProvincia, idDepartamento, idLocalidad, idBarrio);
+                    dom = new Domicilio();
+                    dom.IdProvincia = idProvincia;
+                    dom.IdDepartamento = idDepartamento;
+                    dom.IdLocalidad = idLocalidad;
+                    dom.IdBarrio = idBarrio;
                 }
             }
-            return id;
+            return dom;
+        }
+
+        internal static int ObtenerIdDomicilio(SMPorresEntities db, Domicilio domicilio)
+        {
+            var dom = (from d in db.Domicilios
+                       where d.IdProvincia == domicilio.IdProvincia &
+                             d.IdDepartamento == domicilio.IdDepartamento &
+                             d.IdLocalidad == domicilio.IdLocalidad &
+                             d.IdBarrio == domicilio.IdBarrio
+                       select d).FirstOrDefault();
+            if (dom == null)
+            {
+                dom = domicilio;
+                dom.Id = db.Domicilios.Any() ? db.Domicilios.Max(d => d.Id) + 1 : 1;
+                db.Domicilios.Add(dom);
+            }
+            return dom.Id;
         }
 
         internal static Domicilio ObtenerDomicilioPorId(int idDomicilio)
@@ -88,5 +109,5 @@ namespace SMPorres.Repositories
                 return dom.Id;
             }
         }
-     }
+    }
 }

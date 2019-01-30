@@ -787,7 +787,7 @@
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Domicilio" Relationship="SMPorres_DevModel.FK_Alumnos_Domicilios" FromRole="Alumno" ToRole="Domicilio" />
-          <NavigationProperty Name="TiposDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
+          <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPagoes" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
           <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />

@@ -47,7 +47,7 @@
             this.cbDepartamento = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cbProvincia = new System.Windows.Forms.ComboBox();
-            this.txtNumDocumento = new CustomLibrary.ComponentModel.NumericTextBox();
+            this.txtNroDocumento = new CustomLibrary.ComponentModel.NumericTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -146,7 +146,7 @@
             this.panel2.Controls.Add(this.cbDepartamento);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.cbProvincia);
-            this.panel2.Controls.Add(this.txtNumDocumento);
+            this.panel2.Controls.Add(this.txtNroDocumento);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.txtDireccion);
             this.panel2.Controls.Add(this.label7);
@@ -185,7 +185,7 @@
             this.cbSexo.Location = new System.Drawing.Point(281, 89);
             this.cbSexo.Name = "cbSexo";
             this.cbSexo.Size = new System.Drawing.Size(121, 21);
-            this.cbSexo.TabIndex = 35;
+            this.cbSexo.TabIndex = 5;
             // 
             // btnBarrio
             // 
@@ -194,6 +194,7 @@
             this.btnBarrio.Name = "btnBarrio";
             this.btnBarrio.Size = new System.Drawing.Size(23, 23);
             this.btnBarrio.TabIndex = 15;
+            this.btnBarrio.TabStop = false;
             this.btnBarrio.UseVisualStyleBackColor = true;
             this.btnBarrio.Click += new System.EventHandler(this.btnBarrio_Click);
             // 
@@ -204,6 +205,7 @@
             this.btnLocalidad.Name = "btnLocalidad";
             this.btnLocalidad.Size = new System.Drawing.Size(23, 23);
             this.btnLocalidad.TabIndex = 14;
+            this.btnLocalidad.TabStop = false;
             this.btnLocalidad.UseVisualStyleBackColor = true;
             this.btnLocalidad.Click += new System.EventHandler(this.btnLocalidad_Click);
             // 
@@ -214,6 +216,7 @@
             this.btnDepartamentos.Name = "btnDepartamentos";
             this.btnDepartamentos.Size = new System.Drawing.Size(23, 23);
             this.btnDepartamentos.TabIndex = 13;
+            this.btnDepartamentos.TabStop = false;
             this.btnDepartamentos.UseVisualStyleBackColor = true;
             this.btnDepartamentos.Click += new System.EventHandler(this.btnDepartamentos_Click);
             // 
@@ -224,7 +227,7 @@
             this.cbBarrio.Location = new System.Drawing.Point(95, 223);
             this.cbBarrio.Name = "cbBarrio";
             this.cbBarrio.Size = new System.Drawing.Size(313, 21);
-            this.cbBarrio.TabIndex = 9;
+            this.cbBarrio.TabIndex = 10;
             // 
             // label12
             // 
@@ -242,7 +245,7 @@
             this.cbLocalidad.Location = new System.Drawing.Point(95, 196);
             this.cbLocalidad.Name = "cbLocalidad";
             this.cbLocalidad.Size = new System.Drawing.Size(313, 21);
-            this.cbLocalidad.TabIndex = 8;
+            this.cbLocalidad.TabIndex = 9;
             this.cbLocalidad.SelectionChangeCommitted += new System.EventHandler(this.cbLocalidad_SelectionChangeCommitted);
             // 
             // label11
@@ -261,7 +264,7 @@
             this.cbDepartamento.Location = new System.Drawing.Point(95, 169);
             this.cbDepartamento.Name = "cbDepartamento";
             this.cbDepartamento.Size = new System.Drawing.Size(313, 21);
-            this.cbDepartamento.TabIndex = 7;
+            this.cbDepartamento.TabIndex = 8;
             this.cbDepartamento.SelectionChangeCommitted += new System.EventHandler(this.cbDepartamento_SelectionChangeCommitted);
             // 
             // label10
@@ -280,23 +283,23 @@
             this.cbProvincia.Location = new System.Drawing.Point(95, 142);
             this.cbProvincia.Name = "cbProvincia";
             this.cbProvincia.Size = new System.Drawing.Size(313, 21);
-            this.cbProvincia.TabIndex = 6;
+            this.cbProvincia.TabIndex = 7;
             this.cbProvincia.SelectionChangeCommitted += new System.EventHandler(this.cbProvincia_SelectionChangeCommitted);
             // 
             // txtNumDocumento
             // 
-            this.txtNumDocumento.DecValue = new decimal(new int[] {
+            this.txtNroDocumento.DecValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.txtNumDocumento.IntValue = ((long)(0));
-            this.txtNumDocumento.Location = new System.Drawing.Point(281, 63);
-            this.txtNumDocumento.Name = "txtNumDocumento";
-            this.txtNumDocumento.Size = new System.Drawing.Size(127, 20);
-            this.txtNumDocumento.TabIndex = 3;
-            this.txtNumDocumento.Text = "0";
-            this.txtNumDocumento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtNroDocumento.IntValue = ((long)(0));
+            this.txtNroDocumento.Location = new System.Drawing.Point(281, 63);
+            this.txtNroDocumento.Name = "txtNumDocumento";
+            this.txtNroDocumento.Size = new System.Drawing.Size(127, 20);
+            this.txtNroDocumento.TabIndex = 3;
+            this.txtNroDocumento.Text = "0";
+            this.txtNroDocumento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
             // 
@@ -312,7 +315,7 @@
             this.txtDireccion.Location = new System.Drawing.Point(95, 250);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(313, 20);
-            this.txtDireccion.TabIndex = 10;
+            this.txtDireccion.TabIndex = 11;
             // 
             // label7
             // 
@@ -328,7 +331,7 @@
             this.txtEmail.Location = new System.Drawing.Point(95, 116);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(313, 20);
-            this.txtEmail.TabIndex = 5;
+            this.txtEmail.TabIndex = 6;
             // 
             // label6
             // 
@@ -416,7 +419,7 @@
             this.ckEstado.Location = new System.Drawing.Point(95, 276);
             this.ckEstado.Name = "ckEstado";
             this.ckEstado.Size = new System.Drawing.Size(73, 17);
-            this.ckEstado.TabIndex = 11;
+            this.ckEstado.TabIndex = 12;
             this.ckEstado.Text = "Habilitada";
             this.ckEstado.UseVisualStyleBackColor = true;
             // 
@@ -484,7 +487,7 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private CustomLibrary.ComponentModel.NumericTextBox txtNumDocumento;
+        private CustomLibrary.ComponentModel.NumericTextBox txtNroDocumento;
         private System.Windows.Forms.ComboBox cbProvincia;
         private System.Windows.Forms.ComboBox cbBarrio;
         private System.Windows.Forms.Label label12;
