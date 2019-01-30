@@ -29,7 +29,7 @@ namespace SMPorres.Models
         public System.DateTime FechaNacimiento { get; set; }
         public string EMail { get; set; }
         public string Direccion { get; set; }
-        public int IdDomicilio { get; set; }
+        public Nullable<int> IdDomicilio { get; set; }
         public byte Estado { get; set; }
         public string Sexo { get; set; }
     

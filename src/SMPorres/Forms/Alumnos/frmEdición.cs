@@ -43,7 +43,7 @@ namespace SMPorres.Forms.Alumnos
             Sexo = (alumno.Sexo ?? "M")[0];
         }
 
-        private void CargarDomicilio(int idDomicilio)
+        private void CargarDomicilio(int? idDomicilio)
         {
             Models.Domicilio d = AlumnosRepository.ObtenerDomicilio(idDomicilio);
 

@@ -78,7 +78,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        internal static Domicilio ObtenerDomicilio(Int32 id)
+        internal static Domicilio ObtenerDomicilio(Int32? id)
         {
             using (var db = new SMPorresEntities())
             {

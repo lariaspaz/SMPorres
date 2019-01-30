@@ -17,7 +17,7 @@
           <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="IdDomicilio" Type="int" Nullable="false" />
+          <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
           <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
@@ -208,7 +208,7 @@
           <Property Name="IdItemMenu" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Alumnos_Domicilios">
-          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="1" />
+          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="0..1" />
           <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Domicilios">
@@ -784,7 +784,7 @@
           <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="IdDomicilio" Type="Int32" Nullable="false" />
+          <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Domicilio" Relationship="SMPorres_DevModel.FK_Alumnos_Domicilios" FromRole="Alumno" ToRole="Domicilio" />
           <NavigationProperty Name="TiposDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
@@ -849,7 +849,7 @@
           <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Provincias" FromRole="Provincia" ToRole="Domicilio" />
         </EntityType>
         <Association Name="FK_Alumnos_Domicilios">
-          <End Type="SMPorres_DevModel.Domicilio" Role="Domicilio" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Domicilio" Role="Domicilio" Multiplicity="0..1" />
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Domicilio">
