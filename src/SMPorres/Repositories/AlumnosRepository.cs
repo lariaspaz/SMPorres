@@ -32,7 +32,7 @@ namespace SMPorres.Repositories
                                         IdDomicilio = a.IdDomicilio,
                                         Domicilio = a.Domicilio,
                                         Estado = a.Estado,
-                                        Sexo = a.Sexo                                                                                
+                                        Sexo = a.Sexo
                                     });
                 return query.OrderBy(a => a.Apellido).ToList();
             }
@@ -76,7 +76,20 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                return db.Alumnos.Find(id);
+                var a = db.Alumnos.Find(id);
+                if (a != null)
+                {
+                    db.Entry(a).Reference(t => t.TipoDocumento).Load();
+                    db.Entry(a).Reference(d => d.Domicilio).Load();
+                    if (a.Domicilio != null)
+                    {
+                        db.Entry(a.Domicilio).Reference(p => p.Provincia).Load();
+                        db.Entry(a.Domicilio).Reference(d => d.Departamento).Load();
+                        db.Entry(a.Domicilio).Reference(l => l.Localidad).Load();
+                        db.Entry(a.Domicilio).Reference(b => b.Barrio).Load();
+                    }
+                }
+                return a;
             }
         }
 
@@ -135,9 +148,9 @@ namespace SMPorres.Repositories
                     throw new Exception("No existe el alumno con Id " + id);
                 }
                 var cursos = from a in db.Alumnos
-                            join t in db.CursosAlumnos on a.Id equals t.IdAlumno
-                            where a.Id == id
-                            select t.Curso.Nombre;
+                             join t in db.CursosAlumnos on a.Id equals t.IdAlumno
+                             where a.Id == id
+                             select t.Curso.Nombre;
                 if (cursos.Any())
                 {
                     var s = " - " + String.Join("\n - ", cursos);

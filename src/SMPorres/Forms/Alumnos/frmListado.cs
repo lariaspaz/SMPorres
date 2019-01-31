@@ -33,29 +33,9 @@ namespace SMPorres.Forms.Alumnos
                                        a.Apellido,
                                        TipoDocumento = a.TipoDocumento.Descripcion,
                                        a.NroDocumento,
-                                       //FechaNacimiento = String.Format("{0:dd/mm/yyyy}", a.FechaNacimiento),
                                        a.FechaNacimiento,
-                                       a.EMail,
-                                       a.Direccion,
-                                       a.Domicilio,
-                                       a.Estado,
-                                       a.Sexo
+                                       Activo = a.Estado == (byte)Models.EstadoAlumno.Activo
                                    });
-        }
-
-        private void ConsultarDireccionEMail(int IdDomicilio)
-        {
-            var d = new Models.Domicilio();
-            d = DomiciliosRepository.ObtenerDomicilioPorId(IdDomicilio);
-
-            txtProvincia.Text = DomiciliosRepository.ObtenerProvincia(d.IdProvincia);
-            txtDepartamento.Text = DomiciliosRepository.ObtenerDepartamento(d.IdDepartamento);
-            txtLocalidad.Text = DomiciliosRepository.ObtenerLocalidad(d.IdLocalidad);
-            txtBarrio.Text = DomiciliosRepository.ObtenerBarrio(d.IdBarrio);
-
-            int rowindex = dgvDatos.CurrentCell.RowIndex;
-            txtDireccion.Text = (string)dgvDatos.Rows[rowindex].Cells[7].Value;
-            txtEMail.Text = (string)dgvDatos.Rows[rowindex].Cells[6].Value;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -105,18 +85,6 @@ namespace SMPorres.Forms.Alumnos
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
-            //a.Id,
-            //a.Nombre,
-            //a.Apellido,
-            //TipoDocumento = a.TipoDocumento.Descripcion,
-            //a.NroDocumento,
-            //a.FechaNacimiento,
-            //a.EMail,
-            //a.Direccion,
-            //a.Domicilio,
-            //a.Estado,
-            //a.Sexo
-
             dgvDatos.Columns[0].HeaderText = "Código";
             dgvDatos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -143,15 +111,9 @@ namespace SMPorres.Forms.Alumnos
             dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy";
 
-            dgvDatos.Columns[6].HeaderText = "EMail";
-            dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            dgvDatos.Columns[6].Visible = false;
-            dgvDatos.Columns[7].Visible = false;
-            dgvDatos.Columns[8].Visible = false;
-            dgvDatos.Columns[9].Visible = false;
-            dgvDatos.Columns[10].Visible = false;
+            dgvDatos.Columns[6].HeaderText = "Activo";
+            dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -166,6 +128,7 @@ namespace SMPorres.Forms.Alumnos
                             f.FechaNacimiento, f.Email, f.Dirección, f.Domicilio, f.Estado, f.Sexo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);
+                        dgvDatos_SelectionChanged(null, EventArgs.Empty);
                     }
                     catch (Exception ex)
                     {
@@ -188,6 +151,7 @@ namespace SMPorres.Forms.Alumnos
                             f.FechaNacimiento, f.Email, f.Dirección, f.Domicilio, f.Estado, f.Sexo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);
+                        dgvDatos_SelectionChanged(null, EventArgs.Empty);
                     }
                     catch (Exception ex)
                     {
@@ -197,21 +161,52 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
-        private void dgvDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            txtProvincia.Text = "";
-            txtDepartamento.Text = "";
-            txtLocalidad.Text = "";
-            txtBarrio.Text = "";
-            txtEMail.Text = "";
-
-            int rowindex = dgvDatos.CurrentCell.RowIndex;
-            ConsultarDireccionEMail((Int32)dgvDatos.Rows[rowindex].Cells[8].Value);
-        }
-
         private void bntPrint_Click(object sender, EventArgs e)
         {
             using (var f = new ListadoAlumnosXCurso()) f.ShowDialog();
+        }
+
+        private void dgvDatos_SelectionChanged(object sender, EventArgs e)
+        {
+            var a = ObtenerAlumnoSeleccionado();
+            if (a == null)
+            {
+                txtNombre.Text = "";
+                txtApellido.Text = "";
+                txtDocumento.Text = "";
+                txtFechaNacimiento.Text = "";
+                txtEMail.Text = "";
+                txtEstado.Text = "";
+                txtSexo.Text = "";
+                txtDireccion.Text = "";
+                txtProvincia.Text = "";
+                txtDepartamento.Text = "";
+                txtLocalidad.Text = "";
+                txtBarrio.Text = "";
+                return;
+            }
+            txtNombre.Text = a.Nombre;
+            txtApellido.Text = a.Apellido;
+            txtDocumento.Text = String.Format("{0} {1:N0}", a.TipoDocumento.Descripcion, a.NroDocumento);
+            txtFechaNacimiento.Text = String.Format("{0:dd/MM/yyyy}", a.FechaNacimiento);
+            txtEMail.Text = a.EMail;
+            txtEstado.Text = a.LeyendaEstado;
+            txtSexo.Text = a.LeyendaSexo;
+            txtDireccion.Text = a.Direccion;
+            if (a.Domicilio == null)
+            {
+                txtProvincia.Text = "";
+                txtDepartamento.Text = "";
+                txtLocalidad.Text = "";
+                txtBarrio.Text = "";
+            }
+            else
+            {
+                txtProvincia.Text = a.Domicilio.Provincia.Nombre;
+                txtDepartamento.Text = a.Domicilio.Departamento.Nombre;
+                txtLocalidad.Text = a.Domicilio.Localidad.Nombre;
+                txtBarrio.Text = a.Domicilio.Barrio.Nombre;
+            }
         }
     }
 }

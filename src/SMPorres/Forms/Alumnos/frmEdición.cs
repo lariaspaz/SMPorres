@@ -26,6 +26,7 @@ namespace SMPorres.Forms.Alumnos
             cbSexo.ValueMember = "Key";
             cbSexo.DisplayMember = "Value";
             cbSexo.SelectedIndex = 0;
+            ckEstado.Checked = true;
         }
 
         public frmEdición(Alumno alumno) : this()
@@ -134,8 +135,7 @@ namespace SMPorres.Forms.Alumnos
             return
                 _validator.Validar(txtNombre, !String.IsNullOrEmpty(Nombre), "No puede estar vacío") &&
                 _validator.Validar(txtApellido, !String.IsNullOrEmpty(Apellido), "No puede estar vacío") &&
-                _validator.Validar(txtNroDocumento, NroDocumento > 0, "No puede ser menor o igual que cero") &&
-                _validator.Validar(txtDireccion, Dirección != "", "No puede estar vacío");
+                _validator.Validar(txtNroDocumento, NroDocumento > 0, "No puede ser menor o igual que cero");
         }
 
         public string Nombre

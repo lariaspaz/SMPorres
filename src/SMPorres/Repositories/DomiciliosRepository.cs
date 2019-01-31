@@ -34,8 +34,12 @@ namespace SMPorres.Repositories
             return dom;
         }
 
-        internal static int ObtenerIdDomicilio(SMPorresEntities db, Domicilio domicilio)
+        internal static int? ObtenerIdDomicilio(SMPorresEntities db, Domicilio domicilio)
         {
+            if (domicilio == null)
+            {
+                return null;
+            }
             var dom = (from d in db.Domicilios
                        where d.IdProvincia == domicilio.IdProvincia &
                              d.IdDepartamento == domicilio.IdDepartamento &
