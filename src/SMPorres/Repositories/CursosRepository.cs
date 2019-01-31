@@ -70,6 +70,10 @@ namespace SMPorres.Repositories
                     throw new Exception("No existe el curso con Id " + id);
                 }
                 var c = db.Cursos.Find(id);
+                if (c.CursosAlumnos.Any())
+                {
+                    throw new Exception("No puede eliminar el curso porque tiene alumnos relacionados.");
+                }
                 db.Cursos.Remove(c);
                 db.SaveChanges();
             }
@@ -80,21 +84,6 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 return db.Cursos.Find(id);
-            }
-        }
-
-        public static bool AlumnoAsignado(decimal id)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                if (!db.CursosAlumnos.Any(t => t.IdCurso == id))
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
             }
         }
     }

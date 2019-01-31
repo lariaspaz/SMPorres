@@ -49,9 +49,7 @@ namespace SMPorres.Repositories
             {
                 return db.Grupos.Find(id);
             }
-        }
-
-        
+        }        
 
         public static void Actualizar(decimal id, string descripción, byte estado)
         {
@@ -67,6 +65,20 @@ namespace SMPorres.Repositories
                 {
                     c.Estado = estado;
                 }
+                db.SaveChanges();
+            }
+        }
+
+        internal static void Eliminar(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.Grupos.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe el grupo con Id " + id);
+                }
+                var c = db.Grupos.Find(id);
+                db.Grupos.Remove(c);
                 db.SaveChanges();
             }
         }

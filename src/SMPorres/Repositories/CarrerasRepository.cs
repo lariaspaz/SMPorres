@@ -80,6 +80,10 @@ namespace SMPorres.Repositories
                     throw new Exception("No existe la carrera con Id " + id);
                 }
                 var c = db.Carreras.Find(id);
+                if (c.Cursos.Any())
+                {
+                    throw new Exception("No puede eliminar la carrera: hay cursos relacionados.");
+                }
                 db.Carreras.Remove(c);
                 db.SaveChanges();
             }
@@ -92,21 +96,5 @@ namespace SMPorres.Repositories
                 return db.Carreras.Find(id);
             }
         }
-
-        public static bool CursoAsignado(decimal id)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                if (!db.Cursos.Any(t => t.IdCarrera == id))
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-
     }
 }

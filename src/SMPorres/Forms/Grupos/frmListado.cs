@@ -88,7 +88,7 @@ namespace SMPorres.Forms.UsuariosGrupos
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            Models.Grupos g = ObtenerGrupoUsuarioSeleccionada();
+            Models.Grupos g = ObtenerGrupoUsuarioSeleccionado();
             using (var f = new frmEdición(g))
             {
                 if (f.ShowDialog() == DialogResult.OK)
@@ -107,12 +107,31 @@ namespace SMPorres.Forms.UsuariosGrupos
             }
         }
 
-        private Models.Grupos ObtenerGrupoUsuarioSeleccionada()
+        private Models.Grupos ObtenerGrupoUsuarioSeleccionado()
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
             var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
             var g = GruposRepository.ObtenerGrupoPorId(id);
             return g;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var m = ObtenerGrupoUsuarioSeleccionado();
+            if (MessageBox.Show("¿Está seguro de que desea eliminar el grupo seleccionado?",
+                "Eliminar grupo", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                try
+                {
+                    GruposRepository.Eliminar(m.Id);
+                    ConsultarDatos();
+                    dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
+                }
+                catch (Exception ex)
+                {
+                    ShowError(ex.Message);
+                }
+            }
         }
     }
 }

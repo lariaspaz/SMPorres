@@ -147,35 +147,48 @@ namespace SMPorres.Repositories
                 {
                     throw new Exception("No existe el alumno con Id " + id);
                 }
-                var cursos = from a in db.Alumnos
-                             join t in db.CursosAlumnos on a.Id equals t.IdAlumno
-                             where a.Id == id
-                             select t.Curso.Nombre;
-                if (cursos.Any())
-                {
-                    var s = " - " + String.Join("\n - ", cursos);
-                    throw new Exception(String.Format("El alumno está asignado a los cursos:\n{1}", cursos.Count(), s));
-                }
-
-                var planes = from a in db.Alumnos
-                             join p in db.PlanesPago on a.Id equals p.IdAlumno
-                             where a.Id == id
-                             select p.Curso.Nombre;
-                if (planes.Any())
-                {
-                    var s = " - " + String.Join("\n - ", planes);
-                    throw new Exception(String.Format("El alumno tiene {0} planes de pago en los cursos:\n{1}", planes.Count(), planes));
-                }
-
-                var domics = from a in db.Alumnos
-                             join d in db.Domicilios on a.IdDomicilio equals d.Id
-                             where a.Id == id
-                             select d;
-                if (domics.Count() == 1)
-                {
-                    db.Domicilios.Remove(domics.First());
-                }
                 var alumno = db.Alumnos.Find(id);
+
+                //var cursos = from a in db.Alumnos
+                //             join t in db.CursosAlumnos on a.Id equals t.IdAlumno
+                //             where a.Id == id
+                //             select t.Curso.Nombre;
+                //if (cursos.Any())
+                //{
+                //    var s = " - " + String.Join("\n - ", cursos);
+                //    throw new Exception(String.Format("El alumno está asignado a los cursos:\n{1}", cursos.Count(), s));
+                //}
+
+                //var planes = from a in db.Alumnos
+                //             join p in db.PlanesPago on a.Id equals p.IdAlumno
+                //             where a.Id == id
+                //             select p.Curso.Nombre;
+                //if (planes.Any())
+                //{
+                //    var s = " - " + String.Join("\n - ", planes);
+                //    throw new Exception(String.Format("El alumno tiene {0} planes de pago en los cursos:\n{1}", planes.Count(), s));
+                //}
+
+                if (alumno.CursosAlumnos.Any())
+                {
+                    var s = " - " + String.Join("\n - ", alumno.CursosAlumnos.Select(ca => ca.Curso.Nombre));
+                    throw new Exception(String.Format("El alumno está asignado a los cursos:\n{1}", alumno.CursosAlumnos.Count(), s));
+                }
+
+                if (alumno.PlanesPago.Any())
+                {
+                    var s = " - " + String.Join("\n - ", alumno.PlanesPago.Select(pp => pp.Curso.Nombre));
+                    throw new Exception(String.Format("El alumno tiene {0} planes de pago en los cursos:\n{1}", alumno.PlanesPago.Count(), s));
+                }
+
+                //var domics = from a in db.Alumnos
+                //             join d in db.Domicilios on a.IdDomicilio equals d.Id
+                //             where a.Id == id
+                //             select d;
+                if (alumno.Domicilio != null)
+                {
+                    db.Domicilios.Remove(alumno.Domicilio);
+                }
                 db.Alumnos.Remove(alumno);
                 db.SaveChanges();
             }

@@ -20,9 +20,7 @@ CREATE TABLE [dbo].[Carreras](
 	[Id] [int] NOT NULL,
 	[Nombre] [varchar](255) NOT NULL,
 	[Duracion] [smallint] NOT NULL,
-	[Importe1Vto] [numeric](18, 2) NOT NULL,
-	[Importe2Vto] [numeric](18, 2) NOT NULL,
-	[Importe3Vto] [numeric](18, 3) NOT NULL,
+	[Importe] [numeric](18, 2) NOT NULL,
 	[Estado] [smallint] NOT NULL,
 	[FechaEstado] [smalldatetime] NOT NULL,
  CONSTRAINT [PK_Carreras] PRIMARY KEY CLUSTERED 
