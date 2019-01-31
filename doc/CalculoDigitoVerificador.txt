@@ -1,0 +1,30 @@
+(*) Algoritmo de calculo de digito verificador		
+	
+a) Empezando por la cifra mas significativa (por la izquierda) y excluyendo el DV, asignarle al código de barras 
+la siguiente secuencia: 1,3,5,7,9,3,5,7,9,3,5,7,9.,,,			
+Notas: 			
+La secuencia debe ser aplicada de izquierda a derecha, empezando por 1			
+La secuencia 3,5,7 y 9 será repetida tantas veces como sea necesario para completar la multiplicación de cada digito del codigo de barras
+con el elemento correspondiente de la secuencia			
+Si el digito verificador esta incluido dentro del codigo de barras, la posicion del digito verificador debero saltearse cuando se aplique la serie			
+b) Realizar el producto de cada elemento de la secuencia por el elemento correspondiente del codigo de barras con el elemento de la serie a verificar.			
+c) Sumar los productos.
+d) Dividir el resultado de la suma por 2 y tomar la parte entera.		
+e) Dividir el resultado por 10. 
+f) El resto es el Digito Verificador 			
+
+Ejemplo
+
+codigo de barras: 102343247689574239
+serie: 3579		
+
+Sumar los productos: 
+(1*1) + (0*3) + (2*5) + (3*7) + (4*9) + (3*3) + (2*5) + (4*7) + (7*9) + (6*3) + (8*5) + (9*7) + (5*9) + (7*3) + (4*5) + (2*7) + (3*9) + (9*3) = 453
+
+Dividir por 2:
+453/2 = 226.5 ==> 226
+
+Modulo 10:
+226 mod 10 = 6
+
+Digito Verificador = 6
