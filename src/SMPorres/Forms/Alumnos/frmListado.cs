@@ -1,14 +1,8 @@
-﻿using CustomLibrary.Extensions.Controls;
-using SMPorres.Prints;
+﻿using SMPorres.Prints;
 using SMPorres.Repositories;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SMPorres.Forms.Alumnos
@@ -128,7 +122,6 @@ namespace SMPorres.Forms.Alumnos
                             f.FechaNacimiento, f.Email, f.Dirección, f.Domicilio, f.Estado, f.Sexo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);
-                        dgvDatos_SelectionChanged(null, EventArgs.Empty);
                     }
                     catch (Exception ex)
                     {
@@ -151,7 +144,6 @@ namespace SMPorres.Forms.Alumnos
                             f.FechaNacimiento, f.Email, f.Dirección, f.Domicilio, f.Estado, f.Sexo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == a.Id);
-                        dgvDatos_SelectionChanged(null, EventArgs.Empty);
                     }
                     catch (Exception ex)
                     {
