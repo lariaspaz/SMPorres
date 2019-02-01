@@ -14,7 +14,31 @@ namespace SMPorres.Prints
             WindowState = FormWindowState.Maximized;
         }
 
-        private void cargarDataTable(DataTable axcurso)
+        private void crystalReportViewer1_Load(object sender, EventArgs e)
+        {
+            var dataT = CrearDatatable();
+            cargarDatos(dataT);
+
+            AlumnosPorCurso cr = new AlumnosPorCurso();
+            cr.Database.Tables["dtAlumnosXCurso"].SetDataSource(dataT);
+
+            crystalReportViewer1.ReportSource = null;
+            crystalReportViewer1.ReportSource = cr;
+        }
+
+        private DataTable CrearDatatable()
+        {
+            DataTable dtAlumnosXCurso = new DataTable();
+            dtAlumnosXCurso.Columns.Add("curso", typeof(string));
+            dtAlumnosXCurso.Columns.Add("apellido", typeof(string));
+            dtAlumnosXCurso.Columns.Add("nombre", typeof(string));
+            dtAlumnosXCurso.Columns.Add("documento", typeof(string));
+            dtAlumnosXCurso.Columns.Add("telefono", typeof(string));
+
+            return dtAlumnosXCurso;
+        }
+
+        private void cargarDatos(DataTable x)
         {
             using (var db = new Models.SMPorresEntities())
             {
@@ -26,36 +50,19 @@ namespace SMPorres.Prints
                              select new
                              {
                                  Curso = c.Nombre,
-                                 Nombre = a.Nombre,
                                  Apellido = a.Apellido,
-                                 NroDocumento = a.NroDocumento,
-                                 FechaNacimiento = a.FechaNacimiento
+                                 Nombre = a.Nombre,
+                                 Documento = a.NroDocumento,
+                                 Telefono = "0385-0303456"
                              }
                              ).ToList();
 
                 foreach (var item in query)
                 {
-                    axcurso.Rows.Add(item.Curso, item.Nombre, item.NroDocumento, item.FechaNacimiento);
+                    x.Rows.Add(item.Curso, item.Apellido, item.Nombre, item.Documento, item.Telefono);
                 }
 
             }
-        }
-       
-        private void crystalReportViewer1_Load(object sender, EventArgs e)
-        {
-            DataTable axcurso = new DataTable();
-            axcurso.Columns.Add("curso", typeof(string));
-            axcurso.Columns.Add("nombre", typeof(string));
-            axcurso.Columns.Add("apellido", typeof(string));
-            axcurso.Columns.Add("fechanac", typeof(DateTime));
-
-            cargarDataTable(axcurso);
-
-            crAlumnos cr = new crAlumnos();
-            cr.Database.Tables["axcurso"].SetDataSource(axcurso);
-
-            crystalReportViewer1.ReportSource = null;
-            crystalReportViewer1.ReportSource = cr;
         }
     }
 }

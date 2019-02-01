@@ -16,14 +16,14 @@ namespace SMPorres.Prints.Reporte {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class crAlumnos : ReportClass {
+    public class AlumnosPorCurso : ReportClass {
         
-        public crAlumnos() {
+        public AlumnosPorCurso() {
         }
         
         public override string ResourceName {
             get {
-                return "crAlumnos.rpt";
+                return "AlumnosPorCurso.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SMPorres.Prints.Reporte {
         
         public override string FullResourceName {
             get {
-                return "SMPorres.Prints.Reporte.crAlumnos.rpt";
+                return "SMPorres.Prints.Reporte.AlumnosPorCurso.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace SMPorres.Prints.Reporte {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace SMPorres.Prints.Reporte {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,17 +82,33 @@ namespace SMPorres.Prints.Reporte {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+            get {
+                return this.ReportDefinition.Sections[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+            get {
+                return this.ReportDefinition.Sections[6];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedcrAlumnos : Component, ICachedReport {
+    public class CachedAlumnosPorCurso : Component, ICachedReport {
         
-        public CachedcrAlumnos() {
+        public CachedAlumnosPorCurso() {
         }
         
         [Browsable(false)]
@@ -129,7 +145,7 @@ namespace SMPorres.Prints.Reporte {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            crAlumnos rpt = new crAlumnos();
+            AlumnosPorCurso rpt = new AlumnosPorCurso();
             rpt.Site = this.Site;
             return rpt;
         }

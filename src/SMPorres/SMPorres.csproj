@@ -292,10 +292,10 @@
     <Compile Include="Models\UsuariosItemsMenu.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Prints\DataSet\dsAXCurso.Designer.cs">
+    <Compile Include="Prints\DataSet\dsImpresiones.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dsAXCurso.xsd</DependentUpon>
+      <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </Compile>
     <Compile Include="Prints\ListadoAlumnosXCurso.cs">
       <SubType>Form</SubType>
@@ -303,10 +303,10 @@
     <Compile Include="Prints\ListadoAlumnosXCurso.Designer.cs">
       <DependentUpon>ListadoAlumnosXCurso.cs</DependentUpon>
     </Compile>
-    <Compile Include="Prints\Reporte\crAlumnos1.cs">
+    <Compile Include="Prints\Reporte\AlumnosPorCurso.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>crAlumnos.rpt</DependentUpon>
+      <DependentUpon>AlumnosPorCurso.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -399,9 +399,9 @@
     <EmbeddedResource Include="Prints\ListadoAlumnosXCurso.resx">
       <DependentUpon>ListadoAlumnosXCurso.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Prints\Reporte\crAlumnos.rpt">
+    <EmbeddedResource Include="Prints\Reporte\AlumnosPorCurso.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>crAlumnos1.cs</LastGenOutput>
+      <LastGenOutput>AlumnosPorCurso.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -425,16 +425,16 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Prints\DataSet\dsAXCurso.xsc">
-      <DependentUpon>dsAXCurso.xsd</DependentUpon>
+    <None Include="Prints\DataSet\dsImpresiones.xsc">
+      <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </None>
-    <None Include="Prints\DataSet\dsAXCurso.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsAXCurso.Designer.cs</LastGenOutput>
+    <None Include="Prints\DataSet\dsImpresiones.xsd">
       <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpresiones.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Prints\DataSet\dsAXCurso.xss">
-      <DependentUpon>dsAXCurso.xsd</DependentUpon>
+    <None Include="Prints\DataSet\dsImpresiones.xss">
+      <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
