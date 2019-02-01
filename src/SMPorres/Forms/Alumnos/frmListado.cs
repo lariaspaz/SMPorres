@@ -39,10 +39,20 @@ namespace SMPorres.Forms.Alumnos
 
         private Models.Alumno ObtenerAlumnoSeleccionado()
         {
-            int rowindex = dgvDatos.CurrentCell.RowIndex;
-            var id = (Int32)dgvDatos.Rows[rowindex].Cells[0].Value;
-            var a = AlumnosRepository.ObtenerAlumnoPorId(id);
-            return a;
+            try
+            {
+                int rowindex = dgvDatos.CurrentCell.RowIndex;
+                var id = (Int32)dgvDatos.Rows[rowindex].Cells[0].Value;
+                var a = AlumnosRepository.ObtenerAlumnoPorId(id);
+                return a;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

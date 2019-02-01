@@ -109,10 +109,18 @@ namespace SMPorres.Forms.UsuariosGrupos
 
         private Models.Grupos ObtenerGrupoUsuarioSeleccionado()
         {
-            int rowindex = dgvDatos.CurrentCell.RowIndex;
-            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-            var g = GruposRepository.ObtenerGrupoPorId(id);
-            return g;
+            try
+            {
+                int rowindex = dgvDatos.CurrentCell.RowIndex;
+                var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+                var g = GruposRepository.ObtenerGrupoPorId(id);
+                return g;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

@@ -102,10 +102,18 @@ namespace SMPorres.Forms.Cuotas
 
         private Models.Cuota ObtenerCuotaSeleccionada()
         {
-            int rowindex = dgvDatos.CurrentCell.RowIndex;
-            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-            var c = CuotasRepository.ObtenerCuotaPorId(id);
-            return c;
+            try
+            {
+                int rowindex = dgvDatos.CurrentCell.RowIndex;
+                var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+                var c = CuotasRepository.ObtenerCuotaPorId(id);
+                return c;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

@@ -113,10 +113,18 @@ namespace SMPorres.Forms.Carreras
 
         private Models.Carrera ObtenerCarreraSeleccionada()
         {
-            int rowindex = dgvDatos.CurrentCell.RowIndex;
-            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-            var m = CarrerasRepository.ObtenerCarreraPorId(id);
-            return m;
+            try
+            {
+                int rowindex = dgvDatos.CurrentCell.RowIndex;
+                var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+                var m = CarrerasRepository.ObtenerCarreraPorId(id);
+                return m;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
