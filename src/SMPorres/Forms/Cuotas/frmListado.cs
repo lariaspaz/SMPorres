@@ -25,7 +25,6 @@ namespace SMPorres.Forms.Cuotas
             foreach (DataGridViewColumn c in dgvDatos.Columns)
             {
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
 
             dgvDatos.Columns[0].HeaderText = "Código";

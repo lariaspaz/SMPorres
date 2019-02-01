@@ -19,6 +19,7 @@ namespace SMPorres.Forms.Alumnos
             _validator = new FormValidations(this, errorProvider1);
             CargarProvincias();
             CargarTiposDocumento();
+            InicializarDomicilio();
             var sexos = new Dictionary<char, string>();
             sexos.Add('F', "Femenino");
             sexos.Add('M', "Masculino");
@@ -27,6 +28,26 @@ namespace SMPorres.Forms.Alumnos
             cbSexo.DisplayMember = "Value";
             cbSexo.SelectedIndex = 0;
             ckEstado.Checked = true;
+        }
+
+        private void InicializarDomicilio()
+        {
+            Action<ComboBox, string> seleccionar = (cb, s) => {
+                for (int i = 0; i < cb.Items.Count; i++)
+                {
+                    if (cb.GetItemText(cb.Items[i]).Contains(s))
+                    {
+                        cb.SelectedIndex = i;
+                        break;
+                    }
+                }
+            };
+            seleccionar(cbProvincia, "Santiago");
+            CargarDepartamentos(IdProvincia);
+            //seleccionar(cbDepartamento, "Capital");
+            //CargarLocalidades(IdDepartamento);
+            //seleccionar(cbLocalidad, "Capital");
+            //cbBarrio.SelectedIndex = -1;
         }
 
         public frmEdición(Alumno alumno) : this()
@@ -85,11 +106,11 @@ namespace SMPorres.Forms.Alumnos
             cbProvincia.DataSource = p;
             cbProvincia.DisplayMember = "Nombre";
             cbProvincia.ValueMember = "Id";
-            if (p.Any())
-            {
-                cbProvincia.SelectedIndex = 0;
-                CargarDepartamentos(IdProvincia);
-            }
+            //if (p.Any())
+            //{
+            //    //cbProvincia.SelectedIndex = 0;
+            //    CargarDepartamentos(IdProvincia);
+            //}
         }
 
         private void CargarDepartamentos(int idProvincia)

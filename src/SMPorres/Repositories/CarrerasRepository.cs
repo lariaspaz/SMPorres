@@ -82,7 +82,7 @@ namespace SMPorres.Repositories
                 var c = db.Carreras.Find(id);
                 if (c.Cursos.Any())
                 {
-                    throw new Exception("No puede eliminar la carrera: hay cursos relacionados.");
+                    throw new Exception("No se puede eliminar la carrera: hay cursos relacionados.");
                 }
                 db.Carreras.Remove(c);
                 db.SaveChanges();
