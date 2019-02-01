@@ -205,6 +205,8 @@
     <Compile Include="Lib\AppForms\frmInputQuery.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Lib\Calculos\DígitoVerificador.cs" />
+    <Compile Include="Lib\Calculos\FechaJuliana.cs" />
     <Compile Include="Lib\Components\Forms.cs" />
     <Compile Include="Lib\Configuration.cs" />
     <Compile Include="Lib\AppForms\FormBase.cs">
