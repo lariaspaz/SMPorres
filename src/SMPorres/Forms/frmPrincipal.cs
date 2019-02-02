@@ -173,5 +173,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Localidades.frmListado()) f.ShowDialog();
         }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            using (var f = new Barrios.frmListado()) f.ShowDialog();
+        }
     }
 }

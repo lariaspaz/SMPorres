@@ -63,8 +63,13 @@ namespace SMPorres.Repositories
                 {
                     throw new Exception("No existe la localidad con Id " + id);
                 }
-                var d = db.Localidades.Find(id);
-                d.Nombre = nombre;
+                var loc = db.Localidades.Find(id);
+                if (db.Localidades.Any(l => l.Nombre.ToLower() == nombre.ToLower() &&
+                        l.IdDepartamento == loc.IdDepartamento))
+                {
+                    throw new Exception("Ya existe una localidad con este nombre en este departamento.");
+                }
+                loc.Nombre = nombre;
                 db.SaveChanges();
             }
         }

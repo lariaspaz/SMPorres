@@ -46,5 +46,50 @@ namespace SMPorres.Repositories
                 return barrio;
             }
         }
+
+        internal static Barrio ObtenerBarrioPorId(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.Barrios.FirstOrDefault(b => b.Id == id);
+            }
+        }
+
+        internal static void Actualizar(int id, string nombre)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.Barrios.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe el barrio con Id " + id);
+                }
+                var barrio = db.Barrios.Find(id);
+                if (db.Barrios.Any(b => b.Nombre.ToLower() == nombre.ToLower() &&
+                        b.IdLocalidad == barrio.IdLocalidad))
+                {
+                    throw new Exception("Ya existe un barrio con este nombre en esta localidad.");
+                }
+                barrio.Nombre = nombre;
+                db.SaveChanges();
+            }
+        }
+
+        internal static void Eliminar(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.Barrios.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe el barrio con Id " + id);
+                }
+                var b = db.Barrios.Find(id);
+                if (b.Domicilios.Any())
+                {
+                    throw new Exception("No se puede eliminar la localidad porque está relacionada a alumnos.");
+                }
+                db.Barrios.Remove(b);
+                db.SaveChanges();
+            }
+        }
     }
 }

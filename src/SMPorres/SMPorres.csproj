@@ -100,6 +100,12 @@
     <Compile Include="Forms\Alumnos\frmPanelAlumno.Designer.cs">
       <DependentUpon>frmPanelAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Barrios\frmListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Barrios\frmListado.Designer.cs">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Carreras\frmEdición.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Alumnos\frmPanelAlumno.resx">
       <DependentUpon>frmPanelAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Barrios\frmListado.resx">
+      <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>

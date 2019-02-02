@@ -63,8 +63,13 @@ namespace SMPorres.Repositories
                 {
                     throw new Exception("No existe el departamento con Id " + id);
                 }
-                var d = db.Departamentos.Find(id);
-                d.Nombre = nombre;
+                var depto = db.Departamentos.Find(id);
+                if (db.Departamentos.Any(d => d.Nombre.ToLower() == nombre.ToLower() &&
+                        d.IdProvincia == depto.IdProvincia))
+                {
+                    throw new Exception("Ya existe un departamento con este nombre en esta provincia.");
+                }
+                depto.Nombre = nombre;
                 db.SaveChanges();
             }
         }
