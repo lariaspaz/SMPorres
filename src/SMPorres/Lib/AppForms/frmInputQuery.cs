@@ -99,12 +99,12 @@ namespace SMPorres.Lib.AppForms
             this.ResumeLayout(false);
         }
 
-        public frmInputQuery(string formText, string queryPrompt)
+        public frmInputQuery(string formText, string queryPrompt, string descripción = "")
         {
             InitializeComponent();
             this.Text = formText;
             lblPrompt.Text = queryPrompt;
-            txtDescripcion.Text = "";
+            txtDescripcion.Text = descripción;
         }
 
         public string Descripción
