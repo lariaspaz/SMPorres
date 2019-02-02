@@ -798,7 +798,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdLocalidad" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Localidad" Relationship="SMPorres_DevModel.FK_Barrios_Localidades" FromRole="Barrio" ToRole="Localidade" />
           <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Barrios" FromRole="Barrio" ToRole="Domicilio" />
         </EntityType>
