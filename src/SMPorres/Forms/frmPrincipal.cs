@@ -163,5 +163,10 @@ namespace SMPorres.Forms
         {
             using (var f = new MenuItems.frmAsignarUsuariosyGruposAMenuItems()) f.ShowDialog();
         }
+
+        private void departamentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Departamentos.frmListado()) f.ShowDialog();
+        }
     }
 }
