@@ -1,4 +1,4 @@
-﻿namespace SMPorres.Forms.Departamentos
+﻿namespace SMPorres.Forms.Localidades
 {
     partial class frmListado
     {
@@ -37,6 +37,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbDepartamentos = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.cbProvincias = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -147,6 +149,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbDepartamentos);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cbProvincias);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -154,6 +158,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(766, 37);
             this.panel1.TabIndex = 2;
+            // 
+            // cbDepartamentos
+            // 
+            this.cbDepartamentos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDepartamentos.FormattingEnabled = true;
+            this.cbDepartamentos.Location = new System.Drawing.Point(331, 8);
+            this.cbDepartamentos.Name = "cbDepartamentos";
+            this.cbDepartamentos.Size = new System.Drawing.Size(150, 21);
+            this.cbDepartamentos.TabIndex = 3;
+            this.cbDepartamentos.SelectedIndexChanged += new System.EventHandler(this.cbDepartamentos_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(248, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Departamento:";
             // 
             // cbProvincias
             // 
@@ -182,7 +205,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
             this.Name = "frmListado";
-            this.Text = "Departamentos";
+            this.Text = "Localidades";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmListado_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -208,5 +231,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cbProvincias;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbDepartamentos;
+        private System.Windows.Forms.Label label2;
     }
 }

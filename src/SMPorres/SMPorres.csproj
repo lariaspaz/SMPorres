@@ -106,6 +106,12 @@
     <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Localidades\frmListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Localidades\frmListado.Designer.cs">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Departamentos\frmListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -360,6 +366,9 @@
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Localidades\frmListado.resx">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Departamentos\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
@@ -436,9 +445,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SMPorres.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="bin\Debug\SMPorres.exe.config" />
-    <None Include="bin\Debug\SMPorres.vshost.exe.config" />
-    <None Include="bin\Debug\SMPorres.vshost.exe.manifest" />
     <Compile Include="Models\Alumno.Ext.cs" />
     <None Include="Models\SMPorres.edmx.diagram">
       <DependentUpon>SMPorres.edmx</DependentUpon>
@@ -473,14 +479,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\CustomLibrary.dll" />
-    <Content Include="bin\Debug\EntityFramework.dll" />
-    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\Debug\EntityFramework.xml" />
-    <Content Include="bin\Debug\SMPorres.exe" />
-    <Content Include="bin\Debug\SMPorres.pdb" />
-    <Content Include="bin\Debug\SMPorres.vshost.exe" />
     <Content Include="Models\SMPorres.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SMPorres.edmx</DependentUpon>

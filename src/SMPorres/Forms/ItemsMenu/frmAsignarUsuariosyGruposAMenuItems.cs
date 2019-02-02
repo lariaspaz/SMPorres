@@ -27,6 +27,7 @@ namespace SMPorres.Forms.MenuItems
             tvItemsMenu.ExpandAll();
             tvItemsMenu.SelectedNode = tn.FirstNode;
             rbGrupos.Checked = true;
+            tvItemsMenu.Select();
         }
 
         private void CargarMenu(TreeNode padre, List<ItemsMenu> items)

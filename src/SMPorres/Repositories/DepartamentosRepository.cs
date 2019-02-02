@@ -51,7 +51,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                return db.Departamentos.FirstOrDefault(c => c.Id == id);
+                return db.Departamentos.FirstOrDefault(d => d.Id == id);
             }
         }
 
@@ -61,13 +61,12 @@ namespace SMPorres.Repositories
             {
                 if (!db.Departamentos.Any(t => t.Id == id))
                 {
-                    throw new Exception("No existe el departamento con Id {0}" + id);
+                    throw new Exception("No existe el departamento con Id " + id);
                 }
                 var d = db.Departamentos.Find(id);
                 d.Nombre = nombre;
                 db.SaveChanges();
             }
-
         }
 
         internal static void Eliminar(int id)
@@ -83,6 +82,10 @@ namespace SMPorres.Repositories
                 {
                     throw new Exception(String.Format("No se puede eliminar el departamento " + 
                         "porque tiene {0} localidades relacionadas.", d.Localidades.Count));
+                }
+                if (d.Domicilios.Any())
+                {
+                    throw new Exception("No se puede eliminar el departamento porque está relacionado a alumnos.");
                 }
                 db.Departamentos.Remove(d);
                 db.SaveChanges();
