@@ -1,6 +1,7 @@
 ﻿using SMPorres.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -203,5 +204,81 @@ namespace SMPorres.Repositories
                 }
             }
         }
+
+        public static void cargarAlumnosPorCarreraCursoEstado(DataTable x, int idCarrera, int idCurso, int estado)
+        {
+
+            using (var db = new Models.SMPorresEntities())
+            {
+                var query = (
+                    from ca in db.CursosAlumnos
+
+                    join cur in db.Cursos
+                    on ca.IdCurso equals cur.Id
+
+                    join car in db.Carreras
+                    on cur.IdCarrera equals car.Id
+
+                    join al in db.Alumnos
+                    on ca.IdAlumno equals al.Id
+                    where
+                        car.Id == idCarrera &
+                        cur.Id == idCurso &
+                        al.Estado == estado
+                    select new
+                    {
+                        CursoImpresion = car.Nombre + " - " + cur.Nombre,
+                        AlumnoNombre = al.Nombre,
+                        AlumnoApellido = al.Apellido,
+                        AlumnoMail = al.EMail,
+                        AlumnoEstado = (al.Estado == 1 ? "Activo" : "Baja")
+                    }).ToList();
+
+                foreach (var item in query)
+                {
+                    x.Rows.Add(item.CursoImpresion, item.AlumnoNombre, item.AlumnoApellido, item.AlumnoMail, item.AlumnoEstado);
+                }
+
+            }
+
+        }
+
+        public static void cargarAlumnosPorCarreraEstado(DataTable x, int idCarrera, int estado)
+        {
+
+            using (var db = new Models.SMPorresEntities())
+            {
+                var query = (
+                    from ca in db.CursosAlumnos
+
+                    join cur in db.Cursos
+                    on ca.IdCurso equals cur.Id
+
+                    join car in db.Carreras
+                    on cur.IdCarrera equals car.Id
+
+                    join al in db.Alumnos
+                    on ca.IdAlumno equals al.Id
+                    where
+                    car.Id == idCarrera &
+                    al.Estado == estado
+                    select new
+                    {
+                        CursoImpresion = car.Nombre + " - " + cur.Nombre,
+                        AlumnoNombre = al.Nombre,
+                        AlumnoApellido = al.Apellido,
+                        AlumnoMail = al.EMail,
+                        AlumnoEstado = (al.Estado == 1 ? "Activo" : "Baja")
+                    }).ToList();
+
+                foreach (var item in query)
+                {
+                    x.Rows.Add(item.CursoImpresion, item.AlumnoNombre, item.AlumnoApellido, item.AlumnoMail, item.AlumnoEstado);
+                }
+
+            }
+
+        }
+
     }
 }

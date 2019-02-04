@@ -88,6 +88,18 @@
     <Compile Include="Forms\Alumnos\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstado.Designer.cs">
+      <DependentUpon>frmInfAlumnosPorEstado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstadoCondiciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstadoCondiciones.Designer.cs">
+      <DependentUpon>frmInfAlumnosPorEstadoCondiciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Alumnos\frmListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +339,12 @@
       <DependentUpon>AlumnosPorCurso.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Prints\Reporte\AlumnosPorEstado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlumnosPorEstado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Prints\Reporte\CuponDePago.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -363,6 +381,12 @@
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Repositories\CursosRepository.cs" />
+    <EmbeddedResource Include="Forms\Alumnos\frmInfAlumnosPorEstado.resx">
+      <DependentUpon>frmInfAlumnosPorEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Alumnos\frmInfAlumnosPorEstadoCondiciones.resx">
+      <DependentUpon>frmInfAlumnosPorEstadoCondiciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Alumnos\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
@@ -435,6 +459,10 @@
     <EmbeddedResource Include="Prints\Reporte\AlumnosPorCurso.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AlumnosPorCurso.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prints\Reporte\AlumnosPorEstado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AlumnosPorEstado.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Prints\Reporte\CuponDePago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

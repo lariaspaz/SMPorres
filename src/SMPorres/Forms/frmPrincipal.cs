@@ -178,5 +178,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Barrios.frmListado()) f.ShowDialog();
         }
+
+        private void alumnosPorEstadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Alumnos.frmInfAlumnosPorEstadoCondiciones()) f.ShowDialog();
+        }
     }
 }
