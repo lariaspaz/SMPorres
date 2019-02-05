@@ -1,4 +1,5 @@
 ﻿using SMPorres.Lib.AppForms;
+using SMPorres.Models;
 using SMPorres.Repositories;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,18 @@ namespace SMPorres.Forms.Alumnos
         {
             InitializeComponent();
 
-            cbCarreras.DataSource = CarrerasRepository.ObtenerCarreras().OrderBy(c => c.Nombre).ToList();
+            var qry = CarrerasRepository.ObtenerCarreras().OrderBy(c => c.Nombre).ToList();
+            qry.Insert(0, new Carrera { Id = 0, Nombre = "(Todas las carreras)" });
             cbCarreras.DisplayMember = "Nombre";
             cbCarreras.ValueMember = "Id";
+            cbCarreras.DataSource = qry;
 
-            cbCursos.Enabled = false;
-            chkVerCursos.Checked = false;
+            var estados = new Dictionary<EstadoAlumno, string>();
+            estados.Add(EstadoAlumno.Activo, "Activo");
+            estados.Add(EstadoAlumno.Baja, "Baja");
+            cbEstado.DataSource = new BindingSource(estados, null);
+            cbEstado.ValueMember = "Key";
+            cbEstado.DisplayMember = "Value";
             cbEstado.SelectedIndex = 0;
         }
 
@@ -34,27 +41,14 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (chkVerCursos.Checked)
-            {
-                using (var f = new frmInfAlumnosPorEstado(IdCarrera, IdCurso, Estado)) f.ShowDialog();
-            }
-            else
-            {
-                using (var f = new frmInfAlumnosPorEstado(IdCarrera, Estado)) f.ShowDialog();
-            }
-        }
-
-        private void chkVerCursos_CheckedChanged(object sender, EventArgs e)
-        {
-            cbCursos.Enabled = chkVerCursos.Checked;
-            cbCursos.Enabled = chkVerCursos.Checked;
+            using (var f = new frmInfAlumnosPorEstado(IdCarrera, IdCurso, Estado)) f.ShowDialog();
         }
 
         private int IdCarrera
         {
             get
             {
-                return ((Models.Carrera)cbCarreras.SelectedItem).Id;
+                return Convert.ToInt32(cbCarreras.SelectedValue);
             }
         }
 
@@ -62,29 +56,26 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                return ((Models.Curso)cbCursos.SelectedItem).Id;
+                return Convert.ToInt32(cbCursos.SelectedValue);
             }
         }
 
-        private int Estado
+        private EstadoAlumno Estado
         {
             get
             {
-                if (cbEstado.SelectedItem.ToString() == "Activo") return 1;
-
-                return 2;
+                return (EstadoAlumno)cbEstado.SelectedValue;
             }
         }
 
         private void cbCarreras_SelectedValueChanged(object sender, EventArgs e)
         {
             var items = CursosRepository.ObtenerCursosPorIdCarrera(IdCarrera).OrderBy(c => c.Nombre).ToList();
-
+            items.Insert(0, new Models.Curso { Id = 0, Nombre = "(Todos los cursos)" });
             cbCursos.DataSource = items;
             cbCursos.DisplayMember = "Nombre";
             cbCursos.ValueMember = "Id";
-            cbCursos.SelectedItem = items.FirstOrDefault();
-            cbCursos.Text = "Todos los cursos";
+            cbCursos.SelectedIndex = 0;
         }
     }
 }

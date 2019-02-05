@@ -282,6 +282,7 @@
     <Compile Include="Models\GruposUsuario.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InformesModels\AlumnoCursante.cs" />
     <Compile Include="Models\ItemsMenu.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>

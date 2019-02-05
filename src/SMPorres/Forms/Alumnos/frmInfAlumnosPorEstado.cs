@@ -11,42 +11,25 @@ namespace SMPorres.Forms.Alumnos
 {
     public partial class frmInfAlumnosPorEstado : FormBase
     {
-        public frmInfAlumnosPorEstado()
+        public frmInfAlumnosPorEstado(int idCarrera, int idCurso, EstadoAlumno estado)
         {
             InitializeComponent();
-        }
 
-        public frmInfAlumnosPorEstado(int idCarrera, int estado)
-        {
-            InitializeComponent();
-            WindowState = FormWindowState.Maximized;
+            var tabla = CrearDataTable();
+            var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(idCarrera, idCurso, estado);
 
-            var dataT = CrearDatatable();
-            AlumnosRepository.cargarAlumnosPorCarreraEstado(dataT, idCarrera, estado);
+            foreach (var a in alumnos)
+            {
+                tabla.Rows.Add(a.Curso, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado());
+            }
 
             AlumnosPorEstado cr = new AlumnosPorEstado();
-            cr.Database.Tables["dtAlumnosPorEstado"].SetDataSource(dataT);
-
+            cr.Database.Tables["dtAlumnosPorEstado"].SetDataSource(tabla);
             crystalReportViewer1.ReportSource = null;
             crystalReportViewer1.ReportSource = cr;
         }
 
-        public frmInfAlumnosPorEstado(int idCarrera, int idCurso, int estado)
-        {
-            InitializeComponent();
-            WindowState = FormWindowState.Maximized;
-
-            var dataT = CrearDatatable();
-            AlumnosRepository.cargarAlumnosPorCarreraCursoEstado(dataT, idCarrera, idCurso, estado);
-
-            AlumnosPorEstado cr = new AlumnosPorEstado();
-            cr.Database.Tables["dtAlumnosPorEstado"].SetDataSource(dataT);
-
-            crystalReportViewer1.ReportSource = null;
-            crystalReportViewer1.ReportSource = cr;
-        }
-
-        private DataTable CrearDatatable()
+        private DataTable CrearDataTable()
         {
             DataTable dtAlumnosPorEstado = new DataTable();
             dtAlumnosPorEstado.Columns.Add("CarreraCurso", typeof(string));

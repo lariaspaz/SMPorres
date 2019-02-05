@@ -205,80 +205,40 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void cargarAlumnosPorCarreraCursoEstado(DataTable x, int idCarrera, int idCurso, int estado)
+        public static IEnumerable<Models.InformesModels.AlumnoCursante> ObtenerAlumnosPorEstado(int idCarrera, 
+            int idCurso, EstadoAlumno estado)
         {
-
-            using (var db = new Models.SMPorresEntities())
+            using (var db = new SMPorresEntities())
             {
                 var query = (
                     from ca in db.CursosAlumnos
-
-                    join cur in db.Cursos
-                    on ca.IdCurso equals cur.Id
-
-                    join car in db.Carreras
-                    on cur.IdCarrera equals car.Id
-
-                    join al in db.Alumnos
-                    on ca.IdAlumno equals al.Id
+                    join a in db.Alumnos on ca.IdAlumno equals a.Id
                     where
-                        car.Id == idCarrera &
-                        cur.Id == idCurso &
-                        al.Estado == estado
-                    select new
+                        ca.Curso.IdCarrera == idCarrera &
+                        ca.IdCurso == idCurso &
+                        a.Estado == (byte)estado
+                    select new Models.InformesModels.AlumnoCursante
                     {
-                        CursoImpresion = car.Nombre + " - " + cur.Nombre,
-                        AlumnoNombre = al.Nombre,
-                        AlumnoApellido = al.Apellido,
-                        AlumnoMail = al.EMail,
-                        AlumnoEstado = (al.Estado == 1 ? "Activo" : "Baja")
-                    }).ToList();
+                        IdCarrera = ca.Curso.IdCarrera,
+                        Carrera = ca.Curso.Carrera.Nombre,
+                        IdCurso = ca.IdCurso,
+                        Curso = ca.Curso.Nombre,
+                        Nombre = a.Nombre,
+                        Apellido = a.Apellido,
+                        EMail = a.EMail,
+                        Estado = a.Estado
+                    });
 
-                foreach (var item in query)
+                if (idCarrera > 0)
                 {
-                    x.Rows.Add(item.CursoImpresion, item.AlumnoNombre, item.AlumnoApellido, item.AlumnoMail, item.AlumnoEstado);
+                    query = query.Where(a => a.IdCarrera == idCarrera);
                 }
-
-            }
-
-        }
-
-        public static void cargarAlumnosPorCarreraEstado(DataTable x, int idCarrera, int estado)
-        {
-
-            using (var db = new Models.SMPorresEntities())
-            {
-                var query = (
-                    from ca in db.CursosAlumnos
-
-                    join cur in db.Cursos
-                    on ca.IdCurso equals cur.Id
-
-                    join car in db.Carreras
-                    on cur.IdCarrera equals car.Id
-
-                    join al in db.Alumnos
-                    on ca.IdAlumno equals al.Id
-                    where
-                    car.Id == idCarrera &
-                    al.Estado == estado
-                    select new
-                    {
-                        CursoImpresion = car.Nombre + " - " + cur.Nombre,
-                        AlumnoNombre = al.Nombre,
-                        AlumnoApellido = al.Apellido,
-                        AlumnoMail = al.EMail,
-                        AlumnoEstado = (al.Estado == 1 ? "Activo" : "Baja")
-                    }).ToList();
-
-                foreach (var item in query)
+                if (idCurso > 0)
                 {
-                    x.Rows.Add(item.CursoImpresion, item.AlumnoNombre, item.AlumnoApellido, item.AlumnoMail, item.AlumnoEstado);
+                    query = query.Where(a => a.IdCurso == idCurso);
                 }
-
+                return query.ToList();
             }
-
         }
-
     }
 }
