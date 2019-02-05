@@ -137,7 +137,6 @@
             this.bntPrint.Size = new System.Drawing.Size(23, 22);
             this.bntPrint.Text = "toolStripButton3";
             this.bntPrint.ToolTipText = "Eliminar (Ctrl + Delete)";
-            this.bntPrint.Click += new System.EventHandler(this.bntPrint_Click);
             // 
             // btnEliminar
             // 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SMPorres.Prints.Reporte {
+namespace SMPorres.Reports.Designs {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace SMPorres.Prints.Reporte {
         
         public override string FullResourceName {
             get {
-                return "SMPorres.Prints.Reporte.CuponDePago.rpt";
+                return "SMPorres.Reports.Designs.CuponDePago.rpt";
             }
             set {
                 // Do nothing

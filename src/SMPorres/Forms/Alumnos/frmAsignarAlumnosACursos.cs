@@ -29,7 +29,7 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                return ((Models.Carrera)cbCarreras.SelectedItem).Id;
+                return ((Carrera)cbCarreras.SelectedItem).Id;
             }
         }
 
@@ -37,17 +37,19 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                return ((Models.Curso)cbCursos.SelectedItem).Id;
+                if (cbCursos.SelectedItem == null) return 0;
+                return ((Curso)cbCursos.SelectedItem).Id;
             }
         }
 
         private void cbCarreras_SelectedValueChanged(object sender, EventArgs e)
         {
             var items = CursosRepository.ObtenerCursosPorIdCarrera(IdCarrera).OrderBy(c => c.Nombre).ToList();
-            cbCursos.DataSource = items;
             cbCursos.DisplayMember = "Nombre";
             cbCursos.ValueMember = "Id";
-            cbCursos.SelectedItem = items.FirstOrDefault();
+            cbCursos.DataSource = items;
+            //cbCursos.SelectedIndex = 1;
+            ConsultarAlumnos();
         }
 
 
@@ -59,17 +61,32 @@ namespace SMPorres.Forms.Alumnos
 
         private void ConsultarAlumnos()
         {
-            var asignados = CursosAlumnosRepository.ObtenerAlumnosPorCursoId(IdCurso).ToList();
-            lbAsignados.DataSource = asignados;
+            var asignados = from a in CursosAlumnosRepository.ObtenerAlumnosPorCursoId(IdCurso)
+                            select new Alumno {
+                                Id = a.Id,
+                                Nombre = String.Format("{0} {1} - {2} {3}", a.TipoDocumento.Descripcion, 
+                                            a.NroDocumento, a.Nombre, a.Apellido)
+                            };
+            lbAsignados.DataSource = asignados.ToList();
             lbAsignados.ValueMember = "Id";
             lbAsignados.DisplayMember = "Nombre";
-            var sinAsignar = AlumnosRepository.ObtenerAlumnos()
-                                .Where(a => a.Estado == (byte)EstadoAlumno.Activo)
-                                .Where(a => !asignados.Any(a2 => a2.Id == a.Id))
-                                .ToList();
-            lbSinAsignar.DataSource = sinAsignar;
+            btnQuitar.Enabled = asignados.Any();
+
+            var sinAsignar = from a in AlumnosRepository.ObtenerAlumnos()
+                              where a.Estado == (byte)EstadoAlumno.Activo &&
+                                    !asignados.Any(a2 => a2.Id == a.Id)
+                              select new Alumno
+                              {
+                                  Id = a.Id,
+                                  Nombre = String.Format("{0} {1} - {2} {3}", a.TipoDocumento.Descripcion,
+                                            a.NroDocumento, a.Nombre, a.Apellido)
+                              };
+
+            lbSinAsignar.DataSource = sinAsignar.ToList();
             lbSinAsignar.DisplayMember = "Nombre";
             lbSinAsignar.ValueMember = "Id";
+            btnAsignar.Enabled = sinAsignar.Any();
+
         }
 
         private void splitContainer1_Paint(object sender, PaintEventArgs e)

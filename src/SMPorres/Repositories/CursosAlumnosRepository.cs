@@ -25,6 +25,7 @@ namespace SMPorres.Repositories
                                         Nombre = a.Nombre,
                                         Apellido = a.Apellido,
                                         IdTipoDocumento = a.IdTipoDocumento,
+                                        TipoDocumento = a.TipoDocumento,
                                         NroDocumento = a.NroDocumento,
                                         FechaNacimiento = a.FechaNacimiento,
                                         EMail = a.EMail,

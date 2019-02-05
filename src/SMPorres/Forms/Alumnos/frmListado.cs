@@ -1,5 +1,4 @@
-﻿using SMPorres.Prints;
-using SMPorres.Repositories;
+﻿using SMPorres.Repositories;
 using System;
 using System.Data;
 using System.Linq;
@@ -161,11 +160,6 @@ namespace SMPorres.Forms.Alumnos
                     }
                 }
             }
-        }
-
-        private void bntPrint_Click(object sender, EventArgs e)
-        {
-            using (var f = new ListadoAlumnosXCurso()) f.ShowDialog();
         }
 
         private void dgvDatos_SelectionChanged(object sender, EventArgs e)

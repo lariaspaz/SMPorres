@@ -1,46 +1,123 @@
 ﻿using SMPorres.Lib.AppForms;
 using SMPorres.Models;
-using SMPorres.Prints.Reporte;
-using System;
-using System.Data;
-using System.Linq;
-using System.Windows.Forms;
+using SMPorres.Reports.Designs;
 using SMPorres.Repositories;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SMPorres.Forms.Alumnos
 {
     public partial class frmInfAlumnosPorEstado : FormBase
     {
-        public frmInfAlumnosPorEstado(int idCarrera, int idCurso, EstadoAlumno estado)
+        public frmInfAlumnosPorEstado()
         {
             InitializeComponent();
 
-            var tabla = CrearDataTable();
-            var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(idCarrera, idCurso, estado);
+            var qry = CarrerasRepository.ObtenerCarreras().OrderBy(c => c.Nombre).ToList();
+            qry.Insert(0, new Carrera { Id = 0, Nombre = "(Todas las carreras)" });
+            cbCarreras.DisplayMember = "Nombre";
+            cbCarreras.ValueMember = "Id";
+            cbCarreras.DataSource = qry;
 
+            var estados = new Dictionary<EstadoAlumno, string>();
+            estados.Add(EstadoAlumno.Activo, "Activo");
+            estados.Add(EstadoAlumno.Baja, "Baja");
+            cbEstado.DataSource = new BindingSource(estados, null);
+            cbEstado.ValueMember = "Key";
+            cbEstado.DisplayMember = "Value";
+            cbEstado.SelectedIndex = 0;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            using (var dt = ObtenerDatos())
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    MostrarReporte(dt);
+                }
+                else
+                {
+                    ShowError("No hay datos para mostrar.");
+                }
+            }
+        }
+
+        private static void MostrarReporte(DataTable dt)
+        {
+            using (var reporte = new AlumnosPorEstado())
+            {
+                reporte.Database.Tables["dtAlumnosPorEstado"].SetDataSource(dt);
+                using (var f = new frmReporte("Informe de Alumnos por Estado", reporte)) f.ShowDialog();
+            }
+        }
+
+        private int IdCarrera
+        {
+            get
+            {
+                return Convert.ToInt32(cbCarreras.SelectedValue);
+            }
+        }
+
+        private int IdCurso
+        {
+            get
+            {
+                return Convert.ToInt32(cbCursos.SelectedValue);
+            }
+        }
+
+        private EstadoAlumno Estado
+        {
+            get
+            {
+                return (EstadoAlumno)cbEstado.SelectedValue;
+            }
+        }
+
+        private void cbCarreras_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var items = CursosRepository.ObtenerCursosPorIdCarrera(IdCarrera).OrderBy(c => c.Nombre).ToList();
+            items.Insert(0, new Curso { Id = 0, Nombre = "(Todos los cursos)" });
+            cbCursos.DataSource = items;
+            cbCursos.DisplayMember = "Nombre";
+            cbCursos.ValueMember = "Id";
+            cbCursos.SelectedIndex = 0;
+        }
+
+        private DataTable ObtenerDatos()
+        {
+            var dt = CrearDataTable();
+            var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
             foreach (var a in alumnos)
             {
-                tabla.Rows.Add(a.Curso, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado());
+                dt.Rows.Add(String.Format("{0} de {1}", a.Curso, a.Carrera), a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado());
             }
-
-            AlumnosPorEstado cr = new AlumnosPorEstado();
-            cr.Database.Tables["dtAlumnosPorEstado"].SetDataSource(tabla);
-            crystalReportViewer1.ReportSource = null;
-            crystalReportViewer1.ReportSource = cr;
+            return dt;
         }
 
         private DataTable CrearDataTable()
         {
-            DataTable dtAlumnosPorEstado = new DataTable();
-            dtAlumnosPorEstado.Columns.Add("CarreraCurso", typeof(string));
-            dtAlumnosPorEstado.Columns.Add("Nombre", typeof(string));
-            dtAlumnosPorEstado.Columns.Add("Apellido", typeof(string));
-            dtAlumnosPorEstado.Columns.Add("Email", typeof(string));
-            dtAlumnosPorEstado.Columns.Add("Estado", typeof(string));
-
-            return dtAlumnosPorEstado;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("CarreraCurso", typeof(string));
+            dt.Columns.Add("Nombre", typeof(string));
+            dt.Columns.Add("Apellido", typeof(string));
+            dt.Columns.Add("Email", typeof(string));
+            dt.Columns.Add("Estado", typeof(string));
+            return dt;
         }
-
-        
     }
 }

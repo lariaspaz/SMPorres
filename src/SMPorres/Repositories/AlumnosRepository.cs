@@ -213,10 +213,7 @@ namespace SMPorres.Repositories
                 var query = (
                     from ca in db.CursosAlumnos
                     join a in db.Alumnos on ca.IdAlumno equals a.Id
-                    where
-                        ca.Curso.IdCarrera == idCarrera &
-                        ca.IdCurso == idCurso &
-                        a.Estado == (byte)estado
+                    where a.Estado == (byte)estado
                     select new Models.InformesModels.AlumnoCursante
                     {
                         IdCarrera = ca.Curso.IdCarrera,

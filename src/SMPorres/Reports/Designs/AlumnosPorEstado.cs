@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SMPorres.Prints.Reporte {
+namespace SMPorres.Reports.Designs {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace SMPorres.Prints.Reporte {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class AlumnosPorCurso : ReportClass {
+    public class AlumnosPorEstado : ReportClass {
         
-        public AlumnosPorCurso() {
+        public AlumnosPorEstado() {
         }
         
         public override string ResourceName {
             get {
-                return "AlumnosPorCurso.rpt";
+                return "AlumnosPorEstado.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SMPorres.Prints.Reporte {
         
         public override string FullResourceName {
             get {
-                return "SMPorres.Prints.Reporte.AlumnosPorCurso.rpt";
+                return "SMPorres.Reports.Designs.AlumnosPorEstado.rpt";
             }
             set {
                 // Do nothing
@@ -106,9 +106,9 @@ namespace SMPorres.Prints.Reporte {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedAlumnosPorCurso : Component, ICachedReport {
+    public class CachedAlumnosPorEstado : Component, ICachedReport {
         
-        public CachedAlumnosPorCurso() {
+        public CachedAlumnosPorEstado() {
         }
         
         [Browsable(false)]
@@ -145,7 +145,7 @@ namespace SMPorres.Prints.Reporte {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            AlumnosPorCurso rpt = new AlumnosPorCurso();
+            AlumnosPorEstado rpt = new AlumnosPorEstado();
             rpt.Site = this.Site;
             return rpt;
         }

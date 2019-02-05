@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace SMPorres.Prints.DataSet {
+namespace SMPorres.Reports.DataSet {
     
     
     /// <summary>

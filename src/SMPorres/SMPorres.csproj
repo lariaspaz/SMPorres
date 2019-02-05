@@ -94,12 +94,6 @@
     <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstado.Designer.cs">
       <DependentUpon>frmInfAlumnosPorEstado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstadoCondiciones.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstadoCondiciones.Designer.cs">
-      <DependentUpon>frmInfAlumnosPorEstadoCondiciones.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Alumnos\frmListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +117,12 @@
     </Compile>
     <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmReporte.Designer.cs">
+      <DependentUpon>frmReporte.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Localidades\frmListado.cs">
       <SubType>Form</SubType>
@@ -323,30 +323,18 @@
     <Compile Include="Models\UsuariosItemsMenu.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Prints\DataSet\dsImpresiones.Designer.cs">
+    <Compile Include="Reports\DataSet\dsImpresiones.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Prints\ListadoAlumnosXCurso.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Prints\ListadoAlumnosXCurso.Designer.cs">
-      <DependentUpon>ListadoAlumnosXCurso.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Prints\Reporte\AlumnosPorCurso.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AlumnosPorCurso.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Prints\Reporte\AlumnosPorEstado.cs">
+    <Compile Include="Reports\Designs\AlumnosPorEstado.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AlumnosPorEstado.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Prints\Reporte\CuponDePago.cs">
+    <Compile Include="Reports\Designs\CuponDePago.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CuponDePago.rpt</DependentUpon>
@@ -385,9 +373,6 @@
     <EmbeddedResource Include="Forms\Alumnos\frmInfAlumnosPorEstado.resx">
       <DependentUpon>frmInfAlumnosPorEstado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Alumnos\frmInfAlumnosPorEstadoCondiciones.resx">
-      <DependentUpon>frmInfAlumnosPorEstadoCondiciones.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Alumnos\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
@@ -399,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmReporte.resx">
+      <DependentUpon>frmReporte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Localidades\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
@@ -454,18 +442,11 @@
     <EmbeddedResource Include="Forms\Usuarios\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Prints\ListadoAlumnosXCurso.resx">
-      <DependentUpon>ListadoAlumnosXCurso.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Prints\Reporte\AlumnosPorCurso.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>AlumnosPorCurso.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Prints\Reporte\AlumnosPorEstado.rpt">
+    <EmbeddedResource Include="Reports\Designs\AlumnosPorEstado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AlumnosPorEstado.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Prints\Reporte\CuponDePago.rpt">
+    <EmbeddedResource Include="Reports\Designs\CuponDePago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CuponDePago.cs</LastGenOutput>
     </EmbeddedResource>
@@ -488,15 +469,15 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Prints\DataSet\dsImpresiones.xsc">
+    <None Include="Reports\DataSet\dsImpresiones.xsc">
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </None>
-    <None Include="Prints\DataSet\dsImpresiones.xsd">
+    <None Include="Reports\DataSet\dsImpresiones.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dsImpresiones.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Prints\DataSet\dsImpresiones.xss">
+    <None Include="Reports\DataSet\dsImpresiones.xss">
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">

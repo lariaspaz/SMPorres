@@ -1,6 +1,6 @@
-﻿namespace SMPorres.Prints
+﻿namespace SMPorres.Forms
 {
-    partial class ListadoAlumnosXCurso
+    partial class frmReporte
     {
         /// <summary>
         /// Required designer variable.
@@ -39,22 +39,26 @@
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(676, 372);
+            this.crystalReportViewer1.ShowCopyButton = false;
+            this.crystalReportViewer1.ShowGroupTreeButton = false;
+            this.crystalReportViewer1.ShowLogo = false;
+            this.crystalReportViewer1.ShowParameterPanelButton = false;
+            this.crystalReportViewer1.ShowRefreshButton = false;
+            this.crystalReportViewer1.Size = new System.Drawing.Size(484, 261);
             this.crystalReportViewer1.TabIndex = 0;
-            this.crystalReportViewer1.Load += new System.EventHandler(this.crystalReportViewer1_Load);
+            this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // ListadoAlumnosXCurso
+            // frmReporte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 372);
+            this.ClientSize = new System.Drawing.Size(484, 261);
             this.Controls.Add(this.crystalReportViewer1);
-            this.Name = "ListadoAlumnosXCurso";
-            this.Text = "Listado de alumnos por Curso";
+            this.Name = "frmReporte";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }
-
 
         #endregion
 
