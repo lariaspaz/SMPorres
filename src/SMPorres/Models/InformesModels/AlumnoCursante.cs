@@ -24,6 +24,8 @@ namespace SMPorres.Models.InformesModels
 
         public byte Estado { get; set; }
 
+        public string Documento { get; set; }
+
         public string LeyendaEstado()
         {
             switch ((EstadoAlumno)Estado)

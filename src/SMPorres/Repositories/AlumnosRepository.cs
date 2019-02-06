@@ -223,7 +223,8 @@ namespace SMPorres.Repositories
                         Nombre = a.Nombre,
                         Apellido = a.Apellido,
                         EMail = a.EMail,
-                        Estado = a.Estado
+                        Estado = a.Estado,
+                        Documento = a.TipoDocumento.Descripcion + " " + a.NroDocumento
                     });
 
                 if (idCarrera > 0)

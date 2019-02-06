@@ -16,6 +16,7 @@ namespace SMPorres.Forms.Alumnos
 {
     public partial class frmInfAlumnosPorEstado : FormBase
     {
+        static string _título = "Informe de Alumnos por Estado";
         public frmInfAlumnosPorEstado()
         {
             InitializeComponent();
@@ -60,7 +61,7 @@ namespace SMPorres.Forms.Alumnos
             using (var reporte = new AlumnosPorEstado())
             {
                 reporte.Database.Tables["dtAlumnosPorEstado"].SetDataSource(dt);
-                using (var f = new frmReporte("Informe de Alumnos por Estado", reporte)) f.ShowDialog();
+                using (var f = new frmReporte(_título, reporte)) f.ShowDialog();
             }
         }
 
@@ -102,9 +103,10 @@ namespace SMPorres.Forms.Alumnos
         {
             var dt = CrearDataTable();
             var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
+            string títuloInforme = _título + " de " + cbCursos.Text + " de " + cbCarreras.Text;
             foreach (var a in alumnos)
             {
-                dt.Rows.Add(String.Format("{0} de {1}", a.Curso, a.Carrera), a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado());
+                dt.Rows.Add(String.Format("{0} de {1}", a.Curso, a.Carrera), a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), títuloInforme, a.Documento);
             }
             return dt;
         }
@@ -117,6 +119,8 @@ namespace SMPorres.Forms.Alumnos
             dt.Columns.Add("Apellido", typeof(string));
             dt.Columns.Add("Email", typeof(string));
             dt.Columns.Add("Estado", typeof(string));
+            dt.Columns.Add("Título", typeof(string));
+            dt.Columns.Add("Documento", typeof(string));
             return dt;
         }
     }
