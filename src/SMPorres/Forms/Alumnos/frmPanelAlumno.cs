@@ -67,13 +67,13 @@ namespace SMPorres.Forms.Alumnos
             {
                 toolTip1.ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
                 dgvCursos.DataSource = null;
-                btnGenerarPlanPago.Enabled = false;
+                GenerarPlanDePagoToolStripMenuItem.Enabled = false;
             }
             else
             {
                 dgvCursos.SetDataSource(cursos);
                 ConsultarPlanesPago();
-                btnGenerarPlanPago.Enabled = true;
+                GenerarPlanDePagoToolStripMenuItem.Enabled = true;
             }
         }
 
@@ -93,9 +93,9 @@ namespace SMPorres.Forms.Alumnos
         private void frmPanelAlumno_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) btnSalir.PerformClick();
-            else if (e.Control && e.KeyCode == Keys.N) btnNuevo.PerformClick();
-            else if (e.Control && e.KeyCode == Keys.F4) btnEditar.PerformClick();
-            else if (e.Control && e.KeyCode == Keys.Delete) btnEliminar.PerformClick();
+            //else if (e.Control && e.KeyCode == Keys.N) btnNuevo.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.F4) btnEditarPlanPago.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.Delete) btnAnularPlanPago.PerformClick();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -150,27 +150,6 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
-        private void btnGenerarPlanPago_Click(object sender, EventArgs e)
-        {
-            string curso = CursoSeleccionado.Nombre + " de " + CarreraSeleccionada;
-            using (var f = new PlanesPago.frmEdición(txtNombre.Text, curso))
-            {
-                if (f.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca);
-                        ConsultarPlanesPago();
-                        dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowError("Error al intentar grabar los datos: \n" + ex.Message);
-                    }
-                }
-            }
-        }
-
         private void dgvPlanesPago_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             //CantidadCuotas = pp.CantidadCuotas,
@@ -207,6 +186,32 @@ namespace SMPorres.Forms.Alumnos
             dgvPlanesPago.Columns[4].HeaderText = "Estado";
             dgvPlanesPago.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvPlanesPago.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void GenerarPlanDePagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string curso = CursoSeleccionado.Nombre + " de " + CarreraSeleccionada;
+            using (var f = new PlanesPago.frmEdición(txtNombre.Text, curso))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca);
+                        ConsultarPlanesPago();
+                        dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void imprimirMatrículaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

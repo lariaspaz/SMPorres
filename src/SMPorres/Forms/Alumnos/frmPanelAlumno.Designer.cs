@@ -38,9 +38,8 @@
             this.btnConsultar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnEditarPlanPago = new System.Windows.Forms.ToolStripButton();
+            this.btnAnularPlanPago = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -52,10 +51,12 @@
             this.dgvPlanesPago = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvPagos = new CustomLibrary.ComponentModel.CustomDataGridView();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnGenerarPlanPago = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.GenerarPlanDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CobrarCuotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imprimirMatrículaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -67,7 +68,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).BeginInit();
-            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -154,9 +154,10 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNuevo,
-            this.btnEditar,
-            this.btnEliminar,
+            this.toolStripDropDownButton2,
+            this.btnEditarPlanPago,
+            this.btnAnularPlanPago,
+            this.toolStripDropDownButton1,
             this.toolStripSeparator1,
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -165,35 +166,25 @@
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnNuevo
+            // btnEditarPlanPago
             // 
-            this.btnNuevo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNuevo.Image = global::SMPorres.Properties.Resources.add;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(23, 22);
-            this.btnNuevo.Text = "toolStripButton1";
-            this.btnNuevo.ToolTipText = "Nuevo (Ctrl + N)";
+            this.btnEditarPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEditarPlanPago.Image = global::SMPorres.Properties.Resources.page_white_edit;
+            this.btnEditarPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditarPlanPago.Name = "btnEditarPlanPago";
+            this.btnEditarPlanPago.Size = new System.Drawing.Size(23, 22);
+            this.btnEditarPlanPago.Text = "toolStripButton2";
+            this.btnEditarPlanPago.ToolTipText = "Editar plan de pago (Ctrl + F4)";
             // 
-            // btnEditar
+            // btnAnularPlanPago
             // 
-            this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEditar.Image = global::SMPorres.Properties.Resources.page_white_edit;
-            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(23, 22);
-            this.btnEditar.Text = "toolStripButton2";
-            this.btnEditar.ToolTipText = "Editar (Ctrl + F4)";
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEliminar.Image = global::SMPorres.Properties.Resources.cross;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(23, 22);
-            this.btnEliminar.Text = "toolStripButton3";
-            this.btnEliminar.ToolTipText = "Eliminar (Ctrl + Delete)";
+            this.btnAnularPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAnularPlanPago.Image = global::SMPorres.Properties.Resources.cross;
+            this.btnAnularPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAnularPlanPago.Name = "btnAnularPlanPago";
+            this.btnAnularPlanPago.Size = new System.Drawing.Size(23, 22);
+            this.btnAnularPlanPago.Text = "toolStripButton3";
+            this.btnAnularPlanPago.ToolTipText = "Anular plan de pago (Ctrl + Delete)";
             // 
             // toolStripSeparator1
             // 
@@ -250,7 +241,6 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.tabControl1);
-            this.panel3.Controls.Add(this.toolStrip2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 164);
             this.panel3.Name = "panel3";
@@ -262,10 +252,10 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(719, 168);
+            this.tabControl1.Size = new System.Drawing.Size(719, 193);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -274,7 +264,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(711, 142);
+            this.tabPage1.Size = new System.Drawing.Size(711, 167);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Planes de pago";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -294,7 +284,7 @@
             this.dgvPlanesPago.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvPlanesPago.ReadOnly = true;
             this.dgvPlanesPago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPlanesPago.Size = new System.Drawing.Size(705, 136);
+            this.dgvPlanesPago.Size = new System.Drawing.Size(705, 161);
             this.dgvPlanesPago.TabIndex = 1;
             this.dgvPlanesPago.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPlanesPago_DataBindingComplete);
             // 
@@ -327,30 +317,48 @@
             this.dgvPagos.Size = new System.Drawing.Size(705, 136);
             this.dgvPagos.TabIndex = 1;
             // 
-            // toolStrip2
+            // toolStripDropDownButton1
             // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnGenerarPlanPago,
-            this.toolStripSeparator2});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(719, 25);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.imprimirMatrículaToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::SMPorres.Properties.Resources.printer;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
             // 
-            // btnGenerarPlanPago
+            // toolStripDropDownButton2
             // 
-            this.btnGenerarPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnGenerarPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGenerarPlanPago.Name = "btnGenerarPlanPago";
-            this.btnGenerarPlanPago.Size = new System.Drawing.Size(124, 22);
-            this.btnGenerarPlanPago.Text = "Generar Plan de Pago";
-            this.btnGenerarPlanPago.Click += new System.EventHandler(this.btnGenerarPlanPago_Click);
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GenerarPlanDePagoToolStripMenuItem,
+            this.CobrarCuotaToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = global::SMPorres.Properties.Resources.add;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton2.Text = "toolStripDropDownButton2";
             // 
-            // toolStripSeparator2
+            // GenerarPlanDePagoToolStripMenuItem
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.GenerarPlanDePagoToolStripMenuItem.Name = "GenerarPlanDePagoToolStripMenuItem";
+            this.GenerarPlanDePagoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.GenerarPlanDePagoToolStripMenuItem.Text = "Generar plan de pago";
+            this.GenerarPlanDePagoToolStripMenuItem.Click += new System.EventHandler(this.GenerarPlanDePagoToolStripMenuItem_Click);
+            // 
+            // CobrarCuotaToolStripMenuItem
+            // 
+            this.CobrarCuotaToolStripMenuItem.Name = "CobrarCuotaToolStripMenuItem";
+            this.CobrarCuotaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.CobrarCuotaToolStripMenuItem.Text = "Cobrar cuota";
+            // 
+            // imprimirMatrículaToolStripMenuItem
+            // 
+            this.imprimirMatrículaToolStripMenuItem.Name = "imprimirMatrículaToolStripMenuItem";
+            this.imprimirMatrículaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.imprimirMatrículaToolStripMenuItem.Text = "Imprimir matrícula";
+            this.imprimirMatrículaToolStripMenuItem.Click += new System.EventHandler(this.imprimirMatrículaToolStripMenuItem_Click);
             // 
             // frmPanelAlumno
             // 
@@ -373,14 +381,11 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).EndInit();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,9 +401,8 @@
         private CustomLibrary.ComponentModel.NumericTextBox txtNroDocumento;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnNuevo;
-        private System.Windows.Forms.ToolStripButton btnEditar;
-        private System.Windows.Forms.ToolStripButton btnEliminar;
+        private System.Windows.Forms.ToolStripButton btnEditarPlanPago;
+        private System.Windows.Forms.ToolStripButton btnAnularPlanPago;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.Panel panel2;
@@ -410,9 +414,11 @@
         private System.Windows.Forms.TabPage tabPage2;
         private CustomLibrary.ComponentModel.CustomDataGridView dgvPlanesPago;
         private CustomLibrary.ComponentModel.CustomDataGridView dgvPagos;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton btnGenerarPlanPago;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem GenerarPlanDePagoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CobrarCuotaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imprimirMatrículaToolStripMenuItem;
     }
 }
