@@ -8,8 +8,8 @@
   <Shapes>
     <Shape ID="DesignTable:dtAlumnosXCurso" ZOrder="4" X="148" Y="81" Height="124" Width="171" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="120" />
     <Shape ID="DesignTable:dtImpresion" ZOrder="3" X="149" Y="218" Height="105" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="101" />
-    <Shape ID="DesignTable:dtAlumno" ZOrder="2" X="372" Y="79" Height="105" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="101" />
-    <Shape ID="DesignTable:dtDetalle" ZOrder="1" X="374" Y="199" Height="105" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="101" />
+    <Shape ID="DesignTable:CupónPago" ZOrder="2" X="372" Y="79" Height="238" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="234" />
+    <Shape ID="DesignTable:dtDetalle" ZOrder="1" X="334" Y="363" Height="105" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="101" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

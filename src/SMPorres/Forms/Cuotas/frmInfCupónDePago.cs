@@ -16,16 +16,19 @@ namespace SMPorres.Forms.Alumnos
 {
     public partial class frmInfCupónDePago : FormBase
     {
+        private int _idAlumno;
+
         private enum TipoImpresión
         {
             Matrícula,
             Cuota
         }
 
-        public frmInfCupónDePago()
+        public frmInfCupónDePago(int idAlumno)
         {
             InitializeComponent();
 
+            _idAlumno = idAlumno;
             var tipos = new Dictionary<TipoImpresión, string>();
             tipos.Add(TipoImpresión.Cuota, "Cuota");
             tipos.Add(TipoImpresión.Matrícula, "Matrícula");

@@ -28,7 +28,7 @@ namespace SMPorres.Reports.DataSet {
         
         private dtImpresionDataTable tabledtImpresion;
         
-        private dtAlumnoDataTable tabledtAlumno;
+        private CupónPagoDataTable tableCupónPago;
         
         private dtDetalleDataTable tabledtDetalle;
         
@@ -66,8 +66,8 @@ namespace SMPorres.Reports.DataSet {
                 if ((ds.Tables["dtImpresion"] != null)) {
                     base.Tables.Add(new dtImpresionDataTable(ds.Tables["dtImpresion"]));
                 }
-                if ((ds.Tables["dtAlumno"] != null)) {
-                    base.Tables.Add(new dtAlumnoDataTable(ds.Tables["dtAlumno"]));
+                if ((ds.Tables["CupónPago"] != null)) {
+                    base.Tables.Add(new CupónPagoDataTable(ds.Tables["CupónPago"]));
                 }
                 if ((ds.Tables["dtDetalle"] != null)) {
                     base.Tables.Add(new dtDetalleDataTable(ds.Tables["dtDetalle"]));
@@ -114,9 +114,9 @@ namespace SMPorres.Reports.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtAlumnoDataTable dtAlumno {
+        public CupónPagoDataTable CupónPago {
             get {
-                return this.tabledtAlumno;
+                return this.tableCupónPago;
             }
         }
         
@@ -203,8 +203,8 @@ namespace SMPorres.Reports.DataSet {
                 if ((ds.Tables["dtImpresion"] != null)) {
                     base.Tables.Add(new dtImpresionDataTable(ds.Tables["dtImpresion"]));
                 }
-                if ((ds.Tables["dtAlumno"] != null)) {
-                    base.Tables.Add(new dtAlumnoDataTable(ds.Tables["dtAlumno"]));
+                if ((ds.Tables["CupónPago"] != null)) {
+                    base.Tables.Add(new CupónPagoDataTable(ds.Tables["CupónPago"]));
                 }
                 if ((ds.Tables["dtDetalle"] != null)) {
                     base.Tables.Add(new dtDetalleDataTable(ds.Tables["dtDetalle"]));
@@ -254,10 +254,10 @@ namespace SMPorres.Reports.DataSet {
                     this.tabledtImpresion.InitVars();
                 }
             }
-            this.tabledtAlumno = ((dtAlumnoDataTable)(base.Tables["dtAlumno"]));
+            this.tableCupónPago = ((CupónPagoDataTable)(base.Tables["CupónPago"]));
             if ((initTable == true)) {
-                if ((this.tabledtAlumno != null)) {
-                    this.tabledtAlumno.InitVars();
+                if ((this.tableCupónPago != null)) {
+                    this.tableCupónPago.InitVars();
                 }
             }
             this.tabledtDetalle = ((dtDetalleDataTable)(base.Tables["dtDetalle"]));
@@ -280,8 +280,8 @@ namespace SMPorres.Reports.DataSet {
             base.Tables.Add(this.tabledtAlumnosXCurso);
             this.tabledtImpresion = new dtImpresionDataTable();
             base.Tables.Add(this.tabledtImpresion);
-            this.tabledtAlumno = new dtAlumnoDataTable();
-            base.Tables.Add(this.tabledtAlumno);
+            this.tableCupónPago = new CupónPagoDataTable();
+            base.Tables.Add(this.tableCupónPago);
             this.tabledtDetalle = new dtDetalleDataTable();
             base.Tables.Add(this.tabledtDetalle);
         }
@@ -300,7 +300,7 @@ namespace SMPorres.Reports.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializedtAlumno() {
+        private bool ShouldSerializeCupónPago() {
             return false;
         }
         
@@ -372,7 +372,7 @@ namespace SMPorres.Reports.DataSet {
         public delegate void dtImpresionRowChangeEventHandler(object sender, dtImpresionRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void dtAlumnoRowChangeEventHandler(object sender, dtAlumnoRowChangeEvent e);
+        public delegate void CupónPagoRowChangeEventHandler(object sender, CupónPagoRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void dtDetalleRowChangeEventHandler(object sender, dtDetalleRowChangeEvent e);
@@ -974,20 +974,34 @@ namespace SMPorres.Reports.DataSet {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtAlumnoDataTable : global::System.Data.TypedTableBase<dtAlumnoRow> {
+        public partial class CupónPagoDataTable : global::System.Data.TypedTableBase<CupónPagoRow> {
+            
+            private global::System.Data.DataColumn columnIdPago;
+            
+            private global::System.Data.DataColumn columnFechaEmisión;
+            
+            private global::System.Data.DataColumn columnFechaVencimiento;
             
             private global::System.Data.DataColumn columnNombre;
             
-            private global::System.Data.DataColumn columnDomicilio;
+            private global::System.Data.DataColumn columnTipoDocumento;
             
-            private global::System.Data.DataColumn columnLocalidad;
+            private global::System.Data.DataColumn columnDocumento;
             
-            private global::System.Data.DataColumn columncondVenta;
+            private global::System.Data.DataColumn columnCarrera;
+            
+            private global::System.Data.DataColumn columnCurso;
+            
+            private global::System.Data.DataColumn columnConcepto;
+            
+            private global::System.Data.DataColumn columnImporte;
+            
+            private global::System.Data.DataColumn columnCódigoBarra;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtAlumnoDataTable() {
-                this.TableName = "dtAlumno";
+            public CupónPagoDataTable() {
+                this.TableName = "CupónPago";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -995,7 +1009,7 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal dtAlumnoDataTable(global::System.Data.DataTable table) {
+            internal CupónPagoDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -1012,9 +1026,33 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected dtAlumnoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected CupónPagoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdPagoColumn {
+                get {
+                    return this.columnIdPago;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FechaEmisiónColumn {
+                get {
+                    return this.columnFechaEmisión;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FechaVencimientoColumn {
+                get {
+                    return this.columnFechaVencimiento;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1027,25 +1065,57 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DomicilioColumn {
+            public global::System.Data.DataColumn TipoDocumentoColumn {
                 get {
-                    return this.columnDomicilio;
+                    return this.columnTipoDocumento;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn LocalidadColumn {
+            public global::System.Data.DataColumn DocumentoColumn {
                 get {
-                    return this.columnLocalidad;
+                    return this.columnDocumento;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn condVentaColumn {
+            public global::System.Data.DataColumn CarreraColumn {
                 get {
-                    return this.columncondVenta;
+                    return this.columnCarrera;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CursoColumn {
+                get {
+                    return this.columnCurso;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ConceptoColumn {
+                get {
+                    return this.columnConcepto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImporteColumn {
+                get {
+                    return this.columnImporte;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CódigoBarraColumn {
+                get {
+                    return this.columnCódigoBarra;
                 }
             }
             
@@ -1060,48 +1130,55 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtAlumnoRow this[int index] {
+            public CupónPagoRow this[int index] {
                 get {
-                    return ((dtAlumnoRow)(this.Rows[index]));
+                    return ((CupónPagoRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event dtAlumnoRowChangeEventHandler dtAlumnoRowChanging;
+            public event CupónPagoRowChangeEventHandler CupónPagoRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event dtAlumnoRowChangeEventHandler dtAlumnoRowChanged;
+            public event CupónPagoRowChangeEventHandler CupónPagoRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event dtAlumnoRowChangeEventHandler dtAlumnoRowDeleting;
+            public event CupónPagoRowChangeEventHandler CupónPagoRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event dtAlumnoRowChangeEventHandler dtAlumnoRowDeleted;
+            public event CupónPagoRowChangeEventHandler CupónPagoRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AdddtAlumnoRow(dtAlumnoRow row) {
+            public void AddCupónPagoRow(CupónPagoRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtAlumnoRow AdddtAlumnoRow(string Nombre, string Domicilio, string Localidad, string condVenta) {
-                dtAlumnoRow rowdtAlumnoRow = ((dtAlumnoRow)(this.NewRow()));
+            public CupónPagoRow AddCupónPagoRow(string IdPago, string FechaEmisión, string FechaVencimiento, string Nombre, string TipoDocumento, string Documento, string Carrera, string Curso, string Concepto, string Importe, string CódigoBarra) {
+                CupónPagoRow rowCupónPagoRow = ((CupónPagoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        IdPago,
+                        FechaEmisión,
+                        FechaVencimiento,
                         Nombre,
-                        Domicilio,
-                        Localidad,
-                        condVenta};
-                rowdtAlumnoRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtAlumnoRow);
-                return rowdtAlumnoRow;
+                        TipoDocumento,
+                        Documento,
+                        Carrera,
+                        Curso,
+                        Concepto,
+                        Importe,
+                        CódigoBarra};
+                rowCupónPagoRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCupónPagoRow);
+                return rowCupónPagoRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtAlumnoDataTable cln = ((dtAlumnoDataTable)(base.Clone()));
+                CupónPagoDataTable cln = ((CupónPagoDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -1109,55 +1186,76 @@ namespace SMPorres.Reports.DataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtAlumnoDataTable();
+                return new CupónPagoDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
+                this.columnIdPago = base.Columns["IdPago"];
+                this.columnFechaEmisión = base.Columns["FechaEmisión"];
+                this.columnFechaVencimiento = base.Columns["FechaVencimiento"];
                 this.columnNombre = base.Columns["Nombre"];
-                this.columnDomicilio = base.Columns["Domicilio"];
-                this.columnLocalidad = base.Columns["Localidad"];
-                this.columncondVenta = base.Columns["condVenta"];
+                this.columnTipoDocumento = base.Columns["TipoDocumento"];
+                this.columnDocumento = base.Columns["Documento"];
+                this.columnCarrera = base.Columns["Carrera"];
+                this.columnCurso = base.Columns["Curso"];
+                this.columnConcepto = base.Columns["Concepto"];
+                this.columnImporte = base.Columns["Importe"];
+                this.columnCódigoBarra = base.Columns["CódigoBarra"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
+                this.columnIdPago = new global::System.Data.DataColumn("IdPago", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdPago);
+                this.columnFechaEmisión = new global::System.Data.DataColumn("FechaEmisión", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFechaEmisión);
+                this.columnFechaVencimiento = new global::System.Data.DataColumn("FechaVencimiento", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFechaVencimiento);
                 this.columnNombre = new global::System.Data.DataColumn("Nombre", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNombre);
-                this.columnDomicilio = new global::System.Data.DataColumn("Domicilio", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDomicilio);
-                this.columnLocalidad = new global::System.Data.DataColumn("Localidad", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLocalidad);
-                this.columncondVenta = new global::System.Data.DataColumn("condVenta", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncondVenta);
+                this.columnTipoDocumento = new global::System.Data.DataColumn("TipoDocumento", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTipoDocumento);
+                this.columnDocumento = new global::System.Data.DataColumn("Documento", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDocumento);
+                this.columnCarrera = new global::System.Data.DataColumn("Carrera", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCarrera);
+                this.columnCurso = new global::System.Data.DataColumn("Curso", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurso);
+                this.columnConcepto = new global::System.Data.DataColumn("Concepto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnConcepto);
+                this.columnImporte = new global::System.Data.DataColumn("Importe", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImporte);
+                this.columnCódigoBarra = new global::System.Data.DataColumn("CódigoBarra", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCódigoBarra);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtAlumnoRow NewdtAlumnoRow() {
-                return ((dtAlumnoRow)(this.NewRow()));
+            public CupónPagoRow NewCupónPagoRow() {
+                return ((CupónPagoRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtAlumnoRow(builder);
+                return new CupónPagoRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtAlumnoRow);
+                return typeof(CupónPagoRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtAlumnoRowChanged != null)) {
-                    this.dtAlumnoRowChanged(this, new dtAlumnoRowChangeEvent(((dtAlumnoRow)(e.Row)), e.Action));
+                if ((this.CupónPagoRowChanged != null)) {
+                    this.CupónPagoRowChanged(this, new CupónPagoRowChangeEvent(((CupónPagoRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1165,8 +1263,8 @@ namespace SMPorres.Reports.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtAlumnoRowChanging != null)) {
-                    this.dtAlumnoRowChanging(this, new dtAlumnoRowChangeEvent(((dtAlumnoRow)(e.Row)), e.Action));
+                if ((this.CupónPagoRowChanging != null)) {
+                    this.CupónPagoRowChanging(this, new CupónPagoRowChangeEvent(((CupónPagoRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1174,8 +1272,8 @@ namespace SMPorres.Reports.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtAlumnoRowDeleted != null)) {
-                    this.dtAlumnoRowDeleted(this, new dtAlumnoRowChangeEvent(((dtAlumnoRow)(e.Row)), e.Action));
+                if ((this.CupónPagoRowDeleted != null)) {
+                    this.CupónPagoRowDeleted(this, new CupónPagoRowChangeEvent(((CupónPagoRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1183,14 +1281,14 @@ namespace SMPorres.Reports.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtAlumnoRowDeleting != null)) {
-                    this.dtAlumnoRowDeleting(this, new dtAlumnoRowChangeEvent(((dtAlumnoRow)(e.Row)), e.Action));
+                if ((this.CupónPagoRowDeleting != null)) {
+                    this.CupónPagoRowDeleting(this, new CupónPagoRowChangeEvent(((CupónPagoRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemovedtAlumnoRow(dtAlumnoRow row) {
+            public void RemoveCupónPagoRow(CupónPagoRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -1217,7 +1315,7 @@ namespace SMPorres.Reports.DataSet {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtAlumnoDataTable";
+                attribute2.FixedValue = "CupónPagoDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1832,15 +1930,63 @@ namespace SMPorres.Reports.DataSet {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtAlumnoRow : global::System.Data.DataRow {
+        public partial class CupónPagoRow : global::System.Data.DataRow {
             
-            private dtAlumnoDataTable tabledtAlumno;
+            private CupónPagoDataTable tableCupónPago;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal dtAlumnoRow(global::System.Data.DataRowBuilder rb) : 
+            internal CupónPagoRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtAlumno = ((dtAlumnoDataTable)(this.Table));
+                this.tableCupónPago = ((CupónPagoDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string IdPago {
+                get {
+                    try {
+                        return ((string)(this[this.tableCupónPago.IdPagoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'IdPago\' de la tabla \'CupónPago\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCupónPago.IdPagoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FechaEmisión {
+                get {
+                    try {
+                        return ((string)(this[this.tableCupónPago.FechaEmisiónColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'FechaEmisión\' de la tabla \'CupónPago\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCupónPago.FechaEmisiónColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FechaVencimiento {
+                get {
+                    try {
+                        return ((string)(this[this.tableCupónPago.FechaVencimientoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'FechaVencimiento\' de la tabla \'CupónPago\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCupónPago.FechaVencimientoColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1848,111 +1994,259 @@ namespace SMPorres.Reports.DataSet {
             public string Nombre {
                 get {
                     try {
-                        return ((string)(this[this.tabledtAlumno.NombreColumn]));
+                        return ((string)(this[this.tableCupónPago.NombreColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Nombre\' de la tabla \'dtAlumno\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Nombre\' de la tabla \'CupónPago\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtAlumno.NombreColumn] = value;
+                    this[this.tableCupónPago.NombreColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Domicilio {
+            public string TipoDocumento {
                 get {
                     try {
-                        return ((string)(this[this.tabledtAlumno.DomicilioColumn]));
+                        return ((string)(this[this.tableCupónPago.TipoDocumentoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Domicilio\' de la tabla \'dtAlumno\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TipoDocumento\' de la tabla \'CupónPago\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtAlumno.DomicilioColumn] = value;
+                    this[this.tableCupónPago.TipoDocumentoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Localidad {
+            public string Documento {
                 get {
                     try {
-                        return ((string)(this[this.tabledtAlumno.LocalidadColumn]));
+                        return ((string)(this[this.tableCupónPago.DocumentoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Localidad\' de la tabla \'dtAlumno\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Documento\' de la tabla \'CupónPago\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtAlumno.LocalidadColumn] = value;
+                    this[this.tableCupónPago.DocumentoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string condVenta {
+            public string Carrera {
                 get {
                     try {
-                        return ((string)(this[this.tabledtAlumno.condVentaColumn]));
+                        return ((string)(this[this.tableCupónPago.CarreraColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'condVenta\' de la tabla \'dtAlumno\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Carrera\' de la tabla \'CupónPago\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtAlumno.condVentaColumn] = value;
+                    this[this.tableCupónPago.CarreraColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Curso {
+                get {
+                    try {
+                        return ((string)(this[this.tableCupónPago.CursoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Curso\' de la tabla \'CupónPago\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCupónPago.CursoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Concepto {
+                get {
+                    try {
+                        return ((string)(this[this.tableCupónPago.ConceptoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Concepto\' de la tabla \'CupónPago\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCupónPago.ConceptoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Importe {
+                get {
+                    try {
+                        return ((string)(this[this.tableCupónPago.ImporteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Importe\' de la tabla \'CupónPago\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCupónPago.ImporteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CódigoBarra {
+                get {
+                    try {
+                        return ((string)(this[this.tableCupónPago.CódigoBarraColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CódigoBarra\' de la tabla \'CupónPago\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCupónPago.CódigoBarraColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIdPagoNull() {
+                return this.IsNull(this.tableCupónPago.IdPagoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIdPagoNull() {
+                this[this.tableCupónPago.IdPagoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFechaEmisiónNull() {
+                return this.IsNull(this.tableCupónPago.FechaEmisiónColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFechaEmisiónNull() {
+                this[this.tableCupónPago.FechaEmisiónColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFechaVencimientoNull() {
+                return this.IsNull(this.tableCupónPago.FechaVencimientoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFechaVencimientoNull() {
+                this[this.tableCupónPago.FechaVencimientoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNombreNull() {
-                return this.IsNull(this.tabledtAlumno.NombreColumn);
+                return this.IsNull(this.tableCupónPago.NombreColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNombreNull() {
-                this[this.tabledtAlumno.NombreColumn] = global::System.Convert.DBNull;
+                this[this.tableCupónPago.NombreColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDomicilioNull() {
-                return this.IsNull(this.tabledtAlumno.DomicilioColumn);
+            public bool IsTipoDocumentoNull() {
+                return this.IsNull(this.tableCupónPago.TipoDocumentoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDomicilioNull() {
-                this[this.tabledtAlumno.DomicilioColumn] = global::System.Convert.DBNull;
+            public void SetTipoDocumentoNull() {
+                this[this.tableCupónPago.TipoDocumentoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsLocalidadNull() {
-                return this.IsNull(this.tabledtAlumno.LocalidadColumn);
+            public bool IsDocumentoNull() {
+                return this.IsNull(this.tableCupónPago.DocumentoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetLocalidadNull() {
-                this[this.tabledtAlumno.LocalidadColumn] = global::System.Convert.DBNull;
+            public void SetDocumentoNull() {
+                this[this.tableCupónPago.DocumentoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IscondVentaNull() {
-                return this.IsNull(this.tabledtAlumno.condVentaColumn);
+            public bool IsCarreraNull() {
+                return this.IsNull(this.tableCupónPago.CarreraColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetcondVentaNull() {
-                this[this.tabledtAlumno.condVentaColumn] = global::System.Convert.DBNull;
+            public void SetCarreraNull() {
+                this[this.tableCupónPago.CarreraColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCursoNull() {
+                return this.IsNull(this.tableCupónPago.CursoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCursoNull() {
+                this[this.tableCupónPago.CursoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsConceptoNull() {
+                return this.IsNull(this.tableCupónPago.ConceptoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetConceptoNull() {
+                this[this.tableCupónPago.ConceptoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImporteNull() {
+                return this.IsNull(this.tableCupónPago.ImporteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImporteNull() {
+                this[this.tableCupónPago.ImporteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCódigoBarraNull() {
+                return this.IsNull(this.tableCupónPago.CódigoBarraColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCódigoBarraNull() {
+                this[this.tableCupónPago.CódigoBarraColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2155,22 +2449,22 @@ namespace SMPorres.Reports.DataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class dtAlumnoRowChangeEvent : global::System.EventArgs {
+        public class CupónPagoRowChangeEvent : global::System.EventArgs {
             
-            private dtAlumnoRow eventRow;
+            private CupónPagoRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtAlumnoRowChangeEvent(dtAlumnoRow row, global::System.Data.DataRowAction action) {
+            public CupónPagoRowChangeEvent(CupónPagoRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtAlumnoRow Row {
+            public CupónPagoRow Row {
                 get {
                     return this.eventRow;
                 }

@@ -329,6 +329,9 @@
     <Compile Include="Models\UsuariosItemsMenu.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DataSet\dsImpresiones.cs">
+      <DependentUpon>dsImpresiones.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\DataSet\dsImpresiones.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
