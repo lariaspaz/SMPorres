@@ -43,7 +43,7 @@ namespace SMPorres.Forms.Carreras
         {
             get
             {
-                return (short)txtImporte.IntValue;
+                return (short)txtDuración.IntValue;
             }
         }
 

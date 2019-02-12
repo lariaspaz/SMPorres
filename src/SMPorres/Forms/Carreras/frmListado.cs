@@ -24,6 +24,7 @@ namespace SMPorres.Forms.Carreras
                                        c.Id,
                                        c.Nombre,
                                        Duracion = String.Format("{0} años", c.Duracion),
+                                       c.Importe,
                                        DescripciónEstado = (c.Estado == 1 ? "Habilitada" : "Baja"),
                                        c.Estado
                                    });
@@ -31,12 +32,6 @@ namespace SMPorres.Forms.Carreras
 
         private void dgvDatos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            foreach (DataGridViewColumn c in dgvDatos.Columns)
-            {
-                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            }
-
             dgvDatos.Columns[0].HeaderText = "Código";
             dgvDatos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -50,11 +45,22 @@ namespace SMPorres.Forms.Carreras
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[2].DefaultCellStyle.Format = "d";
 
-            dgvDatos.Columns[3].HeaderText = "Estado";
-            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[3].HeaderText = "Importe";
+            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[3].DefaultCellStyle.Format = "C2";
 
-            dgvDatos.Columns[4].Visible = false;
+            dgvDatos.Columns[4].HeaderText = "Estado";
+            dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            dgvDatos.Columns[5].Visible = false;
+
+            foreach (DataGridViewColumn c in dgvDatos.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)
