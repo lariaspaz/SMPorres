@@ -46,6 +46,7 @@ namespace SMPorres.Repositories
 
                 var curso = CursosRepository.ObtenerCursoPorId(idCurso);
                 var id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1;
+                var trx = db.Database.BeginTransaction();
                 var plan = new PlanPago
                 {
                     Id = id,
@@ -61,7 +62,24 @@ namespace SMPorres.Repositories
                     IdUsuario = Session.CurrentUser.Id
                 };
                 db.PlanesPago.Add(plan);
-                db.SaveChanges();
+                for (short i = 1; i <= Configuration.MaxCuotas; i++)
+                {
+                    var p = new Pago();
+                    p.IdPlanPago = id;
+                    p.NroCuota = i;
+                    p.ImporteCuota = curso.ImporteCuota;
+                    db.Pagos.Add(p);
+                }
+                try
+                {
+                    db.SaveChanges();
+                    trx.Commit();
+                }
+                catch (Exception)
+                {
+                    trx.Rollback();
+                    throw;
+                }
                 return plan;
             }
         }

@@ -36,7 +36,7 @@ namespace SMPorres.Forms.Alumnos
             }
             else
             {
-                result = AlumnosRepository.BuscarAlumnosPorDocumento(txtDato.Text);
+                result = AlumnosRepository.BuscarAlumnosPorNombre(txtDato.Text);
             }
             dgvDatos.SetDataSource(result.Select(r => new { r.Id, r.NroDocumento, r.Nombre }));
             if (result.Any())
@@ -55,6 +55,7 @@ namespace SMPorres.Forms.Alumnos
                 }
                 else if (dgvDatos.Focused)
                 {
+                    e.Handled = true;
                     DialogResult = DialogResult.OK;
                 }
             }
@@ -73,7 +74,7 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                int rowindex = dgvDatos.CurrentCell.RowIndex;
+                int rowindex = dgvDatos.SelectedCells[0].RowIndex;
                 var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
                 return AlumnosRepository.ObtenerAlumnoPorId(id);
             }

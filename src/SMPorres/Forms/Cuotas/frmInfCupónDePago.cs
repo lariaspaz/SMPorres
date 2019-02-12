@@ -77,36 +77,41 @@ namespace SMPorres.Forms.Alumnos
 
         private DataTable ObtenerDatos()
         {
-            var dt = CrearDataTable();
+            //var dt = CrearDataTable();
             //var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
             //foreach (var a in alumnos)
             //{
             //    dt.Rows.Add(String.Format("{0} de {1}", a.Curso, a.Carrera), a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado());
             //}
+            //return dt;
+
+            var dt = new Reports.DataSet.dsImpresiones.CupónPagoDataTable();
+            var row = (Reports.DataSet.dsImpresiones.CupónPagoRow)(dt.NewRow());
+            row.IdPago = String.Format("{0:0000000}", 1);
+            row.FechaEmisión = String.Format("0:dd/MM/yyyy", Lib.Configuration.CurrentDate);
+            row.FechaVencimiento = dtFechaPago.Text;
+            var alumno = AlumnosRepository.ObtenerAlumnoPorId(_idAlumno);
+            row.Nombre = String.Format("{0} {1}", alumno.Nombre, alumno.Apellido);
+            row.TipoDocumento = alumno.TipoDocumento.Descripcion;
+            var carrera =
+                (from ca in CursosAlumnosRepository.ObtenerCursosPorAlumno(_idAlumno)
+                 join c in CarrerasRepository.ObtenerCarreras() on ca.IdCarrera equals c.Id
+                 select c).FirstOrDefault();
+            row.Carrera = carrera.Nombre;
+            //row.Curso = 
+            row.Concepto = "";
+            row.Importe = String.Format("0:C2", 0);
+            row.CódigoBarra = "";
+            dt.Rows.Add(row);
             return dt;
         }
 
         private DataTable CrearDataTable()
         {
-            var alumno = new DataTable();
-            alumno.Columns.Add("Nombre", typeof(string));
-            alumno.Columns.Add("Domicilio", typeof(string));
-            alumno.Columns.Add("Localidad", typeof(string));
-            alumno.Columns.Add("Documento", typeof(string));
-
-            var detalle = new DataTable();
-            detalle.Columns.Add("Cantidad", typeof(string));
-            detalle.Columns.Add("Descripción", typeof(string));
-            detalle.Columns.Add("Precio", typeof(string));
-            detalle.Columns.Add("Importe", typeof(string));
-
-            var impresion = new DataTable();
-            impresion.Columns.Add("comprobantePago", typeof(string));
-            impresion.Columns.Add("fechaVencimiento", typeof(string));
-            impresion.Columns.Add("codigoBarra", typeof(string));
-            impresion.Columns.Add("Total", typeof(string));
-
-            return alumno;
+            var dt = new Reports.DataSet.dsImpresiones.CupónPagoDataTable();
+            var rowCupónPagoRow = (Reports.DataSet.dsImpresiones.CupónPagoRow)(dt.NewRow());
+            dt.Rows.Add(rowCupónPagoRow);
+            return dt;
         }
     }
 }

@@ -27,7 +27,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdLocalidad" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="nchar" MaxLength="10" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Carreras">
           <Key>
@@ -141,21 +141,21 @@
           </Key>
           <Property Name="IdPago" Type="int" Nullable="false" />
           <Property Name="IdPlanPago" Type="int" Nullable="false" />
-          <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" />
           <Property Name="NroCuota" Type="smallint" Nullable="false" />
-          <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" />
           <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="PorcDescPagoTermino" Type="smallint" Nullable="false" />
-          <Property Name="ImportePagoTermino" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="PorcentajeBeca" Type="smallint" Nullable="false" />
+          <Property Name="PorcDescPagoTermino" Type="smallint" />
+          <Property Name="ImportePagoTermino" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeBeca" Type="smallint" />
           <Property Name="IdBecaAlumno" Type="int" />
-          <Property Name="Recargo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="IdMedioPago" Type="int" Nullable="false" />
+          <Property Name="Recargo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdMedioPago" Type="int" />
           <Property Name="IdArchivo" Type="int" />
-          <Property Name="EsContrasiento" Type="smallint" Nullable="false" />
+          <Property Name="EsContrasiento" Type="smallint" />
           <Property Name="IdPagoAsiento" Type="int" />
-          <Property Name="IdUsuario" Type="int" Nullable="false" />
-          <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="FechaGrabacion" Type="datetime" />
         </EntityType>
         <EntityType Name="PlanesPago">
           <Key>
@@ -424,7 +424,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pagos_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -717,19 +717,6 @@
           </AssociationSet>
           <EntitySet Name="Configuraciones" EntityType="SMPorres_DevModel.Configuracion" />
           <EntitySet Name="Cuotas" EntityType="SMPorres_DevModel.Cuota" />
-          <EntitySet Name="Pagos" EntityType="SMPorres_DevModel.Pago" />
-          <AssociationSet Name="FK_Pagos_Pagos" Association="SMPorres_DevModel.FK_Pagos_Pagos">
-            <End Role="Pago" EntitySet="Pagos" />
-            <End Role="Pago1" EntitySet="Pagos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pagos_PlanesPago" Association="SMPorres_DevModel.FK_Pagos_PlanesPago">
-            <End Role="PlanesPago" EntitySet="PlanesPago" />
-            <End Role="Pago" EntitySet="Pagos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pagos_Usuarios" Association="SMPorres_DevModel.FK_Pagos_Usuarios">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Pago" EntitySet="Pagos" />
-          </AssociationSet>
           <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />
           <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
             <End Role="Carrera" EntitySet="Carreras" />
@@ -754,6 +741,19 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="UsuariosItemsMenu" EntitySet="UsuariosItemsMenus" />
           </AssociationSet>
+          <EntitySet Name="Pagos" EntityType="SMPorres_DevModel.Pago" />
+          <AssociationSet Name="FK_Pagos_Pagos" Association="SMPorres_DevModel.FK_Pagos_Pagos">
+            <End Role="Pago" EntitySet="Pagos" />
+            <End Role="Pago1" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_PlanesPago" Association="SMPorres_DevModel.FK_Pagos_PlanesPago">
+            <End Role="PlanPago" EntitySet="PlanesPago" />
+            <End Role="Pago" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Usuarios" Association="SMPorres_DevModel.FK_Pagos_Usuarios">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Pago" EntitySet="Pagos" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -769,8 +769,8 @@
           <NavigationProperty Name="GruposUsuarios" Relationship="SMPorres_DevModel.FK_GruposUsuarios_Usuarios" FromRole="Usuario" ToRole="GruposUsuario" />
           <NavigationProperty Name="PlanesPagos" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios" FromRole="Usuario" ToRole="PlanesPago" />
           <NavigationProperty Name="PlanesPagosEstado" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios1" FromRole="Usuario" ToRole="PlanesPago" />
-          <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Usuario" ToRole="Pago" />
           <NavigationProperty Name="UsuariosItemsMenus" Relationship="SMPorres_DevModel.FK_UsuariosItemsMenu_Usuarios" FromRole="Usuario" ToRole="UsuariosItemsMenu" />
+          <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Usuario" ToRole="Pago" />
         </EntityType>
         <EntityType Name="Alumno">
           <Key>
@@ -952,7 +952,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdCarrera" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="Curso" ToRole="CursosAlumno" />
-          <NavigationProperty Name="PlanesPagoes" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanesPago" />
+          <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanesPago" />
           <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
           <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
@@ -1074,7 +1074,7 @@
           <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="PlanesPago" ToRole="Curso" />
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios" FromRole="PlanesPago" ToRole="Usuario" />
           <NavigationProperty Name="UsuarioEstado" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios1" FromRole="PlanesPago" ToRole="Usuario" />
-          <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="PlanesPago" ToRole="Pago" />
+          <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="PlanPago" ToRole="Pago" />
         </EntityType>
         <Association Name="FK_PlanesPago_Alumnos">
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
@@ -1142,68 +1142,6 @@
           <Property Name="VtoBonificacion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="VtoCuota" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
-        <EntityType Name="Pago">
-          <Key>
-            <PropertyRef Name="IdPago" />
-          </Key>
-          <Property Name="IdPago" Type="Int32" Nullable="false" />
-          <Property Name="IdPlanPago" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="NroCuota" Type="Int16" Nullable="false" />
-          <Property Name="ImportePagado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="PorcDescPagoTermino" Type="Int16" Nullable="false" />
-          <Property Name="ImportePagoTermino" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="PorcentajeBeca" Type="Int16" Nullable="false" />
-          <Property Name="IdBecaAlumno" Type="Int32" />
-          <Property Name="Recargo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdMedioPago" Type="Int32" Nullable="false" />
-          <Property Name="IdArchivo" Type="Int32" />
-          <Property Name="EsContrasiento" Type="Int16" Nullable="false" />
-          <Property Name="IdPagoAsiento" Type="Int32" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="FechaGrabacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="PagosAsientos" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago" ToRole="Pago1" />
-          <NavigationProperty Name="PagoAsiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago1" ToRole="Pago" />
-          <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanesPago" />
-          <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Pagos_Pagos">
-          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="0..1" />
-          <End Type="SMPorres_DevModel.Pago" Role="Pago1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pago">
-              <PropertyRef Name="IdPago" />
-            </Principal>
-            <Dependent Role="Pago1">
-              <PropertyRef Name="IdPagoAsiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pagos_PlanesPago">
-          <End Type="SMPorres_DevModel.PlanPago" Role="PlanesPago" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PlanesPago">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pago">
-              <PropertyRef Name="IdPlanPago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pagos_Usuarios">
-          <End Type="SMPorres_DevModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pago">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Carrera">
           <Key>
             <PropertyRef Name="Id" />
@@ -1303,6 +1241,68 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UsuariosItemsMenu">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="IdPago" />
+          </Key>
+          <Property Name="IdPago" Type="Int32" Nullable="false" />
+          <Property Name="IdPlanPago" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="NroCuota" Type="Int16" Nullable="false" />
+          <Property Name="ImportePagado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PorcDescPagoTermino" Type="Int16" />
+          <Property Name="ImportePagoTermino" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeBeca" Type="Int16" />
+          <Property Name="IdBecaAlumno" Type="Int32" />
+          <Property Name="Recargo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdMedioPago" Type="Int32" />
+          <Property Name="IdArchivo" Type="Int32" />
+          <Property Name="EsContrasiento" Type="Int16" />
+          <Property Name="IdPagoAsiento" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="FechaGrabacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Asiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago" ToRole="Pago1" />
+          <NavigationProperty Name="Contrasiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago1" ToRole="Pago" />
+          <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanPago" />
+          <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Pagos_Pagos">
+          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="0..1" />
+          <End Type="SMPorres_DevModel.Pago" Role="Pago1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pago">
+              <PropertyRef Name="IdPago" />
+            </Principal>
+            <Dependent Role="Pago1">
+              <PropertyRef Name="IdPagoAsiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagos_PlanesPago">
+          <End Type="SMPorres_DevModel.PlanPago" Role="PlanPago" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanPago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdPlanPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagos_Usuarios">
+          <End Type="SMPorres_DevModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pago">
               <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -1472,29 +1472,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Pagos">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.Pago">
-              <MappingFragment StoreEntitySet="Pagos">
-                <ScalarProperty Name="FechaGrabacion" ColumnName="FechaGrabacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdPagoAsiento" ColumnName="IdPagoAsiento" />
-                <ScalarProperty Name="EsContrasiento" ColumnName="EsContrasiento" />
-                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
-                <ScalarProperty Name="IdMedioPago" ColumnName="IdMedioPago" />
-                <ScalarProperty Name="Recargo" ColumnName="Recargo" />
-                <ScalarProperty Name="IdBecaAlumno" ColumnName="IdBecaAlumno" />
-                <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
-                <ScalarProperty Name="ImportePagoTermino" ColumnName="ImportePagoTermino" />
-                <ScalarProperty Name="PorcDescPagoTermino" ColumnName="PorcDescPagoTermino" />
-                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
-                <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
-                <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
-                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Carreras">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Carrera">
               <MappingFragment StoreEntitySet="Carreras">
@@ -1532,6 +1509,29 @@
                 <ScalarProperty Name="IdItemMenu" ColumnName="IdItemMenu" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Pago">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="FechaGrabacion" ColumnName="FechaGrabacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdPagoAsiento" ColumnName="IdPagoAsiento" />
+                <ScalarProperty Name="EsContrasiento" ColumnName="EsContrasiento" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdMedioPago" ColumnName="IdMedioPago" />
+                <ScalarProperty Name="Recargo" ColumnName="Recargo" />
+                <ScalarProperty Name="IdBecaAlumno" ColumnName="IdBecaAlumno" />
+                <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
+                <ScalarProperty Name="ImportePagoTermino" ColumnName="ImportePagoTermino" />
+                <ScalarProperty Name="PorcDescPagoTermino" ColumnName="PorcDescPagoTermino" />
+                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
+                <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
+                <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
+                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

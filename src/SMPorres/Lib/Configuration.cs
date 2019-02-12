@@ -22,5 +22,13 @@ namespace SMPorres.Lib
                 }
             }
         }
+
+        public static int MaxCuotas
+        {
+            get
+            {
+                return 10;
+            }
+        }
     }
 }

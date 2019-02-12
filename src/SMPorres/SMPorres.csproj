@@ -356,6 +356,7 @@
     <Compile Include="Repositories\CuotasRepository.cs" />
     <Compile Include="Repositories\GruposItemsMenuRepository.cs" />
     <Compile Include="Repositories\ItemsMenuRepository.cs" />
+    <Compile Include="Repositories\PagosRepository.cs" />
     <Compile Include="Repositories\PlanesPagoRepository.cs" />
     <Compile Include="Repositories\TiposDocumentoRepository.cs" />
     <Compile Include="Repositories\BarriosRepository.cs" />

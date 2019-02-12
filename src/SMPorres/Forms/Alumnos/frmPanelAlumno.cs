@@ -68,12 +68,14 @@ namespace SMPorres.Forms.Alumnos
                 toolTip1.ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
                 dgvCursos.DataSource = null;
                 GenerarPlanDePagoToolStripMenuItem.Enabled = false;
+                CobrarCuotaToolStripMenuItem.Enabled = false;
             }
             else
             {
                 dgvCursos.SetDataSource(cursos);
                 ConsultarPlanesPago();
                 GenerarPlanDePagoToolStripMenuItem.Enabled = true;
+                CobrarCuotaToolStripMenuItem.Enabled = true;
             }
         }
 

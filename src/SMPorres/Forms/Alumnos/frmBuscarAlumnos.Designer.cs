@@ -31,15 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.dgvDatos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtDato = new System.Windows.Forms.TextBox();
             this.cbTipo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
+            this.dgvDatos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuscar
@@ -66,21 +66,6 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // dgvDatos
-            // 
-            this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDatos.EvenRowColor = System.Drawing.Color.Empty;
-            this.dgvDatos.Location = new System.Drawing.Point(0, 43);
-            this.dgvDatos.Name = "dgvDatos";
-            this.dgvDatos.OddRowColor = System.Drawing.Color.AliceBlue;
-            this.dgvDatos.RowHeadersVisible = false;
-            this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(498, 219);
-            this.dgvDatos.TabIndex = 1;
-            this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
             // 
             // panel1
             // 
@@ -129,6 +114,25 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // dgvDatos
+            // 
+            this.dgvDatos.AllowUserToAddRows = false;
+            this.dgvDatos.AllowUserToDeleteRows = false;
+            this.dgvDatos.AllowUserToResizeRows = false;
+            this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDatos.EvenRowColor = System.Drawing.Color.Empty;
+            this.dgvDatos.Location = new System.Drawing.Point(0, 43);
+            this.dgvDatos.MultiSelect = false;
+            this.dgvDatos.Name = "dgvDatos";
+            this.dgvDatos.OddRowColor = System.Drawing.Color.AliceBlue;
+            this.dgvDatos.ReadOnly = true;
+            this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDatos.Size = new System.Drawing.Size(498, 219);
+            this.dgvDatos.TabIndex = 1;
+            this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
+            // 
             // frmBuscarAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,10 +145,10 @@
             this.Name = "frmBuscarAlumnos";
             this.Text = "Búsqueda de alumnos";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmBuscarAlumnos_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -152,12 +156,12 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private CustomLibrary.ComponentModel.CustomDataGridView dgvDatos;
         private System.Windows.Forms.TextBox txtDato;
         private System.Windows.Forms.ComboBox cbTipo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private CustomLibrary.ComponentModel.CustomDataGridView dgvDatos;
     }
 }

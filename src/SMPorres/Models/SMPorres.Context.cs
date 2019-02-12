@@ -40,10 +40,10 @@ namespace SMPorres.Models
         public virtual DbSet<PlanPago> PlanesPago { get; set; }
         public virtual DbSet<Configuracion> Configuraciones { get; set; }
         public virtual DbSet<Cuota> Cuotas { get; set; }
-        public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<Carrera> Carreras { get; set; }
         public virtual DbSet<GruposItemsMenu> GruposItemsMenus { get; set; }
         public virtual DbSet<ItemsMenu> ItemsMenus { get; set; }
         public virtual DbSet<UsuariosItemsMenu> UsuariosItemsMenus { get; set; }
+        public virtual DbSet<Pago> Pagos { get; set; }
     }
 }
