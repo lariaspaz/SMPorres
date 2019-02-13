@@ -62,12 +62,13 @@ namespace SMPorres.Repositories
                     IdUsuario = Session.CurrentUser.Id
                 };
                 db.PlanesPago.Add(plan);
-                for (short i = 1; i <= Configuration.MaxCuotas; i++)
+                for (short i = 0; i <= Configuration.MaxCuotas; i++)
                 {
                     var p = new Pago();
+                    p.IdPago = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.IdPago) + 1 : 1;
                     p.IdPlanPago = id;
                     p.NroCuota = i;
-                    p.ImporteCuota = curso.ImporteCuota;
+                    p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
                     db.Pagos.Add(p);
                 }
                 try

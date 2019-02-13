@@ -42,6 +42,8 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtImporteMatrícula = new CustomLibrary.ComponentModel.NumericTextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -50,6 +52,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtImporteMatrícula);
+            this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.txtImporteCuota);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cbCarreras);
@@ -59,7 +63,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(422, 94);
+            this.panel2.Size = new System.Drawing.Size(422, 123);
             this.panel2.TabIndex = 1;
             // 
             // txtImporteCuota
@@ -71,7 +75,7 @@
             131072});
             this.txtImporteCuota.Digits = 2;
             this.txtImporteCuota.IntValue = ((long)(0));
-            this.txtImporteCuota.Location = new System.Drawing.Point(141, 64);
+            this.txtImporteCuota.Location = new System.Drawing.Point(141, 90);
             this.txtImporteCuota.Name = "txtImporteCuota";
             this.txtImporteCuota.Size = new System.Drawing.Size(100, 20);
             this.txtImporteCuota.TabIndex = 4;
@@ -81,7 +85,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 67);
+            this.label3.Location = new System.Drawing.Point(45, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 3;
@@ -133,7 +137,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(428, 135);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(428, 164);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -142,7 +146,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 100);
+            this.panel1.Location = new System.Drawing.Point(0, 129);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(428, 35);
@@ -186,13 +190,38 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // txtImporteMatrícula
+            // 
+            this.txtImporteMatrícula.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.txtImporteMatrícula.Digits = 2;
+            this.txtImporteMatrícula.IntValue = ((long)(0));
+            this.txtImporteMatrícula.Location = new System.Drawing.Point(141, 64);
+            this.txtImporteMatrícula.Name = "txtImporteMatrícula";
+            this.txtImporteMatrícula.Size = new System.Drawing.Size(100, 20);
+            this.txtImporteMatrícula.TabIndex = 3;
+            this.txtImporteMatrícula.Text = "0,00";
+            this.txtImporteMatrícula.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(28, 67);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Importe de matrícula:";
+            // 
             // frmEdición
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(428, 135);
+            this.ClientSize = new System.Drawing.Size(428, 164);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";
@@ -220,5 +249,7 @@
         private System.Windows.Forms.ComboBox cbCarreras;
         private CustomLibrary.ComponentModel.NumericTextBox txtImporteCuota;
         private System.Windows.Forms.Label label3;
+        private CustomLibrary.ComponentModel.NumericTextBox txtImporteMatrícula;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -32,8 +32,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtImporte = new CustomLibrary.ComponentModel.NumericTextBox();
             this.txtDuración = new CustomLibrary.ComponentModel.NumericTextBox();
             this.ckEstado = new System.Windows.Forms.CheckBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -55,8 +53,6 @@
             // 
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.txtImporte);
             this.panel2.Controls.Add(this.txtDuración);
             this.panel2.Controls.Add(this.ckEstado);
             this.panel2.Controls.Add(this.txtNombre);
@@ -65,13 +61,13 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(384, 115);
+            this.panel2.Size = new System.Drawing.Size(384, 90);
             this.panel2.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(54, 91);
+            this.label8.Location = new System.Drawing.Point(54, 65);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(46, 13);
             this.label8.TabIndex = 13;
@@ -80,42 +76,31 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(217, 42);
+            this.label6.Location = new System.Drawing.Point(190, 40);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "años";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 66);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Importe de Cuota:";
-            // 
-            // txtImporte
-            // 
-            this.txtImporte.Digits = 2;
-            this.txtImporte.Location = new System.Drawing.Point(111, 63);
-            this.txtImporte.Name = "txtImporte";
-            this.txtImporte.Size = new System.Drawing.Size(100, 20);
-            this.txtImporte.TabIndex = 2;
-            this.txtImporte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // txtDuración
             // 
+            this.txtDuración.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtDuración.IntValue = ((long)(0));
             this.txtDuración.Location = new System.Drawing.Point(111, 37);
             this.txtDuración.Name = "txtDuración";
-            this.txtDuración.Size = new System.Drawing.Size(100, 20);
+            this.txtDuración.Size = new System.Drawing.Size(73, 20);
             this.txtDuración.TabIndex = 1;
+            this.txtDuración.Text = "0";
             this.txtDuración.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // ckEstado
             // 
             this.ckEstado.AutoSize = true;
-            this.ckEstado.Location = new System.Drawing.Point(111, 89);
+            this.ckEstado.Location = new System.Drawing.Point(111, 63);
             this.ckEstado.Name = "ckEstado";
             this.ckEstado.Size = new System.Drawing.Size(73, 17);
             this.ckEstado.TabIndex = 5;
@@ -159,7 +144,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(390, 156);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(390, 131);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -168,7 +153,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 121);
+            this.panel1.Location = new System.Drawing.Point(0, 96);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(390, 35);
@@ -218,7 +203,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(390, 156);
+            this.ClientSize = new System.Drawing.Size(390, 131);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";
@@ -245,9 +230,7 @@
         private CustomLibrary.ComponentModel.Bevel bevel1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private CustomLibrary.ComponentModel.NumericTextBox txtDuración;
-        private CustomLibrary.ComponentModel.NumericTextBox txtImporte;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
     }
 }

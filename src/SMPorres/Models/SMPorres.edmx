@@ -13,13 +13,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
+          <Property Name="NroDocumento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="Barrios">
           <Key>
@@ -36,9 +36,8 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
-          <Property Name="Importe" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -66,6 +65,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCarrera" Type="int" Nullable="false" />
           <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteMatricula" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="CursosAlumnos">
           <Key>
@@ -781,7 +781,7 @@
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
@@ -790,7 +790,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="Barrio">
           <Key>
@@ -955,6 +955,7 @@
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanesPago" />
           <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
           <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Grupos">
           <Key>
@@ -1150,8 +1151,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
@@ -1392,6 +1392,7 @@
           <EntitySetMapping Name="Cursos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
               <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="ImporteMatricula" ColumnName="ImporteMatricula" />
                 <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
                 <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1475,7 +1476,6 @@
           <EntitySetMapping Name="Carreras">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Carrera">
               <MappingFragment StoreEntitySet="Carreras">
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
                 <ScalarProperty Name="FechaEstado" ColumnName="FechaEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Duracion" ColumnName="Duracion" />

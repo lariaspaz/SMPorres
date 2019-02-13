@@ -27,7 +27,6 @@ namespace SMPorres.Forms.Carreras
             this.Text = "Edición de carrera";
             txtNombre.Text = carrera.Nombre;
             txtDuración.Text = carrera.Duracion.ToString();
-            txtImporte.Text = String.Format("{0:n}", carrera.Importe);
             ckEstado.Checked = carrera.Estado == 1;
         }
 
@@ -44,14 +43,6 @@ namespace SMPorres.Forms.Carreras
             get
             {
                 return (short)txtDuración.IntValue;
-            }
-        }
-
-        public decimal Importe
-        {
-            get
-            {
-                return txtImporte.DecValue;
             }
         }
 
@@ -76,8 +67,7 @@ namespace SMPorres.Forms.Carreras
         {
             return
                 _validator.Validar(txtNombre, !String.IsNullOrEmpty(Nombre.Trim()), "No puede estar vacío") &&
-                _validator.Validar(txtDuración, Duración > 0, "No puede ser menor o igual que cero") &&
-                _validator.Validar(txtImporte, Importe > 0, "No puede ser menor o igual que cero");
+                _validator.Validar(txtDuración, Duración > 0, "No puede ser menor o igual que cero");
         }        
     }
 }

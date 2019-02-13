@@ -24,7 +24,6 @@ namespace SMPorres.Forms.Carreras
                                        c.Id,
                                        c.Nombre,
                                        Duracion = String.Format("{0} años", c.Duracion),
-                                       c.Importe,
                                        DescripciónEstado = (c.Estado == 1 ? "Habilitada" : "Baja"),
                                        c.Estado
                                    });
@@ -45,16 +44,11 @@ namespace SMPorres.Forms.Carreras
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[2].DefaultCellStyle.Format = "d";
 
-            dgvDatos.Columns[3].HeaderText = "Importe";
-            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[3].HeaderText = "Estado";
+            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvDatos.Columns[3].DefaultCellStyle.Format = "C2";
 
-            dgvDatos.Columns[4].HeaderText = "Estado";
-            dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-
-            dgvDatos.Columns[5].Visible = false;
+            dgvDatos.Columns[4].Visible = false;
 
             foreach (DataGridViewColumn c in dgvDatos.Columns)
             {
@@ -84,7 +78,7 @@ namespace SMPorres.Forms.Carreras
                 {
                     try
                     {
-                        var c = CarrerasRepository.Insertar(f.Nombre, f.Duración, f.Importe, f.Estado);
+                        var c = CarrerasRepository.Insertar(f.Nombre, f.Duración, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }
@@ -105,7 +99,7 @@ namespace SMPorres.Forms.Carreras
                 {
                     try
                     {
-                        CarrerasRepository.Actualizar(m.Id, f.Nombre, f.Duración, f.Importe, f.Estado);
+                        CarrerasRepository.Actualizar(m.Id, f.Nombre, f.Duración, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
                     }

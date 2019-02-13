@@ -22,7 +22,6 @@ namespace SMPorres.Repositories
                                         Id = c.Id,
                                         Nombre = c.Nombre,
                                         Duracion = c.Duracion,
-                                        Importe = c.Importe,
                                         Estado = c.Estado,
                                         FechaEstado = c.FechaEstado
                                     });
@@ -30,7 +29,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static Carrera Insertar(string nombre, short duración, decimal importe, short estado)
+        public static Carrera Insertar(string nombre, short duración, short estado)
         {
             using (var db = new SMPorresEntities())
             {
@@ -40,7 +39,6 @@ namespace SMPorres.Repositories
                     Id = id,
                     Nombre = nombre,
                     Duracion = duración,
-                    Importe = importe,
                     Estado = estado,
                     FechaEstado = Configuration.CurrentDate
                 };
@@ -50,7 +48,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void Actualizar(decimal id, string nombre, short duración, decimal importe, short estado)
+        public static void Actualizar(decimal id, string nombre, short duración, short estado)
         {
             using (var db = new SMPorresEntities())
             {
@@ -61,7 +59,6 @@ namespace SMPorres.Repositories
                 var c = db.Carreras.Find(id);
                 c.Nombre = nombre;
                 c.Duracion = duración;
-                c.Importe = importe;
                 if (c.Estado != estado)
                 {
                     c.Estado = estado;

@@ -32,6 +32,7 @@ namespace SMPorres.Forms.Cursos
             this.Text = "Edición de curso";
             txtNombre.Text = curso.Nombre;
             cbCarreras.SelectedValue = curso.IdCarrera;
+            txtImporteMatrícula.DecValue = curso.ImporteMatricula;
             txtImporteCuota.DecValue = curso.ImporteCuota;
         }
 
@@ -48,6 +49,14 @@ namespace SMPorres.Forms.Cursos
             get
             {
                 return ((Carrera)cbCarreras.SelectedItem).Id;
+            }
+        }
+
+        public decimal ImporteMatrícula
+        {
+            get
+            {
+                return txtImporteMatrícula.DecValue;
             }
         }
 

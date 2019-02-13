@@ -21,13 +21,14 @@ namespace SMPorres.Repositories
                                         Id = c.Id,
                                         Nombre = c.Nombre,
                                         IdCarrera = c.IdCarrera,
-                                        ImporteCuota = c.ImporteCuota
+                                        ImporteCuota = c.ImporteCuota,
+                                        ImporteMatricula = c.ImporteMatricula
                                     });
                 return query.OrderBy(c => c.Nombre).ToList();
             }
         }
 
-        public static Curso Insertar(string nombre, int idCarrera, decimal importeCuota)
+        public static Curso Insertar(string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota)
         {
             using (var db = new SMPorresEntities())
             {
@@ -37,6 +38,7 @@ namespace SMPorres.Repositories
                     Id = id,
                     Nombre = nombre,
                     IdCarrera = idCarrera,
+                    ImporteMatricula = importeMatrícula,
                     ImporteCuota = importeCuota
                 };
                 db.Cursos.Add(c);
@@ -45,7 +47,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void Actualizar(int id, string nombre, int idCarrera, decimal importeCuota)
+        public static void Actualizar(int id, string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota)
         {
             using (var db = new SMPorresEntities())
             {
@@ -56,6 +58,7 @@ namespace SMPorres.Repositories
                 var c = db.Cursos.Find(id);
                 c.Nombre = nombre;
                 c.IdCarrera = idCarrera;
+                c.ImporteMatricula = importeMatrícula;
                 c.ImporteCuota = importeCuota;
                 db.SaveChanges();
             }

@@ -25,6 +25,7 @@ namespace SMPorres.Models
         public string Nombre { get; set; }
         public int IdCarrera { get; set; }
         public decimal ImporteCuota { get; set; }
+        public decimal ImporteMatricula { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CursosAlumno> CursosAlumnos { get; set; }
