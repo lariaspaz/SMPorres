@@ -52,7 +52,7 @@ namespace SMPorres.Repositories
                     Id = id,
                     IdAlumno = idAlumno,
                     IdCurso = idCurso,
-                    CantidadCuotas = 10,
+                    CantidadCuotas = Configuration.MaxCuotas,
                     NroCuota = 1,
                     ImporteCuota = curso.ImporteCuota,
                     PorcentajeBeca = porcentajeBeca,
@@ -61,19 +61,20 @@ namespace SMPorres.Repositories
                     FechaGrabacion = Configuration.CurrentDate,
                     IdUsuario = Session.CurrentUser.Id
                 };
-                db.PlanesPago.Add(plan);
-                for (short i = 0; i <= Configuration.MaxCuotas; i++)
-                {
-                    var p = new Pago();
-                    p.IdPago = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.IdPago) + 1 : 1;
-                    p.IdPlanPago = id;
-                    p.NroCuota = i;
-                    p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
-                    db.Pagos.Add(p);
-                }
                 try
                 {
+                    db.PlanesPago.Add(plan);
                     db.SaveChanges();
+                    for (short i = 0; i <= Configuration.MaxCuotas; i++)
+                    {
+                        var p = new Pago();
+                        p.IdPago = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.IdPago) + 1 : 1;
+                        p.IdPlanPago = id;
+                        p.NroCuota = i;
+                        p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                        db.Pagos.Add(p);
+                        db.SaveChanges();
+                    }
                     trx.Commit();
                 }
                 catch (Exception)
@@ -82,6 +83,19 @@ namespace SMPorres.Repositories
                     throw;
                 }
                 return plan;
+            }
+        }
+
+        public static void Actualizar(int idCurso, decimal importeCuota)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var planes = from p in db.PlanesPago where p.IdCurso == idCurso && p.Estado == (short)EstadoPlanPago.Vigente select p;
+                foreach (var p in planes)
+                {
+                    p.ImporteCuota = importeCuota;
+                }
+                db.SaveChanges();
             }
         }
     }

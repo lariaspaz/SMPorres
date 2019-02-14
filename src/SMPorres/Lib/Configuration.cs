@@ -23,7 +23,7 @@ namespace SMPorres.Lib
             }
         }
 
-        public static int MaxCuotas
+        public static short MaxCuotas
         {
             get
             {

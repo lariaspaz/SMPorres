@@ -58,9 +58,28 @@ namespace SMPorres.Repositories
                 var c = db.Cursos.Find(id);
                 c.Nombre = nombre;
                 c.IdCarrera = idCarrera;
-                c.ImporteMatricula = importeMatrícula;
-                c.ImporteCuota = importeCuota;
-                db.SaveChanges();
+                var trx = db.Database.BeginTransaction();
+                try
+                {
+                    if (c.ImporteMatricula != importeMatrícula)
+                    {
+                        c.ImporteMatricula = importeMatrícula;
+                        PagosRepository.ActualizarCuotas(id, importeMatrícula, true);
+                    }
+                    if (c.ImporteCuota != importeCuota)
+                    {
+                        c.ImporteCuota = importeCuota;
+                        PagosRepository.ActualizarCuotas(id, importeCuota, false);
+                        PlanesPagoRepository.Actualizar(id, importeCuota);
+                    }
+                    db.SaveChanges();
+                    trx.Commit();
+                }
+                catch (Exception)
+                {
+                    trx.Rollback();
+                    throw;
+                }
             }
         }
 

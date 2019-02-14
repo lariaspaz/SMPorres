@@ -24,5 +24,29 @@ namespace SMPorres.Repositories
                 }
             }
         }
+
+        internal static void ActualizarCuotas(int idCurso, decimal importe, bool esMatrícula)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var pagos = from p in db.Pagos
+                            where p.PlanesPago.IdCurso == idCurso &&
+                                  !p.Fecha.HasValue
+                            select p;
+                if (esMatrícula)
+                {
+                    pagos = pagos.Where(m => m.NroCuota == 0);
+                }
+                else
+                {
+                    pagos = pagos.Where(m => m.NroCuota > 0);
+                }
+                foreach (var m in pagos)
+                {
+                    m.ImporteCuota = importe;
+                }
+                db.SaveChanges();
+            }
+        }
     }
 }
