@@ -81,7 +81,7 @@ namespace SMPorres.Forms.Alumnos
 
         private void ConsultarPlanesPago()
         {
-            var query = from pp in PlanesPagoRepository.ObtenerPlanesPagoPorAlumnoYCurso(_alumno.Id, CursoSeleccionado.Id)
+            var query = from pp in PlanesPagoRepository.ObtenerPlanesPago(_alumno.Id, CursoSeleccionado.Id)
                         select new {
                             Id = pp.Id,
                             ProximaCuota = String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
@@ -211,7 +211,45 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
-        private void imprimirMatrículaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void dgvPlanesPago_SelectionChanged(object sender, EventArgs e)
+        {
+            int rowindex = dgvPlanesPago.CurrentCell.RowIndex;
+            var id = (Int32)dgvPlanesPago.Rows[rowindex].Cells[0].Value;
+            var query = from p in PagosRepository.ObtenerPagos(id)
+                        select new
+                        {
+                            IdPago = p.IdPago,
+                            Concepto = (p.NroCuota == 0)? "Matrícula":String.Format("Cuota Nº {0}", p.NroCuota),
+                            Importe = p.ImporteCuota,
+                            Fecha = p.Fecha
+                        };
+            dgvPagos.SetDataSource(query);
+        }
+
+        private void dgvPagos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewColumn c in dgvCursos.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            dgvPagos.Columns[0].Visible = false;
+
+            dgvPagos.Columns[1].HeaderText = "Concepto";
+            dgvPagos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPagos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dgvPagos.Columns[2].HeaderText = "Importe";
+            dgvPagos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPagos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPagos.Columns[2].DefaultCellStyle.Format = "C2";
+
+            dgvPagos.Columns[3].HeaderText = "Fecha";
+            dgvPagos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPagos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        }
+
+        private void btnImprimirCuota_Click(object sender, EventArgs e)
         {
 
         }

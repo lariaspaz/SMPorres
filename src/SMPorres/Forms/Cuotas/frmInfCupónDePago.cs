@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SMPorres.Forms.Alumnos
+namespace SMPorres.Forms.Cuotas
 {
     public partial class frmInfCupónDePago : FormBase
     {

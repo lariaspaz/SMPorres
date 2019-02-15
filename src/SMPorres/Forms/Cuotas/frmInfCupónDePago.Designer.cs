@@ -1,4 +1,4 @@
-﻿namespace SMPorres.Forms.Alumnos
+﻿namespace SMPorres.Forms.Cuotas
 {
     partial class frmInfCupónDePago
     {

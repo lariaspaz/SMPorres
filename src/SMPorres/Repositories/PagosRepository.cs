@@ -48,5 +48,24 @@ namespace SMPorres.Repositories
                 db.SaveChanges();
             }
         }
+
+        internal static List<Pago> ObtenerPagos(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = (from p in db.Pagos where p.IdPlanPago == id select p)
+                            .ToList()
+                            .Select(
+                                p => new Pago
+                                {
+                                    IdPago = p.IdPago,
+                                    NroCuota = p.NroCuota,
+                                    ImporteCuota = p.ImporteCuota,
+                                    Fecha = p.Fecha
+                                }
+                            );                    
+                return query.OrderBy(p => p.NroCuota).ToList();
+            }
+        }
     }
 }

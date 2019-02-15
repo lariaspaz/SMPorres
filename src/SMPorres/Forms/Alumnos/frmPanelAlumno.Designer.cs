@@ -43,8 +43,7 @@
             this.CobrarCuotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEditarPlanPago = new System.Windows.Forms.ToolStripButton();
             this.btnAnularPlanPago = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.imprimirMatrículaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnImprimirCuota = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -157,7 +156,7 @@
             this.toolStripDropDownButton2,
             this.btnEditarPlanPago,
             this.btnAnularPlanPago,
-            this.toolStripDropDownButton1,
+            this.btnImprimirCuota,
             this.toolStripSeparator1,
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -210,23 +209,15 @@
             this.btnAnularPlanPago.Text = "toolStripButton3";
             this.btnAnularPlanPago.ToolTipText = "Anular plan de pago (Ctrl + Delete)";
             // 
-            // toolStripDropDownButton1
+            // btnImprimirCuota
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.imprimirMatrículaToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::SMPorres.Properties.Resources.printer;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            // 
-            // imprimirMatrículaToolStripMenuItem
-            // 
-            this.imprimirMatrículaToolStripMenuItem.Name = "imprimirMatrículaToolStripMenuItem";
-            this.imprimirMatrículaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.imprimirMatrículaToolStripMenuItem.Text = "Imprimir matrícula";
-            this.imprimirMatrículaToolStripMenuItem.Click += new System.EventHandler(this.imprimirMatrículaToolStripMenuItem_Click);
+            this.btnImprimirCuota.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnImprimirCuota.Image = global::SMPorres.Properties.Resources.printer;
+            this.btnImprimirCuota.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnImprimirCuota.Name = "btnImprimirCuota";
+            this.btnImprimirCuota.Size = new System.Drawing.Size(23, 22);
+            this.btnImprimirCuota.Text = "Imprimir cuota";
+            this.btnImprimirCuota.Click += new System.EventHandler(this.btnImprimirCuota_Click);
             // 
             // toolStripSeparator1
             // 
@@ -251,7 +242,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 64);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(719, 100);
+            this.panel2.Size = new System.Drawing.Size(719, 153);
             this.panel2.TabIndex = 2;
             // 
             // dgvCursos
@@ -262,7 +253,7 @@
             this.dgvCursos.Location = new System.Drawing.Point(0, 23);
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.OddRowColor = System.Drawing.Color.Empty;
-            this.dgvCursos.Size = new System.Drawing.Size(719, 77);
+            this.dgvCursos.Size = new System.Drawing.Size(719, 130);
             this.dgvCursos.TabIndex = 1;
             this.dgvCursos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCursos_DataBindingComplete);
             // 
@@ -284,9 +275,9 @@
             // 
             this.panel3.Controls.Add(this.tabControl1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 164);
+            this.panel3.Location = new System.Drawing.Point(0, 217);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(719, 193);
+            this.panel3.Size = new System.Drawing.Size(719, 250);
             this.panel3.TabIndex = 3;
             // 
             // tabControl1
@@ -297,7 +288,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(719, 193);
+            this.tabControl1.Size = new System.Drawing.Size(719, 250);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -306,7 +297,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(711, 167);
+            this.tabPage1.Size = new System.Drawing.Size(711, 224);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Planes de pago";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -326,9 +317,10 @@
             this.dgvPlanesPago.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvPlanesPago.ReadOnly = true;
             this.dgvPlanesPago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPlanesPago.Size = new System.Drawing.Size(705, 161);
+            this.dgvPlanesPago.Size = new System.Drawing.Size(705, 218);
             this.dgvPlanesPago.TabIndex = 1;
             this.dgvPlanesPago.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPlanesPago_DataBindingComplete);
+            this.dgvPlanesPago.SelectionChanged += new System.EventHandler(this.dgvPlanesPago_SelectionChanged);
             // 
             // tabPage2
             // 
@@ -336,9 +328,9 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(711, 167);
+            this.tabPage2.Size = new System.Drawing.Size(711, 224);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Pagos";
+            this.tabPage2.Text = "Cuotas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dgvPagos
@@ -356,14 +348,15 @@
             this.dgvPagos.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvPagos.ReadOnly = true;
             this.dgvPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPagos.Size = new System.Drawing.Size(705, 161);
+            this.dgvPagos.Size = new System.Drawing.Size(705, 218);
             this.dgvPagos.TabIndex = 1;
+            this.dgvPagos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPagos_DataBindingComplete);
             // 
             // frmPanelAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 357);
+            this.ClientSize = new System.Drawing.Size(719, 467);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -414,10 +407,9 @@
         private CustomLibrary.ComponentModel.CustomDataGridView dgvPlanesPago;
         private CustomLibrary.ComponentModel.CustomDataGridView dgvPagos;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem GenerarPlanDePagoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CobrarCuotaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem imprimirMatrículaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnImprimirCuota;
     }
 }

@@ -10,7 +10,7 @@ namespace SMPorres.Repositories
 {
     class PlanesPagoRepository
     {
-        internal static List<PlanPago> ObtenerPlanesPagoPorAlumnoYCurso(int idAlumno, int idCurso)
+        internal static List<PlanPago> ObtenerPlanesPago(int idAlumno, int idCurso)
         {
             using (var db = new SMPorresEntities())
             {
