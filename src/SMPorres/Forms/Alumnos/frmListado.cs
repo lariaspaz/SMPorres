@@ -107,7 +107,7 @@ namespace SMPorres.Forms.Alumnos
             dgvDatos.Columns[4].HeaderText = "Nº Documento";
             dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvDatos.Columns[4].DefaultCellStyle.Format = "n0";
+            dgvDatos.Columns[4].DefaultCellStyle.Format = "N0";
 
             dgvDatos.Columns[5].HeaderText = "Fec. Nac.";
             dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

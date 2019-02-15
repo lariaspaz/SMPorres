@@ -30,7 +30,7 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var pagos = from p in db.Pagos
-                            where p.PlanesPago.IdCurso == idCurso &&
+                            where p.PlanPago.IdCurso == idCurso &&
                                   !p.Fecha.HasValue
                             select p;
                 if (esMatrícula)
@@ -49,11 +49,11 @@ namespace SMPorres.Repositories
             }
         }
 
-        internal static List<Pago> ObtenerPagos(int id)
+        internal static List<Pago> ObtenerPagos(int idPlanPago)
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from p in db.Pagos where p.IdPlanPago == id select p)
+                var query = (from p in db.Pagos where p.IdPlanPago == idPlanPago select p)
                             .ToList()
                             .Select(
                                 p => new Pago
@@ -65,6 +65,20 @@ namespace SMPorres.Repositories
                                 }
                             );                    
                 return query.OrderBy(p => p.NroCuota).ToList();
+            }
+        }
+
+        internal static Pago ObtenerPago(int idPago)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p = db.Pagos.Find(idPago);
+                db.Entry(p).Reference(p1 => p1.PlanPago).Load();
+                db.Entry(p.PlanPago).Reference(pp => pp.Alumno).Load();
+                db.Entry(p.PlanPago.Alumno).Reference(a => a.TipoDocumento).Load();
+                db.Entry(p.PlanPago).Reference(pp => pp.Curso).Load();
+                db.Entry(p.PlanPago.Curso).Reference(c => c.Carrera).Load();
+                return p;
             }
         }
     }

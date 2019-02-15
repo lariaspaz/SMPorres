@@ -1,4 +1,4 @@
-﻿namespace SMPorres.Forms.Cuotas
+﻿namespace SMPorres.Forms.Pagos
 {
     partial class frmInfCupónDePago
     {
@@ -33,14 +33,8 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbTipo = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.dtFechaPago = new System.Windows.Forms.DateTimePicker();
-            this.txtDesde = new CustomLibrary.ComponentModel.NumericTextBox();
-            this.txtHasta = new CustomLibrary.ComponentModel.NumericTextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -58,7 +52,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 136);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 77);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // panel3
@@ -66,7 +60,7 @@
             this.panel3.Controls.Add(this.btnCancelar);
             this.panel3.Controls.Add(this.btnAceptar);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 101);
+            this.panel3.Location = new System.Drawing.Point(0, 42);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(236, 35);
@@ -95,102 +89,30 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.txtHasta);
-            this.panel2.Controls.Add(this.txtDesde);
             this.panel2.Controls.Add(this.dtFechaPago);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.cbTipo);
-            this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(230, 95);
+            this.panel2.Size = new System.Drawing.Size(230, 36);
             this.panel2.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Fecha de Pago:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 66);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Cuota:";
-            // 
-            // cbTipo
-            // 
-            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipo.FormattingEnabled = true;
-            this.cbTipo.Location = new System.Drawing.Point(100, 9);
-            this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(100, 21);
-            this.cbTipo.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Imprimir:";
             // 
             // dtFechaPago
             // 
             this.dtFechaPago.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFechaPago.Location = new System.Drawing.Point(100, 36);
+            this.dtFechaPago.Location = new System.Drawing.Point(110, 8);
             this.dtFechaPago.Name = "dtFechaPago";
             this.dtFechaPago.Size = new System.Drawing.Size(100, 20);
             this.dtFechaPago.TabIndex = 9;
             // 
-            // txtDesde
+            // label3
             // 
-            this.txtDesde.DecValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtDesde.IntValue = ((long)(0));
-            this.txtDesde.Location = new System.Drawing.Point(100, 62);
-            this.txtDesde.Name = "txtDesde";
-            this.txtDesde.Size = new System.Drawing.Size(25, 20);
-            this.txtDesde.TabIndex = 10;
-            this.txtDesde.Text = "0";
-            this.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtHasta
-            // 
-            this.txtHasta.DecValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtHasta.IntValue = ((long)(0));
-            this.txtHasta.Location = new System.Drawing.Point(175, 62);
-            this.txtHasta.Name = "txtHasta";
-            this.txtHasta.Size = new System.Drawing.Size(25, 20);
-            this.txtHasta.TabIndex = 11;
-            this.txtHasta.Text = "0";
-            this.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(131, 66);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = " hasta ";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Fecha de Pago:";
             // 
             // frmInfCupónDePago
             // 
@@ -198,7 +120,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(236, 136);
+            this.ClientSize = new System.Drawing.Size(236, 77);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmInfCupónDePago";
             this.Text = "Impresión de Cuotas";
@@ -217,13 +139,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbTipo;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtFechaPago;
-        private System.Windows.Forms.Label label4;
-        private CustomLibrary.ComponentModel.NumericTextBox txtHasta;
-        private CustomLibrary.ComponentModel.NumericTextBox txtDesde;
     }
 }

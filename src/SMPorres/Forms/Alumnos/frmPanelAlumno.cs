@@ -132,7 +132,7 @@ namespace SMPorres.Forms.Alumnos
             dgvCursos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
-        private Models.Curso CursoSeleccionado
+        private Curso CursoSeleccionado
         {
             get
             {
@@ -233,7 +233,7 @@ namespace SMPorres.Forms.Alumnos
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
-            dgvPagos.Columns[0].Visible = false;
+            dgvPagos.Columns[0].Visible = true;
 
             dgvPagos.Columns[1].HeaderText = "Concepto";
             dgvPagos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -251,7 +251,9 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnImprimirCuota_Click(object sender, EventArgs e)
         {
-
+            int rowindex = dgvCursos.CurrentCell.RowIndex;
+            var id = (int)dgvCursos.Rows[rowindex].Cells[0].Value;
+            using (var f = new Pagos.frmInfCupónDePago(id)) f.ShowDialog();
         }
     }
 }

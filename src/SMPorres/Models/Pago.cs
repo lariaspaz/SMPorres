@@ -41,7 +41,7 @@ namespace SMPorres.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Asiento { get; set; }
         public virtual Pago Contrasiento { get; set; }
-        public virtual PlanPago PlanesPago { get; set; }
+        public virtual PlanPago PlanPago { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

@@ -12,11 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SMPorres.Forms.Cuotas
+namespace SMPorres.Forms.Pagos
 {
     public partial class frmInfCupónDePago : FormBase
     {
-        private int _idAlumno;
+        private int _idPago;
 
         private enum TipoImpresión
         {
@@ -24,18 +24,11 @@ namespace SMPorres.Forms.Cuotas
             Cuota
         }
 
-        public frmInfCupónDePago(int idAlumno)
+        public frmInfCupónDePago(int idPago)
         {
             InitializeComponent();
 
-            _idAlumno = idAlumno;
-            var tipos = new Dictionary<TipoImpresión, string>();
-            tipos.Add(TipoImpresión.Cuota, "Cuota");
-            tipos.Add(TipoImpresión.Matrícula, "Matrícula");
-            cbTipo.DataSource = new BindingSource(tipos, null);
-            cbTipo.ValueMember = "Key";
-            cbTipo.DisplayMember = "Value";
-            cbTipo.SelectedIndex = 0;
+            _idPago = idPago;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -62,16 +55,8 @@ namespace SMPorres.Forms.Cuotas
         {
             using (var reporte = new CupónDePago())
             {
-                reporte.Database.Tables["dtAlumno"].SetDataSource(dt);
-                using (var f = new frmReporte("Informe de Alumnos por Estado", reporte)) f.ShowDialog();
-            }
-        }
-
-        private TipoImpresión Tipo
-        {
-            get
-            {
-                return (TipoImpresión)cbTipo.SelectedValue;
+                reporte.Database.Tables["CupónPago"].SetDataSource(dt);
+                using (var f = new frmReporte("", reporte)) f.ShowDialog();
             }
         }
 
@@ -85,25 +70,30 @@ namespace SMPorres.Forms.Cuotas
             //}
             //return dt;
 
-            var dt = new Reports.DataSet.dsImpresiones.CupónPagoDataTable();
-            var row = (Reports.DataSet.dsImpresiones.CupónPagoRow)(dt.NewRow());
-            row.IdPago = String.Format("{0:0000000}", 1);
-            row.FechaEmisión = String.Format("0:dd/MM/yyyy", Lib.Configuration.CurrentDate);
-            row.FechaVencimiento = dtFechaPago.Text;
-            var alumno = AlumnosRepository.ObtenerAlumnoPorId(_idAlumno);
-            row.Nombre = String.Format("{0} {1}", alumno.Nombre, alumno.Apellido);
-            row.TipoDocumento = alumno.TipoDocumento.Descripcion;
-            var carrera =
-                (from ca in CursosAlumnosRepository.ObtenerCursosPorAlumno(_idAlumno)
-                 join c in CarrerasRepository.ObtenerCarreras() on ca.IdCarrera equals c.Id
-                 select c).FirstOrDefault();
-            row.Carrera = carrera.Nombre;
-            //row.Curso = 
-            row.Concepto = "";
-            row.Importe = String.Format("0:C2", 0);
-            row.CódigoBarra = "";
-            dt.Rows.Add(row);
-            return dt;
+            var cupón = new Reports.DataSet.dsImpresiones.CupónPagoDataTable();
+            var row = cupón.NewCupónPagoRow();
+            var idPago = String.Format("{0:0000000}", _idPago);
+            var fechaEmisión = String.Format("{0:dd/MM/yyyy}", Lib.Configuration.CurrentDate);
+            var fechaVencimiento = dtFechaPago.Text;
+            var pago = PagosRepository.ObtenerPago(_idPago);
+            var nombre = String.Format("{0} {1}", pago.PlanPago.Alumno.Nombre, pago.PlanPago.Alumno.Apellido);
+            var tipoDocumento = pago.PlanPago.Alumno.TipoDocumento.Descripcion;
+            var documento = pago.PlanPago.Alumno.NroDocumento.ToString("N0");
+            var curso = pago.PlanPago.Curso.Nombre;
+            var carrera = pago.PlanPago.Curso.Carrera.Nombre;
+            var importe = String.Format("{0:C2}", pago.ImporteCuota);
+            var códigoBarra = "";
+
+            if (pago.NroCuota > 0)
+            {
+
+            }
+            else
+            {
+                cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento, 
+                    carrera, curso, importe, códigoBarra, "1", "Matrícula", importe);
+            }
+            return cupón;
         }
 
         private DataTable CrearDataTable()

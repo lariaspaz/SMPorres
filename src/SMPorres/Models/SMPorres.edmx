@@ -1268,7 +1268,7 @@
           <Property Name="FechaGrabacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Asiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago" ToRole="Pago1" />
           <NavigationProperty Name="Contrasiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago1" ToRole="Pago" />
-          <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanPago" />
+          <NavigationProperty Name="PlanPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanPago" />
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
         </EntityType>
         <Association Name="FK_Pagos_Pagos">
