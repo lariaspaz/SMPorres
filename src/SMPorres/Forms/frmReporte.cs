@@ -8,6 +8,7 @@ namespace SMPorres.Forms
         {
             InitializeComponent();
             this.Text = título;
+            crystalReportViewer1.SelectionMode = CrystalDecisions.Windows.Forms.SelectionMode.None;            
             crystalReportViewer1.ReportSource = reportSource;
         }        
     }

@@ -82,8 +82,12 @@ namespace SMPorres.Forms.Pagos
             var curso = pago.PlanPago.Curso.Nombre;
             var carrera = pago.PlanPago.Curso.Carrera.Nombre;
             var importe = String.Format("{0:C2}", pago.ImporteCuota);
-            var códigoBarra = "";
-
+            var total = String.Format("{0:C2}", pago.ImporteCuota);
+            var total_codbar = pago.ImporteCuota;
+            var fechaVtoJuliano = String.Format("{0:yy}{1:000}", dtFechaPago.Value, (dtFechaPago.Value - new DateTime(dtFechaPago.Value.Year, 1, 1)).TotalDays);
+            var importe_codbar = Math.Truncate(total_codbar).ToString("00000000") + ((total_codbar - Math.Truncate(total_codbar)) * 100).ToString("00");
+            var códigoBarra = idPago + fechaVtoJuliano + importe_codbar;
+            códigoBarra += Lib.Calculos.DígitoVerificador.CalculaDigitoVerificador(códigoBarra, "10");
             if (pago.NroCuota > 0)
             {
 
@@ -91,7 +95,10 @@ namespace SMPorres.Forms.Pagos
             else
             {
                 cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento, 
-                    carrera, curso, importe, códigoBarra, "1", "Matrícula", importe);
+                    carrera, curso, total, códigoBarra, "1", "Matrícula", importe);
+
+                cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+                    carrera, curso, total, códigoBarra, "1", "Recargo", importe);
             }
             return cupón;
         }
