@@ -251,8 +251,8 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnImprimirCuota_Click(object sender, EventArgs e)
         {
-            int rowindex = dgvCursos.CurrentCell.RowIndex;
-            var id = (int)dgvCursos.Rows[rowindex].Cells[0].Value;
+            int rowindex = dgvPagos.CurrentCell.RowIndex;
+            var id = (int)dgvPagos.Rows[rowindex].Cells[0].Value;
             using (var f = new Pagos.frmInfCupónDePago(id)) f.ShowDialog();
         }
     }
