@@ -33,8 +33,12 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ckTodas = new System.Windows.Forms.CheckBox();
+            this.txtDescripción = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.dtFechaPago = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
+            this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -52,24 +56,25 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 77);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(356, 130);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btnCancelar);
             this.panel3.Controls.Add(this.btnAceptar);
+            this.panel3.Controls.Add(this.bevel1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 42);
+            this.panel3.Location = new System.Drawing.Point(0, 95);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(236, 35);
+            this.panel3.Size = new System.Drawing.Size(356, 35);
             this.panel3.TabIndex = 2;
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(121, 6);
+            this.btnCancelar.Location = new System.Drawing.Point(181, 6);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -79,7 +84,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(40, 6);
+            this.btnAceptar.Location = new System.Drawing.Point(100, 6);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -89,30 +94,75 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.ckTodas);
+            this.panel2.Controls.Add(this.txtDescripción);
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.dtFechaPago);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(230, 36);
+            this.panel2.Size = new System.Drawing.Size(350, 89);
             this.panel2.TabIndex = 1;
+            // 
+            // ckTodas
+            // 
+            this.ckTodas.AutoSize = true;
+            this.ckTodas.Location = new System.Drawing.Point(82, 61);
+            this.ckTodas.Name = "ckTodas";
+            this.ckTodas.Size = new System.Drawing.Size(223, 17);
+            this.ckTodas.TabIndex = 14;
+            this.ckTodas.Text = "Imprimir todas las cuotas impagas del plan";
+            this.ckTodas.UseVisualStyleBackColor = true;
+            this.ckTodas.CheckedChanged += new System.EventHandler(this.ckTodas_CheckedChanged);
+            // 
+            // txtDescripción
+            // 
+            this.txtDescripción.BackColor = System.Drawing.Color.AliceBlue;
+            this.txtDescripción.Location = new System.Drawing.Point(82, 9);
+            this.txtDescripción.Name = "txtDescripción";
+            this.txtDescripción.ReadOnly = true;
+            this.txtDescripción.Size = new System.Drawing.Size(256, 20);
+            this.txtDescripción.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(35, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Cuota: ";
             // 
             // dtFechaPago
             // 
-            this.dtFechaPago.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFechaPago.Location = new System.Drawing.Point(110, 8);
+            this.dtFechaPago.Location = new System.Drawing.Point(82, 35);
             this.dtFechaPago.Name = "dtFechaPago";
-            this.dtFechaPago.Size = new System.Drawing.Size(100, 20);
+            this.dtFechaPago.Size = new System.Drawing.Size(200, 20);
             this.dtFechaPago.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 11);
+            this.label3.Location = new System.Drawing.Point(9, 41);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 13);
+            this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Fecha de Pago:";
+            this.label3.Text = "Pagar hasta:";
+            // 
+            // bevel1
+            // 
+            this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel1.BevelType = CustomLibrary.ComponentModel.BevelType.TopLine;
+            this.bevel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel1.Location = new System.Drawing.Point(0, 0);
+            this.bevel1.Margin = new System.Windows.Forms.Padding(0);
+            this.bevel1.Name = "bevel1";
+            this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel1.Size = new System.Drawing.Size(356, 23);
+            this.bevel1.TabIndex = 4;
+            this.bevel1.Text = "bevel1";
             // 
             // frmInfCupónDePago
             // 
@@ -120,7 +170,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(236, 77);
+            this.ClientSize = new System.Drawing.Size(356, 130);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmInfCupónDePago";
             this.Text = "Impresión de Cuotas";
@@ -141,5 +191,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtFechaPago;
+        private System.Windows.Forms.TextBox txtDescripción;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox ckTodas;
+        private CustomLibrary.ComponentModel.Bevel bevel1;
     }
 }

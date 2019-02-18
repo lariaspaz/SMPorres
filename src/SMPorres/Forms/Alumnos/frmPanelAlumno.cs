@@ -112,12 +112,10 @@ namespace SMPorres.Forms.Alumnos
 
         private void dgvCursos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //foreach (DataGridViewColumn c in dgvCursos.Columns)
-            //{
-            //    c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            //    //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //}
-
+            foreach (DataGridViewColumn c in dgvCursos.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
 
             dgvCursos.Columns[0].HeaderText = "Código";
             dgvCursos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -154,18 +152,10 @@ namespace SMPorres.Forms.Alumnos
 
         private void dgvPlanesPago_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //CantidadCuotas = pp.CantidadCuotas,
-            //NroCuota = pp.NroCuota,
-            //ImporteCuota = pp.ImporteCuota,
-            //PorcentajeBeca = pp.PorcentajeBeca,
-            //Estado = pp.Estado,
-            //FechaGrabacion = pp.FechaGrabacion
-
-            //foreach (DataGridViewColumn c in dgvCursos.Columns)
-            //{
-            //    c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            //    //c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //}
+            foreach (DataGridViewColumn c in dgvCursos.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
 
             dgvPlanesPago.Columns[0].HeaderText = "Código";
             dgvPlanesPago.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -254,6 +244,11 @@ namespace SMPorres.Forms.Alumnos
             int rowindex = dgvPagos.CurrentCell.RowIndex;
             var id = (int)dgvPagos.Rows[rowindex].Cells[0].Value;
             using (var f = new Pagos.frmInfCupónDePago(id)) f.ShowDialog();
+        }
+
+        private void dgvCursos_SelectionChanged(object sender, EventArgs e)
+        {
+            ConsultarPlanesPago();
         }
     }
 }

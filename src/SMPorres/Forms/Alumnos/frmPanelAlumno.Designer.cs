@@ -247,15 +247,23 @@
             // 
             // dgvCursos
             // 
+            this.dgvCursos.AllowUserToAddRows = false;
+            this.dgvCursos.AllowUserToDeleteRows = false;
+            this.dgvCursos.AllowUserToResizeRows = false;
+            this.dgvCursos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCursos.EvenRowColor = System.Drawing.Color.Empty;
             this.dgvCursos.Location = new System.Drawing.Point(0, 23);
+            this.dgvCursos.MultiSelect = false;
             this.dgvCursos.Name = "dgvCursos";
-            this.dgvCursos.OddRowColor = System.Drawing.Color.Empty;
+            this.dgvCursos.OddRowColor = System.Drawing.Color.AliceBlue;
+            this.dgvCursos.ReadOnly = true;
+            this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCursos.Size = new System.Drawing.Size(719, 130);
             this.dgvCursos.TabIndex = 1;
             this.dgvCursos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCursos_DataBindingComplete);
+            this.dgvCursos.SelectionChanged += new System.EventHandler(this.dgvCursos_SelectionChanged);
             // 
             // label3
             // 
