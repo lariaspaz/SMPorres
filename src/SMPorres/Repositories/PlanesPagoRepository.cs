@@ -35,6 +35,33 @@ namespace SMPorres.Repositories
             }
         }
 
+        internal static PlanPago ObtenerPlanPago(int idPago)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.Pagos.Find(idPago).PlanPago;
+                //var pago = db.Pagos.Find(idPago).PlanPago;
+                //var query = (from pp in pago.PlanPago
+                //             where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso
+                //             select pp)
+                //            .ToList()
+                //            .Select(
+                //                pp => new PlanPago
+                //                {
+                //                    Id = pp.Id,
+                //                    CantidadCuotas = pp.CantidadCuotas,
+                //                    NroCuota = pp.NroCuota,
+                //                    ImporteCuota = pp.ImporteCuota,
+                //                    PorcentajeBeca = pp.PorcentajeBeca,
+                //                    Estado = pp.Estado,
+                //                    FechaGrabacion = pp.FechaGrabacion
+                //                }
+                //            );
+
+                //return (from pp in query orderby pp.Estado, pp.FechaGrabacion select pp).ToList();
+            }
+        }
+
         public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca)
         {
             using (var db = new SMPorresEntities())

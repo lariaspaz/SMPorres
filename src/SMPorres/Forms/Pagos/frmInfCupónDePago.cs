@@ -91,30 +91,43 @@ namespace SMPorres.Forms.Pagos
 
             if (ckTodas.Checked)
             {
-                var pagos = pago.PlanPago.Pagos.Where(p => p.Fecha == null && p.NroCuota > 0);
+                //var pagos = pago.PlanPago.Pagos.Where(p => p.Fecha == null && p.NroCuota > 0);
+                var pagos = PagosRepository.ObtenerPagos(pago.IdPlanPago).Where(p => p.Fecha == null && p.NroCuota > 0);
                 var min = pagos.Min(p => p.NroCuota);
                 var max = pagos.Max(p => p.NroCuota);
 
+                // CUOTAS *************************
                 var impBase = pagos.Sum(p => p.ImporteCuota);
                 var importe = impBase.ToString("$ 0,0.00");
                 string concepto = String.Format("Cuotas de {0} a {1} ", min, max);
                 cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                     carrera, curso, "", "", "1", concepto, importe);
 
-                var pb = pagos
-                            .Where(p => p.PlanPago.PorcentajeBeca > 0)
-                            .Select(p => p.ImporteCuota * ((decimal) p.PlanPago.PorcentajeBeca) / 100);
-                decimal beca = pb.Sum();
+
+                // BECAS *************************
+                decimal beca = 0;
+                string s = "";
+                decimal descBeca = 0;
+                foreach (var p in pagos)
+                {
+                    var p1 = PagosRepository.ObtenerPago(p.IdPago);
+                    if (p1.PlanPago.PorcentajeBeca > 0)
+                    {
+                        descBeca = (decimal)p1.PlanPago.PorcentajeBeca;
+                        beca += p.ImporteCuota * (descBeca / 100);
+                        s += String.IsNullOrEmpty(s) ? p.NroCuota.ToString() : "," + p.NroCuota;
+                    }
+                }
                 if (beca > 0)
                 {
-                    string s = String.Join(", ", pagos
-                                                    .Where(p => p.PlanPago.PorcentajeBeca > 0)
-                                                    .Select(p => p.NroCuota.ToString()));
                     importe = beca.ToString("$ -0,0.00");
-                    concepto = String.Format("Descuentos por becas de cuotas %{0}", s);
+                    concepto = String.Format("Descuento de %{0} por becas de cuotas {1} ", descBeca, s);
                     cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                         carrera, curso, "", "", "2", concepto, importe);
                 }
+
+
+                //
 
                 //CuotasRepository.ObtenerCuotas().Any(
                 //var cuota = CuotasRepository.ObtenerCuotas().Where(c => c.NroCuota == pago.NroCuota).FirstOrDefault();
@@ -125,7 +138,7 @@ namespace SMPorres.Forms.Pagos
                 //}
 
             }
-            if (pago.NroCuota > 0)
+            else if (pago.NroCuota > 0)
             {
                 var impBase = pago.ImporteCuota;
                 var importe = impBase.ToString("$ 0,0.00");
