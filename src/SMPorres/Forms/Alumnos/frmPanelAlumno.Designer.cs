@@ -208,6 +208,7 @@
             this.btnAnularPlanPago.Size = new System.Drawing.Size(23, 22);
             this.btnAnularPlanPago.Text = "toolStripButton3";
             this.btnAnularPlanPago.ToolTipText = "Anular plan de pago (Ctrl + Delete)";
+            this.btnAnularPlanPago.Click += new System.EventHandler(this.btnAnularPlanPago_Click);
             // 
             // btnImprimirCuota
             // 

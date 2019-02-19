@@ -150,6 +150,15 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
+        private int PlanDePagoSeleccionado
+        {
+            get
+            {
+                int rowindex = dgvPlanesPago.CurrentCell.RowIndex;
+                return (int)dgvPlanesPago.Rows[rowindex].Cells[0].Value;
+            }
+        }
+
         private void dgvPlanesPago_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewColumn c in dgvCursos.Columns)
@@ -249,6 +258,24 @@ namespace SMPorres.Forms.Alumnos
         private void dgvCursos_SelectionChanged(object sender, EventArgs e)
         {
             ConsultarPlanesPago();
+        }
+
+        private void btnAnularPlanPago_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Está seguro de que desea anular el plan de pago?",
+                "Anular plan de pago", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                try
+                {
+                    PlanesPagoRepository.AnularPlanDePago(PlanDePagoSeleccionado);
+                    ConsultarDatos();
+                    dgvPlanesPago.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == PlanDePagoSeleccionado);
+                }
+                catch (Exception ex)
+                {
+                    ShowError(ex.Message);
+                }
+            }
         }
     }
 }

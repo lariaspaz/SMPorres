@@ -98,5 +98,20 @@ namespace SMPorres.Repositories
                 db.SaveChanges();
             }
         }
+
+        public static void AnularPlanDePago(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.PlanesPago.Any(t => t.Id == id))
+                {
+                    throw new Exception(String.Format("No existe plan de pago {0}", id));
+                }
+                var pp = db.PlanesPago.Find(id);
+                pp.Estado = 3;
+                
+                db.SaveChanges();
+            }
+        }
     }
 }
