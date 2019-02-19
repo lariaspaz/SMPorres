@@ -35,15 +35,10 @@ namespace SMPorres.Forms.Cuotas
             dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dgvDatos.Columns[2].HeaderText = "Vto. Bonificación";
+            dgvDatos.Columns[2].HeaderText = "Vto. Cuota";
             dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
-
-            dgvDatos.Columns[3].HeaderText = "Vto. Cuota";
-            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvDatos.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)
@@ -67,7 +62,7 @@ namespace SMPorres.Forms.Cuotas
                 {
                     try
                     {
-                        var c = CuotasRepository.Insertar(f.NroCuota, f.VtoBonificacion, f.VtoCuota);
+                        var c = CuotasRepository.Insertar(f.NroCuota, f.VtoCuota);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }
@@ -88,7 +83,7 @@ namespace SMPorres.Forms.Cuotas
                 {
                     try
                     {
-                        CuotasRepository.Actualizar(c.Id, f.NroCuota, f.VtoBonificacion, f.VtoCuota);
+                        CuotasRepository.Actualizar(c.Id, f.NroCuota, f.VtoCuota);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }

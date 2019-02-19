@@ -16,7 +16,6 @@ namespace SMPorres.Models
     {
         public int Id { get; set; }
         public short NroCuota { get; set; }
-        public System.DateTime VtoBonificacion { get; set; }
         public System.DateTime VtoCuota { get; set; }
     }
 }

@@ -27,7 +27,6 @@ namespace SMPorres.Forms.Cuotas
         {
             this.Text = "Edición de cuota";
             txtNroCuota.Text = cuota.NroCuota.ToString();
-            dtVtoBonificacion.Value = cuota.VtoBonificacion;
             dtVtoCuota.Value = cuota.VtoCuota;
         }
 
@@ -36,14 +35,6 @@ namespace SMPorres.Forms.Cuotas
             get
             {
                 return (short)txtNroCuota.IntValue;
-            }
-        }
-
-        public DateTime VtoBonificacion
-        {
-            get
-            {
-                return dtVtoBonificacion.Value;
             }
         }
 
