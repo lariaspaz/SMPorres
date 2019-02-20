@@ -53,7 +53,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvPlanesPago = new CustomLibrary.ComponentModel.CustomDataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tpCuotas = new System.Windows.Forms.TabPage();
             this.dgvPagos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -65,7 +65,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.tpCuotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -292,7 +292,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tpCuotas);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -331,16 +331,16 @@
             this.dgvPlanesPago.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPlanesPago_DataBindingComplete);
             this.dgvPlanesPago.SelectionChanged += new System.EventHandler(this.dgvPlanesPago_SelectionChanged);
             // 
-            // tabPage2
+            // tpCuotas
             // 
-            this.tabPage2.Controls.Add(this.dgvPagos);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(711, 224);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Cuotas";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpCuotas.Controls.Add(this.dgvPagos);
+            this.tpCuotas.Location = new System.Drawing.Point(4, 22);
+            this.tpCuotas.Name = "tpCuotas";
+            this.tpCuotas.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCuotas.Size = new System.Drawing.Size(711, 224);
+            this.tpCuotas.TabIndex = 1;
+            this.tpCuotas.Text = "Cuotas";
+            this.tpCuotas.UseVisualStyleBackColor = true;
             // 
             // dgvPagos
             // 
@@ -385,7 +385,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).EndInit();
-            this.tabPage2.ResumeLayout(false);
+            this.tpCuotas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -412,7 +412,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpCuotas;
         private CustomLibrary.ComponentModel.CustomDataGridView dgvPlanesPago;
         private CustomLibrary.ComponentModel.CustomDataGridView dgvPagos;
         private System.Windows.Forms.ToolTip toolTip1;

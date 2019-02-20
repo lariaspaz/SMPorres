@@ -8,10 +8,10 @@ namespace SMPorres.Lib.Calculos
 {
     public class DígitoVerificador
     {
-        public static int CalculaDigitoVerificador(string códigoBarra, string semilla)
+        public static int CalculaDigitoVerificador(string códigoBarra)
         {
             //var códigoBarra = "0000002191090000082800";
-            //var semilla = "10";
+            const string semilla = "15973";
             var list = códigoBarra.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));
             var sem = String.Concat(Enumerable.Repeat(semilla, códigoBarra.Length / semilla.Length + 1));
             var list2 = sem.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));

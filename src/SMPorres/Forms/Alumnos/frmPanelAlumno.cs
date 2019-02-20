@@ -250,6 +250,7 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnImprimirCuota_Click(object sender, EventArgs e)
         {
+            tabControl1.SelectedTab = tpCuotas;
             int rowindex = dgvPagos.CurrentCell.RowIndex;
             var id = (int)dgvPagos.Rows[rowindex].Cells[0].Value;
             using (var f = new Pagos.frmInfCupónDePago(id)) f.ShowDialog();
