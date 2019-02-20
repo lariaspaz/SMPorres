@@ -68,7 +68,7 @@ namespace SMPorres.Forms.Cuotas
                     }
                     catch (Exception ex)
                     {
-                        ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                        ShowError("Error al intentar grabar los datos: \n", ex);
                     }
                 }
             }

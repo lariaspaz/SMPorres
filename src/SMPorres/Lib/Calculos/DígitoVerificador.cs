@@ -8,7 +8,18 @@ namespace SMPorres.Lib.Calculos
 {
     public class DígitoVerificador
     {
-        public static int CalculaDigitoVerificador(string codBarra, string semilla)
+        public static int CalculaDigitoVerificador(string códigoBarra, string semilla)
+        {
+            //var códigoBarra = "0000002191090000082800";
+            //var semilla = "10";
+            var list = códigoBarra.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));
+            var sem = String.Concat(Enumerable.Repeat(semilla, códigoBarra.Length / semilla.Length + 1));
+            var list2 = sem.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));
+            var sum = list.ElementAt(0) + list.Skip(1).Select((item, index) => item * list2.ElementAt(index)).Sum();            
+            return (sum / 2) % 10;
+        }
+        
+        public static int CalculaDigitoVerificador_old(string codBarra, string semilla)
         {
             int digitoVerificador = 0;
 
@@ -29,7 +40,7 @@ namespace SMPorres.Lib.Calculos
 
         private static List<int> ListarElementosCodigoBarra(string codigoBarra)
         {
-            if (codigoBarra.Length <= 0) return null;
+            if (codigoBarra.Length <= 0) return null;            
 
             List<int> LCodigo = new List<int>();
             var loopCounter = 0;
@@ -59,6 +70,17 @@ namespace SMPorres.Lib.Calculos
 
         private static int MultiplicarElementos(List<int> codigo, List<int> semilla)
         {
+            var s = "0000002191090000082800";
+            var s2 = "15973";
+            var list = s.ToCharArray().Select(c => Convert.ToInt32(c));
+
+            var sem = String.Concat(Enumerable.Repeat(s2, s.Length / s2.Length + 1));
+            var list2 = sem.Substring(0, s.Length - 1).ToCharArray().Select(c => Convert.ToInt32(c));
+
+            
+
+            Console.WriteLine(list2);
+
             int Multiplicacion = 0;
             int contadorSemilla = 0;
 

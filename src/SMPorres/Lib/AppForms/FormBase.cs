@@ -26,5 +26,23 @@ namespace SMPorres.Lib.AppForms
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        protected void ShowError(string message, Exception ex)
+        {
+            string error = ex.Message;
+            while (error.Contains("inner exception"))
+            {
+                if (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    error = ex.Message;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            ShowError(message + error);
+        }
     }
 }
