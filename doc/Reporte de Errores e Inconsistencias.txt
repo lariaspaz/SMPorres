@@ -1,0 +1,8 @@
+* Permitió borrar asignacion de curso a un alumno y al eliminar el alumno, corrobora que tiene un plan de pago asignado para un curso
+en este caso al quitar la asignacion del curso debe corroborar que no se haya asignado el plan de pago previamente
+
+* Al editar alumno no carga Tipo Documento (está levantando CUIL )
+
+* Error al abrir edicion / Departamentos
+
+* Error al abrir edicion / Localidades
