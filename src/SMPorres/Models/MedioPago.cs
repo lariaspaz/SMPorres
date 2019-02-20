@@ -12,11 +12,18 @@ namespace SMPorres.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cuota
+    public partial class MedioPago
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MedioPago()
+        {
+            this.Pagos = new HashSet<Pago>();
+        }
+    
         public int Id { get; set; }
-        public short NroCuota { get; set; }
-        public System.DateTime VtoCuota { get; set; }
-        public System.DateTime VtoBonificacion { get; set; }
+        public string Descripcion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pago> Pagos { get; set; }
     }
 }

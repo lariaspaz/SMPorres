@@ -43,5 +43,6 @@ namespace SMPorres.Models
         public virtual Pago Contrasiento { get; set; }
         public virtual PlanPago PlanPago { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual MedioPago MediosPago { get; set; }
     }
 }

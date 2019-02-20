@@ -118,6 +118,12 @@
     <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pagos\frmPagarCuota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pagos\frmPagarCuota.Designer.cs">
+      <DependentUpon>frmPagarCuota.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pagos\frmInfCupónDePago.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,6 +301,9 @@
     <Compile Include="Models\Localidad.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MedioPago.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Pago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -394,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pagos\frmPagarCuota.resx">
+      <DependentUpon>frmPagarCuota.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagos\frmInfCupónDePago.resx">
       <DependentUpon>frmInfCupónDePago.cs</DependentUpon>
