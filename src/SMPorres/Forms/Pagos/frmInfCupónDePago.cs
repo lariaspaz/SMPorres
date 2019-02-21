@@ -210,7 +210,7 @@ namespace SMPorres.Forms.Pagos
                 var impBase = pago.ImporteCuota;
                 decimal beca = 0;
 
-                var p1 = PagosRepository.ObtenerPago(p.IdPago);
+                var p1 = PagosRepository.ObtenerPago(p.Id);
                 if (p1.PlanPago.PorcentajeBeca > 0)
                 {
                     descBeca = (decimal)p1.PlanPago.PorcentajeBeca;

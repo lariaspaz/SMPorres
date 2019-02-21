@@ -1,0 +1,1 @@
+exec sp_rename 'Pagos.IdPago', 'Id', 'COLUMN'

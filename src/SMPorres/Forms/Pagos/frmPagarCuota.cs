@@ -14,37 +14,52 @@ using System.Windows.Forms;
 
 namespace SMPorres.Forms.Pagos
 {
-    public partial class frmEdición : FormBase
+    public partial class frmPagarCuota : FormBase
     {
-        public frmEdición()
+        public frmPagarCuota(int idPago)
         {
             InitializeComponent();
-            cbMediosPago.DataSource = CarrerasRepository.ObtenerCarreras().OrderBy(c => c.Nombre).ToList();
-            cbMediosPago.DisplayMember = "Nombre";
+
+            var p = PagosRepository.ObtenerPago(idPago);
+            txtCurso.Text = String.Format("{0} de {1}", p.PlanPago.Curso.Nombre, p.PlanPago.Curso.Carrera.Nombre);
+
+            if (p.NroCuota == 0)
+            {
+                txtCuota.Text = "Matrícula";
+                txtCuota.TextAlign = HorizontalAlignment.Left;
+            }
+            else
+            {
+                txtCuota.Text = String.Format("{0} de {1}", p.NroCuota, Lib.Configuration.MaxCuotas);
+                txtCuota.TextAlign = HorizontalAlignment.Right;
+            }
+
+            var dp = PagosRepository.ObtenerDetallePago(idPago, dtFechaPago.Value);
+            if (dp.Resultado)
+            {
+                txtImporte.DecValue = dp.ImporteBase;
+                txtDescBeca.DecValue = dp.Beca;
+                txtDescPagoATérmino.DecValue = dp.DescuentoPagoTérmino;
+                txtRecargoPorMora.DecValue = dp.RecargoPorMora;
+                txtTotal.DecValue = dp.TotalAPagar;
+            }
+            else
+            {
+                ShowError("Falta parametrizar la cuota " + p.NroCuota);
+            }
+
+            dtFechaPago.Value = Lib.Configuration.CurrentDate;
+            dtFechaPago.Select();
+
+            cbMediosPago.DataSource = MediosPagoRepository.ObtenerMediosPago();
+            cbMediosPago.DisplayMember = "Descripcion";
             cbMediosPago.ValueMember = "Id";
-            this.Text = "Nuevo curso";
-            txtNombre.Select();
+            cbMediosPago.SelectedIndex = 0;
+
             _validator = new FormValidations(this, errorProvider1);
         }
 
-        public frmEdición(Curso curso) : this()
-        {
-            this.Text = "Edición de curso";
-            txtNombre.Text = curso.Nombre;
-            cbMediosPago.SelectedValue = curso.IdCarrera;
-            txtDescBeca.DecValue = curso.ImporteMatricula;
-            txtRecargoPorMora.DecValue = curso.ImporteCuota;
-        }
-
-        public string Nombre
-        {
-            get
-            {
-                return txtNombre.Text;
-            }
-        }
-
-        public int IdCarrera
+        public int IdMedioPago
         {
             get
             {
@@ -52,26 +67,10 @@ namespace SMPorres.Forms.Pagos
             }
         }
 
-        public decimal ImporteMatrícula
-        {
-            get
-            {
-                return txtDescBeca.DecValue;
-            }
-        }
-
-        public decimal ImporteCuota
-        {
-            get
-            {
-                return txtRecargoPorMora.DecValue;
-            }
-        }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.None;
-            if (this.ValidarDatos())
+            DialogResult = DialogResult.None;
+            if (ValidarDatos())
             {
                 DialogResult = DialogResult.OK;
             }
@@ -79,8 +78,10 @@ namespace SMPorres.Forms.Pagos
 
         private bool ValidarDatos()
         {
-            return _validator.Validar(txtNombre, !String.IsNullOrEmpty(txtNombre.Text.Trim()), "No puede estar vacío") &&
-                _validator.Validar(txtRecargoPorMora, txtRecargoPorMora.DecValue >= 0, "No puede ser menor que 0");
-        }        
+            //return _validator.Validar(txtNombre, !String.IsNullOrEmpty(txtNombre.Text.Trim()), "No puede estar vacío") &&
+            //    _validator.Validar(txtRecargoPorMora, txtRecargoPorMora.DecValue >= 0, "No puede ser menor que 0");
+
+            return false;
+        }
     }
 }

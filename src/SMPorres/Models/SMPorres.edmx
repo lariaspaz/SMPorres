@@ -13,13 +13,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
+          <Property Name="NroDocumento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="Barrios">
           <Key>
@@ -37,7 +37,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -54,7 +54,6 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Cuota" Type="smallint" Nullable="false" />
-          <Property Name="VtoBonificacion" Type="smalldatetime" Nullable="false" />
           <Property Name="VtoCuota" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Cursos">
@@ -144,9 +143,9 @@
         </EntityType>
         <EntityType Name="Pagos">
           <Key>
-            <PropertyRef Name="IdPago" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdPago" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdPlanPago" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="smalldatetime" />
           <Property Name="NroCuota" Type="smallint" Nullable="false" />
@@ -423,7 +422,7 @@
           <End Role="Pagos1" Type="Self.Pagos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pagos">
-              <PropertyRef Name="IdPago" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Pagos1">
               <PropertyRef Name="IdPagoAsiento" />
@@ -765,7 +764,12 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="UsuariosItemsMenu" EntitySet="UsuariosItemsMenus" />
           </AssociationSet>
+          <EntitySet Name="MediosPago" EntityType="SMPorres_DevModel.MedioPago" />
           <EntitySet Name="Pagos" EntityType="SMPorres_DevModel.Pago" />
+          <AssociationSet Name="FK_Pagos_MediosPago" Association="SMPorres_DevModel.FK_Pagos_MediosPago">
+            <End Role="MedioPago" EntitySet="MediosPago" />
+            <End Role="Pago" EntitySet="Pagos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pagos_Pagos" Association="SMPorres_DevModel.FK_Pagos_Pagos">
             <End Role="Pago" EntitySet="Pagos" />
             <End Role="Pago1" EntitySet="Pagos" />
@@ -776,11 +780,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_Usuarios" Association="SMPorres_DevModel.FK_Pagos_Usuarios">
             <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Pago" EntitySet="Pagos" />
-          </AssociationSet>
-          <EntitySet Name="MedioPagoes" EntityType="SMPorres_DevModel.MedioPago" />
-          <AssociationSet Name="FK_Pagos_MediosPago" Association="SMPorres_DevModel.FK_Pagos_MediosPago">
-            <End Role="MediosPago" EntitySet="MedioPagoes" />
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
           </EntityContainer>
@@ -810,7 +809,7 @@
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
@@ -819,7 +818,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="Barrio">
           <Key>
@@ -1170,7 +1169,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="NroCuota" Type="Int16" Nullable="false" />
           <Property Name="VtoCuota" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="VtoBonificacion" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Carrera">
           <Key>
@@ -1180,7 +1178,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
@@ -1274,11 +1272,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MedioPago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_MediosPago" FromRole="MedioPago" ToRole="Pago" />
+        </EntityType>
         <EntityType Name="Pago">
           <Key>
-            <PropertyRef Name="IdPago" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdPago" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdPlanPago" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <Property Name="NroCuota" Type="Int16" Nullable="false" />
@@ -1295,18 +1301,30 @@
           <Property Name="IdPagoAsiento" Type="Int32" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="FechaGrabacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MedioPago" Relationship="SMPorres_DevModel.FK_Pagos_MediosPago" FromRole="Pago" ToRole="MedioPago" />
           <NavigationProperty Name="Asiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago" ToRole="Pago1" />
           <NavigationProperty Name="Contrasiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago1" ToRole="Pago" />
           <NavigationProperty Name="PlanPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanPago" />
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
-          <NavigationProperty Name="MediosPago" Relationship="SMPorres_DevModel.FK_Pagos_MediosPago" FromRole="Pago" ToRole="MediosPago" />
         </EntityType>
+        <Association Name="FK_Pagos_MediosPago">
+          <End Type="SMPorres_DevModel.MedioPago" Role="MedioPago" Multiplicity="0..1" />
+          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedioPago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdMedioPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pagos_Pagos">
           <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="0..1" />
           <End Type="SMPorres_DevModel.Pago" Role="Pago1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pago">
-              <PropertyRef Name="IdPago" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Pago1">
               <PropertyRef Name="IdPagoAsiento" />
@@ -1334,26 +1352,6 @@
             </Principal>
             <Dependent Role="Pago">
               <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="MedioPago">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_MediosPago" FromRole="MediosPago" ToRole="Pago" />
-        </EntityType>
-        <Association Name="FK_Pagos_MediosPago">
-          <End Type="SMPorres_DevModel.MedioPago" Role="MediosPago" Multiplicity="0..1" />
-          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MediosPago">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pago">
-              <PropertyRef Name="IdMedioPago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1516,7 +1514,6 @@
           <EntitySetMapping Name="Cuotas">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Cuota">
               <MappingFragment StoreEntitySet="Cuotas">
-                <ScalarProperty Name="VtoBonificacion" ColumnName="VtoBonificacion" />
                 <ScalarProperty Name="VtoCuota" ColumnName="VtoCuota" />
                 <ScalarProperty Name="NroCuota" ColumnName="Cuota" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1562,6 +1559,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MediosPago">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.MedioPago">
+              <MappingFragment StoreEntitySet="MediosPago">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Pagos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Pago">
               <MappingFragment StoreEntitySet="Pagos">
@@ -1581,14 +1586,6 @@
                 <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
-                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MedioPagoes">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.MedioPago">
-              <MappingFragment StoreEntitySet="MediosPago">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

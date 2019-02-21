@@ -95,7 +95,7 @@ namespace SMPorres.Repositories
                     for (short i = 0; i <= Configuration.MaxCuotas; i++)
                     {
                         var p = new Pago();
-                        p.IdPago = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.IdPago) + 1 : 1;
+                        p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
                         p.IdPlanPago = id;
                         p.NroCuota = i;
                         p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;

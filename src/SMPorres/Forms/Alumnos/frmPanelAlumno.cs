@@ -217,7 +217,7 @@ namespace SMPorres.Forms.Alumnos
             var query = from p in PagosRepository.ObtenerPagos(id)
                         select new
                         {
-                            IdPago = p.IdPago,
+                            Id = p.Id,
                             Concepto = (p.NroCuota == 0)? "Matrícula":String.Format("Cuota Nº {0}", p.NroCuota),
                             Importe = p.ImporteCuota,
                             Fecha = p.Fecha
@@ -248,12 +248,20 @@ namespace SMPorres.Forms.Alumnos
             dgvPagos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
-        private void btnImprimirCuota_Click(object sender, EventArgs e)
+        private Pago PagoSeleccionado
         {
-            tabControl1.SelectedTab = tpCuotas;
-            int rowindex = dgvPagos.CurrentCell.RowIndex;
-            var id = (int)dgvPagos.Rows[rowindex].Cells[0].Value;
-            using (var f = new Pagos.frmInfCupónDePago(id)) f.ShowDialog();
+            get
+            {
+                tabControl1.SelectedTab = tpCuotas;
+                int rowindex = dgvPagos.CurrentCell.RowIndex;
+                var id = (int)dgvPagos.Rows[rowindex].Cells[0].Value;
+                return PagosRepository.ObtenerPago(id);
+            }
+        }
+
+        private void btnImprimirCuota_Click(object sender, EventArgs e)
+        {            
+            using (var f = new Pagos.frmInfCupónDePago(PagoSeleccionado.Id)) f.ShowDialog();
         }
 
         private void dgvCursos_SelectionChanged(object sender, EventArgs e)
@@ -277,6 +285,11 @@ namespace SMPorres.Forms.Alumnos
                     ShowError(ex.Message);
                 }
             }
+        }
+
+        private void btnPagarCuota_Click(object sender, EventArgs e)
+        {
+            using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
         }
     }
 }

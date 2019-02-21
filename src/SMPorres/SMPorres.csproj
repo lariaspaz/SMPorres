@@ -365,6 +365,7 @@
     <Compile Include="Repositories\CuotasRepository.cs" />
     <Compile Include="Repositories\GruposItemsMenuRepository.cs" />
     <Compile Include="Repositories\ItemsMenuRepository.cs" />
+    <Compile Include="Repositories\MediosPagoRepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
     <Compile Include="Repositories\PlanesPagoRepository.cs" />
     <Compile Include="Repositories\TiposDocumentoRepository.cs" />
@@ -533,6 +534,7 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
       <LastGenOutput>SMPorres.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\money_dollar.png" />
     <None Include="Resources\printer.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\control_rewind_blue.png" />

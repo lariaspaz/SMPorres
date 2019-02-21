@@ -20,7 +20,7 @@ namespace SMPorres.Models
             this.Asiento = new HashSet<Pago>();
         }
     
-        public int IdPago { get; set; }
+        public int Id { get; set; }
         public int IdPlanPago { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public short NroCuota { get; set; }
@@ -38,11 +38,11 @@ namespace SMPorres.Models
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> FechaGrabacion { get; set; }
     
+        public virtual MedioPago MedioPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Asiento { get; set; }
         public virtual Pago Contrasiento { get; set; }
         public virtual PlanPago PlanPago { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual MedioPago MediosPago { get; set; }
     }
 }
