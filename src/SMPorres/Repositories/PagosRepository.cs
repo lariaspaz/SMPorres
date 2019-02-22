@@ -1,4 +1,5 @@
-﻿using SMPorres.Models;
+﻿using SMPorres.Lib;
+using SMPorres.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,59 +93,64 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static DetallePago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
-        {
-            DetallePago dp = new DetallePago();
-            var pago = ObtenerPago(idPago);
-            dp.ImporteBase = pago.ImporteCuota;
-            var descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
-            dp.Beca = 0;
-            if (descBeca > 0)
-            {
-                dp.Beca = Math.Round(dp.ImporteBase * (descBeca / 100));
-            }
+        //public static DetallePago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
+        //{
+        //    DetallePago dp = new DetallePago();
+        //    var pago = ObtenerPago(idPago);
+        //    dp.ImporteBase = pago.ImporteCuota;
+        //    var descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
+        //    dp.Beca = 0;
+        //    if (descBeca > 0)
+        //    {
+        //        dp.Beca = Math.Round(dp.ImporteBase * (descBeca / 100));
+        //    }
 
-            if (pago.NroCuota == 0)
-            {
-                dp.TotalAPagar = dp.ImporteBase - dp.Beca;
-                dp.Resultado = true;
-                return dp;
-            }
+        //    if (pago.NroCuota == 0)
+        //    {
+        //        dp.TotalAPagar = dp.ImporteBase - dp.Beca;
+        //        dp.Resultado = true;
+        //        return dp;
+        //    }
 
-            var cuota = CuotasRepository.ObtenerCuotas().Where(c => c.NroCuota == pago.NroCuota).FirstOrDefault();
-            if (cuota == null)
-            {
-                dp.Resultado = false;
-                return dp;
-            }
+        //    var cuota = CuotasRepository.ObtenerCuotas().Where(c => c.NroCuota == pago.NroCuota).FirstOrDefault();
+        //    if (cuota == null)
+        //    {
+        //        dp.Resultado = false;
+        //        return dp;
+        //    }
 
-            var vtoCuota = cuota.VtoCuota;
-            dp.TotalAPagar = 0;
-            var impBecado = dp.ImporteBase - dp.Beca;
-            if (fechaCompromiso <= vtoCuota)
-            {
-                var dpt = (decimal)(ConfiguracionRepository.ObtenerConfiguracion().DescuentoPagoTermino / 100);
-                dp.DescuentoPagoTérmino = Math.Round(impBecado * dpt, 2);
-                dp.TotalAPagar = dp.ImporteBase - dp.Beca - dp.DescuentoPagoTérmino;
-            }
-            else
-            {
-                var porcRecargo = (ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
-                var díasAtraso = Math.Truncate((fechaCompromiso - vtoCuota).TotalDays);
-                var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
-                dp.RecargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
-                dp.TotalAPagar = dp.ImporteBase - dp.Beca + dp.RecargoPorMora;
-            }
+        //    var vtoCuota = cuota.VtoCuota;
+        //    dp.TotalAPagar = 0;
+        //    var impBecado = dp.ImporteBase - dp.Beca;
+        //    if (fechaCompromiso <= vtoCuota)
+        //    {
+        //        var dpt = (decimal)(ConfiguracionRepository.ObtenerConfiguracion().DescuentoPagoTermino / 100);
+        //        dp.DescuentoPagoTérmino = Math.Round(impBecado * dpt, 2);
+        //        dp.TotalAPagar = dp.ImporteBase - dp.Beca - dp.DescuentoPagoTérmino;
+        //    }
+        //    else
+        //    {
+        //        var porcRecargo = (ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
+        //        var díasAtraso = Math.Truncate((fechaCompromiso - vtoCuota).TotalDays);
+        //        var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
+        //        dp.RecargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+        //        dp.TotalAPagar = dp.ImporteBase - dp.Beca + dp.RecargoPorMora;
+        //    }
 
-            dp.Resultado = true;
-            return dp;
-        }
+        //    dp.Resultado = true;
+        //    return dp;
+        //}
 
-        public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso, int a)
+        public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
             Pago pago = ObtenerPago(idPago);
 
             var impBase = pago.ImporteCuota;
+            if (pago.NroCuota == 0)
+            {
+                return pago;
+            }
+
             var descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
             decimal beca = 0;
             if (descBeca > 0)
@@ -157,31 +163,36 @@ namespace SMPorres.Repositories
             {
                 return null;
             }
-            var vtoCuota = cuota.VtoCuota;
+            pago.FechaVto = cuota.VtoCuota;
             var totalAPagar = (decimal)0;
             var impBecado = impBase - beca;
-            if (fechaCompromiso <= vtoCuota)
+            if (fechaCompromiso <= pago.FechaVto)
             {
                 var dpt = (decimal)(ConfiguracionRepository.ObtenerConfiguracion().DescuentoPagoTermino / 100);
                 var descPagoTérmino = Math.Round(impBecado * dpt, 2);
 
                 totalAPagar = impBase - beca - descPagoTérmino;
 
-                pago.PorcDescPagoTermino = (short) Math.Truncate(dpt * 100);
+                pago.PorcDescPagoTermino = (double) Math.Truncate(dpt * 100);
                 pago.ImportePagoTermino = descPagoTérmino;
             }
             else
             {
                 var porcRecargo = (ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
-                var díasAtraso = Math.Truncate((fechaCompromiso - vtoCuota).TotalDays);
+                var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto.Value).TotalDays);
                 var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
                 var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
 
                 totalAPagar = impBase - beca + recargoPorMora;
 
-
-                //pago.Recargo 
+                pago.PorcRecargo = porcRecargo;
+                pago.ImporteRecargo = recargoPorMora;
             }
+
+            pago.ImportePagado = totalAPagar;
+            pago.PorcBeca = (double) descBeca;
+            pago.ImporteBeca = beca;
+            pago.IdBecaAlumno = null;
 
             return pago;
         }
@@ -211,9 +222,9 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var p = db.Pagos.Find(idPago);
-                p.Fecha = fecha.Date;
-                p.ImportePagado = detalle.TotalAPagar;
-                //p.PorcDescPagoTermino = detalle.DescuentoPagoTérmino;
+                p.IdUsuario = Session.CurrentUser.Id;
+                p.FechaGrabacion = Configuration.CurrentDate;
+                db.SaveChanges();
             }
             return true;
         }

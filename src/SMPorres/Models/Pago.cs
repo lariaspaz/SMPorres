@@ -23,15 +23,17 @@ namespace SMPorres.Models
         public int Id { get; set; }
         public int IdPlanPago { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<System.DateTime> FechaVto { get; set; }
         public short NroCuota { get; set; }
         public Nullable<decimal> ImportePagado { get; set; }
         public decimal ImporteCuota { get; set; }
         public Nullable<double> PorcDescPagoTermino { get; set; }
         public Nullable<decimal> ImportePagoTermino { get; set; }
         public Nullable<double> PorcBeca { get; set; }
+        public Nullable<decimal> ImporteBeca { get; set; }
         public Nullable<int> IdBecaAlumno { get; set; }
         public Nullable<double> PorcRecargo { get; set; }
-        public Nullable<decimal> Recargo { get; set; }
+        public Nullable<decimal> ImporteRecargo { get; set; }
         public Nullable<int> IdMedioPago { get; set; }
         public Nullable<int> IdArchivo { get; set; }
         public Nullable<short> EsContrasiento { get; set; }

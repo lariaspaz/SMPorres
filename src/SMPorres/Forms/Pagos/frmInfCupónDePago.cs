@@ -100,86 +100,132 @@ namespace SMPorres.Forms.Pagos
             else if (pago.NroCuota > 0)
             {
                 return GenerarDetalleCuota(cupón, idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento,
-                    documento, curso, carrera, fechaCompromiso, pago);
+                    documento, curso, carrera, fechaCompromiso);
             }
             else
             {
                 return GenerarMatrícula(cupón, idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento,
-                    documento, curso, carrera, fechaCompromiso, pago);
+                    documento, curso, carrera, fechaCompromiso);
             }
-            //return cupón;
         }
 
-        private DataTable GenerarMatrícula(dsImpresiones.CupónPagoDataTable cupón, string idPago, string fechaEmisión, string fechaVencimiento, string nombre, string tipoDocumento, string documento, string curso, string carrera, DateTime fechaCompromiso, Pago pago)
+        private DataTable GenerarMatrícula(dsImpresiones.CupónPagoDataTable cupón, string idPago, string fechaEmisión, 
+            string fechaVencimiento, string nombre, string tipoDocumento, string documento, string curso, string carrera, 
+            DateTime fechaCompromiso)
         {
-            var importe = String.Format("{0:$ 0,0.00}", pago.ImporteCuota);
-            var total = String.Format("{0:$ 0,0.00}", pago.ImporteCuota);
-            string codBarra = GenerarCódigoBarras(idPago, pago.ImporteCuota);
+            var p = PagosRepository.ObtenerDetallePago(_idPago, fechaCompromiso);
+            var importe = String.Format("{0:$ 0,0.00}", p.ImporteCuota);
+            var total = String.Format("{0:$ 0,0.00}", p.ImporteCuota);
+            string codBarra = GenerarCódigoBarras(idPago, p.ImporteCuota);
             cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                 carrera, curso, total, codBarra, "1", "Matrícula", importe);
 
             return cupón;
         }
 
-        private DataTable GenerarDetalleCuota(dsImpresiones.CupónPagoDataTable cupón, string idPago,
-            string fechaEmisión, string fechaVencimiento, string nombre, string tipoDocumento, string documento,
-            string curso, string carrera, DateTime fechaCompromiso, Pago pago)
+        //private DataTable GenerarDetalleCuota(dsImpresiones.CupónPagoDataTable cupón, string idPago,
+        //    string fechaEmisión, string fechaVencimiento, string nombre, string tipoDocumento, string documento,
+        //    string curso, string carrera, DateTime fechaCompromiso, Pago pago)
+        //{
+        //    var impBase = pago.ImporteCuota;
+        //    var importe = impBase.ToString("$ 0,0.00");
+        //    string concepto = String.Format("Cuota Nº {0}", pago.NroCuota);
+        //    cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+        //        carrera, curso, "", "", "1", concepto, importe);
+
+        //    var descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
+        //    decimal beca = 0;
+        //    if (descBeca > 0)
+        //    {
+        //        beca = Math.Round(impBase * (descBeca / 100));
+        //        importe = beca.ToString("$ -0,0.00");
+        //        concepto = String.Format("Descuento por beca del %{0}", descBeca);
+        //        cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+        //            carrera, curso, "", "", "2", concepto, importe);
+        //    }
+
+        //    var cuota = CuotasRepository.ObtenerCuotas().Where(c => c.NroCuota == pago.NroCuota).FirstOrDefault();
+        //    if (cuota == null)
+        //    {
+        //        ShowError("Falta parametrizar la cuota " + pago.NroCuota);
+        //        return null;
+        //    }
+        //    var vtoCuota = cuota.VtoCuota;
+        //    var totalAPagar = (decimal)0;
+        //    var impBecado = impBase - beca;
+        //    if (fechaCompromiso <= vtoCuota)
+        //    {
+        //        var dpt = (decimal)(ConfiguracionRepository.ObtenerConfiguracion().DescuentoPagoTermino / 100);
+        //        var descPagoTérmino = Math.Round(impBecado * dpt, 2);
+        //        importe = descPagoTérmino.ToString("$ -0,0.00");
+        //        concepto = "Descuento por pago a término";
+        //        cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+        //            carrera, curso, "", "", "3", concepto, importe);
+
+        //        totalAPagar = impBase - beca - descPagoTérmino;
+        //    }
+        //    else
+        //    {
+        //        var porcRecargo = (ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
+        //        var díasAtraso = Math.Truncate((fechaCompromiso - vtoCuota).TotalDays);
+        //        var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
+        //        var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+        //        importe = recargoPorMora.ToString("$ 0,0.00");
+        //        concepto = "Recargo por mora";
+        //        cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+        //            carrera, curso, "", "", "3", concepto, importe);
+
+        //        totalAPagar = impBase - beca + recargoPorMora;
+        //    }
+
+        //    var codBarra = GenerarCódigoBarras(idPago, totalAPagar);
+        //    foreach (Reports.DataSet.dsImpresiones.CupónPagoRow row in cupón.Rows)
+        //    {
+        //        row.Total = String.Format("{0:$ 0,0.00}", totalAPagar);
+        //        row.CódigoBarra = codBarra;
+        //    }
+
+        //    return cupón;
+        //}
+
+        private DataTable GenerarDetalleCuota(dsImpresiones.CupónPagoDataTable cupón, string idPago, string fechaEmisión, 
+            string fechaVencimiento, string nombre, string tipoDocumento, string documento, string curso, string carrera, 
+            DateTime fechaCompromiso)
         {
-            var impBase = pago.ImporteCuota;
+            var p = PagosRepository.ObtenerDetallePago(_idPago, fechaCompromiso);
+            var impBase = p.ImporteCuota;
             var importe = impBase.ToString("$ 0,0.00");
-            string concepto = String.Format("Cuota Nº {0}", pago.NroCuota);
+            string concepto = String.Format("Cuota Nº {0}", p.NroCuota);
             cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                 carrera, curso, "", "", "1", concepto, importe);
 
-            var descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
-            decimal beca = 0;
-            if (descBeca > 0)
+            if (p.ImporteBeca.HasValue)
             {
-                beca = Math.Round(impBase * (descBeca / 100));
-                importe = beca.ToString("$ -0,0.00");
-                concepto = String.Format("Descuento por beca del %{0}", descBeca);
+                importe = p.ImporteBeca.Value.ToString("$ -0,0.00");
+                concepto = String.Format("Descuento por beca del %{0}", p.PorcBeca);
                 cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                     carrera, curso, "", "", "2", concepto, importe);
             }
 
-            var cuota = CuotasRepository.ObtenerCuotas().Where(c => c.NroCuota == pago.NroCuota).FirstOrDefault();
-            if (cuota == null)
+            if (fechaCompromiso <= p.FechaVto.Value)
             {
-                ShowError("Falta parametrizar la cuota " + pago.NroCuota);
-                return null;
-            }
-            var vtoCuota = cuota.VtoCuota;
-            var totalAPagar = (decimal)0;
-            var impBecado = impBase - beca;
-            if (fechaCompromiso <= vtoCuota)
-            {
-                var dpt = (decimal)(ConfiguracionRepository.ObtenerConfiguracion().DescuentoPagoTermino / 100);
-                var descPagoTérmino = Math.Round(impBecado * dpt, 2);
-                importe = descPagoTérmino.ToString("$ -0,0.00");
+                importe = p.ImportePagoTermino.Value.ToString("$ -0,0.00");
                 concepto = "Descuento por pago a término";
                 cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                     carrera, curso, "", "", "3", concepto, importe);
-
-                totalAPagar = impBase - beca - descPagoTérmino;
             }
             else
             {
-                var porcRecargo = (ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
-                var díasAtraso = Math.Truncate((fechaCompromiso - vtoCuota).TotalDays);
-                var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
-                var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
-                importe = recargoPorMora.ToString("$ 0,0.00");
+                importe = p.ImporteRecargo.Value.ToString("$ 0,0.00");
                 concepto = "Recargo por mora";
                 cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                     carrera, curso, "", "", "3", concepto, importe);
-
-                totalAPagar = impBase - beca + recargoPorMora;
             }
 
-            var codBarra = GenerarCódigoBarras(idPago, totalAPagar);
-            foreach (Reports.DataSet.dsImpresiones.CupónPagoRow row in cupón.Rows)
+            var codBarra = GenerarCódigoBarras(idPago, p.ImportePagado.Value);
+            foreach (dsImpresiones.CupónPagoRow row in cupón.Rows)
             {
-                row.Total = String.Format("{0:$ 0,0.00}", totalAPagar);
+                row.Total = String.Format("{0:$ 0,0.00}", p.ImportePagado.Value);
                 row.CódigoBarra = codBarra;
             }
 
@@ -283,13 +329,14 @@ namespace SMPorres.Forms.Pagos
 
         private string GenerarCódigoBarras(string idPago, decimal total)
         {
-            const string códigoLink = "9015";
+            const string códigoLink = "9016";
             //var fechaVtoJuliano = String.Format("{0:yy}{1:000}", dtFechaPago.Value, (dtFechaPago.Value - new DateTime(dtFechaPago.Value.Year, 1, 1)).TotalDays);
             var fechaVtoJuliano = String.Format("{0:yy}{1:000}", dtFechaPago.Value, dtFechaPago.Value.DayOfYear);
             //var importe = Math.Truncate(total).ToString("00000000") + ((total - Math.Truncate(total)) * 100).ToString("00");
             var importe = Math.Truncate(total * 100).ToString("0000000000");
             var códigoBarra = códigoLink + idPago + fechaVtoJuliano + importe;
             códigoBarra += Lib.Calculos.DígitoVerificador.CalculaDigitoVerificador(códigoBarra);
+            códigoBarra = "*" + códigoBarra + "*";
             return códigoBarra;
         }
 

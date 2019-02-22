@@ -34,14 +34,14 @@ namespace SMPorres.Forms.Pagos
                 txtCuota.TextAlign = HorizontalAlignment.Right;
             }
 
-            var dp = PagosRepository.ObtenerDetallePago(idPago, dtFechaPago.Value);
-            if (dp.Resultado)
+            var _pago = PagosRepository.ObtenerDetallePago(idPago, dtFechaPago.Value);
+            if (_pago != null)
             {
-                txtImporte.DecValue = dp.ImporteBase;
-                txtDescBeca.DecValue = dp.Beca;
-                txtDescPagoATérmino.DecValue = dp.DescuentoPagoTérmino;
-                txtRecargoPorMora.DecValue = dp.RecargoPorMora;
-                txtTotal.DecValue = dp.TotalAPagar;
+                txtImporte.DecValue = _pago.ImporteCuota;
+                txtDescBeca.DecValue = _pago.ImporteBeca.Value;
+                txtDescPagoATérmino.DecValue = _pago.ImportePagoTermino.Value;
+                txtRecargoPorMora.DecValue = _pago.ImporteRecargo.Value;
+                txtTotal.DecValue = _pago.ImportePagado.Value;
             }
             else
             {
