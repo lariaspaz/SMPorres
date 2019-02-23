@@ -16,9 +16,14 @@ namespace SMPorres.Forms.Pagos
 {
     public partial class frmPagarCuota : FormBase
     {
+        private int _idPago;
+        private Pago _pago;
+
         public frmPagarCuota(int idPago)
         {
             InitializeComponent();
+
+            _idPago = idPago;
 
             var p = PagosRepository.ObtenerPago(idPago);
             txtCurso.Text = String.Format("{0} de {1}", p.PlanPago.Curso.Nombre, p.PlanPago.Curso.Carrera.Nombre);
@@ -34,19 +39,7 @@ namespace SMPorres.Forms.Pagos
                 txtCuota.TextAlign = HorizontalAlignment.Right;
             }
 
-            var _pago = PagosRepository.ObtenerDetallePago(idPago, dtFechaPago.Value);
-            if (_pago != null)
-            {
-                txtImporte.DecValue = _pago.ImporteCuota;
-                txtDescBeca.DecValue = _pago.ImporteBeca.Value;
-                txtDescPagoATérmino.DecValue = _pago.ImportePagoTermino.Value;
-                txtRecargoPorMora.DecValue = _pago.ImporteRecargo.Value;
-                txtTotal.DecValue = _pago.ImportePagado.Value;
-            }
-            else
-            {
-                ShowError("Falta parametrizar la cuota " + p.NroCuota);
-            }
+            CalcularDetalle();
 
             dtFechaPago.Value = Lib.Configuration.CurrentDate;
             dtFechaPago.Select();
@@ -59,6 +52,24 @@ namespace SMPorres.Forms.Pagos
             _validator = new FormValidations(this, errorProvider1);
         }
 
+        private void CalcularDetalle()
+        {
+            _pago = PagosRepository.ObtenerDetallePago(_idPago, dtFechaPago.Value.Date);
+            if (_pago != null)
+            {
+                txtImporte.DecValue = _pago.ImporteCuota;
+                txtDescBeca.DecValue = _pago.ImporteBeca.Value;
+                txtDescPagoATérmino.DecValue = _pago.ImportePagoTermino.Value;
+                txtRecargoPorMora.DecValue = _pago.ImporteRecargo.Value;
+                txtTotal.DecValue = _pago.ImportePagado.Value;
+                txtFechaVto.Text = _pago.FechaVto.Value.ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                ShowError("Falta parametrizar la cuota " + _pago.NroCuota);
+            }
+        }
+
         public int IdMedioPago
         {
             get
@@ -69,9 +80,19 @@ namespace SMPorres.Forms.Pagos
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.None;
-            if (ValidarDatos())
+            if (MessageBox.Show("¿Está seguro que desea pagar esta cuota?", "Confirme el pago",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                try
+                {
+                    _pago.Fecha = dtFechaPago.Value.Date;
+                    _pago.IdMedioPago = (int)cbMediosPago.SelectedValue;
+                    PagosRepository.PagarCuota(_pago);
+                }
+                catch (Exception ex)
+                {
+                    ShowError("No se pudo grabar el pago:\n", ex);
+                }
                 DialogResult = DialogResult.OK;
             }
         }
@@ -82,6 +103,11 @@ namespace SMPorres.Forms.Pagos
             //    _validator.Validar(txtRecargoPorMora, txtRecargoPorMora.DecValue >= 0, "No puede ser menor que 0");
 
             return false;
+        }
+
+        private void dtFechaPago_ValueChanged(object sender, EventArgs e)
+        {
+            CalcularDetalle();
         }
     }
 }

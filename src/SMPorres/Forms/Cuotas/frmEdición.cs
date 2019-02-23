@@ -42,7 +42,7 @@ namespace SMPorres.Forms.Cuotas
         {
             get
             {
-                return dtVtoCuota.Value;
+                return dtVtoCuota.Value.Date;
             }
         }
 

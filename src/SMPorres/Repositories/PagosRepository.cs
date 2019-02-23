@@ -10,16 +10,6 @@ namespace SMPorres.Repositories
 {
     class PagosRepository
     {
-        public struct DetallePago
-        {
-            public decimal DescuentoPagoTérmino { get; internal set; }
-            public decimal RecargoPorMora { get; internal set; }
-            public decimal Beca { get; internal set; }
-            public decimal ImporteBase { get; internal set; }
-            public bool Resultado { get; internal set; }
-            public decimal TotalAPagar { get; internal set; }
-        }
-
         private void Insertar(int idPlanPago)
         {
             using (var db = new SMPorresEntities())
@@ -74,7 +64,7 @@ namespace SMPorres.Repositories
                                     ImporteCuota = p.ImporteCuota,
                                     Fecha = p.Fecha
                                 }
-                            );                    
+                            );
                 return query.OrderBy(p => p.NroCuota).ToList();
             }
         }
@@ -144,10 +134,19 @@ namespace SMPorres.Repositories
         public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
             Pago pago = ObtenerPago(idPago);
-
             var impBase = pago.ImporteCuota;
+            var cc = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
+            pago.PorcBeca = 0;
+            pago.ImporteBeca = 0;
+            pago.PorcDescPagoTermino = 0;
+            pago.ImportePagoTermino = 0;
+            pago.PorcRecargo = 0;
+            pago.ImporteRecargo = 0;
+            pago.ImportePagado = pago.ImporteCuota;
+
             if (pago.NroCuota == 0)
             {
+                pago.FechaVto = new DateTime(cc, 12, 31);
                 return pago;
             }
 
@@ -173,7 +172,7 @@ namespace SMPorres.Repositories
 
                 totalAPagar = impBase - beca - descPagoTérmino;
 
-                pago.PorcDescPagoTermino = (double) Math.Truncate(dpt * 100);
+                pago.PorcDescPagoTermino = (double)Math.Truncate(dpt * 100);
                 pago.ImportePagoTermino = descPagoTérmino;
             }
             else
@@ -189,39 +188,29 @@ namespace SMPorres.Repositories
                 pago.ImporteRecargo = recargoPorMora;
             }
 
-            pago.ImportePagado = totalAPagar;
-            pago.PorcBeca = (double) descBeca;
+            pago.PorcBeca = (double)descBeca;
             pago.ImporteBeca = beca;
             pago.IdBecaAlumno = null;
+            pago.ImportePagado = totalAPagar;
 
             return pago;
         }
 
-        public static bool PagarCuota(int idPago, DetallePago detalle)
+        public static bool PagarCuota(Pago pago)
         {
-            //[Id]                  
-            //[IdPlanPago]          
-            //[Fecha]               
-            //[NroCuota]            
-            //[ImportePagado]       
-            //[ImporteCuota]        
-            //[PorcDescPagoTermino] 
-            //[ImportePagoTermino]  
-            //[PorcentajeBeca]      
-            //[IdBecaAlumno]        
-            //[Recargo]             
-            //[IdMedioPago]         
-            //[IdArchivo]           
-            //[EsContrasiento]      
-            //[IdPagoAsiento]       
-            //[IdUsuario]           
-            //[FechaGrabacion]      
-
-
-            var fecha = Lib.Configuration.CurrentDate;
             using (var db = new SMPorresEntities())
             {
-                var p = db.Pagos.Find(idPago);
+                var p = db.Pagos.Find(pago.Id);
+                p.Fecha = pago.Fecha;
+                p.FechaVto = pago.FechaVto;
+                p.PorcBeca = pago.PorcBeca;
+                p.ImporteBeca = pago.ImporteBeca;
+                p.PorcDescPagoTermino = pago.PorcDescPagoTermino;
+                p.ImportePagoTermino = pago.ImportePagoTermino;
+                p.PorcRecargo = pago.PorcRecargo;
+                p.ImporteRecargo = pago.ImporteRecargo;
+                p.ImportePagado = pago.ImportePagado;
+                p.IdMedioPago = pago.IdMedioPago;
                 p.IdUsuario = Session.CurrentUser.Id;
                 p.FechaGrabacion = Configuration.CurrentDate;
                 db.SaveChanges();
