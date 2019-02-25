@@ -154,8 +154,7 @@ namespace SMPorres.Repositories
                     throw new Exception(String.Format("No existe plan de pago {0}", id));
                 }
                 var pp = db.PlanesPago.Find(id);
-                pp.Estado = 3;  //usar EstadoPlanDePago
-                
+                pp.Estado = (int)Models.EstadoPlanPago.Baja;
                 db.SaveChanges();
             }
         }

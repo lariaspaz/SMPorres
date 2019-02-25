@@ -296,7 +296,6 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
-                //tabControl1.SelectedTab = tpCuotas;
                 int rowindex = dgvPlanesPago.CurrentCell.RowIndex;
                 var id = (int)dgvPlanesPago.Rows[rowindex].Cells[0].Value;
                 return PlanesPagoRepository.ObtenerPlanPagoPorId(id);
