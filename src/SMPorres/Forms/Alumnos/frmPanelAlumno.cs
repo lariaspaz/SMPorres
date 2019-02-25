@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMPorres.Models;
+using SMPorres.Forms.BecasAlumnos;
 
 namespace SMPorres.Forms.Alumnos
 {
@@ -68,21 +69,22 @@ namespace SMPorres.Forms.Alumnos
                 toolTip1.ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
                 dgvCursos.DataSource = null;
                 GenerarPlanDePagoToolStripMenuItem.Enabled = false;
-                CobrarCuotaToolStripMenuItem.Enabled = false;
+                btnPagarCuota.Enabled = false;
             }
             else
             {
                 dgvCursos.SetDataSource(cursos);
                 ConsultarPlanesPago();
                 GenerarPlanDePagoToolStripMenuItem.Enabled = true;
-                CobrarCuotaToolStripMenuItem.Enabled = true;
+                btnPagarCuota.Enabled = true;
             }
         }
 
         private void ConsultarPlanesPago()
         {
             var query = from pp in PlanesPagoRepository.ObtenerPlanesPago(_alumno.Id, CursoSeleccionado.Id)
-                        select new {
+                        select new
+                        {
                             Id = pp.Id,
                             ProximaCuota = String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
                             ImporteCuota = pp.ImporteCuota,
@@ -141,24 +143,6 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
-        private string CarreraSeleccionada
-        {
-            get
-            {
-                int rowindex = dgvCursos.CurrentCell.RowIndex;
-                return (string)dgvCursos.Rows[rowindex].Cells[2].Value;
-            }
-        }
-
-        private int PlanDePagoSeleccionado
-        {
-            get
-            {
-                int rowindex = dgvPlanesPago.CurrentCell.RowIndex;
-                return (int)dgvPlanesPago.Rows[rowindex].Cells[0].Value;
-            }
-        }
-
         private void dgvPlanesPago_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewColumn c in dgvCursos.Columns)
@@ -191,8 +175,7 @@ namespace SMPorres.Forms.Alumnos
 
         private void GenerarPlanDePagoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string curso = CursoSeleccionado.Nombre + " de " + CarreraSeleccionada;
-            using (var f = new PlanesPago.frmEdición(txtNombre.Text, curso))
+            using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
@@ -212,13 +195,18 @@ namespace SMPorres.Forms.Alumnos
 
         private void dgvPlanesPago_SelectionChanged(object sender, EventArgs e)
         {
+            ConsultarPagos();
+        }
+
+        private void ConsultarPagos()
+        {
             int rowindex = dgvPlanesPago.CurrentCell.RowIndex;
             var id = (Int32)dgvPlanesPago.Rows[rowindex].Cells[0].Value;
             var query = from p in PagosRepository.ObtenerPagos(id)
                         select new
                         {
                             Id = p.Id,
-                            Concepto = (p.NroCuota == 0)? "Matrícula":String.Format("Cuota Nº {0}", p.NroCuota),
+                            Concepto = (p.NroCuota == 0) ? "Matrícula" : String.Format("Cuota Nº {0}", p.NroCuota),
                             Importe = p.ImporteCuota,
                             Fecha = p.Fecha
                         };
@@ -260,7 +248,7 @@ namespace SMPorres.Forms.Alumnos
         }
 
         private void btnImprimirCuota_Click(object sender, EventArgs e)
-        {            
+        {
             using (var f = new Pagos.frmInfCupónDePago(PagoSeleccionado.Id)) f.ShowDialog();
         }
 
@@ -276,9 +264,10 @@ namespace SMPorres.Forms.Alumnos
             {
                 try
                 {
-                    PlanesPagoRepository.AnularPlanDePago(PlanDePagoSeleccionado);
+                    var pp = PlanDePagoSeleccionado;
+                    PlanesPagoRepository.AnularPlanDePago(pp.Id);
                     ConsultarDatos();
-                    dgvPlanesPago.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == PlanDePagoSeleccionado);
+                    dgvPlanesPago.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == pp.Id);
                 }
                 catch (Exception ex)
                 {
@@ -292,7 +281,7 @@ namespace SMPorres.Forms.Alumnos
             using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
         }
 
-        private PlanPago PlanDePagoSeleccionadoModel
+        private PlanPago PlanDePagoSeleccionado
         {
             get
             {
@@ -304,20 +293,52 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnEditarPlanPago_Click(object sender, EventArgs e)
         {
-            string curso = CursoSeleccionado.Nombre + " de " + CarreraSeleccionada;
-            using (var f = new PlanesPago.frmEdición(txtNombre.Text, curso, PlanDePagoSeleccionadoModel))
+            var pps = PlanDePagoSeleccionado;
+            using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado, pps))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        var pp = PlanesPagoRepository.ActualizarPorcentajeBeca(PlanDePagoSeleccionado, f.PorcentajeBeca);
+                        var pp = PlanesPagoRepository.ActualizarPorcentajeBeca(pps.Id, f.PorcentajeBeca);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == pp.Id);
                     }
                     catch (Exception ex)
                     {
                         ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                    }
+                }
+            }
+        }
+
+        public string NombreCursoSeleccionado
+        {
+            get
+            {
+                int rowindex = dgvCursos.CurrentCell.RowIndex;
+                var carrera = (string)dgvCursos.Rows[rowindex].Cells[2].Value;
+                return CursoSeleccionado.Nombre + " de " + carrera;
+            }
+        }
+
+        private void AsignarBecaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var p = PagoSeleccionado;
+            var cuota = String.Format("{0} | {1}", p.NroCuota, NombreCursoSeleccionado);
+            using (var f = new frmAsignarBeca(cuota))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var beca = BecasAlumnosRepository.Insertar(p.Id, p.Id, f.Beca);
+                        //ConsultarPagos();
+                        //dgvPagos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == pp.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowError("Error al intentar grabar los datos: \n", ex);
                     }
                 }
             }

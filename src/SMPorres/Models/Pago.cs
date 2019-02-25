@@ -18,6 +18,7 @@ namespace SMPorres.Models
         public Pago()
         {
             this.Asiento = new HashSet<Pago>();
+            this.BecasAlumnos = new HashSet<BecaAlumno>();
         }
     
         public int Id { get; set; }
@@ -47,5 +48,7 @@ namespace SMPorres.Models
         public virtual Pago Contrasiento { get; set; }
         public virtual PlanPago PlanPago { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BecaAlumno> BecasAlumnos { get; set; }
     }
 }

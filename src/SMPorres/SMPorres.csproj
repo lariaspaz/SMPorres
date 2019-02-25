@@ -112,6 +112,12 @@
     <Compile Include="Forms\Barrios\frmListado.Designer.cs">
       <DependentUpon>frmListado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\BecasAlumnos\frmAsignarBeca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BecasAlumnos\frmAsignarBeca.Designer.cs">
+      <DependentUpon>frmAsignarBeca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Carreras\frmEdición.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,9 @@
     <Compile Include="Models\Barrio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BecaAlumno.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Carrera.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -361,6 +370,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AlumnosRepository.cs" />
+    <Compile Include="Repositories\BecasAlumnosRepository.cs" />
     <Compile Include="Repositories\ConfiguracionRepository.cs" />
     <Compile Include="Repositories\CuotasRepository.cs" />
     <Compile Include="Repositories\GruposItemsMenuRepository.cs" />
@@ -401,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Barrios\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BecasAlumnos\frmAsignarBeca.resx">
+      <DependentUpon>frmAsignarBeca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>

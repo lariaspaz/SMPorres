@@ -40,7 +40,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.GenerarPlanDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CobrarCuotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEditarPlanPago = new System.Windows.Forms.ToolStripButton();
             this.btnAnularPlanPago = new System.Windows.Forms.ToolStripButton();
             this.btnImprimirCuota = new System.Windows.Forms.ToolStripButton();
@@ -57,6 +56,7 @@
             this.tpCuotas = new System.Windows.Forms.TabPage();
             this.dgvPagos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.AsignarBecaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -172,7 +172,7 @@
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.GenerarPlanDePagoToolStripMenuItem,
-            this.CobrarCuotaToolStripMenuItem});
+            this.AsignarBecaToolStripMenuItem});
             this.toolStripDropDownButton2.Image = global::SMPorres.Properties.Resources.add;
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
@@ -184,12 +184,6 @@
             this.GenerarPlanDePagoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.GenerarPlanDePagoToolStripMenuItem.Text = "Generar plan de pago";
             this.GenerarPlanDePagoToolStripMenuItem.Click += new System.EventHandler(this.GenerarPlanDePagoToolStripMenuItem_Click);
-            // 
-            // CobrarCuotaToolStripMenuItem
-            // 
-            this.CobrarCuotaToolStripMenuItem.Name = "CobrarCuotaToolStripMenuItem";
-            this.CobrarCuotaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.CobrarCuotaToolStripMenuItem.Text = "Cobrar cuota";
             // 
             // btnEditarPlanPago
             // 
@@ -374,6 +368,13 @@
             this.dgvPagos.TabIndex = 1;
             this.dgvPagos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPagos_DataBindingComplete);
             // 
+            // AsignarBecaToolStripMenuItem
+            // 
+            this.AsignarBecaToolStripMenuItem.Name = "AsignarBecaToolStripMenuItem";
+            this.AsignarBecaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.AsignarBecaToolStripMenuItem.Text = "Asignar beca";
+            this.AsignarBecaToolStripMenuItem.Click += new System.EventHandler(this.AsignarBecaToolStripMenuItem_Click);
+            // 
             // frmPanelAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -431,8 +432,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem GenerarPlanDePagoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CobrarCuotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton btnImprimirCuota;
         private System.Windows.Forms.ToolStripButton btnPagarCuota;
+        private System.Windows.Forms.ToolStripMenuItem AsignarBecaToolStripMenuItem;
     }
 }

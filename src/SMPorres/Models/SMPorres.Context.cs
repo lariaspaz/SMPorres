@@ -46,5 +46,6 @@ namespace SMPorres.Models
         public virtual DbSet<UsuariosItemsMenu> UsuariosItemsMenus { get; set; }
         public virtual DbSet<MedioPago> MediosPago { get; set; }
         public virtual DbSet<Pago> Pagos { get; set; }
+        public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
     }
 }
