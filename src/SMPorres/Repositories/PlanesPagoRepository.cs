@@ -62,6 +62,14 @@ namespace SMPorres.Repositories
             }
         }
 
+        internal static PlanPago ObtenerPlanPagoPorId(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.PlanesPago.Find(id);
+            }
+        }
+
         public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca)
         {
             using (var db = new SMPorresEntities())
@@ -113,6 +121,17 @@ namespace SMPorres.Repositories
             }
         }
 
+        public static PlanPago ActualizarPorcentajeBeca(int planDePagoId, short porcentajeBeca)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p = db.PlanesPago.Find(planDePagoId);
+                p.PorcentajeBeca = porcentajeBeca;
+                db.SaveChanges();
+                return p;
+            }
+        }
+
         public static void Actualizar(int idCurso, decimal importeCuota)
         {
             using (var db = new SMPorresEntities())
@@ -135,7 +154,7 @@ namespace SMPorres.Repositories
                     throw new Exception(String.Format("No existe plan de pago {0}", id));
                 }
                 var pp = db.PlanesPago.Find(id);
-                pp.Estado = 3;
+                pp.Estado = 3;  //usar EstadoPlanDePago
                 
                 db.SaveChanges();
             }

@@ -291,5 +291,37 @@ namespace SMPorres.Forms.Alumnos
         {
             using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
         }
+
+        private PlanPago PlanDePagoSeleccionadoModel
+        {
+            get
+            {
+                //tabControl1.SelectedTab = tpCuotas;
+                int rowindex = dgvPlanesPago.CurrentCell.RowIndex;
+                var id = (int)dgvPlanesPago.Rows[rowindex].Cells[0].Value;
+                return PlanesPagoRepository.ObtenerPlanPagoPorId(id);
+            }
+        }
+
+        private void btnEditarPlanPago_Click(object sender, EventArgs e)
+        {
+            string curso = CursoSeleccionado.Nombre + " de " + CarreraSeleccionada;
+            using (var f = new PlanesPago.frmEdición(txtNombre.Text, curso, PlanDePagoSeleccionadoModel))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var pp = PlanesPagoRepository.ActualizarPorcentajeBeca(PlanDePagoSeleccionado, f.PorcentajeBeca);
+                        ConsultarPlanesPago();
+                        dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == pp.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                    }
+                }
+            }
+        }
     }
 }
