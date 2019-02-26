@@ -1,5 +1,6 @@
 ﻿using SMPorres.Lib.AppForms;
 using SMPorres.Models;
+using SMPorres.Reports.DataSet;
 using SMPorres.Reports.Designs;
 using SMPorres.Repositories;
 using System;
@@ -16,8 +17,6 @@ namespace SMPorres.Forms.Alumnos
 {
     public partial class frmInfAlumnosPorEstado : FormBase
     {
-        static string _título = "Alumnos por Estado";
-
         public frmInfAlumnosPorEstado()
         {
             InitializeComponent();
@@ -61,10 +60,14 @@ namespace SMPorres.Forms.Alumnos
         {
             using (var reporte = new AlumnosPorEstado())
             {
-                reporte.Database.Tables["dtAlumnosPorEstado"].SetDataSource(dt);
-                reporte.SummaryInfo.ReportTitle = _título;
-                ((CrystalDecisions.CrystalReports.Engine.TextObject)reporte.ReportDefinition.ReportObjects["txtSubtítulo"]).Text = cbCursos.Text + " - " + cbCarreras.Text;
-                using (var f = new frmReporte(_título, reporte)) f.ShowDialog();
+                string título = "Alumnos por Estado";
+                string curso = cbCursos.Text;
+                if (IdCurso == 0) curso = curso.Replace("(", "").Replace(")", "");
+                string carrera = cbCarreras.Text;
+                if (IdCarrera == 0) carrera = carrera.Replace("(", "").Replace(")", "");
+                var subTítulo = curso + " - " + carrera;
+                reporte.Database.Tables["EstadoAlumno"].SetDataSource(dt);
+                using (var f = new frmReporte(reporte, título, subTítulo)) f.ShowDialog();
             }
         }
 
@@ -104,28 +107,17 @@ namespace SMPorres.Forms.Alumnos
 
         private DataTable ObtenerDatos()
         {
-            var dt = CrearDataTable();
-            
+            var tabla = new dsImpresiones.EstadoAlumnoDataTable();
             var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
-            string títuloInforme = _título + " de " + cbCursos.Text + " de " + cbCarreras.Text;
-            foreach (var a in alumnos)
+            for (int i = 0; i < 10; i++)
             {
-                dt.Rows.Add(String.Format("{0} de {1}", a.Curso, a.Carrera), a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), títuloInforme, a.Documento);
+                foreach (var a in alumnos)
+                {
+                    var s = String.Format("{0} de {1}", a.Curso, a.Carrera);
+                    tabla.AddEstadoAlumnoRow(s, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
+                }
             }
-            return dt;
-        }
-
-        private DataTable CrearDataTable()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("CarreraCurso", typeof(string));
-            dt.Columns.Add("Nombre", typeof(string));
-            dt.Columns.Add("Apellido", typeof(string));
-            dt.Columns.Add("Email", typeof(string));
-            dt.Columns.Add("Estado", typeof(string));
-            dt.Columns.Add("Título", typeof(string));
-            dt.Columns.Add("Documento", typeof(string));
-            return dt;
+            return tabla;
         }
     }
 }

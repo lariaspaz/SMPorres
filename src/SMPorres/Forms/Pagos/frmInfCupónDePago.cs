@@ -74,7 +74,7 @@ namespace SMPorres.Forms.Pagos
             using (var reporte = new CupónDePago())
             {
                 reporte.Database.Tables["CupónPago"].SetDataSource(dt);
-                using (var f = new frmReporte(txtDescripción.Text, reporte)) f.ShowDialog();
+                using (var f = new frmReporte(reporte, txtDescripción.Text)) f.ShowDialog();
             }
         }
 
