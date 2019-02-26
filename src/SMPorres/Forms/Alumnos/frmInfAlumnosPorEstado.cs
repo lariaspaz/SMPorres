@@ -16,7 +16,8 @@ namespace SMPorres.Forms.Alumnos
 {
     public partial class frmInfAlumnosPorEstado : FormBase
     {
-        static string _título = "Informe de Alumnos por Estado";
+        static string _título = "Alumnos por Estado";
+
         public frmInfAlumnosPorEstado()
         {
             InitializeComponent();
@@ -56,11 +57,13 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
-        private static void MostrarReporte(DataTable dt)
+        private void MostrarReporte(DataTable dt)
         {
             using (var reporte = new AlumnosPorEstado())
             {
                 reporte.Database.Tables["dtAlumnosPorEstado"].SetDataSource(dt);
+                reporte.SummaryInfo.ReportTitle = _título;
+                ((CrystalDecisions.CrystalReports.Engine.TextObject)reporte.ReportDefinition.ReportObjects["txtSubtítulo"]).Text = cbCursos.Text + " - " + cbCarreras.Text;
                 using (var f = new frmReporte(_título, reporte)) f.ShowDialog();
             }
         }
@@ -102,6 +105,7 @@ namespace SMPorres.Forms.Alumnos
         private DataTable ObtenerDatos()
         {
             var dt = CrearDataTable();
+            
             var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
             string títuloInforme = _título + " de " + cbCursos.Text + " de " + cbCarreras.Text;
             foreach (var a in alumnos)

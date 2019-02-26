@@ -235,7 +235,7 @@ namespace SMPorres.Repositories
                 {
                     query = query.Where(a => a.IdCurso == idCurso);
                 }
-                return query.ToList();
+                return query.OrderBy(a => a.IdCarrera).ThenBy(a => a.IdCurso).ThenBy(a => a.Estado).ToList();
             }
         }
     }
