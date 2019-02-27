@@ -55,8 +55,10 @@
             this.dgvPlanesPago = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.tpCuotas = new System.Windows.Forms.TabPage();
             this.dgvPagos = new CustomLibrary.ComponentModel.CustomDataGridView();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AsignarBecaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditarBecaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -68,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).BeginInit();
             this.tpCuotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -171,8 +174,7 @@
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.GenerarPlanDePagoToolStripMenuItem,
-            this.AsignarBecaToolStripMenuItem});
+            this.GenerarPlanDePagoToolStripMenuItem});
             this.toolStripDropDownButton2.Image = global::SMPorres.Properties.Resources.add;
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
@@ -356,6 +358,7 @@
             this.dgvPagos.AllowUserToResizeRows = false;
             this.dgvPagos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPagos.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvPagos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPagos.EvenRowColor = System.Drawing.Color.Empty;
             this.dgvPagos.Location = new System.Drawing.Point(3, 3);
@@ -368,12 +371,29 @@
             this.dgvPagos.TabIndex = 1;
             this.dgvPagos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPagos_DataBindingComplete);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AsignarBecaToolStripMenuItem,
+            this.EditarBecaToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(128, 70);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
             // AsignarBecaToolStripMenuItem
             // 
             this.AsignarBecaToolStripMenuItem.Name = "AsignarBecaToolStripMenuItem";
-            this.AsignarBecaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.AsignarBecaToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.AsignarBecaToolStripMenuItem.Text = "Asignar beca";
             this.AsignarBecaToolStripMenuItem.Click += new System.EventHandler(this.AsignarBecaToolStripMenuItem_Click);
+            // 
+            // EditarBecaToolStripMenuItem
+            // 
+            this.EditarBecaToolStripMenuItem.Name = "EditarBecaToolStripMenuItem";
+            this.EditarBecaToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.EditarBecaToolStripMenuItem.Text = "Editar beca";
+            this.EditarBecaToolStripMenuItem.Click += new System.EventHandler(this.EditarBecaToolStripMenuItem_Click);
             // 
             // frmPanelAlumno
             // 
@@ -401,6 +421,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanesPago)).EndInit();
             this.tpCuotas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPagos)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,6 +455,8 @@
         private System.Windows.Forms.ToolStripMenuItem GenerarPlanDePagoToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton btnImprimirCuota;
         private System.Windows.Forms.ToolStripButton btnPagarCuota;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem AsignarBecaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EditarBecaToolStripMenuItem;
     }
 }

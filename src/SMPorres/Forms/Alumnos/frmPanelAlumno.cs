@@ -145,7 +145,7 @@ namespace SMPorres.Forms.Alumnos
 
         private void dgvPlanesPago_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            foreach (DataGridViewColumn c in dgvCursos.Columns)
+            foreach (DataGridViewColumn c in dgvPlanesPago.Columns)
             {
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
@@ -207,33 +207,63 @@ namespace SMPorres.Forms.Alumnos
                         {
                             Id = p.Id,
                             Concepto = (p.NroCuota == 0) ? "Matrícula" : String.Format("Cuota Nº {0}", p.NroCuota),
-                            Importe = p.ImporteCuota,
-                            Fecha = p.Fecha
+                            FechaVto = p.FechaVto,
+                            ImporteCuota = p.ImporteCuota,
+                            Fecha = p.Fecha,
+                            ImportePagado = p.ImportePagado,
+                            MedioPago = p.IdMedioPago.HasValue ? p.MedioPago.Descripcion : null,
+                            PorcBeca = p.PorcBeca,
+                            EsContrasiento = p.EsContrasiento == 1
                         };
             dgvPagos.SetDataSource(query);
         }
 
         private void dgvPagos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            foreach (DataGridViewColumn c in dgvCursos.Columns)
-            {
-                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            }
-
-            dgvPagos.Columns[0].Visible = true;
+            dgvPagos.Columns[0].Visible = false;
 
             dgvPagos.Columns[1].HeaderText = "Concepto";
             dgvPagos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvPagos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dgvPagos.Columns[2].HeaderText = "Importe";
-            dgvPagos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPagos.Columns[2].HeaderText = "Vencimiento";
+            dgvPagos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvPagos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPagos.Columns[2].DefaultCellStyle.Format = "C2";
+            dgvPagos.Columns[2].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvPagos.Columns[3].HeaderText = "Fecha";
-            dgvPagos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPagos.Columns[3].HeaderText = "Importe";
+            dgvPagos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPagos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPagos.Columns[3].DefaultCellStyle.Format = "C2";
+
+            dgvPagos.Columns[4].HeaderText = "Fecha Pago";
+            dgvPagos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPagos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPagos.Columns[4].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvPagos.Columns[5].HeaderText = "Imp. Pagado";
+            dgvPagos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPagos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPagos.Columns[5].DefaultCellStyle.Format = "C2";
+
+            dgvPagos.Columns[6].HeaderText = "Medio Pago";
+            dgvPagos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPagos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvPagos.Columns[7].HeaderText = "Porc. Beca";
+            dgvPagos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPagos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvPagos.Columns[7].DefaultCellStyle.Format = "#\\%";
+
+            dgvPagos.Columns[8].HeaderText = "Contr.";
+            dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPagos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPagos.Columns[8].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            foreach (DataGridViewColumn c in dgvPagos.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
 
         private Pago PagoSeleccionado
@@ -332,15 +362,52 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var beca = BecasAlumnosRepository.Insertar(p.Id, p.Id, f.Beca);
-                        //ConsultarPagos();
-                        //dgvPagos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == pp.Id);
+                        var beca = BecasAlumnosRepository.Insertar(_alumno.Id, p.Id, f.Beca);
+                        ConsultarPagos();
+                        dgvPagos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == p.Id);
                     }
                     catch (Exception ex)
                     {
                         ShowError("Error al intentar grabar los datos: \n", ex);
                     }
                 }
+            }
+        }
+
+        private void EditarBecaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var p = PagoSeleccionado;
+            var cuota = String.Format("{0} | {1}", p.NroCuota, NombreCursoSeleccionado);
+            var beca = p.BecasAlumnos.First();
+            using (var f = new frmAsignarBeca(cuota, beca.PorcBeca))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        beca = BecasAlumnosRepository.Actualizar(beca.Id, f.Beca);
+                        ConsultarPagos();
+                        dgvPagos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == p.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowError("Error al intentar grabar los datos: \n", ex);
+                    }
+                }
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            var p = PagoSeleccionado;
+            if (p.NroCuota == 0 || p.Fecha.HasValue)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                AsignarBecaToolStripMenuItem.Visible = !p.BecasAlumnos.Any();
+                EditarBecaToolStripMenuItem.Visible = p.BecasAlumnos.Any();
             }
         }
     }

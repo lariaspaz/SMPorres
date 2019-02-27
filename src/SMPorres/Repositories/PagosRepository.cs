@@ -54,18 +54,45 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from p in db.Pagos where p.IdPlanPago == idPlanPago select p)
-                            .ToList()
-                            .Select(
-                                p => new Pago
-                                {
-                                    Id = p.Id,
-                                    NroCuota = p.NroCuota,
-                                    ImporteCuota = p.ImporteCuota,
-                                    Fecha = p.Fecha
-                                }
-                            );
-                return query.OrderBy(p => p.NroCuota).ToList();
+                var q = (from p in db.Pagos
+                         join c in db.Cuotas on p.NroCuota equals c.NroCuota into pc
+                         from c in pc.DefaultIfEmpty()
+                         join mp in db.MediosPago on p.IdMedioPago equals mp.Id into pmp
+                         from mp in pmp.DefaultIfEmpty()
+                         join ba in db.BecasAlumnos on p.Id equals ba.IdPago into pba
+                         from ba in pba.DefaultIfEmpty()
+                         where p.IdPlanPago == idPlanPago
+                         select new
+                         {
+                             p.Id,
+                             p.NroCuota,
+                             p.ImporteCuota,
+                             p.Fecha,
+                             FechaVto = (c == null) ? default(DateTime) : c.VtoCuota,
+                             p.ImportePagado,
+                             p.IdMedioPago,
+                             MedioPago = mp,
+                             PorcBeca = (ba == null) ? default(double?) : ba.PorcBeca,
+                             p.EsContrasiento
+                         })
+                         .ToList()
+                         .Select(
+                            p => new Pago
+                            {
+                                Id = p.Id,
+                                NroCuota = p.NroCuota,
+                                ImporteCuota = p.ImporteCuota,
+                                Fecha = p.Fecha,
+                                FechaVto = p.FechaVto,
+                                ImportePagado = p.ImportePagado,
+                                IdMedioPago = p.IdMedioPago,
+                                MedioPago = p.MedioPago,
+                                PorcBeca = p.PorcBeca,
+                                EsContrasiento = p.EsContrasiento
+                            }
+                        )
+                        .OrderBy(p => p.NroCuota);
+                return q.ToList();
             }
         }
 
@@ -75,6 +102,7 @@ namespace SMPorres.Repositories
             {
                 var p = db.Pagos.Find(idPago);
                 db.Entry(p).Reference(p1 => p1.PlanPago).Load();
+                db.Entry(p).Collection(p1 => p1.BecasAlumnos).Load();
                 db.Entry(p.PlanPago).Reference(pp => pp.Alumno).Load();
                 db.Entry(p.PlanPago.Alumno).Reference(a => a.TipoDocumento).Load();
                 db.Entry(p.PlanPago).Reference(pp => pp.Curso).Load();
@@ -82,54 +110,6 @@ namespace SMPorres.Repositories
                 return p;
             }
         }
-
-        //public static DetallePago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
-        //{
-        //    DetallePago dp = new DetallePago();
-        //    var pago = ObtenerPago(idPago);
-        //    dp.ImporteBase = pago.ImporteCuota;
-        //    var descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
-        //    dp.Beca = 0;
-        //    if (descBeca > 0)
-        //    {
-        //        dp.Beca = Math.Round(dp.ImporteBase * (descBeca / 100));
-        //    }
-
-        //    if (pago.NroCuota == 0)
-        //    {
-        //        dp.TotalAPagar = dp.ImporteBase - dp.Beca;
-        //        dp.Resultado = true;
-        //        return dp;
-        //    }
-
-        //    var cuota = CuotasRepository.ObtenerCuotas().Where(c => c.NroCuota == pago.NroCuota).FirstOrDefault();
-        //    if (cuota == null)
-        //    {
-        //        dp.Resultado = false;
-        //        return dp;
-        //    }
-
-        //    var vtoCuota = cuota.VtoCuota;
-        //    dp.TotalAPagar = 0;
-        //    var impBecado = dp.ImporteBase - dp.Beca;
-        //    if (fechaCompromiso <= vtoCuota)
-        //    {
-        //        var dpt = (decimal)(ConfiguracionRepository.ObtenerConfiguracion().DescuentoPagoTermino / 100);
-        //        dp.DescuentoPagoTérmino = Math.Round(impBecado * dpt, 2);
-        //        dp.TotalAPagar = dp.ImporteBase - dp.Beca - dp.DescuentoPagoTérmino;
-        //    }
-        //    else
-        //    {
-        //        var porcRecargo = (ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
-        //        var díasAtraso = Math.Truncate((fechaCompromiso - vtoCuota).TotalDays);
-        //        var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
-        //        dp.RecargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
-        //        dp.TotalAPagar = dp.ImporteBase - dp.Beca + dp.RecargoPorMora;
-        //    }
-
-        //    dp.Resultado = true;
-        //    return dp;
-        //}
 
         public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {

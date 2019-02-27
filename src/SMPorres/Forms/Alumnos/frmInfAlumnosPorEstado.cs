@@ -51,7 +51,7 @@ namespace SMPorres.Forms.Alumnos
                 }
                 else
                 {
-                    ShowError("No hay datos para mostrar.");
+                    ShowError("No hay ningún registro que coincida con su consulta.");
                 }
             }
         }
@@ -109,13 +109,10 @@ namespace SMPorres.Forms.Alumnos
         {
             var tabla = new dsImpresiones.EstadoAlumnoDataTable();
             var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
-            for (int i = 0; i < 10; i++)
+            foreach (var a in alumnos)
             {
-                foreach (var a in alumnos)
-                {
-                    var s = String.Format("{0} de {1}", a.Curso, a.Carrera);
-                    tabla.AddEstadoAlumnoRow(s, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
-                }
+                var s = String.Format("{0} de {1}", a.Curso, a.Carrera);
+                tabla.AddEstadoAlumnoRow(s, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
             }
             return tabla;
         }

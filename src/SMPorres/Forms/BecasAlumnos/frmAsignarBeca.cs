@@ -23,17 +23,17 @@ namespace SMPorres.Forms.BecasAlumnos
             _validator = new FormValidations(this, errorProvider1);
         }
 
-        public frmAsignarBeca(string cuota, int beca) : this(cuota)
+        public frmAsignarBeca(string cuota, double? beca) : this(cuota)
         {
             this.Text = "Edición de beca";
-            txtBeca.IntValue = beca;
+            txtBeca.IntValue = (int)beca;
         }
 
         public short Beca
         {
             get
             {
-                return (short) txtBeca.IntValue;
+                return (short)txtBeca.IntValue;
             }
         }
 
@@ -49,6 +49,6 @@ namespace SMPorres.Forms.BecasAlumnos
         private bool ValidarDatos()
         {
             return _validator.Validar(txtBeca, Beca > 0, "No puede ser menor o igual que cero");
-        }        
+        }
     }
 }
