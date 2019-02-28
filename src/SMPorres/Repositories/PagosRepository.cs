@@ -59,7 +59,7 @@ namespace SMPorres.Repositories
                          from c in pc.DefaultIfEmpty()
                          join mp in db.MediosPago on p.IdMedioPago equals mp.Id into pmp
                          from mp in pmp.DefaultIfEmpty()
-                         join ba in db.BecasAlumnos on p.Id equals ba.IdPago into pba
+                         join ba in db.BecasAlumnos on p.IdBecaAlumno equals ba.Id into pba
                          from ba in pba.DefaultIfEmpty()
                          where p.IdPlanPago == idPlanPago
                          select new
@@ -102,7 +102,7 @@ namespace SMPorres.Repositories
             {
                 var p = db.Pagos.Find(idPago);
                 db.Entry(p).Reference(p1 => p1.PlanPago).Load();
-                db.Entry(p).Collection(p1 => p1.BecasAlumnos).Load();
+                db.Entry(p).Reference(p1 => p1.BecaAlumno).Load();
                 db.Entry(p.PlanPago).Reference(pp => pp.Alumno).Load();
                 db.Entry(p.PlanPago.Alumno).Reference(a => a.TipoDocumento).Load();
                 db.Entry(p.PlanPago).Reference(pp => pp.Curso).Load();

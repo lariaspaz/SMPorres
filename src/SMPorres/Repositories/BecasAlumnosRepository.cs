@@ -28,17 +28,28 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var id = db.BecasAlumnos.Any() ? db.BecasAlumnos.Max(ba => ba.Id) + 1 : 1;
-                var b = new BecaAlumno
+                var trx = db.Database.BeginTransaction();
+                try
                 {
-                    Id = id,
-                    IdAlumno = idAlumno,
-                    IdPago = idPago,
-                    PorcBeca = beca
-                };
-                db.BecasAlumnos.Add(b);
-                db.SaveChanges();
-                return b;
+                    var id = db.BecasAlumnos.Any() ? db.BecasAlumnos.Max(ba => ba.Id) + 1 : 1;
+                    var b = new BecaAlumno
+                    {
+                        Id = id,
+                        IdAlumno = idAlumno,
+                        PorcBeca = beca
+                    };
+                    db.BecasAlumnos.Add(b);
+                    var p = db.Pagos.Find(idPago);
+                    p.BecaAlumno = b;
+                    db.SaveChanges();
+                    trx.Commit();
+                    return b;
+                }
+                catch (Exception)
+                {
+                    trx.Rollback();
+                    throw;
+                }
             }
         }
 

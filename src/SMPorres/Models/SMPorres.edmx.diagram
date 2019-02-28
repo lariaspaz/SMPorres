@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0f3b513c0d05411285ef10c4b15716e2" Name="Diagram1" ZoomLevel="111" SnapToGrid="true">
+      <Diagram DiagramId="0f3b513c0d05411285ef10c4b15716e2" Name="Diagram1" ZoomLevel="93" SnapToGrid="true">
         <EntityTypeShape EntityType="SMPorres_DevModel.Usuario" Width="1.5" PointX="7.25" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Alumno" Width="1.625" PointX="7.5" PointY="0.5" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Barrio" Width="1.5" PointX="4.875" PointY="4.375" />
@@ -35,8 +35,8 @@
         <EntityTypeShape EntityType="SMPorres_DevModel.PlanPago" Width="1.5" PointX="7.5" PointY="6" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Alumnos" ></AssociationConnector>
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" ManuallyRouted="true" >
-          <ConnectorPoint PointX="9.625" PointY="4.4235484407188075" />
-          <ConnectorPoint PointX="9.0000000000000018" PointY="6.0000000000000595" />
+          <ConnectorPoint PointX="9.625" PointY="4.4233821335363608" />
+          <ConnectorPoint PointX="9.0000000000000018" PointY="6.00000000000195" />
         </AssociationConnector>
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Usuarios" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Usuarios1" />
@@ -58,9 +58,9 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Pagos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_PlanesPago" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Usuarios" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.BecaAlumno" Width="1.5" PointX="9.625" PointY="6" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.BecaAlumno" Width="1.5" PointX="9.625" PointY="6.25" />
         <AssociationConnector Association="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_BecasAlumnos_Pagos" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_BecasAlumnos" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

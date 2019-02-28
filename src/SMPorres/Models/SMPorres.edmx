@@ -13,13 +13,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="NroDocumento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Barrios">
           <Key>
@@ -34,7 +34,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="IdPago" Type="int" Nullable="false" />
           <Property Name="IdAlumno" Type="int" Nullable="false" />
           <Property Name="PorcBeca" Type="float" Nullable="false" />
         </EntityType>
@@ -46,7 +45,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -63,6 +62,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Cuota" Type="smallint" Nullable="false" />
+          <Property Name="VtoBonificacion" Type="smalldatetime" Nullable="false" />
           <Property Name="VtoCuota" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Cursos">
@@ -171,8 +171,8 @@
           <Property Name="IdPagoAsiento" Type="int" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="FechaGrabacion" Type="datetime" />
-          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PorcRecargo" Type="float" />
+          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
           <Property Name="FechaVto" Type="datetime" />
         </EntityType>
         <EntityType Name="PlanesPago">
@@ -262,9 +262,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BecasAlumnos_Alumnos">
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
           <End Role="BecasAlumnos" Type="Self.BecasAlumnos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumnos">
@@ -272,20 +270,6 @@
             </Principal>
             <Dependent Role="BecasAlumnos">
               <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BecasAlumnos_Pagos">
-          <End Role="Pagos" Type="Self.Pagos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="BecasAlumnos" Type="Self.BecasAlumnos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pagos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BecasAlumnos">
-              <PropertyRef Name="IdPago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -445,6 +429,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pagos_BecasAlumnos">
+          <End Role="BecasAlumnos" Type="Self.BecasAlumnos" Multiplicity="0..1" />
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BecasAlumnos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="IdBecaAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pagos_MediosPago">
           <End Role="MediosPago" Type="Self.MediosPago" Multiplicity="0..1" />
           <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
@@ -466,6 +462,18 @@
             </Principal>
             <Dependent Role="Pagos1">
               <PropertyRef Name="IdPagoAsiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagos_Pagos1">
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="1" />
+          <End Role="Pagos1" Type="Self.Pagos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pagos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagos1">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -604,10 +612,6 @@
             <End Role="Alumnos" EntitySet="Alumnos" />
             <End Role="BecasAlumnos" EntitySet="BecasAlumnos" />
           </AssociationSet>
-          <AssociationSet Name="FK_BecasAlumnos_Pagos" Association="Self.FK_BecasAlumnos_Pagos">
-            <End Role="Pagos" EntitySet="Pagos" />
-            <End Role="BecasAlumnos" EntitySet="BecasAlumnos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cursos_Carreras" Association="Self.FK_Cursos_Carreras">
             <End Role="Carreras" EntitySet="Carreras" />
             <End Role="Cursos" EntitySet="Cursos" />
@@ -660,11 +664,19 @@
             <End Role="Departamentos" EntitySet="Departamentos" />
             <End Role="Localidades" EntitySet="Localidades" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pagos_BecasAlumnos" Association="Self.FK_Pagos_BecasAlumnos">
+            <End Role="BecasAlumnos" EntitySet="BecasAlumnos" />
+            <End Role="Pagos" EntitySet="Pagos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pagos_MediosPago" Association="Self.FK_Pagos_MediosPago">
             <End Role="MediosPago" EntitySet="MediosPago" />
             <End Role="Pagos" EntitySet="Pagos" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_Pagos" Association="Self.FK_Pagos_Pagos">
+            <End Role="Pagos" EntitySet="Pagos" />
+            <End Role="Pagos1" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Pagos1" Association="Self.FK_Pagos_Pagos1">
             <End Role="Pagos" EntitySet="Pagos" />
             <End Role="Pagos1" EntitySet="Pagos" />
           </AssociationSet>
@@ -836,9 +848,9 @@
             <End Role="Alumno" EntitySet="Alumnos" />
             <End Role="BecasAlumno" EntitySet="BecasAlumnos" />
           </AssociationSet>
-          <AssociationSet Name="FK_BecasAlumnos_Pagos" Association="SMPorres_DevModel.FK_BecasAlumnos_Pagos">
-            <End Role="Pago" EntitySet="Pagos" />
+          <AssociationSet Name="FK_Pagos_BecasAlumnos" Association="SMPorres_DevModel.FK_Pagos_BecasAlumnos">
             <End Role="BecasAlumno" EntitySet="BecasAlumnos" />
+            <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
@@ -867,7 +879,7 @@
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
@@ -876,7 +888,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="BecasAlumnos" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" FromRole="Alumno" ToRole="BecasAlumno" />
         </EntityType>
         <EntityType Name="Barrio">
@@ -1228,6 +1240,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="NroCuota" Type="Int16" Nullable="false" />
           <Property Name="VtoCuota" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VtoBonificacion" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Carrera">
           <Key>
@@ -1237,7 +1250,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
@@ -1368,7 +1381,7 @@
           <NavigationProperty Name="Contrasiento" Relationship="SMPorres_DevModel.FK_Pagos_Pagos" FromRole="Pago1" ToRole="Pago" />
           <NavigationProperty Name="PlanPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanPago" />
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
-          <NavigationProperty Name="BecasAlumnos" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Pagos" FromRole="Pago" ToRole="BecasAlumno" />
+          <NavigationProperty Name="BecaAlumno" Relationship="SMPorres_DevModel.FK_Pagos_BecasAlumnos" FromRole="Pago" ToRole="BecasAlumno" />
         </EntityType>
         <Association Name="FK_Pagos_MediosPago">
           <End Type="SMPorres_DevModel.MedioPago" Role="MedioPago" Multiplicity="0..1" />
@@ -1423,16 +1436,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdPago" Type="Int32" Nullable="false" />
           <Property Name="IdAlumno" Type="Int32" Nullable="false" />
           <Property Name="PorcBeca" Type="Double" Nullable="false" />
           <NavigationProperty Name="Alumno" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" FromRole="BecasAlumno" ToRole="Alumno" />
-          <NavigationProperty Name="Pago" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Pagos" FromRole="BecasAlumno" ToRole="Pago" />
+          <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_BecasAlumnos" FromRole="BecasAlumno" ToRole="Pago" />
         </EntityType>
         <Association Name="FK_BecasAlumnos_Alumnos">
-          <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
           <End Type="SMPorres_DevModel.BecaAlumno" Role="BecasAlumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumno">
@@ -1443,17 +1453,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BecasAlumnos_Pagos">
-          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="SMPorres_DevModel.BecaAlumno" Role="BecasAlumno" Multiplicity="*" />
+        <Association Name="FK_Pagos_BecasAlumnos">
+          <End Type="SMPorres_DevModel.BecaAlumno" Role="BecasAlumno" Multiplicity="0..1" />
+          <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Pago">
+            <Principal Role="BecasAlumno">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BecasAlumno">
-              <PropertyRef Name="IdPago" />
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdBecaAlumno" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1616,6 +1624,7 @@
           <EntitySetMapping Name="Cuotas">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Cuota">
               <MappingFragment StoreEntitySet="Cuotas">
+                <ScalarProperty Name="VtoBonificacion" ColumnName="VtoBonificacion" />
                 <ScalarProperty Name="VtoCuota" ColumnName="VtoCuota" />
                 <ScalarProperty Name="NroCuota" ColumnName="Cuota" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1700,7 +1709,6 @@
               <MappingFragment StoreEntitySet="BecasAlumnos">
                 <ScalarProperty Name="PorcBeca" ColumnName="PorcBeca" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

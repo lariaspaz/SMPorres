@@ -68,6 +68,7 @@ namespace SMPorres.Forms.Alumnos
             {
                 toolTip1.ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
                 dgvCursos.DataSource = null;
+                dgvPagos.DataSource = null;
                 GenerarPlanDePagoToolStripMenuItem.Enabled = false;
                 btnPagarCuota.Enabled = false;
             }
@@ -92,6 +93,7 @@ namespace SMPorres.Forms.Alumnos
                             Estado = pp.LeyendaEstado
                         };
             dgvPlanesPago.SetDataSource(query.ToList());
+            if (!query.Any()) dgvPagos.DataSource = null;
         }
 
         private void frmPanelAlumno_KeyDown(object sender, KeyEventArgs e)
@@ -378,7 +380,7 @@ namespace SMPorres.Forms.Alumnos
         {
             var p = PagoSeleccionado;
             var cuota = String.Format("{0} | {1}", p.NroCuota, NombreCursoSeleccionado);
-            var beca = p.BecasAlumnos.First();
+            var beca = p.BecaAlumno;
             using (var f = new frmAsignarBeca(cuota, beca.PorcBeca))
             {
                 if (f.ShowDialog() == DialogResult.OK)
@@ -406,8 +408,8 @@ namespace SMPorres.Forms.Alumnos
             }
             else
             {
-                AsignarBecaToolStripMenuItem.Visible = !p.BecasAlumnos.Any();
-                EditarBecaToolStripMenuItem.Visible = p.BecasAlumnos.Any();
+                AsignarBecaToolStripMenuItem.Visible = p.BecaAlumno == null;
+                EditarBecaToolStripMenuItem.Visible = p.BecaAlumno != null;
             }
         }
     }

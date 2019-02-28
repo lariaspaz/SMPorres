@@ -14,12 +14,18 @@ namespace SMPorres.Models
     
     public partial class BecaAlumno
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BecaAlumno()
+        {
+            this.Pagos = new HashSet<Pago>();
+        }
+    
         public int Id { get; set; }
-        public int IdPago { get; set; }
         public int IdAlumno { get; set; }
         public double PorcBeca { get; set; }
     
         public virtual Alumno Alumno { get; set; }
-        public virtual Pago Pago { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pago> Pagos { get; set; }
     }
 }
