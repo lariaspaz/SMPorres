@@ -94,6 +94,12 @@
     <Compile Include="Forms\Alumnos\frmInfAlumnosPorEstado.Designer.cs">
       <DependentUpon>frmInfAlumnosPorEstado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Alumnos\frmInfAlumnosMorosos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Alumnos\frmInfAlumnosMorosos.Designer.cs">
+      <DependentUpon>frmInfAlumnosMorosos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Alumnos\frmListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +361,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Designs\AlumnosMorosos.cs">
+      <DependentUpon>AlumnosMorosos.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\Designs\AlumnosPorEstado.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -378,6 +390,7 @@
     <Compile Include="Repositories\MediosPagoRepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
     <Compile Include="Repositories\PlanesPagoRepository.cs" />
+    <Compile Include="Repositories\StoredProcs.cs" />
     <Compile Include="Repositories\TiposDocumentoRepository.cs" />
     <Compile Include="Repositories\BarriosRepository.cs" />
     <Compile Include="Repositories\DepartamentosRepository.cs" />
@@ -402,6 +415,9 @@
     <Compile Include="Repositories\CursosRepository.cs" />
     <EmbeddedResource Include="Forms\Alumnos\frmInfAlumnosPorEstado.resx">
       <DependentUpon>frmInfAlumnosPorEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Alumnos\frmInfAlumnosMorosos.resx">
+      <DependentUpon>frmInfAlumnosMorosos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Alumnos\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
@@ -480,6 +496,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Usuarios\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Designs\AlumnosMorosos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AlumnosMorosos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Designs\AlumnosPorEstado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

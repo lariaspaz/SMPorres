@@ -573,6 +573,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ConsAlumnosMorosos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fecha" Type="smalldatetime" Mode="In" />
+          <Parameter Name="Tipo" Type="smallint" Mode="In" />
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="SMPorres_DevModelStoreContainer">
           <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Barrios" EntityType="Self.Barrios" Schema="dbo" store:Type="Tables" />
@@ -852,6 +857,11 @@
             <End Role="BecasAlumno" EntitySet="BecasAlumnos" />
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
+          <FunctionImport Name="ConsAlumnosMorosos">
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Tipo" Mode="In" Type="Int16" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1382,7 +1392,7 @@
           <NavigationProperty Name="PlanPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanPago" />
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
           <NavigationProperty Name="BecaAlumno" Relationship="SMPorres_DevModel.FK_Pagos_BecasAlumnos" FromRole="Pago" ToRole="BecasAlumno" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_Pagos_MediosPago">
           <End Type="SMPorres_DevModel.MedioPago" Role="MedioPago" Multiplicity="0..1" />
           <End Type="SMPorres_DevModel.Pago" Role="Pago" Multiplicity="*" />
@@ -1713,6 +1723,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsAlumnosMorosos" FunctionName="SMPorres_DevModel.Store.ConsAlumnosMorosos" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

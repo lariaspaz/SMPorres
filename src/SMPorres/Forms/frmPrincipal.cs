@@ -181,7 +181,7 @@ namespace SMPorres.Forms
 
         private void alumnosPorEstadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new Alumnos.frmInfAlumnosPorEstado()) f.ShowDialog();
+            using (var f = new Alumnos.frmInfAlumnosMorosos()) f.ShowDialog();
         }
     }
 }

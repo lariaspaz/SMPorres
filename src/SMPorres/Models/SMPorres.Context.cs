@@ -12,6 +12,8 @@ namespace SMPorres.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SMPorresEntities : DbContext
     {
@@ -47,5 +49,22 @@ namespace SMPorres.Models
         public virtual DbSet<MedioPago> MediosPago { get; set; }
         public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
+    
+        public virtual int ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCurso)
+        {
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(short));
+    
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ConsAlumnosMorosos", fechaParameter, tipoParameter, idCursoParameter);
+        }
     }
 }
