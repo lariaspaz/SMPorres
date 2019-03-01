@@ -50,7 +50,7 @@ namespace SMPorres.Models
         public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
     
-        public virtual int ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCurso)
+        public virtual ObjectResult<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCurso)
         {
             var fechaParameter = fecha.HasValue ?
                 new ObjectParameter("Fecha", fecha) :
@@ -64,7 +64,7 @@ namespace SMPorres.Models
                 new ObjectParameter("IdCurso", idCurso) :
                 new ObjectParameter("IdCurso", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ConsAlumnosMorosos", fechaParameter, tipoParameter, idCursoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsAlumnosMorosos_Result>("ConsAlumnosMorosos", fechaParameter, tipoParameter, idCursoParameter);
         }
     }
 }

@@ -46,6 +46,8 @@
             this.asignarAlumnosACursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.configuraciónGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,8 +55,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -197,6 +198,22 @@
             this.configuraciónGeneralToolStripMenuItem.Text = "Configuración general";
             this.configuraciónGeneralToolStripMenuItem.Click += new System.EventHandler(this.configuraciónGeneralToolStripMenuItem_Click);
             // 
+            // informesToolStripMenuItem
+            // 
+            this.informesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alumnosPorEstadoToolStripMenuItem,
+            this.alumnosMorososToolStripMenuItem});
+            this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
+            this.informesToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.informesToolStripMenuItem.Text = "Informes";
+            // 
+            // alumnosPorEstadoToolStripMenuItem
+            // 
+            this.alumnosPorEstadoToolStripMenuItem.Name = "alumnosPorEstadoToolStripMenuItem";
+            this.alumnosPorEstadoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.alumnosPorEstadoToolStripMenuItem.Text = "Alumnos por estado";
+            this.alumnosPorEstadoToolStripMenuItem.Click += new System.EventHandler(this.alumnosPorEstadoToolStripMenuItem_Click);
+            // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -250,20 +267,12 @@
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Text = "Asignar permisos a Grupos y Usuarios";
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosAGruposYUsuariosToolStripMenuItem_Click);
             // 
-            // informesToolStripMenuItem
+            // alumnosMorososToolStripMenuItem
             // 
-            this.informesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alumnosPorEstadoToolStripMenuItem});
-            this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
-            this.informesToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.informesToolStripMenuItem.Text = "Informes";
-            // 
-            // alumnosPorEstadoToolStripMenuItem
-            // 
-            this.alumnosPorEstadoToolStripMenuItem.Name = "alumnosPorEstadoToolStripMenuItem";
-            this.alumnosPorEstadoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.alumnosPorEstadoToolStripMenuItem.Text = "Alumnos por estado";
-            this.alumnosPorEstadoToolStripMenuItem.Click += new System.EventHandler(this.alumnosPorEstadoToolStripMenuItem_Click);
+            this.alumnosMorososToolStripMenuItem.Name = "alumnosMorososToolStripMenuItem";
+            this.alumnosMorososToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.alumnosMorososToolStripMenuItem.Text = "Alumnos morosos";
+            this.alumnosMorososToolStripMenuItem.Click += new System.EventHandler(this.alumnosMorososToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -312,6 +321,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alumnosPorEstadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alumnosMorososToolStripMenuItem;
     }
 }
 

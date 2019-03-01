@@ -66,13 +66,13 @@ namespace SMPorres.Forms.Alumnos
         {
             using (var reporte = new AlumnosPorEstado())
             {
-                string título = "Alumnos por Estado";
+                string título = "Alumnos morosos";
                 string curso = cbCursos.Text;
                 if (IdCurso == 0) curso = curso.Replace("(", "").Replace(")", "");
                 string carrera = cbCarreras.Text;
                 if (IdCarrera == 0) carrera = carrera.Replace("(", "").Replace(")", "");
                 var subTítulo = curso + " - " + carrera;
-                reporte.Database.Tables["EstadoAlumno"].SetDataSource(dt);
+                reporte.Database.Tables["AlumnoMoroso"].SetDataSource(dt);
                 using (var f = new frmReporte(reporte, título, subTítulo)) f.ShowDialog();
             }
         }
@@ -101,6 +101,14 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
+        private DateTime Fecha
+        {
+            get
+            {
+                return dtFecha.Value.Date;
+            }
+        }
+
         private void cbCarreras_SelectedValueChanged(object sender, EventArgs e)
         {
             var items = CursosRepository.ObtenerCursosPorIdCarrera(IdCarrera).OrderBy(c => c.Nombre).ToList();
@@ -113,13 +121,21 @@ namespace SMPorres.Forms.Alumnos
 
         private DataTable ObtenerDatos()
         {
-            var tabla = new dsImpresiones.EstadoAlumnoDataTable();
-            //var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
-            //foreach (var a in alumnos)
-            //{
-            //    var s = String.Format("{0} de {1}", a.Curso, a.Carrera);
-            //    tabla.AddEstadoAlumnoRow(s, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
-            //}
+            var tabla = new dsImpresiones.AlumnoMorosoDataTable();
+            var alumnos = StoredProcs.ConsAlumnosMorosos(Fecha, (short)TipoInforme, IdCurso);
+            foreach (var a in alumnos)
+            {
+                //var s = String.Format("{0} de {1}", a.Curso, a.Carrera);
+                //tabla.AddEstadoAlumnoRow(s, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
+                string nrodoc = a.NroDocumento.ToString();
+                string vtoCuota = a.VtoCuota.HasValue ? a.VtoCuota.Value.ToString("dd/MM/yyyy") : "";
+                string fechaPago = a.FechaPago.HasValue ? a.FechaPago.Value.ToString("dd/MM/yyyy") : "";
+                string importeCuota = a.ImporteCuota.ToString("0.00");
+                string importePagado = a.ImportePagado.HasValue ? a.ImportePagado.Value.ToString("0.00") : "";
+                string beca = a.Beca.HasValue ? a.Beca.Value.ToString("0") : "";
+                tabla.AddAlumnoMorosoRow(a.IdCurso, a.Curso, a.Carrera, a.TipoDocumento, nrodoc, a.Nombre,
+                    a.Apellido, vtoCuota, fechaPago, a.Cuota ?? 0, importeCuota, importePagado, beca);
+            }
             return tabla;
         }
     }

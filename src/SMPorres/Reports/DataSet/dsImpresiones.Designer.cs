@@ -1281,7 +1281,7 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AlumnoMorosoRow AddAlumnoMorosoRow(string IdCurso, string Curso, string Carrera, string TipoDocumento, string NroDocumento, string Nombre, string Apellido, string VtoCuota, string FechaPago, string Cuota, string ImporteCuota, string ImportePagado, string Beca) {
+            public AlumnoMorosoRow AddAlumnoMorosoRow(int IdCurso, string Curso, string Carrera, string TipoDocumento, string NroDocumento, string Nombre, string Apellido, string VtoCuota, string FechaPago, short Cuota, string ImporteCuota, string ImportePagado, string Beca) {
                 AlumnoMorosoRow rowAlumnoMorosoRow = ((AlumnoMorosoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IdCurso,
@@ -1337,7 +1337,7 @@ namespace SMPorres.Reports.DataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnIdCurso = new global::System.Data.DataColumn("IdCurso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnIdCurso = new global::System.Data.DataColumn("IdCurso", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIdCurso);
                 this.columnCurso = new global::System.Data.DataColumn("Curso", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCurso);
@@ -1355,7 +1355,7 @@ namespace SMPorres.Reports.DataSet {
                 base.Columns.Add(this.columnVtoCuota);
                 this.columnFechaPago = new global::System.Data.DataColumn("FechaPago", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFechaPago);
-                this.columnCuota = new global::System.Data.DataColumn("Cuota", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnCuota = new global::System.Data.DataColumn("Cuota", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCuota);
                 this.columnImporteCuota = new global::System.Data.DataColumn("ImporteCuota", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnImporteCuota);
@@ -2067,10 +2067,10 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string IdCurso {
+            public int IdCurso {
                 get {
                     try {
-                        return ((string)(this[this.tableAlumnoMoroso.IdCursoColumn]));
+                        return ((int)(this[this.tableAlumnoMoroso.IdCursoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("El valor de la columna \'IdCurso\' de la tabla \'AlumnoMoroso\' es DBNull.", e);
@@ -2211,10 +2211,10 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Cuota {
+            public short Cuota {
                 get {
                     try {
-                        return ((string)(this[this.tableAlumnoMoroso.CuotaColumn]));
+                        return ((short)(this[this.tableAlumnoMoroso.CuotaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("El valor de la columna \'Cuota\' de la tabla \'AlumnoMoroso\' es DBNull.", e);

@@ -283,6 +283,9 @@
     <Compile Include="Models\Configuracion.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConsAlumnosMorosos_Result.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cuota.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
