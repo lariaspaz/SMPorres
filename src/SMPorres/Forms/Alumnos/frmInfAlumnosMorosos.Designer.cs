@@ -75,7 +75,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(143, 6);
+            this.btnCancelar.Location = new System.Drawing.Point(145, 6);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -85,7 +85,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(62, 6);
+            this.btnAceptar.Location = new System.Drawing.Point(64, 6);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -189,7 +189,7 @@
             this.ClientSize = new System.Drawing.Size(285, 166);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmInfAlumnosMorosos";
-            this.Text = "Alumnos por Estado";
+            this.Text = "Alumnos morosos";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

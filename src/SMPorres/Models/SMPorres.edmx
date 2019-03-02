@@ -13,13 +13,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="NroDocumento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Barrios">
           <Key>
@@ -45,7 +45,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -170,8 +170,8 @@
           <Property Name="IdPagoAsiento" Type="int" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="FechaGrabacion" Type="datetime" />
-          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PorcRecargo" Type="float" />
+          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
           <Property Name="FechaVto" Type="datetime" />
         </EntityType>
         <EntityType Name="PlanesPago">
@@ -464,6 +464,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pagos_Pagos1">
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="1" />
+          <End Role="Pagos1" Type="Self.Pagos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pagos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagos1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pagos_PlanesPago">
           <End Role="PlanesPago" Type="Self.PlanesPago" Multiplicity="1" />
           <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
@@ -563,6 +575,7 @@
         <Function Name="ConsAlumnosMorosos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fecha" Type="smalldatetime" Mode="In" />
           <Parameter Name="Tipo" Type="smallint" Mode="In" />
+          <Parameter Name="IdCarrera" Type="int" Mode="In" />
           <Parameter Name="IdCurso" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="SMPorres_DevModelStoreContainer">
@@ -665,6 +678,10 @@
             <End Role="Pagos" EntitySet="Pagos" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagos_Pagos" Association="Self.FK_Pagos_Pagos">
+            <End Role="Pagos" EntitySet="Pagos" />
+            <End Role="Pagos1" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Pagos1" Association="Self.FK_Pagos_Pagos1">
             <End Role="Pagos" EntitySet="Pagos" />
             <End Role="Pagos1" EntitySet="Pagos" />
           </AssociationSet>
@@ -843,6 +860,7 @@
           <FunctionImport Name="ConsAlumnosMorosos" ReturnType="Collection(SMPorres_DevModel.ConsAlumnosMorosos_Result)">
             <Parameter Name="Fecha" Mode="In" Type="DateTime" />
             <Parameter Name="Tipo" Mode="In" Type="Int16" />
+            <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -872,7 +890,7 @@
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
@@ -881,7 +899,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="BecasAlumnos" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" FromRole="Alumno" ToRole="BecasAlumno" />
         </EntityType>
         <EntityType Name="Barrio">
@@ -1242,7 +1260,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
@@ -1460,6 +1478,7 @@
         <ComplexType Name="ConsAlumnosMorosos_Result">
           <Property Type="Int32" Name="IdCurso" Nullable="false" />
           <Property Type="String" Name="Curso" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdCarrera" Nullable="false" />
           <Property Type="String" Name="Carrera" Nullable="false" MaxLength="255" />
           <Property Type="String" Name="TipoDocumento" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="NroDocumento" Nullable="false" Precision="18" Scale="0" />
@@ -1724,6 +1743,7 @@
               <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsAlumnosMorosos_Result">
                 <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
                 <ScalarProperty Name="Curso" ColumnName="Curso" />
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
                 <ScalarProperty Name="Carrera" ColumnName="Carrera" />
                 <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
                 <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />

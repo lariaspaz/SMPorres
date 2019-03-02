@@ -311,6 +311,7 @@ namespace SMPorres.Forms.Alumnos
         private void btnPagarCuota_Click(object sender, EventArgs e)
         {
             using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
+            ConsultarPagos();
         }
 
         private PlanPago PlanDePagoSeleccionado

@@ -19,8 +19,8 @@ namespace SMPorres.Forms.Alumnos
     {
         private enum TiposInforme
         {
-            AlumnosAlDía,
-            AlumnosMorosos
+            AlumnosAlDía = 1,
+            AlumnosMorosos = 2
         }
 
         public frmInfAlumnosMorosos()
@@ -34,8 +34,8 @@ namespace SMPorres.Forms.Alumnos
             cbCarreras.DataSource = qry;
 
             var tipos = new Dictionary<TiposInforme, string>();
-            tipos.Add(TiposInforme.AlumnosAlDía, "Al día");
-            tipos.Add(TiposInforme.AlumnosMorosos, "Morosos");
+            tipos.Add(TiposInforme.AlumnosAlDía, "Alumnos al día");
+            tipos.Add(TiposInforme.AlumnosMorosos, "Alumnos morosos");
             cbTipo.DataSource = new BindingSource(tipos, null);
             cbTipo.ValueMember = "Key";
             cbTipo.DisplayMember = "Value";
@@ -64,14 +64,15 @@ namespace SMPorres.Forms.Alumnos
 
         private void MostrarReporte(DataTable dt)
         {
-            using (var reporte = new AlumnosPorEstado())
+            using (var reporte = new AlumnosMorosos())
             {
-                string título = "Alumnos morosos";
+                string título = cbTipo.Text;
+                string fecha = "Al " + dtFecha.Value.Date.ToString("dd/MM/yyyy");
                 string curso = cbCursos.Text;
                 if (IdCurso == 0) curso = curso.Replace("(", "").Replace(")", "");
                 string carrera = cbCarreras.Text;
                 if (IdCarrera == 0) carrera = carrera.Replace("(", "").Replace(")", "");
-                var subTítulo = curso + " - " + carrera;
+                var subTítulo = fecha + " - " + curso + " - " + carrera;
                 reporte.Database.Tables["AlumnoMoroso"].SetDataSource(dt);
                 using (var f = new frmReporte(reporte, título, subTítulo)) f.ShowDialog();
             }
@@ -122,17 +123,15 @@ namespace SMPorres.Forms.Alumnos
         private DataTable ObtenerDatos()
         {
             var tabla = new dsImpresiones.AlumnoMorosoDataTable();
-            var alumnos = StoredProcs.ConsAlumnosMorosos(Fecha, (short)TipoInforme, IdCurso);
+            var alumnos = StoredProcs.ConsAlumnosMorosos(Fecha, (short)TipoInforme, IdCarrera, IdCurso);
             foreach (var a in alumnos)
             {
-                //var s = String.Format("{0} de {1}", a.Curso, a.Carrera);
-                //tabla.AddEstadoAlumnoRow(s, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
                 string nrodoc = a.NroDocumento.ToString();
-                string vtoCuota = a.VtoCuota.HasValue ? a.VtoCuota.Value.ToString("dd/MM/yyyy") : "";
-                string fechaPago = a.FechaPago.HasValue ? a.FechaPago.Value.ToString("dd/MM/yyyy") : "";
-                string importeCuota = a.ImporteCuota.ToString("0.00");
-                string importePagado = a.ImportePagado.HasValue ? a.ImportePagado.Value.ToString("0.00") : "";
-                string beca = a.Beca.HasValue ? a.Beca.Value.ToString("0") : "";
+                string vtoCuota = a.VtoCuota.HasValue ? a.VtoCuota.Value.ToString("dd/MM/yy") : "";
+                string fechaPago = a.FechaPago.HasValue ? a.FechaPago.Value.ToString("dd/MM/yy") : "";
+                string importeCuota = a.ImporteCuota.ToString("###,##0.00");
+                string importePagado = a.ImportePagado.HasValue ? a.ImportePagado.Value.ToString("###,##0.00") : "";
+                string beca = a.Beca.HasValue ? a.Beca.Value.ToString("0\\%") : "";
                 tabla.AddAlumnoMorosoRow(a.IdCurso, a.Curso, a.Carrera, a.TipoDocumento, nrodoc, a.Nombre,
                     a.Apellido, vtoCuota, fechaPago, a.Cuota ?? 0, importeCuota, importePagado, beca);
             }

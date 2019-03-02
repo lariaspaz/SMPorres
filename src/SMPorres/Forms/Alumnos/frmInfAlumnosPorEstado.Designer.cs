@@ -160,7 +160,7 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Carrera: ";
             // 
-            // frmInfAlumnosPorEstadoCondiciones
+            // frmInfAlumnosPorEstado
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,8 +168,8 @@
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(280, 136);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "frmInfAlumnosPorEstadoCondiciones";
-            this.Text = "Alumnos por Estado";
+            this.Name = "frmInfAlumnosPorEstado";
+            this.Text = "Alumnos por estado";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
