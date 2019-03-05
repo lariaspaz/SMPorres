@@ -23,6 +23,13 @@ namespace SMPorres.Forms.Alumnos
             AlumnosMorosos = 2
         }
 
+        private enum BecasOtorgadas
+        {
+            AlumnosTodos = 0,
+            AlumnosSinBeca = 1,
+            AlumnosConBeca = 2
+        }
+
         public frmInfAlumnosMorosos()
         {
             InitializeComponent();
@@ -33,6 +40,24 @@ namespace SMPorres.Forms.Alumnos
             cbCarreras.ValueMember = "Id";
             cbCarreras.DataSource = qry;
 
+            cargarTipo();
+            cargarBecaOtorgada();
+        }
+
+        private void cargarBecaOtorgada()
+        {
+            var beca = new Dictionary<BecasOtorgadas, string>();
+            beca.Add(BecasOtorgadas.AlumnosTodos, "(Todos los alumnos)");
+            beca.Add(BecasOtorgadas.AlumnosSinBeca, "Alumnos sin beca asignada");
+            beca.Add(BecasOtorgadas.AlumnosConBeca, "Alumnos con beca asignada");
+            cbBeca.DataSource = new BindingSource(beca, null);
+            cbBeca.ValueMember = "Key";
+            cbBeca.DisplayMember = "Value";
+            cbBeca.SelectedIndex = 0;
+        }
+
+        private void cargarTipo()
+        {
             var tipos = new Dictionary<TiposInforme, string>();
             tipos.Add(TiposInforme.AlumnosAlDía, "Alumnos al día");
             tipos.Add(TiposInforme.AlumnosMorosos, "Alumnos morosos");
@@ -102,6 +127,14 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
+        private BecasOtorgadas BecaOtorgada
+        {
+            get
+            {
+                return (BecasOtorgadas)cbBeca.SelectedValue;
+            }
+        }
+
         private DateTime Fecha
         {
             get
@@ -123,7 +156,8 @@ namespace SMPorres.Forms.Alumnos
         private DataTable ObtenerDatos()
         {
             var tabla = new dsImpresiones.AlumnoMorosoDataTable();
-            var alumnos = StoredProcs.ConsAlumnosMorosos(Fecha, (short)TipoInforme, IdCarrera, IdCurso);
+            //var alumnos = StoredProcs.ConsAlumnosMorosos(Fecha, (short)TipoInforme, IdCarrera, IdCurso);
+            var alumnos = StoredProcs.ConsAlumnosMorosos2(Fecha, (short)TipoInforme, IdCarrera, IdCurso, (short)BecaOtorgada);
             foreach (var a in alumnos)
             {
                 string nrodoc = a.NroDocumento.ToString();

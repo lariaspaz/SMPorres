@@ -41,6 +41,8 @@
             this.cbCursos = new System.Windows.Forms.ComboBox();
             this.cbCarreras = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.cbBeca = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -58,7 +60,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(285, 166);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(285, 192);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // panel3
@@ -66,7 +68,7 @@
             this.panel3.Controls.Add(this.btnCancelar);
             this.panel3.Controls.Add(this.btnAceptar);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 131);
+            this.panel3.Location = new System.Drawing.Point(0, 157);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(285, 35);
@@ -95,6 +97,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cbBeca);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.dtFecha);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.cbTipo);
@@ -106,7 +110,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(279, 125);
+            this.panel2.Size = new System.Drawing.Size(279, 151);
             this.panel2.TabIndex = 1;
             // 
             // dtFecha
@@ -180,13 +184,31 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Carrera: ";
             // 
+            // cbBeca
+            // 
+            this.cbBeca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBeca.FormattingEnabled = true;
+            this.cbBeca.Location = new System.Drawing.Point(64, 118);
+            this.cbBeca.Name = "cbBeca";
+            this.cbBeca.Size = new System.Drawing.Size(200, 21);
+            this.cbBeca.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 122);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Beca: ";
+            // 
             // frmInfAlumnosMorosos
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(285, 166);
+            this.ClientSize = new System.Drawing.Size(285, 192);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmInfAlumnosMorosos";
             this.Text = "Alumnos morosos";
@@ -213,5 +235,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbTipo;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbBeca;
+        private System.Windows.Forms.Label label1;
     }
 }
