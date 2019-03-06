@@ -48,6 +48,7 @@
             this.configuraciónGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +56,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PagosTotalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -202,7 +203,8 @@
             // 
             this.informesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alumnosPorEstadoToolStripMenuItem,
-            this.alumnosMorososToolStripMenuItem});
+            this.alumnosMorososToolStripMenuItem,
+            this.PagosTotalesToolStripMenuItem});
             this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
             this.informesToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.informesToolStripMenuItem.Text = "Informes";
@@ -213,6 +215,13 @@
             this.alumnosPorEstadoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.alumnosPorEstadoToolStripMenuItem.Text = "Alumnos por estado";
             this.alumnosPorEstadoToolStripMenuItem.Click += new System.EventHandler(this.alumnosPorEstadoToolStripMenuItem_Click);
+            // 
+            // alumnosMorososToolStripMenuItem
+            // 
+            this.alumnosMorososToolStripMenuItem.Name = "alumnosMorososToolStripMenuItem";
+            this.alumnosMorososToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.alumnosMorososToolStripMenuItem.Text = "Alumnos morosos";
+            this.alumnosMorososToolStripMenuItem.Click += new System.EventHandler(this.alumnosMorososToolStripMenuItem_Click);
             // 
             // seguridadToolStripMenuItem
             // 
@@ -267,12 +276,12 @@
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Text = "Asignar permisos a Grupos y Usuarios";
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosAGruposYUsuariosToolStripMenuItem_Click);
             // 
-            // alumnosMorososToolStripMenuItem
+            // PagosTotalesToolStripMenuItem
             // 
-            this.alumnosMorososToolStripMenuItem.Name = "alumnosMorososToolStripMenuItem";
-            this.alumnosMorososToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.alumnosMorososToolStripMenuItem.Text = "Alumnos morosos";
-            this.alumnosMorososToolStripMenuItem.Click += new System.EventHandler(this.alumnosMorososToolStripMenuItem_Click);
+            this.PagosTotalesToolStripMenuItem.Name = "PagosTotalesToolStripMenuItem";
+            this.PagosTotalesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.PagosTotalesToolStripMenuItem.Text = "Totales de pagos";
+            this.PagosTotalesToolStripMenuItem.Click += new System.EventHandler(this.PagosTotalesToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -322,6 +331,7 @@
         private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alumnosPorEstadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alumnosMorososToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PagosTotalesToolStripMenuItem;
     }
 }
 

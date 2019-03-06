@@ -130,6 +130,12 @@
     <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pagos\frmInfPagosTotales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pagos\frmInfPagosTotales.Designer.cs">
+      <DependentUpon>frmInfPagosTotales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pagos\frmPagarCuota.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +292,9 @@
     <Compile Include="Models\ConsAlumnosMorosos_Result.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConsTotalPagos_Result.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cuota.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -364,6 +373,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Designs\TotalPagos.cs">
+      <DependentUpon>TotalPagos.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\Designs\AlumnosMorosos.cs">
       <DependentUpon>AlumnosMorosos.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -437,6 +452,9 @@
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pagos\frmInfPagosTotales.resx">
+      <DependentUpon>frmInfPagosTotales.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagos\frmPagarCuota.resx">
       <DependentUpon>frmPagarCuota.cs</DependentUpon>
     </EmbeddedResource>
@@ -499,6 +517,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Usuarios\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Designs\TotalPagos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TotalPagos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Designs\AlumnosMorosos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

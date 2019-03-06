@@ -188,5 +188,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Alumnos.frmInfAlumnosMorosos()) f.ShowDialog();
         }
+
+        private void PagosTotalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Pagos.frmInfPagosTotales()) f.ShowDialog();
+        }
     }
 }

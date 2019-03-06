@@ -27,5 +27,14 @@ namespace SMPorres.Repositories
                 return db.ConsAlumnosMorosos(fecha, tipo, idCarrera, idCurso).ToList();
             }
         }
+
+        public static List<ConsTotalPagos_Result> ConsTotalPagos(DateTime desde, DateTime hasta,
+            int idCarrera, int idCurso)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.ConsTotalPagos(desde, hasta, idCarrera, idCurso).ToList();
+            }
+        }
     }
 }
