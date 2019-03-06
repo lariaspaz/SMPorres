@@ -577,6 +577,7 @@
           <Parameter Name="Tipo" Type="smallint" Mode="In" />
           <Parameter Name="IdCarrera" Type="int" Mode="In" />
           <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="TipoBecado" Type="smallint" Mode="In" />
         </Function>
         <Function Name="ConsTotalPagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Desde" Type="smalldatetime" Mode="In" />
@@ -863,17 +864,18 @@
             <End Role="BecasAlumno" EntitySet="BecasAlumnos" />
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
-          <FunctionImport Name="ConsAlumnosMorosos" ReturnType="Collection(SMPorres_DevModel.ConsAlumnosMorosos_Result)">
-            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="Tipo" Mode="In" Type="Int16" />
-            <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
-            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ConsTotalPagos" ReturnType="Collection(SMPorres_DevModel.ConsTotalPagos_Result)">
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
             <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ConsAlumnosMorosos" ReturnType="Collection(SMPorres_DevModel.ConsAlumnosMorosos_Result)">
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Tipo" Mode="In" Type="Int16" />
+            <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="TipoBecado" Mode="In" Type="Int16" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Usuario">
@@ -1487,6 +1489,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="ConsTotalPagos_Result">
+          <Property Type="String" Name="Carrera" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Curso" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdCarrera" Nullable="false" />
+          <Property Type="Int32" Name="IdCurso" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
         <ComplexType Name="ConsAlumnosMorosos_Result">
           <Property Type="Int32" Name="IdCurso" Nullable="false" />
           <Property Type="String" Name="Curso" Nullable="false" MaxLength="50" />
@@ -1502,14 +1512,6 @@
           <Property Type="Decimal" Name="ImporteCuota" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="ImportePagado" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Double" Name="Beca" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="ConsTotalPagos_Result">
-          <Property Type="String" Name="Carrera" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="Curso" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="IdCarrera" Nullable="false" />
-          <Property Type="Int32" Name="IdCurso" Nullable="false" />
-          <Property Type="Int32" Name="Cantidad" Nullable="false" />
-          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1758,6 +1760,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsTotalPagos" FunctionName="SMPorres_DevModel.Store.ConsTotalPagos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsTotalPagos_Result">
+                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+                <ScalarProperty Name="Curso" ColumnName="Curso" />
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ConsAlumnosMorosos" FunctionName="SMPorres_DevModel.Store.ConsAlumnosMorosos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsAlumnosMorosos_Result">
@@ -1775,18 +1789,6 @@
                 <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
                 <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
                 <ScalarProperty Name="Beca" ColumnName="Beca" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ConsTotalPagos" FunctionName="SMPorres_DevModel.Store.ConsTotalPagos">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsTotalPagos_Result">
-                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
-                <ScalarProperty Name="Curso" ColumnName="Curso" />
-                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

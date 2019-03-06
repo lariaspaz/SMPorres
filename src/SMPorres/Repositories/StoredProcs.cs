@@ -10,21 +10,11 @@ namespace SMPorres.Repositories
     public class StoredProcs
     {
         public static List<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(DateTime fecha, short tipo,
-            int idCarrera, int idCurso)
+            int idCarrera, int idCurso, short tipoBecado)
         {
             using (var db = new SMPorresEntities())
             {                
-                return db.ConsAlumnosMorosos(fecha, tipo, idCarrera, idCurso).ToList();
-            }
-        }
-
-        public static List<ConsAlumnosMorosos_Result> ConsAlumnosMorosos2(DateTime fecha, short tipo,
-            int idCarrera, int idCurso, short beca)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                //return db.ConsAlumnosMorosos2(fecha, tipo, idCarrera, idCurso, beca).ToList();
-                return db.ConsAlumnosMorosos(fecha, tipo, idCarrera, idCurso).ToList();
+                return db.ConsAlumnosMorosos(fecha, tipo, idCarrera, idCurso, tipoBecado).ToList();
             }
         }
 

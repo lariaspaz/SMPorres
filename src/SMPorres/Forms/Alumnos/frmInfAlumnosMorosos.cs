@@ -23,11 +23,11 @@ namespace SMPorres.Forms.Alumnos
             AlumnosMorosos = 2
         }
 
-        private enum BecasOtorgadas
+        private enum TiposBecados
         {
-            AlumnosTodos = 0,
-            AlumnosSinBeca = 1,
-            AlumnosConBeca = 2
+            Todos = 0,
+            SinBeca = 1,
+            ConBeca = 2
         }
 
         public frmInfAlumnosMorosos()
@@ -40,23 +40,23 @@ namespace SMPorres.Forms.Alumnos
             cbCarreras.ValueMember = "Id";
             cbCarreras.DataSource = qry;
 
-            cargarTipo();
-            cargarBecaOtorgada();
+            CargarTiposInforme();
+            CargarTiposBecados();
         }
 
-        private void cargarBecaOtorgada()
+        private void CargarTiposBecados()
         {
-            var beca = new Dictionary<BecasOtorgadas, string>();
-            beca.Add(BecasOtorgadas.AlumnosTodos, "(Todos los alumnos)");
-            beca.Add(BecasOtorgadas.AlumnosSinBeca, "Alumnos sin beca asignada");
-            beca.Add(BecasOtorgadas.AlumnosConBeca, "Alumnos con beca asignada");
+            var beca = new Dictionary<TiposBecados, string>();
+            beca.Add(TiposBecados.Todos, "(Todos los alumnos)");
+            beca.Add(TiposBecados.SinBeca, "Alumnos sin beca asignada");
+            beca.Add(TiposBecados.ConBeca, "Alumnos con beca asignada");
             cbBeca.DataSource = new BindingSource(beca, null);
             cbBeca.ValueMember = "Key";
             cbBeca.DisplayMember = "Value";
             cbBeca.SelectedIndex = 0;
         }
 
-        private void cargarTipo()
+        private void CargarTiposInforme()
         {
             var tipos = new Dictionary<TiposInforme, string>();
             tipos.Add(TiposInforme.AlumnosAlDía, "Alumnos al día");
@@ -127,11 +127,11 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
-        private BecasOtorgadas BecaOtorgada
+        private TiposBecados TipoBecado
         {
             get
             {
-                return (BecasOtorgadas)cbBeca.SelectedValue;
+                return (TiposBecados)cbBeca.SelectedValue;
             }
         }
 
@@ -156,8 +156,7 @@ namespace SMPorres.Forms.Alumnos
         private DataTable ObtenerDatos()
         {
             var tabla = new dsImpresiones.AlumnoMorosoDataTable();
-            //var alumnos = StoredProcs.ConsAlumnosMorosos(Fecha, (short)TipoInforme, IdCarrera, IdCurso);
-            var alumnos = StoredProcs.ConsAlumnosMorosos2(Fecha, (short)TipoInforme, IdCarrera, IdCurso, (short)BecaOtorgada);
+            var alumnos = StoredProcs.ConsAlumnosMorosos(Fecha, (short)TipoInforme, IdCarrera, IdCurso, (short) TipoBecado);
             foreach (var a in alumnos)
             {
                 string nrodoc = a.NroDocumento.ToString();

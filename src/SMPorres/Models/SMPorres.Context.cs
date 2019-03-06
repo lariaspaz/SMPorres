@@ -50,27 +50,6 @@ namespace SMPorres.Models
         public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
     
-        public virtual ObjectResult<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCarrera, Nullable<int> idCurso)
-        {
-            var fechaParameter = fecha.HasValue ?
-                new ObjectParameter("Fecha", fecha) :
-                new ObjectParameter("Fecha", typeof(System.DateTime));
-    
-            var tipoParameter = tipo.HasValue ?
-                new ObjectParameter("Tipo", tipo) :
-                new ObjectParameter("Tipo", typeof(short));
-    
-            var idCarreraParameter = idCarrera.HasValue ?
-                new ObjectParameter("IdCarrera", idCarrera) :
-                new ObjectParameter("IdCarrera", typeof(int));
-    
-            var idCursoParameter = idCurso.HasValue ?
-                new ObjectParameter("IdCurso", idCurso) :
-                new ObjectParameter("IdCurso", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsAlumnosMorosos_Result>("ConsAlumnosMorosos", fechaParameter, tipoParameter, idCarreraParameter, idCursoParameter);
-        }
-    
         public virtual ObjectResult<ConsTotalPagos_Result> ConsTotalPagos(Nullable<System.DateTime> desde, Nullable<System.DateTime> hasta, Nullable<int> idCarrera, Nullable<int> idCurso)
         {
             var desdeParameter = desde.HasValue ?
@@ -90,6 +69,31 @@ namespace SMPorres.Models
                 new ObjectParameter("IdCurso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsTotalPagos_Result>("ConsTotalPagos", desdeParameter, hastaParameter, idCarreraParameter, idCursoParameter);
+        }
+    
+        public virtual ObjectResult<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCarrera, Nullable<int> idCurso, Nullable<short> tipoBecado)
+        {
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(short));
+    
+            var idCarreraParameter = idCarrera.HasValue ?
+                new ObjectParameter("IdCarrera", idCarrera) :
+                new ObjectParameter("IdCarrera", typeof(int));
+    
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var tipoBecadoParameter = tipoBecado.HasValue ?
+                new ObjectParameter("TipoBecado", tipoBecado) :
+                new ObjectParameter("TipoBecado", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsAlumnosMorosos_Result>("ConsAlumnosMorosos", fechaParameter, tipoParameter, idCarreraParameter, idCursoParameter, tipoBecadoParameter);
         }
     }
 }
