@@ -10,13 +10,12 @@ namespace SMPorres.Lib.Calculos
     {
         public static int CalculaDigitoVerificador(string códigoBarra)
         {
-            //var códigoBarra = "0000002191090000082800";
-            const string semilla = "15973";
-            var list = códigoBarra.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));
-            var sem = String.Concat(Enumerable.Repeat(semilla, códigoBarra.Length / semilla.Length + 1));
-            var list2 = sem.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));
-            var sum = list.ElementAt(0) + list.Skip(1).Select((item, index) => item * list2.ElementAt(index)).Sum();            
-            return (sum / 2) % 10;
+		  const string semilla = "5973";
+		  var list = códigoBarra.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));
+		  var sem = String.Concat(Enumerable.Repeat(semilla, códigoBarra.Length / semilla.Length + 1));
+		  var list2 = sem.ToCharArray().Select(c => Convert.ToInt32(c.ToString()));
+		  var sum = list.ElementAt(0) + list.Skip(1).Select((item, index) => item * list2.ElementAt(index)).Sum();            
+		  return (int) Math.Truncate((double) sum / (double) 2) % 10;
         }
         
         public static int CalculaDigitoVerificador_old(string codBarra, string semilla)
