@@ -61,8 +61,9 @@ namespace SMPorres.Forms.Alumnos
                          select new
                          {
                              ca.Id,
-                             ca.Nombre,
-                             Carrera = ca.Carrera.Nombre
+                             ca.CicloLectivo,
+                             ca.Curso.Nombre,
+                             Carrera = ca.Curso.Carrera.Nombre
                          };
             if (!cursos.Any())
             {
@@ -125,13 +126,17 @@ namespace SMPorres.Forms.Alumnos
             dgvCursos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvCursos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
-            dgvCursos.Columns[1].HeaderText = "Nombre";
-            dgvCursos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvCursos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvCursos.Columns[1].HeaderText = "Ciclo Lectivo";
+            dgvCursos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvCursos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
-            dgvCursos.Columns[2].HeaderText = "Carrera";
+            dgvCursos.Columns[2].HeaderText = "Nombre";
             dgvCursos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvCursos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dgvCursos.Columns[3].HeaderText = "Carrera";
+            dgvCursos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvCursos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private Curso CursoSeleccionado
@@ -215,7 +220,7 @@ namespace SMPorres.Forms.Alumnos
                             ImportePagado = p.ImportePagado,
                             MedioPago = p.IdMedioPago.HasValue ? p.MedioPago.Descripcion : null,
                             PorcBeca = p.PorcBeca,
-                            EsContrasiento = p.EsContrasiento == 1,
+                            //EsContrasiento = p.EsContrasiento == 1,
                             Descripcion = p.Descripcion
                         };
             dgvPagos.SetDataSource(query);
@@ -266,8 +271,7 @@ namespace SMPorres.Forms.Alumnos
 
             dgvPagos.Columns[8].HeaderText = "Descripción";
             dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            //dgvPagos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            //dgvPagos.Columns[8].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
 
             foreach (DataGridViewColumn c in dgvPagos.Columns)
             {

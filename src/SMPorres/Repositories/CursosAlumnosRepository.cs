@@ -37,24 +37,33 @@ namespace SMPorres.Repositories
             }
         }
 
-        internal static List<Curso> ObtenerCursosPorAlumno(int idAlumno)
+        internal static List<CursosAlumno> ObtenerCursosPorAlumno(int idAlumno)
         {
             using (var db = new SMPorresEntities())
             {
+                Func<string, Curso> crearCurso = (string s) => { return new Curso { Nombre = s }; };
                 var query = (from ca in db.CursosAlumnos
-                             join c in db.Cursos on ca.IdCurso equals c.Id
+                             //join c in db.Cursos on ca.IdCurso equals c.Id
                              where ca.IdAlumno == idAlumno
-                             select c)
+                             select new
+                             {
+                                 ca.Id,
+                                 IdCurso = ca.Curso.Id,
+                                 ca.CicloLectivo,
+                                 Curso = ca.Curso.Nombre,
+                                 Carrera = ca.Curso.Carrera.Nombre
+                             })
                             .ToList()
                             .Select(
-                                c => new Curso
+                                c => new CursosAlumno
                                 {
                                     Id = c.Id,
-                                    Nombre = c.Nombre,
-                                    Carrera = c.Carrera
-                                }
+                                    IdCurso = c.IdCurso,
+                                    CicloLectivo = c.CicloLectivo,
+                                    Curso = new Curso { Nombre = c.Curso, Carrera = new Carrera { Nombre = c.Carrera } },
+            }
                             );
-                return query.OrderBy(c => c.Nombre).ToList();
+                return query.OrderBy(c => c.CicloLectivo).ThenBy(c => c.Curso.Nombre).ToList();
             }
         }
 

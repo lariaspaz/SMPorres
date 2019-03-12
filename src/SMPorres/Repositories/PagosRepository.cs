@@ -84,7 +84,7 @@ namespace SMPorres.Repositories
                                 NroCuota = p.NroCuota,
                                 ImporteCuota = p.ImporteCuota,
                                 Fecha = p.Fecha,
-                                FechaVto = p.FechaVto,
+                                FechaVto = (p.FechaVto == default(DateTime))? new DateTime(ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo, 12, 31) : p.FechaVto,
                                 ImportePagado = p.ImportePagado,
                                 IdMedioPago = p.IdMedioPago,
                                 MedioPago = p.MedioPago,
