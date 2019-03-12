@@ -799,7 +799,13 @@ namespace SMPorres.Reports.DataSet {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class EstadoAlumnoDataTable : global::System.Data.TypedTableBase<EstadoAlumnoRow> {
             
-            private global::System.Data.DataColumn columnCarreraCurso;
+            private global::System.Data.DataColumn columnIdCarrera;
+            
+            private global::System.Data.DataColumn columnCarrera;
+            
+            private global::System.Data.DataColumn columnIdCurso;
+            
+            private global::System.Data.DataColumn columnCurso;
             
             private global::System.Data.DataColumn columnNombre;
             
@@ -846,9 +852,33 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CarreraCursoColumn {
+            public global::System.Data.DataColumn IdCarreraColumn {
                 get {
-                    return this.columnCarreraCurso;
+                    return this.columnIdCarrera;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CarreraColumn {
+                get {
+                    return this.columnCarrera;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdCursoColumn {
+                get {
+                    return this.columnIdCurso;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CursoColumn {
+                get {
+                    return this.columnCurso;
                 }
             }
             
@@ -929,10 +959,13 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EstadoAlumnoRow AddEstadoAlumnoRow(string CarreraCurso, string Nombre, string Apellido, string EMail, string Estado, string Documento) {
+            public EstadoAlumnoRow AddEstadoAlumnoRow(int IdCarrera, string Carrera, int IdCurso, string Curso, string Nombre, string Apellido, string EMail, string Estado, string Documento) {
                 EstadoAlumnoRow rowEstadoAlumnoRow = ((EstadoAlumnoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        CarreraCurso,
+                        IdCarrera,
+                        Carrera,
+                        IdCurso,
+                        Curso,
                         Nombre,
                         Apellido,
                         EMail,
@@ -960,7 +993,10 @@ namespace SMPorres.Reports.DataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnCarreraCurso = base.Columns["CarreraCurso"];
+                this.columnIdCarrera = base.Columns["IdCarrera"];
+                this.columnCarrera = base.Columns["Carrera"];
+                this.columnIdCurso = base.Columns["IdCurso"];
+                this.columnCurso = base.Columns["Curso"];
                 this.columnNombre = base.Columns["Nombre"];
                 this.columnApellido = base.Columns["Apellido"];
                 this.columnEMail = base.Columns["EMail"];
@@ -971,8 +1007,14 @@ namespace SMPorres.Reports.DataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnCarreraCurso = new global::System.Data.DataColumn("CarreraCurso", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCarreraCurso);
+                this.columnIdCarrera = new global::System.Data.DataColumn("IdCarrera", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdCarrera);
+                this.columnCarrera = new global::System.Data.DataColumn("Carrera", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCarrera);
+                this.columnIdCurso = new global::System.Data.DataColumn("IdCurso", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdCurso);
+                this.columnCurso = new global::System.Data.DataColumn("Curso", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurso);
                 this.columnNombre = new global::System.Data.DataColumn("Nombre", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNombre);
                 this.columnApellido = new global::System.Data.DataColumn("Apellido", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2240,17 +2282,65 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CarreraCurso {
+            public int IdCarrera {
                 get {
                     try {
-                        return ((string)(this[this.tableEstadoAlumno.CarreraCursoColumn]));
+                        return ((int)(this[this.tableEstadoAlumno.IdCarreraColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CarreraCurso\' de la tabla \'EstadoAlumno\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'IdCarrera\' de la tabla \'EstadoAlumno\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableEstadoAlumno.CarreraCursoColumn] = value;
+                    this[this.tableEstadoAlumno.IdCarreraColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Carrera {
+                get {
+                    try {
+                        return ((string)(this[this.tableEstadoAlumno.CarreraColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Carrera\' de la tabla \'EstadoAlumno\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEstadoAlumno.CarreraColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int IdCurso {
+                get {
+                    try {
+                        return ((int)(this[this.tableEstadoAlumno.IdCursoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'IdCurso\' de la tabla \'EstadoAlumno\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEstadoAlumno.IdCursoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Curso {
+                get {
+                    try {
+                        return ((string)(this[this.tableEstadoAlumno.CursoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Curso\' de la tabla \'EstadoAlumno\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEstadoAlumno.CursoColumn] = value;
                 }
             }
             
@@ -2336,14 +2426,50 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCarreraCursoNull() {
-                return this.IsNull(this.tableEstadoAlumno.CarreraCursoColumn);
+            public bool IsIdCarreraNull() {
+                return this.IsNull(this.tableEstadoAlumno.IdCarreraColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCarreraCursoNull() {
-                this[this.tableEstadoAlumno.CarreraCursoColumn] = global::System.Convert.DBNull;
+            public void SetIdCarreraNull() {
+                this[this.tableEstadoAlumno.IdCarreraColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCarreraNull() {
+                return this.IsNull(this.tableEstadoAlumno.CarreraColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCarreraNull() {
+                this[this.tableEstadoAlumno.CarreraColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIdCursoNull() {
+                return this.IsNull(this.tableEstadoAlumno.IdCursoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIdCursoNull() {
+                this[this.tableEstadoAlumno.IdCursoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCursoNull() {
+                return this.IsNull(this.tableEstadoAlumno.CursoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCursoNull() {
+                this[this.tableEstadoAlumno.CursoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -111,8 +111,7 @@ namespace SMPorres.Forms.Alumnos
             var alumnos = AlumnosRepository.ObtenerAlumnosPorEstado(IdCarrera, IdCurso, Estado);
             foreach (var a in alumnos)
             {
-                var s = String.Format("{0} de {1}", a.Curso, a.Carrera);
-                tabla.AddEstadoAlumnoRow(s, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
+                tabla.AddEstadoAlumnoRow(a.IdCarrera, a.Carrera, a.IdCurso, a.Curso, a.Nombre, a.Apellido, a.EMail, a.LeyendaEstado(), a.Documento);
             }
             return tabla;
         }

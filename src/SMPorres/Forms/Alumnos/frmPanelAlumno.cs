@@ -259,10 +259,10 @@ namespace SMPorres.Forms.Alumnos
             dgvPagos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvPagos.Columns[7].DefaultCellStyle.Format = "#\\%";
 
-            dgvPagos.Columns[8].HeaderText = "Contr.";
-            dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvPagos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPagos.Columns[8].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dgvPagos.Columns[8].HeaderText = "Contr.";
+            //dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //dgvPagos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvPagos.Columns[8].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvPagos.Columns[8].HeaderText = "Descripción";
             dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
