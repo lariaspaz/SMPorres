@@ -70,14 +70,6 @@ namespace SMPorres.Forms.Pagos
             }
         }
 
-        public int IdMedioPago
-        {
-            get
-            {
-                return ((Carrera)cbMediosPago.SelectedItem).Id;
-            }
-        }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Está seguro que desea pagar esta cuota?", "Confirme el pago",
@@ -87,6 +79,7 @@ namespace SMPorres.Forms.Pagos
                 {
                     _pago.Fecha = dtFechaPago.Value.Date;
                     _pago.IdMedioPago = (int)cbMediosPago.SelectedValue;
+                    _pago.Descripcion = txtDescripcion.Text.Trim();
                     PagosRepository.PagarCuota(_pago);
                 }
                 catch (Exception ex)

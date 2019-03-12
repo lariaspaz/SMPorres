@@ -173,6 +173,7 @@
           <Property Name="PorcRecargo" Type="float" />
           <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
           <Property Name="FechaVto" Type="datetime" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="PlanesPago">
           <Key>
@@ -1406,6 +1407,7 @@
           <NavigationProperty Name="PlanPago" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="Pago" ToRole="PlanPago" />
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
           <NavigationProperty Name="BecaAlumno" Relationship="SMPorres_DevModel.FK_Pagos_BecasAlumnos" FromRole="Pago" ToRole="BecasAlumno" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           </EntityType>
         <Association Name="FK_Pagos_MediosPago">
           <End Type="SMPorres_DevModel.MedioPago" Role="MedioPago" Multiplicity="0..1" />
@@ -1728,6 +1730,7 @@
           <EntitySetMapping Name="Pagos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Pago">
               <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
                 <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
                 <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />

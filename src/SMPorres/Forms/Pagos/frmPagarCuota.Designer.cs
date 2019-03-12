@@ -56,6 +56,8 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,6 +66,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.txtDescripcion);
             this.panel2.Controls.Add(this.txtFechaVto);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.txtCurso);
@@ -87,7 +91,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(340, 277);
+            this.panel2.Size = new System.Drawing.Size(340, 317);
             this.panel2.TabIndex = 1;
             // 
             // txtFechaVto
@@ -335,7 +339,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(346, 318);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(346, 358);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -344,7 +348,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 283);
+            this.panel1.Location = new System.Drawing.Point(0, 323);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(346, 35);
@@ -353,7 +357,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(255, 7);
+            this.btnCancelar.Location = new System.Drawing.Point(176, 7);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -362,7 +366,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(174, 7);
+            this.btnAceptar.Location = new System.Drawing.Point(95, 7);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -388,13 +392,29 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Location = new System.Drawing.Point(127, 271);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(200, 20);
+            this.txtDescripcion.TabIndex = 17;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(55, 274);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(66, 13);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "Descripción:";
+            // 
             // frmPagarCuota
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(346, 318);
+            this.ClientSize = new System.Drawing.Size(346, 358);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmPagarCuota";
             this.Text = "Pago de Cuotas";
@@ -436,5 +456,7 @@
         private System.Windows.Forms.TextBox txtCurso;
         private System.Windows.Forms.TextBox txtFechaVto;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtDescripcion;
     }
 }

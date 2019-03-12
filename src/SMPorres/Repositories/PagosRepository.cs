@@ -73,7 +73,8 @@ namespace SMPorres.Repositories
                              p.IdMedioPago,
                              MedioPago = mp,
                              PorcBeca = (ba == null) ? default(double?) : ba.PorcBeca,
-                             p.EsContrasiento
+                             p.EsContrasiento,
+                             p.Descripcion
                          })
                          .ToList()
                          .Select(
@@ -88,7 +89,8 @@ namespace SMPorres.Repositories
                                 IdMedioPago = p.IdMedioPago,
                                 MedioPago = p.MedioPago,
                                 PorcBeca = p.PorcBeca,
-                                EsContrasiento = p.EsContrasiento
+                                EsContrasiento = p.EsContrasiento,
+                                Descripcion = p.Descripcion
                             }
                         )
                         .OrderBy(p => p.NroCuota);
@@ -193,6 +195,7 @@ namespace SMPorres.Repositories
                 p.IdMedioPago = pago.IdMedioPago;
                 p.IdUsuario = Session.CurrentUser.Id;
                 p.FechaGrabacion = Configuration.CurrentDate;
+                p.Descripcion = pago.Descripcion;
                 db.SaveChanges();
             }
             return true;

@@ -215,7 +215,8 @@ namespace SMPorres.Forms.Alumnos
                             ImportePagado = p.ImportePagado,
                             MedioPago = p.IdMedioPago.HasValue ? p.MedioPago.Descripcion : null,
                             PorcBeca = p.PorcBeca,
-                            EsContrasiento = p.EsContrasiento == 1
+                            EsContrasiento = p.EsContrasiento == 1,
+                            Descripcion = p.Descripcion
                         };
             dgvPagos.SetDataSource(query);
         }
@@ -226,12 +227,13 @@ namespace SMPorres.Forms.Alumnos
 
             dgvPagos.Columns[1].HeaderText = "Concepto";
             dgvPagos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvPagos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPagos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             dgvPagos.Columns[2].HeaderText = "Vencimiento";
             dgvPagos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvPagos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPagos.Columns[2].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvPagos.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgvPagos.Columns[3].HeaderText = "Importe";
             dgvPagos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -261,6 +263,11 @@ namespace SMPorres.Forms.Alumnos
             dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvPagos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPagos.Columns[8].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvPagos.Columns[8].HeaderText = "Descripción";
+            dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //dgvPagos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvPagos.Columns[8].CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             foreach (DataGridViewColumn c in dgvPagos.Columns)
             {
@@ -310,8 +317,16 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnPagarCuota_Click(object sender, EventArgs e)
         {
-            using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
-            ConsultarPagos();
+            var p = PagoSeleccionado;
+            if (p.Fecha != null)
+            {
+                ShowError("La cuota ya está pagada.");
+            }
+            else
+            {
+                using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
+                ConsultarPagos();
+            }
         }
 
         private PlanPago PlanDePagoSeleccionado
