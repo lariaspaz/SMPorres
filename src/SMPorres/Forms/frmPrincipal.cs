@@ -193,5 +193,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Pagos.frmInfPagosTotales()) f.ShowDialog();
         }
+
+        private void rendiciónBSEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Pagos.frmLeerArchivoBSE()) f.ShowDialog();
+        }
     }
 }

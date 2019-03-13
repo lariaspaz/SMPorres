@@ -49,6 +49,7 @@
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PagosTotalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,8 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PagosTotalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rendiciónBSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +68,7 @@
             this.archivoToolStripMenuItem,
             this.ediciónToolStripMenuItem,
             this.informesToolStripMenuItem,
+            this.pagosToolStripMenuItem,
             this.seguridadToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -223,6 +226,13 @@
             this.alumnosMorososToolStripMenuItem.Text = "Alumnos morosos";
             this.alumnosMorososToolStripMenuItem.Click += new System.EventHandler(this.alumnosMorososToolStripMenuItem_Click);
             // 
+            // PagosTotalesToolStripMenuItem
+            // 
+            this.PagosTotalesToolStripMenuItem.Name = "PagosTotalesToolStripMenuItem";
+            this.PagosTotalesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.PagosTotalesToolStripMenuItem.Text = "Totales de pagos";
+            this.PagosTotalesToolStripMenuItem.Click += new System.EventHandler(this.PagosTotalesToolStripMenuItem_Click);
+            // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -276,12 +286,20 @@
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Text = "Asignar permisos a Grupos y Usuarios";
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosAGruposYUsuariosToolStripMenuItem_Click);
             // 
-            // PagosTotalesToolStripMenuItem
+            // pagosToolStripMenuItem
             // 
-            this.PagosTotalesToolStripMenuItem.Name = "PagosTotalesToolStripMenuItem";
-            this.PagosTotalesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.PagosTotalesToolStripMenuItem.Text = "Totales de pagos";
-            this.PagosTotalesToolStripMenuItem.Click += new System.EventHandler(this.PagosTotalesToolStripMenuItem_Click);
+            this.pagosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rendiciónBSEToolStripMenuItem});
+            this.pagosToolStripMenuItem.Name = "pagosToolStripMenuItem";
+            this.pagosToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.pagosToolStripMenuItem.Text = "Pagos";
+            // 
+            // rendiciónBSEToolStripMenuItem
+            // 
+            this.rendiciónBSEToolStripMenuItem.Name = "rendiciónBSEToolStripMenuItem";
+            this.rendiciónBSEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rendiciónBSEToolStripMenuItem.Text = "Rendición BSE";
+            this.rendiciónBSEToolStripMenuItem.Click += new System.EventHandler(this.rendiciónBSEToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -332,6 +350,8 @@
         private System.Windows.Forms.ToolStripMenuItem alumnosPorEstadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alumnosMorososToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PagosTotalesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pagosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rendiciónBSEToolStripMenuItem;
     }
 }
 

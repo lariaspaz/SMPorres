@@ -136,6 +136,12 @@
     <Compile Include="Forms\Pagos\frmInfPagosTotales.Designer.cs">
       <DependentUpon>frmInfPagosTotales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pagos\frmLeerArchivoBSE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pagos\frmLeerArchivoBSE.Designer.cs">
+      <DependentUpon>frmLeerArchivoBSE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pagos\frmPagarCuota.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,6 +283,7 @@
     <Compile Include="Models\Alumno.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArchivoBSE.cs" />
     <Compile Include="Models\Barrio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -454,6 +461,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagos\frmInfPagosTotales.resx">
       <DependentUpon>frmInfPagosTotales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pagos\frmLeerArchivoBSE.resx">
+      <DependentUpon>frmLeerArchivoBSE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagos\frmPagarCuota.resx">
       <DependentUpon>frmPagarCuota.cs</DependentUpon>
