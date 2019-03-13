@@ -1,0 +1,11 @@
+succod	sucursal	moneda	comprobante	tipo_mov	importe	fecha_proceso	cuil	usuario	hora	codbarra	grupoterminal	nrorendicion	fecha_cobro
+1	Casa Central (Desarrollo)	PESOS	0000046	2 - Recaudación	1230.00	2019/03/11	20209322375	Cordova, Mario Alberto	090723	901600000461908500001230007		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000068	2 - Recaudación	1230.00	2019/03/11	20209322375	Cordova, Mario Alberto	090723	901600000681908500001230001		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000090	2 - Recaudación	1275.00	2019/03/11	20209322375	Cordova, Mario Alberto	090723	901600000901908800001275009		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000024	2 - Recaudación	1350.00	2019/03/11	20209322375	Cordova, Mario Alberto	090723	901600000241908400001350001		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000035	2 - Recaudación	1366.67	2019/03/11	20209322375	Cordova, Mario Alberto	090723	901600000351908500001366674		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000013	2 - Recaudación	1383.33	2019/03/11	20209322375	Cordova, Mario Alberto	090722	901600000131908600001383337		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000057	2 - Recaudación	1383.33	2019/03/11	20209322375	Cordova, Mario Alberto	090723	901600000571908600001383335		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000079	2 - Recaudación	1383.33	2019/03/11	20209322375	Cordova, Mario Alberto	090723	901600000791908600001383339		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000112	2 - Recaudación	1416.67	2019/03/11	20209322375	Cordova, Mario Alberto	090724	901600001121908800001416677		1	2019/03/11
+1	Casa Central (Desarrollo)	PESOS	0000101	2 - Recaudación	675.00	2019/03/11	20209322375	Cordova, Mario Alberto	090724	901600001011908400000675007		1	2019/03/11
