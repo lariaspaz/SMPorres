@@ -132,6 +132,7 @@
             this.dgvDatos.Size = new System.Drawing.Size(498, 219);
             this.dgvDatos.TabIndex = 1;
             this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
+            this.dgvDatos.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvDatos_MouseDoubleClick);
             // 
             // frmBuscarAlumnos
             // 

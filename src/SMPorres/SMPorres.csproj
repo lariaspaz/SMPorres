@@ -602,6 +602,9 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
       <LastGenOutput>SMPorres.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\logo-color.jpg" />
+    <None Include="Resources\logo.jpg" />
+    <None Include="Resources\logo.png" />
     <None Include="Resources\money_dollar.png" />
     <None Include="Resources\printer.png" />
     <None Include="Resources\zoom.png" />

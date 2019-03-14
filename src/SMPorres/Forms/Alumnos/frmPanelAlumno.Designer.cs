@@ -36,16 +36,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnConsultar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnBuscarAlumno = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.GenerarPlanDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEditarPlanPago = new System.Windows.Forms.ToolStripButton();
-            this.btnAnularPlanPago = new System.Windows.Forms.ToolStripButton();
-            this.btnImprimirCuota = new System.Windows.Forms.ToolStripButton();
-            this.btnPagarCuota = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvCursos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.label3 = new System.Windows.Forms.Label();
@@ -59,6 +51,14 @@
             this.AsignarBecaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditarBecaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnBuscarAlumno = new System.Windows.Forms.Button();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.GenerarPlanDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEditarPlanPago = new System.Windows.Forms.ToolStripButton();
+            this.btnAnularPlanPago = new System.Windows.Forms.ToolStripButton();
+            this.btnImprimirCuota = new System.Windows.Forms.ToolStripButton();
+            this.btnPagarCuota = new System.Windows.Forms.ToolStripButton();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -144,16 +144,6 @@
             this.panel1.Size = new System.Drawing.Size(719, 39);
             this.panel1.TabIndex = 1;
             // 
-            // btnBuscarAlumno
-            // 
-            this.btnBuscarAlumno.Image = global::SMPorres.Properties.Resources.zoom;
-            this.btnBuscarAlumno.Location = new System.Drawing.Point(205, 6);
-            this.btnBuscarAlumno.Name = "btnBuscarAlumno";
-            this.btnBuscarAlumno.Size = new System.Drawing.Size(23, 23);
-            this.btnBuscarAlumno.TabIndex = 2;
-            this.btnBuscarAlumno.UseVisualStyleBackColor = true;
-            this.btnBuscarAlumno.Click += new System.EventHandler(this.btnBuscarAlumno_Click);
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -170,80 +160,10 @@
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripDropDownButton2
-            // 
-            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.GenerarPlanDePagoToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = global::SMPorres.Properties.Resources.add;
-            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(29, 22);
-            // 
-            // GenerarPlanDePagoToolStripMenuItem
-            // 
-            this.GenerarPlanDePagoToolStripMenuItem.Name = "GenerarPlanDePagoToolStripMenuItem";
-            this.GenerarPlanDePagoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.GenerarPlanDePagoToolStripMenuItem.Text = "Generar plan de pago";
-            this.GenerarPlanDePagoToolStripMenuItem.Click += new System.EventHandler(this.GenerarPlanDePagoToolStripMenuItem_Click);
-            // 
-            // btnEditarPlanPago
-            // 
-            this.btnEditarPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEditarPlanPago.Image = global::SMPorres.Properties.Resources.page_white_edit;
-            this.btnEditarPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditarPlanPago.Name = "btnEditarPlanPago";
-            this.btnEditarPlanPago.Size = new System.Drawing.Size(23, 22);
-            this.btnEditarPlanPago.Text = "toolStripButton2";
-            this.btnEditarPlanPago.ToolTipText = "Editar plan de pago (Ctrl + F4)";
-            this.btnEditarPlanPago.Click += new System.EventHandler(this.btnEditarPlanPago_Click);
-            // 
-            // btnAnularPlanPago
-            // 
-            this.btnAnularPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAnularPlanPago.Image = global::SMPorres.Properties.Resources.cross;
-            this.btnAnularPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAnularPlanPago.Name = "btnAnularPlanPago";
-            this.btnAnularPlanPago.Size = new System.Drawing.Size(23, 22);
-            this.btnAnularPlanPago.Text = "toolStripButton3";
-            this.btnAnularPlanPago.ToolTipText = "Anular plan de pago (Ctrl + Delete)";
-            this.btnAnularPlanPago.Click += new System.EventHandler(this.btnAnularPlanPago_Click);
-            // 
-            // btnImprimirCuota
-            // 
-            this.btnImprimirCuota.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnImprimirCuota.Image = global::SMPorres.Properties.Resources.printer;
-            this.btnImprimirCuota.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnImprimirCuota.Name = "btnImprimirCuota";
-            this.btnImprimirCuota.Size = new System.Drawing.Size(23, 22);
-            this.btnImprimirCuota.Text = "Imprimir cuota";
-            this.btnImprimirCuota.Click += new System.EventHandler(this.btnImprimirCuota_Click);
-            // 
-            // btnPagarCuota
-            // 
-            this.btnPagarCuota.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnPagarCuota.Image = global::SMPorres.Properties.Resources.money_dollar;
-            this.btnPagarCuota.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPagarCuota.Name = "btnPagarCuota";
-            this.btnPagarCuota.Size = new System.Drawing.Size(23, 22);
-            this.btnPagarCuota.Text = "toolStripButton1";
-            this.btnPagarCuota.Click += new System.EventHandler(this.btnPagarCuota_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(23, 22);
-            this.btnSalir.Text = "toolStripButton4";
-            this.btnSalir.ToolTipText = "Salir (Escape)";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // panel2
             // 
@@ -378,22 +298,102 @@
             this.EditarBecaToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(128, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 48);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // AsignarBecaToolStripMenuItem
             // 
             this.AsignarBecaToolStripMenuItem.Name = "AsignarBecaToolStripMenuItem";
-            this.AsignarBecaToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.AsignarBecaToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.AsignarBecaToolStripMenuItem.Text = "Asignar beca";
             this.AsignarBecaToolStripMenuItem.Click += new System.EventHandler(this.AsignarBecaToolStripMenuItem_Click);
             // 
             // EditarBecaToolStripMenuItem
             // 
             this.EditarBecaToolStripMenuItem.Name = "EditarBecaToolStripMenuItem";
-            this.EditarBecaToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.EditarBecaToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.EditarBecaToolStripMenuItem.Text = "Editar beca";
             this.EditarBecaToolStripMenuItem.Click += new System.EventHandler(this.EditarBecaToolStripMenuItem_Click);
+            // 
+            // btnBuscarAlumno
+            // 
+            this.btnBuscarAlumno.Image = global::SMPorres.Properties.Resources.zoom;
+            this.btnBuscarAlumno.Location = new System.Drawing.Point(205, 6);
+            this.btnBuscarAlumno.Name = "btnBuscarAlumno";
+            this.btnBuscarAlumno.Size = new System.Drawing.Size(23, 23);
+            this.btnBuscarAlumno.TabIndex = 2;
+            this.btnBuscarAlumno.UseVisualStyleBackColor = true;
+            this.btnBuscarAlumno.Click += new System.EventHandler(this.btnBuscarAlumno_Click);
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GenerarPlanDePagoToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = global::SMPorres.Properties.Resources.add;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(29, 22);
+            // 
+            // GenerarPlanDePagoToolStripMenuItem
+            // 
+            this.GenerarPlanDePagoToolStripMenuItem.Name = "GenerarPlanDePagoToolStripMenuItem";
+            this.GenerarPlanDePagoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.GenerarPlanDePagoToolStripMenuItem.Text = "Generar plan de pago";
+            this.GenerarPlanDePagoToolStripMenuItem.Click += new System.EventHandler(this.GenerarPlanDePagoToolStripMenuItem_Click);
+            // 
+            // btnEditarPlanPago
+            // 
+            this.btnEditarPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEditarPlanPago.Image = global::SMPorres.Properties.Resources.page_white_edit;
+            this.btnEditarPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditarPlanPago.Name = "btnEditarPlanPago";
+            this.btnEditarPlanPago.Size = new System.Drawing.Size(23, 22);
+            this.btnEditarPlanPago.Text = "toolStripButton2";
+            this.btnEditarPlanPago.ToolTipText = "Editar plan de pago (Ctrl + F4)";
+            this.btnEditarPlanPago.Click += new System.EventHandler(this.btnEditarPlanPago_Click);
+            // 
+            // btnAnularPlanPago
+            // 
+            this.btnAnularPlanPago.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAnularPlanPago.Image = global::SMPorres.Properties.Resources.cross;
+            this.btnAnularPlanPago.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAnularPlanPago.Name = "btnAnularPlanPago";
+            this.btnAnularPlanPago.Size = new System.Drawing.Size(23, 22);
+            this.btnAnularPlanPago.Text = "toolStripButton3";
+            this.btnAnularPlanPago.ToolTipText = "Anular plan de pago (Ctrl + Delete)";
+            this.btnAnularPlanPago.Click += new System.EventHandler(this.btnAnularPlanPago_Click);
+            // 
+            // btnImprimirCuota
+            // 
+            this.btnImprimirCuota.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnImprimirCuota.Image = global::SMPorres.Properties.Resources.printer;
+            this.btnImprimirCuota.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnImprimirCuota.Name = "btnImprimirCuota";
+            this.btnImprimirCuota.Size = new System.Drawing.Size(23, 22);
+            this.btnImprimirCuota.Text = "Imprimir cuota";
+            this.btnImprimirCuota.Click += new System.EventHandler(this.btnImprimirCuota_Click);
+            // 
+            // btnPagarCuota
+            // 
+            this.btnPagarCuota.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPagarCuota.Image = global::SMPorres.Properties.Resources.money_dollar;
+            this.btnPagarCuota.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPagarCuota.Name = "btnPagarCuota";
+            this.btnPagarCuota.Size = new System.Drawing.Size(23, 22);
+            this.btnPagarCuota.Text = "toolStripButton1";
+            this.btnPagarCuota.Click += new System.EventHandler(this.btnPagarCuota_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(23, 22);
+            this.btnSalir.Text = "toolStripButton4";
+            this.btnSalir.ToolTipText = "Salir (Escape)";
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // frmPanelAlumno
             // 

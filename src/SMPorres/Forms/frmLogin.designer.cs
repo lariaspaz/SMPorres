@@ -40,10 +40,13 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bevel2 = new CustomLibrary.ComponentModel.Bevel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -59,28 +62,30 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(371, 239);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(371, 350);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.txtContraseña);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.txtUsuario);
             this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.bevel2);
             this.panel2.Controls.Add(this.bevel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(365, 185);
+            this.panel2.Size = new System.Drawing.Size(365, 296);
             this.panel2.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.ForestGreen;
+            this.label1.ForeColor = System.Drawing.Color.Sienna;
             this.label1.Location = new System.Drawing.Point(92, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(201, 33);
@@ -91,7 +96,7 @@
             // txtContraseña
             // 
             this.txtContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContraseña.Location = new System.Drawing.Point(38, 144);
+            this.txtContraseña.Location = new System.Drawing.Point(38, 247);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '•';
             this.txtContraseña.Size = new System.Drawing.Size(289, 29);
@@ -102,7 +107,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(142, 125);
+            this.label3.Location = new System.Drawing.Point(142, 228);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 16);
             this.label3.TabIndex = 2;
@@ -111,7 +116,7 @@
             // txtUsuario
             // 
             this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.Location = new System.Drawing.Point(38, 85);
+            this.txtUsuario.Location = new System.Drawing.Point(38, 188);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(289, 29);
             this.txtUsuario.TabIndex = 1;
@@ -121,7 +126,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(154, 66);
+            this.label2.Location = new System.Drawing.Point(154, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 16);
             this.label2.TabIndex = 0;
@@ -135,7 +140,7 @@
             this.bevel1.Location = new System.Drawing.Point(14, 10);
             this.bevel1.Name = "bevel1";
             this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bevel1.Size = new System.Drawing.Size(336, 174);
+            this.bevel1.Size = new System.Drawing.Size(336, 278);
             this.bevel1.TabIndex = 5;
             this.bevel1.Text = "bevel1";
             // 
@@ -143,7 +148,7 @@
             // 
             this.panel4.Controls.Add(this.btnAceptar);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 194);
+            this.panel4.Location = new System.Drawing.Point(3, 305);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(365, 42);
             this.panel4.TabIndex = 3;
@@ -163,26 +168,50 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SMPorres.Properties.Resources.logo_color;
+            this.pictureBox1.Location = new System.Drawing.Point(136, 64);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(92, 92);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // bevel2
+            // 
+            this.bevel2.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel2.BevelType = CustomLibrary.ComponentModel.BevelType.Box;
+            this.bevel2.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel2.Location = new System.Drawing.Point(134, 62);
+            this.bevel2.Name = "bevel2";
+            this.bevel2.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel2.Size = new System.Drawing.Size(97, 97);
+            this.bevel2.TabIndex = 7;
+            this.bevel2.Text = "bevel2";
+            // 
             // frmLogin
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 239);
+            this.ClientSize = new System.Drawing.Size(371, 350);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Iniciar sesión";
+            this.Text = "Instituto San Martín de Porres";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -200,6 +229,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label1;
         private CustomLibrary.ComponentModel.Bevel bevel1;
-
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private CustomLibrary.ComponentModel.Bevel bevel2;
     }
 }

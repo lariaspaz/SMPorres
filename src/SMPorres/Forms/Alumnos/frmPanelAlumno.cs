@@ -60,7 +60,7 @@ namespace SMPorres.Forms.Alumnos
                          orderby ca.Id
                          select new
                          {
-                             ca.Id,
+                             ca.IdCurso,
                              ca.CicloLectivo,
                              ca.Curso.Nombre,
                              Carrera = ca.Curso.Carrera.Nombre
@@ -143,6 +143,7 @@ namespace SMPorres.Forms.Alumnos
         {
             get
             {
+                if (dgvCursos.CurrentCell == null) return null;
                 int rowindex = dgvCursos.CurrentCell.RowIndex;
                 var id = (int)dgvCursos.Rows[rowindex].Cells[0].Value;
                 var c = CursosRepository.ObtenerCursoPorId(id);
@@ -297,7 +298,17 @@ namespace SMPorres.Forms.Alumnos
 
         private void dgvCursos_SelectionChanged(object sender, EventArgs e)
         {
-            ConsultarPlanesPago();
+            if (dgvCursos.Focused)
+            {
+                if (CursoSeleccionado == null)
+                {
+                    ShowError("El alumno no está asignado a ningún curso.");
+                }
+                else
+                {
+                    ConsultarPlanesPago();
+                }
+            }
         }
 
         private void btnAnularPlanPago_Click(object sender, EventArgs e)

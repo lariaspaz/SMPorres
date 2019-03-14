@@ -107,5 +107,13 @@ namespace SMPorres.Forms.Alumnos
         {
             return _validator.Validar(txtDato, !String.IsNullOrEmpty(txtDato.Text.Trim()), "No puede estar vacío");
         }
+
+        private void dgvDatos_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dgvDatos.Rows.Count > 0)
+            {
+                DialogResult = DialogResult.OK;
+            }
+        }
     }
 }

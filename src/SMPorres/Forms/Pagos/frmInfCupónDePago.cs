@@ -199,7 +199,7 @@ namespace SMPorres.Forms.Pagos
             cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                 carrera, curso, "", "", "1", concepto, importe);
 
-            if (p.ImporteBeca.HasValue)
+            if (p.ImporteBeca > 0)
             {
                 importe = p.ImporteBeca.Value.ToString("$ -0,0.00");
                 concepto = String.Format("Descuento por beca del %{0}", p.PorcBeca);
