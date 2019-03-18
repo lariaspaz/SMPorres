@@ -40,7 +40,7 @@
             // lPath
             // 
             this.lPath.AutoSize = true;
-            this.lPath.Location = new System.Drawing.Point(233, 45);
+            this.lPath.Location = new System.Drawing.Point(206, 38);
             this.lPath.Name = "lPath";
             this.lPath.Size = new System.Drawing.Size(16, 13);
             this.lPath.TabIndex = 1;
@@ -48,7 +48,7 @@
             // 
             // btnExaminar
             // 
-            this.btnExaminar.Location = new System.Drawing.Point(138, 35);
+            this.btnExaminar.Location = new System.Drawing.Point(108, 28);
             this.btnExaminar.Name = "btnExaminar";
             this.btnExaminar.Size = new System.Drawing.Size(75, 23);
             this.btnExaminar.TabIndex = 2;
@@ -58,13 +58,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dgvArchivoBSE);
-            this.groupBox1.Controls.Add(this.btnLeer);
             this.groupBox1.Controls.Add(this.btnExaminar);
             this.groupBox1.Controls.Add(this.lPath);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(653, 390);
+            this.groupBox1.Size = new System.Drawing.Size(653, 78);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccionar archivo";
@@ -72,15 +70,14 @@
             // dgvArchivoBSE
             // 
             this.dgvArchivoBSE.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvArchivoBSE.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvArchivoBSE.Location = new System.Drawing.Point(3, 89);
+            this.dgvArchivoBSE.Location = new System.Drawing.Point(12, 278);
             this.dgvArchivoBSE.Name = "dgvArchivoBSE";
-            this.dgvArchivoBSE.Size = new System.Drawing.Size(647, 298);
+            this.dgvArchivoBSE.Size = new System.Drawing.Size(647, 167);
             this.dgvArchivoBSE.TabIndex = 4;
             // 
             // btnLeer
             // 
-            this.btnLeer.Location = new System.Drawing.Point(414, 35);
+            this.btnLeer.Location = new System.Drawing.Point(363, 115);
             this.btnLeer.Name = "btnLeer";
             this.btnLeer.Size = new System.Drawing.Size(75, 23);
             this.btnLeer.TabIndex = 3;
@@ -93,6 +90,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 414);
+            this.Controls.Add(this.btnLeer);
+            this.Controls.Add(this.dgvArchivoBSE);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmLeerArchivoBSE";
             this.Text = "frmLeerArchivoBSE";

@@ -201,5 +201,29 @@ namespace SMPorres.Repositories
             return true;
         }
 
+        public static bool RegistrarPagoBSE(Pago pago)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p = db.Pagos.Find(pago.Id);
+                p.Fecha = pago.Fecha;
+                p.FechaVto = pago.FechaVto;
+                p.PorcBeca = pago.PorcBeca;
+                p.ImporteBeca = pago.ImporteBeca;
+                p.PorcDescPagoTermino = pago.PorcDescPagoTermino;
+                p.ImportePagoTermino = pago.ImportePagoTermino;
+                p.PorcRecargo = pago.PorcRecargo;
+                p.ImporteRecargo = pago.ImporteRecargo;
+                p.ImportePagado = pago.ImportePagado;
+                p.IdMedioPago = pago.IdMedioPago;
+                p.IdUsuario = Session.CurrentUser.Id;
+                p.FechaGrabacion = Configuration.CurrentDate;
+                p.Descripcion = pago.Descripcion;
+
+                p.IdArchivo = pago.IdArchivo;
+                db.SaveChanges();
+            }
+            return true;
+        }
     }
 }

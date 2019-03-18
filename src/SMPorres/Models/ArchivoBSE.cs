@@ -9,19 +9,33 @@ namespace SMPorres.Models
     public class ArchivoBSE
     {
         //succod	sucursal	moneda	comprobante	tipo_mov	importe	fecha_proceso	cuil	usuario	hora	codbarra	grupoterminal	nrorendicion	fecha_cobro
-        public int succod { get; set; }
-        public string sucursal { get; set; }
-        public string moneda { get; set; }
-        public string comprobante { get; set; }
-        public string tipo_mov { get; set; }
-        public double importe { get; set; }
-        public DateTime fecha_proceso { get; set; }
-        public string cuil { get; set; }
-        public string usuario { get; set; }
-        public DateTime hora { get; set; }
-        public string codbarra { get; set; }
-        public string grupoterminal { get; set; }
-        public string nrorendicion { get; set; }
-        public DateTime fecha_cobro { get; set; }
+        public int CódigoSucursal { get; set; }
+
+        public string Sucursal { get; set; }
+
+        public string Moneda { get; set; }
+
+        public Int32 Comprobante { get; set; }
+
+        public string TipoMov { get; set; }
+
+        public decimal Importe { get; set; }
+
+        public DateTime FechaProceso { get; set; }
+
+        public string Cuil { get; set; }
+
+        public string Usuario { get; set; }
+
+        public Int32 Hora { get; set; }
+
+        public string CódigoBarra { get; set; }
+
+        public string GrupoTerminal { get; set; }
+
+        public string NroRendicion { get; set; }
+
+        public DateTime FechaCobro { get; set; }
+
     }
 }
