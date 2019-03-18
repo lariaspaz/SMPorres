@@ -1,0 +1,4 @@
+1 - se registra pago leído en archivo BSE identificando Comprobante = Pagos.Id
+2 - Falta completar datos sobre las variaciones de importe, es decir beca, recargo, descuento
+3 - Te paso los datos (datosBoletas2) que se usaron para generar Boletas2 (archivo con el código de barras correcto)
+4 - sobre la interfaz no hice nada, puedes verlo vos o decime mas o menos cómo sigo, porque no lo estoy viendo y voy a demorar más por lo visto.

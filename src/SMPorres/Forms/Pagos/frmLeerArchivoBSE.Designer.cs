@@ -58,6 +58,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnLeer);
             this.groupBox1.Controls.Add(this.btnExaminar);
             this.groupBox1.Controls.Add(this.lPath);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -77,7 +78,7 @@
             // 
             // btnLeer
             // 
-            this.btnLeer.Location = new System.Drawing.Point(363, 115);
+            this.btnLeer.Location = new System.Drawing.Point(492, 49);
             this.btnLeer.Name = "btnLeer";
             this.btnLeer.Size = new System.Drawing.Size(75, 23);
             this.btnLeer.TabIndex = 3;
@@ -90,7 +91,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 414);
-            this.Controls.Add(this.btnLeer);
             this.Controls.Add(this.dgvArchivoBSE);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmLeerArchivoBSE";

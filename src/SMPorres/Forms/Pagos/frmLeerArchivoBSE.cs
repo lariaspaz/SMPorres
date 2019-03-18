@@ -17,7 +17,7 @@ namespace SMPorres.Forms.Pagos
     public partial class frmLeerArchivoBSE : Form
     {
         string _path = null;
-
+        int _archivosProcesados = 0;
         public frmLeerArchivoBSE()
         {
             InitializeComponent();
@@ -65,22 +65,22 @@ namespace SMPorres.Forms.Pagos
                 tmp.NroRendicion = campos[12];
                 tmp.FechaCobro = DateTime.Parse(campos[13]);
                 dgvArchivoBSE.Rows.Add(tmp);
-                //registrarPago(tmp);
+              
             }
-            cargarDGV(lines);
-            int f = lines.Count() - 1;
+            
+
             
         }
 
         private void btnLeer_Click(object sender, EventArgs e)
         {
             List<ArchivoBSE> archivo = new List<ArchivoBSE>();
-
+            _archivosProcesados = 0;
+            
             string[] lines = File.ReadAllLines(_path);
-
+            int cRegistros = lines.Count() - 1;
             foreach (string line in lines)
             {
-                //Corta por los tabs
                 string[] campos = line.Split('\t');
                 
                 if (campos[0] == "succod") continue;
@@ -103,28 +103,24 @@ namespace SMPorres.Forms.Pagos
 
                 registrarPago(tmp);
             }
-            cargarDGV(lines);
+
+            MessageBox.Show("Se procesaron correctamente " + _archivosProcesados + " de " + cRegistros, "Rendición BSE", MessageBoxButtons.OK);
+
+           
 
         }
 
-        private void cargarDGV(string[] lines)
-        {
-
-
-        }
-
+       
         private void registrarPago(ArchivoBSE tmp)
         {
 
             Pago pago = new Pago();
             pago.Id = tmp.Comprobante;
             pago.Fecha = tmp.FechaCobro;
-
             pago.FechaVto = LeerVto(tmp.CódigoBarra.Substring(11,5));
-
-            pago.IdMedioPago = 1;
-            pago.ImportePagado = tmp.Importe; //separar en decimales
-
+            pago.IdMedioPago = 1;   //se debe leer de medios de pago
+            pago.ImportePagado = tmp.Importe/100; 
+            /*Éstos campos null podrían completarse al generar la boleta,*/
             pago.PorcBeca = null;
             pago.ImporteBeca = null;
             pago.PorcDescPagoTermino = null;
@@ -135,7 +131,14 @@ namespace SMPorres.Forms.Pagos
 
             pago.IdArchivo = 1; //como generamos este ID?
 
-            PagosRepository.RegistrarPagoBSE(pago);
+            if (PagosRepository.RegistrarPagoBSE(pago) == false)
+            {
+                MessageBox.Show("No se pudo registrar pago del comprobante " + pago.Id, "Rendición BSE", MessageBoxButtons.OK);
+            }
+            else
+            {
+                _archivosProcesados =+ _archivosProcesados;
+            }
         }
 
         private DateTime? LeerVto(string v)
