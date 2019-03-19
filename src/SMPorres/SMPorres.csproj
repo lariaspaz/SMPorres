@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SMPorres</RootNamespace>
     <AssemblyName>SMPorres</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,11 +53,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -428,6 +434,11 @@
     <Compile Include="Repositories\ProvinciasRepository.cs" />
     <Compile Include="Repositories\UsuariosItemsMenuRepository.cs" />
     <Compile Include="Repositories\UsuariosRepository.cs" />
+    <Compile Include="Service References\ConsultasWeb\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\Alumnos\frmAsignarAlumnosACursos.resx">
       <DependentUpon>frmAsignarAlumnosACursos.cs</DependentUpon>
     </EmbeddedResource>
@@ -583,6 +594,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\ConsultasWeb\SMP.wsdl" />
+    <None Include="Service References\ConsultasWeb\SMPorres.ConsultasWeb.ActualizarDatosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConsultasWeb\SMPorres.ConsultasWeb.HelloWorldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -602,8 +620,14 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
       <LastGenOutput>SMPorres.cs</LastGenOutput>
     </Content>
+    <None Include="Service References\ConsultasWeb\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ConsultasWeb\configuration.svcinfo" />
+    <None Include="Service References\ConsultasWeb\configuration91.svcinfo" />
+    <None Include="Service References\ConsultasWeb\SMP.disco" />
     <None Include="Resources\logo-color.jpg" />
-    <None Include="Resources\logo.jpg" />
     <None Include="Resources\logo.png" />
     <None Include="Resources\money_dollar.png" />
     <None Include="Resources\printer.png" />
@@ -616,7 +640,12 @@
     <None Include="Resources\cross.png" />
     <None Include="Resources\add.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ConsultasWeb\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
