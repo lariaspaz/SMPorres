@@ -1,6 +1,8 @@
 src/.vs
 src/SMPorres/bin
 src/SMPorres/obj
-src/packages
 src/SMPorres/App.config
+src/packages
+src/Consultas/bin
+src/Consultas/obj
 tmp
