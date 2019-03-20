@@ -12,21 +12,42 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorres_DevEntities())
             {
-                var a = db.AlumnoWebs.Find(alumno.Id);
-                bool insertar = a == null;
-                if (insertar)
+                var trx = db.Database.BeginTransaction();
+                try
                 {
-                    a = new AlumnoWeb();
+                    var a = db.AlumnoWebs.Find(alumno.Id);
+                    bool insertar = a == null;
+                    if (insertar)
+                    {
+                        a = new AlumnoWeb();
+                    }
+                    a.Id = alumno.Id;
+                    a.Nombre = alumno.Nombre;
+                    a.Apellido = alumno.Apellido;
+                    a.TipoDocumento = alumno.TipoDocumento;
+                    a.NroDocumento = alumno.NroDocumento;
+                    a.Estado = (byte)alumno.Estado;
+                    if (insertar)
+                    {
+                        db.AlumnoWebs.Add(a);
+                    }
+
+                    var caRepo = new CursoAlumnoRepository();
+                    var pagosRepo = new PagosRepository();
+                    foreach (var ca in alumno.CursosAlumnos)
+                    {
+                        var id = caRepo.Actualizar(a.Id, ca).Id;
+                        foreach (var p in ca.Pagos)
+                        {
+                            pagosRepo.Actualizar(id, p);
+                        }
+                    }
+                    trx.Commit();
                 }
-                a.Id = alumno.Id;
-                a.Nombre = alumno.Nombre;
-                a.Apellido = alumno.Apellido;
-                a.TipoDocumento = alumno.TipoDocumento;
-                a.NroDocumento = alumno.NroDocumento;
-                a.Estado = (byte)alumno.Estado;
-                if (insertar)
+                catch (Exception)
                 {
-                    db.AlumnoWebs.Add(a);
+                    trx.Rollback();
+                    throw;
                 }
             }
         }

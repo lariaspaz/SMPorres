@@ -7,6 +7,8 @@ namespace Consultas.Models.WebServices
 {
     public class CursoAlumno
     {
+        public int Id { get; set; }
+
         public int IdCurso { get; set; }
 
         public string Curso { get; set; }

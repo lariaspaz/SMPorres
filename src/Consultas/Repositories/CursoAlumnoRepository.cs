@@ -8,26 +8,28 @@ namespace Consultas.Repositories
 {
     public class CursoAlumnoRepository
     {
-        public void Actualizar(Models.WebServices.CursoAlumno cursoAlumno)
+        public CursoAlumnoWeb Actualizar(int idAlumnoWeb, Models.WebServices.CursoAlumno cursoAlumno)
         {
             using (var db = new SMPorres_DevEntities())
             {
-                //var a = db.AlumnoWebs.Find(alumno.Id);
-                //bool insertar = a == null;
-                //if (insertar)
-                //{
-                //    a = new AlumnoWeb();
-                //}
-                //a.Id = alumno.Id;
-                //a.Nombre = alumno.Nombre;
-                //a.Apellido = alumno.Apellido;
-                //a.TipoDocumento = alumno.TipoDocumento;
-                //a.NroDocumento = alumno.NroDocumento;
-                //a.Estado = (byte)alumno.Estado;
-                //if (insertar)
-                //{
-                //    db.AlumnoWebs.Add(a);
-                //}
+                var ca = db.CursoAlumnoWebs.FirstOrDefault(ca1 => ca1.IdCurso == cursoAlumno.IdCurso && 
+                            ca1.IdCarrera == cursoAlumno.IdCarrera);
+                bool insertar = ca == null;
+                if (insertar)
+                {
+                    ca = new CursoAlumnoWeb();
+                    ca.Id = cursoAlumno.Id;
+                    ca.IdAlumnoWeb = idAlumnoWeb;
+                }
+                ca.IdCurso = cursoAlumno.IdCurso;
+                ca.Curso = cursoAlumno.Curso;
+                ca.IdCarrera = cursoAlumno.IdCarrera;
+                ca.Carrera = cursoAlumno.Carrera;
+                if (insertar)
+                {
+                    db.CursoAlumnoWebs.Add(ca);
+                }
+                db.SaveChanges();
             }
         }
     }
