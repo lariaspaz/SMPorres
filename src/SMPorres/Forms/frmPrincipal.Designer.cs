@@ -50,6 +50,7 @@
             this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PagosTotalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,8 +58,8 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rendiciónBSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizarDatosEnLaWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +81,8 @@
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.panelDeAlumnosToolStripMenuItem,
+            this.rendiciónBSEToolStripMenuItem,
+            this.actualizarDatosEnLaWebToolStripMenuItem,
             this.toolStripMenuItem2,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
@@ -89,19 +92,19 @@
             // panelDeAlumnosToolStripMenuItem
             // 
             this.panelDeAlumnosToolStripMenuItem.Name = "panelDeAlumnosToolStripMenuItem";
-            this.panelDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.panelDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.panelDeAlumnosToolStripMenuItem.Text = "Panel de alumnos";
             this.panelDeAlumnosToolStripMenuItem.Click += new System.EventHandler(this.panelDeAlumnosToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(165, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(208, 6);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -233,6 +236,12 @@
             this.PagosTotalesToolStripMenuItem.Text = "Totales de pagos";
             this.PagosTotalesToolStripMenuItem.Click += new System.EventHandler(this.PagosTotalesToolStripMenuItem_Click);
             // 
+            // pagosToolStripMenuItem
+            // 
+            this.pagosToolStripMenuItem.Name = "pagosToolStripMenuItem";
+            this.pagosToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.pagosToolStripMenuItem.Text = "Pagos";
+            // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -286,20 +295,18 @@
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Text = "Asignar permisos a Grupos y Usuarios";
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosAGruposYUsuariosToolStripMenuItem_Click);
             // 
-            // pagosToolStripMenuItem
-            // 
-            this.pagosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rendiciónBSEToolStripMenuItem});
-            this.pagosToolStripMenuItem.Name = "pagosToolStripMenuItem";
-            this.pagosToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.pagosToolStripMenuItem.Text = "Pagos";
-            // 
             // rendiciónBSEToolStripMenuItem
             // 
             this.rendiciónBSEToolStripMenuItem.Name = "rendiciónBSEToolStripMenuItem";
-            this.rendiciónBSEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rendiciónBSEToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.rendiciónBSEToolStripMenuItem.Text = "Rendición BSE";
-            this.rendiciónBSEToolStripMenuItem.Click += new System.EventHandler(this.rendiciónBSEToolStripMenuItem_Click);
+            // 
+            // actualizarDatosEnLaWebToolStripMenuItem
+            // 
+            this.actualizarDatosEnLaWebToolStripMenuItem.Name = "actualizarDatosEnLaWebToolStripMenuItem";
+            this.actualizarDatosEnLaWebToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.actualizarDatosEnLaWebToolStripMenuItem.Text = "Actualizar datos en la web";
+            this.actualizarDatosEnLaWebToolStripMenuItem.Click += new System.EventHandler(this.actualizarDatosEnLaWebToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -352,6 +359,7 @@
         private System.Windows.Forms.ToolStripMenuItem PagosTotalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pagosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rendiciónBSEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem actualizarDatosEnLaWebToolStripMenuItem;
     }
 }
 

@@ -25,6 +25,7 @@ namespace Consultas.Models
         public string Apellido { get; set; }
         public string TipoDocumento { get; set; }
         public decimal NroDocumento { get; set; }
+        public byte Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CursoAlumnoWeb> CursosAlumnosWeb { get; set; }

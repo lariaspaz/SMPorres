@@ -27,6 +27,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="TipoDocumento" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="NroDocumento" type="s:decimal" />
           <s:element minOccurs="0" maxOccurs="1" name="CursosAlumnos" type="tns:ArrayOfCursoAlumno" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfCursoAlumno">
@@ -55,7 +56,10 @@
           <s:element minOccurs="1" maxOccurs="1" name="NroCuota" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="FechaVto" type="s:dateTime" />
           <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImporteCuota" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="ImportePagado" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImporteRecargo" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImporteBeca" type="s:decimal" />
         </s:sequence>
       </s:complexType>
       <s:element name="ActualizarDatosResponse">

@@ -17,6 +17,12 @@ namespace Consultas.Models.WebServices
 
         public DateTime Fecha { get; set; }
 
+        public decimal ImporteCuota { get; set; }
+
         public decimal ImportePagado { get; set; }
+
+        public decimal ImporteRecargo { get; set; }
+
+        public decimal ImporteBeca { get; set; }
     }
 }

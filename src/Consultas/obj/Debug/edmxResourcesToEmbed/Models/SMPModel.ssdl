@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMPorres_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AlumnosWeb">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TipoDocumento" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Estado" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CursosAlumnosWeb">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdAlumnoWeb" Type="int" Nullable="false" />
+    <Property Name="IdCurso" Type="int" Nullable="false" />
+    <Property Name="Curso" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdCarrera" Type="int" Nullable="false" />
+    <Property Name="Carrera" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PagosWeb">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdCursoAlumno" Type="int" Nullable="false" />
+    <Property Name="IdPlanPago" Type="int" Nullable="false" />
+    <Property Name="NroCuota" Type="smallint" Nullable="false" />
+    <Property Name="FechaVto" Type="smalldatetime" Nullable="false" />
+    <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
+    <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ImporteRecargo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
+    <End Role="AlumnosWeb" Type="Self.AlumnosWeb" Multiplicity="1" />
+    <End Role="CursosAlumnosWeb" Type="Self.CursosAlumnosWeb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AlumnosWeb">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CursosAlumnosWeb">
+        <PropertyRef Name="IdAlumnoWeb" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PagosWeb_CursosAlumnos">
+    <End Role="CursosAlumnosWeb" Type="Self.CursosAlumnosWeb" Multiplicity="1" />
+    <End Role="PagosWeb" Type="Self.PagosWeb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CursosAlumnosWeb">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PagosWeb">
+        <PropertyRef Name="IdCursoAlumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SMPorres_DevModelStoreContainer">
+    <EntitySet Name="AlumnosWeb" EntityType="Self.AlumnosWeb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CursosAlumnosWeb" EntityType="Self.CursosAlumnosWeb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PagosWeb" EntityType="Self.PagosWeb" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CursosAlumnosWeb_AlumnosWeb" Association="Self.FK_CursosAlumnosWeb_AlumnosWeb">
+      <End Role="AlumnosWeb" EntitySet="AlumnosWeb" />
+      <End Role="CursosAlumnosWeb" EntitySet="CursosAlumnosWeb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PagosWeb_CursosAlumnos" Association="Self.FK_PagosWeb_CursosAlumnos">
+      <End Role="CursosAlumnosWeb" EntitySet="CursosAlumnosWeb" />
+      <End Role="PagosWeb" EntitySet="PagosWeb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

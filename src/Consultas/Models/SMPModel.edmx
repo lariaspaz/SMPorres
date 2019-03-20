@@ -14,6 +14,7 @@
           <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TipoDocumento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="CursosAlumnosWeb">
           <Key>
@@ -38,6 +39,8 @@
           <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
           <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteRecargo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="Self.AlumnosWeb" Multiplicity="1" />
@@ -90,6 +93,7 @@
           <Property Name="TipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="CursosAlumnosWeb" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="AlumnosWeb" ToRole="CursosAlumnosWeb" />
+          <Property Name="Estado" Type="Byte" Nullable="false" />
         </EntityType>
         <EntityType Name="CursoAlumnoWeb">
           <Key>
@@ -117,6 +121,8 @@
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ImportePagado" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="CursosAlumnosWeb" Relationship="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" FromRole="PagosWeb" ToRole="CursosAlumnosWeb" />
+          <Property Name="ImporteRecargo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteBeca" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="SMPorres_DevModel.AlumnoWeb" Multiplicity="1" />
@@ -164,6 +170,7 @@
           <EntitySetMapping Name="AlumnoWebs">
             <EntityTypeMapping TypeName="SMPorres_DevModel.AlumnoWeb">
               <MappingFragment StoreEntitySet="AlumnosWeb">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
@@ -187,6 +194,8 @@
           <EntitySetMapping Name="PagoWebs">
             <EntityTypeMapping TypeName="SMPorres_DevModel.PagoWeb">
               <MappingFragment StoreEntitySet="PagosWeb">
+                <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
+                <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
                 <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />

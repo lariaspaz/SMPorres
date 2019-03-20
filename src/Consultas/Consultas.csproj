@@ -206,6 +206,8 @@
     </Compile>
     <Compile Include="Models\WebServices\Pago.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AlumnosRepository.cs" />
+    <Compile Include="Repositories\CursoAlumnoRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Web_Services\SMP.asmx.cs">
       <DependentUpon>SMP.asmx</DependentUpon>

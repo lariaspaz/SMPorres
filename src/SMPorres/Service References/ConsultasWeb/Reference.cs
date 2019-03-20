@@ -38,6 +38,8 @@ namespace SMPorres.ConsultasWeb {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SMPorres.ConsultasWeb.CursoAlumno[] CursosAlumnosField;
         
+        private int EstadoField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -122,6 +124,19 @@ namespace SMPorres.ConsultasWeb {
                 if ((object.ReferenceEquals(this.CursosAlumnosField, value) != true)) {
                     this.CursosAlumnosField = value;
                     this.RaisePropertyChanged("CursosAlumnos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public int Estado {
+            get {
+                return this.EstadoField;
+            }
+            set {
+                if ((this.EstadoField.Equals(value) != true)) {
+                    this.EstadoField = value;
+                    this.RaisePropertyChanged("Estado");
                 }
             }
         }
@@ -262,7 +277,13 @@ namespace SMPorres.ConsultasWeb {
         
         private System.DateTime FechaField;
         
+        private decimal ImporteCuotaField;
+        
         private decimal ImportePagadoField;
+        
+        private decimal ImporteRecargoField;
+        
+        private decimal ImporteBecaField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -340,6 +361,19 @@ namespace SMPorres.ConsultasWeb {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public decimal ImporteCuota {
+            get {
+                return this.ImporteCuotaField;
+            }
+            set {
+                if ((this.ImporteCuotaField.Equals(value) != true)) {
+                    this.ImporteCuotaField = value;
+                    this.RaisePropertyChanged("ImporteCuota");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
         public decimal ImportePagado {
             get {
                 return this.ImportePagadoField;
@@ -348,6 +382,32 @@ namespace SMPorres.ConsultasWeb {
                 if ((this.ImportePagadoField.Equals(value) != true)) {
                     this.ImportePagadoField = value;
                     this.RaisePropertyChanged("ImportePagado");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public decimal ImporteRecargo {
+            get {
+                return this.ImporteRecargoField;
+            }
+            set {
+                if ((this.ImporteRecargoField.Equals(value) != true)) {
+                    this.ImporteRecargoField = value;
+                    this.RaisePropertyChanged("ImporteRecargo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
+        public decimal ImporteBeca {
+            get {
+                return this.ImporteBecaField;
+            }
+            set {
+                if ((this.ImporteBecaField.Equals(value) != true)) {
+                    this.ImporteBecaField = value;
+                    this.RaisePropertyChanged("ImporteBeca");
                 }
             }
         }

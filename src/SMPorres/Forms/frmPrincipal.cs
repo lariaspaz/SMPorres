@@ -198,5 +198,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Pagos.frmLeerArchivoBSE()) f.ShowDialog();
         }
+
+        private void actualizarDatosEnLaWebToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Web.frmActualizarDatos()) f.ShowDialog();
+        }
     }
 }

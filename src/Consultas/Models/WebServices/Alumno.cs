@@ -19,5 +19,7 @@ namespace Consultas.Models.WebServices
         public decimal NroDocumento { get; set; }
 
         public List<CursoAlumno> CursosAlumnos { get; set; }
+
+        public int Estado { get; set; }
     }
 }

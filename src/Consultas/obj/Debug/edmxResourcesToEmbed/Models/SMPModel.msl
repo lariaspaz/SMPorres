@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SMPorres_DevModelStoreContainer" CdmEntityContainer="SMPorres_DevEntities">
+    <EntitySetMapping Name="AlumnoWebs">
+      <EntityTypeMapping TypeName="SMPorres_DevModel.AlumnoWeb">
+        <MappingFragment StoreEntitySet="AlumnosWeb">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+          <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CursoAlumnoWebs">
+      <EntityTypeMapping TypeName="SMPorres_DevModel.CursoAlumnoWeb">
+        <MappingFragment StoreEntitySet="CursosAlumnosWeb">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdAlumnoWeb" ColumnName="IdAlumnoWeb" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+          <ScalarProperty Name="Curso" ColumnName="Curso" />
+          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+          <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PagoWebs">
+      <EntityTypeMapping TypeName="SMPorres_DevModel.PagoWeb">
+        <MappingFragment StoreEntitySet="PagosWeb">
+          <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
+          <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
+          <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
+          <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
+          <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
+          <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

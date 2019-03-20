@@ -286,7 +286,7 @@
             this.cbProvincia.TabIndex = 7;
             this.cbProvincia.SelectionChangeCommitted += new System.EventHandler(this.cbProvincia_SelectionChangeCommitted);
             // 
-            // txtNumDocumento
+            // txtNroDocumento
             // 
             this.txtNroDocumento.DecValue = new decimal(new int[] {
             0,
@@ -295,7 +295,7 @@
             0});
             this.txtNroDocumento.IntValue = ((long)(0));
             this.txtNroDocumento.Location = new System.Drawing.Point(281, 63);
-            this.txtNroDocumento.Name = "txtNumDocumento";
+            this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(127, 20);
             this.txtNroDocumento.TabIndex = 3;
             this.txtNroDocumento.Text = "0";
@@ -420,7 +420,7 @@
             this.ckEstado.Name = "ckEstado";
             this.ckEstado.Size = new System.Drawing.Size(73, 17);
             this.ckEstado.TabIndex = 12;
-            this.ckEstado.Text = "Habilitada";
+            this.ckEstado.Text = "Habilitado";
             this.ckEstado.UseVisualStyleBackColor = true;
             // 
             // txtNombre

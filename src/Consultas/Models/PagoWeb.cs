@@ -22,6 +22,8 @@ namespace Consultas.Models
         public decimal ImporteCuota { get; set; }
         public System.DateTime Fecha { get; set; }
         public decimal ImportePagado { get; set; }
+        public decimal ImporteRecargo { get; set; }
+        public decimal ImporteBeca { get; set; }
     
         public virtual CursoAlumnoWeb CursosAlumnosWeb { get; set; }
     }

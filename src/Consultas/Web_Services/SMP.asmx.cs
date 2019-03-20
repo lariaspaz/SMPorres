@@ -1,4 +1,5 @@
 ﻿using Consultas.Models;
+using Consultas.Models.WebServices;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Consultas.Web_Services
         }
 
         [WebMethod]
-        public bool ActualizarDatos(Consultas.Models.WebServices.Alumno alumno)
+        public bool ActualizarDatos(Alumno alumno)
         {
             var s = JsonConvert.SerializeObject(alumno, Formatting.Indented);
             System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
