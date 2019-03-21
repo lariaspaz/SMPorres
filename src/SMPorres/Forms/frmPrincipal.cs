@@ -196,7 +196,7 @@ namespace SMPorres.Forms
 
         private void rendiciónBSEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new Pagos.frmLeerArchivoBSE()) f.ShowDialog();
+            using (var f = new Pagos.frmImportarPagosBSE()) f.ShowDialog();
         }
 
         private void actualizarDatosEnLaWebToolStripMenuItem_Click(object sender, EventArgs e)

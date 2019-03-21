@@ -142,11 +142,11 @@
     <Compile Include="Forms\Pagos\frmInfPagosTotales.Designer.cs">
       <DependentUpon>frmInfPagosTotales.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pagos\frmLeerArchivoBSE.cs">
+    <Compile Include="Forms\Pagos\frmImportarPagosBSE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Pagos\frmLeerArchivoBSE.Designer.cs">
-      <DependentUpon>frmLeerArchivoBSE.cs</DependentUpon>
+    <Compile Include="Forms\Pagos\frmImportarPagosBSE.Designer.cs">
+      <DependentUpon>frmImportarPagosBSE.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pagos\frmPagarCuota.cs">
       <SubType>Form</SubType>
@@ -284,12 +284,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Lib\Calculos\DígitoVerificador.cs" />
-    <Compile Include="Lib\Calculos\FechaJuliana.cs" />
-    <Compile Include="Lib\Components\Forms.cs" />
     <Compile Include="Lib\Configuration.cs" />
     <Compile Include="Lib\AppForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Lib\Security\Cryptography.cs" />
     <Compile Include="Lib\Session.cs" />
     <Compile Include="Lib\Validations\FormValidations.cs" />
     <Compile Include="Models\Alumno.cs">
@@ -300,6 +299,9 @@
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BecaAlumno.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CabeceraArchivo.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Carrera.cs">
@@ -360,6 +362,9 @@
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RendicionBSE.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SMPorres.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -378,6 +383,7 @@
     <Compile Include="Models\TipoDocumento.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoArchivo.cs" />
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -420,6 +426,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AlumnosRepository.cs" />
     <Compile Include="Repositories\BecasAlumnosRepository.cs" />
+    <Compile Include="Repositories\CabecerasArchivosRepository.cs" />
     <Compile Include="Repositories\ConfiguracionRepository.cs" />
     <Compile Include="Repositories\CuotasRepository.cs" />
     <Compile Include="Repositories\GruposItemsMenuRepository.cs" />
@@ -427,6 +434,7 @@
     <Compile Include="Repositories\MediosPagoRepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
     <Compile Include="Repositories\PlanesPagoRepository.cs" />
+    <Compile Include="Repositories\RendicionBSERepository.cs" />
     <Compile Include="Repositories\StoredProcs.cs" />
     <Compile Include="Repositories\TiposDocumentoRepository.cs" />
     <Compile Include="Repositories\BarriosRepository.cs" />
@@ -480,8 +488,8 @@
     <EmbeddedResource Include="Forms\Pagos\frmInfPagosTotales.resx">
       <DependentUpon>frmInfPagosTotales.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pagos\frmLeerArchivoBSE.resx">
-      <DependentUpon>frmLeerArchivoBSE.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Pagos\frmImportarPagosBSE.resx">
+      <DependentUpon>frmImportarPagosBSE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagos\frmPagarCuota.resx">
       <DependentUpon>frmPagarCuota.cs</DependentUpon>

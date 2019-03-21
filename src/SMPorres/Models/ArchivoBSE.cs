@@ -6,36 +6,36 @@ using System.Threading.Tasks;
 
 namespace SMPorres.Models
 {
-    public class ArchivoBSE
+    public class PagoBSE
     {
         //succod	sucursal	moneda	comprobante	tipo_mov	importe	fecha_proceso	cuil	usuario	hora	codbarra	grupoterminal	nrorendicion	fecha_cobro
         public int CódigoSucursal { get; set; }
 
-        public string Sucursal { get; set; }
+        public string NombreSucursal { get; set; }
 
         public string Moneda { get; set; }
 
-        public Int32 Comprobante { get; set; }
+        public string Comprobante { get; set; }
 
-        public string TipoMov { get; set; }
+        public string TipoMovimiento { get; set; }
 
-        public decimal Importe { get; set; }
+        public string Importe { get; set; }
 
-        public DateTime FechaProceso { get; set; }
+        public string FechaProceso { get; set; }
 
-        public string Cuil { get; set; }
+        public string CuilUsuario { get; set; }
 
-        public string Usuario { get; set; }
+        public string NombreUsuario { get; set; }
 
-        public Int32 Hora { get; set; }
+        public string Hora { get; set; }
 
         public string CódigoBarra { get; set; }
 
         public string GrupoTerminal { get; set; }
 
-        public string NroRendicion { get; set; }
+        public string NroRendición { get; set; }
 
-        public DateTime FechaCobro { get; set; }
+        public string FechaMovimiento { get; set; }
 
     }
 }

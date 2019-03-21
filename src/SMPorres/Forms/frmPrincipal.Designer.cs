@@ -31,6 +31,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelDeAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rendiciónBSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizarDatosEnLaWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ediciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,8 +60,6 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rendiciónBSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.actualizarDatosEnLaWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +95,20 @@
             this.panelDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.panelDeAlumnosToolStripMenuItem.Text = "Panel de alumnos";
             this.panelDeAlumnosToolStripMenuItem.Click += new System.EventHandler(this.panelDeAlumnosToolStripMenuItem_Click);
+            // 
+            // rendiciónBSEToolStripMenuItem
+            // 
+            this.rendiciónBSEToolStripMenuItem.Name = "rendiciónBSEToolStripMenuItem";
+            this.rendiciónBSEToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.rendiciónBSEToolStripMenuItem.Text = "Importar rendición BSE";
+            this.rendiciónBSEToolStripMenuItem.Click += new System.EventHandler(this.rendiciónBSEToolStripMenuItem_Click);
+            // 
+            // actualizarDatosEnLaWebToolStripMenuItem
+            // 
+            this.actualizarDatosEnLaWebToolStripMenuItem.Name = "actualizarDatosEnLaWebToolStripMenuItem";
+            this.actualizarDatosEnLaWebToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.actualizarDatosEnLaWebToolStripMenuItem.Text = "Actualizar datos en la web";
+            this.actualizarDatosEnLaWebToolStripMenuItem.Click += new System.EventHandler(this.actualizarDatosEnLaWebToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -294,19 +308,6 @@
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Text = "Asignar permisos a Grupos y Usuarios";
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosAGruposYUsuariosToolStripMenuItem_Click);
-            // 
-            // rendiciónBSEToolStripMenuItem
-            // 
-            this.rendiciónBSEToolStripMenuItem.Name = "rendiciónBSEToolStripMenuItem";
-            this.rendiciónBSEToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.rendiciónBSEToolStripMenuItem.Text = "Rendición BSE";
-            // 
-            // actualizarDatosEnLaWebToolStripMenuItem
-            // 
-            this.actualizarDatosEnLaWebToolStripMenuItem.Name = "actualizarDatosEnLaWebToolStripMenuItem";
-            this.actualizarDatosEnLaWebToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.actualizarDatosEnLaWebToolStripMenuItem.Text = "Actualizar datos en la web";
-            this.actualizarDatosEnLaWebToolStripMenuItem.Click += new System.EventHandler(this.actualizarDatosEnLaWebToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
