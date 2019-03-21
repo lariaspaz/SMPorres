@@ -37,10 +37,10 @@
           <Property Name="NroCuota" Type="smallint" Nullable="false" />
           <Property Name="FechaVto" Type="smalldatetime" Nullable="false" />
           <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
-          <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ImporteRecargo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ImporteRecargo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="Self.AlumnosWeb" Multiplicity="1" />
@@ -106,23 +106,7 @@
           <Property Name="IdCarrera" Type="Int32" Nullable="false" />
           <Property Name="Carrera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="AlumnosWeb" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="CursosAlumnosWeb" ToRole="AlumnosWeb" />
-          <NavigationProperty Name="PagosWeb" Relationship="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" FromRole="CursosAlumnosWeb" ToRole="PagosWeb" />
-        </EntityType>
-        <EntityType Name="PagoWeb">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdCursoAlumno" Type="Int32" Nullable="false" />
-          <Property Name="IdPlanPago" Type="Int32" Nullable="false" />
-          <Property Name="NroCuota" Type="Int16" Nullable="false" />
-          <Property Name="FechaVto" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ImporteCuota" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ImportePagado" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <NavigationProperty Name="CursosAlumnosWeb" Relationship="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" FromRole="PagosWeb" ToRole="CursosAlumnosWeb" />
-          <Property Name="ImporteRecargo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ImporteBeca" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="PagosWeb" Relationship="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" FromRole="CursoAlumnoWeb" ToRole="PagosWeb" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="SMPorres_DevModel.AlumnoWeb" Multiplicity="1" />
@@ -139,21 +123,37 @@
         <EntityContainer Name="SMPorres_DevEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AlumnoWebs" EntityType="SMPorres_DevModel.AlumnoWeb" />
           <EntitySet Name="CursoAlumnoWebs" EntityType="SMPorres_DevModel.CursoAlumnoWeb" />
-          <EntitySet Name="PagoWebs" EntityType="SMPorres_DevModel.PagoWeb" />
           <AssociationSet Name="FK_CursosAlumnosWeb_AlumnosWeb" Association="Self.FK_CursosAlumnosWeb_AlumnosWeb">
             <End Role="AlumnosWeb" EntitySet="AlumnoWebs" />
             <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
           </AssociationSet>
+          <EntitySet Name="PagoWebs" EntityType="SMPorres_DevModel.PagoWeb" />
           <AssociationSet Name="FK_PagosWeb_CursosAlumnos" Association="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos">
-            <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
+            <End Role="CursoAlumnoWeb" EntitySet="CursoAlumnoWebs" />
             <End Role="PagosWeb" EntitySet="PagoWebs" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PagoWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdCursoAlumno" Type="Int32" Nullable="false" />
+          <Property Name="IdPlanPago" Type="Int32" Nullable="false" />
+          <Property Name="NroCuota" Type="Int16" Nullable="false" />
+          <Property Name="FechaVto" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="ImportePagado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteRecargo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteBeca" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="CursoAlumnoWeb" Relationship="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" FromRole="PagosWeb" ToRole="CursoAlumnoWeb" />
+        </EntityType>
         <Association Name="FK_PagosWeb_CursosAlumnos">
-          <End Type="SMPorres_DevModel.CursoAlumnoWeb" Role="CursosAlumnosWeb" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.CursoAlumnoWeb" Role="CursoAlumnoWeb" Multiplicity="1" />
           <End Type="SMPorres_DevModel.PagoWeb" Role="PagosWeb" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CursosAlumnosWeb">
+            <Principal Role="CursoAlumnoWeb">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PagosWeb">
@@ -196,14 +196,14 @@
               <MappingFragment StoreEntitySet="PagosWeb">
                 <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
                 <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
-                <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
-                <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
-                <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
-                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
+                <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
+                <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
+                <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
+                <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

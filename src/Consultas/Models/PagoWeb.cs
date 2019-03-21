@@ -20,11 +20,11 @@ namespace Consultas.Models
         public short NroCuota { get; set; }
         public System.DateTime FechaVto { get; set; }
         public decimal ImporteCuota { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public decimal ImportePagado { get; set; }
-        public decimal ImporteRecargo { get; set; }
-        public decimal ImporteBeca { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<decimal> ImportePagado { get; set; }
+        public Nullable<decimal> ImporteRecargo { get; set; }
+        public Nullable<decimal> ImporteBeca { get; set; }
     
-        public virtual CursoAlumnoWeb CursosAlumnosWeb { get; set; }
+        public virtual CursoAlumnoWeb CursoAlumnoWeb { get; set; }
     }
 }

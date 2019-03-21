@@ -31,15 +31,16 @@ namespace Consultas.Repositories
                     {
                         db.AlumnoWebs.Add(a);
                     }
+                    db.SaveChanges();
 
                     var caRepo = new CursoAlumnoRepository();
                     var pagosRepo = new PagosRepository();
                     foreach (var ca in alumno.CursosAlumnos)
                     {
-                        var id = caRepo.Actualizar(a.Id, ca).Id;
+                        var id = caRepo.Actualizar(db, a.Id, ca).Id;
                         foreach (var p in ca.Pagos)
                         {
-                            pagosRepo.Actualizar(id, p);
+                            pagosRepo.Actualizar(db, id, p);
                         }
                     }
                     trx.Commit();

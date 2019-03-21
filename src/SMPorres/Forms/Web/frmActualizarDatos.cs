@@ -15,7 +15,7 @@ namespace SMPorres.Forms.Web
     public partial class frmActualizarDatos : FormBase
     {
         private Thread _thread;
-        private volatile bool _stop;
+        private volatile bool _stop = true;
 
         public frmActualizarDatos()
         {
@@ -24,7 +24,7 @@ namespace SMPorres.Forms.Web
 
         private void btnIniciarProceso_Click(object sender, EventArgs e)
         {
-            if (_thread != null)
+            if (!_stop)
             {
                 btnIniciarProceso.Image = Properties.Resources.control_play_blue;
                 _stop = true;
@@ -43,24 +43,32 @@ namespace SMPorres.Forms.Web
         {
             try
             {
+                lblAcción.Text = "Conectando a la web";
                 var cliente = new ConsultasWeb.SMPSoapClient();
                 var repo = new Repositories.WebRepository();
+                lblAcción.Text = "Obteniendo datos";
                 var datos = repo.ObtenerDatos();
                 progressBar1.Minimum = 0;
                 progressBar1.Maximum = datos.Count();
                 progressBar1.Step = 1;
                 progressBar1.Value = 0;
-                label6.Text = "0%";
+                lblPorcentaje.Text = "0%";
+                lblAcción.Text = "Procesando";
                 foreach (var alumno in datos)
                 {
                     if (_stop)
                     {
                         break;
                     }
-                    cliente.ActualizarDatos(alumno);
+                    if (!cliente.ActualizarDatos(alumno))
+                    {
+                        ShowError("Error al subir los datos de " + alumno.Nombre + " " + alumno.Apellido);
+                        break;
+                    }
                     progressBar1.PerformStep();
-                    label6.Text = String.Format("{0}%", progressBar1.Value);
+                    lblPorcentaje.Text = String.Format("{0}%", Math.Truncate((progressBar1.Value / (double)progressBar1.Maximum) * 100));
                 }
+                MessageBox.Show("Fin del proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (ThreadAbortException)
             {
@@ -70,6 +78,9 @@ namespace SMPorres.Forms.Web
             {
                 ShowError("Error al subir los datos:\n", ex);
             }
+            lblAcción.Text = "Fin del proceso";
+            btnIniciarProceso.Image = Properties.Resources.control_play_blue;
+            _stop = true;
         }
     }
 }

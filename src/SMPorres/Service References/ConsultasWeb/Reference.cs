@@ -160,6 +160,8 @@ namespace SMPorres.ConsultasWeb {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        private int IdField;
+        
         private int IdCursoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -184,6 +186,19 @@ namespace SMPorres.ConsultasWeb {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int IdCurso {
             get {
                 return this.IdCursoField;
@@ -196,7 +211,7 @@ namespace SMPorres.ConsultasWeb {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string Curso {
             get {
                 return this.CursoField;
@@ -209,7 +224,7 @@ namespace SMPorres.ConsultasWeb {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
         public int IdCarrera {
             get {
                 return this.IdCarreraField;
@@ -222,7 +237,7 @@ namespace SMPorres.ConsultasWeb {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string Carrera {
             get {
                 return this.CarreraField;
@@ -235,7 +250,7 @@ namespace SMPorres.ConsultasWeb {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public SMPorres.ConsultasWeb.Pago[] Pagos {
             get {
                 return this.PagosField;
@@ -275,15 +290,15 @@ namespace SMPorres.ConsultasWeb {
         
         private System.DateTime FechaVtoField;
         
-        private System.DateTime FechaField;
+        private System.Nullable<System.DateTime> FechaField;
         
         private decimal ImporteCuotaField;
         
-        private decimal ImportePagadoField;
+        private System.Nullable<decimal> ImportePagadoField;
         
-        private decimal ImporteRecargoField;
+        private System.Nullable<decimal> ImporteRecargoField;
         
-        private decimal ImporteBecaField;
+        private System.Nullable<decimal> ImporteBecaField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -348,7 +363,7 @@ namespace SMPorres.ConsultasWeb {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
-        public System.DateTime Fecha {
+        public System.Nullable<System.DateTime> Fecha {
             get {
                 return this.FechaField;
             }
@@ -374,7 +389,7 @@ namespace SMPorres.ConsultasWeb {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
-        public decimal ImportePagado {
+        public System.Nullable<decimal> ImportePagado {
             get {
                 return this.ImportePagadoField;
             }
@@ -387,7 +402,7 @@ namespace SMPorres.ConsultasWeb {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
-        public decimal ImporteRecargo {
+        public System.Nullable<decimal> ImporteRecargo {
             get {
                 return this.ImporteRecargoField;
             }
@@ -400,7 +415,7 @@ namespace SMPorres.ConsultasWeb {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
-        public decimal ImporteBeca {
+        public System.Nullable<decimal> ImporteBeca {
             get {
                 return this.ImporteBecaField;
             }

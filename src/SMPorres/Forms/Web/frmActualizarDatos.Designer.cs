@@ -34,8 +34,9 @@
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnIniciarProceso = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblPorcentaje = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lblAcción = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -53,7 +54,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 101);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(347, 116);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panel1
@@ -61,7 +62,7 @@
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 66);
+            this.panel1.Location = new System.Drawing.Point(0, 81);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(347, 35);
@@ -93,46 +94,54 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblAcción);
             this.panel2.Controls.Add(this.btnIniciarProceso);
-            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.lblPorcentaje);
             this.panel2.Controls.Add(this.progressBar1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(341, 60);
+            this.panel2.Size = new System.Drawing.Size(341, 75);
             this.panel2.TabIndex = 1;
             // 
             // btnIniciarProceso
             // 
             this.btnIniciarProceso.Image = global::SMPorres.Properties.Resources.control_play_blue;
-            this.btnIniciarProceso.Location = new System.Drawing.Point(304, 9);
+            this.btnIniciarProceso.Location = new System.Drawing.Point(304, 27);
             this.btnIniciarProceso.Name = "btnIniciarProceso";
             this.btnIniciarProceso.Size = new System.Drawing.Size(31, 23);
             this.btnIniciarProceso.TabIndex = 10;
             this.btnIniciarProceso.UseVisualStyleBackColor = true;
             this.btnIniciarProceso.Click += new System.EventHandler(this.btnIniciarProceso_Click);
             // 
-            // label6
+            // lblPorcentaje
             // 
-            this.label6.Location = new System.Drawing.Point(11, 35);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(287, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "0%";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPorcentaje.Location = new System.Drawing.Point(11, 53);
+            this.lblPorcentaje.Name = "lblPorcentaje";
+            this.lblPorcentaje.Size = new System.Drawing.Size(287, 13);
+            this.lblPorcentaje.TabIndex = 9;
+            this.lblPorcentaje.Text = "0%";
+            this.lblPorcentaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(11, 9);
+            this.progressBar1.Location = new System.Drawing.Point(11, 27);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(287, 23);
             this.progressBar1.TabIndex = 8;
+            // 
+            // lblAcción
+            // 
+            this.lblAcción.Location = new System.Drawing.Point(11, 6);
+            this.lblAcción.Name = "lblAcción";
+            this.lblAcción.Size = new System.Drawing.Size(287, 15);
+            this.lblAcción.TabIndex = 11;
             // 
             // frmActualizarDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 101);
+            this.ClientSize = new System.Drawing.Size(347, 116);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmActualizarDatos";
             this.Text = "Actualizar datos";
@@ -151,7 +160,8 @@
         private CustomLibrary.ComponentModel.Bevel bevel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnIniciarProceso;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblPorcentaje;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lblAcción;
     }
 }

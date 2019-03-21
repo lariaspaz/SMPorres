@@ -1,5 +1,6 @@
 ﻿using Consultas.Models;
 using Consultas.Models.WebServices;
+using Consultas.Repositories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,20 @@ namespace Consultas.Web_Services
         [WebMethod]
         public bool ActualizarDatos(Alumno alumno)
         {
-            var s = JsonConvert.SerializeObject(alumno, Formatting.Indented);
-            System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
-            return true;
+            try
+            {
+                new AlumnosRepository().Actualizar(alumno);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine + 
+                        "Datos ========================" + Environment.NewLine + 
+                        JsonConvert.SerializeObject(alumno, Formatting.Indented);
+                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                return false;
+                throw;
+            }
         }
     }
 }
