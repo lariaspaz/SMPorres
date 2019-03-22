@@ -226,15 +226,5 @@ namespace SMPorres.Repositories
         //    return true;
         //}
 
-        public static IEnumerable<Pago> ObtenerPagosRelacionados(List<RendicionBSE> pagosBSE)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                var q = from p in db.Pagos
-                        join p2 in pagosBSE on p.Id equals Int32.Parse(p2.Comprobante)
-                        select p;
-                return q.ToList();
-            }
-        }
     }
 }

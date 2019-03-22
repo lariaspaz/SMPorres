@@ -21,7 +21,8 @@ namespace Consultas.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            //: base("DefaultConnection", throwIfV1Schema: false)
+            : base("SMPorres_DevEntities", throwIfV1Schema: false)
         {
         }
 

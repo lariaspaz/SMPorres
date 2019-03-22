@@ -17,17 +17,18 @@ namespace SMPorres.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CabeceraArchivo()
         {
-            this.RendicionBSE = new HashSet<RendicionBSE>();
+            this.RendicionesBSE = new HashSet<RendicionBSE>();
         }
     
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Firma { get; set; }
+        public int IdTipoArchivo { get; set; }
+        public string NombreArchivo { get; set; }
+        public string Hash { get; set; }
         public System.DateTime Fecha { get; set; }
         public int IdUsuario { get; set; }
     
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RendicionBSE> RendicionBSE { get; set; }
+        public virtual ICollection<RendicionBSE> RendicionesBSE { get; set; }
     }
 }

@@ -31,6 +31,6 @@ namespace SMPorres.Models
         public string NroRendicion { get; set; }
         public string FechaMovimiento { get; set; }
     
-        public virtual CabeceraArchivo CabeceraArchivo { get; set; }
+        public virtual CabeceraArchivo CabecerasArchivo { get; set; }
     }
 }

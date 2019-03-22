@@ -13,13 +13,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="NroDocumento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Barrios">
           <Key>
@@ -42,8 +42,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Firma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoArchivo" Type="int" Nullable="false" />
+          <Property Name="NombreArchivo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hash" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
         </EntityType>
@@ -55,7 +56,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -180,8 +181,8 @@
           <Property Name="IdPagoAsiento" Type="int" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="FechaGrabacion" Type="datetime" />
-          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PorcRecargo" Type="float" />
+          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
           <Property Name="FechaVto" Type="datetime" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -508,6 +509,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pagos_Pagos1">
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="1" />
+          <End Role="Pagos1" Type="Self.Pagos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pagos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagos1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pagos_PlanesPago">
           <End Role="PlanesPago" Type="Self.PlanesPago" Multiplicity="1" />
           <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
@@ -732,6 +745,10 @@
             <End Role="Pagos" EntitySet="Pagos" />
             <End Role="Pagos1" EntitySet="Pagos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pagos_Pagos1" Association="Self.FK_Pagos_Pagos1">
+            <End Role="Pagos" EntitySet="Pagos" />
+            <End Role="Pagos1" EntitySet="Pagos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pagos_PlanesPago" Association="Self.FK_Pagos_PlanesPago">
             <End Role="PlanesPago" EntitySet="PlanesPago" />
             <End Role="Pagos" EntitySet="Pagos" />
@@ -921,15 +938,15 @@
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="TipoBecado" Mode="In" Type="Int16" />
           </FunctionImport>
-          <EntitySet Name="CabecerasArchivos" EntityType="SMPorres_DevModel.CabeceraArchivo" />
           <EntitySet Name="RendicionBSEs" EntityType="SMPorres_DevModel.RendicionBSE" />
+          <EntitySet Name="CabecerasArchivos" EntityType="SMPorres_DevModel.CabeceraArchivo" />
           <AssociationSet Name="FK_CabecerasArchivos_Usuarios" Association="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="CabecerasArchivo" EntitySet="CabecerasArchivos" />
           </AssociationSet>
           <AssociationSet Name="FK_RendicionesBSE_CabecerasArchivos" Association="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos">
             <End Role="CabecerasArchivo" EntitySet="CabecerasArchivos" />
-            <End Role="RendicionesBSE" EntitySet="RendicionBSEs" />
+            <End Role="RendicionBSE" EntitySet="RendicionBSEs" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
@@ -959,7 +976,7 @@
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
@@ -968,7 +985,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="BecasAlumnos" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" FromRole="Alumno" ToRole="BecasAlumno" />
         </EntityType>
         <EntityType Name="Barrio">
@@ -1329,7 +1346,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
@@ -1569,18 +1586,6 @@
           <Property Type="Decimal" Name="ImportePagado" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Double" Name="Beca" Nullable="true" />
         </ComplexType>
-        <EntityType Name="CabeceraArchivo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Firma" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios" FromRole="CabecerasArchivo" ToRole="Usuario" />
-          <NavigationProperty Name="RendicionBSE" Relationship="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos" FromRole="CabecerasArchivo" ToRole="RendicionesBSE" />
-        </EntityType>
         <EntityType Name="RendicionBSE">
           <Key>
             <PropertyRef Name="Id" />
@@ -1601,7 +1606,20 @@
           <Property Name="GrupoTerminal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NroRendicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaMovimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CabeceraArchivo" Relationship="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos" FromRole="RendicionesBSE" ToRole="CabecerasArchivo" />
+          <NavigationProperty Name="CabecerasArchivo" Relationship="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos" FromRole="RendicionBSE" ToRole="CabecerasArchivo" />
+        </EntityType>
+        <EntityType Name="CabeceraArchivo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoArchivo" Type="Int32" Nullable="false" />
+          <Property Name="NombreArchivo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hash" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios" FromRole="CabecerasArchivo" ToRole="Usuario" />
+          <NavigationProperty Name="RendicionesBSE" Relationship="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos" FromRole="CabecerasArchivo" ToRole="RendicionBSE" />
         </EntityType>
         <Association Name="FK_CabecerasArchivos_Usuarios">
           <End Type="SMPorres_DevModel.Usuario" Role="Usuario" Multiplicity="1" />
@@ -1617,12 +1635,12 @@
         </Association>
         <Association Name="FK_RendicionesBSE_CabecerasArchivos">
           <End Type="SMPorres_DevModel.CabeceraArchivo" Role="CabecerasArchivo" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.RendicionBSE" Role="RendicionesBSE" Multiplicity="*" />
+          <End Type="SMPorres_DevModel.RendicionBSE" Role="RendicionBSE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CabecerasArchivo">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="RendicionesBSE">
+            <Dependent Role="RendicionBSE">
               <PropertyRef Name="IdCabeceraArchivo" />
             </Dependent>
           </ReferentialConstraint>
@@ -1895,17 +1913,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CabecerasArchivos">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.CabeceraArchivo">
-              <MappingFragment StoreEntitySet="CabecerasArchivos">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Firma" ColumnName="Firma" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RendicionBSEs">
             <EntityTypeMapping TypeName="SMPorres_DevModel.RendicionBSE">
               <MappingFragment StoreEntitySet="RendicionesBSE">
@@ -1924,6 +1931,18 @@
                 <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
                 <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
                 <ScalarProperty Name="IdCabeceraArchivo" ColumnName="IdCabeceraArchivo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CabecerasArchivos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.CabeceraArchivo">
+              <MappingFragment StoreEntitySet="CabecerasArchivos">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="IdTipoArchivo" ColumnName="IdTipoArchivo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

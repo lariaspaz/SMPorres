@@ -294,7 +294,7 @@
     <Compile Include="Models\Alumno.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ArchivoBSE.cs" />
+    <Compile Include="Models\PagoBSE.cs" />
     <Compile Include="Models\Barrio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -432,6 +432,7 @@
     <Compile Include="Repositories\GruposItemsMenuRepository.cs" />
     <Compile Include="Repositories\ItemsMenuRepository.cs" />
     <Compile Include="Repositories\MediosPagoRepository.cs" />
+    <Compile Include="Repositories\PagosBSERepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
     <Compile Include="Repositories\PlanesPagoRepository.cs" />
     <Compile Include="Repositories\RendicionBSERepository.cs" />

@@ -16,9 +16,9 @@ namespace SMPorres.Repositories
             {
                 var ca = new CabeceraArchivo();
                 ca.Id = db.CabecerasArchivos.Any() ? db.CabecerasArchivos.Max(t => t.Id) : 1;
-                ca.Nombre = archivo;
+                ca.NombreArchivo = archivo;
                 ca.IdUsuario = Lib.Session.CurrentUser.Id;
-                ca.Firma = Lib.Security.Cryptography.CalcularMD5(archivo);
+                ca.Hash = Lib.Security.Cryptography.CalcularMD5(archivo);
                 ca.Fecha = Lib.Configuration.CurrentDate;
             }
         }
@@ -28,7 +28,7 @@ namespace SMPorres.Repositories
             string firma = Lib.Security.Cryptography.CalcularMD5(archivo);
             using (var db = new SMPorresEntities())
             {
-                return db.CabecerasArchivos.Any(ca => ca.Firma == firma);
+                return db.CabecerasArchivos.Any(ca => ca.Hash == firma);
             }
         }
     }

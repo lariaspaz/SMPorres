@@ -49,8 +49,8 @@ namespace SMPorres.Models
         public virtual DbSet<MedioPago> MediosPago { get; set; }
         public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
-        public virtual DbSet<CabeceraArchivo> CabecerasArchivos { get; set; }
         public virtual DbSet<RendicionBSE> RendicionBSEs { get; set; }
+        public virtual DbSet<CabeceraArchivo> CabecerasArchivos { get; set; }
     
         public virtual ObjectResult<ConsTotalPagos_Result> ConsTotalPagos(Nullable<System.DateTime> desde, Nullable<System.DateTime> hasta, Nullable<int> idCarrera, Nullable<int> idCurso)
         {

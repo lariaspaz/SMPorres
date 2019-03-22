@@ -69,8 +69,8 @@ namespace SMPorres.Forms.Pagos
             //}
         }
 
-        private void registrarPago(PagoBSE tmp)
-        {
+        //private void registrarPago(PagoBSE tmp)
+        //{
             //Pago pago = new Pago();
             //pago.Id = tmp.Comprobante;
             //pago.Fecha = tmp.FechaCobro;
@@ -96,7 +96,7 @@ namespace SMPorres.Forms.Pagos
             //{
             //    _archivosProcesados =+ _archivosProcesados;
             //}
-        }
+        //}
 
         private DateTime? LeerVto(string v)
         {
@@ -131,9 +131,21 @@ namespace SMPorres.Forms.Pagos
             }
 
             var rendición = RendicionBSERepository.CargarRendición(Archivo);
-            var query = from p in PagosRepository.ObtenerPagosRelacionados(rendición)
-                        join r in rendición on p.Id equals Int32.Parse(r.Comprobante)
-                        select new { p.Id, p.ImporteCuota, p.FechaVto, r.Comprobante, r.CodigoBarra };
+            
+            //cómo es el código de barras de un pago de varias cuotas?
+            var query = from p in PagosBSERepository.ObtenerPagosRelacionados(rendición)
+                        select new {
+                            p.Id,
+                            p.Comprobante,
+                            p.Documento,
+                            p.Alumno,
+                            p.Carrera,
+                            p.Curso,
+                            p.FechaVto,
+                            p.FechaPago,
+                            p.ImportePagado,
+                            p.CodigoBarra
+                        };
             dgvDatos.SetDataSource(query);
         }
     }
