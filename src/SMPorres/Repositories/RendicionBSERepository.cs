@@ -26,10 +26,12 @@ namespace SMPorres.Repositories
         {
             List<RendicionBSE> result = new List<RendicionBSE>();
             var líneas = File.ReadAllLines(archivo).Skip(1);
+            int i = 1;
             foreach (var línea in líneas)
             {
                 var campos = línea.Split('\t');
                 var rend = new RendicionBSE();
+                rend.Id = i++;
                 rend.CodigoSucursal = Int32.Parse(campos[0]);
                 rend.NombreSucursal = campos[1];
                 rend.Moneda = campos[2];

@@ -83,5 +83,10 @@ namespace SMPorres.Repositories
             var días = Int32.Parse(codBarra.Substring(13, 3));
             return new DateTime(2000 + año, 1, 1).AddDays(días);
         }
+
+        public static void ValidarPagos(ref IEnumerable<PagoBSE> pagos)
+        {
+
+        }
     }
 }
