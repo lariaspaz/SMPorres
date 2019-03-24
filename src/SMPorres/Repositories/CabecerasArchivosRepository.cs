@@ -10,17 +10,17 @@ namespace SMPorres.Repositories
 {
     class CabecerasArchivosRepository
     {
-        public static void Insertar(TipoArchivo tipo, string archivo)
+        public static CabeceraArchivo Insertar(SMPorresEntities db, TipoArchivo tipo, string archivo)
         {
-            using (var db = new SMPorresEntities())
-            {
-                var ca = new CabeceraArchivo();
-                ca.Id = db.CabecerasArchivos.Any() ? db.CabecerasArchivos.Max(t => t.Id) : 1;
-                ca.NombreArchivo = archivo;
-                ca.IdUsuario = Lib.Session.CurrentUser.Id;
-                ca.Hash = Lib.Security.Cryptography.CalcularMD5(archivo);
-                ca.Fecha = Lib.Configuration.CurrentDate;
-            }
+            var ca = new CabeceraArchivo();
+            ca.Id = db.CabecerasArchivos.Any() ? db.CabecerasArchivos.Max(t => t.Id) + 1 : 1;
+            ca.IdTipoArchivo = (int)tipo;
+            ca.NombreArchivo = System.IO.Path.GetFileName(archivo);
+            ca.IdUsuario = Lib.Session.CurrentUser.Id;
+            ca.Hash = Lib.Security.Cryptography.CalcularMD5(archivo);
+            ca.Fecha = Lib.Configuration.CurrentDate;
+            db.CabecerasArchivos.Add(ca);
+            return ca;
         }
 
         public static bool ExisteArchivo(TipoArchivo tipo, string archivo)

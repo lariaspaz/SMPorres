@@ -84,7 +84,7 @@ namespace SMPorres.Repositories
                                 NroCuota = p.NroCuota,
                                 ImporteCuota = p.ImporteCuota,
                                 Fecha = p.Fecha,
-                                FechaVto = (p.FechaVto == default(DateTime))? new DateTime(ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo, 12, 31) : p.FechaVto,
+                                FechaVto = (p.FechaVto == default(DateTime)) ? new DateTime(ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo, 12, 31) : p.FechaVto,
                                 ImportePagado = p.ImportePagado,
                                 IdMedioPago = p.IdMedioPago,
                                 MedioPago = p.MedioPago,
@@ -103,12 +103,15 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var p = db.Pagos.Find(idPago);
-                db.Entry(p).Reference(p1 => p1.PlanPago).Load();
-                db.Entry(p).Reference(p1 => p1.BecaAlumno).Load();
-                db.Entry(p.PlanPago).Reference(pp => pp.Alumno).Load();
-                db.Entry(p.PlanPago.Alumno).Reference(a => a.TipoDocumento).Load();
-                db.Entry(p.PlanPago).Reference(pp => pp.Curso).Load();
-                db.Entry(p.PlanPago.Curso).Reference(c => c.Carrera).Load();
+                if (p != null)
+                {
+                    db.Entry(p).Reference(p1 => p1.PlanPago).Load();
+                    db.Entry(p).Reference(p1 => p1.BecaAlumno).Load();
+                    db.Entry(p.PlanPago).Reference(pp => pp.Alumno).Load();
+                    db.Entry(p.PlanPago.Alumno).Reference(a => a.TipoDocumento).Load();
+                    db.Entry(p.PlanPago).Reference(pp => pp.Curso).Load();
+                    db.Entry(p.PlanPago.Curso).Reference(c => c.Carrera).Load();
+                }
                 return p;
             }
         }
@@ -116,6 +119,7 @@ namespace SMPorres.Repositories
         public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
             Pago pago = ObtenerPago(idPago);
+            if (pago == null) return null;
             var impBase = pago.ImporteCuota;
             var cc = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
             pago.PorcBeca = 0;
@@ -196,35 +200,28 @@ namespace SMPorres.Repositories
                 p.IdUsuario = Session.CurrentUser.Id;
                 p.FechaGrabacion = Configuration.CurrentDate;
                 p.Descripcion = pago.Descripcion;
-                db.SaveChanges();
+                p.IdArchivo = pago.IdArchivo;
             }
             return true;
         }
 
-        //public static bool RegistrarPagoBSE(Pago pago)
-        //{
-        //    using (var db = new SMPorresEntities())
-        //    {
-        //        var p = db.Pagos.Find(pago.Id);
-        //        p.Fecha = pago.Fecha;
-        //        p.FechaVto = pago.FechaVto;
-        //        p.PorcBeca = pago.PorcBeca;
-        //        p.ImporteBeca = pago.ImporteBeca;
-        //        p.PorcDescPagoTermino = pago.PorcDescPagoTermino;
-        //        p.ImportePagoTermino = pago.ImportePagoTermino;
-        //        p.PorcRecargo = pago.PorcRecargo;
-        //        p.ImporteRecargo = pago.ImporteRecargo;
-        //        p.ImportePagado = pago.ImportePagado;
-        //        p.IdMedioPago = pago.IdMedioPago;
-        //        p.IdUsuario = Session.CurrentUser.Id;
-        //        p.FechaGrabacion = Configuration.CurrentDate;
-        //        p.Descripcion = pago.Descripcion;
-
-        //        p.IdArchivo = pago.IdArchivo;
-        //        db.SaveChanges();
-        //    }
-        //    return true;
-        //}
-
+        public static void PagarCuota(SMPorresEntities db, Pago pago)
+        {
+            var p = db.Pagos.Find(pago.Id);
+            p.Fecha = pago.Fecha;
+            p.FechaVto = pago.FechaVto;
+            p.PorcBeca = pago.PorcBeca;
+            p.ImporteBeca = pago.ImporteBeca;
+            p.PorcDescPagoTermino = pago.PorcDescPagoTermino;
+            p.ImportePagoTermino = pago.ImportePagoTermino;
+            p.PorcRecargo = pago.PorcRecargo;
+            p.ImporteRecargo = pago.ImporteRecargo;
+            p.ImportePagado = pago.ImportePagado;
+            p.IdMedioPago = pago.IdMedioPago;
+            p.IdUsuario = Session.CurrentUser.Id;
+            p.FechaGrabacion = Configuration.CurrentDate;
+            p.Descripcion = pago.Descripcion;
+            p.IdArchivo = pago.IdArchivo;
+        }
     }
 }

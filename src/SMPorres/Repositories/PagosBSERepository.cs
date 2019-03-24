@@ -32,7 +32,7 @@ namespace SMPorres.Repositories
                              })
                             .ToList();
                 var query2 = from pbse in pagosBSE
-                             join p in query on Int32.Parse(pbse.Comprobante) equals p.Id into pq
+                             join p in query on pbse.IdComprobante equals p.Id into pq
                              from pago in pq.DefaultIfEmpty()
                              select new PagoBSE
                              {
@@ -52,41 +52,13 @@ namespace SMPorres.Repositories
                                  GrupoTerminal = pbse.GrupoTerminal,
                                  NroRendicion = pbse.NroRendicion,
                                  FechaMovimiento = pbse.FechaMovimiento,
-                                 Documento = String.Format("{0} {1:##,###,##0}", pago?.TipoDocumento ?? "", pago?.NroDocumento ?? 0),
-                                 Alumno = String.Format("{0} {1}", pago?.Nombre ?? "<No existe>", pago?.Apellido ?? ""),
+                                 Documento = String.Format("{0} {1:N0}", pago?.TipoDocumento ?? "", pago?.NroDocumento ?? 0),
+                                 Alumno = String.Format("{0} {1}", pago?.Nombre ?? "", pago?.Apellido ?? ""),
                                  Carrera = pago?.Carrera ?? "",
-                                 Curso = pago?.Curso ?? "",
-                                 FechaVto = ObtenerFechaVto(pbse.CodigoBarra),
-                                 FechaPago = ObtenerFechaPago(pbse.FechaMovimiento),
-                                 ImportePagado = ObtenerImporte(pbse.Importe)
+                                 Curso = pago?.Curso ?? ""
                              };
                 return query2.ToList();
             }
-        }
-
-        private static decimal ObtenerImporte(string importe)
-        {
-            return Decimal.Parse(importe.Replace(".", ","));
-        }
-
-        private static DateTime ObtenerFechaPago(string fechaMovimiento)
-        {
-            var año = Int32.Parse(fechaMovimiento.Substring(0, 4));
-            var mes = Int32.Parse(fechaMovimiento.Substring(5, 2));
-            var día = Int32.Parse(fechaMovimiento.Substring(8, 2));
-            return new DateTime(año, mes, día);
-        }
-
-        private static DateTime ObtenerFechaVto(string codBarra)
-        {
-            var año = Int32.Parse(codBarra.Substring(11, 2));
-            var días = Int32.Parse(codBarra.Substring(13, 3));
-            return new DateTime(2000 + año, 1, 1).AddDays(días);
-        }
-
-        public static void ValidarPagos(ref IEnumerable<PagoBSE> pagos)
-        {
-
         }
     }
 }

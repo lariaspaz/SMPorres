@@ -938,7 +938,7 @@
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="TipoBecado" Mode="In" Type="Int16" />
           </FunctionImport>
-          <EntitySet Name="RendicionBSEs" EntityType="SMPorres_DevModel.RendicionBSE" />
+          <EntitySet Name="RendicionesBSE" EntityType="SMPorres_DevModel.RendicionBSE" />
           <EntitySet Name="CabecerasArchivos" EntityType="SMPorres_DevModel.CabeceraArchivo" />
           <AssociationSet Name="FK_CabecerasArchivos_Usuarios" Association="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios">
             <End Role="Usuario" EntitySet="Usuarios" />
@@ -946,7 +946,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_RendicionesBSE_CabecerasArchivos" Association="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos">
             <End Role="CabecerasArchivo" EntitySet="CabecerasArchivos" />
-            <End Role="RendicionBSE" EntitySet="RendicionBSEs" />
+            <End Role="RendicionBSE" EntitySet="RendicionesBSE" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
@@ -1913,7 +1913,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="RendicionBSEs">
+          <EntitySetMapping Name="RendicionesBSE">
             <EntityTypeMapping TypeName="SMPorres_DevModel.RendicionBSE">
               <MappingFragment StoreEntitySet="RendicionesBSE">
                 <ScalarProperty Name="FechaMovimiento" ColumnName="FechaMovimiento" />

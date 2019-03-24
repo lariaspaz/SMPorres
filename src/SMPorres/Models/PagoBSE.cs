@@ -16,10 +16,22 @@ namespace SMPorres.Models
 
         public string Curso { get; set; }
 
-        public DateTime FechaVto { get; set; }
+        public bool Válido { get; set; }
 
-        public DateTime FechaPago { get; set; }
+        public Pago DetallePago
+        {
+            get
+            {
+                return Repositories.PagosRepository.ObtenerDetallePago(Id, FechaVto);
+            }
+        }
 
-        public decimal ImportePagado { get; set; }
+        public decimal? ImporteAPagar
+        {
+            get
+            {
+                return DetallePago != null ? DetallePago.ImportePagado : null;
+            }
+        }
     }
 }

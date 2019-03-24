@@ -365,6 +365,7 @@
     <Compile Include="Models\RendicionBSE.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RendicionBSE.Ext.cs" />
     <Compile Include="Models\SMPorres.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

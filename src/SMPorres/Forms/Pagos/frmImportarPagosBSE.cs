@@ -17,8 +17,7 @@ namespace SMPorres.Forms.Pagos
 {
     public partial class frmImportarPagosBSE : FormBase
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+        private IEnumerable<PagoBSE> _pagos;
 
         public string Archivo
         {
@@ -31,72 +30,7 @@ namespace SMPorres.Forms.Pagos
         public frmImportarPagosBSE()
         {
             InitializeComponent();
-
-            btnBuscar.Size = new Size(30, txtArchivo.ClientSize.Height + 2);
-            //btnBuscar.Location = new Point(txtArchivo.ClientSize.Width - btnBuscar.Width, -1);
-            btnBuscar.Dock = DockStyle.Right;
-            btnBuscar.Cursor = Cursors.Default;
-            txtArchivo.Controls.Add(btnBuscar);
-            // Send EM_SETMARGINS to prevent text from disappearing underneath the button
-            SendMessage(txtArchivo.Handle, 0xd3, (IntPtr)2, (IntPtr)(txtArchivo.Width << 16));
         }
-
-        private void LeerArchivo()
-        {
-            //List<PagoBSE> archivo = new List<PagoBSE>();
-            //string[] lines = File.ReadAllLines(_path);
-            //foreach (string line in lines)
-            //{
-            //    //Corta por los tabs
-            //    string[] campos = line.Split('\t');
-            //    if (campos[0] == "succod") continue;
-            //    PagoBSE tmp = new PagoBSE();
-            //    tmp.CódigoSucursal = Int32.Parse(campos[0]);
-            //    tmp.NombreSucursal = campos[1];
-            //    tmp.Moneda = campos[2];
-            //    tmp.Comprobante = Int32.Parse(campos[3]);
-            //    tmp.TipoMovimiento = campos[4];
-            //    tmp.Importe = decimal.Parse(campos[5]);
-            //    tmp.FechaProceso = DateTime.Parse(campos[6]);
-            //    tmp.CuilUsuario = campos[7];
-            //    tmp.NombreUsuario = campos[8];
-            //    tmp.Hora = Int32.Parse(campos[9]);
-            //    tmp.CódigoBarra = campos[10];
-            //    tmp.GrupoTerminal = campos[11];
-            //    tmp.NroRendición = campos[12];
-            //    tmp.FechaCobro = DateTime.Parse(campos[13]);
-            //    dgvArchivoBSE.Rows.Add(tmp);              
-            //}
-        }
-
-        //private void registrarPago(PagoBSE tmp)
-        //{
-            //Pago pago = new Pago();
-            //pago.Id = tmp.Comprobante;
-            //pago.Fecha = tmp.FechaCobro;
-            //pago.FechaVto = LeerVto(tmp.CódigoBarra.Substring(11,5));
-            //pago.IdMedioPago = 1;   //se debe leer de medios de pago
-            //pago.ImportePagado = tmp.Importe/100; 
-            ///*Éstos campos null podrían completarse al generar la boleta,*/
-            //pago.PorcBeca = null;
-            //pago.ImporteBeca = null;
-            //pago.PorcDescPagoTermino = null;
-            //pago.ImportePagoTermino = null;
-            //pago.PorcRecargo = null;
-            //pago.ImporteRecargo = null;
-            //pago.Descripcion = null;
-
-            //pago.IdArchivo = 1; //como generamos este ID?
-
-            //if (PagosRepository.RegistrarPagoBSE(pago) == false)
-            //{
-            //    MessageBox.Show("No se pudo registrar pago del comprobante " + pago.Id, "Rendición BSE", MessageBoxButtons.OK);
-            //}
-            //else
-            //{
-            //    _archivosProcesados =+ _archivosProcesados;
-            //}
-        //}
 
         private DateTime? LeerVto(string v)
         {
@@ -131,10 +65,18 @@ namespace SMPorres.Forms.Pagos
             }
 
             var rendición = RendicionBSERepository.CargarRendición(Archivo);
-            
+
+            _pagos = from p in PagosBSERepository.ObtenerPagosRelacionados(rendición) orderby p.Id select p;
+            foreach (var p in _pagos)
+            {
+                p.Válido = p.ImportePagado == p.ImporteAPagar && p.DetallePago != null;
+            }
+
             //cómo es el código de barras de un pago de varias cuotas?
-            var query = from p in PagosBSERepository.ObtenerPagosRelacionados(rendición)
-                        select new {
+            var query = from p in _pagos
+                        select new
+                        {
+                            p.Válido,
                             p.Id,
                             p.Comprobante,
                             p.Documento,
@@ -143,10 +85,115 @@ namespace SMPorres.Forms.Pagos
                             p.Curso,
                             p.FechaVto,
                             p.FechaPago,
+                            ImporteAPagar = p.ImporteAPagar,
                             p.ImportePagado,
                             p.CodigoBarra
                         };
             dgvDatos.SetDataSource(query);
+            toolStripStatusLabel1.Text = String.Format("Se han leído {0} filas", query.Count());
+            btnGrabar.Enabled = query.Any(t => t.Válido);
+        }
+
+        private decimal? ObtenerImporteAPagar(int id, DateTime fechaVto)
+        {
+            var p = PagosRepository.ObtenerDetallePago(id, fechaVto);
+            if (p == null) return null;
+            System.Diagnostics.Debug.Print(String.Format("Id = {0} - FechaVto = {1} - Importe a pagar: {2}",
+                id, fechaVto, p.ImportePagado));
+            return p.ImportePagado;
+        }
+
+        private void dgvDatos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            var válido = (bool)dgvDatos.Rows[e.RowIndex].Cells[0].Value;
+            if (!válido)
+            {
+                dgvDatos.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                dgvDatos.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.Red;
+            }
+        }
+
+        private void dgvDatos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewColumn c in dgvDatos.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            dgvDatos.Columns[0].HeaderText = "Válido";
+            dgvDatos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            dgvDatos.Columns[1].HeaderText = "Código";
+            dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            dgvDatos.Columns[2].HeaderText = "Comprobante";
+            dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[3].HeaderText = "Documento";
+            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[4].HeaderText = "Alumno";
+            dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[5].HeaderText = "Carrera";
+            dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[6].HeaderText = "Curso";
+            dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDatos.Columns[6].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            dgvDatos.Columns[7].HeaderText = "Fecha Vto.";
+            dgvDatos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[8].HeaderText = "Fecha Pago";
+            dgvDatos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[9].HeaderText = "Importe a Pagar";
+            dgvDatos.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[10].HeaderText = "Importe Pagado";
+            dgvDatos.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            dgvDatos.Columns[11].HeaderText = "Código de Barras";
+            dgvDatos.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        }
+
+        private void btnGrabar_Click(object sender, EventArgs e)
+        {
+            var pagos = _pagos.Where(p => p.Válido).ToList();
+            string s = String.Format("Hay {0} pagos válidos de un total de {1}.\n¿Está seguro " + 
+                        "que desea grabar esta rendición?", pagos.Count(), _pagos.Count());
+            if (MessageBox.Show(s, "Grabar rendición", MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    RendicionBSERepository.GrabarRendición(Archivo, pagos);
+                    MessageBox.Show("Los datos se grabaron correctamente.", "Grabar rendición", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+                    _pagos = _pagos.Where(p => !p.Válido);
+                    txtArchivo.Text = "";
+                    dgvDatos.DataSource = null;
+                    toolStripStatusLabel1.Text = "";
+                    btnGrabar.Enabled = false;
+                }
+                catch (Exception ex)
+                {
+                    ShowError("Error al intentar grabar los pagos: \n", ex);
+                }
+            }
         }
     }
 }
