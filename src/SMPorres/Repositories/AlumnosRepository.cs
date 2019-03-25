@@ -238,5 +238,18 @@ namespace SMPorres.Repositories
                 return query.OrderBy(a => a.IdCarrera).ThenBy(a => a.IdCurso).ThenBy(a => a.Estado).ToList();
             }
         }
+
+        public static string GenerarContraseña(int idAlumno, ref string pwdEncriptada)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var a = db.Alumnos.Find(idAlumno);
+                var pwd = Lib.Security.Cryptography.GenerarContraseña();
+                pwdEncriptada = Lib.Security.Cryptography.CalcularSHA512(pwd);
+                a.Contraseña = pwdEncriptada;
+                db.SaveChanges();
+                return pwd;
+            }
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace SMPorres.Models
         public Nullable<int> IdDomicilio { get; set; }
         public byte Estado { get; set; }
         public string Sexo { get; set; }
+        public string Contraseña { get; set; }
     
         public virtual Domicilio Domicilio { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }

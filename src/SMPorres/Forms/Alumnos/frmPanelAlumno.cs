@@ -70,14 +70,14 @@ namespace SMPorres.Forms.Alumnos
                 toolTip1.ShowError(this, txtNroDocumento, "El alumno no se inscribió en ningún curso.");
                 dgvCursos.DataSource = null;
                 dgvPagos.DataSource = null;
-                GenerarPlanDePagoToolStripMenuItem.Enabled = false;
+                btnGenerarPlanDePago.Enabled = false;
                 btnPagarCuota.Enabled = false;
             }
             else
             {
                 dgvCursos.SetDataSource(cursos);
                 ConsultarPlanesPago();
-                GenerarPlanDePagoToolStripMenuItem.Enabled = true;
+                btnGenerarPlanDePago.Enabled = true;
                 btnPagarCuota.Enabled = true;
             }
         }
@@ -443,5 +443,37 @@ namespace SMPorres.Forms.Alumnos
                 EditarBecaToolStripMenuItem.Visible = p.BecaAlumno != null;
             }
         }
+
+        private void btnGenerarContraseñaWeb_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("¿Está seguro que desea generar una nueva contraseña para el alumno?" +
+                        "\nSe reemplazará su contraseña actual.", "Generar contraseña", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string pwdEncriptada = "";
+                    var pwd = AlumnosRepository.GenerarContraseña(_alumno.Id, ref pwdEncriptada);
+                    string msg = "La contraseña generada para el alumno es:\n" + pwd;
+                    var cliente = new ConsultasWeb.SMPSoapClient();
+                    if (cliente.ActualizarPwd(_alumno.Id, pwdEncriptada))
+                    {
+                        msg += "\nSe actualizó la contraseña del alumno en la web.";
+                    }
+                    else
+                    {
+                        msg += "\nNo se pudo actualizar la contraseña del alumno en la web." +
+                               "\nSe actualizará cuando se suban los datos de todos los alumnos.";
+                    }
+                    MessageBox.Show(msg, "Generar contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowError("Error al intentar generar la contraseña del alumno:\n", ex);
+            }
+        }
+
+
     }
 }

@@ -618,7 +618,7 @@
     <None Include="Service References\ConsultasWeb\SMPorres.ConsultasWeb.ActualizarDatosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ConsultasWeb\SMPorres.ConsultasWeb.HelloWorldResponse.datasource">
+    <None Include="Service References\ConsultasWeb\SMPorres.ConsultasWeb.ActualizarPwdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
@@ -640,6 +640,7 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
       <LastGenOutput>SMPorres.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\key.png" />
     <None Include="Resources\control_stop_blue.png" />
     <None Include="Resources\control_play_blue.png" />
     <None Include="Service References\ConsultasWeb\Reference.svcmap">

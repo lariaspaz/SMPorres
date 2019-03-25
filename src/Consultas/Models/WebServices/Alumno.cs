@@ -21,5 +21,7 @@ namespace Consultas.Models.WebServices
         public List<CursoAlumno> CursosAlumnos { get; set; }
 
         public int Estado { get; set; }
+
+        public string Contraseña { get; set; }
     }
 }

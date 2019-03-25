@@ -17,16 +17,7 @@ namespace SMPorres.Repositories
             {
                 return false;
             }
-            return usr.Contraseña == HashPassword(contraseña);
-        }
-
-        private static string HashPassword(string contraseña)
-        {
-            using (var alg = SHA512.Create())
-            {
-                alg.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
-                return BitConverter.ToString(alg.Hash);
-            }
+            return usr.Contraseña == Lib.Security.Cryptography.CalcularSHA512(contraseña);
         }
 
         internal Usuario ObtenerUsuario(string nombre)
@@ -41,20 +32,6 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                //var query = (from u in db.Usuarios select u)
-                //                .ToList()
-                //                .Select(
-                //                    u => new Usuario
-                //                    {
-                //                        Id = u.Id,
-                //                        FechaAlta = u.FechaAlta,
-                //                        FechaBaja = u.FechaBaja,
-                //                        Nombre = u.Nombre,
-                //                        NombreCompleto = u.NombreCompleto,
-                //                        Estado = u.Estado
-                //                    });
-                //return query.ToList();
-
                 return (from u in db.Usuarios orderby u.Nombre select u).ToList();
             }
         }
@@ -76,7 +53,7 @@ namespace SMPorres.Repositories
                     FechaAlta = Configuration.CurrentDate,
                     Estado = estado,
                     FechaBaja = estado == 1 ? (DateTime?)null : Configuration.CurrentDate,
-                    Contraseña = HashPassword("123456")
+                    Contraseña = Lib.Security.Cryptography.CalcularSHA512("123456")
                 };
                 db.Usuarios.Add(usr);
                 db.SaveChanges();
@@ -117,7 +94,7 @@ namespace SMPorres.Repositories
                     throw new Exception("No existe el usuario con Id " + id);
                 }
                 var u = db.Usuarios.Find(id);
-                u.Contraseña = HashPassword(contraseña);
+                u.Contraseña = Lib.Security.Cryptography.CalcularSHA512(contraseña);
                 db.SaveChanges();
             }
         }

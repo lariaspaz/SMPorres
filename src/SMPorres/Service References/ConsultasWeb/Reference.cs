@@ -40,6 +40,9 @@ namespace SMPorres.ConsultasWeb {
         
         private int EstadoField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContraseñaField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -137,6 +140,19 @@ namespace SMPorres.ConsultasWeb {
                 if ((this.EstadoField.Equals(value) != true)) {
                     this.EstadoField = value;
                     this.RaisePropertyChanged("Estado");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string Contraseña {
+            get {
+                return this.ContraseñaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContraseñaField, value) != true)) {
+                    this.ContraseñaField = value;
+                    this.RaisePropertyChanged("Contraseña");
                 }
             }
         }
@@ -441,80 +457,19 @@ namespace SMPorres.ConsultasWeb {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConsultasWeb.SMPSoap")]
     public interface SMPSoap {
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento HelloWorldResult del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
-        SMPorres.ConsultasWeb.HelloWorldResponse HelloWorld(SMPorres.ConsultasWeb.HelloWorldRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
-        System.Threading.Tasks.Task<SMPorres.ConsultasWeb.HelloWorldResponse> HelloWorldAsync(SMPorres.ConsultasWeb.HelloWorldRequest request);
-        
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento alumno del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarDatos", ReplyAction="*")]
         SMPorres.ConsultasWeb.ActualizarDatosResponse ActualizarDatos(SMPorres.ConsultasWeb.ActualizarDatosRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarDatos", ReplyAction="*")]
         System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarDatosResponse> ActualizarDatosAsync(SMPorres.ConsultasWeb.ActualizarDatosRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class HelloWorldRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorld", Namespace="http://tempuri.org/", Order=0)]
-        public SMPorres.ConsultasWeb.HelloWorldRequestBody Body;
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pwd del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarPwd", ReplyAction="*")]
+        SMPorres.ConsultasWeb.ActualizarPwdResponse ActualizarPwd(SMPorres.ConsultasWeb.ActualizarPwdRequest request);
         
-        public HelloWorldRequest() {
-        }
-        
-        public HelloWorldRequest(SMPorres.ConsultasWeb.HelloWorldRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class HelloWorldRequestBody {
-        
-        public HelloWorldRequestBody() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class HelloWorldResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorldResponse", Namespace="http://tempuri.org/", Order=0)]
-        public SMPorres.ConsultasWeb.HelloWorldResponseBody Body;
-        
-        public HelloWorldResponse() {
-        }
-        
-        public HelloWorldResponse(SMPorres.ConsultasWeb.HelloWorldResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class HelloWorldResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string HelloWorldResult;
-        
-        public HelloWorldResponseBody() {
-        }
-        
-        public HelloWorldResponseBody(string HelloWorldResult) {
-            this.HelloWorldResult = HelloWorldResult;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarPwd", ReplyAction="*")]
+        System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarPwdResponse> ActualizarPwdAsync(SMPorres.ConsultasWeb.ActualizarPwdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -585,6 +540,78 @@ namespace SMPorres.ConsultasWeb {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ActualizarPwdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ActualizarPwd", Namespace="http://tempuri.org/", Order=0)]
+        public SMPorres.ConsultasWeb.ActualizarPwdRequestBody Body;
+        
+        public ActualizarPwdRequest() {
+        }
+        
+        public ActualizarPwdRequest(SMPorres.ConsultasWeb.ActualizarPwdRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ActualizarPwdRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int idAlumno;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string pwd;
+        
+        public ActualizarPwdRequestBody() {
+        }
+        
+        public ActualizarPwdRequestBody(int idAlumno, string pwd) {
+            this.idAlumno = idAlumno;
+            this.pwd = pwd;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ActualizarPwdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ActualizarPwdResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SMPorres.ConsultasWeb.ActualizarPwdResponseBody Body;
+        
+        public ActualizarPwdResponse() {
+        }
+        
+        public ActualizarPwdResponse(SMPorres.ConsultasWeb.ActualizarPwdResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ActualizarPwdResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool ActualizarPwdResult;
+        
+        public ActualizarPwdResponseBody() {
+        }
+        
+        public ActualizarPwdResponseBody(bool ActualizarPwdResult) {
+            this.ActualizarPwdResult = ActualizarPwdResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface SMPSoapChannel : SMPorres.ConsultasWeb.SMPSoap, System.ServiceModel.IClientChannel {
     }
@@ -613,29 +640,6 @@ namespace SMPorres.ConsultasWeb {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SMPorres.ConsultasWeb.HelloWorldResponse SMPorres.ConsultasWeb.SMPSoap.HelloWorld(SMPorres.ConsultasWeb.HelloWorldRequest request) {
-            return base.Channel.HelloWorld(request);
-        }
-        
-        public string HelloWorld() {
-            SMPorres.ConsultasWeb.HelloWorldRequest inValue = new SMPorres.ConsultasWeb.HelloWorldRequest();
-            inValue.Body = new SMPorres.ConsultasWeb.HelloWorldRequestBody();
-            SMPorres.ConsultasWeb.HelloWorldResponse retVal = ((SMPorres.ConsultasWeb.SMPSoap)(this)).HelloWorld(inValue);
-            return retVal.Body.HelloWorldResult;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<SMPorres.ConsultasWeb.HelloWorldResponse> SMPorres.ConsultasWeb.SMPSoap.HelloWorldAsync(SMPorres.ConsultasWeb.HelloWorldRequest request) {
-            return base.Channel.HelloWorldAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<SMPorres.ConsultasWeb.HelloWorldResponse> HelloWorldAsync() {
-            SMPorres.ConsultasWeb.HelloWorldRequest inValue = new SMPorres.ConsultasWeb.HelloWorldRequest();
-            inValue.Body = new SMPorres.ConsultasWeb.HelloWorldRequestBody();
-            return ((SMPorres.ConsultasWeb.SMPSoap)(this)).HelloWorldAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         SMPorres.ConsultasWeb.ActualizarDatosResponse SMPorres.ConsultasWeb.SMPSoap.ActualizarDatos(SMPorres.ConsultasWeb.ActualizarDatosRequest request) {
             return base.Channel.ActualizarDatos(request);
         }
@@ -658,6 +662,33 @@ namespace SMPorres.ConsultasWeb {
             inValue.Body = new SMPorres.ConsultasWeb.ActualizarDatosRequestBody();
             inValue.Body.alumno = alumno;
             return ((SMPorres.ConsultasWeb.SMPSoap)(this)).ActualizarDatosAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SMPorres.ConsultasWeb.ActualizarPwdResponse SMPorres.ConsultasWeb.SMPSoap.ActualizarPwd(SMPorres.ConsultasWeb.ActualizarPwdRequest request) {
+            return base.Channel.ActualizarPwd(request);
+        }
+        
+        public bool ActualizarPwd(int idAlumno, string pwd) {
+            SMPorres.ConsultasWeb.ActualizarPwdRequest inValue = new SMPorres.ConsultasWeb.ActualizarPwdRequest();
+            inValue.Body = new SMPorres.ConsultasWeb.ActualizarPwdRequestBody();
+            inValue.Body.idAlumno = idAlumno;
+            inValue.Body.pwd = pwd;
+            SMPorres.ConsultasWeb.ActualizarPwdResponse retVal = ((SMPorres.ConsultasWeb.SMPSoap)(this)).ActualizarPwd(inValue);
+            return retVal.Body.ActualizarPwdResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarPwdResponse> SMPorres.ConsultasWeb.SMPSoap.ActualizarPwdAsync(SMPorres.ConsultasWeb.ActualizarPwdRequest request) {
+            return base.Channel.ActualizarPwdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarPwdResponse> ActualizarPwdAsync(int idAlumno, string pwd) {
+            SMPorres.ConsultasWeb.ActualizarPwdRequest inValue = new SMPorres.ConsultasWeb.ActualizarPwdRequest();
+            inValue.Body = new SMPorres.ConsultasWeb.ActualizarPwdRequestBody();
+            inValue.Body.idAlumno = idAlumno;
+            inValue.Body.pwd = pwd;
+            return ((SMPorres.ConsultasWeb.SMPSoap)(this)).ActualizarPwdAsync(inValue);
         }
     }
 }

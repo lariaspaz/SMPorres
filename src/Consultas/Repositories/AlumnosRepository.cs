@@ -27,6 +27,7 @@ namespace Consultas.Repositories
                     a.TipoDocumento = alumno.TipoDocumento;
                     a.NroDocumento = alumno.NroDocumento;
                     a.Estado = (byte)alumno.Estado;
+                    a.Contraseña = alumno.Contraseña;
                     if (insertar)
                     {
                         db.AlumnoWebs.Add(a);
@@ -50,6 +51,18 @@ namespace Consultas.Repositories
                     trx.Rollback();
                     throw;
                 }
+            }
+        }
+
+        public bool ActualizarContraseña(int idAlumno, string pwd)
+        {
+            using (var db = new SMPorres_DevEntities())
+            {
+                var a = db.AlumnoWebs.Find(idAlumno);
+                if (a == null) return false;
+                a.Contraseña = pwd;
+                db.SaveChanges();
+                return true;
             }
         }
     }

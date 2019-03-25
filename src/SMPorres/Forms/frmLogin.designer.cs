@@ -31,22 +31,22 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.bevel2 = new CustomLibrary.ComponentModel.Bevel();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bevel2 = new CustomLibrary.ComponentModel.Bevel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -80,6 +80,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(365, 296);
             this.panel2.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SMPorres.Properties.Resources.logo_color;
+            this.pictureBox1.Location = new System.Drawing.Point(136, 64);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(92, 92);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -132,6 +142,18 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Usuario";
             // 
+            // bevel2
+            // 
+            this.bevel2.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel2.BevelType = CustomLibrary.ComponentModel.BevelType.Box;
+            this.bevel2.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel2.Location = new System.Drawing.Point(134, 62);
+            this.bevel2.Name = "bevel2";
+            this.bevel2.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel2.Size = new System.Drawing.Size(97, 97);
+            this.bevel2.TabIndex = 7;
+            this.bevel2.Text = "bevel2";
+            // 
             // bevel1
             // 
             this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
@@ -168,28 +190,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::SMPorres.Properties.Resources.logo_color;
-            this.pictureBox1.Location = new System.Drawing.Point(136, 64);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(92, 92);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
-            // bevel2
-            // 
-            this.bevel2.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
-            this.bevel2.BevelType = CustomLibrary.ComponentModel.BevelType.Box;
-            this.bevel2.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bevel2.Location = new System.Drawing.Point(134, 62);
-            this.bevel2.Name = "bevel2";
-            this.bevel2.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bevel2.Size = new System.Drawing.Size(97, 97);
-            this.bevel2.TabIndex = 7;
-            this.bevel2.Text = "bevel2";
-            // 
             // frmLogin
             // 
             this.AcceptButton = this.btnAceptar;
@@ -202,16 +202,15 @@
             this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Instituto San Martín de Porres";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

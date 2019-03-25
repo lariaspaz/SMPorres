@@ -15,6 +15,7 @@
           <Property Name="TipoDocumento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="CursosAlumnosWeb">
           <Key>
@@ -94,6 +95,7 @@
           <Property Name="NroDocumento" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="CursosAlumnosWeb" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="AlumnosWeb" ToRole="CursosAlumnosWeb" />
           <Property Name="Estado" Type="Byte" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CursoAlumnoWeb">
           <Key>
@@ -170,6 +172,7 @@
           <EntitySetMapping Name="AlumnoWebs">
             <EntityTypeMapping TypeName="SMPorres_DevModel.AlumnoWeb">
               <MappingFragment StoreEntitySet="AlumnosWeb">
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />

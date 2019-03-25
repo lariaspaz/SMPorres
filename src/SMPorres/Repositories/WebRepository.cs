@@ -20,7 +20,8 @@ namespace SMPorres.Repositories
                                 Nombre = a.Nombre,
                                 Apellido = a.Apellido,
                                 TipoDocumento = a.TipoDocumento.Descripcion,
-                                NroDocumento = a.NroDocumento
+                                NroDocumento = a.NroDocumento,
+                                Contraseña = a.Contraseña
                             })
                             .ToList();
                 foreach (var a in result)
