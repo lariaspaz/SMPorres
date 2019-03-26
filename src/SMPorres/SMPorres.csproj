@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -630,6 +633,16 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.ico" />
+    <Content Include="logo128x128.ico" />
+    <Content Include="logo256x256.ico" />
+    <Content Include="logo256x256_3jt_icon.ico" />
+    <Content Include="logo256x256_64p_icon.ico" />
+    <Content Include="logo3.ico" />
+    <Content Include="logo4.ico" />
+    <Content Include="logo5.ico" />
+    <Content Include="logo6.ico" />
+    <Content Include="logo64x64.ico" />
     <Content Include="Models\SMPorres.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SMPorres.edmx</DependentUpon>
