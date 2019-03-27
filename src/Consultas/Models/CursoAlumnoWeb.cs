@@ -27,7 +27,7 @@ namespace Consultas.Models
         public int IdCarrera { get; set; }
         public string Carrera { get; set; }
     
-        public virtual AlumnoWeb AlumnosWeb { get; set; }
+        public virtual AlumnoWeb AlumnoWeb { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PagoWeb> PagosWeb { get; set; }
     }

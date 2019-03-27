@@ -1,4 +1,5 @@
 ﻿using Consultas.Models;
+using Consultas.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Consultas.Repositories
 {
     public class CursoAlumnoRepository
     {
-        public CursoAlumnoWeb Actualizar(SMPorres_DevEntities db, int idAlumnoWeb, 
+        public CursoAlumnoWeb Actualizar(SMPorresEntities db, int idAlumnoWeb,
             Models.WebServices.CursoAlumno cursoAlumno)
         {
             var ca = db.CursoAlumnoWebs.Find(cursoAlumno.Id);
@@ -29,6 +30,37 @@ namespace Consultas.Repositories
             }
             db.SaveChanges();
             return ca;
+        }
+
+        public IEnumerable<Carrera> ObtenerCarreras()
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return (from ca in db.CursoAlumnoWebs
+                        select new Carrera
+                        {
+                            Id = ca.IdCarrera,
+                            Descripción = ca.Carrera
+                        })
+                        .Distinct()
+                        .ToList();
+            }
+        }
+
+        public IEnumerable<Curso> ObtenerCarreras(int idCarrera)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return (from ca in db.CursoAlumnoWebs
+                        where ca.IdCarrera == idCarrera
+                        select new Curso
+                        {
+                            Id = ca.IdCurso,
+                            Descripción = ca.Curso
+                        })
+                        .Distinct()
+                        .ToList();
+            }
         }
     }
 }

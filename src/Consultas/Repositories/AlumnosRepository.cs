@@ -10,7 +10,7 @@ namespace Consultas.Repositories
     {
         public void Actualizar(Models.WebServices.Alumno alumno)
         {
-            using (var db = new SMPorres_DevEntities())
+            using (var db = new SMPorresEntities())
             {
                 var trx = db.Database.BeginTransaction();
                 try
@@ -56,7 +56,7 @@ namespace Consultas.Repositories
 
         public bool ActualizarContraseña(int idAlumno, string pwd)
         {
-            using (var db = new SMPorres_DevEntities())
+            using (var db = new SMPorresEntities())
             {
                 var a = db.AlumnoWebs.Find(idAlumno);
                 if (a == null) return false;

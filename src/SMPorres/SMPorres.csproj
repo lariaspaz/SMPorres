@@ -56,10 +56,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -634,15 +630,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
-    <Content Include="logo128x128.ico" />
-    <Content Include="logo256x256.ico" />
-    <Content Include="logo256x256_3jt_icon.ico" />
-    <Content Include="logo256x256_64p_icon.ico" />
-    <Content Include="logo3.ico" />
-    <Content Include="logo4.ico" />
-    <Content Include="logo5.ico" />
-    <Content Include="logo6.ico" />
-    <Content Include="logo64x64.ico" />
     <Content Include="Models\SMPorres.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SMPorres.edmx</DependentUpon>

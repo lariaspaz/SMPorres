@@ -8,7 +8,7 @@ namespace Consultas.Repositories
 {
     public class PagosRepository
     {
-        public void Actualizar(SMPorres_DevEntities db, int idCursoAlumno, Models.WebServices.Pago pago)
+        public void Actualizar(SMPorresEntities db, int idCursoAlumno, Models.WebServices.Pago pago)
         {
             var p = db.PagoWebs.Find(pago.Id);
             bool insertar = p == null;

@@ -17,7 +17,7 @@ namespace Consultas.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AlumnoWeb()
         {
-            this.CursosAlumnosWeb = new HashSet<CursoAlumnoWeb>();
+            this.CursosAlumnosWebs = new HashSet<CursoAlumnoWeb>();
         }
     
         public int Id { get; set; }
@@ -29,6 +29,6 @@ namespace Consultas.Models
         public string Contraseña { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CursoAlumnoWeb> CursosAlumnosWeb { get; set; }
+        public virtual ICollection<CursoAlumnoWeb> CursosAlumnosWebs { get; set; }
     }
 }

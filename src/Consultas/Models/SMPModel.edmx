@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMPorres_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMPorres.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AlumnosWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,7 +67,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SMPorres_DevModelStoreContainer">
+        <EntityContainer Name="SMPorresStoreContainer">
           <EntitySet Name="AlumnosWeb" EntityType="Self.AlumnosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CursosAlumnosWeb" EntityType="Self.CursosAlumnosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PagosWeb" EntityType="Self.PagosWeb" Schema="dbo" store:Type="Tables" />
@@ -83,7 +83,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SMPorres_DevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SMPorres" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AlumnoWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -93,9 +93,9 @@
           <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="CursosAlumnosWeb" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="AlumnosWeb" ToRole="CursosAlumnosWeb" />
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CursosAlumnosWebs" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="AlumnosWeb" ToRole="CursosAlumnosWeb" />
         </EntityType>
         <EntityType Name="CursoAlumnoWeb">
           <Key>
@@ -107,34 +107,9 @@
           <Property Name="Curso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdCarrera" Type="Int32" Nullable="false" />
           <Property Name="Carrera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AlumnosWeb" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="CursosAlumnosWeb" ToRole="AlumnosWeb" />
-          <NavigationProperty Name="PagosWeb" Relationship="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" FromRole="CursoAlumnoWeb" ToRole="PagosWeb" />
+          <NavigationProperty Name="AlumnoWeb" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="CursosAlumnosWeb" ToRole="AlumnosWeb" />
+          <NavigationProperty Name="PagosWeb" Relationship="Self.FK_PagosWeb_CursosAlumnos" FromRole="CursosAlumnosWeb" ToRole="PagosWeb" />
         </EntityType>
-        <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
-          <End Role="AlumnosWeb" Type="SMPorres_DevModel.AlumnoWeb" Multiplicity="1" />
-          <End Role="CursosAlumnosWeb" Type="SMPorres_DevModel.CursoAlumnoWeb" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AlumnosWeb">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CursosAlumnosWeb">
-              <PropertyRef Name="IdAlumnoWeb" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SMPorres_DevEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AlumnoWebs" EntityType="SMPorres_DevModel.AlumnoWeb" />
-          <EntitySet Name="CursoAlumnoWebs" EntityType="SMPorres_DevModel.CursoAlumnoWeb" />
-          <AssociationSet Name="FK_CursosAlumnosWeb_AlumnosWeb" Association="Self.FK_CursosAlumnosWeb_AlumnosWeb">
-            <End Role="AlumnosWeb" EntitySet="AlumnoWebs" />
-            <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
-          </AssociationSet>
-          <EntitySet Name="PagoWebs" EntityType="SMPorres_DevModel.PagoWeb" />
-          <AssociationSet Name="FK_PagosWeb_CursosAlumnos" Association="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos">
-            <End Role="CursoAlumnoWeb" EntitySet="CursoAlumnoWebs" />
-            <End Role="PagosWeb" EntitySet="PagoWebs" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="PagoWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -144,18 +119,30 @@
           <Property Name="IdPlanPago" Type="Int32" Nullable="false" />
           <Property Name="NroCuota" Type="Int16" Nullable="false" />
           <Property Name="FechaVto" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteCuota" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <Property Name="ImportePagado" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ImporteRecargo" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ImporteBeca" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="CursoAlumnoWeb" Relationship="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" FromRole="PagosWeb" ToRole="CursoAlumnoWeb" />
+          <NavigationProperty Name="CursoAlumnoWeb" Relationship="Self.FK_PagosWeb_CursosAlumnos" FromRole="PagosWeb" ToRole="CursosAlumnosWeb" />
         </EntityType>
-        <Association Name="FK_PagosWeb_CursosAlumnos">
-          <End Type="SMPorres_DevModel.CursoAlumnoWeb" Role="CursoAlumnoWeb" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.PagoWeb" Role="PagosWeb" Multiplicity="*" />
+        <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
+          <End Role="AlumnosWeb" Type="SMPorres.AlumnoWeb" Multiplicity="1" />
+          <End Role="CursosAlumnosWeb" Type="SMPorres.CursoAlumnoWeb" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CursoAlumnoWeb">
+            <Principal Role="AlumnosWeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursosAlumnosWeb">
+              <PropertyRef Name="IdAlumnoWeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PagosWeb_CursosAlumnos">
+          <End Role="CursosAlumnosWeb" Type="SMPorres.CursoAlumnoWeb" Multiplicity="1" />
+          <End Role="PagosWeb" Type="SMPorres.PagoWeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CursosAlumnosWeb">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PagosWeb">
@@ -163,27 +150,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="SMPorresEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlumnoWebs" EntityType="SMPorres.AlumnoWeb" />
+          <EntitySet Name="CursoAlumnoWebs" EntityType="SMPorres.CursoAlumnoWeb" />
+          <EntitySet Name="PagoWebs" EntityType="SMPorres.PagoWeb" />
+          <AssociationSet Name="FK_CursosAlumnosWeb_AlumnosWeb" Association="Self.FK_CursosAlumnosWeb_AlumnosWeb">
+            <End Role="AlumnosWeb" EntitySet="AlumnoWebs" />
+            <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PagosWeb_CursosAlumnos" Association="Self.FK_PagosWeb_CursosAlumnos">
+            <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
+            <End Role="PagosWeb" EntitySet="PagoWebs" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SMPorres_DevModelStoreContainer" CdmEntityContainer="SMPorres_DevEntities">
+        <EntityContainerMapping StorageEntityContainer="SMPorresStoreContainer" CdmEntityContainer="SMPorresEntities">
           <EntitySetMapping Name="AlumnoWebs">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.AlumnoWeb">
+            <EntityTypeMapping TypeName="SMPorres.AlumnoWeb">
               <MappingFragment StoreEntitySet="AlumnosWeb">
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
                 <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CursoAlumnoWebs">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.CursoAlumnoWeb">
+            <EntityTypeMapping TypeName="SMPorres.CursoAlumnoWeb">
               <MappingFragment StoreEntitySet="CursosAlumnosWeb">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdAlumnoWeb" ColumnName="IdAlumnoWeb" />
@@ -195,18 +195,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PagoWebs">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.PagoWeb">
+            <EntityTypeMapping TypeName="SMPorres.PagoWeb">
               <MappingFragment StoreEntitySet="PagosWeb">
-                <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
-                <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />
-                <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
-                <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
-                <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
-                <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
-                <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
+                <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
+                <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
+                <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
+                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
+                <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />
+                <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

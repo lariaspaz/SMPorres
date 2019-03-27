@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d32ce24c388c4b8cb0f35e73f8f14b8c" Name="Diagram1">
-        <EntityTypeShape EntityType="SMPorres_DevModel.AlumnoWeb" Width="1.75" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.CursoAlumnoWeb" Width="1.875" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnosWeb_AlumnosWeb" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.PagoWeb" Width="1.5" PointX="5.625" PointY="1" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_PagosWeb_CursosAlumnos" />
+      <Diagram DiagramId="fd77a481c4bc4c4a98e81f1f8af87106" Name="Diagram1">
+        <EntityTypeShape EntityType="SMPorres.AlumnoWeb" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres.CursoAlumnoWeb" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres.PagoWeb" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="SMPorres.FK_CursosAlumnosWeb_AlumnosWeb" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPorres.FK_PagosWeb_CursosAlumnos" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

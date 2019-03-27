@@ -13,10 +13,10 @@ namespace Consultas.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SMPorres_DevEntities : DbContext
+    public partial class SMPorresEntities : DbContext
     {
-        public SMPorres_DevEntities()
-            : base("name=SMPorres_DevEntities")
+        public SMPorresEntities()
+            : base("name=SMPorresEntities")
         {
         }
     

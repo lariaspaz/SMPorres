@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SelectListItem>
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+
+<table>
+    <tr>
+        <td>
+            <label>Carrera: </label>
+        </td>
+        <td>
+            @Html.DropDownList("carreras", Model, new { @name = "a", @id = "carreras" });
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Curso: </label>
+        </td>
+        <td id="cursos">
+            @Html.DropDownList("cursos", new List<SelectListItem>(), "(Seleccione)", new { @id = "ddlcursos" });
+        </td>
+    </tr>
+</table>  
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#carreras').change(function () {
+            $.ajax({
+                type: "post",
+                url: "/EstadoCuenta/ObtenerCursos",
+                data: { stateId: $('#carreras').val() },
+                traditional: true,
+                success: function (data) {                    
+                    $('#District').html(data);
+                }
+            });
+        });
+    });
+</script>  
