@@ -3,7 +3,65 @@
     ViewBag.Title = "Estado de cuenta";
 }
 
-<h2>Index</h2>
+<h2 class="mt-3" >Estado de Cuenta</h2>
+
+@{ Html.RenderAction("MostrarCursosAlumno"); }
 
 @{ Html.RenderAction("MostrarCarreras"); }
 
+<div id="datos">
+    <div id="proxcuota">
+        <h3>Próxima Cuota</h3>
+        <hr />
+    </div>
+
+    <div id="pagos">
+        <h3>Pagos</h3>
+        <hr />
+    </div>
+</div>
+     
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#carreras').change(function () {
+                if ($('#carreras').val() !== '') {
+                    $.ajax({
+                        type: "get",
+                        url: "/EstadoCuenta/MostrarCursos",
+                        data: { idCarrera: $('#carreras').val() },
+                        traditional: true,
+                        success: function (data) {
+                            $('#cursos').html(data);
+                        }
+                    });
+                };
+            });
+
+            $('#cursos').change(function () {
+                if ($('#ddlcursos').val() === '') {
+                    $('#ddldatos').html('');
+                } else {
+                    $.ajax({
+                        type: "get",
+                        url: "/EstadoCuenta/Consultar",
+                        data: {
+                            idCarrera: $('#carreras').val(),
+                            idCurso: $('#ddlcursos').val()
+                        },
+                        traditional: true,
+                        success: function (data) {
+                            $('#datos').html(data);
+                        }
+                    });
+                };
+            });
+
+            $('.detail').click(function (e) {
+                e.preventDefault();
+                $('#datos').load($(this).attr('href'));
+            })
+        });
+
+    </script>
+}

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Consultas.Models.PagoWeb>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Concepto")
+        </th>
+        <th>
+            @Html.DisplayName("Vencimiento")
+        </th>
+        <th>
+            @Html.DisplayName("Fecha de Pago")
+        </th>
+        <th>
+            @Html.DisplayName("Importe de Cuota")
+        </th>
+        <th>
+            @Html.DisplayName("Beca")
+        </th>
+        <th>
+            @Html.DisplayName("Recargo")
+        </th>
+        <th>
+            @Html.DisplayName("Importe Pagado")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.NroCuota == 0)
+                {
+                    @:Matrícula
+                }
+                else
+                {
+                    @String.Format("Cuota Nº {0}", item.NroCuota)
+                }
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", item.FechaVto)
+            </td>
+            <td>
+                @if (item.Fecha != null)
+                {
+                    @String.Format("{0:dd/MM/yyyy}", item.Fecha)
+                }
+            </td>
+            <td>
+                @item.ImporteCuota.ToString("C2")
+            </td>
+            <td>
+                @{ (item.ImporteBeca??0).ToString("C2"); }  
+            </td>
+            <td>
+                @{ (item.ImporteRecargo ?? 0).ToString("C2"); }
+            </td>
+            <td>
+                @((item.ImportePagado ?? 0).ToString("C2"))
+                @item.ImportePagado
+            </td>
+        </tr>
+    }
+
+</table>

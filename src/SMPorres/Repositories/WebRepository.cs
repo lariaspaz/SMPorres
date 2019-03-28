@@ -24,9 +24,13 @@ namespace SMPorres.Repositories
                                 Contraseña = a.Contraseña
                             })
                             .ToList();
+                var cicloLectivo = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
                 foreach (var a in result)
                 {
-                    a.CursosAlumnos = (from ca in db.CursosAlumnos where ca.IdAlumno == a.Id select ca).ToList()
+                    a.CursosAlumnos = (from ca in db.CursosAlumnos
+                                       where ca.IdAlumno == a.Id &&
+                                                ca.CicloLectivo == cicloLectivo
+                                       select ca).ToList()
                                         .Select(ca => new CursoAlumno
                                         {
                                             Id = ca.Id,

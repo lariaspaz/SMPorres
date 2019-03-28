@@ -24,7 +24,24 @@ namespace Consultas.Controllers
 
         public ActionResult MostrarCursos(int idCarrera)
         {
-            return null;
+            var cursos = from c in new CursoAlumnoRepository().ObtenerCursos(idCarrera)
+                           select new SelectListItem { Text = c.Descripción, Value = c.Id.ToString() };
+            return PartialView(cursos);
+        }
+
+        public ActionResult MostrarCursosAlumno()
+        {            
+            return PartialView(new CursoAlumnoRepository().ObtenerCursosAlumno());
+        }
+
+        public ActionResult Consultar()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Details(int id)
+        {
+            return PartialView(new PagosRepository().ObtenerPagos(id));
         }
     }
 }

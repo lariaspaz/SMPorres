@@ -31,5 +31,13 @@ namespace Consultas.Repositories
             }
             db.SaveChanges();
         }
+
+        public IEnumerable<PagoWeb> ObtenerPagos(int idCursoAlumno)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.PagoWebs.Where(p => p.IdCursoAlumno == idCursoAlumno).ToList();
+            }
+        }
     }
 }

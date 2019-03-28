@@ -47,7 +47,7 @@ namespace Consultas.Repositories
             }
         }
 
-        public IEnumerable<Curso> ObtenerCarreras(int idCarrera)
+        public IEnumerable<Curso> ObtenerCursos(int idCarrera)
         {
             using (var db = new SMPorresEntities())
             {
@@ -59,6 +59,21 @@ namespace Consultas.Repositories
                             Descripción = ca.Curso
                         })
                         .Distinct()
+                        .ToList();
+            }
+        }
+
+        public IEnumerable<CursoAlumnoWeb> ObtenerCursosAlumno()
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return (from ca in db.CursoAlumnoWebs select new { ca.Id, ca.Carrera, ca.Curso }).Distinct().ToList()
+                        .Select(ca => new CursoAlumnoWeb
+                        {
+                            Id = ca.Id,
+                            Carrera = ca.Carrera,
+                            Curso = ca.Curso
+                        })
                         .ToList();
             }
         }
