@@ -220,7 +220,7 @@
             this.btnPagarCuota.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPagarCuota.Name = "btnPagarCuota";
             this.btnPagarCuota.Size = new System.Drawing.Size(23, 22);
-            this.btnPagarCuota.Text = "toolStripButton1";
+            this.btnPagarCuota.Text = "Pagar cuota";
             this.btnPagarCuota.Click += new System.EventHandler(this.btnPagarCuota_Click);
             // 
             // btnGenerarContraseñaWeb

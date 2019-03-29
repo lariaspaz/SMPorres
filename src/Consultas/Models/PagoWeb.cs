@@ -24,6 +24,8 @@ namespace Consultas.Models
         public Nullable<decimal> ImportePagado { get; set; }
         public Nullable<decimal> ImporteRecargo { get; set; }
         public Nullable<decimal> ImporteBeca { get; set; }
+        public Nullable<decimal> ImportePagoTermino { get; set; }
+        public Nullable<short> PorcentajeBeca { get; set; }
     
         public virtual CursoAlumnoWeb CursoAlumnoWeb { get; set; }
     }

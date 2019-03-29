@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtFechaVto = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtCurso = new System.Windows.Forms.TextBox();
@@ -56,8 +58,6 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -93,6 +93,22 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(340, 317);
             this.panel2.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(55, 274);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(66, 13);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "Descripción:";
+            // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Location = new System.Drawing.Point(127, 271);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(200, 20);
+            this.txtDescripcion.TabIndex = 17;
             // 
             // txtFechaVto
             // 
@@ -392,25 +408,8 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.Location = new System.Drawing.Point(127, 271);
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(200, 20);
-            this.txtDescripcion.TabIndex = 17;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(55, 274);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 13);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "Descripción:";
-            // 
             // frmPagarCuota
             // 
-            this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;

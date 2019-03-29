@@ -20,11 +20,6 @@ namespace Consultas.Web_Services
     // [System.Web.Script.Services.ScriptService]
     public class SMP : System.Web.Services.WebService
     {
-        //[WebMethod]
-        //public string HelloWorld()
-        //{
-        //    return "Hola a todos";
-        //}
 
         [WebMethod]
         public bool ActualizarDatos(Alumno alumno)

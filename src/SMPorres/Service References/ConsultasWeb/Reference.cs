@@ -316,6 +316,10 @@ namespace SMPorres.ConsultasWeb {
         
         private System.Nullable<decimal> ImporteBecaField;
         
+        private System.Nullable<decimal> ImportePagoTérminoField;
+        
+        private System.Nullable<short> PorcentajeBecaField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -439,6 +443,32 @@ namespace SMPorres.ConsultasWeb {
                 if ((this.ImporteBecaField.Equals(value) != true)) {
                     this.ImporteBecaField = value;
                     this.RaisePropertyChanged("ImporteBeca");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        public System.Nullable<decimal> ImportePagoTérmino {
+            get {
+                return this.ImportePagoTérminoField;
+            }
+            set {
+                if ((this.ImportePagoTérminoField.Equals(value) != true)) {
+                    this.ImportePagoTérminoField = value;
+                    this.RaisePropertyChanged("ImportePagoTérmino");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        public System.Nullable<short> PorcentajeBeca {
+            get {
+                return this.PorcentajeBecaField;
+            }
+            set {
+                if ((this.PorcentajeBecaField.Equals(value) != true)) {
+                    this.PorcentajeBecaField = value;
+                    this.RaisePropertyChanged("PorcentajeBeca");
                 }
             }
         }

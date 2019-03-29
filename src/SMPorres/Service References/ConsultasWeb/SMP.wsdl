@@ -52,6 +52,8 @@
           <s:element minOccurs="1" maxOccurs="1" name="ImportePagado" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="ImporteRecargo" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="ImporteBeca" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImportePagoTérmino" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PorcentajeBeca" nillable="true" type="s:short" />
         </s:sequence>
       </s:complexType>
       <s:element name="ActualizarDatosResponse">

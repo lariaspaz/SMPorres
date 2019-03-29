@@ -42,6 +42,8 @@
           <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" />
           <Property Name="ImporteRecargo" Type="numeric" Precision="18" Scale="2" />
           <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ImportePagoTermino" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcentajeBeca" Type="smallint" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="Self.AlumnosWeb" Multiplicity="1" />
@@ -125,6 +127,8 @@
           <Property Name="ImporteRecargo" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ImporteBeca" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="CursoAlumnoWeb" Relationship="Self.FK_PagosWeb_CursosAlumnos" FromRole="PagosWeb" ToRole="CursosAlumnosWeb" />
+          <Property Name="ImportePagoTermino" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeBeca" Type="Int16" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="SMPorres.AlumnoWeb" Multiplicity="1" />
@@ -197,6 +201,8 @@
           <EntitySetMapping Name="PagoWebs">
             <EntityTypeMapping TypeName="SMPorres.PagoWeb">
               <MappingFragment StoreEntitySet="PagosWeb">
+                <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
+                <ScalarProperty Name="ImportePagoTermino" ColumnName="ImportePagoTermino" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
                 <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />

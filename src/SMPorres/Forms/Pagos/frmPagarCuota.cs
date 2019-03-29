@@ -81,12 +81,14 @@ namespace SMPorres.Forms.Pagos
                     _pago.IdMedioPago = (int)cbMediosPago.SelectedValue;
                     _pago.Descripcion = txtDescripcion.Text.Trim();
                     PagosRepository.PagarCuota(_pago);
+                    MessageBox.Show("La cuota se pagó correctamente.", this.Text, MessageBoxButtons.OK, 
+                        MessageBoxIcon.Information);
+                    DialogResult = DialogResult.OK;
                 }
                 catch (Exception ex)
                 {
                     ShowError("No se pudo grabar el pago:\n", ex);
                 }
-                DialogResult = DialogResult.OK;
             }
         }
 

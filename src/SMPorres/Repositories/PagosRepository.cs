@@ -72,7 +72,7 @@ namespace SMPorres.Repositories
                              p.ImportePagado,
                              p.IdMedioPago,
                              MedioPago = mp,
-                             PorcBeca = (ba == null) ? default(double?) : ba.PorcBeca,
+                             PorcBeca = (ba == null) ? default(double?) : ba.PorcentajeBeca,
                              p.EsContrasiento,
                              p.Descripcion
                          })
@@ -136,7 +136,15 @@ namespace SMPorres.Repositories
                 return pago;
             }
 
-            var descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
+            var descBeca = (decimal)0;
+            if (pago.BecaAlumno == null)
+            {
+                descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
+            }
+            else
+            {
+                descBeca = (decimal)pago.BecaAlumno.PorcentajeBeca;
+            }
             decimal beca = 0;
             if (descBeca > 0)
             {
@@ -201,6 +209,7 @@ namespace SMPorres.Repositories
                 p.FechaGrabacion = Configuration.CurrentDate;
                 p.Descripcion = pago.Descripcion;
                 p.IdArchivo = pago.IdArchivo;
+                db.SaveChanges();
             }
             return true;
         }

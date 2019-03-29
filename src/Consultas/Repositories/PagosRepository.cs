@@ -23,8 +23,11 @@ namespace Consultas.Repositories
             p.ImporteCuota = pago.ImporteCuota;
             p.ImporteBeca = pago.ImporteBeca;
             p.ImporteRecargo = pago.ImporteRecargo;
+            p.ImportePagado = pago.ImportePagado;
             p.Fecha = (pago.Fecha == default(DateTime)) ? null : pago.Fecha;
             p.FechaVto = pago.FechaVto;
+            p.ImportePagoTermino = pago.ImportePagoTérmino;
+            p.PorcentajeBeca = pago.PorcentajeBeca;
             if (insertar)
             {
                 db.PagoWebs.Add(p);

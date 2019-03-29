@@ -412,7 +412,7 @@ namespace SMPorres.Forms.Alumnos
             var p = PagoSeleccionado;
             var cuota = String.Format("{0} | {1}", p.NroCuota, NombreCursoSeleccionado);
             var beca = p.BecaAlumno;
-            using (var f = new frmAsignarBeca(cuota, beca.PorcBeca))
+            using (var f = new frmAsignarBeca(cuota, beca.PorcentajeBeca))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {

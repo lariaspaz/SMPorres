@@ -22,7 +22,7 @@ namespace SMPorres.Models
     
         public int Id { get; set; }
         public int IdAlumno { get; set; }
-        public double PorcBeca { get; set; }
+        public Nullable<short> PorcentajeBeca { get; set; }
     
         public virtual Alumno Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

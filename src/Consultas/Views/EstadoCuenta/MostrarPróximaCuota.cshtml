@@ -1,0 +1,47 @@
+﻿@model Consultas.Models.PagoWeb
+
+@if (Model == null)
+{
+    <span>No hay cuotas pendientes de pago.</span>
+}
+else
+{
+    <div class="row mt-3">
+        <div class="col-sm">
+            Próxima Cuota: @((Model.NroCuota == 0) ? "Matrícula" : Model.NroCuota.ToString())
+        </div>
+        <div class="col-sm text-right">
+            Importe: @Model.ImporteCuota.ToString("C2")
+        </div>
+        <div class="col-sm-6">
+        </div>
+    </div>
+        @*@if (Model.ImportePagoTermino > 0)
+            {*@
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                Si paga hasta el <strong>@Model.FechaVto.ToString("dd/MM/yyyy")</strong>
+                tendrá una bonificación de <strong>@((Model.ImportePagoTermino ?? 0).ToString("C2"))</strong>.
+            </div>
+        </div>
+            @*}
+                @if (Model.PorcentajeBeca.HasValue)
+                {*@
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    Usted tiene una beca de <strong>%@Model.PorcentajeBeca.Value.ToString("0")</strong>
+                    equivalente a <strong>@((Model.ImporteBeca ?? 0).ToString("C2"))</strong>.
+                </div>
+            </div>
+            @*}
+                @if (Model.Vencido)
+                {*@
+            <div class="row mt-3">
+                <div class="col-sm-6">
+                    <div class="alert alert-danger" role="alert" style="padding: 0 1.25em; text-align: center;">
+                        Esta cuota se encuentra vencida.
+                    </div>
+                </div>
+            </div>
+            @*}*@
+}

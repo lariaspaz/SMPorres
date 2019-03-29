@@ -136,6 +136,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Configuration.cs" />
     <Compile Include="Models\AlumnoWeb.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
     </Compile>
@@ -162,6 +163,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\Carrera.cs" />
     <Compile Include="Models\ViewModels\Curso.cs" />
+    <Compile Include="Models\ViewModels\DetallePago.cs" />
     <Compile Include="Models\WebServices\Alumno.cs" />
     <Compile Include="Models\WebServices\CursoAlumno.cs" />
     <Compile Include="Models\WebServices\Pago.cs" />
@@ -216,6 +218,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Compile Include="Models\PagoWeb.Ext.cs" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -265,10 +268,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\EstadoCuenta\Index.cshtml" />
-    <Content Include="Views\EstadoCuenta\MostrarCarreras.cshtml" />
-    <Content Include="Views\EstadoCuenta\MostrarCursos.cshtml" />
-    <Content Include="Views\EstadoCuenta\Consultar.cshtml" />
-    <Content Include="Views\EstadoCuenta\MostrarCursosAlumno.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -279,6 +278,9 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\EstadoCuenta\Details.cshtml" />
+    <Content Include="Views\EstadoCuenta\ListarPagos.cshtml" />
+    <Content Include="Views\EstadoCuenta\MostrarCursosAlumno.cshtml" />
+    <Content Include="Views\EstadoCuenta\MostrarPróximaCuota.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

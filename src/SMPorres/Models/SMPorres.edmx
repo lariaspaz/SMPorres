@@ -36,7 +36,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdAlumno" Type="int" Nullable="false" />
-          <Property Name="PorcBeca" Type="float" Nullable="false" />
+          <Property Name="PorcentajeBeca" Type="smallint" />
         </EntityType>
         <EntityType Name="CabecerasArchivos">
           <Key>
@@ -1520,9 +1520,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdAlumno" Type="Int32" Nullable="false" />
-          <Property Name="PorcBeca" Type="Double" Nullable="false" />
           <NavigationProperty Name="Alumno" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" FromRole="BecasAlumno" ToRole="Alumno" />
           <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_BecasAlumnos" FromRole="BecasAlumno" ToRole="Pago" />
+          <Property Name="PorcentajeBeca" Type="Int16" />
         </EntityType>
         <Association Name="FK_BecasAlumnos_Alumnos">
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
@@ -1874,7 +1874,7 @@
           <EntitySetMapping Name="BecasAlumnos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.BecaAlumno">
               <MappingFragment StoreEntitySet="BecasAlumnos">
-                <ScalarProperty Name="PorcBeca" ColumnName="PorcBeca" />
+                <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

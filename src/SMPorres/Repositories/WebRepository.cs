@@ -48,40 +48,53 @@ namespace SMPorres.Repositories
 
         private Pago[] ObtenerPagos(Models.SMPorresEntities db, int idAlumno, int idCurso)
         {
-            return  (from pp in db.PlanesPago
-                     join p in db.Pagos on pp.Id equals p.IdPlanPago
-                     join c in db.Cuotas on p.NroCuota equals c.NroCuota into pc
-                     from c in pc.DefaultIfEmpty()
-                     join ca in db.CursosAlumnos on new { pp.IdAlumno, pp.IdCurso } equals new { ca.IdAlumno, ca.IdCurso } into ca2
-                     where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso //&& p.Fecha != null
-                     select new
-                     {
-                        p.Id,
-                        p.IdPlanPago,
-                        p.NroCuota,
-                        Cuota = c,
-                        CursoAlumno = ca2.FirstOrDefault(),
-                        p.Fecha,
-                        p.ImporteCuota,
-                        p.ImporteBeca,
-                        p.ImporteRecargo,
-                        p.ImportePagado
-                     })
-                     .ToList()
-                     .Select(
-                     p => new Pago
-                     {
-                         Id = p.Id,
-                         IdPlanPago = p.IdPlanPago,
-                         NroCuota = p.NroCuota,
-                         FechaVto = (p.Cuota == null) ? new DateTime(p.CursoAlumno.CicloLectivo, 12, 31) : p.Cuota.VtoCuota,
-                         Fecha = p.Fecha ?? default(DateTime),
-                         ImporteCuota = p.ImporteCuota,
-                         ImporteBeca = p.ImporteBeca ?? 0,
-                         ImporteRecargo = p.ImporteRecargo ?? 0,
-                         ImportePagado = p.ImportePagado ?? 0
-                     })
-                     .ToArray();
+            var query = (from pp in db.PlanesPago
+                         join p in db.Pagos on pp.Id equals p.IdPlanPago
+                         join c in db.Cuotas on p.NroCuota equals c.NroCuota into pc
+                         from c in pc.DefaultIfEmpty()
+                         join ca in db.CursosAlumnos on new { pp.IdAlumno, pp.IdCurso } equals new { ca.IdAlumno, ca.IdCurso } into ca2
+                         where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso //&& p.Fecha != null
+                         select new
+                         {
+                             p.Id,
+                             p.IdPlanPago,
+                             p.NroCuota,
+                             Cuota = c,
+                             CursoAlumno = ca2.FirstOrDefault(),
+                             p.Fecha,
+                             p.ImporteCuota,
+                             p.ImporteBeca,
+                             p.ImporteRecargo,
+                             p.ImportePagado
+                         })
+                         .ToList()
+                         .Select(
+                            p => new Pago
+                            {
+                                Id = p.Id,
+                                IdPlanPago = p.IdPlanPago,
+                                NroCuota = p.NroCuota,
+                                FechaVto = (p.Cuota == null) ? new DateTime(p.CursoAlumno.CicloLectivo, 12, 31) : p.Cuota.VtoCuota,
+                                Fecha = p.Fecha ?? default(DateTime),
+                                ImporteCuota = p.ImporteCuota,
+                                ImporteBeca = p.ImporteBeca ?? 0,
+                                ImporteRecargo = p.ImporteRecargo ?? 0,
+                                ImportePagado = p.ImportePagado ?? 0
+                            })
+                         .ToArray();
+
+            foreach (var p in query)
+            {
+                if (p.Fecha == default(DateTime))
+                {
+                    var pago = PagosRepository.ObtenerDetallePago(p.Id, p.FechaVto);
+                    p.ImportePagoTérmino = pago.ImportePagoTermino;
+                    p.PorcentajeBeca = (short)Math.Round(pago.PorcBeca ?? 0 * 100);
+                    p.ImporteBeca = pago.ImporteBeca;
+                }
+            }
+
+            return query;
         }
     }
 }

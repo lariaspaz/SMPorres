@@ -77,5 +77,13 @@ namespace Consultas.Repositories
                         .ToList();
             }
         }
+
+        public CursoAlumnoWeb ObtenerCursoAlumnoPorId(int id)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.CursoAlumnoWebs.Find(id);
+            }
+        }
     }
 }
