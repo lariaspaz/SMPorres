@@ -51,7 +51,7 @@ namespace Consultas.Controllers
                         };
 
                         string userData = JsonConvert.SerializeObject(userModel);
-                        FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, loginView.UserName, 
+                        FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, loginView.UserName,
                             DateTime.Now, DateTime.Now.AddMinutes(30), false, userData);
 
                         string enTicket = FormsAuthentication.Encrypt(authTicket);

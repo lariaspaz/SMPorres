@@ -9,6 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+@if (User.Identity.IsAuthenticated)
+{
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
@@ -26,6 +28,7 @@
                 </div>
             </div>
         </nav>
+}
 
         <div class="container body-content">
             @RenderBody()
