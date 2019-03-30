@@ -10,6 +10,8 @@
         <EntityTypeShape EntityType="SMPorres.PagoWeb" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="SMPorres.FK_CursosAlumnosWeb_AlumnosWeb" ManuallyRouted="false" />
         <AssociationConnector Association="SMPorres.FK_PagosWeb_CursosAlumnos" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SMPorres.RolUsuarioWeb" Width="1.5" PointX="0.75" PointY="5.125" />
+        <AssociationConnector Association="SMPorres.FK_AlumnosWeb_RolesUsuariosWeb" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

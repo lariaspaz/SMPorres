@@ -16,6 +16,7 @@
           <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
           <Property Name="Contraseña" Type="varchar" MaxLength="255" />
+          <Property Name="IdRolUsuarioWeb" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CursosAlumnosWeb">
           <Key>
@@ -45,6 +46,25 @@
           <Property Name="ImportePagoTermino" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PorcentajeBeca" Type="smallint" />
         </EntityType>
+        <EntityType Name="RolesUsuariosWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AlumnosWeb_RolesUsuariosWeb">
+          <End Role="RolesUsuariosWeb" Type="Self.RolesUsuariosWeb" Multiplicity="1" />
+          <End Role="AlumnosWeb" Type="Self.AlumnosWeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesUsuariosWeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlumnosWeb">
+              <PropertyRef Name="IdRolUsuarioWeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="Self.AlumnosWeb" Multiplicity="1" />
           <End Role="CursosAlumnosWeb" Type="Self.CursosAlumnosWeb" Multiplicity="*" />
@@ -73,6 +93,11 @@
           <EntitySet Name="AlumnosWeb" EntityType="Self.AlumnosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CursosAlumnosWeb" EntityType="Self.CursosAlumnosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PagosWeb" EntityType="Self.PagosWeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolesUsuariosWeb" EntityType="Self.RolesUsuariosWeb" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AlumnosWeb_RolesUsuariosWeb" Association="Self.FK_AlumnosWeb_RolesUsuariosWeb">
+            <End Role="RolesUsuariosWeb" EntitySet="RolesUsuariosWeb" />
+            <End Role="AlumnosWeb" EntitySet="AlumnosWeb" />
+          </AssociationSet>
           <AssociationSet Name="FK_CursosAlumnosWeb_AlumnosWeb" Association="Self.FK_CursosAlumnosWeb_AlumnosWeb">
             <End Role="AlumnosWeb" EntitySet="AlumnosWeb" />
             <End Role="CursosAlumnosWeb" EntitySet="CursosAlumnosWeb" />
@@ -98,6 +123,8 @@
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CursosAlumnosWebs" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="AlumnosWeb" ToRole="CursosAlumnosWeb" />
+          <Property Name="IdRolUsuarioWeb" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RolUsuarioWeb" Relationship="SMPorres.FK_AlumnosWeb_RolesUsuariosWeb" FromRole="AlumnoWeb" ToRole="RolesUsuariosWeb" />
         </EntityType>
         <EntityType Name="CursoAlumnoWeb">
           <Key>
@@ -166,7 +193,32 @@
             <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
             <End Role="PagosWeb" EntitySet="PagoWebs" />
           </AssociationSet>
+          <EntitySet Name="RolUsuarioWebs" EntityType="SMPorres.RolUsuarioWeb" />
+          <AssociationSet Name="FK_AlumnosWeb_RolesUsuariosWeb" Association="SMPorres.FK_AlumnosWeb_RolesUsuariosWeb">
+            <End Role="RolesUsuariosWeb" EntitySet="RolUsuarioWebs" />
+            <End Role="AlumnoWeb" EntitySet="AlumnoWebs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="RolUsuarioWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AlumnosWeb" Relationship="SMPorres.FK_AlumnosWeb_RolesUsuariosWeb" FromRole="RolesUsuariosWeb" ToRole="AlumnoWeb" />
+        </EntityType>
+        <Association Name="FK_AlumnosWeb_RolesUsuariosWeb">
+          <End Type="SMPorres.RolUsuarioWeb" Role="RolesUsuariosWeb" Multiplicity="1" />
+          <End Type="SMPorres.AlumnoWeb" Role="AlumnoWeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesUsuariosWeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlumnoWeb">
+              <PropertyRef Name="IdRolUsuarioWeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -176,6 +228,7 @@
           <EntitySetMapping Name="AlumnoWebs">
             <EntityTypeMapping TypeName="SMPorres.AlumnoWeb">
               <MappingFragment StoreEntitySet="AlumnosWeb">
+                <ScalarProperty Name="IdRolUsuarioWeb" ColumnName="IdRolUsuarioWeb" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
@@ -213,6 +266,14 @@
                 <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
                 <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />
                 <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolUsuarioWebs">
+            <EntityTypeMapping TypeName="SMPorres.RolUsuarioWeb">
+              <MappingFragment StoreEntitySet="RolesUsuariosWeb">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

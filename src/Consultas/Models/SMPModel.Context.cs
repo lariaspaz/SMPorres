@@ -28,5 +28,6 @@ namespace Consultas.Models
         public virtual DbSet<AlumnoWeb> AlumnoWebs { get; set; }
         public virtual DbSet<CursoAlumnoWeb> CursoAlumnoWebs { get; set; }
         public virtual DbSet<PagoWeb> PagoWebs { get; set; }
+        public virtual DbSet<RolUsuarioWeb> RolUsuarioWebs { get; set; }
     }
 }

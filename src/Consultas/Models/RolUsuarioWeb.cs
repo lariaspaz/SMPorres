@@ -12,25 +12,18 @@ namespace Consultas.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AlumnoWeb
+    public partial class RolUsuarioWeb
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AlumnoWeb()
+        public RolUsuarioWeb()
         {
-            this.CursosAlumnosWebs = new HashSet<CursoAlumnoWeb>();
+            this.AlumnosWeb = new HashSet<AlumnoWeb>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string TipoDocumento { get; set; }
-        public decimal NroDocumento { get; set; }
-        public byte Estado { get; set; }
-        public string Contraseña { get; set; }
-        public int IdRolUsuarioWeb { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CursoAlumnoWeb> CursosAlumnosWebs { get; set; }
-        public virtual RolUsuarioWeb RolUsuarioWeb { get; set; }
+        public virtual ICollection<AlumnoWeb> AlumnosWeb { get; set; }
     }
 }

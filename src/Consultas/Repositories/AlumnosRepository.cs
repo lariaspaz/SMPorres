@@ -65,5 +65,35 @@ namespace Consultas.Repositories
                 return true;
             }
         }
+
+        public bool ExisteAlumno(int nrodoc, string contraseña)
+        {
+            string hashpwd = "";
+            using (var alg = System.Security.Cryptography.SHA512.Create())
+            {
+                alg.ComputeHash(System.Text.Encoding.UTF8.GetBytes(contraseña));
+                hashpwd = BitConverter.ToString(alg.Hash);
+            }
+
+            using (var db = new SMPorresEntities())
+            {
+                return (from a in db.AlumnoWebs
+                            where nrodoc == a.NroDocumento && hashpwd == a.Contraseña
+                            select a).Any();
+            }
+        }
+
+        public AlumnoWeb ObtenerAlumno(int nrodoc)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var alumno = (from a in db.AlumnoWebs where nrodoc == a.NroDocumento select a).FirstOrDefault();
+                if (alumno != null)
+                {
+                    db.Entry(alumno).Reference(r => r.RolUsuarioWeb).Load();
+                }
+                return alumno;
+            }
+        }
     }
 }

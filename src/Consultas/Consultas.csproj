@@ -131,19 +131,30 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EstadoCuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Lib\Configuration.cs" />
+    <Compile Include="Lib\Security\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Lib\Security\CustomMembership.cs" />
+    <Compile Include="Lib\Security\CustomMembershipUser.cs" />
+    <Compile Include="Lib\Security\CustomPrincipal.cs" />
     <Compile Include="Models\AlumnoWeb.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CursoAlumnoWeb.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomSerializeModel.cs" />
+    <Compile Include="Models\LoginView.cs" />
     <Compile Include="Models\PagoWeb.cs">
+      <DependentUpon>SMPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RolUsuarioWeb.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SMPModel.Context.cs">
@@ -253,7 +264,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -281,6 +294,8 @@
     <Content Include="Views\EstadoCuenta\ListarPagos.cshtml" />
     <Content Include="Views\EstadoCuenta\MostrarCursosAlumno.cshtml" />
     <Content Include="Views\EstadoCuenta\MostrarPróximaCuota.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

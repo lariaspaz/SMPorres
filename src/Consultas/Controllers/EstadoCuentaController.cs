@@ -1,4 +1,5 @@
-﻿using Consultas.Models.ViewModels;
+﻿using Consultas.CustomAuthentication;
+using Consultas.Models.ViewModels;
 using Consultas.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Consultas.Controllers
 {
+    [CustomAuthorize]
     public class EstadoCuentaController : Controller
     {
         // GET: EstadoCuenta
