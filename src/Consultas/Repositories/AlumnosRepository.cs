@@ -15,7 +15,7 @@ namespace Consultas.Repositories
                 var trx = db.Database.BeginTransaction();
                 try
                 {
-                    var a = db.AlumnoWebs.Find(alumno.Id);
+                    var a = db.AlumnosWeb.Find(alumno.Id);
                     bool insertar = a == null;
                     if (insertar)
                     {
@@ -30,11 +30,11 @@ namespace Consultas.Repositories
                     a.Contraseña = alumno.Contraseña;
                     if (insertar)
                     {
-                        db.AlumnoWebs.Add(a);
+                        db.AlumnosWeb.Add(a);
                     }
                     db.SaveChanges();
 
-                    var caRepo = new CursoAlumnoRepository();
+                    var caRepo = new CursosAlumnosRepository();
                     var pagosRepo = new PagosRepository();
                     foreach (var ca in alumno.CursosAlumnos)
                     {
@@ -58,7 +58,7 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var a = db.AlumnoWebs.Find(idAlumno);
+                var a = db.AlumnosWeb.Find(idAlumno);
                 if (a == null) return false;
                 a.Contraseña = pwd;
                 db.SaveChanges();
@@ -77,7 +77,7 @@ namespace Consultas.Repositories
 
             using (var db = new SMPorresEntities())
             {
-                return (from a in db.AlumnoWebs
+                return (from a in db.AlumnosWeb
                             where nrodoc == a.NroDocumento && hashpwd == a.Contraseña
                             select a).Any();
             }
@@ -87,7 +87,7 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var alumno = (from a in db.AlumnoWebs where nrodoc == a.NroDocumento select a).FirstOrDefault();
+                var alumno = (from a in db.AlumnosWeb where nrodoc == a.NroDocumento select a).FirstOrDefault();
                 if (alumno != null)
                 {
                     db.Entry(alumno).Reference(r => r.RolUsuarioWeb).Load();

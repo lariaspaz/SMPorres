@@ -182,21 +182,21 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SMPorresEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AlumnoWebs" EntityType="SMPorres.AlumnoWeb" />
-          <EntitySet Name="CursoAlumnoWebs" EntityType="SMPorres.CursoAlumnoWeb" />
-          <EntitySet Name="PagoWebs" EntityType="SMPorres.PagoWeb" />
+          <EntitySet Name="AlumnosWeb" EntityType="SMPorres.AlumnoWeb" />
+          <EntitySet Name="CursosAlumnosWeb" EntityType="SMPorres.CursoAlumnoWeb" />
+          <EntitySet Name="PagosWeb" EntityType="SMPorres.PagoWeb" />
           <AssociationSet Name="FK_CursosAlumnosWeb_AlumnosWeb" Association="Self.FK_CursosAlumnosWeb_AlumnosWeb">
-            <End Role="AlumnosWeb" EntitySet="AlumnoWebs" />
-            <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
+            <End Role="AlumnosWeb" EntitySet="AlumnosWeb" />
+            <End Role="CursosAlumnosWeb" EntitySet="CursosAlumnosWeb" />
           </AssociationSet>
           <AssociationSet Name="FK_PagosWeb_CursosAlumnos" Association="Self.FK_PagosWeb_CursosAlumnos">
-            <End Role="CursosAlumnosWeb" EntitySet="CursoAlumnoWebs" />
-            <End Role="PagosWeb" EntitySet="PagoWebs" />
+            <End Role="CursosAlumnosWeb" EntitySet="CursosAlumnosWeb" />
+            <End Role="PagosWeb" EntitySet="PagosWeb" />
           </AssociationSet>
-          <EntitySet Name="RolUsuarioWebs" EntityType="SMPorres.RolUsuarioWeb" />
+          <EntitySet Name="RolesUsuariosWeb" EntityType="SMPorres.RolUsuarioWeb" />
           <AssociationSet Name="FK_AlumnosWeb_RolesUsuariosWeb" Association="SMPorres.FK_AlumnosWeb_RolesUsuariosWeb">
-            <End Role="RolesUsuariosWeb" EntitySet="RolUsuarioWebs" />
-            <End Role="AlumnoWeb" EntitySet="AlumnoWebs" />
+            <End Role="RolesUsuariosWeb" EntitySet="RolesUsuariosWeb" />
+            <End Role="AlumnoWeb" EntitySet="AlumnosWeb" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="RolUsuarioWeb">
@@ -225,7 +225,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SMPorresStoreContainer" CdmEntityContainer="SMPorresEntities">
-          <EntitySetMapping Name="AlumnoWebs">
+          <EntitySetMapping Name="AlumnosWeb">
             <EntityTypeMapping TypeName="SMPorres.AlumnoWeb">
               <MappingFragment StoreEntitySet="AlumnosWeb">
                 <ScalarProperty Name="IdRolUsuarioWeb" ColumnName="IdRolUsuarioWeb" />
@@ -239,7 +239,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CursoAlumnoWebs">
+          <EntitySetMapping Name="CursosAlumnosWeb">
             <EntityTypeMapping TypeName="SMPorres.CursoAlumnoWeb">
               <MappingFragment StoreEntitySet="CursosAlumnosWeb">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -251,7 +251,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PagoWebs">
+          <EntitySetMapping Name="PagosWeb">
             <EntityTypeMapping TypeName="SMPorres.PagoWeb">
               <MappingFragment StoreEntitySet="PagosWeb">
                 <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
@@ -269,7 +269,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RolUsuarioWebs">
+          <EntitySetMapping Name="RolesUsuariosWeb">
             <EntityTypeMapping TypeName="SMPorres.RolUsuarioWeb">
               <MappingFragment StoreEntitySet="RolesUsuariosWeb">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />

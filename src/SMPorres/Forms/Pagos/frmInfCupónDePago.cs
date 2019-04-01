@@ -90,7 +90,7 @@ namespace SMPorres.Forms.Pagos
             var documento = pago.PlanPago.Alumno.NroDocumento.ToString("N0");
             var curso = pago.PlanPago.Curso.Nombre;
             var carrera = pago.PlanPago.Curso.Carrera.Nombre;
-            var fechaCompromiso = dtFechaPago.Value;
+            var fechaCompromiso = dtFechaPago.Value.Date;
 
             if (ckTodas.Checked)
             {
@@ -152,7 +152,7 @@ namespace SMPorres.Forms.Pagos
             else
             {
                 importe = p.ImporteRecargo.Value.ToString("$ 0,0.00");
-                concepto = "Recargo por mora";
+                concepto = String.Format("Recargo por mora - Vencida el {0:dd/MM/yyyy}", p.FechaVto);
                 cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
                     carrera, curso, "", "", "3", concepto, importe);
             }

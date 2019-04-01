@@ -10,7 +10,7 @@ namespace Consultas.Repositories
     {
         public void Actualizar(SMPorresEntities db, int idCursoAlumno, Models.WebServices.Pago pago)
         {
-            var p = db.PagoWebs.Find(pago.Id);
+            var p = db.PagosWeb.Find(pago.Id);
             bool insertar = p == null;
             if (insertar)
             {
@@ -30,7 +30,7 @@ namespace Consultas.Repositories
             p.PorcentajeBeca = pago.PorcentajeBeca;
             if (insertar)
             {
-                db.PagoWebs.Add(p);
+                db.PagosWeb.Add(p);
             }
             db.SaveChanges();
         }
@@ -39,7 +39,30 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                return db.PagoWebs.Where(p => p.IdCursoAlumno == idCursoAlumno).ToList();
+                return db.PagosWeb.Where(p => p.IdCursoAlumno == idCursoAlumno).ToList();
+            }
+        }
+
+        public int ObtenerIdPrimeraCuotaImpaga()
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p2 = (from p in db.PagosWeb select p).FirstOrDefault();
+                return (p2 == null) ? 0 : p2.Id;
+            }
+        }
+
+        public PagoWeb ObtenerPago(int idPago)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p = db.PagosWeb.Find(idPago);
+                if (p != null)
+                {
+                    db.Entry(p).Reference(p1 => p1.CursoAlumnoWeb).Load();
+                    db.Entry(p.CursoAlumnoWeb).Reference(ca => ca.AlumnoWeb).Load();
+                }
+                return p;
             }
         }
     }

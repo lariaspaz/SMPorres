@@ -25,9 +25,9 @@ namespace Consultas.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AlumnoWeb> AlumnoWebs { get; set; }
-        public virtual DbSet<CursoAlumnoWeb> CursoAlumnoWebs { get; set; }
-        public virtual DbSet<PagoWeb> PagoWebs { get; set; }
-        public virtual DbSet<RolUsuarioWeb> RolUsuarioWebs { get; set; }
+        public virtual DbSet<AlumnoWeb> AlumnosWeb { get; set; }
+        public virtual DbSet<CursoAlumnoWeb> CursosAlumnosWeb { get; set; }
+        public virtual DbSet<PagoWeb> PagosWeb { get; set; }
+        public virtual DbSet<RolUsuarioWeb> RolesUsuariosWeb { get; set; }
     }
 }
