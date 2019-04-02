@@ -1,4 +1,6 @@
-﻿using Consultas.Models;
+﻿using Consultas.Lib;
+using Consultas.Lib.Security;
+using Consultas.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +41,11 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                return db.PagosWeb.Where(p => p.IdCursoAlumno == idCursoAlumno).ToList();
+                var qry = from p in db.PagosWeb
+                          where p.IdCursoAlumno == idCursoAlumno &&
+                                  p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId
+                          select p;
+                return qry.ToList();
             }
         }
 
@@ -47,7 +53,10 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var p2 = (from p in db.PagosWeb select p).FirstOrDefault();
+                var p2 = (from p in db.PagosWeb
+                          where p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId &&
+                                p.Fecha == null
+                          select p).FirstOrDefault();
                 return (p2 == null) ? 0 : p2.Id;
             }
         }
@@ -64,6 +73,35 @@ namespace Consultas.Repositories
                 }
                 return p;
             }
+        }
+
+        public PagoWeb ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
+        {
+            var pago = new PagosRepository().ObtenerPago(idPago);
+
+            pago.ImporteRecargo = 0;
+            pago.ImportePagado = pago.ImporteCuota;
+
+            var totalAPagar = (decimal)0;
+            if (fechaCompromiso <= pago.FechaVto)
+            {
+                totalAPagar = pago.ImporteCuota - pago.ImporteBeca - pago.ImportePagoTermino ?? 0;
+            }
+            else
+            {
+                var porcRecargo = (new ConfiguracionRepository().ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
+                var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto).TotalDays);
+                var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
+                var impBecado = pago.ImporteCuota - pago.ImporteBeca ?? 0;
+                var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+
+                totalAPagar = pago.ImporteCuota - (pago.ImporteBeca ?? 0) + recargoPorMora;
+
+                pago.ImporteRecargo = recargoPorMora;
+            }
+
+            pago.ImportePagado = totalAPagar;
+            return pago;
         }
     }
 }

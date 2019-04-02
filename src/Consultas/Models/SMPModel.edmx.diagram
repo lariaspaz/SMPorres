@@ -12,6 +12,7 @@
         <AssociationConnector Association="SMPorres.FK_PagosWeb_CursosAlumnos" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SMPorres.RolUsuarioWeb" Width="1.5" PointX="0.75" PointY="5.125" />
         <AssociationConnector Association="SMPorres.FK_AlumnosWeb_RolesUsuariosWeb" />
+        <EntityTypeShape EntityType="SMPorres.ConfiguracionWeb" Width="1.5" PointX="3" PointY="5.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

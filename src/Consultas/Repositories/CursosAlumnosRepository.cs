@@ -1,4 +1,5 @@
-﻿using Consultas.Models;
+﻿using Consultas.Lib;
+using Consultas.Models;
 using Consultas.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -67,7 +68,14 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                return (from ca in db.CursosAlumnosWeb select new { ca.Id, ca.Carrera, ca.Curso }).Distinct().ToList()
+                return (from ca in db.CursosAlumnosWeb
+                        where ca.AlumnoWeb.Id == Session.CurrentUserId
+                        select new {
+                            ca.Id,
+                            ca.Carrera,
+                            ca.Curso })
+                        .Distinct()
+                        .ToList()
                         .Select(ca => new CursoAlumnoWeb
                         {
                             Id = ca.Id,

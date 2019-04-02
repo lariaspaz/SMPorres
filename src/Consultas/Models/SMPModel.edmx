@@ -18,6 +18,13 @@
           <Property Name="Contraseña" Type="varchar" MaxLength="255" />
           <Property Name="IdRolUsuarioWeb" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ConfiguracionWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InteresPorMora" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="CursosAlumnosWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -91,6 +98,7 @@
         </Association>
         <EntityContainer Name="SMPorresStoreContainer">
           <EntitySet Name="AlumnosWeb" EntityType="Self.AlumnosWeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfiguracionWeb" EntityType="Self.ConfiguracionWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CursosAlumnosWeb" EntityType="Self.CursosAlumnosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PagosWeb" EntityType="Self.PagosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesUsuariosWeb" EntityType="Self.RolesUsuariosWeb" Schema="dbo" store:Type="Tables" />
@@ -198,6 +206,7 @@
             <End Role="RolesUsuariosWeb" EntitySet="RolesUsuariosWeb" />
             <End Role="AlumnoWeb" EntitySet="AlumnosWeb" />
           </AssociationSet>
+          <EntitySet Name="ConfiguracionesWeb" EntityType="SMPorres.ConfiguracionWeb" />
         </EntityContainer>
         <EntityType Name="RolUsuarioWeb">
           <Key>
@@ -219,6 +228,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ConfiguracionWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InteresPorMora" Type="Double" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -273,6 +289,14 @@
             <EntityTypeMapping TypeName="SMPorres.RolUsuarioWeb">
               <MappingFragment StoreEntitySet="RolesUsuariosWeb">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfiguracionesWeb">
+            <EntityTypeMapping TypeName="SMPorres.ConfiguracionWeb">
+              <MappingFragment StoreEntitySet="ConfiguracionWeb">
+                <ScalarProperty Name="InteresPorMora" ColumnName="InteresPorMora" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

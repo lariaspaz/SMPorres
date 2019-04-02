@@ -147,7 +147,11 @@
     <Compile Include="Lib\Security\CustomMembership.cs" />
     <Compile Include="Lib\Security\CustomMembershipUser.cs" />
     <Compile Include="Lib\Security\CustomPrincipal.cs" />
+    <Compile Include="Lib\Session.cs" />
     <Compile Include="Models\AlumnoWeb.cs">
+      <DependentUpon>SMPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConfiguracionWeb.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CursoAlumnoWeb.cs">
@@ -198,6 +202,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Repositories\AlumnosRepository.cs" />
+    <Compile Include="Repositories\ConfiguracionRepository.cs" />
     <Compile Include="Repositories\CuponPagoRepository.cs" />
     <Compile Include="Repositories\CursosAlumnosRepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />

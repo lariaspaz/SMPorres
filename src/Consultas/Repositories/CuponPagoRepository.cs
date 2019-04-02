@@ -12,10 +12,11 @@ namespace Consultas.Repositories
         public DataTable ObtenerDatos(bool todas, int idPago, DateTime fechaCompromiso)
         {
             var cupón = new dsConsultas.CupónPagoDataTable();
-            var idPagoStr = String.Format("{0:0000000}", 0);
+            var idPagoStr = String.Format("{0:0000000}", idPago);
             var fechaEmisión = String.Format("{0:dd/MM/yyyy}", Lib.Configuration.CurrentDate);
             var fechaVencimiento = String.Format("{0:dd/MM/yyyy}", fechaCompromiso);
-            var pago = new PagosRepository().ObtenerPago(idPago);
+            //var pago = new PagosRepository().ObtenerPago(idPago);
+            var pago = new PagosRepository().ObtenerDetallePago(idPago, fechaCompromiso);
             var nombre = String.Format("{0} {1}", pago.CursoAlumnoWeb.AlumnoWeb.Nombre, pago.CursoAlumnoWeb.AlumnoWeb.Apellido);
             var tipoDocumento = pago.CursoAlumnoWeb.AlumnoWeb.TipoDocumento;
             var documento = pago.CursoAlumnoWeb.AlumnoWeb.NroDocumento.ToString("N0");
@@ -43,7 +44,7 @@ namespace Consultas.Repositories
             string fechaVencimiento, string nombre, string tipoDocumento, string documento, string curso, string carrera,
             DateTime fechaCompromiso, PagoWeb pago)
         {
-            return null;
+            throw new NotImplementedException();
 
             //var pagos = PagosRepository.ObtenerPagos(pago.IdPlanPago).Where(p => p.Fecha == null && p.NroCuota > 0);
             //var min = pagos.Min(p => p.NroCuota);
