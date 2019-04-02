@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace SMPorres.Forms.Web
             try
             {
                 lblAcción.Text = "Conectando a la web";
-                var cliente = new ConsultasWeb.SMPSoapClient();
+                ConsultasWeb.SMPSoapClient cliente = CrearCliente();
                 var repo = new Repositories.WebRepository();
                 lblAcción.Text = "Obteniendo datos";
                 var datos = repo.ObtenerDatos();
@@ -81,6 +82,18 @@ namespace SMPorres.Forms.Web
             lblAcción.Text = "Fin del proceso";
             btnIniciarProceso.Image = Properties.Resources.control_play_blue;
             _stop = true;
+        }
+
+        private static ConsultasWeb.SMPSoapClient CrearCliente()
+        {
+            //Specify the binding to be used for the client.
+            BasicHttpBinding binding = new BasicHttpBinding();
+
+            //Specify the address to be used for the client.
+            EndpointAddress address =
+               new EndpointAddress(Repositories.ConfiguracionRepository.ObtenerConfiguracion().EndpointAddress);
+
+            return new ConsultasWeb.SMPSoapClient(binding, address);
         }
     }
 }

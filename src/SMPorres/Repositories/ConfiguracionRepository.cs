@@ -19,7 +19,8 @@ namespace SMPorres.Repositories
                                         Id = c.Id,
                                         DescuentoPagoTermino = c.DescuentoPagoTermino,
                                         InteresPorMora = c.InteresPorMora,
-                                        CicloLectivo = c.CicloLectivo
+                                        CicloLectivo = c.CicloLectivo,
+                                        EndpointAddress = c.EndpointAddress
                                     }
                                 );
                 if (conf.Any())
