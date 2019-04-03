@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Consultas.Models.CursoAlumnoWeb>
+
 @{
     ViewBag.Title = "Estado de cuenta";
 }
@@ -15,7 +16,7 @@
         </div>
     </div>
 </div>
-     
+
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
@@ -24,7 +25,9 @@
                 $('#datos').load($(this).attr('href'));
                 $(this).parent().find('a.active').removeClass('active');
                 $(this).addClass('active');
-            })
+            });
+
+            $('#exampleModalCenter').modal(options);
         });
     </script>
 }
