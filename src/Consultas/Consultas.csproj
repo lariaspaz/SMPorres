@@ -136,7 +136,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\EstadoCuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +218,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\logo.jpg" />
+    <Content Include="Content\user.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -313,10 +313,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\EstadoCuenta\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -326,10 +323,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\EstadoCuenta\Details.cshtml" />
-    <Content Include="Views\EstadoCuenta\ListarPagos.cshtml" />
-    <Content Include="Views\EstadoCuenta\MostrarCursosAlumno.cshtml" />
-    <Content Include="Views\EstadoCuenta\MostrarPróximaCuota.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\ListarPagos.cshtml" />
+    <Content Include="Views\Home\MostrarCursosAlumno.cshtml" />
+    <Content Include="Views\Home\MostrarPróximaCuota.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
   </ItemGroup>

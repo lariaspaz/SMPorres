@@ -1,45 +1,57 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
 </head>
-<body>
-@if (User.Identity.IsAuthenticated)
-{
-        <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav mr-auto">
-                        <li>@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Acerca de", "About", "Home", null, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Cerrar sesión", "LogOut", "Account", null, new { @class = "nav-link" })</li>
-                    </ul>
-                </div>
+<body @(User.Identity.IsAuthenticated?"":"class=\"bg-light\"")>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" style="border-bottom: 1px solid brown;">
+            <a class="navbar-brand font-weight-bolder" href="#">
+                <img src="~/Content/logo.jpg" width="48" height="48" class="d-inline-block align-top rounded" alt="">
+                <h2 class="d-inline ml-1">Instituto San Martín de Porres</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/Content/user.jpg" alt="" style="margin-bottom: 4px;" />
+                            @String.Format("{0} {1}", Consultas.Lib.Session.CurrentUser.FirstName,
+                                Consultas.Lib.Session.CurrentUser.LastName)
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Cambiar contraseña</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="@Url.Action("Logout", "Account")" class="dropdown-item">
+                                <span class="glyphicon glyphicon-log-out"></span> Cerrar sesión
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>
-}
+    }
 
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-            </footer>
-        </div>
+    <div class="container-fluid h-100 min-vh-100">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p class="text-right">&copy; @DateTime.Now.Year - ISMP</p>
+        </footer>
+    </div>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
