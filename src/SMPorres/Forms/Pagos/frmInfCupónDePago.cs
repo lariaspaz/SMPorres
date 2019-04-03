@@ -22,6 +22,8 @@ namespace SMPorres.Forms.Pagos
         public frmInfCupónDePago(int idPago)
         {
             InitializeComponent();
+            this.Height = this.Height - ckTodas.Height;
+            ckTodas.Visible = false;
             _idPago = idPago;
             AsignarDescripción();
         }
