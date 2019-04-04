@@ -68,16 +68,24 @@ else
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-light">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Cupón de Pago</h5>
+                    <h5 class="modal-title font-weight-bolder" id="exampleModalCenterTitle">Imprimir Cupón de Pago</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Fecha de Pago: 
-                    @Html.TextBoxFor(m => new DateTime(), new {type = "date", id = ""})
+                    <div class="row">
+                        <div class="col-7 offset-3">
+                            <span>Fecha de Pago: </span>
+                            @Html.TextBox("fechaCompromiso", 
+                                Consultas.Lib.Configuration.CurrentDate.Date.ToString("yyyy-MM-dd"), 
+                                new {type = "date", id = "fechaCompromiso" })
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
+                    @Html.ActionLink("Imprimir", "ImprimirCupon", null,
+                        new { @class = "btn btn-primary", target = "_blank", role = "button" })
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
