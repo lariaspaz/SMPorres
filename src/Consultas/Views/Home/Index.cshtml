@@ -18,6 +18,8 @@
 </div>
 
 @section scripts {
+    <script type="text/javascript" src="~/Scripts/pdfobject.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.detail').click(function (e) {
@@ -27,7 +29,20 @@
                 $(this).addClass('active');
             });
 
-            $('#exampleModalCenter').modal(options);
+            $('#modSelFechaCompromiso').modal();
+            $('body').on('click', '#modSelFechaCompromiso #lnkImprimir', function (e) {
+                e.preventDefault();
+                var fc = $('#modSelFechaCompromiso #fechaCompromiso').attr('value');
+                var url = $('#modSelFechaCompromiso #lnkImprimir').attr('href');
+                $("#reporte .modal-body").html('');
+                PDFObject.embed(url + '?fechaCompromiso=' + fc, "#reporte .modal-body");
+                $('#modSelFechaCompromiso').modal('hide');
+                $('#reporte').on('shown.bs.modal', function (e) {
+                    var h = $('#reporte').height() * 0.95;
+                    $('#reporte .modal-dialog, #reporte .modal-content').height(h);
+                });
+                $('#reporte').modal();
+            });
         });
     </script>
 }
