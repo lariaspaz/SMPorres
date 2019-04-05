@@ -16,54 +16,44 @@ else
         <div class="col-sm-6">
         </div>
     </div>
-        @*@if (Model.ImportePagoTermino > 0)
-            {*@
+    if (Model.ImportePagoTermino > 0)
+    {
         <div class="row mt-3">
             <div class="col-sm-6">
                 Si paga hasta el <strong>@Model.FechaVto.ToString("dd/MM/yyyy")</strong>
                 tendrá una bonificación de <strong>@((Model.ImportePagoTermino ?? 0).ToString("C2"))</strong>.
             </div>
         </div>
-            @*}
-                @if (Model.PorcentajeBeca.HasValue)
-                {*@
-            <div class="row mt-3">
-                <div class="col-sm-6">
-                    Usted tiene una beca de <strong>%@Model.PorcentajeBeca.Value.ToString("0")</strong>
-                    equivalente a <strong>@((Model.ImporteBeca ?? 0).ToString("C2"))</strong>.
-                </div>
+    }
+    if (Model.PorcentajeBeca > 0)
+    {
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                Usted tiene una beca de <strong>%@Model.PorcentajeBeca.Value.ToString("0")</strong>
+                equivalente a <strong>@((Model.ImporteBeca ?? 0).ToString("C2"))</strong>.
             </div>
-            @*}
-                @if (Model.Vencido)
-                {*@
-            <div class="row mt-3">
-                <div class="col-sm-6">
-                    <div class="alert alert-danger" role="alert" style="padding: 0 1.25em; text-align: center;">
-                        Esta cuota se encuentra vencida.
-                    </div>
-                </div>
-            </div>
-            @*}*@
-
-    @*<div class="row">
-        <div class="col-sm-6 text-right">
-            @Html.ActionLink("Imprimir Cupón de Pago", "ImprimirCupon", 
-                new { fechaCompromiso = new DateTime(2019,04,1).Date }, 
-                new { @class = "btn btn-light text-primary", target = "_blank" })
         </div>
-    </div>*@
+    }
+    if (Model.Vencido)
+    {
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="alert alert-danger text-center" role="alert" style="padding: 0 1.25em;">
+                    Esta cuota se encuentra vencida.
+                </div>
+            </div>
+        </div>
+    }
 
     <div class="row">
         <div class="col-sm-6 text-right">
-            <!-- Button trigger modal -->
             <button type="button" class="btn btn-light text-primary" data-toggle="modal" data-target="#modSelFechaCompromiso">
                 Imprimir Cupón de Pago
             </button>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modSelFechaCompromiso" tabindex="-1" role="dialog" 
+    <div class="modal fade" id="modSelFechaCompromiso" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -77,9 +67,9 @@ else
                     <div class="row">
                         <div class="col-7 offset-3">
                             <span>Fecha de Pago: </span>
-                            @Html.TextBox("fechaCompromiso", 
-                                Consultas.Lib.Configuration.CurrentDate.Date.ToString("yyyy-MM-dd"), 
-                                new {type = "date", id = "fechaCompromiso" })
+                            @Html.TextBox("fechaCompromiso",
+                                Consultas.Lib.Configuration.CurrentDate.Date.ToString("yyyy-MM-dd"),
+                                new { type = "date", id = "fechaCompromiso" })
                         </div>
                     </div>
                 </div>
