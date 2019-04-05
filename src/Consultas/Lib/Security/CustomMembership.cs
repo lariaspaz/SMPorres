@@ -23,10 +23,10 @@ namespace Consultas.Lib.Security
             }
         }
 
-        public override MembershipUser GetUser(string username, bool userIsOnline)
+        public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
             int nrodoc = 0;
-            if (Int32.TryParse(username, out nrodoc))
+            if (Int32.TryParse((string)providerUserKey, out nrodoc))
             {
                 var a = new AlumnosRepository().ObtenerAlumno(nrodoc);
                 return new CustomMembershipUser(a);
@@ -37,7 +37,50 @@ namespace Consultas.Lib.Security
             }
         }
 
+        public override int MinRequiredPasswordLength
+        {
+            get
+            {
+                return 8;
+            }
+        }
+
+
         #region Métodos no implementados
+
+        public override bool ChangePassword(string username, string oldPassword, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int MinRequiredNonAlphanumericCharacters
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public override string PasswordStrengthRegularExpression
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public override MembershipUser GetUser(string username, bool userIsOnline)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int MaxInvalidPasswordAttempts
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public override string GetUserNameByEmail(string email)
         {
@@ -73,38 +116,6 @@ namespace Consultas.Lib.Security
             }
         }
 
-        public override int MaxInvalidPasswordAttempts
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public override int MinRequiredNonAlphanumericCharacters
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public override int MinRequiredPasswordLength
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public override int PasswordAttemptWindow
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public override MembershipPasswordFormat PasswordFormat
         {
             get
@@ -113,7 +124,7 @@ namespace Consultas.Lib.Security
             }
         }
 
-        public override string PasswordStrengthRegularExpression
+        public override int PasswordAttemptWindow
         {
             get
             {
@@ -135,11 +146,6 @@ namespace Consultas.Lib.Security
             {
                 throw new NotImplementedException();
             }
-        }
-
-        public override bool ChangePassword(string username, string oldPassword, string newPassword)
-        {
-            throw new NotImplementedException();
         }
 
         public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
@@ -178,11 +184,6 @@ namespace Consultas.Lib.Security
         }
 
         public override string GetPassword(string username, string answer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
             throw new NotImplementedException();
         }

@@ -69,18 +69,25 @@ namespace Consultas.Repositories
         public bool ExisteAlumno(int nrodoc, string contraseña)
         {
             string hashpwd = "";
+            hashpwd = EncriptarContraseña(contraseña);
+            using (var db = new SMPorresEntities())
+            {
+                return (from a in db.AlumnosWeb
+                        where nrodoc == a.NroDocumento && hashpwd == a.Contraseña
+                        select a).Any();
+            }
+        }
+
+        private string EncriptarContraseña(string contraseña)
+        {
+            string hashpwd;
             using (var alg = System.Security.Cryptography.SHA512.Create())
             {
                 alg.ComputeHash(System.Text.Encoding.UTF8.GetBytes(contraseña));
                 hashpwd = BitConverter.ToString(alg.Hash);
             }
 
-            using (var db = new SMPorresEntities())
-            {
-                return (from a in db.AlumnosWeb
-                            where nrodoc == a.NroDocumento && hashpwd == a.Contraseña
-                            select a).Any();
-            }
+            return hashpwd;
         }
 
         public AlumnoWeb ObtenerAlumno(int nrodoc)
@@ -93,6 +100,25 @@ namespace Consultas.Repositories
                     db.Entry(alumno).Reference(r => r.RolUsuarioWeb).Load();
                 }
                 return alumno;
+            }
+        }
+
+        public void ActualizarYEncriptarContraseña(int idAlumno, string contraseña)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var a = db.AlumnosWeb.Find(idAlumno);
+                a.Contraseña = EncriptarContraseña(contraseña);
+                db.SaveChanges();
+            }
+        }
+
+        public bool EsContraseña(int idAlumno, string contraseña)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var a = db.AlumnosWeb.Find(idAlumno);
+                return a.Contraseña == EncriptarContraseña(contraseña);                
             }
         }
     }

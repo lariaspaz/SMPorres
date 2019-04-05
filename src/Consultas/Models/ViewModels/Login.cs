@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Consultas.Models
+namespace Consultas.Models.ViewModels
 {
-    public class LoginView
+    public class Login
     {
         [Required]
         [Display(Name = "Nombre de usuario")]

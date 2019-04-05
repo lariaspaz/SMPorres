@@ -30,7 +30,7 @@
                                 Consultas.Lib.Session.CurrentUser.LastName)
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Cambiar contraseña</a>
+                            @Html.ActionLink("Cambiar contraseña", "ChangePwd", "Account", null, new { @class = "dropdown-item" })
                             <div class="dropdown-divider"></div>
                             <a href="@Url.Action("Logout", "Account")" class="dropdown-item">
                                 <span class="glyphicon glyphicon-log-out"></span> Cerrar sesión

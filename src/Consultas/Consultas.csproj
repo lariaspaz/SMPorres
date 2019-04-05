@@ -164,7 +164,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Models\LoginView.cs" />
+    <Compile Include="Models\ViewModels\ChangePwd.cs" />
+    <Compile Include="Models\ViewModels\Login.cs" />
     <Compile Include="Models\PagoWeb.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
     </Compile>
@@ -329,6 +330,7 @@
     <Content Include="Views\Home\MostrarPróximaCuota.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Account\ChangePwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

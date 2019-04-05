@@ -1,0 +1,57 @@
+﻿@model Consultas.Models.ViewModels.ChangePwd
+@{
+    ViewBag.Title = "Cambiar contraseña";
+}
+
+<div class="card">
+    <div class="card-body">
+        @using (Html.BeginForm("ChangePwd", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Cambiar contraseña</h4>
+                <hr />
+
+                @if (ViewBag.Message != null)
+                {
+                    <div class="col-4">
+                        <span class="mt-3 mb-3 bg-success text-white p-0 rounded d-block text-center">
+                            @ViewBag.Message
+                        </span>
+                    </div>
+                }
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger col-4 p-0" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContraseñaActual, htmlAttributes: new { @class = "col-4" })
+                    <div class="col-4">
+                        @Html.EditorFor(model => model.ContraseñaActual, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                        @Html.ValidationMessageFor(model => model.ContraseñaActual, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContraseñaNueva, htmlAttributes: new { @class = "col-4" })
+                    <div class="col-4">
+                        @Html.EditorFor(model => model.ContraseñaNueva, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                        @Html.ValidationMessageFor(model => model.ContraseñaNueva, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContraseñaNuevaRepetida, htmlAttributes: new { @class = "col-4" })
+                    <div class="col-4">
+                        @Html.EditorFor(model => model.ContraseñaNuevaRepetida, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                        @Html.ValidationMessageFor(model => model.ContraseñaNuevaRepetida, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-4">
+                    <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                    @Html.ActionLink("Cancelar", "Index", "Home", null, new { @class = "btn btn-light text-primary" } )
+                </div>
+            </div>
+        }
+    </div>
+</div>
