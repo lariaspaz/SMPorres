@@ -45,6 +45,7 @@ namespace SMPorres.Repositories
                 if (!db.Configuraciones.Any())
                 {
                     conf.Id = 1;
+                    conf.EndpointAddress = "";
                     db.Configuraciones.Add(conf);
                 }
                 db.SaveChanges();
