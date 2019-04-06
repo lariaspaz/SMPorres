@@ -2,6 +2,10 @@
 {
 }
 
+namespace Consultas.Models
+{
+}
+
 namespace SMPorres.Reports.DataSet
 {
 
