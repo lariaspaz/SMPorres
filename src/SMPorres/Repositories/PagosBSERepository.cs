@@ -13,10 +13,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                //db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
-
                 var comprobantes = pagosBSE.Select(p2 => Int32.Parse(p2.Comprobante));
-                //var t = db.Pagos.Where(p => comprobantes.Contains(p.Id));
                 var query = (from p in db.Pagos
                              where comprobantes.Contains(p.Id)
                              select new

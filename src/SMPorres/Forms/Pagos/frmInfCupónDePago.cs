@@ -146,10 +146,13 @@ namespace SMPorres.Forms.Pagos
 
             if (fechaCompromiso <= p.FechaVto.Value)
             {
-                importe = p.ImportePagoTermino.Value.ToString("$ -0,0.00");
-                concepto = "Descuento por pago a término";
-                cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
-                    carrera, curso, "", "", "3", concepto, importe);
+                if (p.ImportePagoTermino > 0)
+                {
+                    importe = p.ImportePagoTermino.Value.ToString("$ -0,0.00");
+                    concepto = "Descuento por pago a término";
+                    cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+                        carrera, curso, "", "", "3", concepto, importe);
+                }
             }
             else
             {

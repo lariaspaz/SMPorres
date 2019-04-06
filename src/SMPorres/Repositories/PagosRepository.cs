@@ -159,10 +159,17 @@ namespace SMPorres.Repositories
             pago.FechaVto = cuota.VtoCuota;
             var totalAPagar = (decimal)0;
             var impBecado = impBase - beca;
+            var conf = ConfiguracionRepository.ObtenerConfiguracion();
             if (fechaCompromiso <= pago.FechaVto)
             {
-                var dpt = (decimal)(ConfiguracionRepository.ObtenerConfiguracion().DescuentoPagoTermino / 100);
+                var dpt = (decimal)(conf.DescuentoPagoTermino / 100);
                 var descPagoTérmino = Math.Round(impBecado * dpt, 2);
+
+                if (fechaCompromiso > pago.FechaVto.Value.AddDays(-conf.DiasVtoPagoTermino ?? 0))
+                {
+                    dpt = 0;
+                    descPagoTérmino = 0;
+                }
 
                 totalAPagar = impBase - beca - descPagoTérmino;
 
@@ -171,7 +178,7 @@ namespace SMPorres.Repositories
             }
             else
             {
-                var porcRecargo = (ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
+                var porcRecargo = (conf.InteresPorMora / 100) / 30.0;
                 var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto.Value).TotalDays);
                 var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
                 var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
