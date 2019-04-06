@@ -15,12 +15,14 @@ namespace SMPorres.Repositories
             {
                 var conf = db.Configuraciones.ToList()
                                 .Select(
-                                    c => new Configuracion {
+                                    c => new Configuracion
+                                    {
                                         Id = c.Id,
                                         DescuentoPagoTermino = c.DescuentoPagoTermino,
                                         InteresPorMora = c.InteresPorMora,
                                         CicloLectivo = c.CicloLectivo,
-                                        EndpointAddress = c.EndpointAddress
+                                        EndpointAddress = c.EndpointAddress,
+                                        DiasVtoPagoTermino = c.DiasVtoPagoTermino
                                     }
                                 );
                 if (conf.Any())
@@ -29,12 +31,13 @@ namespace SMPorres.Repositories
                 }
                 else
                 {
-                    return new Configuracion { CicloLectivo = (short) DateTime.Now.Year };
+                    return new Configuracion { CicloLectivo = (short)DateTime.Now.Year };
                 }
             }
         }
 
-        public static void Actualizar(double descuentoPagoTermino, double interesPorMora, short cicloLectivo)
+        public static void Actualizar(double descuentoPagoTermino, double interesPorMora, short cicloLectivo,
+            short diasVtoPagoTermino, string endpointAddress)
         {
             using (var db = new SMPorresEntities())
             {
@@ -42,10 +45,11 @@ namespace SMPorres.Repositories
                 conf.DescuentoPagoTermino = descuentoPagoTermino;
                 conf.InteresPorMora = interesPorMora;
                 conf.CicloLectivo = cicloLectivo;
+                conf.DiasVtoPagoTermino = diasVtoPagoTermino;
+                conf.EndpointAddress = endpointAddress;
                 if (!db.Configuraciones.Any())
                 {
                     conf.Id = 1;
-                    conf.EndpointAddress = "";
                     db.Configuraciones.Add(conf);
                 }
                 db.SaveChanges();

@@ -19,9 +19,11 @@ namespace SMPorres.Forms
         {
             InitializeComponent();
             var conf = ConfiguracionRepository.ObtenerConfiguracion();
-            txtDescPagoTérmino.DecValue =(decimal) conf.DescuentoPagoTermino;
-            txtInterésPorMora.DecValue = (decimal) conf.InteresPorMora;
+            txtDescPagoTérmino.DecValue = (decimal)conf.DescuentoPagoTermino;
+            txtInterésPorMora.DecValue = (decimal)conf.InteresPorMora;
             txtCicloLectivo.IntValue = conf.CicloLectivo;
+            txtDiasVtoPagoTermino.IntValue = conf.DiasVtoPagoTermino ?? 0;
+            txtEndpointAddress.Text = conf.EndpointAddress;
             this.Text = "Configuración general";
             txtDescPagoTérmino.Select();
             _validator = new FormValidations(this, errorProvider1);
@@ -47,7 +49,23 @@ namespace SMPorres.Forms
         {
             get
             {
-                return (short) txtCicloLectivo.IntValue;
+                return (short)txtCicloLectivo.IntValue;
+            }
+        }
+
+        public short DíasVtoPagoTermino
+        {
+            get
+            {
+                return (short)txtDiasVtoPagoTermino.IntValue;
+            }
+        }
+
+        public string EndpointAddress
+        {
+            get
+            {
+                return txtEndpointAddress.Text.Trim();
             }
         }
 
@@ -58,7 +76,8 @@ namespace SMPorres.Forms
             {
                 try
                 {
-                    ConfiguracionRepository.Actualizar(DescuentoPagoATérmino, InterésPorMora, CicloLectivo);
+                    ConfiguracionRepository.Actualizar(DescuentoPagoATérmino, InterésPorMora,
+                        CicloLectivo, DíasVtoPagoTermino, EndpointAddress);
                     DialogResult = DialogResult.OK;
                 }
                 catch (Exception ex)

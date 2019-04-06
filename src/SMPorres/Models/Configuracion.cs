@@ -19,5 +19,6 @@ namespace SMPorres.Models
         public double InteresPorMora { get; set; }
         public short CicloLectivo { get; set; }
         public string EndpointAddress { get; set; }
+        public Nullable<short> DiasVtoPagoTermino { get; set; }
     }
 }

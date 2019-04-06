@@ -68,6 +68,7 @@
           <Property Name="InteresPorMora" Type="float" Nullable="false" />
           <Property Name="CicloLectivo" Type="smallint" Nullable="false" />
           <Property Name="EndpointAddress" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DiasVtoPagoTermino" Type="smallint" />
         </EntityType>
         <EntityType Name="Cuotas">
           <Key>
@@ -1317,6 +1318,7 @@
           <Property Name="InteresPorMora" Type="Double" Nullable="false" />
           <Property Name="CicloLectivo" Type="Int16" Nullable="false" />
           <Property Name="EndpointAddress" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DiasVtoPagoTermino" Type="Int16" />
         </EntityType>
         <EntityType Name="Cuota">
           <Key>
@@ -1783,6 +1785,7 @@
           <EntitySetMapping Name="Configuraciones">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Configuracion">
               <MappingFragment StoreEntitySet="Configuracion">
+                <ScalarProperty Name="DiasVtoPagoTermino" ColumnName="DiasVtoPagoTermino" />
                 <ScalarProperty Name="EndpointAddress" ColumnName="EndpointAddress" />
                 <ScalarProperty Name="CicloLectivo" ColumnName="CicloLectivo" />
                 <ScalarProperty Name="InteresPorMora" ColumnName="InteresPorMora" />
