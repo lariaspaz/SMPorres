@@ -55,22 +55,10 @@ namespace Consultas.Controllers
                             reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
                                 System.Web.HttpContext.Current.Response, false, "Cupon-de-pago");
                             return new EmptyResult();
-
-                            //using (var f = new frmReporte(reporte, txtDescripción.Text)) f.ShowDialog();
-
-                            //System.Data.DataTable tblOrderDetail = new System.Data.DataTable("OrderDetail");
-                            //ReportDocument doc = new ReportDocument();
-
-                            //CrystalReport1 objReport = new CrystalReport1();
-                            //objReport.SetDataSource(tblOrderDetail);
-
-                            //CrystalReportViewer1.RefreshReport();
-
                         }
                     }
                     else
                     {
-                        //ShowError("No hay datos para mostrar.");
                         return View();
                     }
                 }
@@ -80,21 +68,5 @@ namespace Consultas.Controllers
                 return View();
             }
         }
-
-        private void Test()
-        {
-            //System.Data.DataTable tblOrderDetail = new System.Data.DataTable("OrderDetail");
-            //CrystalReport1 objReport = new CrystalReport1();
-            //objReport.SetDataSource(tblOrderDetail);
-
-            //ReportDocument doc = new ReportDocument();
-
-            //CrystalReportViewer1.ReportSource = objReport;
-            //CrystalReportViewer1.RefreshReport();
-
-            ////file name 'Test PDF.pdf' can be anything, you may also use GUID or something similar to get unique file name
-            ////objReport.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Page.Response, true, "Test PDF.pdf");
-            //objReport.ExportToDisk(ExportFormatType.PortableDocFormat, "C:\\Data\\Testy.pdf"); // file path is just for demo
-        }
-    }
+   }
 }

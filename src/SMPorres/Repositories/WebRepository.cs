@@ -24,7 +24,9 @@ namespace SMPorres.Repositories
                                 Contraseña = a.Contraseña
                             })
                             .ToList();
-                var cicloLectivo = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
+                var conf = ConfiguracionRepository.ObtenerConfiguracion();
+                var cicloLectivo = conf.CicloLectivo;
+                var díasVtoPagoTermino = conf.DiasVtoPagoTermino ?? 0;
                 foreach (var a in result)
                 {
                     a.CursosAlumnos = (from ca in db.CursosAlumnos
@@ -38,7 +40,7 @@ namespace SMPorres.Repositories
                                             Curso = ca.Curso.Nombre,
                                             IdCarrera = ca.Curso.Carrera.Id,
                                             Carrera = ca.Curso.Carrera.Nombre,
-                                            Pagos = ObtenerPagos(db, a.Id, ca.IdCurso)
+                                            Pagos = ObtenerPagos(db, a.Id, ca.IdCurso, díasVtoPagoTermino)
                                         })
                                         .ToArray();
                 }
@@ -46,7 +48,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        private Pago[] ObtenerPagos(Models.SMPorresEntities db, int idAlumno, int idCurso)
+        private Pago[] ObtenerPagos(Models.SMPorresEntities db, int idAlumno, int idCurso, int díasVtoPagoTermino)
         {
             var query = (from pp in db.PlanesPago
                          join p in db.Pagos on pp.Id equals p.IdPlanPago
@@ -87,11 +89,12 @@ namespace SMPorres.Repositories
             {
                 if (p.Fecha == default(DateTime))
                 {
-                    var pago = PagosRepository.ObtenerDetallePago(p.Id, p.FechaVto);
+                    var pago = PagosRepository.ObtenerDetallePago(p.Id, p.FechaVto.AddDays(-díasVtoPagoTermino));
                     p.ImportePagoTérmino = pago.ImportePagoTermino;
                     p.PorcentajeBeca = (short)Math.Round(pago.PorcBeca ?? 0 * 100);
                     p.ImporteBeca = pago.ImporteBeca;
                 }
+                p.FechaVtoPagoTérmino = p.FechaVto.AddDays(-díasVtoPagoTermino);
             }
 
             return query;

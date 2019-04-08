@@ -32,7 +32,7 @@
             $('#modSelFechaCompromiso').modal();
             $('body').on('click', '#modSelFechaCompromiso #lnkImprimir', function (e) {
                 e.preventDefault();
-                var fc = $('#modSelFechaCompromiso #fechaCompromiso').attr('value');
+                var fc = $('#modSelFechaCompromiso #fechaCompromiso').val();
                 var url = $('#modSelFechaCompromiso #lnkImprimir').attr('href');
                 $("#reporte .modal-body").html('');
                 PDFObject.embed(url + '?fechaCompromiso=' + fc, "#reporte .modal-body");

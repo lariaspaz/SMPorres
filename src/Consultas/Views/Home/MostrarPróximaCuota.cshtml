@@ -6,21 +6,20 @@
 }
 else
 {
-    <div class="row mt-3">
+    <div class="row">
         <div class="col-sm">
             Próxima Cuota: @((Model.NroCuota == 0) ? "Matrícula" : Model.NroCuota.ToString())
         </div>
         <div class="col-sm text-right">
             Importe: @Model.ImporteCuota.ToString("C2")
         </div>
-        <div class="col-sm-6">
-        </div>
+        <div></div>
     </div>
-    if (Model.ImportePagoTermino > 0)
+    if (Model.ImportePagoTermino > 0 && Model.FechaVtoPagoTermino >= Consultas.Lib.Configuration.CurrentDate.Date)
     {
         <div class="row mt-3">
-            <div class="col-sm-6">
-                Si paga hasta el <strong>@Model.FechaVto.ToString("dd/MM/yyyy")</strong>
+            <div class="col">
+                Si paga hasta el <strong>@String.Format("{0:dd 'de' MMMM}", Model.FechaVtoPagoTermino)</strong>
                 tendrá una bonificación de <strong>@((Model.ImportePagoTermino ?? 0).ToString("C2"))</strong>.
             </div>
         </div>
@@ -28,7 +27,7 @@ else
     if (Model.PorcentajeBeca > 0)
     {
         <div class="row mt-3">
-            <div class="col-sm-6">
+            <div class="col">
                 Usted tiene una beca de <strong>%@Model.PorcentajeBeca.Value.ToString("0")</strong>
                 equivalente a <strong>@((Model.ImporteBeca ?? 0).ToString("C2"))</strong>.
             </div>
@@ -37,7 +36,7 @@ else
     if (Model.Vencido)
     {
         <div class="row mt-3">
-            <div class="col-sm-6">
+            <div class="col">
                 <div class="alert alert-danger text-center" role="alert" style="padding: 0 1.25em;">
                     Esta cuota se encuentra vencida.
                 </div>
@@ -46,7 +45,7 @@ else
     }
 
     <div class="row">
-        <div class="col-sm-6 text-right">
+        <div class="text-right mt-3 col">
             <button type="button" class="btn btn-light text-primary" data-toggle="modal" data-target="#modSelFechaCompromiso">
                 Imprimir Cupón de Pago
             </button>

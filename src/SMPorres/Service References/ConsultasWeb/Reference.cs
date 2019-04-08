@@ -320,6 +320,8 @@ namespace SMPorres.ConsultasWeb {
         
         private System.Nullable<short> PorcentajeBecaField;
         
+        private System.DateTime FechaVtoPagoTérminoField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -469,6 +471,19 @@ namespace SMPorres.ConsultasWeb {
                 if ((this.PorcentajeBecaField.Equals(value) != true)) {
                     this.PorcentajeBecaField = value;
                     this.RaisePropertyChanged("PorcentajeBeca");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
+        public System.DateTime FechaVtoPagoTérmino {
+            get {
+                return this.FechaVtoPagoTérminoField;
+            }
+            set {
+                if ((this.FechaVtoPagoTérminoField.Equals(value) != true)) {
+                    this.FechaVtoPagoTérminoField = value;
+                    this.RaisePropertyChanged("FechaVtoPagoTérmino");
                 }
             }
         }

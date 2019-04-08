@@ -31,10 +31,10 @@ namespace Consultas.Web_Services
             }
             catch (Exception ex)
             {
-                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine + 
-                //        "Datos ========================" + Environment.NewLine + 
-                //        JsonConvert.SerializeObject(alumno, Formatting.Indented);
-                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                        "Datos ========================" + Environment.NewLine +
+                        JsonConvert.SerializeObject(alumno, Formatting.Indented);
+                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
                 return false;
                 throw;
             }

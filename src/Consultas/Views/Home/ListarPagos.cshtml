@@ -6,11 +6,11 @@
             <th>Concepto</th>
             <th>Vencimiento</th>
             <th>Fecha de Pago</th>
-            <th>Importe de Cuota</th>
+            <th>Cuota</th>
             <th>Beca</th>
             <th>Desc. Pago Térm.</th>
             <th>Recargo</th>
-            <th>Importe Pagado</th>
+            <th>Pagado</th>
         </tr>
     </thead>
 
@@ -41,6 +41,18 @@
             </td>
             <td>
                 @((((item.ImportePagoTermino ?? 0) == 0) ? "-" : item.ImportePagoTermino.Value.ToString("C2")))
+                @if(item.ImportePagoTermino.HasValue)
+                {
+                    <small class="text-muted d-block" style="font-size: xx-small; margin-bottom: -10px;">
+                        hasta el @String.Format("{0:dd/MM/yyyy}", item.FechaVtoPagoTermino)
+                    </small>
+                }
+                else
+                {
+                    <small class="text-muted d-block" style="font-size: xx-small; margin-bottom: -10px;">
+                        &nbsp;
+                    </small>
+                }
             </td>
             <td>
                 @((((item.ImporteRecargo ?? 0) == 0) ? "-" : item.ImporteRecargo.Value.ToString("C2")))

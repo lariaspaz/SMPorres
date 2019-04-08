@@ -30,6 +30,7 @@ namespace Consultas.Repositories
             p.FechaVto = pago.FechaVto;
             p.ImportePagoTermino = pago.ImportePagoTérmino;
             p.PorcentajeBeca = pago.PorcentajeBeca;
+            p.FechaVtoPagoTermino = pago.FechaVtoPagoTérmino;
             if (insertar)
             {
                 db.PagosWeb.Add(p);
@@ -85,7 +86,14 @@ namespace Consultas.Repositories
             var totalAPagar = (decimal)0;
             if (fechaCompromiso <= pago.FechaVto)
             {
-                totalAPagar = pago.ImporteCuota - pago.ImporteBeca - pago.ImportePagoTermino ?? 0;
+                if (fechaCompromiso <= pago.FechaVtoPagoTermino)
+                {
+                    totalAPagar = pago.ImporteCuota - pago.ImporteBeca ?? 0 - pago.ImportePagoTermino ?? 0;
+                }
+                else
+                {
+                    totalAPagar = pago.ImporteCuota - pago.ImporteBeca ?? 0;
+                }
             }
             else
             {

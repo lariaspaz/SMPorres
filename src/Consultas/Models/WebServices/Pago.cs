@@ -28,5 +28,7 @@ namespace Consultas.Models.WebServices
         public decimal? ImportePagoTérmino { get; set; }
 
         public short? PorcentajeBeca { get; set; }
+
+        public DateTime FechaVtoPagoTérmino { get; set; }
     }
 }

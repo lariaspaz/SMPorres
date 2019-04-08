@@ -172,10 +172,13 @@ namespace Consultas.Repositories
 
             if (fechaCompromiso <= p.FechaVto)
             {
-                importe = p.ImportePagoTermino.Value.ToString("$ -0,0.00");
-                concepto = "Descuento por pago a término";
-                cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
-                    carrera, curso, "", "", "3", concepto, importe);
+                if (fechaCompromiso <= p.FechaVtoPagoTermino)
+                {
+                    importe = p.ImportePagoTermino.Value.ToString("$ -0,0.00");
+                    concepto = "Descuento por pago a término";
+                    cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+                        carrera, curso, "", "", "3", concepto, importe);
+                }
             }
             else
             {

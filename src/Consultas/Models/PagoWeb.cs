@@ -26,6 +26,7 @@ namespace Consultas.Models
         public Nullable<decimal> ImporteBeca { get; set; }
         public Nullable<decimal> ImportePagoTermino { get; set; }
         public Nullable<short> PorcentajeBeca { get; set; }
+        public Nullable<System.DateTime> FechaVtoPagoTermino { get; set; }
     
         public virtual CursoAlumnoWeb CursoAlumnoWeb { get; set; }
     }
