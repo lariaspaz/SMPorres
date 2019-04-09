@@ -20,6 +20,7 @@ namespace SMPorres.Lib.AppForms
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
+            Icon = Properties.Resources.app2;
         }
 
         protected void ShowError(string message)

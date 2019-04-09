@@ -218,9 +218,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\logo.jpg" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\pdfobject.min.js" />
     <Content Include="Content\user.jpg" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\SMPModel.Context.tt">

@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationIcon>app2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -630,6 +630,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <Content Include="app2.ico" />
     <Content Include="Models\SMPorres.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SMPorres.edmx</DependentUpon>
@@ -640,6 +641,8 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
       <LastGenOutput>SMPorres.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\app2.ico" />
+    <None Include="Resources\favicon2.png" />
     <None Include="Resources\key.png" />
     <None Include="Resources\control_stop_blue.png" />
     <None Include="Resources\control_play_blue.png" />

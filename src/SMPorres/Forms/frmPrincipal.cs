@@ -24,6 +24,7 @@ namespace SMPorres.Forms
             _menuItems = new List<string>();
             RecorrerMenu(this.menuStrip1.Items, null);
             ItemsMenuRepository.EliminarItemsInexistentes(_menuItems);
+            Icon = Properties.Resources.app2;
         }
 
         private void CargarPermisosGruposDeUsuarioActual(int idusuario)
