@@ -15,10 +15,10 @@ namespace Consultas.Models
     
     public partial class SMPorresEntities : DbContext
     {
-        public SMPorresEntities()
-            : base("name=SMPorresEntities")
-        {
-        }
+        //public SMPorresEntities()
+        //    : base("name=SMPorresEntities")
+        //{
+        //}
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

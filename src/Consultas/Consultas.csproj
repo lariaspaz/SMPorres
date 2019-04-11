@@ -145,6 +145,7 @@
     <Compile Include="Lib\Security\CustomMembership.cs" />
     <Compile Include="Lib\Security\CustomMembershipUser.cs" />
     <Compile Include="Lib\Security\CustomPrincipal.cs" />
+    <Compile Include="Lib\Security\StringCipher.cs" />
     <Compile Include="Lib\Session.cs" />
     <Compile Include="Models\AlumnoWeb.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
@@ -164,6 +165,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Models\SMPorresEntities.Ext.cs" />
     <Compile Include="Models\ViewModels\ChangePwd.cs" />
     <Compile Include="Models\ViewModels\Login.cs" />
     <Compile Include="Models\PagoWeb.cs">
@@ -267,6 +269,7 @@
     <Content Include="Models\dsConsultas.xss">
       <DependentUpon>dsConsultas.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

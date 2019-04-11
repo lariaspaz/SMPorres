@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SMPorres.Models
+﻿namespace Consultas.Models
 {
+    using System.Data.Entity.Core.EntityClient;
+    using System.Data.SqlClient;
+
     public partial class SMPorresEntities
     {
         public const string ConnectionStringPassPhrase = "_SMPorres 11:06";
 
         public SMPorresEntities() : base(GetConnectionString())
-        {}
+        { }
 
         private static string GetConnectionString()
         {
-            var model = "SMPorres";
+            var model = "SMPModel";
 
             string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\SMP\Cs";
             string keyName = key.Substring(0, key.LastIndexOf("\\"));
