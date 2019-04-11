@@ -58,6 +58,7 @@
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -288,6 +289,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Lib\Security\Cryptography.cs" />
+    <Compile Include="Lib\Security\StringCipher.cs" />
     <Compile Include="Lib\Session.cs" />
     <Compile Include="Lib\Validations\FormValidations.cs" />
     <Compile Include="Models\Alumno.cs">
@@ -380,6 +382,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SMPorres.Ext.cs" />
     <Compile Include="Models\TipoDocumento.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
