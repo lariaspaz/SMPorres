@@ -45,7 +45,6 @@ namespace SMPorres.Forms.Web
             try
             {
                 lblAcción.Text = "Conectando a la web";
-                ConsultasWeb.SMPSoapClient cliente = CrearCliente();
                 var repo = new Repositories.WebRepository();
                 lblAcción.Text = "Obteniendo datos";
                 var datos = repo.ObtenerDatos();
@@ -55,21 +54,35 @@ namespace SMPorres.Forms.Web
                 progressBar1.Value = 0;
                 lblPorcentaje.Text = "0%";
                 lblAcción.Text = "Procesando";
-                foreach (var alumno in datos)
+                ConsultasWeb.SMPSoapClient cliente = CrearCliente();
+                try
                 {
-                    if (_stop)
+                    foreach (var alumno in datos)
                     {
-                        break;
+                        if (_stop)
+                        {
+                            break;
+                        }
+                        if (!cliente.ActualizarDatos(alumno))
+                        {
+                            ShowError("Error al subir los datos de " + alumno.Nombre + " " + alumno.Apellido);
+                            break;
+                        }
+                        progressBar1.PerformStep();
+                        lblPorcentaje.Text = String.Format("{0}%", Math.Truncate((progressBar1.Value / (double)progressBar1.Maximum) * 100));
                     }
-                    if (!cliente.ActualizarDatos(alumno))
-                    {
-                        ShowError("Error al subir los datos de " + alumno.Nombre + " " + alumno.Apellido);
-                        break;
-                    }
-                    progressBar1.PerformStep();
-                    lblPorcentaje.Text = String.Format("{0}%", Math.Truncate((progressBar1.Value / (double)progressBar1.Maximum) * 100));
+                    var conf = Repositories.ConfiguracionRepository.ObtenerConfiguracion();
+                    cliente.ActualizarConfiguracion(conf.InteresPorMora);
                 }
-                MessageBox.Show("Fin del proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    cliente.Close();
+                }
+                MessageBox.Show("Los datos se subieron correctamente.\nFin del proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (ThreadAbortException)
             {

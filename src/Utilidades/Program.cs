@@ -16,7 +16,7 @@ namespace Utilidades
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmConfigurarCadenaConexión());
+            Application.Run(new frmPrincipal());
         }
     }
 }

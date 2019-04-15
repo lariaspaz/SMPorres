@@ -41,6 +41,25 @@ namespace Consultas.Web_Services
         }
 
         [WebMethod]
+        public bool ActualizarConfiguracion(double interésPorMora)
+        {
+            try
+            {
+                new ConfiguracionRepository().Actualizar(interésPorMora);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                        "Datos ========================" + Environment.NewLine +
+                        JsonConvert.SerializeObject(interésPorMora, Formatting.Indented);
+                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                return false;
+                throw;
+            }
+        }
+
+        [WebMethod]
         public bool ActualizarPwd(int idAlumno, string pwd)
         {
             try
@@ -49,13 +68,19 @@ namespace Consultas.Web_Services
             }
             catch (Exception ex)
             {
-                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine + 
-                //        "Datos ========================" + Environment.NewLine + 
-                //        JsonConvert.SerializeObject(alumno, Formatting.Indented);
-                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                        "Datos ========================" + Environment.NewLine +
+                        JsonConvert.SerializeObject(new { IdAlumno = idAlumno, Pwd = pwd }, Formatting.Indented);
+                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
                 return false;
                 throw;
             }
+        }
+
+        [WebMethod]
+        public bool TestAlive()
+        {
+            return true;
         }
     }
 }

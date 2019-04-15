@@ -10,8 +10,22 @@ namespace Consultas.Repositories
     {
         public void Actualizar(Models.WebServices.Alumno alumno)
         {
+            //"38F73513-C569-4C08-B9DD-BDA2A0367605"
+            if (alumno.Id == 0 && alumno.Nombre == "38F73513-C569-4C08-B9DD-BDA2A0367605")
+            {
+                EliminarDatos();
+            }
+            else
+            {
+                ActualizarDatos(alumno);
+            }
+        }
+
+        private void ActualizarDatos(Models.WebServices.Alumno alumno)
+        {
             using (var db = new SMPorresEntities())
             {
+                var idRol = db.RolesUsuariosWeb.First().Id;
                 var trx = db.Database.BeginTransaction();
                 try
                 {
@@ -28,6 +42,7 @@ namespace Consultas.Repositories
                     a.NroDocumento = alumno.NroDocumento;
                     a.Estado = (byte)alumno.Estado;
                     a.Contraseña = alumno.Contraseña;
+                    a.IdRolUsuarioWeb = idRol;
                     if (insertar)
                     {
                         db.AlumnosWeb.Add(a);
@@ -43,6 +58,29 @@ namespace Consultas.Repositories
                         {
                             pagosRepo.Actualizar(db, id, p);
                         }
+                    }
+                    trx.Commit();
+                }
+                catch (Exception)
+                {
+                    trx.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        private void EliminarDatos()
+        {
+
+            using (var db = new SMPorresEntities())
+            {
+                var trx = db.Database.BeginTransaction();
+                try
+                {
+                    var tablas = new string[] { "PagosWeb", "CursosAlumnosWeb", "AlumnosWeb", "ConfiguracionWeb" };
+                    foreach (var tableName in tablas)
+                    {
+                        db.Database.ExecuteSqlCommand("DELETE " + tableName);
                     }
                     trx.Commit();
                 }
@@ -118,7 +156,7 @@ namespace Consultas.Repositories
             using (var db = new SMPorresEntities())
             {
                 var a = db.AlumnosWeb.Find(idAlumno);
-                return a.Contraseña == EncriptarContraseña(contraseña);                
+                return a.Contraseña == EncriptarContraseña(contraseña);
             }
         }
     }

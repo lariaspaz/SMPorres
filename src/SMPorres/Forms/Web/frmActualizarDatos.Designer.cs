@@ -33,10 +33,10 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblAcción = new System.Windows.Forms.Label();
             this.btnIniciarProceso = new System.Windows.Forms.Button();
             this.lblPorcentaje = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.lblAcción = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -104,6 +104,14 @@
             this.panel2.Size = new System.Drawing.Size(341, 75);
             this.panel2.TabIndex = 1;
             // 
+            // lblAcción
+            // 
+            this.lblAcción.Location = new System.Drawing.Point(11, 6);
+            this.lblAcción.Name = "lblAcción";
+            this.lblAcción.Size = new System.Drawing.Size(287, 15);
+            this.lblAcción.TabIndex = 11;
+            this.lblAcción.Text = "Esperando...";
+            // 
             // btnIniciarProceso
             // 
             this.btnIniciarProceso.Image = global::SMPorres.Properties.Resources.control_play_blue;
@@ -129,13 +137,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(287, 23);
             this.progressBar1.TabIndex = 8;
-            // 
-            // lblAcción
-            // 
-            this.lblAcción.Location = new System.Drawing.Point(11, 6);
-            this.lblAcción.Name = "lblAcción";
-            this.lblAcción.Size = new System.Drawing.Size(287, 15);
-            this.lblAcción.TabIndex = 11;
             // 
             // frmActualizarDatos
             // 

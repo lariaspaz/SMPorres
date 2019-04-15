@@ -55,6 +55,8 @@
             this.txtConnectionString.Name = "txtConnectionString";
             this.txtConnectionString.Size = new System.Drawing.Size(346, 20);
             this.txtConnectionString.TabIndex = 1;
+            this.txtConnectionString.Text = "Data Source=SQLEXPRESS;Initial Catalog=SMPorres;Persist Security Info=True;User I" +
+    "D=sa;Password=<123>";
             // 
             // label2
             // 
@@ -141,6 +143,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtConnectionString);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmConfigurarCadenaConexión";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configurar cadena de conexión";

@@ -509,12 +509,24 @@ namespace SMPorres.ConsultasWeb {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarDatos", ReplyAction="*")]
         System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarDatosResponse> ActualizarDatosAsync(SMPorres.ConsultasWeb.ActualizarDatosRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarConfiguracion", ReplyAction="*")]
+        bool ActualizarConfiguracion(double interésPorMora);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarConfiguracion", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> ActualizarConfiguracionAsync(double interésPorMora);
+        
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pwd del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarPwd", ReplyAction="*")]
         SMPorres.ConsultasWeb.ActualizarPwdResponse ActualizarPwd(SMPorres.ConsultasWeb.ActualizarPwdRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarPwd", ReplyAction="*")]
         System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarPwdResponse> ActualizarPwdAsync(SMPorres.ConsultasWeb.ActualizarPwdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TestAlive", ReplyAction="*")]
+        bool TestAlive();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TestAlive", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> TestAliveAsync();
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -709,6 +721,14 @@ namespace SMPorres.ConsultasWeb {
             return ((SMPorres.ConsultasWeb.SMPSoap)(this)).ActualizarDatosAsync(inValue);
         }
         
+        public bool ActualizarConfiguracion(double interésPorMora) {
+            return base.Channel.ActualizarConfiguracion(interésPorMora);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ActualizarConfiguracionAsync(double interésPorMora) {
+            return base.Channel.ActualizarConfiguracionAsync(interésPorMora);
+        }
+        
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         SMPorres.ConsultasWeb.ActualizarPwdResponse SMPorres.ConsultasWeb.SMPSoap.ActualizarPwd(SMPorres.ConsultasWeb.ActualizarPwdRequest request) {
             return base.Channel.ActualizarPwd(request);
@@ -734,6 +754,14 @@ namespace SMPorres.ConsultasWeb {
             inValue.Body.idAlumno = idAlumno;
             inValue.Body.pwd = pwd;
             return ((SMPorres.ConsultasWeb.SMPSoap)(this)).ActualizarPwdAsync(inValue);
+        }
+        
+        public bool TestAlive() {
+            return base.Channel.TestAlive();
+        }
+        
+        public System.Threading.Tasks.Task<bool> TestAliveAsync() {
+            return base.Channel.TestAliveAsync();
         }
     }
 }

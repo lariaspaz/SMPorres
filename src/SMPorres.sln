@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consultas", "Consultas\Consultas.csproj", "{160ECD46-3B65-4E64-84A6-9547756DCC23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades", "Utilidades\Utilidades.csproj", "{0D3D9DA5-0860-4434-925F-EFA400D41B28}"
+	ProjectSection(ProjectDependencies) = postProject
+		{160ECD46-3B65-4E64-84A6-9547756DCC23} = {160ECD46-3B65-4E64-84A6-9547756DCC23}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

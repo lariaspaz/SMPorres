@@ -6,3 +6,5 @@ src/packages
 src/Consultas/bin
 src/Consultas/obj
 tmp
+src/Utilidades/bin
+src/Utilidades/obj
