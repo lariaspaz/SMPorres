@@ -8,3 +8,4 @@ src/Consultas/obj
 tmp
 src/Utilidades/bin
 src/Utilidades/obj
+src/Utilidades/packages.config

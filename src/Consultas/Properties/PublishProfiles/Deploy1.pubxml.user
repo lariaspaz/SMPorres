@@ -13,58 +13,58 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>04/10/2019 11:36:28</publishTime>
+      <publishTime>04/15/2019 22:42:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>04/10/2019 11:36:28</publishTime>
+      <publishTime>04/15/2019 22:42:08</publishTime>
     </File>
     <File Include="bin/Consultas.dll">
-      <publishTime>04/10/2019 11:35:40</publishTime>
+      <publishTime>04/15/2019 22:41:32</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.CrystalReports.Engine.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:38</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.ClientDoc.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:38</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.CommLayer.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:38</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.CommonControls.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:38</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.CommonObjectModel.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:38</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.Controllers.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:38</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.CubeDefModel.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.DataDefModel.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.DataSetConversion.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.ObjectFactory.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.Prompting.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.ReportDefModel.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportAppServer.XmlSerialize.dll">
-      <publishTime>11/10/2018 07:44:08</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.ReportSource.dll">
-      <publishTime>11/10/2018 07:44:10</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/CrystalDecisions.Shared.dll">
-      <publishTime>11/10/2018 07:44:10</publishTime>
+      <publishTime>01/09/2018 07:13:40</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -250,7 +250,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
     <File Include="bin/stdole.dll">
-      <publishTime>03/18/2010 23:21:56</publishTime>
+      <publishTime>07/07/2015 00:51:38</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>11/28/2018 13:04:24</publishTime>
@@ -277,259 +277,259 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>01/23/2014 13:57:34</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.css">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.css.map">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.min.css">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.min.css.map">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.css">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.css.map">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.min.css">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.min.css.map">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>03/27/2019 19:50:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>03/27/2019 19:50:16</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
-      <publishTime>03/27/2019 19:50:16</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Content/logo.jpg">
-      <publishTime>03/29/2019 21:55:24</publishTime>
+      <publishTime>03/30/2019 23:52:52</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>04/10/2019 11:29:14</publishTime>
+      <publishTime>04/15/2019 22:41:51</publishTime>
     </File>
     <File Include="Content/user.jpg">
-      <publishTime>04/03/2019 11:54:54</publishTime>
+      <publishTime>04/03/2019 19:50:47</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>04/10/2019 11:29:14</publishTime>
+      <publishTime>04/08/2019 22:42:57</publishTime>
     </File>
     <File Include="Models/dsConsultas.xsc">
-      <publishTime>04/01/2019 10:10:54</publishTime>
+      <publishTime>04/01/2019 19:24:39</publishTime>
     </File>
     <File Include="Models/dsConsultas.xss">
-      <publishTime>04/01/2019 10:10:54</publishTime>
+      <publishTime>04/01/2019 19:24:39</publishTime>
     </File>
     <File Include="Models/SMPModel.edmx.diagram">
-      <publishTime>04/03/2019 07:09:53</publishTime>
+      <publishTime>04/01/2019 23:43:58</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/08/2019 07:13:38</publishTime>
+      <publishTime>04/05/2019 23:15:18</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>04/10/2019 11:36:07</publishTime>
+      <publishTime>04/15/2019 22:42:03</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
-      <publishTime>03/27/2019 19:50:16</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js.map">
-      <publishTime>03/27/2019 19:50:16</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.min.js">
-      <publishTime>03/27/2019 19:50:15</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.min.js.map">
-      <publishTime>03/27/2019 19:50:15</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>03/27/2019 19:50:15</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js.map">
-      <publishTime>03/27/2019 19:50:15</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>03/27/2019 19:50:14</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js.map">
-      <publishTime>03/27/2019 19:50:14</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper-utils.js">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper-utils.js.map">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper-utils.min.js">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper-utils.min.js.map">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper.js">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper.js.map">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper.min.js">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/esm/popper.min.js.map">
-      <publishTime>03/27/2019 20:42:41</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.js">
-      <publishTime>03/27/2019 19:51:13</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.min.js">
-      <publishTime>03/27/2019 19:51:13</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.min.map">
-      <publishTime>03/27/2019 19:51:12</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.slim.js">
-      <publishTime>03/27/2019 19:51:12</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.slim.min.js">
-      <publishTime>03/27/2019 19:51:12</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.slim.min.map">
-      <publishTime>03/27/2019 19:51:12</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>03/27/2019 19:53:17</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>03/27/2019 19:53:16</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>03/27/2019 19:56:43</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>03/27/2019 19:56:42</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
-      <publishTime>03/27/2019 20:31:12</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/pdfobject.min.js">
-      <publishTime>04/04/2019 10:13:52</publishTime>
+      <publishTime>04/04/2019 20:17:49</publishTime>
     </File>
     <File Include="Scripts/popper-utils.js">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/popper-utils.js.map">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/popper-utils.min.js">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/popper-utils.min.js.map">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/popper.js">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/popper.js.map">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/popper.min.js">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/popper.min.js.map">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/README.md">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>03/27/2019 20:31:22</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/respond.matchmedia.addListener.js">
-      <publishTime>03/27/2019 20:31:22</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/respond.matchmedia.addListener.min.js">
-      <publishTime>03/27/2019 20:31:21</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>03/27/2019 20:31:21</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper-utils.js">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper-utils.js.map">
-      <publishTime>03/27/2019 20:42:40</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper-utils.min.js">
-      <publishTime>03/27/2019 20:42:39</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper-utils.min.js.map">
-      <publishTime>03/27/2019 20:42:39</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper.js">
-      <publishTime>03/27/2019 20:42:39</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper.js.map">
-      <publishTime>03/27/2019 20:42:39</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper.min.js">
-      <publishTime>03/27/2019 20:42:39</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/umd/popper.min.js.map">
-      <publishTime>03/27/2019 20:42:39</publishTime>
+      <publishTime>03/28/2019 12:16:24</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>04/04/2019 10:14:16</publishTime>
+      <publishTime>04/04/2019 20:17:49</publishTime>
     </File>
     <File Include="Views/Account/ChangePwd.cshtml">
-      <publishTime>04/05/2019 13:37:28</publishTime>
+      <publishTime>04/05/2019 22:13:28</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>04/05/2019 07:58:22</publishTime>
+      <publishTime>04/05/2019 22:13:29</publishTime>
     </File>
     <File Include="Views/Error/AccessDenied.cshtml">
-      <publishTime>03/29/2019 19:24:12</publishTime>
+      <publishTime>03/30/2019 23:52:52</publishTime>
     </File>
     <File Include="Views/Home/Details.cshtml">
-      <publishTime>04/08/2019 10:14:36</publishTime>
+      <publishTime>04/15/2019 22:04:10</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>04/10/2019 11:29:14</publishTime>
+      <publishTime>04/15/2019 22:14:32</publishTime>
     </File>
     <File Include="Views/Home/ListarPagos.cshtml">
-      <publishTime>04/08/2019 09:43:29</publishTime>
+      <publishTime>04/08/2019 22:16:06</publishTime>
     </File>
     <File Include="Views/Home/MostrarCursosAlumno.cshtml">
-      <publishTime>04/05/2019 14:00:39</publishTime>
+      <publishTime>04/05/2019 22:13:29</publishTime>
     </File>
     <File Include="Views/Home/MostrarPróximaCuota.cshtml">
-      <publishTime>04/08/2019 10:14:30</publishTime>
+      <publishTime>04/15/2019 22:06:49</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>03/26/2019 19:42:43</publishTime>
+      <publishTime>03/27/2019 11:44:48</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/05/2019 09:14:39</publishTime>
+      <publishTime>04/05/2019 22:13:29</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>03/26/2019 19:42:43</publishTime>
+      <publishTime>03/18/2019 23:10:21</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>03/26/2019 19:42:43</publishTime>
+      <publishTime>03/18/2019 23:10:21</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/10/2019 11:35:44</publishTime>
+      <publishTime>04/15/2019 22:41:33</publishTime>
     </File>
     <File Include="Web_Services/SMP.asmx">
-      <publishTime>03/26/2019 19:53:40</publishTime>
+      <publishTime>03/18/2019 23:17:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

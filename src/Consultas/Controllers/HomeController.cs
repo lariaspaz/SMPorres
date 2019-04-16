@@ -32,7 +32,7 @@ namespace Consultas.Controllers
             result.PróximaCuota = pagos.FirstOrDefault(p => p.Fecha == null);
             if (result.PróximaCuota != null)
             {
-                result.PróximaCuota.Vencido = result.PróximaCuota.FechaVto < Lib.Configuration.CurrentDate;
+                result.PróximaCuota.Vencido = result.PróximaCuota.FechaVto < Lib.Configuration.CurrentDate.Date;
             }
             return PartialView(result);
         }
