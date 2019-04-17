@@ -35,9 +35,16 @@ namespace Utilidades
         private void btnVerificarConexion_Click(object sender, EventArgs e)
         {
             var cliente = CrearCliente(txtEndpoint.Text);
-            cliente.TestAlive();
+            if (cliente.TestAlive())
+            {
+                MessageBox.Show("Todo ok.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Se produjo un error en el servidor.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             cliente.Close();
-            MessageBox.Show("Todo ok.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnLimpiarBD_Click(object sender, EventArgs e)
@@ -50,13 +57,22 @@ namespace Utilidades
             try
             {
                 var cliente = CrearCliente(txtEndpoint.Text);
-                cliente.ActualizarDatos(new SMPorres.ConsultasWeb.Alumno {
-                    Id = 0,
-                    Nombre = "38F73513-C569-4C08-B9DD-BDA2A0367605"
-                });
+                var alumno = new SMPorres.ConsultasWeb.Alumno {
+                                 Id = 0,
+                                 Nombre = "38F73513-C569-4C08-B9DD-BDA2A0367605"
+                             };
+                bool result = cliente.ActualizarDatos(alumno);
                 cliente.Close();
-                MessageBox.Show("Los datos se eliminaron correctamente.", "Información", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (result)
+                {
+                    MessageBox.Show("Los datos se eliminaron correctamente.", "Información", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Se produjo un error en el servidor.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
