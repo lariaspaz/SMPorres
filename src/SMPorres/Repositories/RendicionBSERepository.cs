@@ -18,7 +18,7 @@ namespace SMPorres.Repositories
                 try
                 {
                     var ca = CabecerasArchivosRepository.Insertar(db, TipoArchivo.RendiciónBSE, archivo);
-                    var id = db.RendicionesBSE.Any() ? db.RendicionesBSE.Max(t => t.Id) : 1;
+                    var id = db.RendicionesBSE.Any() ? db.RendicionesBSE.Max(t => t.Id) + 1 : 1;
                     foreach (var p in pagos)
                     {
                         var rend = new RendicionBSE();
