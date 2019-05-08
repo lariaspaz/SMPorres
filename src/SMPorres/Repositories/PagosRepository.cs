@@ -10,22 +10,6 @@ namespace SMPorres.Repositories
 {
     class PagosRepository
     {
-        private void Insertar(int idPlanPago)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                var pp = db.PlanesPago.Find(idPlanPago);
-                for (short i = 1; i <= Lib.Configuration.MaxCuotas; i++)
-                {
-                    var p = new Pago();
-                    p.IdPlanPago = idPlanPago;
-                    p.NroCuota = i;
-                    p.ImporteCuota = pp.ImporteCuota;
-                    db.Pagos.Add(p);
-                }
-            }
-        }
-
         internal static void ActualizarCuotas(int idCurso, decimal importe, bool esMatrícula)
         {
             using (var db = new SMPorresEntities())
@@ -217,6 +201,10 @@ namespace SMPorres.Repositories
                 p.Descripcion = pago.Descripcion;
                 p.IdArchivo = pago.IdArchivo;
                 db.SaveChanges();
+                if (p.NroCuota == Configuration.MaxCuotas)
+                {
+                    p.PlanPago.Estado = (short) EstadoPlanPago.Cancelado;
+                }
             }
             return true;
         }
@@ -238,6 +226,10 @@ namespace SMPorres.Repositories
             p.FechaGrabacion = Configuration.CurrentDate;
             p.Descripcion = pago.Descripcion;
             p.IdArchivo = pago.IdArchivo;
+            if (p.NroCuota == Configuration.MaxCuotas)
+            {
+                p.PlanPago.Estado = (short)EstadoPlanPago.Cancelado;
+            }
         }
     }
 }
