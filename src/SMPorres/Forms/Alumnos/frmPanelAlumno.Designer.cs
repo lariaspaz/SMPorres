@@ -105,7 +105,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(251, 12);
+            this.label2.Location = new System.Drawing.Point(339, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 3;
@@ -113,7 +113,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(307, 9);
+            this.txtNombre.Location = new System.Drawing.Point(395, 9);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(321, 20);
@@ -122,7 +122,7 @@
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(634, 6);
+            this.btnConsultar.Location = new System.Drawing.Point(722, 6);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(75, 23);
             this.btnConsultar.TabIndex = 5;
@@ -141,7 +141,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(719, 39);
+            this.panel1.Size = new System.Drawing.Size(804, 39);
             this.panel1.TabIndex = 1;
             // 
             // btnBuscarAlumno
@@ -167,7 +167,7 @@
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(719, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(804, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -257,7 +257,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 64);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(719, 153);
+            this.panel2.Size = new System.Drawing.Size(804, 153);
             this.panel2.TabIndex = 2;
             // 
             // dgvCursos
@@ -275,7 +275,7 @@
             this.dgvCursos.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursos.Size = new System.Drawing.Size(719, 130);
+            this.dgvCursos.Size = new System.Drawing.Size(804, 130);
             this.dgvCursos.TabIndex = 1;
             this.dgvCursos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCursos_DataBindingComplete);
             this.dgvCursos.SelectionChanged += new System.EventHandler(this.dgvCursos_SelectionChanged);
@@ -289,7 +289,7 @@
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.label3.Size = new System.Drawing.Size(719, 23);
+            this.label3.Size = new System.Drawing.Size(804, 23);
             this.label3.TabIndex = 0;
             this.label3.Text = "Cursos en los que se inscribió el alumno";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -300,7 +300,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 217);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(719, 250);
+            this.panel3.Size = new System.Drawing.Size(804, 295);
             this.panel3.TabIndex = 3;
             // 
             // tabControl1
@@ -311,7 +311,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(719, 250);
+            this.tabControl1.Size = new System.Drawing.Size(804, 295);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -320,7 +320,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(711, 224);
+            this.tabPage1.Size = new System.Drawing.Size(796, 269);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Planes de pago";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -340,7 +340,7 @@
             this.dgvPlanesPago.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvPlanesPago.ReadOnly = true;
             this.dgvPlanesPago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPlanesPago.Size = new System.Drawing.Size(705, 218);
+            this.dgvPlanesPago.Size = new System.Drawing.Size(790, 263);
             this.dgvPlanesPago.TabIndex = 1;
             this.dgvPlanesPago.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPlanesPago_DataBindingComplete);
             this.dgvPlanesPago.SelectionChanged += new System.EventHandler(this.dgvPlanesPago_SelectionChanged);
@@ -351,7 +351,7 @@
             this.tpCuotas.Location = new System.Drawing.Point(4, 22);
             this.tpCuotas.Name = "tpCuotas";
             this.tpCuotas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCuotas.Size = new System.Drawing.Size(711, 224);
+            this.tpCuotas.Size = new System.Drawing.Size(796, 254);
             this.tpCuotas.TabIndex = 1;
             this.tpCuotas.Text = "Cuotas";
             this.tpCuotas.UseVisualStyleBackColor = true;
@@ -372,7 +372,7 @@
             this.dgvPagos.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvPagos.ReadOnly = true;
             this.dgvPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPagos.Size = new System.Drawing.Size(705, 218);
+            this.dgvPagos.Size = new System.Drawing.Size(790, 248);
             this.dgvPagos.TabIndex = 1;
             this.dgvPagos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPagos_DataBindingComplete);
             // 
@@ -404,7 +404,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 467);
+            this.ClientSize = new System.Drawing.Size(804, 512);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
