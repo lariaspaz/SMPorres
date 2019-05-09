@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SMPorres.Forms.Web
 {
@@ -40,20 +43,29 @@ namespace SMPorres.Forms.Web
             }
         }
 
+        public string Acción
+        {
+            get
+            {
+                return lblAcción.Text;
+            }
+            set
+            {
+                //lblAcción.Text = value;
+                lblAcción.Invoke((MethodInvoker)delegate { lblAcción.Text = value; });
+            }
+        }
+
         private void ThreadProc()
         {
             try
             {
-                lblAcción.Text = "Conectando a la web";
+                Acción = "Conectando a la web";
                 var repo = new Repositories.WebRepository();
-                lblAcción.Text = "Obteniendo datos";
+                Acción = "Obteniendo datos";
                 var datos = repo.ObtenerDatos();
-                progressBar1.Minimum = 0;
-                progressBar1.Maximum = datos.Count();
-                progressBar1.Step = 1;
-                progressBar1.Value = 0;
-                lblPorcentaje.Text = "0%";
-                lblAcción.Text = "Procesando";
+                InicializarProgreso(datos);
+                Acción = "Procesando";
                 ConsultasWeb.SMPSoapClient cliente = CrearCliente();
                 try
                 {
@@ -65,19 +77,32 @@ namespace SMPorres.Forms.Web
                         }
                         if (!cliente.ActualizarDatos(alumno))
                         {
-                            ShowError("Error al subir los datos de " + alumno.Nombre + " " + alumno.Apellido);
+                            XmlSerializer xsSubmit = new XmlSerializer(typeof(ConsultasWeb.Alumno));
+                            var xml = "";
+                            using (var sww = new StringWriter())
+                            {
+                                using (XmlWriter writer = XmlWriter.Create(sww))
+                                {
+                                    xsSubmit.Serialize(writer, alumno);
+                                    xml = sww.ToString(); // Your XML
+                                    File.WriteAllText(Path.ChangeExtension(Application.ExecutablePath, ".upload.xml"), xml);
+                                }
+                            }
+                            string s = String.Format("No se pudieron subir los datos del alumno: " +
+                                "\nNº Documento:{0}\nNombre: {1}, {2}\nID: {3}", alumno.NroDocumento, 
+                                alumno.Apellido, alumno.Nombre, alumno.Id);
+                            ShowError(s);
                             break;
                         }
-                        progressBar1.PerformStep();
-                        lblPorcentaje.Text = String.Format("{0}%", Math.Truncate((progressBar1.Value / (double)progressBar1.Maximum) * 100));
+                        AvanzarProgreso();
                     }
                     var conf = Repositories.ConfiguracionRepository.ObtenerConfiguracion();
                     cliente.ActualizarConfiguracion(conf.InteresPorMora);
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
+                //catch (Exception)
+                //{
+                //    throw;
+                //}
                 finally
                 {
                     cliente.Close();
@@ -92,9 +117,47 @@ namespace SMPorres.Forms.Web
             {
                 ShowError("Error al subir los datos:\n", ex);
             }
-            lblAcción.Text = "Fin del proceso";
-            btnIniciarProceso.Image = Properties.Resources.control_play_blue;
-            _stop = true;
+            finally
+            {
+                Acción = "Fin del proceso";
+                FinalizarProgreso();
+                _stop = true;
+            }
+        }
+
+        private void FinalizarProgreso()
+        {
+            btnIniciarProceso.Invoke((MethodInvoker)delegate
+            {
+                btnIniciarProceso.Image = Properties.Resources.control_play_blue;
+            });
+        }
+
+        private void AvanzarProgreso()
+        {
+            progressBar1.Invoke((MethodInvoker)delegate
+            {
+                progressBar1.PerformStep();
+            });
+            lblPorcentaje.Invoke((MethodInvoker)delegate
+            {
+                lblPorcentaje.Text = String.Format("{0}%", Math.Truncate((progressBar1.Value / (double)progressBar1.Maximum) * 100));
+            });
+        }
+
+        private void InicializarProgreso(IEnumerable<ConsultasWeb.Alumno> datos)
+        {
+            progressBar1.Invoke((MethodInvoker)delegate
+            {
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = datos.Count();
+                progressBar1.Step = 1;
+                progressBar1.Value = 0;
+            });
+            lblPorcentaje.Invoke((MethodInvoker)delegate
+            {
+                lblPorcentaje.Text = "0%";
+            });
         }
 
         private static ConsultasWeb.SMPSoapClient CrearCliente()

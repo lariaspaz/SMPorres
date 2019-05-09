@@ -52,7 +52,6 @@
             this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PagosTotalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +68,6 @@
             this.archivoToolStripMenuItem,
             this.ediciónToolStripMenuItem,
             this.informesToolStripMenuItem,
-            this.pagosToolStripMenuItem,
             this.seguridadToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -250,12 +248,6 @@
             this.PagosTotalesToolStripMenuItem.Text = "Totales de pagos";
             this.PagosTotalesToolStripMenuItem.Click += new System.EventHandler(this.PagosTotalesToolStripMenuItem_Click);
             // 
-            // pagosToolStripMenuItem
-            // 
-            this.pagosToolStripMenuItem.Name = "pagosToolStripMenuItem";
-            this.pagosToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.pagosToolStripMenuItem.Text = "Pagos";
-            // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -358,7 +350,6 @@
         private System.Windows.Forms.ToolStripMenuItem alumnosPorEstadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alumnosMorososToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PagosTotalesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pagosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rendiciónBSEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actualizarDatosEnLaWebToolStripMenuItem;
     }

@@ -144,7 +144,7 @@
           <Property Name="IdCurso" Type="Int32" Nullable="false" />
           <Property Name="Curso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdCarrera" Type="Int32" Nullable="false" />
-          <Property Name="Carrera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Carrera" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="AlumnoWeb" Relationship="Self.FK_CursosAlumnosWeb_AlumnosWeb" FromRole="CursosAlumnosWeb" ToRole="AlumnosWeb" />
           <NavigationProperty Name="PagosWeb" Relationship="Self.FK_PagosWeb_CursosAlumnos" FromRole="CursosAlumnosWeb" ToRole="PagosWeb" />
         </EntityType>
