@@ -14,6 +14,7 @@ namespace SMPorres.Forms
         {
             InitializeComponent();
             _validator = new FormValidations(this, errorProvider1);
+            Icon = Properties.Resources.app2;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

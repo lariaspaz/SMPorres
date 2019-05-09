@@ -42,6 +42,7 @@ namespace SMPorres.Repositories
                 {
                     if (!menuItemsNames.Contains(item.Nombre))
                     {
+                        db.UsuariosItemsMenus.RemoveRange(db.UsuariosItemsMenus.Where(uim => uim.IdItemMenu == item.Id));
                         db.ItemsMenus.Remove(item);
                     }
                 }

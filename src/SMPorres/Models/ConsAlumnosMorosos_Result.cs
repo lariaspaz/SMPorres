@@ -26,6 +26,6 @@ namespace SMPorres.Models
         public Nullable<short> Cuota { get; set; }
         public decimal ImporteCuota { get; set; }
         public Nullable<decimal> ImportePagado { get; set; }
-        public Nullable<double> Beca { get; set; }
+        public Nullable<short> Beca { get; set; }
     }
 }
