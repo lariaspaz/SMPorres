@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SMPorres.Models;
 using SMPorres.Forms.BecasAlumnos;
+using System.ServiceModel;
 
 namespace SMPorres.Forms.Alumnos
 {
@@ -456,6 +457,7 @@ namespace SMPorres.Forms.Alumnos
                     var pwd = AlumnosRepository.GenerarContraseña(_alumno.Id, ref pwdEncriptada);
                     string msg = "La contraseña generada para el alumno es:\n" + pwd;
                     var cliente = new ConsultasWeb.SMPSoapClient();
+                    //var cliente = CrearCliente();
                     if (cliente.ActualizarPwd(_alumno.Id, pwdEncriptada))
                     {
                         msg += "\nSe actualizó la contraseña del alumno en la web.";
@@ -474,6 +476,16 @@ namespace SMPorres.Forms.Alumnos
             }
         }
 
+        private static ConsultasWeb.SMPSoapClient CrearCliente()
+        {
+            //Specify the binding to be used for the client.
+            BasicHttpBinding binding = new BasicHttpBinding();
 
+            //Specify the address to be used for the client.
+            EndpointAddress address =
+               new EndpointAddress(Repositories.ConfiguracionRepository.ObtenerConfiguracion().EndpointAddress);
+
+            return new ConsultasWeb.SMPSoapClient(binding, address);
+        }
     }
 }
