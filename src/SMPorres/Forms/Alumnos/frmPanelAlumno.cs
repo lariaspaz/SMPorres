@@ -456,8 +456,8 @@ namespace SMPorres.Forms.Alumnos
                     string pwdEncriptada = "";
                     var pwd = AlumnosRepository.GenerarContraseña(_alumno.Id, ref pwdEncriptada);
                     string msg = "La contraseña generada para el alumno es:\n" + pwd;
-                    var cliente = new ConsultasWeb.SMPSoapClient();
-                    //var cliente = CrearCliente();
+                    //var cliente = new ConsultasWeb.SMPSoapClient();
+                    var cliente = CrearCliente();
                     if (cliente.ActualizarPwd(_alumno.Id, pwdEncriptada))
                     {
                         msg += "\nSe actualizó la contraseña del alumno en la web.";
