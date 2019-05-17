@@ -434,7 +434,7 @@ namespace SMPorres.Forms.Alumnos
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             var p = PagoSeleccionado;
-            if (p.NroCuota == 0 || p.Fecha.HasValue)
+            if (p.NroCuota == 0 || p.Fecha.HasValue || Lib.Session.CurrentUser.Id != 1)
             {
                 e.Cancel = true;
             }
