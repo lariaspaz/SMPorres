@@ -33,9 +33,10 @@
             $('body').on('click', '#modSelFechaCompromiso #lnkImprimir', function (e) {
                 e.preventDefault();
                 var fc = $('#modSelFechaCompromiso #fechaCompromiso').val();
+                var c = $('#modSelFechaCompromiso #cuota').val();
                 var url = $('#modSelFechaCompromiso #lnkImprimir').attr('href');
                 $("#reporte .modal-body").html('');
-                PDFObject.embed(url + '?fechaCompromiso=' + fc, "#reporte .modal-body");
+                PDFObject.embed(url + '?fechaCompromiso=' + fc + '&cuota=' + c, "#reporte .modal-body");
                 $('#modSelFechaCompromiso').modal('hide');
                 $('#reporte').on('shown.bs.modal', function (e) {
                     var h = $('#reporte').height() * 0.95;

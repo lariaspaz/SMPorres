@@ -62,6 +62,18 @@ namespace Consultas.Repositories
             }
         }
 
+        public int ObtenerIdCuota(int nroCuota)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p2 = (from p in db.PagosWeb
+                          where p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId &&
+                                p.NroCuota == nroCuota
+                          select p).FirstOrDefault();
+                return (p2 == null) ? 0 : p2.Id;
+            }
+        }
+
         public PagoWeb ObtenerPago(int idPago)
         {
             using (var db = new SMPorresEntities())

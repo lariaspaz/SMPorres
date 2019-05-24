@@ -65,6 +65,12 @@ else
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-7 offset-3">
+                            <span>Cuota: </span>
+                            @Html.DropDownList("cuota", (SelectList)ViewBag.Cuotas, new { id = "cuota" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7 offset-3">
                             <span>Fecha de Pago: </span>
                             @Html.TextBox("fechaCompromiso",
                                 Consultas.Lib.Configuration.CurrentDate.Date.ToString("yyyy-MM-dd"),

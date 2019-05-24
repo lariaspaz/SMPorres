@@ -30,18 +30,25 @@ namespace Consultas.Controllers
             result.Curso = String.Format("{0} de {1}", ca.Curso, ca.Carrera);
             result.Pagos = pagos;
             result.PróximaCuota = pagos.FirstOrDefault(p => p.Fecha == null);
+            ViewBag.Cuotas = new object();
             if (result.PróximaCuota != null)
             {
                 result.PróximaCuota.Vencido = result.PróximaCuota.FechaVto < Lib.Configuration.CurrentDate.Date;
+                ViewBag.Cuotas = new SelectList(Enumerable.Range(result.PróximaCuota.NroCuota, 9 - result.PróximaCuota.NroCuota + 1));
+            }
+            else
+            {
+                ViewBag.Cuotas = new SelectList(Enumerable.Range(1, 9));
             }
             return PartialView(result);
         }
 
-        public ActionResult ImprimirCupon(DateTime fechaCompromiso)
+        public ActionResult ImprimirCupon(int cuota, DateTime fechaCompromiso)
         {
             Response.ClearContent();
             Response.ClearHeaders();
-            var id = new PagosRepository().ObtenerIdPrimeraCuotaImpaga();
+            //var id = new PagosRepository().ObtenerIdPrimeraCuotaImpaga();
+            var id = new PagosRepository().ObtenerIdCuota(cuota);
             if (id > 0)
             {
                 var repo = new CuponPagoRepository();
