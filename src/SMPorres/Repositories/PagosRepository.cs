@@ -165,9 +165,13 @@ namespace SMPorres.Repositories
                 var porcRecargo = (conf.InteresPorMora / 100) / 30.0;
                 var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto.Value).TotalDays);
                 var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
-                var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+                //impBecado = impBase;
+                //var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+                //totalAPagar = impBase - beca + recargoPorMora;
 
-                totalAPagar = impBase - beca + recargoPorMora;
+                beca = 0;
+                var recargoPorMora = Math.Round(pago.ImporteCuota * porcRecargoTotal, 2);
+                totalAPagar = impBase + recargoPorMora;
 
                 pago.PorcRecargo = porcRecargo;
                 pago.ImporteRecargo = recargoPorMora;
