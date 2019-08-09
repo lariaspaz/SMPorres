@@ -102,6 +102,76 @@ namespace SMPorres.Repositories
             }
         }
 
+        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca, short minCuota, short maxCuota)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (db.PlanesPago.Any(pp => pp.IdAlumno == idAlumno && pp.IdCurso == idCurso & pp.Estado == (short)EstadoPlanPago.Vigente))
+                {
+                    throw new Exception("El alumno ya tiene un plan de pago vigente en el curso seleccionado.");
+                }
+
+                var curso = CursosRepository.ObtenerCursoPorId(idCurso);
+                var id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1;
+                var trx = db.Database.BeginTransaction();
+                var plan = new PlanPago
+                {
+                    Id = id,
+                    IdAlumno = idAlumno,
+                    IdCurso = idCurso,
+                    CantidadCuotas = Configuration.MaxCuotas,
+                    NroCuota = 1,
+                    ImporteCuota = curso.ImporteCuota,
+                    PorcentajeBeca = porcentajeBeca,
+                    Estado = (short)EstadoPlanPago.Vigente,
+                    IdUsuarioEstado = Session.CurrentUser.Id,
+                    FechaGrabacion = Configuration.CurrentDate,
+                    IdUsuario = Session.CurrentUser.Id,
+                    MinCuotas = minCuota,
+                    MaxCuotas = maxCuota
+                };
+                try
+                {
+                    db.PlanesPago.Add(plan);
+                    db.SaveChanges();
+                    /*Cuota de matrícula*/
+                    var pMat = new Pago();
+                    pMat.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                    pMat.IdPlanPago = id;
+                    pMat.NroCuota = 0;
+                    pMat.ImporteCuota = curso.ImporteMatricula;
+                    db.Pagos.Add(pMat);
+                    db.SaveChanges();
+
+                    if (minCuota >= 0)
+                    {
+                        for (short i = minCuota; i <= maxCuota; i++)
+                        {
+                            if(i>0)  // Ya se generó matrícula
+                            {
+                                var p = new Pago();
+                                p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                                p.IdPlanPago = id;
+                                p.NroCuota = i;
+                                //p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                                p.ImporteCuota = curso.ImporteCuota;
+                                db.Pagos.Add(p);
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                    trx.Commit();
+                }
+                catch (Exception)
+                {
+                    trx.Rollback();
+                    throw;
+                }
+                return plan;
+            }
+        }
+
+
         public static PlanPago ActualizarPorcentajeBeca(int planDePagoId, short porcentajeBeca)
         {
             using (var db = new SMPorresEntities())

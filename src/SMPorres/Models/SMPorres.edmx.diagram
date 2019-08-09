@@ -35,8 +35,8 @@
         <EntityTypeShape EntityType="SMPorres_DevModel.PlanPago" Width="1.5" PointX="7.5" PointY="6" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Alumnos" ></AssociationConnector>
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" ManuallyRouted="true" >
-          <ConnectorPoint PointX="9.625" PointY="4.4233849756039838" />
-          <ConnectorPoint PointX="9.0000000000000018" PointY="6.0000000000639071" />
+          <ConnectorPoint PointX="9.625" PointY="4.4233849270283283" />
+          <ConnectorPoint PointX="9.0000000000000018" PointY="6.0000000022905366" />
         </AssociationConnector>
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Usuarios" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Usuarios1" />
@@ -65,6 +65,7 @@
         <EntityTypeShape EntityType="SMPorres_DevModel.CabeceraArchivo" Width="1.5" PointX="7.375" PointY="16" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios" />
         <AssociationConnector Association="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.PagosWeb" Width="1.5" PointX="12.375" PointY="13.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
