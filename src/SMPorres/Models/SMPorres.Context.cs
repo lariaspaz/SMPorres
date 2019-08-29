@@ -17,10 +17,10 @@ namespace SMPorres.Models
     
     public partial class SMPorresEntities : DbContext
     {
-        public SMPorresEntities()
-            : base("name=SMPorresEntities")
-        {
-        }
+        //public SMPorresEntities()
+        //    : base("name=SMPorresEntities")
+        //{
+        //}
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -51,7 +51,6 @@ namespace SMPorres.Models
         public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
         public virtual DbSet<RendicionBSE> RendicionesBSE { get; set; }
         public virtual DbSet<CabeceraArchivo> CabecerasArchivos { get; set; }
-        public virtual DbSet<PagosWeb> PagosWebs { get; set; }
     
         public virtual ObjectResult<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCarrera, Nullable<int> idCurso, Nullable<short> tipoBecado)
         {

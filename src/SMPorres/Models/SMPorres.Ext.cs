@@ -12,8 +12,8 @@ namespace SMPorres.Models
     {
         public const string ConnectionStringPassPhrase = "_SMPorres 11:06";
 
-        //public SMPorresEntities() : base(GetConnectionString())
-        //{}
+        public SMPorresEntities() : base(GetConnectionString())
+        {}
 
         private static string GetConnectionString()
         {

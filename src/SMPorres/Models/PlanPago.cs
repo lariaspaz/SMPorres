@@ -31,8 +31,6 @@ namespace SMPorres.Models
         public System.DateTime FechaGrabacion { get; set; }
         public short Estado { get; set; }
         public int IdUsuarioEstado { get; set; }
-        public Nullable<int> MinCuotas { get; set; }
-        public Nullable<int> MaxCuotas { get; set; }
     
         public virtual Alumno Alumno { get; set; }
         public virtual Curso Curso { get; set; }

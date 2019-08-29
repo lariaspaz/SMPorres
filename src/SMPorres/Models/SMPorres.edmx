@@ -17,9 +17,9 @@
           <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
           <Property Name="Contraseña" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Barrios">
@@ -57,7 +57,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -67,8 +67,8 @@
           <Property Name="DescuentoPagoTermino" Type="float" Nullable="false" />
           <Property Name="InteresPorMora" Type="float" Nullable="false" />
           <Property Name="CicloLectivo" Type="smallint" Nullable="false" />
-          <Property Name="EndpointAddress" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="DiasVtoPagoTermino" Type="smallint" />
+          <Property Name="EndpointAddress" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Cuotas">
           <Key>
@@ -189,24 +189,6 @@
           <Property Name="FechaVto" Type="datetime" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="PagosWeb">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="IdCursoAlumno" Type="int" Nullable="false" />
-          <Property Name="IdPlanPago" Type="int" Nullable="false" />
-          <Property Name="NroCuota" Type="smallint" Nullable="false" />
-          <Property Name="FechaVto" Type="smalldatetime" Nullable="false" />
-          <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fecha" Type="smalldatetime" />
-          <Property Name="ImportePagado" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="ImporteRecargo" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="ImportePagoTermino" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="PorcentajeBeca" Type="smallint" />
-          <Property Name="FechaVtoPagoTermino" Type="smalldatetime" />
-        </EntityType>
         <EntityType Name="PlanesPago">
           <Key>
             <PropertyRef Name="Id" />
@@ -222,8 +204,6 @@
           <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
           <Property Name="IdUsuarioEstado" Type="int" Nullable="false" />
-          <Property Name="MinCuotas" Type="int" />
-          <Property Name="MaxCuotas" Type="int" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -672,7 +652,6 @@
           <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MediosPago" EntityType="Self.MediosPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PagosWeb" EntityType="Self.PagosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlanesPago" EntityType="Self.PlanesPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RendicionesBSE" EntityType="Self.RendicionesBSE" Schema="dbo" store:Type="Tables" />
@@ -962,7 +941,6 @@
             <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="PagosWebs" EntityType="SMPorres_DevModel.PagosWeb" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1000,7 +978,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="BecasAlumnos" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" FromRole="Alumno" ToRole="BecasAlumno" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -1288,8 +1266,6 @@
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios" FromRole="PlanesPago" ToRole="Usuario" />
           <NavigationProperty Name="UsuarioEstado" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios1" FromRole="PlanesPago" ToRole="Usuario" />
           <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="PlanPago" ToRole="Pago" />
-          <Property Name="MinCuotas" Type="Int32" />
-          <Property Name="MaxCuotas" Type="Int32" />
         </EntityType>
         <Association Name="FK_PlanesPago_Alumnos">
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
@@ -1366,7 +1342,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
@@ -1665,24 +1641,6 @@
           <Property Type="Int32" Name="Cantidad" Nullable="false" />
           <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
-        <EntityType Name="PagosWeb">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdCursoAlumno" Type="Int32" Nullable="false" />
-          <Property Name="IdPlanPago" Type="Int32" Nullable="false" />
-          <Property Name="NroCuota" Type="Int16" Nullable="false" />
-          <Property Name="FechaVto" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Fecha" Type="DateTime" Precision="0" />
-          <Property Name="ImportePagado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ImporteRecargo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ImporteBeca" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ImportePagoTermino" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PorcentajeBeca" Type="Int16" />
-          <Property Name="FechaVtoPagoTermino" Type="DateTime" Precision="0" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1816,8 +1774,6 @@
           <EntitySetMapping Name="PlanesPago">
             <EntityTypeMapping TypeName="SMPorres_DevModel.PlanPago">
               <MappingFragment StoreEntitySet="PlanesPago">
-                <ScalarProperty Name="MaxCuotas" ColumnName="MaxCuotas" />
-                <ScalarProperty Name="MinCuotas" ColumnName="MinCuotas" />
                 <ScalarProperty Name="IdUsuarioEstado" ColumnName="IdUsuarioEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="FechaGrabacion" ColumnName="FechaGrabacion" />
@@ -2002,25 +1958,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="PagosWebs">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.PagosWeb">
-              <MappingFragment StoreEntitySet="PagosWeb">
-                <ScalarProperty Name="FechaVtoPagoTermino" ColumnName="FechaVtoPagoTermino" />
-                <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
-                <ScalarProperty Name="ImportePagoTermino" ColumnName="ImportePagoTermino" />
-                <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
-                <ScalarProperty Name="ImporteRecargo" ColumnName="ImporteRecargo" />
-                <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
-                <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
-                <ScalarProperty Name="NroCuota" ColumnName="NroCuota" />
-                <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
-                <ScalarProperty Name="IdCursoAlumno" ColumnName="IdCursoAlumno" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
