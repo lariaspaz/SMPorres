@@ -22,13 +22,14 @@ namespace SMPorres.Repositories
                                         Nombre = c.Nombre,
                                         IdCarrera = c.IdCarrera,
                                         ImporteCuota = c.ImporteCuota,
-                                        ImporteMatricula = c.ImporteMatricula
+                                        ImporteMatricula = c.ImporteMatricula,
+                                        Modalidad = c.Modalidad
                                     });
                 return query.OrderBy(c => c.Nombre).ToList();
             }
         }
 
-        public static Curso Insertar(string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota)
+        public static Curso Insertar(string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota, int modalidad)
         {
             using (var db = new SMPorresEntities())
             {
@@ -39,7 +40,8 @@ namespace SMPorres.Repositories
                     Nombre = nombre,
                     IdCarrera = idCarrera,
                     ImporteMatricula = importeMatrícula,
-                    ImporteCuota = importeCuota
+                    ImporteCuota = importeCuota,
+                    Modalidad = modalidad
                 };
                 db.Cursos.Add(c);
                 db.SaveChanges();
@@ -47,7 +49,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void Actualizar(int id, string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota)
+        public static void Actualizar(int id, string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota, int modalidad)
         {
             using (var db = new SMPorresEntities())
             {
@@ -58,6 +60,7 @@ namespace SMPorres.Repositories
                 var c = db.Cursos.Find(id);
                 c.Nombre = nombre;
                 c.IdCarrera = idCarrera;
+                c.Modalidad = modalidad;
                 var trx = db.Database.BeginTransaction();
                 try
                 {

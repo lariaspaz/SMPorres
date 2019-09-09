@@ -28,7 +28,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdLocalidad" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="BecasAlumnos">
           <Key>
@@ -57,7 +57,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Duracion" Type="smallint" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
-          <Property Name="FechaEstado" Type="datetime" Nullable="false" />
+          <Property Name="FechaEstado" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Configuracion">
           <Key>
@@ -67,8 +67,8 @@
           <Property Name="DescuentoPagoTermino" Type="float" Nullable="false" />
           <Property Name="InteresPorMora" Type="float" Nullable="false" />
           <Property Name="CicloLectivo" Type="smallint" Nullable="false" />
-          <Property Name="DiasVtoPagoTermino" Type="smallint" />
           <Property Name="EndpointAddress" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DiasVtoPagoTermino" Type="smallint" />
         </EntityType>
         <EntityType Name="Cuotas">
           <Key>
@@ -87,6 +87,7 @@
           <Property Name="IdCarrera" Type="int" Nullable="false" />
           <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ImporteMatricula" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Modalidad" Type="int" />
         </EntityType>
         <EntityType Name="CursosAlumnos">
           <Key>
@@ -204,6 +205,8 @@
           <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
           <Property Name="IdUsuarioEstado" Type="int" Nullable="false" />
+          <Property Name="MinCuotas" Type="int" />
+          <Property Name="MaxCuotas" Type="int" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -260,30 +263,6 @@
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="IdItemMenu" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Alumnos_Domicilios">
-          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="0..1" />
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilios">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Alumnos">
-              <PropertyRef Name="IdDomicilio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Alumnos_TiposDocumento">
-          <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposDocumento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Alumnos">
-              <PropertyRef Name="IdTipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Barrios_Localidades">
           <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
           <End Role="Barrios" Type="Self.Barrios" Multiplicity="*" />
@@ -658,14 +637,6 @@
           <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuariosItemsMenu" EntityType="Self.UsuariosItemsMenu" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Alumnos_Domicilios" Association="Self.FK_Alumnos_Domicilios">
-            <End Role="Domicilios" EntitySet="Domicilios" />
-            <End Role="Alumnos" EntitySet="Alumnos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="Self.FK_Alumnos_TiposDocumento">
-            <End Role="TiposDocumento" EntitySet="TiposDocumento" />
-            <End Role="Alumnos" EntitySet="Alumnos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Barrios_Localidades" Association="Self.FK_Barrios_Localidades">
             <End Role="Localidades" EntitySet="Localidades" />
             <End Role="Barrios" EntitySet="Barrios" />
@@ -823,7 +794,6 @@
             <End Role="Provincia" EntitySet="Provincias" />
             <End Role="Domicilio" EntitySet="Domicilios" />
           </AssociationSet>
-          <EntitySet Name="Cursos" EntityType="SMPorres_DevModel.Curso" />
           <EntitySet Name="Grupos" EntityType="SMPorres_DevModel.Grupos" />
           <EntitySet Name="GruposUsuarios" EntityType="SMPorres_DevModel.GruposUsuario" />
           <AssociationSet Name="FK_GruposUsuarios_Grupos" Association="SMPorres_DevModel.FK_GruposUsuarios_Grupos">
@@ -844,17 +814,9 @@
             <End Role="Alumno" EntitySet="Alumnos" />
             <End Role="CursosAlumno" EntitySet="CursosAlumnos" />
           </AssociationSet>
-          <AssociationSet Name="FK_CursosAlumnos_Cursos" Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos">
-            <End Role="Curso" EntitySet="Cursos" />
-            <End Role="CursosAlumno" EntitySet="CursosAlumnos" />
-          </AssociationSet>
           <EntitySet Name="PlanesPago" EntityType="SMPorres_DevModel.PlanPago" />
           <AssociationSet Name="FK_PlanesPago_Alumnos" Association="SMPorres_DevModel.FK_PlanesPago_Alumnos">
             <End Role="Alumno" EntitySet="Alumnos" />
-            <End Role="PlanesPago" EntitySet="PlanesPago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PlanesPago_Cursos" Association="SMPorres_DevModel.FK_PlanesPago_Cursos">
-            <End Role="Curso" EntitySet="Cursos" />
             <End Role="PlanesPago" EntitySet="PlanesPago" />
           </AssociationSet>
           <AssociationSet Name="FK_PlanesPago_Usuarios" Association="SMPorres_DevModel.FK_PlanesPago_Usuarios">
@@ -868,10 +830,6 @@
           <EntitySet Name="Configuraciones" EntityType="SMPorres_DevModel.Configuracion" />
           <EntitySet Name="Cuotas" EntityType="SMPorres_DevModel.Cuota" />
           <EntitySet Name="Carreras" EntityType="SMPorres_DevModel.Carrera" />
-          <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
-            <End Role="Carrera" EntitySet="Carreras" />
-            <End Role="Curso" EntitySet="Cursos" />
-          </AssociationSet>
           <EntitySet Name="GruposItemsMenus" EntityType="SMPorres_DevModel.GruposItemsMenu" />
           <EntitySet Name="ItemsMenus" EntityType="SMPorres_DevModel.ItemsMenu" />
           <EntitySet Name="UsuariosItemsMenus" EntityType="SMPorres_DevModel.UsuariosItemsMenu" />
@@ -941,6 +899,19 @@
             <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Cursos" EntityType="SMPorres_DevModel.Curso" />
+          <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
+            <End Role="Carrera" EntitySet="Carreras" />
+            <End Role="Curso" EntitySet="Cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursosAlumnos_Cursos" Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="CursosAlumno" EntitySet="CursosAlumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanesPago_Cursos" Association="SMPorres_DevModel.FK_PlanesPago_Cursos">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="PlanPago" EntitySet="PlanesPago" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -988,7 +959,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdLocalidad" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Localidad" Relationship="SMPorres_DevModel.FK_Barrios_Localidades" FromRole="Barrio" ToRole="Localidade" />
           <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Barrios" FromRole="Barrio" ToRole="Domicilio" />
         </EntityType>
@@ -1134,19 +1105,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Curso">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdCarrera" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="Curso" ToRole="CursosAlumno" />
-          <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanesPago" />
-          <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
-          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ImporteMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-        </EntityType>
         <EntityType Name="Grupos">
           <Key>
             <PropertyRef Name="Id" />
@@ -1219,8 +1177,8 @@
           <Property Name="IdCurso" Type="Int32" Nullable="false" />
           <Property Name="IdAlumno" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Alumno" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="CursosAlumno" ToRole="Alumno" />
-          <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="CursosAlumno" ToRole="Curso" />
           <Property Name="CicloLectivo" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="CursosAlumno" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_CursosAlumnos_Alumnos">
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
@@ -1231,18 +1189,6 @@
             </Principal>
             <Dependent Role="CursosAlumno">
               <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CursosAlumnos_Cursos">
-          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.CursosAlumno" Role="CursosAlumno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Curso">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CursosAlumno">
-              <PropertyRef Name="IdCurso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1262,10 +1208,12 @@
           <Property Name="Estado" Type="Int16" Nullable="false" />
           <Property Name="IdUsuarioEstado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Alumno" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="PlanesPago" ToRole="Alumno" />
-          <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="PlanesPago" ToRole="Curso" />
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios" FromRole="PlanesPago" ToRole="Usuario" />
           <NavigationProperty Name="UsuarioEstado" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios1" FromRole="PlanesPago" ToRole="Usuario" />
           <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="PlanPago" ToRole="Pago" />
+          <Property Name="MinCuotas" Type="Int32" />
+          <Property Name="MaxCuotas" Type="Int32" />
+          <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="PlanPago" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_PlanesPago_Alumnos">
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
@@ -1276,18 +1224,6 @@
             </Principal>
             <Dependent Role="PlanesPago">
               <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PlanesPago_Cursos">
-          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.PlanPago" Role="PlanesPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Curso">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PlanesPago">
-              <PropertyRef Name="IdCurso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1342,21 +1278,9 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Int16" Nullable="false" />
           <Property Name="Estado" Type="Int16" Nullable="false" />
-          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEstado" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Cursos" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Carrera" ToRole="Curso" />
         </EntityType>
-        <Association Name="FK_Cursos_Carreras">
-          <End Type="SMPorres_DevModel.Carrera" Role="Carrera" Multiplicity="1" />
-          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Curso">
-              <PropertyRef Name="IdCarrera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="GruposItemsMenu">
           <Key>
             <PropertyRef Name="Id" />
@@ -1641,6 +1565,56 @@
           <Property Type="Int32" Name="Cantidad" Nullable="false" />
           <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCarrera" Type="Int32" Nullable="false" />
+          <Property Name="ImporteCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Modalidad" Type="Int32" />
+          <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
+          <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="Curso" ToRole="CursosAlumno" />
+          <NavigationProperty Name="PlanesPagoes" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanPago" />
+        </EntityType>
+        <Association Name="FK_Cursos_Carreras">
+          <End Type="SMPorres_DevModel.Carrera" Role="Carrera" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="IdCarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursosAlumnos_Cursos">
+          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.CursosAlumno" Role="CursosAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursosAlumno">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanesPago_Cursos">
+          <End Type="SMPorres_DevModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="SMPorres_DevModel.PlanPago" Role="PlanPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlanPago">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1724,17 +1698,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cursos">
-            <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
-              <MappingFragment StoreEntitySet="Cursos">
-                <ScalarProperty Name="ImporteMatricula" ColumnName="ImporteMatricula" />
-                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
-                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Grupos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Grupos">
               <MappingFragment StoreEntitySet="Grupos">
@@ -1774,6 +1737,8 @@
           <EntitySetMapping Name="PlanesPago">
             <EntityTypeMapping TypeName="SMPorres_DevModel.PlanPago">
               <MappingFragment StoreEntitySet="PlanesPago">
+                <ScalarProperty Name="MaxCuotas" ColumnName="MaxCuotas" />
+                <ScalarProperty Name="MinCuotas" ColumnName="MinCuotas" />
                 <ScalarProperty Name="IdUsuarioEstado" ColumnName="IdUsuarioEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="FechaGrabacion" ColumnName="FechaGrabacion" />
@@ -1958,6 +1923,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Cursos">
+            <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
+              <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
+                <ScalarProperty Name="ImporteMatricula" ColumnName="ImporteMatricula" />
+                <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

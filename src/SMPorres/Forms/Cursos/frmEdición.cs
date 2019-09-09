@@ -22,6 +22,15 @@ namespace SMPorres.Forms.Cursos
             cbCarreras.DataSource = CarrerasRepository.ObtenerCarreras().OrderBy(c => c.Nombre).ToList();
             cbCarreras.DisplayMember = "Nombre";
             cbCarreras.ValueMember = "Id";
+            var modalidades = new Dictionary<int, string>();
+            modalidades.Add(1, "Anual");
+            modalidades.Add(2, "Primer cuatrimestre");
+            modalidades.Add(3, "Segundo cuatrimestre");
+            modalidades.Add(4, "Sin cursado");
+            cbModalidad.DataSource = new BindingSource(modalidades, null);
+            cbModalidad.ValueMember = "Key";
+            cbModalidad.DisplayMember = "Value";
+            cbModalidad.SelectedIndex = 0;
             this.Text = "Nuevo curso";
             txtNombre.Select();
             _validator = new FormValidations(this, errorProvider1);
@@ -34,6 +43,19 @@ namespace SMPorres.Forms.Cursos
             cbCarreras.SelectedValue = curso.IdCarrera;
             txtImporteMatrícula.DecValue = curso.ImporteMatricula;
             txtImporteCuota.DecValue = curso.ImporteCuota;
+            cbModalidad.SelectedIndex = (int)curso.Modalidad - 1;
+        }
+
+        public int Modalidad
+        {
+            private set
+            {
+                cbModalidad.SelectedValue = value;
+            }
+            get
+            {
+                return (int)cbModalidad.SelectedValue;
+            }
         }
 
         public string Nombre
@@ -84,3 +106,4 @@ namespace SMPorres.Forms.Cursos
         }        
     }
 }
+

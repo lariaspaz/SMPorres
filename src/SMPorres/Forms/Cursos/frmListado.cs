@@ -35,7 +35,8 @@ namespace SMPorres.Forms.Cursos
                           c.Nombre,
                           c.IdCarrera,
                           c.ImporteMatricula,
-                          c.ImporteCuota
+                          c.ImporteCuota,
+                          c.Modalidad
                       };
             dgvDatos.SetDataSource(qry.ToList());
         }
@@ -67,6 +68,11 @@ namespace SMPorres.Forms.Cursos
             dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[4].DefaultCellStyle.Format = "C2";
+
+            dgvDatos.Columns[5].HeaderText = "Modalidad";
+            dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            //dgvDatos.Columns[5].DefaultCellStyle.Format = "C2";
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)
@@ -90,7 +96,7 @@ namespace SMPorres.Forms.Cursos
                 {
                     try
                     {
-                        var c = CursosRepository.Insertar(f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.ImporteCuota);
+                        var c = CursosRepository.Insertar(f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.ImporteCuota, f.Modalidad);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }
@@ -111,7 +117,7 @@ namespace SMPorres.Forms.Cursos
                 {
                     try
                     {
-                        CursosRepository.Actualizar(c.Id, f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.ImporteCuota);
+                        CursosRepository.Actualizar(c.Id, f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.ImporteCuota, f.Modalidad);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }
