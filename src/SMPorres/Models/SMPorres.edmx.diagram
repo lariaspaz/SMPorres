@@ -58,7 +58,7 @@
         <EntityTypeShape EntityType="SMPorres_DevModel.CabeceraArchivo" Width="1.5" PointX="7.375" PointY="16" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios" />
         <AssociationConnector Association="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="9.625" PointY="3" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="9.625" PointY="2.875" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" />

@@ -12,10 +12,10 @@ namespace SMPorres.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PlanPago
+    public partial class PlanesPago
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PlanPago()
+        public PlanesPago()
         {
             this.Pagos = new HashSet<Pago>();
         }
@@ -33,10 +33,10 @@ namespace SMPorres.Models
         public int IdUsuarioEstado { get; set; }
     
         public virtual Alumno Alumno { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        public virtual Usuario UsuarioEstado { get; set; }
+        public virtual Curso Curso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pagos { get; set; }
-        public virtual Curso Curso { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

@@ -205,8 +205,6 @@
           <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="smallint" Nullable="false" />
           <Property Name="IdUsuarioEstado" Type="int" Nullable="false" />
-          <Property Name="MinCuotas" Type="int" />
-          <Property Name="MaxCuotas" Type="int" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -1211,8 +1209,6 @@
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios" FromRole="PlanesPago" ToRole="Usuario" />
           <NavigationProperty Name="UsuarioEstado" Relationship="SMPorres_DevModel.FK_PlanesPago_Usuarios1" FromRole="PlanesPago" ToRole="Usuario" />
           <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="PlanPago" ToRole="Pago" />
-          <Property Name="MinCuotas" Type="Int32" />
-          <Property Name="MaxCuotas" Type="Int32" />
           <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="PlanPago" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_PlanesPago_Alumnos">
@@ -1737,8 +1733,6 @@
           <EntitySetMapping Name="PlanesPago">
             <EntityTypeMapping TypeName="SMPorres_DevModel.PlanPago">
               <MappingFragment StoreEntitySet="PlanesPago">
-                <ScalarProperty Name="MaxCuotas" ColumnName="MaxCuotas" />
-                <ScalarProperty Name="MinCuotas" ColumnName="MinCuotas" />
                 <ScalarProperty Name="IdUsuarioEstado" ColumnName="IdUsuarioEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="FechaGrabacion" ColumnName="FechaGrabacion" />

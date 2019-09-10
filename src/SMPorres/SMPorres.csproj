@@ -298,6 +298,9 @@
     <Compile Include="Models\ConsAlumnosMorosos_Result.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Curso.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PagoBSE.cs" />
     <Compile Include="Models\Barrio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
@@ -318,9 +321,6 @@
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuota.cs">
-      <DependentUpon>SMPorres.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Curso.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CursosAlumno.cs">
