@@ -34,7 +34,6 @@ namespace SMPorres.Models
         public virtual DbSet<Domicilio> Domicilios { get; set; }
         public virtual DbSet<Localidad> Localidades { get; set; }
         public virtual DbSet<Provincia> Provincias { get; set; }
-        public virtual DbSet<Curso> Cursos { get; set; }
         public virtual DbSet<Grupos> Grupos { get; set; }
         public virtual DbSet<GruposUsuario> GruposUsuarios { get; set; }
         public virtual DbSet<TipoDocumento> TiposDocumento { get; set; }
@@ -51,6 +50,7 @@ namespace SMPorres.Models
         public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
         public virtual DbSet<RendicionBSE> RendicionesBSE { get; set; }
         public virtual DbSet<CabeceraArchivo> CabecerasArchivos { get; set; }
+        public virtual DbSet<Curso> Cursos { get; set; }
     
         public virtual ObjectResult<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCarrera, Nullable<int> idCurso, Nullable<short> tipoBecado)
         {
