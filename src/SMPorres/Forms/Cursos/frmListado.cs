@@ -36,7 +36,7 @@ namespace SMPorres.Forms.Cursos
                           c.IdCarrera,
                           c.ImporteMatricula,
                           c.ImporteCuota,
-                          c.Modalidad
+                          c.LeyendaModalidad
                       };
             dgvDatos.SetDataSource(qry.ToList());
         }

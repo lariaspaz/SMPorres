@@ -301,6 +301,8 @@
     <Compile Include="Models\Curso.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Curso.Ext.cs" />
+    <Compile Include="Models\ModalidadCursado.cs" />
     <Compile Include="Models\PagoBSE.cs" />
     <Compile Include="Models\Barrio.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
