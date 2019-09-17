@@ -385,6 +385,7 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SMPorres.Ext.cs" />
+    <Compile Include="Models\TipoBeca.cs" />
     <Compile Include="Models\TipoDocumento.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>

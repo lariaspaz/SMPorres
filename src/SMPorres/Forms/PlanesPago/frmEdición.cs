@@ -25,6 +25,13 @@ namespace SMPorres.Forms.PlanesPago
             txtCuota.Text = String.Format("1 de 10", ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo);
             txtPorcentajeBeca.Select();
             _validator = new FormValidations(this, errorProvider1);
+            var tiposBeca = new Dictionary<int, string>();
+            tiposBeca.Add((int)Models.TipoBeca.AplicaHastaVto, "Aplicar hasta el vencimiento");
+            tiposBeca.Add((int)Models.TipoBeca.AplicaSiempre, "Aplicar siempre");
+            cbTipoBeca.DataSource = new BindingSource(tiposBeca, null);
+            cbTipoBeca.ValueMember = "Key";
+            cbTipoBeca.DisplayMember = "Value";
+            cbTipoBeca.SelectedIndex = 0;
         }
 
         public frmEdición(string alumno, string curso, PlanPago plan) : this(alumno, curso)
@@ -32,13 +39,26 @@ namespace SMPorres.Forms.PlanesPago
             this.Text = "Edición de plan de pago";
             txtCuota.Text = String.Format("{0} de {1}", plan.NroCuota, plan.CantidadCuotas);
             txtPorcentajeBeca.DecValue = plan.PorcentajeBeca;
+            this.TipoBeca = (TipoBeca)plan.TipoBeca;
         }
 
         public short PorcentajeBeca
         {
             get
             {
-                return (short) txtPorcentajeBeca.IntValue;
+                return (short)txtPorcentajeBeca.IntValue;
+            }
+        }
+
+        public TipoBeca TipoBeca
+        {
+            get
+            {
+                return (TipoBeca)cbTipoBeca.SelectedValue;
+            }
+            private set
+            {
+                cbTipoBeca.SelectedValue = value;
             }
         }
 
@@ -54,6 +74,6 @@ namespace SMPorres.Forms.PlanesPago
         private bool ValidarDatos()
         {
             return _validator.Validar(txtPorcentajeBeca, txtPorcentajeBeca.DecValue >= 0, "Debe ser mayor que 0");
-        }        
+        }
     }
 }

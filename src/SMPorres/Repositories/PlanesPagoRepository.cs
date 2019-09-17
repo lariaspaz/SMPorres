@@ -51,7 +51,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca)
+        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca, TipoBeca tipoBeca)
         {
             using (var db = new SMPorresEntities())
             {
@@ -72,6 +72,7 @@ namespace SMPorres.Repositories
                     NroCuota = 1,
                     ImporteCuota = curso.ImporteCuota,
                     PorcentajeBeca = porcentajeBeca,
+                    TipoBeca = (byte)tipoBeca,
                     Estado = (short)EstadoPlanPago.Vigente,
                     IdUsuarioEstado = Session.CurrentUser.Id,
                     FechaGrabacion = Configuration.CurrentDate,
@@ -102,12 +103,13 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static PlanPago ActualizarPorcentajeBeca(int planDePagoId, short porcentajeBeca)
+        public static PlanPago Actualizar(int planDePagoId, short porcentajeBeca, TipoBeca tipoBeca)
         {
             using (var db = new SMPorresEntities())
             {
                 var p = db.PlanesPago.Find(planDePagoId);
                 p.PorcentajeBeca = porcentajeBeca;
+                p.TipoBeca = (byte)tipoBeca;
                 db.SaveChanges();
                 return p;
             }
