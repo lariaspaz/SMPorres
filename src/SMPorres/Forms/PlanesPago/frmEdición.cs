@@ -26,8 +26,8 @@ namespace SMPorres.Forms.PlanesPago
             txtPorcentajeBeca.Select();
             _validator = new FormValidations(this, errorProvider1);
             var tiposBeca = new Dictionary<int, string>();
-            tiposBeca.Add((int)Models.TipoBeca.AplicaHastaVto, "Aplicar hasta el vencimiento");
-            tiposBeca.Add((int)Models.TipoBeca.AplicaSiempre, "Aplicar siempre");
+            tiposBeca.Add((int)TipoBeca.AplicaHastaVto, "Aplicar hasta el vencimiento");
+            tiposBeca.Add((int)TipoBeca.AplicaSiempre, "Aplicar siempre");
             cbTipoBeca.DataSource = new BindingSource(tiposBeca, null);
             cbTipoBeca.ValueMember = "Key";
             cbTipoBeca.DisplayMember = "Value";
@@ -58,7 +58,7 @@ namespace SMPorres.Forms.PlanesPago
             }
             private set
             {
-                cbTipoBeca.SelectedValue = value;
+                cbTipoBeca.SelectedValue = (int)value;
             }
         }
 
