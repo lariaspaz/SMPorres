@@ -68,28 +68,45 @@ namespace SMPorres.Repositories
                     Id = id,
                     IdAlumno = idAlumno,
                     IdCurso = idCurso,
-                    CantidadCuotas = Configuration.MaxCuotas,
-                    NroCuota = 1,
+                    CantidadCuotas = CursosRepository.ObtieneMaxCuota(curso.Modalidad),//Configuration.MaxCuotas,
+                    NroCuota = CursosRepository.ObtieneMinCuota(curso.Modalidad), //1,
                     ImporteCuota = curso.ImporteCuota,
                     PorcentajeBeca = porcentajeBeca,
                     Estado = (short)EstadoPlanPago.Vigente,
                     IdUsuarioEstado = Session.CurrentUser.Id,
                     FechaGrabacion = Configuration.CurrentDate,
-                    IdUsuario = Session.CurrentUser.Id
+                    IdUsuario = Session.CurrentUser.Id,
+                    Modalidad = curso.Modalidad
                 };
                 try
                 {
                     db.PlanesPago.Add(plan);
                     db.SaveChanges();
-                    for (short i = 0; i <= Configuration.MaxCuotas; i++)
+                    //carga cuota matricula
+                    var pm = new Pago();
+                    pm.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                    pm.IdPlanPago = id;
+                    pm.NroCuota = 0;
+                    pm.ImporteCuota = curso.ImporteMatricula;
+                    db.Pagos.Add(pm);
+                    db.SaveChanges();
+
+                    //leer modalidad y obtener minCuota y maxCuota
+                    short minC = CursosRepository.ObtieneMinCuota(curso.Modalidad);
+                    short maxC = CursosRepository.ObtieneMaxCuota(curso.Modalidad);
+                    if(minC != maxC)
                     {
-                        var p = new Pago();
-                        p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
-                        p.IdPlanPago = id;
-                        p.NroCuota = i;
-                        p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
-                        db.Pagos.Add(p);
-                        db.SaveChanges();
+                    //for (short i = 0; i <= Configuration.MaxCuotas; i++)
+                        for (short i = minC; i <= maxC; i++)
+                        {
+                            var p = new Pago();
+                            p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                            p.IdPlanPago = id;
+                            p.NroCuota = i;
+                            p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                            db.Pagos.Add(p);
+                            db.SaveChanges();
+                        }
                     }
                     trx.Commit();
                 }

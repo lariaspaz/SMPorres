@@ -184,7 +184,7 @@ namespace SMPorres.Forms.Alumnos
 
         private void GenerarPlanDePagoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado))
+            using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado, NombreCurso))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
@@ -358,7 +358,7 @@ namespace SMPorres.Forms.Alumnos
         private void btnEditarPlanPago_Click(object sender, EventArgs e)
         {
             var pps = PlanDePagoSeleccionado;
-            using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado, pps))
+            using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado, NombreCurso, pps))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
@@ -381,8 +381,17 @@ namespace SMPorres.Forms.Alumnos
             get
             {
                 int rowindex = dgvCursos.CurrentCell.RowIndex;
-                var carrera = (string)dgvCursos.Rows[rowindex].Cells[2].Value;
+                var carrera = (string)dgvCursos.Rows[rowindex].Cells[3].Value;
                 return CursoSeleccionado.Nombre + " de " + carrera;
+            }
+        }
+
+        public string NombreCurso
+        {
+            get
+            {
+                int rowindex = dgvCursos.CurrentCell.RowIndex;
+                return CursoSeleccionado.Nombre;
             }
         }
 

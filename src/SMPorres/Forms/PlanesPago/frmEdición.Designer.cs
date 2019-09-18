@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtModalidad = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPorcentajeBeca = new CustomLibrary.ComponentModel.NumericTextBox();
             this.txtCuota = new System.Windows.Forms.TextBox();
@@ -53,6 +55,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtModalidad);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.txtPorcentajeBeca);
             this.panel2.Controls.Add(this.txtCuota);
@@ -65,13 +69,30 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(307, 122);
+            this.panel2.Size = new System.Drawing.Size(307, 148);
             this.panel2.TabIndex = 1;
+            // 
+            // txtModalidad
+            // 
+            this.txtModalidad.Location = new System.Drawing.Point(95, 63);
+            this.txtModalidad.Name = "txtModalidad";
+            this.txtModalidad.ReadOnly = true;
+            this.txtModalidad.Size = new System.Drawing.Size(200, 20);
+            this.txtModalidad.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 66);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Modalidad:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(201, 93);
+            this.label5.Location = new System.Drawing.Point(201, 120);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(15, 13);
             this.label5.TabIndex = 7;
@@ -85,7 +106,7 @@
             0,
             0});
             this.txtPorcentajeBeca.IntValue = ((long)(0));
-            this.txtPorcentajeBeca.Location = new System.Drawing.Point(95, 90);
+            this.txtPorcentajeBeca.Location = new System.Drawing.Point(95, 116);
             this.txtPorcentajeBeca.Name = "txtPorcentajeBeca";
             this.txtPorcentajeBeca.Size = new System.Drawing.Size(100, 20);
             this.txtPorcentajeBeca.TabIndex = 6;
@@ -94,7 +115,7 @@
             // 
             // txtCuota
             // 
-            this.txtCuota.Location = new System.Drawing.Point(95, 63);
+            this.txtCuota.Location = new System.Drawing.Point(95, 89);
             this.txtCuota.Name = "txtCuota";
             this.txtCuota.ReadOnly = true;
             this.txtCuota.Size = new System.Drawing.Size(100, 20);
@@ -111,7 +132,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(51, 93);
+            this.label4.Location = new System.Drawing.Point(51, 119);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 3;
@@ -120,7 +141,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 67);
+            this.label3.Location = new System.Drawing.Point(11, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 2;
@@ -164,7 +185,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(313, 163);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(313, 189);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -173,7 +194,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 128);
+            this.panel1.Location = new System.Drawing.Point(0, 154);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(313, 35);
@@ -223,7 +244,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(313, 163);
+            this.ClientSize = new System.Drawing.Size(313, 189);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";
@@ -254,5 +275,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtModalidad;
+        private System.Windows.Forms.Label label6;
     }
 }

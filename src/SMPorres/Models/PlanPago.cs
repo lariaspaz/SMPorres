@@ -32,6 +32,7 @@ namespace SMPorres.Models
         public short Estado { get; set; }
         public int IdUsuarioEstado { get; set; }
         public Nullable<byte> TipoBeca { get; set; }
+        public Nullable<int> Modalidad { get; set; }
     
         public virtual Alumno Alumno { get; set; }
         public virtual Usuario Usuario { get; set; }

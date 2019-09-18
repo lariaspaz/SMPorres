@@ -13,13 +13,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
+          <Property Name="NroDocumento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
           <Property Name="Contraseña" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Barrios">
@@ -28,7 +28,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdLocalidad" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="BecasAlumnos">
           <Key>
@@ -185,8 +185,8 @@
           <Property Name="IdPagoAsiento" Type="int" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="FechaGrabacion" Type="datetime" />
-          <Property Name="PorcRecargo" Type="float" />
           <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcRecargo" Type="float" />
           <Property Name="FechaVto" Type="datetime" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -206,6 +206,7 @@
           <Property Name="Estado" Type="smallint" Nullable="false" />
           <Property Name="IdUsuarioEstado" Type="int" Nullable="false" />
           <Property Name="TipoBeca" Type="tinyint" />
+          <Property Name="Modalidad" Type="int" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -262,30 +263,6 @@
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="IdItemMenu" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Alumnos_Domicilios">
-          <End Role="Domicilios" Type="Self.Domicilios" Multiplicity="0..1" />
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Domicilios">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Alumnos">
-              <PropertyRef Name="IdDomicilio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Alumnos_TiposDocumento">
-          <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposDocumento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Alumnos">
-              <PropertyRef Name="IdTipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Barrios_Localidades">
           <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
           <End Role="Barrios" Type="Self.Barrios" Multiplicity="*" />
@@ -660,14 +637,6 @@
           <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuariosItemsMenu" EntityType="Self.UsuariosItemsMenu" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Alumnos_Domicilios" Association="Self.FK_Alumnos_Domicilios">
-            <End Role="Domicilios" EntitySet="Domicilios" />
-            <End Role="Alumnos" EntitySet="Alumnos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="Self.FK_Alumnos_TiposDocumento">
-            <End Role="TiposDocumento" EntitySet="TiposDocumento" />
-            <End Role="Alumnos" EntitySet="Alumnos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Barrios_Localidades" Association="Self.FK_Barrios_Localidades">
             <End Role="Localidades" EntitySet="Localidades" />
             <End Role="Barrios" EntitySet="Barrios" />
@@ -918,14 +887,14 @@
             <End Role="RendicionBSE" EntitySet="RendicionesBSE" />
           </AssociationSet>
           <FunctionImport Name="ConsAlumnosMorosos" ReturnType="Collection(SMPorres_DevModel.ConsAlumnosMorosos_Result)">
-            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          <Parameter Name="Fecha" Mode="In" Type="DateTime" />
             <Parameter Name="Tipo" Mode="In" Type="Int16" />
             <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="TipoBecado" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="ConsTotalPagos" ReturnType="Collection(SMPorres_DevModel.ConsTotalPagos_Result)">
-            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+          <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
             <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
@@ -971,7 +940,7 @@
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
@@ -980,7 +949,7 @@
           <NavigationProperty Name="TipoDocumento" Relationship="SMPorres_DevModel.FK_Alumnos_TiposDocumento" FromRole="Alumno" ToRole="TiposDocumento" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" FromRole="Alumno" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPago" Relationship="SMPorres_DevModel.FK_PlanesPago_Alumnos" FromRole="Alumno" ToRole="PlanesPago" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="BecasAlumnos" Relationship="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" FromRole="Alumno" ToRole="BecasAlumno" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -990,7 +959,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdLocalidad" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Localidad" Relationship="SMPorres_DevModel.FK_Barrios_Localidades" FromRole="Barrio" ToRole="Localidade" />
           <NavigationProperty Name="Domicilios" Relationship="SMPorres_DevModel.FK_Domicilios_Barrios" FromRole="Barrio" ToRole="Domicilio" />
         </EntityType>
@@ -1244,6 +1213,7 @@
           <NavigationProperty Name="Pagos" Relationship="SMPorres_DevModel.FK_Pagos_PlanesPago" FromRole="PlanPago" ToRole="Pago" />
           <NavigationProperty Name="Curso" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="PlanPago" ToRole="Curso" />
           <Property Name="TipoBeca" Type="Byte" />
+          <Property Name="Modalidad" Type="Int32" />
         </EntityType>
         <Association Name="FK_PlanesPago_Alumnos">
           <End Type="SMPorres_DevModel.Alumno" Role="Alumno" Multiplicity="1" />
@@ -1767,6 +1737,7 @@
           <EntitySetMapping Name="PlanesPago">
             <EntityTypeMapping TypeName="SMPorres_DevModel.PlanPago">
               <MappingFragment StoreEntitySet="PlanesPago">
+                <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
                 <ScalarProperty Name="TipoBeca" ColumnName="TipoBeca" />
                 <ScalarProperty Name="IdUsuarioEstado" ColumnName="IdUsuarioEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
