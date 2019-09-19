@@ -27,7 +27,8 @@ namespace SMPorres.Repositories
                                     ImporteCuota = pp.ImporteCuota,
                                     PorcentajeBeca = pp.PorcentajeBeca,
                                     Estado = pp.Estado,
-                                    FechaGrabacion = pp.FechaGrabacion
+                                    FechaGrabacion = pp.FechaGrabacion,
+                                    TipoBeca = pp.TipoBeca
                                 }
                             );
 
