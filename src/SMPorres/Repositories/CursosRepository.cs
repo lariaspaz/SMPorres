@@ -60,10 +60,14 @@ namespace SMPorres.Repositories
                 var c = db.Cursos.Find(id);
                 c.Nombre = nombre;
                 c.IdCarrera = idCarrera;
-                c.Modalidad = modalidad;
+                //c.Modalidad = modalidad;
                 var trx = db.Database.BeginTransaction();
                 try
                 {
+                    if (c.Modalidad != modalidad)
+                    {
+                        c.Modalidad = modalidad;
+                    }
                     if (c.ImporteMatricula != importeMatrícula)
                     {
                         c.ImporteMatricula = importeMatrícula;

@@ -51,7 +51,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca)
+        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca, int modalidad)
         {
             using (var db = new SMPorresEntities())
             {
@@ -68,15 +68,15 @@ namespace SMPorres.Repositories
                     Id = id,
                     IdAlumno = idAlumno,
                     IdCurso = idCurso,
-                    CantidadCuotas = CursosRepository.ObtieneMaxCuota(curso.Modalidad),//Configuration.MaxCuotas,
-                    NroCuota = CursosRepository.ObtieneMinCuota(curso.Modalidad), //1,
+                    CantidadCuotas = CursosRepository.ObtieneMaxCuota(modalidad),//Configuration.MaxCuotas,
+                    NroCuota = CursosRepository.ObtieneMinCuota(modalidad), //1,
                     ImporteCuota = curso.ImporteCuota,
                     PorcentajeBeca = porcentajeBeca,
                     Estado = (short)EstadoPlanPago.Vigente,
                     IdUsuarioEstado = Session.CurrentUser.Id,
                     FechaGrabacion = Configuration.CurrentDate,
                     IdUsuario = Session.CurrentUser.Id,
-                    Modalidad = curso.Modalidad
+                    Modalidad = modalidad //curso.Modalidad
                 };
                 try
                 {
@@ -92,8 +92,8 @@ namespace SMPorres.Repositories
                     db.SaveChanges();
 
                     //leer modalidad y obtener minCuota y maxCuota
-                    short minC = CursosRepository.ObtieneMinCuota(curso.Modalidad);
-                    short maxC = CursosRepository.ObtieneMaxCuota(curso.Modalidad);
+                    short minC = CursosRepository.ObtieneMinCuota(modalidad);
+                    short maxC = CursosRepository.ObtieneMaxCuota(modalidad);
                     if(minC != maxC)
                     {
                     //for (short i = 0; i <= Configuration.MaxCuotas; i++)
@@ -153,6 +153,161 @@ namespace SMPorres.Repositories
                 }
                 var pp = db.PlanesPago.Find(id);
                 pp.Estado = (int)Models.EstadoPlanPago.Baja;
+                db.SaveChanges();
+            }
+        }
+
+        internal static void ActualizarModalidad(int idPlanPago, string nombreCurso, int modalidad)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                int anual = 1;
+                int primerCuatrimestre = 2;
+                int segundoCuatrimestre = 3;
+                int sinCursado = 4;
+                bool actualizaCuotas = false;
+
+                int idCurso = db.PlanesPago.Find(idPlanPago).IdCurso;
+                var curso = db.Cursos.Find(idCurso);
+
+                var modActual = db.PlanesPago.Find(idPlanPago).Modalidad;
+                if (modActual == modalidad) return;
+
+                if (modActual == anual)
+                {
+                    if(modalidad == primerCuatrimestre & !PagosRegistrados(idPlanPago, segundoCuatrimestre))
+                    {
+                        EliminaCuotas(segundoCuatrimestre, idPlanPago);
+                        actualizaCuotas = true;
+                    }
+                    if(modalidad == segundoCuatrimestre & !PagosRegistrados(idPlanPago, primerCuatrimestre))
+                    {
+                        EliminaCuotas(primerCuatrimestre, idPlanPago);
+                        actualizaCuotas = true;
+                    }
+                    if(modalidad == sinCursado & !PagosRegistrados(idPlanPago, anual))
+                    {
+                        EliminaCuotas(anual, idPlanPago);
+                        actualizaCuotas = true;
+                    }
+                }
+
+                if (modActual == primerCuatrimestre)
+                {
+                    if (modalidad == anual)
+                    {
+                        GeneraCuotas(segundoCuatrimestre, idPlanPago, curso);
+                        actualizaCuotas = true;
+                    }
+                    if (modalidad == segundoCuatrimestre & !PagosRegistrados(idPlanPago, primerCuatrimestre))
+                    {
+                        EliminaCuotas(primerCuatrimestre, idPlanPago); 
+                        GeneraCuotas(segundoCuatrimestre, idPlanPago, curso);
+                        actualizaCuotas = true;
+                    }
+                    if (modalidad == sinCursado & !PagosRegistrados(idPlanPago, primerCuatrimestre))
+                    {
+                        EliminaCuotas(primerCuatrimestre, idPlanPago);
+                        actualizaCuotas = true;
+                    }
+                }
+
+                if (modActual == segundoCuatrimestre)
+                {
+                    if (modalidad == anual & !PagosRegistrados(idPlanPago, segundoCuatrimestre))
+                    {
+                        GeneraCuotas(primerCuatrimestre, idPlanPago, curso);
+                        actualizaCuotas = true;
+                    }
+                    if (modalidad == primerCuatrimestre & !PagosRegistrados(idPlanPago, segundoCuatrimestre))
+                    {
+                        EliminaCuotas(segundoCuatrimestre, idPlanPago);
+                        GeneraCuotas(primerCuatrimestre, idPlanPago, curso);
+                        actualizaCuotas = true;
+                    }
+                    if (modalidad == sinCursado & !PagosRegistrados(idPlanPago, segundoCuatrimestre))
+                    {
+                        EliminaCuotas(segundoCuatrimestre, idPlanPago);
+                        actualizaCuotas = true;
+                    }
+                }
+
+                if (modActual == sinCursado)
+                {
+                    if (modalidad == anual)
+                    {
+                        GeneraCuotas(anual, idPlanPago, curso);
+                        actualizaCuotas = true;
+                    }
+                    if (modalidad == primerCuatrimestre)
+                    {
+                        GeneraCuotas(primerCuatrimestre, idPlanPago, curso);
+                        actualizaCuotas = true;
+                    }
+                    if (modalidad == segundoCuatrimestre)
+                    {
+                        GeneraCuotas(segundoCuatrimestre, idPlanPago, curso);
+                        actualizaCuotas = true;
+                    }
+                }
+
+                if (actualizaCuotas)
+                {
+                    var pp = db.PlanesPago.Find(idPlanPago);
+                    pp.Modalidad = modalidad;
+                    db.SaveChanges();
+
+                    PlanesPagoRepository.ActualizarNroyCantidadCuotas(idPlanPago, modalidad);
+                }                
+            }
+        }
+
+        private static void GeneraCuotas(int modalidad, int idPlanPago, Curso curso)
+        {
+            var minC = CursosRepository.ObtieneMinCuota(modalidad);
+            var maxC = CursosRepository.ObtieneMaxCuota(modalidad);
+            for (int i = minC; i <= maxC; i++)
+            {
+                PagosRepository.GeneraNuevaCuota(idPlanPago, i, curso);
+            }
+        }
+
+        private static void EliminaCuotas(int? modActual, int idPlanPago)
+        {
+            var minC = CursosRepository.ObtieneMinCuota(modActual);
+            var maxC = CursosRepository.ObtieneMaxCuota(modActual);
+
+            for (int i = minC; i <= maxC; i++)
+            {
+                PagosRepository.EliminarCuotaGenerada(i, idPlanPago);
+            }
+        }
+
+        private static bool PagosRegistrados(int planPago, int modalidad)
+        {
+            bool pagos = false;
+            var minC = CursosRepository.ObtieneMinCuota(modalidad);
+            var maxC = CursosRepository.ObtieneMaxCuota(modalidad);
+
+            using (var db = new SMPorresEntities())
+            {
+                var p = db.Pagos.Where(x =>
+                    x.IdPlanPago == planPago &
+                    x.ImportePagado > 0 &
+                    x.NroCuota >= minC &
+                    x.NroCuota <= maxC);
+                if (p.Any()) pagos = true;
+            }
+            return pagos;
+        }
+
+        internal static void ActualizarNroyCantidadCuotas(int id, int modalidad)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var pp = db.PlanesPago.Find(id);
+                pp.NroCuota = CursosRepository.ObtieneMinCuota(modalidad);
+                pp.CantidadCuotas = CursosRepository.ObtieneMaxCuota(modalidad);
                 db.SaveChanges();
             }
         }

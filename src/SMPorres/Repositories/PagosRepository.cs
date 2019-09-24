@@ -235,5 +235,36 @@ namespace SMPorres.Repositories
                 p.PlanPago.Estado = (short)EstadoPlanPago.Cancelado;
             }
         }
+
+        public static void EliminarCuotaGenerada(int nroCuota, int idPlanPago)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.Pagos.Any(t => t.IdPlanPago == idPlanPago & t.NroCuota == nroCuota))
+                {
+                    throw new Exception("No existe la cuota generada " + nroCuota);
+                }
+                var cGen = db.Pagos.FirstOrDefault(x => 
+                        x.IdPlanPago == idPlanPago & 
+                        x.NroCuota == nroCuota & 
+                        x.ImportePagado == null);
+                db.Pagos.Remove(cGen);
+                db.SaveChanges();
+            }
+        }
+
+        internal static void GeneraNuevaCuota(int idPlanPago, int i, Curso curso)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p = new Pago();
+                p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                p.IdPlanPago = idPlanPago;
+                p.NroCuota = (short)i;
+                p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                db.Pagos.Add(p);
+                db.SaveChanges();
+            }
+        }
     }
 }

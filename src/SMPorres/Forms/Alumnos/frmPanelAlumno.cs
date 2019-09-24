@@ -190,7 +190,7 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca);
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca, f.Modalidad);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }
@@ -365,6 +365,7 @@ namespace SMPorres.Forms.Alumnos
                     try
                     {
                         var pp = PlanesPagoRepository.ActualizarPorcentajeBeca(pps.Id, f.PorcentajeBeca);
+                        PlanesPagoRepository.ActualizarModalidad(pps.Id, NombreCurso ,f.Modalidad);                        
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == pp.Id);
                     }
