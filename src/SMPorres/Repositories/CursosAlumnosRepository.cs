@@ -33,7 +33,7 @@ namespace SMPorres.Repositories
                                         IdDomicilio = a.IdDomicilio,
                                         Estado = a.Estado
                                     });
-                return query.OrderBy(a => a.Apellido).ToList();
+                return query.OrderBy(a => a.NroDocumento).ToList();
             }
         }
 

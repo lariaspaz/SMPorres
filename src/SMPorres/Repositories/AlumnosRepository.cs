@@ -35,7 +35,37 @@ namespace SMPorres.Repositories
                                         Estado = a.Estado,
                                         Sexo = a.Sexo
                                     });
-                return query.OrderBy(a => a.Apellido).ToList();
+                return query.OrderBy(a => a.NroDocumento).ToList();
+            }
+        }
+
+        public static IList<Alumno> ObtenerAlumnos(string alumno)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = (from a in db.Alumnos
+                             join td in db.TiposDocumento on a.IdTipoDocumento equals td.Id
+                             where a.Nombre.Contains(alumno)
+                             select a)
+                             .ToList()
+                                .Select(
+                                    a => new Alumno
+                                    {
+                                        Id = a.Id,
+                                        Nombre = a.Nombre,
+                                        Apellido = a.Apellido,
+                                        IdTipoDocumento = a.IdTipoDocumento,
+                                        TipoDocumento = a.TipoDocumento,
+                                        NroDocumento = a.NroDocumento,
+                                        FechaNacimiento = a.FechaNacimiento,
+                                        EMail = a.EMail,
+                                        Direccion = a.Direccion,
+                                        IdDomicilio = a.IdDomicilio,
+                                        Domicilio = a.Domicilio,
+                                        Estado = a.Estado,
+                                        Sexo = a.Sexo
+                                    });
+                return query.OrderBy(a => a.NroDocumento).ToList();
             }
         }
 
