@@ -1,0 +1,2 @@
+succod	sucursal	moneda	comprobante	tipo_mov	importe	fecha_proceso	cuil	usuario	hora	codbarra	grupoterminal	nrorendicion	fecha_cobro
+1	Casa Central (Desarrollo)	PESOS	0000025	2 - Recaudación	3645.00	2019/10/15	20209322375	Cordova, Mario Alberto	090723	901600000461928800001230007		1	2019/10/15

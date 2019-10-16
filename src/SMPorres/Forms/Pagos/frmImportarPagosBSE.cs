@@ -32,16 +32,6 @@ namespace SMPorres.Forms.Pagos
             InitializeComponent();
         }
 
-        private DateTime? LeerVto(string v)
-        {
-            int fJuliana = Convert.ToInt32(v);
-            int day = fJuliana % 1000;
-            int year = (fJuliana - day) / 1000;
-            year = year += 2000;
-            var vto = new DateTime(year, 1, 1);
-            return vto.AddDays(day - 1);
-        }
-
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -85,7 +75,7 @@ namespace SMPorres.Forms.Pagos
                             p.Curso,
                             p.FechaVto,
                             p.FechaPago,
-                            ImporteAPagar = p.ImporteAPagar,
+                            p.ImporteAPagar,
                             p.ImportePagado,
                             p.CodigoBarra
                         };
