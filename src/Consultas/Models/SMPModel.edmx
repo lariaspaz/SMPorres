@@ -34,7 +34,7 @@
           <Property Name="IdCurso" Type="int" Nullable="false" />
           <Property Name="Curso" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdCarrera" Type="int" Nullable="false" />
-          <Property Name="Carrera" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Carrera" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="PagosWeb">
           <Key>
@@ -53,6 +53,7 @@
           <Property Name="ImportePagoTermino" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PorcentajeBeca" Type="smallint" />
           <Property Name="FechaVtoPagoTermino" Type="smalldatetime" />
+          <Property Name="TipoBeca" Type="tinyint" />
         </EntityType>
         <EntityType Name="RolesUsuariosWeb">
           <Key>
@@ -166,6 +167,7 @@
           <Property Name="ImportePagoTermino" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PorcentajeBeca" Type="Int16" />
           <Property Name="FechaVtoPagoTermino" Type="DateTime" Precision="0" />
+          <Property Name="TipoBeca" Type="Byte" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="SMPorres.AlumnoWeb" Multiplicity="1" />
@@ -272,6 +274,7 @@
           <EntitySetMapping Name="PagosWeb">
             <EntityTypeMapping TypeName="SMPorres.PagoWeb">
               <MappingFragment StoreEntitySet="PagosWeb">
+                <ScalarProperty Name="TipoBeca" ColumnName="TipoBeca" />
                 <ScalarProperty Name="FechaVtoPagoTermino" ColumnName="FechaVtoPagoTermino" />
                 <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />
                 <ScalarProperty Name="ImportePagoTermino" ColumnName="ImportePagoTermino" />

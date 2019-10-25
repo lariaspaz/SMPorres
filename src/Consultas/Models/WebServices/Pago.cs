@@ -30,5 +30,7 @@ namespace Consultas.Models.WebServices
         public short? PorcentajeBeca { get; set; }
 
         public DateTime FechaVtoPagoTérmino { get; set; }
+
+        public byte? TipoBeca { get; set; }
     }
 }

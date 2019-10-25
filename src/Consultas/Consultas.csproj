@@ -166,6 +166,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Models\SMPorresEntities.Ext.cs" />
+    <Compile Include="Models\TipoBeca.cs" />
     <Compile Include="Models\ViewModels\ChangePwd.cs" />
     <Compile Include="Models\ViewModels\Login.cs" />
     <Compile Include="Models\PagoWeb.cs">
