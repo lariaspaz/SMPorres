@@ -1581,6 +1581,8 @@ namespace SMPorres.Reports.DataSet {
             
             private global::System.Data.DataColumn columnIdCurso;
             
+            private global::System.Data.DataColumn columnMedioPago;
+            
             private global::System.Data.DataColumn columnCantidad;
             
             private global::System.Data.DataColumn columnTotal;
@@ -1652,6 +1654,14 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MedioPagoColumn {
+                get {
+                    return this.columnMedioPago;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn CantidadColumn {
                 get {
                     return this.columnCantidad;
@@ -1703,13 +1713,14 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TotalPagoRow AddTotalPagoRow(string Carrera, string Curso, int IdCarrera, int IdCurso, int Cantidad, decimal Total) {
+            public TotalPagoRow AddTotalPagoRow(string Carrera, string Curso, int IdCarrera, int IdCurso, string MedioPago, decimal Cantidad, string Total) {
                 TotalPagoRow rowTotalPagoRow = ((TotalPagoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Carrera,
                         Curso,
                         IdCarrera,
                         IdCurso,
+                        MedioPago,
                         Cantidad,
                         Total};
                 rowTotalPagoRow.ItemArray = columnValuesArray;
@@ -1738,6 +1749,7 @@ namespace SMPorres.Reports.DataSet {
                 this.columnCurso = base.Columns["Curso"];
                 this.columnIdCarrera = base.Columns["IdCarrera"];
                 this.columnIdCurso = base.Columns["IdCurso"];
+                this.columnMedioPago = base.Columns["MedioPago"];
                 this.columnCantidad = base.Columns["Cantidad"];
                 this.columnTotal = base.Columns["Total"];
             }
@@ -1753,14 +1765,16 @@ namespace SMPorres.Reports.DataSet {
                 base.Columns.Add(this.columnIdCarrera);
                 this.columnIdCurso = new global::System.Data.DataColumn("IdCurso", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIdCurso);
-                this.columnCantidad = new global::System.Data.DataColumn("Cantidad", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnMedioPago = new global::System.Data.DataColumn("MedioPago", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMedioPago);
+                this.columnCantidad = new global::System.Data.DataColumn("Cantidad", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCantidad);
-                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotal);
                 this.columnIdCarrera.AllowDBNull = false;
                 this.columnIdCurso.AllowDBNull = false;
+                this.columnMedioPago.AllowDBNull = false;
                 this.columnCantidad.AllowDBNull = false;
-                this.columnTotal.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2982,9 +2996,20 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Cantidad {
+            public string MedioPago {
                 get {
-                    return ((int)(this[this.tableTotalPago.CantidadColumn]));
+                    return ((string)(this[this.tableTotalPago.MedioPagoColumn]));
+                }
+                set {
+                    this[this.tableTotalPago.MedioPagoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal Cantidad {
+                get {
+                    return ((decimal)(this[this.tableTotalPago.CantidadColumn]));
                 }
                 set {
                     this[this.tableTotalPago.CantidadColumn] = value;
@@ -2993,9 +3018,14 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal Total {
+            public string Total {
                 get {
-                    return ((decimal)(this[this.tableTotalPago.TotalColumn]));
+                    try {
+                        return ((string)(this[this.tableTotalPago.TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Total\' de la tabla \'TotalPago\' es DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableTotalPago.TotalColumn] = value;
@@ -3024,6 +3054,18 @@ namespace SMPorres.Reports.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCursoNull() {
                 this[this.tableTotalPago.CursoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalNull() {
+                return this.IsNull(this.tableTotalPago.TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalNull() {
+                this[this.tableTotalPago.TotalColumn] = global::System.Convert.DBNull;
             }
         }
         

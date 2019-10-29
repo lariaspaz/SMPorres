@@ -611,6 +611,7 @@
           <Parameter Name="Hasta" Type="smalldatetime" Mode="In" />
           <Parameter Name="IdCarrera" Type="int" Mode="In" />
           <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="MedPago" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="SMPorres_DevModelStoreContainer">
           <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
@@ -887,17 +888,11 @@
             <End Role="RendicionBSE" EntitySet="RendicionesBSE" />
           </AssociationSet>
           <FunctionImport Name="ConsAlumnosMorosos" ReturnType="Collection(SMPorres_DevModel.ConsAlumnosMorosos_Result)">
-          <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
             <Parameter Name="Tipo" Mode="In" Type="Int16" />
             <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="TipoBecado" Mode="In" Type="Int16" />
-          </FunctionImport>
-          <FunctionImport Name="ConsTotalPagos" ReturnType="Collection(SMPorres_DevModel.ConsTotalPagos_Result)">
-          <Parameter Name="Desde" Mode="In" Type="DateTime" />
-            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
-            <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
-            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Cursos" EntityType="SMPorres_DevModel.Curso" />
           <AssociationSet Name="FK_Cursos_Carreras" Association="SMPorres_DevModel.FK_Cursos_Carreras">
@@ -912,6 +907,13 @@
             <End Role="Curso" EntitySet="Cursos" />
             <End Role="PlanPago" EntitySet="PlanesPago" />
           </AssociationSet>
+          <FunctionImport Name="ConsTotalPagos" ReturnType="Collection(SMPorres_DevModel.ConsTotalPagos_Result)">
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="IdCarrera" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="MedPago" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1557,14 +1559,6 @@
           <Property Type="Decimal" Name="ImportePagado" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Int16" Name="Beca" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="ConsTotalPagos_Result">
-          <Property Type="String" Name="Carrera" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="Curso" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="IdCarrera" Nullable="false" />
-          <Property Type="Int32" Name="IdCurso" Nullable="false" />
-          <Property Type="Int32" Name="Cantidad" Nullable="false" />
-          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
-        </ComplexType>
         <EntityType Name="Curso">
           <Key>
             <PropertyRef Name="Id" />
@@ -1615,6 +1609,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="ConsTotalPagos_Result">
+          <Property Type="String" Name="Carrera" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Curso" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdCarrera" Nullable="false" />
+          <Property Type="String" Name="MedioPago" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdCurso" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1911,18 +1914,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ConsTotalPagos" FunctionName="SMPorres_DevModel.Store.ConsTotalPagos">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsTotalPagos_Result">
-                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
-                <ScalarProperty Name="Curso" ColumnName="Curso" />
-                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Cursos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
               <MappingFragment StoreEntitySet="Cursos">
@@ -1935,6 +1926,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsTotalPagos" FunctionName="SMPorres_DevModel.Store.ConsTotalPagos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsTotalPagos_Result">
+                <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+                <ScalarProperty Name="Curso" ColumnName="Curso" />
+                <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+                <ScalarProperty Name="MedioPago" ColumnName="MedioPago" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

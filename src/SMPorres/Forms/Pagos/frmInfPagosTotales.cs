@@ -32,6 +32,17 @@ namespace SMPorres.Forms.Pagos
             cbCarreras.DisplayMember = "Nombre";
             cbCarreras.ValueMember = "Id";
             cbCarreras.DataSource = qry;
+
+            cargarMediosPago();
+        }
+
+        private void cargarMediosPago()
+        {
+            var qry = MediosPagoRepository.ObtenerMediosPago().OrderBy(mp => mp.Descripcion).ToList();
+            qry.Insert(0, new MedioPago { Id = 0, Descripcion = "(Todos los medios de pago)" });
+            cbCarreras.DisplayMember = "Descripcion";
+            cbCarreras.ValueMember = "Id";
+            cbCarreras.DataSource = qry;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -86,6 +97,14 @@ namespace SMPorres.Forms.Pagos
             }
         }
 
+        private int IdMedioPago
+        {
+            get
+            {
+                return Convert.ToInt32(cbMedioPago.SelectedValue);
+            }
+        }
+
         private DateTime Desde
         {
             get
@@ -115,10 +134,10 @@ namespace SMPorres.Forms.Pagos
         private DataTable ObtenerDatos()
         {
             var tabla = new dsImpresiones.TotalPagoDataTable();
-            var pagos = StoredProcs.ConsTotalPagos(Desde, Hasta, IdCarrera, IdCurso);
+            var pagos = StoredProcs.ConsTotalPagos(Desde, Hasta, IdCarrera, IdCurso, IdMedioPago);
             foreach (var p in pagos)
             {
-                tabla.AddTotalPagoRow(p.Carrera, p.Curso, p.IdCarrera, p.IdCurso, p.Cantidad, p.Total);
+                tabla.AddTotalPagoRow(p.Carrera, p.Curso, p.IdCarrera, p.IdCurso, p.MedioPago, p.Cantidad, p.Total.ToString() );
             }
             return tabla;
         }

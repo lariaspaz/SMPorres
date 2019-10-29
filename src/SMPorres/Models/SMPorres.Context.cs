@@ -77,7 +77,7 @@ namespace SMPorres.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsAlumnosMorosos_Result>("ConsAlumnosMorosos", fechaParameter, tipoParameter, idCarreraParameter, idCursoParameter, tipoBecadoParameter);
         }
     
-        public virtual ObjectResult<ConsTotalPagos_Result> ConsTotalPagos(Nullable<System.DateTime> desde, Nullable<System.DateTime> hasta, Nullable<int> idCarrera, Nullable<int> idCurso)
+        public virtual ObjectResult<ConsTotalPagos_Result> ConsTotalPagos(Nullable<System.DateTime> desde, Nullable<System.DateTime> hasta, Nullable<int> idCarrera, Nullable<int> idCurso, Nullable<int> medPago)
         {
             var desdeParameter = desde.HasValue ?
                 new ObjectParameter("Desde", desde) :
@@ -95,7 +95,11 @@ namespace SMPorres.Models
                 new ObjectParameter("IdCurso", idCurso) :
                 new ObjectParameter("IdCurso", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsTotalPagos_Result>("ConsTotalPagos", desdeParameter, hastaParameter, idCarreraParameter, idCursoParameter);
+            var medPagoParameter = medPago.HasValue ?
+                new ObjectParameter("MedPago", medPago) :
+                new ObjectParameter("MedPago", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsTotalPagos_Result>("ConsTotalPagos", desdeParameter, hastaParameter, idCarreraParameter, idCursoParameter, medPagoParameter);
         }
     }
 }

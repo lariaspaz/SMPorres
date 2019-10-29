@@ -9,7 +9,7 @@
     <Shape ID="DesignTable:CupónPago" ZOrder="4" X="376" Y="178" Height="276" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="272" />
     <Shape ID="DesignTable:EstadoAlumno" ZOrder="3" X="190" Y="174" Height="200" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="196" />
     <Shape ID="DesignTable:AlumnoMoroso" ZOrder="2" X="559" Y="179" Height="277" Width="156" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="273" />
-    <Shape ID="DesignTable:TotalPago" ZOrder="1" X="736" Y="179" Height="144" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignTable:TotalPago" ZOrder="1" X="736" Y="179" Height="162" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

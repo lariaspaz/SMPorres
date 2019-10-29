@@ -16,6 +16,7 @@ namespace SMPorres.Models
         public string Carrera { get; set; }
         public string Curso { get; set; }
         public int IdCarrera { get; set; }
+        public string MedioPago { get; set; }
         public int IdCurso { get; set; }
         public int Cantidad { get; set; }
         public decimal Total { get; set; }

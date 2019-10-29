@@ -41,6 +41,8 @@
             this.cbCursos = new System.Windows.Forms.ComboBox();
             this.cbCarreras = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbMedioPago = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -58,7 +60,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(285, 162);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(294, 192);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // panel3
@@ -66,16 +68,16 @@
             this.panel3.Controls.Add(this.btnCancelar);
             this.panel3.Controls.Add(this.btnAceptar);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 127);
+            this.panel3.Location = new System.Drawing.Point(0, 157);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(285, 35);
+            this.panel3.Size = new System.Drawing.Size(294, 35);
             this.panel3.TabIndex = 2;
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(145, 6);
+            this.btnCancelar.Location = new System.Drawing.Point(146, 6);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -85,7 +87,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(64, 6);
+            this.btnAceptar.Location = new System.Drawing.Point(65, 6);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -95,6 +97,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.cbMedioPago);
             this.panel2.Controls.Add(this.dtHasta);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.dtDesde);
@@ -106,12 +110,12 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(279, 121);
+            this.panel2.Size = new System.Drawing.Size(288, 151);
             this.panel2.TabIndex = 1;
             // 
             // dtHasta
             // 
-            this.dtHasta.Location = new System.Drawing.Point(64, 35);
+            this.dtHasta.Location = new System.Drawing.Point(74, 35);
             this.dtHasta.Name = "dtHasta";
             this.dtHasta.Size = new System.Drawing.Size(200, 20);
             this.dtHasta.TabIndex = 3;
@@ -119,7 +123,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 41);
+            this.label1.Location = new System.Drawing.Point(34, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 13;
@@ -127,7 +131,7 @@
             // 
             // dtDesde
             // 
-            this.dtDesde.Location = new System.Drawing.Point(64, 9);
+            this.dtDesde.Location = new System.Drawing.Point(74, 9);
             this.dtDesde.Name = "dtDesde";
             this.dtDesde.Size = new System.Drawing.Size(200, 20);
             this.dtDesde.TabIndex = 2;
@@ -135,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 15);
+            this.label5.Location = new System.Drawing.Point(31, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 11;
@@ -144,7 +148,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 92);
+            this.label3.Location = new System.Drawing.Point(35, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 8;
@@ -154,7 +158,7 @@
             // 
             this.cbCursos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCursos.FormattingEnabled = true;
-            this.cbCursos.Location = new System.Drawing.Point(64, 89);
+            this.cbCursos.Location = new System.Drawing.Point(74, 89);
             this.cbCursos.Name = "cbCursos";
             this.cbCursos.Size = new System.Drawing.Size(200, 21);
             this.cbCursos.TabIndex = 5;
@@ -163,7 +167,7 @@
             // 
             this.cbCarreras.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCarreras.FormattingEnabled = true;
-            this.cbCarreras.Location = new System.Drawing.Point(64, 62);
+            this.cbCarreras.Location = new System.Drawing.Point(74, 62);
             this.cbCarreras.Name = "cbCarreras";
             this.cbCarreras.Size = new System.Drawing.Size(200, 21);
             this.cbCarreras.TabIndex = 4;
@@ -172,11 +176,29 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 65);
+            this.label2.Location = new System.Drawing.Point(25, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Carrera: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(2, 119);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Medio Pago:";
+            // 
+            // cbMedioPago
+            // 
+            this.cbMedioPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMedioPago.FormattingEnabled = true;
+            this.cbMedioPago.Location = new System.Drawing.Point(74, 116);
+            this.cbMedioPago.Name = "cbMedioPago";
+            this.cbMedioPago.Size = new System.Drawing.Size(200, 21);
+            this.cbMedioPago.TabIndex = 14;
             // 
             // frmInfPagosTotales
             // 
@@ -184,7 +206,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(285, 162);
+            this.ClientSize = new System.Drawing.Size(294, 192);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmInfPagosTotales";
             this.Text = "Totales de pagos";
@@ -211,5 +233,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtHasta;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbMedioPago;
     }
 }
