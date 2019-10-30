@@ -1713,7 +1713,7 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TotalPagoRow AddTotalPagoRow(string Carrera, string Curso, int IdCarrera, int IdCurso, string MedioPago, decimal Cantidad, string Total) {
+            public TotalPagoRow AddTotalPagoRow(string Carrera, string Curso, int IdCarrera, int IdCurso, string MedioPago, decimal Cantidad, decimal Total) {
                 TotalPagoRow rowTotalPagoRow = ((TotalPagoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Carrera,
@@ -1769,7 +1769,7 @@ namespace SMPorres.Reports.DataSet {
                 base.Columns.Add(this.columnMedioPago);
                 this.columnCantidad = new global::System.Data.DataColumn("Cantidad", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCantidad);
-                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotal);
                 this.columnIdCarrera.AllowDBNull = false;
                 this.columnIdCurso.AllowDBNull = false;
@@ -3018,10 +3018,10 @@ namespace SMPorres.Reports.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Total {
+            public decimal Total {
                 get {
                     try {
-                        return ((string)(this[this.tableTotalPago.TotalColumn]));
+                        return ((decimal)(this[this.tableTotalPago.TotalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("El valor de la columna \'Total\' de la tabla \'TotalPago\' es DBNull.", e);

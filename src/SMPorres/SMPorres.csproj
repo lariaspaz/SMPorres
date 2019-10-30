@@ -410,6 +410,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Designs\TotalesPago.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TotalesPago.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Designs\TotalPagos.cs">
       <DependentUpon>TotalPagos.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -573,6 +579,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Web\frmActualizarDatos.resx">
       <DependentUpon>frmActualizarDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Designs\TotalesPago.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TotalesPago.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Designs\TotalPagos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

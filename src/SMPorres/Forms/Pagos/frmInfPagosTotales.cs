@@ -40,9 +40,9 @@ namespace SMPorres.Forms.Pagos
         {
             var qry = MediosPagoRepository.ObtenerMediosPago().OrderBy(mp => mp.Descripcion).ToList();
             qry.Insert(0, new MedioPago { Id = 0, Descripcion = "(Todos los medios de pago)" });
-            cbCarreras.DisplayMember = "Descripcion";
-            cbCarreras.ValueMember = "Id";
-            cbCarreras.DataSource = qry;
+            cbMedioPago.DisplayMember = "Descripcion";
+            cbMedioPago.ValueMember = "Id";
+            cbMedioPago.DataSource = qry;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -67,7 +67,8 @@ namespace SMPorres.Forms.Pagos
 
         private void MostrarReporte(DataTable dt)
         {
-            using (var reporte = new TotalPagos())
+            //using (var reporte = new TotalPagos())
+            using (var reporte = new TotalesPago())
             {
                 string título = this.Text;
                 string período = String.Format("Desde {0:dd/MM/yy} al {1:dd/MM/yy} ", dtDesde.Value.Date, dtHasta.Value.Date);
@@ -137,7 +138,7 @@ namespace SMPorres.Forms.Pagos
             var pagos = StoredProcs.ConsTotalPagos(Desde, Hasta, IdCarrera, IdCurso, IdMedioPago);
             foreach (var p in pagos)
             {
-                tabla.AddTotalPagoRow(p.Carrera, p.Curso, p.IdCarrera, p.IdCurso, p.MedioPago, p.Cantidad, p.Total.ToString() );
+                tabla.AddTotalPagoRow(p.Carrera, p.Curso, p.IdCarrera, p.IdCurso, p.MedioPago, p.Cantidad, p.Total );
             }
             return tabla;
         }
