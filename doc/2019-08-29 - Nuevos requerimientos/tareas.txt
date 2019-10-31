@@ -1,0 +1,41 @@
+* Anular beneficio a beca en cuota particular, luego de vencida. ( Ya está realizado)
+* Anular descuento pago a término para alumnos becados en aplicación escritorio (Ya está realizado)
+* Anular descuento pago a término para alumnos becados en aplicación web (Ya está realizado)
+
+* Prever alumnos que van a cursar en el segundo cuatrimestre. (Revertir programación enviada por Joaquín)
+* Permitir generar un plan de pago solamente con la matrícula 
+* Permitir generar un plan de pago con la matrícula y 9 cuotas (1, 2, 3, 4, 5, 6, 7, 8 y 9)
+* Permitir generar un plan de pago con la matrícula y cuotas solamente del primer cuatrimestre (1, 2, 3 y 4)
+* Permitir generar un plan de pago con la matrícula y cuotas solamente del segundo cuatrimestre (5, 6, 7, 8 y 9)
+
+
+* Permitir pagar todas las cuotas de una sola vez con un pago único anual. Se debe generar un único comprobante de 
+  pago, cuyo importe sea el 20% del valor de matrícula y la suma de las 9 cuotas respectivamente.
+		
+           
+        * Cambiar plan de pago a un alumno. Un alumno esta asignado a un curso en particular y por error o cualquier motivo, debe cambiarse de plan.
+            Dar de baja un plan de pago, para no contabilizar cuotas impagas.
+            Dar de alta un nuevo plan de pago, a modo de asignar al alumno un nuevo curso con importe a pagar diferente al anterior.
+       
+3- enviar email a alumnos con notificación de deuda.
+    el mail se debe enviar el dia siguiente al vencimiento de cada cuota y fin de mes.
+    envío automático.
+    El texto se tratará en su momento.
+
+4- nuevo sistema AUTOCONSULTA,
+    se da de BAJA el sistema
+
+5- formulario de permiso de examen, con excepción. (formato definido)
+    el alumno puede imprimir formulario de permiso de examen desde la web,  sí tiene la cuota inmediata anterior paga.
+    Desde el sistema se genera permiso de examen a alumnos que no estén al dia. Se denomina con excepción porque no tienen la
+        cuota inmediata anterior paga.
+   
+6- informe de recaudación entre fechas y por medio de pago.
+    se debe agregar filtro entre fechas y medios de pago a los filtros.
+
+7- backup en el hosting consultas
+    sugiere realizar un backup diario a una cuenta de google.
+
+8- updater, actualiza los sistemas.
+    pidieron tener un instalador como backup.
+	

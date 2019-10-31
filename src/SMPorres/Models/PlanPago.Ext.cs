@@ -24,5 +24,20 @@ namespace SMPorres.Models
                 return "";
             }
         }
+
+        public string LeyendaTipoBeca
+        {
+            get
+            {
+                switch ((TipoBeca) TipoBeca)
+                {
+                    case Models.TipoBeca.AplicaHastaVto:
+                        return "Aplica hasta vto.";
+                    case Models.TipoBeca.AplicaSiempre:
+                        return "Aplica siempre";
+                }
+                return "";
+            }
+        }
     }
 }

@@ -169,9 +169,17 @@ namespace SMPorres.Repositories
                 //var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
                 //totalAPagar = impBase - beca + recargoPorMora;
 
-                beca = 0;
-                var recargoPorMora = Math.Round(pago.ImporteCuota * porcRecargoTotal, 2);
-                totalAPagar = impBase + recargoPorMora;
+                decimal recargoPorMora = 0;
+                if (pago.PlanPago.TipoBeca == (byte)TipoBeca.AplicaSiempre)
+                {
+                    recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+                }
+                else
+                {
+                    recargoPorMora = Math.Round(pago.ImporteCuota * porcRecargoTotal, 2);
+                    beca = 0;
+                }
+                totalAPagar = impBase - beca + recargoPorMora;
 
                 pago.PorcRecargo = porcRecargo;
                 pago.ImporteRecargo = recargoPorMora;
@@ -207,7 +215,7 @@ namespace SMPorres.Repositories
                 db.SaveChanges();
                 if (p.NroCuota == Configuration.MaxCuotas)
                 {
-                    p.PlanPago.Estado = (short) EstadoPlanPago.Cancelado;
+                    p.PlanPago.Estado = (short)EstadoPlanPago.Cancelado;
                 }
             }
             return true;

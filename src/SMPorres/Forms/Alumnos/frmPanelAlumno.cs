@@ -92,6 +92,7 @@ namespace SMPorres.Forms.Alumnos
                             ProximaCuota = String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
                             ImporteCuota = pp.ImporteCuota,
                             PorcentajeBeca = pp.PorcentajeBeca,
+                            TipoBeca = pp.LeyendaTipoBeca,
                             Estado = pp.LeyendaEstado
                         };
             dgvPlanesPago.SetDataSource(query.ToList());
@@ -177,9 +178,13 @@ namespace SMPorres.Forms.Alumnos
             dgvPlanesPago.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvPlanesPago.Columns[3].DefaultCellStyle.Format = "0\\%";
 
-            dgvPlanesPago.Columns[4].HeaderText = "Estado";
+            dgvPlanesPago.Columns[4].HeaderText = "Tipo de Beca";
             dgvPlanesPago.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvPlanesPago.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dgvPlanesPago.Columns[5].HeaderText = "Estado";
+            dgvPlanesPago.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPlanesPago.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void GenerarPlanDePagoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -190,7 +195,7 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca, f.Modalidad);
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca, f.Modalidad, f.TipoBeca);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }
@@ -364,8 +369,12 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var pp = PlanesPagoRepository.ActualizarPorcentajeBeca(pps.Id, f.PorcentajeBeca);
-                        PlanesPagoRepository.ActualizarModalidad(pps.Id, NombreCurso ,f.Modalidad);                        
+//<<<<<<< HEAD
+//                        var pp = PlanesPagoRepository.ActualizarPorcentajeBeca(pps.Id, f.PorcentajeBeca);
+//                        PlanesPagoRepository.ActualizarModalidad(pps.Id, NombreCurso ,f.Modalidad);
+//=======
+//                        var pp = PlanesPagoRepository.Actualizar(pps.Id, f.PorcentajeBeca, f.TipoBeca);
+//>>>>>>> R6
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == pp.Id);
                     }

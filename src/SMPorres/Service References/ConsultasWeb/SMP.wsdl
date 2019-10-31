@@ -55,6 +55,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="ImportePagoTérmino" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="PorcentajeBeca" nillable="true" type="s:short" />
           <s:element minOccurs="1" maxOccurs="1" name="FechaVtoPagoTérmino" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoBeca" nillable="true" type="s:unsignedByte" />
         </s:sequence>
       </s:complexType>
       <s:element name="ActualizarDatosResponse">

@@ -41,7 +41,7 @@
             </td>
             <td>
                 @((((item.ImportePagoTermino ?? 0) == 0) ? "-" : item.ImportePagoTermino.Value.ToString("C2")))
-                @if(item.ImportePagoTermino.HasValue)
+                @if(item.ImportePagoTermino.HasValue && (Consultas.Models.TipoBeca)item.TipoBeca == Consultas.Models.TipoBeca.AplicaHastaVto)
                 {
                     <small class="text-muted d-block" style="font-size: xx-small; margin-bottom: -10px;">
                         hasta el @String.Format("{0:dd/MM/yyyy}", item.FechaVtoPagoTermino)

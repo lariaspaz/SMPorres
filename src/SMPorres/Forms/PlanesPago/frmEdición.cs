@@ -30,6 +30,13 @@ namespace SMPorres.Forms.PlanesPago
 
             txtPorcentajeBeca.Select();
             _validator = new FormValidations(this, errorProvider1);
+            var tiposBeca = new Dictionary<int, string>();
+            tiposBeca.Add((int)TipoBeca.AplicaHastaVto, "Aplicar hasta el vencimiento");
+            tiposBeca.Add((int)TipoBeca.AplicaSiempre, "Aplicar siempre");
+            cbTipoBeca.DataSource = new BindingSource(tiposBeca, null);
+            cbTipoBeca.ValueMember = "Key";
+            cbTipoBeca.DisplayMember = "Value";
+            cbTipoBeca.SelectedIndex = 0;
         }
 
         private void cargarCbModalidad(int modalidad)
@@ -58,13 +65,26 @@ namespace SMPorres.Forms.PlanesPago
             txtCuota.Text = String.Format("{0} de {1}", plan.NroCuota, plan.CantidadCuotas);
             cargarCbModalidad(Convert.ToInt16(plan.Modalidad));
             txtPorcentajeBeca.DecValue = plan.PorcentajeBeca;
+            this.TipoBeca = (TipoBeca)plan.TipoBeca;
         }
 
         public short PorcentajeBeca
         {
             get
             {
-                return (short) txtPorcentajeBeca.IntValue;
+                return (short)txtPorcentajeBeca.IntValue;
+            }
+        }
+
+        public TipoBeca TipoBeca
+        {
+            get
+            {
+                return (TipoBeca)cbTipoBeca.SelectedValue;
+            }
+            private set
+            {
+                cbTipoBeca.SelectedValue = (int)value;
             }
         }
 

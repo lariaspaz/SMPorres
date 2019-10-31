@@ -47,6 +47,8 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbTipoBeca = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -56,6 +58,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.cbModalidad);
+            this.panel2.Controls.Add(this.cbTipoBeca);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.txtPorcentajeBeca);
@@ -70,6 +73,7 @@
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(374, 148);
+            this.panel2.Size = new System.Drawing.Size(307, 149);
             this.panel2.TabIndex = 1;
             // 
             // cbModalidad
@@ -187,7 +191,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(380, 189);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(380, 190);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -196,7 +200,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 154);
+            this.panel1.Location = new System.Drawing.Point(0, 155);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(380, 35);
@@ -240,13 +244,31 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 118);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Tipo de beca:";
+            // 
+            // cbTipoBeca
+            // 
+            this.cbTipoBeca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoBeca.FormattingEnabled = true;
+            this.cbTipoBeca.Location = new System.Drawing.Point(95, 116);
+            this.cbTipoBeca.Name = "cbTipoBeca";
+            this.cbTipoBeca.Size = new System.Drawing.Size(200, 21);
+            this.cbTipoBeca.TabIndex = 9;
+            // 
             // frmEdición
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(380, 189);
+            this.ClientSize = new System.Drawing.Size(380, 190);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";
@@ -279,5 +301,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbModalidad;
+        private System.Windows.Forms.ComboBox cbTipoBeca;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -67,7 +67,8 @@ namespace SMPorres.Repositories
                              p.ImporteCuota,
                              p.ImporteBeca,
                              p.ImporteRecargo,
-                             p.ImportePagado
+                             p.ImportePagado,
+                             pp.TipoBeca
                          })
                          .ToList()
                          .Select(
@@ -81,7 +82,8 @@ namespace SMPorres.Repositories
                                 ImporteCuota = p.ImporteCuota,
                                 ImporteBeca = p.ImporteBeca ?? 0,
                                 ImporteRecargo = p.ImporteRecargo ?? 0,
-                                ImportePagado = p.ImportePagado ?? 0
+                                ImportePagado = p.ImportePagado ?? 0,
+                                TipoBeca = p.TipoBeca
                             })
                          .ToArray();
 

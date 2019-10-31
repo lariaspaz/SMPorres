@@ -322,6 +322,8 @@ namespace SMPorres.ConsultasWeb {
         
         private System.DateTime FechaVtoPagoTérminoField;
         
+        private System.Nullable<byte> TipoBecaField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -484,6 +486,19 @@ namespace SMPorres.ConsultasWeb {
                 if ((this.FechaVtoPagoTérminoField.Equals(value) != true)) {
                     this.FechaVtoPagoTérminoField = value;
                     this.RaisePropertyChanged("FechaVtoPagoTérmino");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
+        public System.Nullable<byte> TipoBeca {
+            get {
+                return this.TipoBecaField;
+            }
+            set {
+                if ((this.TipoBecaField.Equals(value) != true)) {
+                    this.TipoBecaField = value;
+                    this.RaisePropertyChanged("TipoBeca");
                 }
             }
         }

@@ -31,6 +31,7 @@ namespace Consultas.Repositories
             p.ImportePagoTermino = pago.ImportePagoTérmino;
             p.PorcentajeBeca = pago.PorcentajeBeca;
             p.FechaVtoPagoTermino = pago.FechaVtoPagoTérmino;
+            p.TipoBeca = pago.TipoBeca;
             if (insertar)
             {
                 db.PagosWeb.Add(p);
@@ -113,15 +114,19 @@ namespace Consultas.Repositories
                 var porcRecargo = (new ConfiguracionRepository().ObtenerConfiguracion().InteresPorMora / 100) / 30.0;
                 var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto).TotalDays);
                 var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
-                //impBecado = pago.ImporteCuota;
-                //var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
-                //totalAPagar = pago.ImporteCuota - (pago.ImporteBeca ?? 0) + recargoPorMora;
 
-                var recargoPorMora = Math.Round(pago.ImporteCuota * porcRecargoTotal, 2);
-                pago.ImporteBeca = 0;
-                totalAPagar = pago.ImporteCuota + recargoPorMora;
-
+                decimal recargoPorMora = 0;
+                if (pago.TipoBeca == (byte)TipoBeca.AplicaSiempre)
+                {
+                    recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+                }
+                else
+                {
+                    recargoPorMora = Math.Round(pago.ImporteCuota * porcRecargoTotal, 2);
+                    pago.ImporteBeca = 0;
+                }
                 pago.ImporteRecargo = recargoPorMora;
+                totalAPagar = pago.ImporteCuota - (pago.ImporteBeca ?? 0) + recargoPorMora;
             }
 
             pago.ImportePagado = totalAPagar;

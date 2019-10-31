@@ -67,6 +67,7 @@ namespace SMPorres.Forms.Web
                 InicializarProgreso(datos);
                 Acción = "Procesando";
                 ConsultasWeb.SMPSoapClient cliente = CrearCliente();
+                bool error = false;
                 try
                 {
                     foreach (var alumno in datos)
@@ -89,9 +90,10 @@ namespace SMPorres.Forms.Web
                                 }
                             }
                             string s = String.Format("No se pudieron subir los datos del alumno: " +
-                                "\nNº Documento:{0}\nNombre: {1}, {2}\nID: {3}", alumno.NroDocumento, 
+                                "\nNº Documento:{0}\nNombre: {1}, {2}\nID: {3}", alumno.NroDocumento,
                                 alumno.Apellido, alumno.Nombre, alumno.Id);
                             ShowError(s);
+                            error = true;
                             break;
                         }
                         AvanzarProgreso();
@@ -107,7 +109,10 @@ namespace SMPorres.Forms.Web
                 {
                     cliente.Close();
                 }
-                MessageBox.Show("Los datos se subieron correctamente.\nFin del proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!error)
+                {
+                    MessageBox.Show("Los datos se subieron correctamente.\nFin del proceso.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (ThreadAbortException)
             {
