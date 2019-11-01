@@ -369,12 +369,8 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-//<<<<<<< HEAD
-//                        var pp = PlanesPagoRepository.ActualizarPorcentajeBeca(pps.Id, f.PorcentajeBeca);
-//                        PlanesPagoRepository.ActualizarModalidad(pps.Id, NombreCurso ,f.Modalidad);
-//=======
-//                        var pp = PlanesPagoRepository.Actualizar(pps.Id, f.PorcentajeBeca, f.TipoBeca);
-//>>>>>>> R6
+                        PlanesPagoRepository.ActualizarModalidad(pps.Id, NombreCurso, f.Modalidad);
+                        var pp = PlanesPagoRepository.Actualizar(pps.Id, f.PorcentajeBeca, f.TipoBeca);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == pp.Id);
                     }
