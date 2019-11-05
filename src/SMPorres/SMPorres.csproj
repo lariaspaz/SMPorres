@@ -417,12 +417,6 @@
       <DependentUpon>TotalesPago.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\Designs\TotalPagos.cs">
-      <DependentUpon>TotalPagos.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\Designs\AlumnosMorosos.cs">
       <DependentUpon>AlumnosMorosos.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -584,10 +578,6 @@
     <EmbeddedResource Include="Reports\Designs\TotalesPago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TotalesPago.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Designs\TotalPagos.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>TotalPagos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Designs\AlumnosMorosos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

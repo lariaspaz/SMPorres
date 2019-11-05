@@ -79,5 +79,26 @@ namespace SMPorres.Repositories
                 return db.Cuotas.FirstOrDefault(c => c.Id == id);
             }
         }
+
+        public static short ÚltimaCuota()
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota); 
+                //return Convert.ToInt16(db.Cuotas.Where(x => x.NroCuota < 11).Where(x => x.VtoCuota <= DateTime.Today));
+                //var p = db.Cuotas.Where(x => x.NroCuota < 11).Where(x => x.VtoCuota <= DateTime.Today);
+
+                //return 8;
+            }
+        }
+
+        public static DateTime ÚltimoVencimiento()
+        {
+            using (var db = new SMPorresEntities())
+            {
+                //return Convert.ToDateTime( db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today) );
+                return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.VtoCuota)                ;
+            }
+        }
     }
 }

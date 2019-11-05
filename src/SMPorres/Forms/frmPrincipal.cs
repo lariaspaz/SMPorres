@@ -204,5 +204,10 @@ namespace SMPorres.Forms
         {
             using (var f = new Web.frmActualizarDatos()) f.ShowDialog();
         }
+
+        private void enviarEmailAAlumnosMorososToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Alumnos.frmEmailAlumnosMorosos()) f.ShowDialog();
+        }
     }
 }
