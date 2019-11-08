@@ -80,15 +80,14 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static short ÚltimaCuota()
+        public static short MáximaCuotaNoVencida
         {
-            using (var db = new SMPorresEntities())
+            get
             {
-                return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota); 
-                //return Convert.ToInt16(db.Cuotas.Where(x => x.NroCuota < 11).Where(x => x.VtoCuota <= DateTime.Today));
-                //var p = db.Cuotas.Where(x => x.NroCuota < 11).Where(x => x.VtoCuota <= DateTime.Today);
-
-                //return 8;
+                using (var db = new SMPorresEntities())
+                {
+                    return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota);
+                }
             }
         }
 
@@ -97,7 +96,7 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 //return Convert.ToDateTime( db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today) );
-                return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.VtoCuota)                ;
+                return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.VtoCuota);
             }
         }
     }

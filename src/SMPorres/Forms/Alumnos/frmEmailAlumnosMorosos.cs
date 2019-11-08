@@ -31,32 +31,10 @@ namespace SMPorres.Forms.Alumnos
 */
         private void ConsultarDatos()
         {
-            short uCuota = CuotasRepository.ÚltimaCuota();
             short idCarrera = 1;
-            List<AlumnoMoroso> am = (List < AlumnoMoroso >) AlumnosMorososRepository.ObtenerAlumnosMorosos(uCuota, idCarrera);
-
-            foreach (var item in am)
-            {
-                item.ImporteDeuda = Convert.ToDecimal(PagosRepository.ObtenerDetallePago(item.IdPago, DateTime.Today).ImportePagado);
-            }
-
-            var morosos = (from m in am
-                           group m by new { m.IdPlanPago, m.Carrera, m.Curso, m.Apellido, m.Nombre, m.Documento, m.EMail }
-                           into g
-                           select new AlumnoMoroso
-                           {
-                               IdPlanPago = g.Key.IdPlanPago,
-                               Carrera = g.Key.Carrera,
-                               Curso = g.Key.Curso,
-                               Apellido = g.Key.Apellido,
-                               Nombre = g.Key.Nombre,
-                               Documento = g.Key.Documento,
-                               EMail = g.Key.EMail,
-                               ImporteDeuda = g.Sum(s => s.ImporteDeuda),
-                               CuotasAdeudadas = g.Count()
-                           });
-            //dgvDatos.SetDataSource(morosos);
-            enviarEMailMorosos(morosos);
+            var morosos = AlumnosMorososRepository.ObtenerAlumnosMorosos(idCarrera);
+            dgvDatos.SetDataSource(morosos);
+            //enviarEMailMorosos(morosos);
         }
 
         private void enviarEMailMorosos(IEnumerable<AlumnoMoroso> morosos)

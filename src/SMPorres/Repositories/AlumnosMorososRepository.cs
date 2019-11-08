@@ -9,36 +9,56 @@ namespace SMPorres.Repositories
 {
     class AlumnosMorososRepository
     {
-        public static IList<AlumnoMoroso> ObtenerAlumnosMorosos(int cuotaMax, int idCarrera)
+        public static IEnumerable<AlumnoMoroso> ObtenerAlumnosMorosos(int idCarrera)
         {
             using (var db = new SMPorresEntities())
             {
                 var query = (from pp in db.PlanesPago
-                             //join a in db.Alumnos on pp.IdAlumno equals a.Id
                              join p in db.Pagos on pp.Id equals p.IdPlanPago
-                             //join c in db.Cursos on pp.IdCurso equals c.Id
                              where pp.Estado == 1 && //Planes de pago activos
-                                 p.ImportePagado == null &&// Cuota pagada
-                                 p.NroCuota <= cuotaMax
-                                 //c.VtoCuota <= DateTime.Today   // Cuotas con vencimiento menor a fecha actual
-                                 && pp.Curso.Carrera.Id == idCarrera
-                                 //&& pp.Id < 100
+                                 p.ImportePagado == null &&// Cuota impaga
+                                 p.NroCuota <= CuotasRepository.MáximaCuotaNoVencida &&
+                                 pp.Curso.Carrera.Id == idCarrera
+                             orderby pp.Id
                              select new AlumnoMoroso
                              {
                                  IdPlanPago = pp.Id,
                                  Carrera = pp.Curso.Carrera.Nombre,
                                  Curso = pp.Curso.Nombre,
-                                 Nombre = pp.Alumno.Nombre, //a.Nombre,
-                                 Apellido = pp.Alumno.Apellido, //a.Apellido,
-                                 Documento = pp.Alumno.NroDocumento.ToString(), //a.NroDocumento.ToString(),
+                                 Nombre = pp.Alumno.Nombre,
+                                 Apellido = pp.Alumno.Apellido,
+                                 Documento = pp.Alumno.NroDocumento.ToString(),
                                  EMail = pp.Alumno.EMail, //a.EMail,
                                  IdPago = p.Id,
                                  NroCuota = p.NroCuota,
                                  ImporteDeuda = 0,
                                  //ImporteDeuda = PagosRepository.ObtenerDetallePago(p.Id, DateTime.Today).ImportePagado,
                                 CuotasAdeudadas = 1
-                             });
-                return query.OrderBy(s => s.IdPlanPago).ToList();
+                             }).ToList();
+                //return query.OrderBy(s => s.IdPlanPago).ToList();
+
+                foreach (var item in query)
+                {
+                    item.ImporteDeuda = PagosRepository.ObtenerDetallePago(item.IdPago, DateTime.Today).ImportePagado;
+                }
+
+                var morosos = (from t in query
+                                group t by new { t.IdPlanPago, t.Carrera, t.Curso, t.Apellido, t.Nombre, t.Documento, t.EMail }
+                               into g
+                                select new AlumnoMoroso
+                                {
+                                    IdPlanPago = g.Key.IdPlanPago,
+                                    Carrera = g.Key.Carrera,
+                                    Curso = g.Key.Curso,
+                                    Apellido = g.Key.Apellido,
+                                    Nombre = g.Key.Nombre,
+                                    Documento = g.Key.Documento,
+                                    EMail = g.Key.EMail,
+                                    ImporteDeuda = g.Sum(s => s.ImporteDeuda),
+                                    CuotasAdeudadas = g.Count()
+                                });
+                return morosos;
+
             }
         }
 
