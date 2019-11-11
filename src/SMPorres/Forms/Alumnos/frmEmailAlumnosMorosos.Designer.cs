@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEmailAlumnosMorosos));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvDatos = new CustomLibrary.ComponentModel.CustomDataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnCalcularDeuda = new System.Windows.Forms.ToolStripButton();
-            this.btnEMail = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
@@ -79,8 +76,6 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnCalcularDeuda,
-            this.btnEMail,
             this.toolStripSeparator1,
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -88,28 +83,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(961, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnCalcularDeuda
-            // 
-            this.btnCalcularDeuda.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnCalcularDeuda.Image = global::SMPorres.Properties.Resources.money_dollar;
-            this.btnCalcularDeuda.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCalcularDeuda.Name = "btnCalcularDeuda";
-            this.btnCalcularDeuda.Size = new System.Drawing.Size(23, 22);
-            this.btnCalcularDeuda.Text = "Enviar email";
-            this.btnCalcularDeuda.ToolTipText = "Nuevo (Ctrl + N)";
-            this.btnCalcularDeuda.Click += new System.EventHandler(this.btnCalcularDeuda_Click);
-            // 
-            // btnEMail
-            // 
-            this.btnEMail.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEMail.Image = ((System.Drawing.Image)(resources.GetObject("btnEMail.Image")));
-            this.btnEMail.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEMail.Name = "btnEMail";
-            this.btnEMail.Size = new System.Drawing.Size(23, 22);
-            this.btnEMail.Text = "Enviar email";
-            this.btnEMail.ToolTipText = "Nuevo (Ctrl + N)";
-            this.btnEMail.Click += new System.EventHandler(this.btnEMail_Click);
             // 
             // toolStripSeparator1
             // 
@@ -148,10 +121,8 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnCalcularDeuda;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private CustomLibrary.ComponentModel.CustomDataGridView dgvDatos;
-        private System.Windows.Forms.ToolStripButton btnEMail;
     }
 }

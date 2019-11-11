@@ -22,45 +22,47 @@ namespace SMPorres.Forms.Alumnos
             InitializeComponent();
             ConsultarDatos();
         }
-/*
-    1 Técnico Superior en Instrumentación Quirúrgica
-    2 Técnico Superior en Radiología
-    3 Técnico Superior en Hemoterapia
-    4 Trabajador Social
-    5 Técnico Superior en Laboratorio de Análisis Clínicos
-*/
+
         private void ConsultarDatos()
         {
-            short idCarrera = 1;
-            var morosos = AlumnosMorososRepository.ObtenerAlumnosMorosos(idCarrera);
-            dgvDatos.SetDataSource(morosos);
-            //enviarEMailMorosos(morosos);
+            IList<Carrera> carreras = CarrerasRepository.ObtenerCarreras();
+            foreach (var item in carreras)
+            {
+                var morosos = AlumnosMorososRepository.ObtenerAlumnosMorosos(item.Id);
+                //dgvDatos.SetDataSource(morosos);
+
+                MessageBox.Show(item.Nombre);
+
+                /* --> utilicé  --> MessageBox.Show(item.Nombre);       
+                 * para poder enviar e-mail.
+                 * Cuando se ejecuta ConsultarDatos(), inicia el proceso, envía unos e-mail y luego
+                 * sale por timeout
+                 * Puse el MessageBox, para tener un tiempo extra y corroborar que se envíen los e-mail
+                 * si encuentras algo me avisas
+                 */
+
+                ProcesarEMailMorosos(morosos);
+            }
         }
 
-        private void enviarEMailMorosos(IEnumerable<AlumnoMoroso> morosos)
+        private void ProcesarEMailMorosos(IEnumerable<AlumnoMoroso> morosos)
         {
-            //controlar en Log los mensajes que se intenta enviar
             foreach (var item in morosos)
             {
-                if (string.IsNullOrEmpty(item.EMail)) return;
-                
+                EMail eMail = new EMail();
+                if (!string.IsNullOrEmpty(item.EMail))
+                {
+                    eMail.To = item.EMail;
+                    eMail.Body = EMailRepository.ArmarBodyEMail(item.Apellido, item.Nombre, item.Documento, item.Carrera,
+                                                item.Curso, item.CuotasAdeudadas, item.ImporteDeuda);
+                    eMail.Subject = "Instituto San Martín de Porres - Tesorería";
+                    EMailRepository.EnviarEMail(eMail);
+                }
+
             }
         }
 
-        private decimal ObtenerDeuda(int idPlanPago, Int16 cuotaReferencia)
-        {
-            
-            var cuotas = AlumnosMorososRepository.ObtenerCuotasAdeudadas(idPlanPago, cuotaReferencia);
-
-            decimal deuda = 0;
-            foreach (var i in cuotas)
-            {
-                deuda += Convert.ToDecimal(PagosRepository.ObtenerDetallePago(i.Id, DateTime.Today).ImportePagado);                
-            }
-
-            return deuda;
-        }
-
+        
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
@@ -101,14 +103,6 @@ namespace SMPorres.Forms.Alumnos
             dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            //dgvDatos.Columns[7].HeaderText = "IdPago";
-            //dgvDatos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //dgvDatos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //
-            //dgvDatos.Columns[8].HeaderText = "NroCuota";
-            //dgvDatos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //dgvDatos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
             dgvDatos.Columns[7].HeaderText = "Importe";
             dgvDatos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -117,80 +111,6 @@ namespace SMPorres.Forms.Alumnos
             dgvDatos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
-
-        private Int32 IdPlanPagoSeleccionado()
-        {
-            try
-            {
-                int rowindex = dgvDatos.CurrentCell.RowIndex;
-                var id = (Int32)dgvDatos.Rows[rowindex].Cells[0].Value;
-                return id;
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
-        }
-
-        private void btnEMail_Click(object sender, EventArgs e)
-        {
-            List<string> destinatarios = new List<string>()
-            {
-                "hernan_jhc@hotmail.com",
-                "hernan.jhc@gmail.com"
-            };
-
-
-            //
-            // se crea el mensaje
-            //
-            string body = "holaaaaa";
-
-            //using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MailSendTest.MailBody.txt"))
-            //using (StreamReader reader = new StreamReader(stream))
-            //{
-            //    body = reader.ReadToEnd();
-            //}
-
-            MailMessage mail = new MailMessage()
-            {
-                From = new MailAddress("hernan.jhc@gmail.com"),
-                Body = body,
-                Subject = "Mail Test",
-                IsBodyHtml = false
-            };
-
-
-            //
-            // se asignan los destinatarios
-            //
-            foreach (string item in destinatarios)
-            {
-                mail.To.Add(new MailAddress(item));
-            }
-
-
-            //
-            // se define el smtp
-            //
-            SmtpClient smtp = new SmtpClient()
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("hernan.jhc@gmail.com", "..."),
-                EnableSsl = true
-            };
-
-
-            smtp.Send(mail);
-        }
-
-        private void btnCalcularDeuda_Click(object sender, EventArgs e)
-        {
-            var idpp = IdPlanPagoSeleccionado();
-            var deuda = ObtenerDeuda(idpp,7);
-            MessageBox.Show("La deuda es de: " + deuda.ToString(), "Deuda");
-        }
+        
     }
 }
