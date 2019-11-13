@@ -31,15 +31,7 @@ namespace SMPorres.Forms.Alumnos
                 var morosos = AlumnosMorososRepository.ObtenerAlumnosMorosos(item.Id);
                 //dgvDatos.SetDataSource(morosos);
 
-                MessageBox.Show(item.Nombre);
-
-                /* --> utilicé  --> MessageBox.Show(item.Nombre);       
-                 * para poder enviar e-mail.
-                 * Cuando se ejecuta ConsultarDatos(), inicia el proceso, envía unos e-mail y luego
-                 * sale por timeout
-                 * Puse el MessageBox, para tener un tiempo extra y corroborar que se envíen los e-mail
-                 * si encuentras algo me avisas
-                 */
+                //MessageBox.Show(item.Nombre); 
 
                 ProcesarEMailMorosos(morosos);
             }
@@ -53,13 +45,14 @@ namespace SMPorres.Forms.Alumnos
                 if (!string.IsNullOrEmpty(item.EMail))
                 {
                     eMail.To = item.EMail;
-                    eMail.Body = EMailRepository.ArmarBodyEMail(item.Apellido, item.Nombre, item.Documento, item.Carrera,
+                    eMail.Body = EMailRepository.ArmarBodyEMailHtml(item.Apellido, item.Nombre, item.Documento, item.Carrera,
                                                 item.Curso, item.CuotasAdeudadas, item.ImporteDeuda);
-                    eMail.Subject = "Instituto San Martín de Porres - Tesorería";
+                    eMail.Subject = "Notificación de deuda - Instituto San Martín de Porres";
                     EMailRepository.EnviarEMail(eMail);
                 }
 
             }
+            morosos = null;
         }
 
         
