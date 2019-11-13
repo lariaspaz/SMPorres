@@ -1,14 +1,3 @@
-src/.vs
-src/SMPorres/bin
-src/SMPorres/obj
-src/SMPorres/App.config
-src/packages
-src/Consultas/bin
-src/Consultas/obj
-tmp
-src/Utilidades/bin
-src/Utilidades/obj
-src/Utilidades/packages.config
 src/Consultas/datos.txt
 
 ## Ignore Visual Studio temporary files, build results, and
