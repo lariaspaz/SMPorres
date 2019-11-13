@@ -80,7 +80,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static short MáximaCuotaNoVencida
+        public static short MáximaCuotaVencida
         {
             get
             {

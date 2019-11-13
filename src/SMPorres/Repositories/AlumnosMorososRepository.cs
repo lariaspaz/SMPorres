@@ -17,7 +17,7 @@ namespace SMPorres.Repositories
                              join p in db.Pagos on pp.Id equals p.IdPlanPago
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
-                                 p.NroCuota <= CuotasRepository.MáximaCuotaNoVencida &&
+                                 p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
                                  pp.Curso.Carrera.Id == idCarrera
                              orderby pp.Id
                              select new AlumnoMoroso

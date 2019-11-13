@@ -312,6 +312,7 @@
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Curso.Ext.cs" />
+    <Compile Include="Models\EMail.cs" />
     <Compile Include="Models\ModalidadCursado.cs" />
     <Compile Include="Models\PagoBSE.cs" />
     <Compile Include="Models\Barrio.cs">
@@ -443,6 +444,7 @@
     <Compile Include="Repositories\CabecerasArchivosRepository.cs" />
     <Compile Include="Repositories\ConfiguracionRepository.cs" />
     <Compile Include="Repositories\CuotasRepository.cs" />
+    <Compile Include="Repositories\EMailRepository.cs" />
     <Compile Include="Repositories\GruposItemsMenuRepository.cs" />
     <Compile Include="Repositories\ItemsMenuRepository.cs" />
     <Compile Include="Repositories\MediosPagoRepository.cs" />
