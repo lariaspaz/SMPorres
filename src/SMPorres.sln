@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades", "Utilidades\Ut
 		{160ECD46-3B65-4E64-84A6-9547756DCC23} = {160ECD46-3B65-4E64-84A6-9547756DCC23}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackupDB", "BackupDB\BackupDB.csproj", "{61CD28C1-3DD6-4322-85FB-F5BAB13DF520}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{0D3D9DA5-0860-4434-925F-EFA400D41B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D3D9DA5-0860-4434-925F-EFA400D41B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D3D9DA5-0860-4434-925F-EFA400D41B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CD28C1-3DD6-4322-85FB-F5BAB13DF520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CD28C1-3DD6-4322-85FB-F5BAB13DF520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CD28C1-3DD6-4322-85FB-F5BAB13DF520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CD28C1-3DD6-4322-85FB-F5BAB13DF520}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
