@@ -45,10 +45,10 @@ namespace SMPorres.Forms.Alumnos
                 if (!string.IsNullOrEmpty(item.EMail))
                 {
                     eMail.To = item.EMail;
-                    eMail.Body = EMailRepository.ArmarBodyEMailHtml(item.Apellido, item.Nombre, item.Documento, item.Carrera,
+                    eMail.Body = EMailRepository.ArmarBodyEMailHtmlImage(item.Apellido, item.Nombre, item.Documento, item.Carrera,
                                                 item.Curso, item.CuotasAdeudadas, item.ImporteDeuda);
                     eMail.Subject = "Notificación de deuda - Instituto San Martín de Porres";
-                    EMailRepository.EnviarEMail(eMail);
+                    EMailRepository.EnviarEMailImage(eMail);
                 }
 
             }

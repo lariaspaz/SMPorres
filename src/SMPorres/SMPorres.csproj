@@ -660,6 +660,7 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
       <LastGenOutput>SMPorres.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\logo-01.png" />
     <None Include="Resources\app2.ico" />
     <None Include="Resources\favicon2.png" />
     <None Include="Resources\key.png" />
