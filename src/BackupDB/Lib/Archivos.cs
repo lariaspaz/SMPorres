@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BackupDB.Models;
+using System.IO;
+using System.IO.Compression;
 
 namespace BackupDB.Lib
 {
@@ -12,61 +15,49 @@ namespace BackupDB.Lib
     {
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static void UploadData(DriveService svc)
-        {
-            var fileMetadata = new File()
-            {
-                Name = $"{DateTime.Now.ToString("yyyyMMddHHmmss")} - photo.jpg"
-            };
-            FilesResource.CreateMediaUpload request;
-            using (var stream = new System.IO.FileStream(@"C:\Proyectos\Varios\Google\Drive\IMG_20180125_113129789_HDR.jpg",
-                System.IO.FileMode.Open))
-            {
-                request = svc.Files.Create(fileMetadata, stream, "image/jpeg");
-                request.Fields = "id";
-                var u = request.Upload();
-                //Console.WriteLine(u.Exception);
-                _log.Error(u.Exception);
-                //Console.WriteLine("Request:\n" + Newtonsoft.Json.JsonConvert.SerializeObject(request));
-            }
-            var file = request.ResponseBody;
-            if (file == null)
-                _log.Debug("file es null");
-            else if (file.Id == null)
-            {
-                _log.Debug("file.id es null");
-                _log.Debug(Newtonsoft.Json.JsonConvert.SerializeObject(file));
-            }
-            else
-                _log.Debug("File ID: " + file.Id);
-        }
 
         private static string DBFile
         {
             get
             {
-                var s = System.IO.Path.GetDirectoryName(
-                            System.Reflection.Assembly.GetExecutingAssembly().Location) +
-                        @"\Files\SMPorres.7z";
-                return s;                
+                var fileName = DateTime.Now.ToString("yyyy-MM-dd HH.mm.ss");
+                var path = System.Configuration.ConfigurationManager.AppSettings["Path"];
+                var f = $"{path}\\{fileName}.bak";
+                using (var db = new SMPorres())
+                {
+                    var dbName = db.Database.Connection.Database;
+                    db.Database.ExecuteSqlCommand(System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction,
+                        $"BACKUP DATABASE {dbName} TO DISK = '{f}' WITH FORMAT;");
+                }
+                return f;
             }
         }
 
+        private static string Comprimir(this string dbName)
+        {
+            var f = Path.GetFileName(dbName);
+            string archivo = Path.GetDirectoryName(dbName) + "\\" + 
+                Path.ChangeExtension(f, "zip");
+            using (FileStream fs = new FileStream(archivo, FileMode.Create))
+            using (ZipArchive arch = new ZipArchive(fs, ZipArchiveMode.Create))
+            {
+                arch.CreateEntryFromFile(dbName, f);
+            }
+            return archivo;
+        }
 
         public static void UploadDB(DriveService svc)
         {
-            var fileMetadata = new File()
-            {
-                Name = $"{DateTime.Now.ToString("yyyyMMddHHmmss")} - db.7z"
-            };
+            var dbFile = DBFile;
+            var zipFile = dbFile.Comprimir();
+            var fileMetadata = new Google.Apis.Drive.v3.Data.File() { Name = Path.GetFileName(zipFile) };
             FilesResource.CreateMediaUpload request;
-            
-            using (var stream = new System.IO.FileStream(DBFile, System.IO.FileMode.Open))
+            using (var stream = new FileStream(zipFile, FileMode.Open))
             {
-                request = svc.Files.Create(fileMetadata, stream, "application/x-7z-compressed");
+                request = svc.Files.Create(fileMetadata, stream, "application/x-zip-compressed");
                 request.Fields = "id";
                 var u = request.Upload();
-                if (u.Exception != null &&!String.IsNullOrEmpty(u.Exception.Message))
+                if (u.Exception != null && !String.IsNullOrEmpty(u.Exception.Message))
                 {
                     _log.Error(u.Exception);
                 }
@@ -82,49 +73,17 @@ namespace BackupDB.Lib
             }
             else
                 _log.Debug("File ID: " + file.Id);
+
+            DeleteFile(zipFile);
+            DeleteFile(dbFile);
         }
 
-
-        public static Google.Apis.Drive.v3.Data.File uploadFile(DriveService _service, string _uploadFile, string _parent, string _descrp = "Uploaded with .NET!")
+        private static void DeleteFile(string fileName)
         {
-            if (System.IO.File.Exists(_uploadFile))
+            if (System.IO.File.Exists(fileName))
             {
-                File body = new File();
-                body.Name = System.IO.Path.GetFileName(_uploadFile);
-                body.Description = _descrp;
-                body.MimeType = GetMimeType(_uploadFile);
-                //body.Parents = new List<ParentReference>() { new ParentReference() { Id = _parent } };
-
-                byte[] byteArray = System.IO.File.ReadAllBytes(_uploadFile);
-                System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
-                try
-                {
-                    FilesResource.CreateMediaUpload request = _service.Files.Create(body, stream, GetMimeType(_uploadFile));
-                    request.Upload();
-                    return request.ResponseBody;
-                }
-                catch (Exception e)
-                {
-                    _log.Error(e);
-                }
+                System.IO.File.Delete(fileName);
             }
-            else
-            {
-                //MessageBox.Show("The file does not exist.", "404");
-                _log.Error("The file does not exist.");
-            }
-
-            return null;
-        }
-
-        private static string GetMimeType(string fileName)
-        {
-            string mimeType = "application/unknown";
-            string ext = System.IO.Path.GetExtension(fileName).ToLower();
-            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
-            if (regKey != null && regKey.GetValue("Content Type") != null)
-                mimeType = regKey.GetValue("Content Type").ToString();
-            return mimeType;
         }
     }
 }
