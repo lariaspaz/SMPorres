@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMPorres.Models
+namespace EnvioEMail.Models
 {
-    public class EMail
+    class EMail
     {
         public string From { get; set; }
 

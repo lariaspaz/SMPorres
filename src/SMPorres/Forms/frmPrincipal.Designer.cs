@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelDeAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enviarEmailAAlumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rendiciónBSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarDatosEnLaWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -80,7 +79,6 @@
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.panelDeAlumnosToolStripMenuItem,
-            this.enviarEmailAAlumnosMorososToolStripMenuItem,
             this.rendiciónBSEToolStripMenuItem,
             this.actualizarDatosEnLaWebToolStripMenuItem,
             this.toolStripMenuItem2,
@@ -92,40 +90,33 @@
             // panelDeAlumnosToolStripMenuItem
             // 
             this.panelDeAlumnosToolStripMenuItem.Name = "panelDeAlumnosToolStripMenuItem";
-            this.panelDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.panelDeAlumnosToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.panelDeAlumnosToolStripMenuItem.Text = "Panel de alumnos";
             this.panelDeAlumnosToolStripMenuItem.Click += new System.EventHandler(this.panelDeAlumnosToolStripMenuItem_Click);
-            // 
-            // enviarEmailAAlumnosMorososToolStripMenuItem
-            // 
-            this.enviarEmailAAlumnosMorososToolStripMenuItem.Name = "enviarEmailAAlumnosMorososToolStripMenuItem";
-            this.enviarEmailAAlumnosMorososToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.enviarEmailAAlumnosMorososToolStripMenuItem.Text = "Enviar email a alumnos morosos";
-            this.enviarEmailAAlumnosMorososToolStripMenuItem.Click += new System.EventHandler(this.enviarEmailAAlumnosMorososToolStripMenuItem_Click);
             // 
             // rendiciónBSEToolStripMenuItem
             // 
             this.rendiciónBSEToolStripMenuItem.Name = "rendiciónBSEToolStripMenuItem";
-            this.rendiciónBSEToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.rendiciónBSEToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.rendiciónBSEToolStripMenuItem.Text = "Importar rendición BSE";
             this.rendiciónBSEToolStripMenuItem.Click += new System.EventHandler(this.rendiciónBSEToolStripMenuItem_Click);
             // 
             // actualizarDatosEnLaWebToolStripMenuItem
             // 
             this.actualizarDatosEnLaWebToolStripMenuItem.Name = "actualizarDatosEnLaWebToolStripMenuItem";
-            this.actualizarDatosEnLaWebToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.actualizarDatosEnLaWebToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.actualizarDatosEnLaWebToolStripMenuItem.Text = "Actualizar datos en la web";
             this.actualizarDatosEnLaWebToolStripMenuItem.Click += new System.EventHandler(this.actualizarDatosEnLaWebToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(242, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(208, 6);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -361,7 +352,6 @@
         private System.Windows.Forms.ToolStripMenuItem PagosTotalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rendiciónBSEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actualizarDatosEnLaWebToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem enviarEmailAAlumnosMorososToolStripMenuItem;
     }
 }
 

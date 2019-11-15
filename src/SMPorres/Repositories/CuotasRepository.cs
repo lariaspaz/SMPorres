@@ -80,24 +80,5 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static short MáximaCuotaVencida
-        {
-            get
-            {
-                using (var db = new SMPorresEntities())
-                {
-                    return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota);
-                }
-            }
-        }
-
-        public static DateTime ÚltimoVencimiento()
-        {
-            using (var db = new SMPorresEntities())
-            {
-                //return Convert.ToDateTime( db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today) );
-                return db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.VtoCuota);
-            }
-        }
     }
 }

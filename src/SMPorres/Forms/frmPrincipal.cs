@@ -207,7 +207,7 @@ namespace SMPorres.Forms
 
         private void enviarEmailAAlumnosMorososToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new Alumnos.frmEmailAlumnosMorosos()) f.ShowDialog();
+            //using (var f = new Alumnos.frmEmailAlumnosMorosos()) f.ShowDialog();
         }
     }
 }
