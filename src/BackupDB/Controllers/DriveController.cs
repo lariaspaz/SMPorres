@@ -35,10 +35,12 @@ namespace BackupDB.Controllers
             {
                 if (CrearServicio())
                 {
+                    string archivo;
                     using (_svc)
                     {
-                        Archivos.UploadDB(_svc);
+                        archivo = Archivos.UploadDB(_svc);
                     }
+                    new Mailer().SendMail("Backup DB SMPorres", "Se realizó el backup de la base de datos.\nArchivo: " + archivo + ".");
                 }
                 return true;
             }

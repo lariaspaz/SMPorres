@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{61CD28C1-3DD6-4322-85FB-F5BAB13DF520}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BackupDB</RootNamespace>
     <AssemblyName>BackupDB</AssemblyName>
@@ -31,6 +31,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -92,6 +95,8 @@
     <Compile Include="Controllers\DriveController.cs" />
     <Compile Include="Lib\Archivos.cs" />
     <Compile Include="Lib\DriveLibrary.cs" />
+    <Compile Include="Lib\Mailer.cs" />
+    <Compile Include="Lib\Security\StringCipher.cs" />
     <Compile Include="Models\SMPorres.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

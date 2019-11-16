@@ -22,6 +22,7 @@ namespace BackupDB.Lib
             {
                 var fileName = DateTime.Now.ToString("yyyy-MM-dd HH.mm.ss");
                 var path = System.Configuration.ConfigurationManager.AppSettings["Path"];
+                Directory.CreateDirectory(path); //crea la ruta si no existe
                 var f = $"{path}\\{fileName}.bak";
                 using (var db = new SMPorres())
                 {
@@ -46,7 +47,7 @@ namespace BackupDB.Lib
             return archivo;
         }
 
-        public static void UploadDB(DriveService svc)
+        public static string UploadDB(DriveService svc)
         {
             var dbFile = DBFile;
             var zipFile = dbFile.Comprimir();
@@ -76,6 +77,8 @@ namespace BackupDB.Lib
 
             DeleteFile(zipFile);
             DeleteFile(dbFile);
+
+            return Path.GetFileName(zipFile);
         }
 
         private static void DeleteFile(string fileName)
