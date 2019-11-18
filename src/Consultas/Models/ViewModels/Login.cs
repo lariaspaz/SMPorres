@@ -9,7 +9,7 @@ namespace Consultas.Models.ViewModels
     public class Login
     {
         [Required]
-        [Display(Name = "Nombre de usuario")]
+        [Display(Name = "Nombre de usuario o Documento")]
         public string UserName { get; set; }
 
         [Required]

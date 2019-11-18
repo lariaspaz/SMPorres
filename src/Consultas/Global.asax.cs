@@ -27,17 +27,24 @@ namespace Consultas
             HttpCookie authCookie = Request.Cookies["Cookie1"];
             if (authCookie != null)
             {
-                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                try
+                {
+                    FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
 
-                var serializeModel = JsonConvert.DeserializeObject<CustomSerializeModel>(authTicket.UserData);
+                    var serializeModel = JsonConvert.DeserializeObject<CustomSerializeModel>(authTicket.UserData);
 
-                CustomPrincipal principal = new CustomPrincipal(authTicket.Name);
-                principal.UserId = serializeModel.UserId;
-                principal.FirstName = serializeModel.FirstName;
-                principal.LastName = serializeModel.LastName;
-                principal.RolName = serializeModel.RoleName;                
+                    CustomPrincipal principal = new CustomPrincipal(authTicket.Name);
+                    principal.UserId = serializeModel.UserId;
+                    principal.FirstName = serializeModel.FirstName;
+                    principal.LastName = serializeModel.LastName;
+                    principal.RolName = serializeModel.RoleName;                
 
-                HttpContext.Current.User = principal;
+                    HttpContext.Current.User = principal;
+                }
+                catch (System.Security.Cryptography.CryptographicException cex)
+                {
+                    FormsAuthentication.SignOut();
+                }
             }
         }
     }
