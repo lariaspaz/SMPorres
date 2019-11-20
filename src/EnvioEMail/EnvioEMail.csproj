@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -57,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lib\Security\StringCipher.cs" />
     <Compile Include="Models\AlumnoMoroso.cs" />
     <Compile Include="Models\Alumnos.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
@@ -104,6 +106,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SMPorres.Ext.cs" />
     <Compile Include="Models\TipoBeca.cs" />
     <Compile Include="Models\TiposDocumento.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
