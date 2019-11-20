@@ -36,7 +36,7 @@ namespace EnvioEMail
                     eMail.To = item.EMail;
                     eMail.Body = EMailRepository.ArmarBodyEMailHtmlImage(item.Apellido, item.Nombre, item.Documento, item.Carrera,
                                                 item.Curso, item.CuotasAdeudadas, item.ImporteDeuda);
-                    eMail.Subject = "Notificación de deuda - Instituto San Martín de Porres";
+                    eMail.Subject = "Notificación de deuda";
                     EMailRepository.EnviarEMailImage(eMail);
                 }
 
