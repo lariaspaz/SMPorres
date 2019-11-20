@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>EnvioEMail.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -111,7 +114,7 @@
     <Compile Include="Repositories\CarrerasRepository.cs" />
     <Compile Include="Repositories\ConfiguracionRepository.cs" />
     <Compile Include="Repositories\CuotasRepository.cs" />
-    <Compile Include="Repositories\EMailRepository.cs" />
+    <Compile Include="Controllers\EMailController.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +129,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Header.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Models\SMPorres.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SMPorres.edmx</DependentUpon>

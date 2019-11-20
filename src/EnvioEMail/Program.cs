@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EnvioEMail.Models;
 using EnvioEMail.Repositories;
+using EnvioEMail.Controllers;
 
 namespace EnvioEMail
 {
@@ -34,10 +35,10 @@ namespace EnvioEMail
                 if (!string.IsNullOrEmpty(item.EMail))
                 {
                     eMail.To = item.EMail;
-                    eMail.Body = EMailRepository.ArmarBodyEMailHtmlImage(item.Apellido, item.Nombre, item.Documento, item.Carrera,
+                    eMail.Body = EMailController.ArmarBodyEMailHtmlImage(item.Apellido, item.Nombre, item.Documento, item.Carrera,
                                                 item.Curso, item.CuotasAdeudadas, item.ImporteDeuda);
                     eMail.Subject = "Notificación de deuda";
-                    EMailRepository.EnviarEMailImage(eMail);
+                    EMailController.EnviarEMailImage(eMail);
                 }
 
             }

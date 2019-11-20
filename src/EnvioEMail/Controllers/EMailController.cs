@@ -8,10 +8,11 @@ using System.Net.Mime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Reflection;
 
-namespace EnvioEMail.Repositories
+namespace EnvioEMail.Controllers
 {
-    class EMailRepository
+    class EMailController
     {
         public static string ArmarBodyEMailHtmlImage(string apellido, string nombre, string documento, string carrera, string curso, int cuotasAdeudadas, decimal? importeDeuda)
         {
@@ -22,7 +23,7 @@ namespace EnvioEMail.Repositories
             body.AppendFormat("<br/>Buenos días <h4>{0} {1}, </h4>", nombre, apellido);
 
             body.AppendFormat("<p>");
-            body.AppendFormat("Al día {0} ", DateTime.Today.ToLongDateString()); //.ToString());    // ("dd/MM/yyyy"));
+            body.AppendFormat("Al día {0} ", DateTime.Today.ToLongDateString());
             body.AppendFormat("detectamos en nuestros sistemas que usted registra {0} cuotas impagas en su carrera {1} ", cuotasAdeudadas, carrera);
             body.AppendFormat("por un importe de ${0:n}. ", importeDeuda);
             body.AppendFormat("</p>");
@@ -51,8 +52,8 @@ namespace EnvioEMail.Repositories
                 {
                     AlternateView htmlView =
                     AlternateView.CreateAlternateViewFromString(eMailDetail.Body, Encoding.UTF8, MediaTypeNames.Text.Html);
-
-                    LinkedResource img = new LinkedResource(@"C:\Temp\ismp.png", MediaTypeNames.Image.Jpeg);
+                    var dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    LinkedResource img = new LinkedResource($@"{dir}\images\Header.png", MediaTypeNames.Image.Jpeg);
                     img.ContentId = "imagen";
 
                     // Lo incrustamos en la vista HTML...
