@@ -331,4 +331,4 @@ ASALocalRun/
 
 src/Consultas/datos.txt
 !src/BackupDB
-
+tmp/**/*
