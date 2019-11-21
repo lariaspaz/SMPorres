@@ -77,7 +77,7 @@ namespace EnvioEMail.Controllers
                         Host = "smtp.gmail.com",
                         Port = 587,
                         UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential("tesoreria@ismp.edu.ar", "QW1951er"),
+                        Credentials = new NetworkCredential("tesoreria@ismp.edu.ar", "skcbhjxwgockqnfo"),
                         //Credentials = new NetworkCredential("hernan.jhc@gmail.com", "kkdjkukmwckyufwk"),
                         EnableSsl = true
                     };
