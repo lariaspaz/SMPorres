@@ -62,8 +62,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblTerminal = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblBaseDatos = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblExeVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblBaseDatos = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -311,8 +312,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblTerminal,
+            this.lblBaseDatos,
             this.lblUsuario,
-            this.lblBaseDatos});
+            this.lblExeVersion});
             this.statusStrip1.Location = new System.Drawing.Point(0, 379);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(641, 24);
@@ -333,13 +335,13 @@
             this.lblUsuario.Size = new System.Drawing.Size(122, 19);
             this.lblUsuario.Text = "toolStripStatusLabel1";
             // 
-            // lblBaseDatos
+            // lblExeVersion
             // 
-            this.lblBaseDatos.Name = "lblBaseDatos";
-            this.lblBaseDatos.Size = new System.Drawing.Size(382, 19);
-            this.lblBaseDatos.Spring = true;
-            this.lblBaseDatos.Text = "toolStripStatusLabel2";
-            this.lblBaseDatos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblExeVersion.Name = "lblExeVersion";
+            this.lblExeVersion.Size = new System.Drawing.Size(264, 19);
+            this.lblExeVersion.Spring = true;
+            this.lblExeVersion.Text = "toolStripStatusLabel2";
+            this.lblExeVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
             // 
@@ -351,6 +353,13 @@
             this.label1.Padding = new System.Windows.Forms.Padding(0, 20, 20, 20);
             this.label1.Size = new System.Drawing.Size(641, 122);
             this.label1.TabIndex = 5;
+            // 
+            // lblBaseDatos
+            // 
+            this.lblBaseDatos.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.lblBaseDatos.Name = "lblBaseDatos";
+            this.lblBaseDatos.Size = new System.Drawing.Size(122, 19);
+            this.lblBaseDatos.Text = "toolStripStatusLabel1";
             // 
             // frmPrincipal
             // 
@@ -410,8 +419,9 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblUsuario;
         private System.Windows.Forms.ToolStripStatusLabel lblTerminal;
-        private System.Windows.Forms.ToolStripStatusLabel lblBaseDatos;
+        private System.Windows.Forms.ToolStripStatusLabel lblExeVersion;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripStatusLabel lblBaseDatos;
     }
 }
 

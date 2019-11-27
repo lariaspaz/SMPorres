@@ -99,6 +99,7 @@ namespace SMPorres.Forms
                 lblTerminal.Text = Lib.Configuration.Terminal;
                 lblUsuario.Text = Lib.Session.CurrentUser.NombreCompleto;
                 lblBaseDatos.Text = Lib.Configuration.DBName;
+                lblExeVersion.Text = "v. " + Lib.Configuration.AppVersion;
 
                 int idUsuario = Lib.Session.CurrentUser.Id;
                 CargarPermisosUsuarioActual(idUsuario);

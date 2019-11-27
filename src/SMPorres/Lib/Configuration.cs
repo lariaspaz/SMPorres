@@ -49,5 +49,15 @@ namespace SMPorres.Lib
                 }
             }
         }
+
+        public static string AppVersion
+        {
+            get
+            {
+                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
+                return fvi.FileVersion;
+            }
+        }
     }
 }
