@@ -21,10 +21,6 @@ namespace SMPorres.Forms
         public frmPrincipal()
         {
             InitializeComponent();
-            _menuItems = new List<string>();
-            RecorrerMenu(this.menuStrip1.Items, null);
-            ItemsMenuRepository.EliminarItemsInexistentes(_menuItems);
-            Icon = Properties.Resources.app2;
         }
 
         private void CargarPermisosGruposDeUsuarioActual(int idusuario)
@@ -67,6 +63,10 @@ namespace SMPorres.Forms
                     ArmarMenu(m.DropDownItems);
                 }
             }
+            archivoToolStripMenuItem.Enabled = true;
+            archivoToolStripMenuItem.Visible = true;
+            salirToolStripMenuItem.Enabled = true;
+            salirToolStripMenuItem.Visible = true;
         }
 
         private void RecorrerMenu(ToolStripItemCollection items, string nombrePadre)
@@ -92,14 +92,18 @@ namespace SMPorres.Forms
         {
             if (new frmLogin().ShowDialog() == DialogResult.OK)
             {
+                _menuItems = new List<string>();
+                RecorrerMenu(this.menuStrip1.Items, null);
+                ItemsMenuRepository.EliminarItemsInexistentes(_menuItems);
+                Icon = Properties.Resources.app2;
+                lblTerminal.Text = Lib.Configuration.Terminal;
+                lblUsuario.Text = Lib.Session.CurrentUser.NombreCompleto;
+                lblBaseDatos.Text = Lib.Configuration.DBName;
+
                 int idUsuario = Lib.Session.CurrentUser.Id;
                 CargarPermisosUsuarioActual(idUsuario);
                 CargarPermisosGruposDeUsuarioActual(idUsuario);
                 ArmarMenu(menuStrip1.Items);
-                archivoToolStripMenuItem.Enabled = true;
-                archivoToolStripMenuItem.Visible = true;
-                salirToolStripMenuItem.Enabled = true;
-                salirToolStripMenuItem.Visible = true;
                 return true;
             }
             return false;

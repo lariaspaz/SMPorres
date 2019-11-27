@@ -30,5 +30,24 @@ namespace SMPorres.Lib
                 return 9;
             }
         }
+
+        public static string Terminal
+        {
+            get
+            {
+                return Environment.MachineName;
+            }
+        }
+
+        public static string DBName
+        {
+            get
+            {
+                using (var db = new SMPorresEntities())
+                {
+                    return db.Database.Connection.Database;
+                }
+            }
+        }
     }
 }

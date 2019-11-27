@@ -59,7 +59,13 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarUsuariosAGruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblTerminal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblBaseDatos = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -71,7 +77,7 @@
             this.seguridadToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(500, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(641, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -301,11 +307,58 @@
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Text = "Asignar permisos a Grupos y Usuarios";
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosAGruposYUsuariosToolStripMenuItem_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTerminal,
+            this.lblUsuario,
+            this.lblBaseDatos});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 379);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(641, 24);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblTerminal
+            // 
+            this.lblTerminal.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.lblTerminal.Name = "lblTerminal";
+            this.lblTerminal.Size = new System.Drawing.Size(122, 19);
+            this.lblTerminal.Text = "toolStripStatusLabel1";
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(122, 19);
+            this.lblUsuario.Text = "toolStripStatusLabel1";
+            // 
+            // lblBaseDatos
+            // 
+            this.lblBaseDatos.Name = "lblBaseDatos";
+            this.lblBaseDatos.Size = new System.Drawing.Size(382, 19);
+            this.lblBaseDatos.Spring = true;
+            this.lblBaseDatos.Text = "toolStripStatusLabel2";
+            this.lblBaseDatos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.Image = global::SMPorres.Properties.Resources.Header_250x88;
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.Location = new System.Drawing.Point(0, 257);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 20, 20, 20);
+            this.label1.Size = new System.Drawing.Size(641, 122);
+            this.label1.TabIndex = 5;
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 262);
+            this.ClientSize = new System.Drawing.Size(641, 403);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmPrincipal";
@@ -314,6 +367,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,6 +407,11 @@
         private System.Windows.Forms.ToolStripMenuItem PagosTotalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rendiciónBSEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actualizarDatosEnLaWebToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblUsuario;
+        private System.Windows.Forms.ToolStripStatusLabel lblTerminal;
+        private System.Windows.Forms.ToolStripStatusLabel lblBaseDatos;
+        private System.Windows.Forms.Label label1;
     }
 }
 
