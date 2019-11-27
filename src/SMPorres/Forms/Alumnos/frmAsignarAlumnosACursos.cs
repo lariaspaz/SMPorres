@@ -15,6 +15,9 @@ namespace SMPorres.Forms.Alumnos
 {
     public partial class frmAsignarAlumnosACursos : FormBase
     {
+        private string _leyenda = "Buscar por nombre";
+        private IEnumerable<Alumno> _sinAsignar;
+
         public frmAsignarAlumnosACursos()
         {
             InitializeComponent();
@@ -23,6 +26,29 @@ namespace SMPorres.Forms.Alumnos
             cbCarreras.ValueMember = "Id";
 
             lblCicloLectivo.Text = String.Format("Ciclo Lectivo {0:n0}", ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo);
+
+            txtBuscar.ForeColor = SystemColors.GrayText;
+            txtBuscar.Text = _leyenda;
+            this.txtBuscar.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.txtBuscar.Enter += new System.EventHandler(this.textBox1_Enter);
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text.Length == 0)
+            {
+                txtBuscar.Text = _leyenda;
+                txtBuscar.ForeColor = SystemColors.GrayText;
+            }
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == _leyenda)
+            {
+                txtBuscar.Text = "";
+                txtBuscar.ForeColor = SystemColors.WindowText;
+            }
         }
 
         private int IdCarrera
@@ -72,7 +98,7 @@ namespace SMPorres.Forms.Alumnos
             lbAsignados.DisplayMember = "Nombre";
             btnQuitar.Enabled = asignados.Any();
 
-            var sinAsignar = from a in AlumnosRepository.ObtenerAlumnos()
+            _sinAsignar = from a in AlumnosRepository.ObtenerAlumnos()
                               where a.Estado == (byte)EstadoAlumno.Activo &&
                                     !asignados.Any(a2 => a2.Id == a.Id)
                               select new Alumno
@@ -82,10 +108,12 @@ namespace SMPorres.Forms.Alumnos
                                             a.NroDocumento, a.Nombre, a.Apellido)
                               };
 
-            lbSinAsignar.DataSource = sinAsignar.ToList();
-            lbSinAsignar.DisplayMember = "Nombre";
-            lbSinAsignar.ValueMember = "Id";
-            btnAsignar.Enabled = sinAsignar.Any();
+            //lbSinAsignar.DataSource = _sinAsignar.ToList();
+            //lbSinAsignar.DisplayMember = "Nombre";
+            //lbSinAsignar.ValueMember = "Id";
+            //btnAsignar.Enabled = _sinAsignar.Any();
+
+            Filtrar();
 
         }
 
@@ -142,6 +170,25 @@ namespace SMPorres.Forms.Alumnos
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void Filtrar()
+        {
+            
+            var data = _sinAsignar;
+            if (txtBuscar.Text != _leyenda)
+            {
+                data = _sinAsignar.Where(t => t.Nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+            }
+            lbSinAsignar.DataSource = data.ToList();
+            lbSinAsignar.DisplayMember = "Nombre";
+            lbSinAsignar.ValueMember = "Id";
+            btnAsignar.Enabled = data.Any();
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            Filtrar();
         }
     }
 }

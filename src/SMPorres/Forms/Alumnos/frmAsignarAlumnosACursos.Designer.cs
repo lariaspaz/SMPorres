@@ -37,6 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lbSinAsignar = new System.Windows.Forms.ListBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -44,15 +46,16 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnAsignar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -150,6 +153,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.lbSinAsignar);
+            this.splitContainer1.Panel1.Controls.Add(this.panel5);
             this.splitContainer1.Panel1.Controls.Add(this.panel2);
             // 
             // splitContainer1.Panel2
@@ -164,10 +168,29 @@
             // 
             this.lbSinAsignar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSinAsignar.FormattingEnabled = true;
-            this.lbSinAsignar.Location = new System.Drawing.Point(0, 22);
+            this.lbSinAsignar.Location = new System.Drawing.Point(0, 42);
             this.lbSinAsignar.Name = "lbSinAsignar";
-            this.lbSinAsignar.Size = new System.Drawing.Size(271, 337);
+            this.lbSinAsignar.Size = new System.Drawing.Size(271, 317);
             this.lbSinAsignar.TabIndex = 2;
+            // 
+            // panel5
+            // 
+            this.panel5.AutoSize = true;
+            this.panel5.Controls.Add(this.txtBuscar);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 22);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(271, 20);
+            this.panel5.TabIndex = 1;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBuscar.Location = new System.Drawing.Point(0, 0);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(271, 20);
+            this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // panel2
             // 
@@ -239,6 +262,17 @@
             this.panel6.Size = new System.Drawing.Size(37, 359);
             this.panel6.TabIndex = 0;
             // 
+            // btnSalir
+            // 
+            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
+            this.btnSalir.Location = new System.Drawing.Point(3, 324);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(27, 27);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // btnQuitar
             // 
             this.btnQuitar.Image = global::SMPorres.Properties.Resources.control_rewind_blue;
@@ -259,16 +293,6 @@
             this.btnAsignar.UseVisualStyleBackColor = true;
             this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
             // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::SMPorres.Properties.Resources.door;
-            this.btnSalir.Location = new System.Drawing.Point(3, 324);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(27, 27);
-            this.btnSalir.TabIndex = 2;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
             // frmAsignarAlumnosACursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,9 +306,12 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -316,5 +343,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblCicloLectivo;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TextBox txtBuscar;
     }
 }
