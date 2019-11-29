@@ -27,6 +27,12 @@ namespace SMPorres.Models
         public decimal ImporteCuota { get; set; }
         public decimal ImporteMatricula { get; set; }
         public Nullable<int> Modalidad { get; set; }
+        public Nullable<decimal> DescuentoMatricula { get; set; }
+        public Nullable<System.DateTime> FechaVencDescuento { get; set; }
+        public Nullable<decimal> Cuota1 { get; set; }
+        public Nullable<decimal> Cuota2 { get; set; }
+        public Nullable<decimal> Cuota3 { get; set; }
+        public Nullable<short> Estado { get; set; }
     
         public virtual Carrera Carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

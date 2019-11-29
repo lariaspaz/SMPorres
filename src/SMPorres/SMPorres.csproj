@@ -308,6 +308,8 @@
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Curso.Ext.cs" />
+    <Compile Include="Models\EstadoCurso.cs" />
+    <Compile Include="Models\EstadoPago.cs" />
     <Compile Include="Models\ModalidadCursado.cs" />
     <Compile Include="Models\PagoBSE.cs" />
     <Compile Include="Models\Barrio.cs">

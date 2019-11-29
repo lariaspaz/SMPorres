@@ -88,6 +88,12 @@
           <Property Name="ImporteCuota" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ImporteMatricula" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Modalidad" Type="int" />
+          <Property Name="DescuentoMatricula" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FechaVencDescuento" Type="datetime" />
+          <Property Name="Cuota1" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Cuota2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Cuota3" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="smallint" />
         </EntityType>
         <EntityType Name="CursosAlumnos">
           <Key>
@@ -189,6 +195,7 @@
           <Property Name="PorcRecargo" Type="float" />
           <Property Name="FechaVto" Type="datetime" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Estado" Type="smallint" />
         </EntityType>
         <EntityType Name="PlanesPago">
           <Key>
@@ -1401,6 +1408,7 @@
           <NavigationProperty Name="Usuario" Relationship="SMPorres_DevModel.FK_Pagos_Usuarios" FromRole="Pago" ToRole="Usuario" />
           <NavigationProperty Name="BecaAlumno" Relationship="SMPorres_DevModel.FK_Pagos_BecasAlumnos" FromRole="Pago" ToRole="BecasAlumno" />
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Int16" />
           </EntityType>
         <Association Name="FK_Pagos_MediosPago">
           <End Type="SMPorres_DevModel.MedioPago" Role="MedioPago" Multiplicity="0..1" />
@@ -1572,6 +1580,12 @@
           <NavigationProperty Name="Carrera" Relationship="SMPorres_DevModel.FK_Cursos_Carreras" FromRole="Curso" ToRole="Carrera" />
           <NavigationProperty Name="CursosAlumnos" Relationship="SMPorres_DevModel.FK_CursosAlumnos_Cursos" FromRole="Curso" ToRole="CursosAlumno" />
           <NavigationProperty Name="PlanesPagoes" Relationship="SMPorres_DevModel.FK_PlanesPago_Cursos" FromRole="Curso" ToRole="PlanPago" />
+          <Property Name="DescuentoMatricula" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FechaVencDescuento" Type="DateTime" Precision="3" />
+          <Property Name="Cuota1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cuota2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cuota3" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="Int16" />
         </EntityType>
         <Association Name="FK_Cursos_Carreras">
           <End Type="SMPorres_DevModel.Carrera" Role="Carrera" Multiplicity="1" />
@@ -1827,6 +1841,7 @@
           <EntitySetMapping Name="Pagos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Pago">
               <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="FechaVto" ColumnName="FechaVto" />
                 <ScalarProperty Name="ImporteBeca" ColumnName="ImporteBeca" />
@@ -1917,6 +1932,12 @@
           <EntitySetMapping Name="Cursos">
             <EntityTypeMapping TypeName="SMPorres_DevModel.Curso">
               <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cuota3" ColumnName="Cuota3" />
+                <ScalarProperty Name="Cuota2" ColumnName="Cuota2" />
+                <ScalarProperty Name="Cuota1" ColumnName="Cuota1" />
+                <ScalarProperty Name="FechaVencDescuento" ColumnName="FechaVencDescuento" />
+                <ScalarProperty Name="DescuentoMatricula" ColumnName="DescuentoMatricula" />
                 <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
                 <ScalarProperty Name="ImporteMatricula" ColumnName="ImporteMatricula" />
                 <ScalarProperty Name="ImporteCuota" ColumnName="ImporteCuota" />

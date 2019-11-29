@@ -35,6 +35,11 @@ namespace SMPorres.Forms.Cursos
                           c.Nombre,
                           c.IdCarrera,
                           c.ImporteMatricula,
+                          c.DescuentoMatricula,
+                          c.FechaVencDescuento,
+                          c.Cuota1,
+                          c.Cuota2,
+                          c.Cuota3,
                           c.ImporteCuota,
                           c.LeyendaModalidad
                       };
@@ -59,20 +64,44 @@ namespace SMPorres.Forms.Cursos
 
             dgvDatos.Columns[2].Visible = false;
 
-            dgvDatos.Columns[3].HeaderText = "Imp. Matr.";
+            dgvDatos.Columns[3].HeaderText = "Imp. Matrícula";
             dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[3].DefaultCellStyle.Format = "C2";
 
-            dgvDatos.Columns[4].HeaderText = "Imp. Cta.";
+            dgvDatos.Columns[4].HeaderText = "Desc. Matr.";
             dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[4].DefaultCellStyle.Format = "C2";
 
-            dgvDatos.Columns[5].HeaderText = "Modalidad";
-            dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[5].HeaderText = "Hasta";
+            dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             //dgvDatos.Columns[5].DefaultCellStyle.Format = "C2";
+
+            dgvDatos.Columns[6].HeaderText = "Cuota 1";
+            dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[6].DefaultCellStyle.Format = "C2";
+
+            dgvDatos.Columns[7].HeaderText = "Cuota 2";
+            dgvDatos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[7].DefaultCellStyle.Format = "C2";
+
+            dgvDatos.Columns[8].HeaderText = "Cuota 3";
+            dgvDatos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[8].DefaultCellStyle.Format = "C2";
+
+            dgvDatos.Columns[9].HeaderText = "Imp. Cuota";
+            dgvDatos.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dgvDatos.Columns[9].DefaultCellStyle.Format = "C2";
+
+            dgvDatos.Columns[10].HeaderText = "Modalidad";
+            dgvDatos.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)
@@ -96,7 +125,8 @@ namespace SMPorres.Forms.Cursos
                 {
                     try
                     {
-                        var c = CursosRepository.Insertar(f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.ImporteCuota, f.Modalidad);
+                        var c = CursosRepository.Insertar(f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.DescuentoPagoAdelantadoMatricula, f.PagoAdelantadoHasta,
+                            f.ImporteCuota1, f.ImporteCuota2, f.ImporteCuota3, f.ImporteCuota, f.Modalidad, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }
@@ -117,7 +147,8 @@ namespace SMPorres.Forms.Cursos
                 {
                     try
                     {
-                        CursosRepository.Actualizar(c.Id, f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.ImporteCuota, f.Modalidad);
+                        CursosRepository.Actualizar(c.Id, f.Nombre, f.IdCarrera, f.ImporteMatrícula, f.DescuentoPagoAdelantadoMatricula, f.PagoAdelantadoHasta,
+                            f.ImporteCuota1, f.ImporteCuota2, f.ImporteCuota3, f.ImporteCuota, f.Modalidad, f.Estado);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }

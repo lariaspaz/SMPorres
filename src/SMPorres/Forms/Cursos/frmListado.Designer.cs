@@ -61,7 +61,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 532F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(772, 593);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(920, 593);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // dgvDatos
@@ -79,7 +79,7 @@
             this.dgvDatos.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(766, 526);
+            this.dgvDatos.Size = new System.Drawing.Size(914, 526);
             this.dgvDatos.TabIndex = 3;
             this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
             // 
@@ -93,7 +93,7 @@
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(772, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(920, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -154,7 +154,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(766, 30);
+            this.panel1.Size = new System.Drawing.Size(914, 30);
             this.panel1.TabIndex = 2;
             // 
             // cbCarreras
@@ -185,7 +185,7 @@
             this.bevel1.Location = new System.Drawing.Point(0, 0);
             this.bevel1.Name = "bevel1";
             this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bevel1.Size = new System.Drawing.Size(766, 30);
+            this.bevel1.Size = new System.Drawing.Size(914, 30);
             this.bevel1.TabIndex = 2;
             this.bevel1.Text = "bevel1";
             // 
@@ -193,7 +193,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(772, 593);
+            this.ClientSize = new System.Drawing.Size(920, 593);
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
             this.Name = "frmListado";

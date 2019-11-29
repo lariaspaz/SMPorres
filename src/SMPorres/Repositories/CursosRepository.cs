@@ -13,7 +13,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from c in db.Cursos where c.IdCarrera == idCarrera select c)
+                var query = (from c in db.Cursos where c.IdCarrera == idCarrera && c.Estado == (short)EstadoCurso.Activo select c)
                                 .ToList()
                                 .Select(
                                     c => new Curso
@@ -23,13 +23,19 @@ namespace SMPorres.Repositories
                                         IdCarrera = c.IdCarrera,
                                         ImporteCuota = c.ImporteCuota,
                                         ImporteMatricula = c.ImporteMatricula,
+                                        DescuentoMatricula = c.DescuentoMatricula,
+                                        FechaVencDescuento = c.FechaVencDescuento,
+                                        Cuota1 = c.Cuota1,
+                                        Cuota2 = c.Cuota2,
+                                        Cuota3 = c.Cuota3,
                                         Modalidad = c.Modalidad
                                     });
                 return query.OrderBy(c => c.Nombre).ToList();
             }
         }
 
-        public static Curso Insertar(string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota, int modalidad)
+        public static Curso Insertar(string nombre, int idCarrera, decimal importeMatrícula, decimal descuentoMatrícula, DateTime descuentoHasta,
+             decimal cuota1, decimal cuota2, decimal cuota3, decimal importeCuota, int modalidad, short estado)
         {
             using (var db = new SMPorresEntities())
             {
@@ -40,8 +46,14 @@ namespace SMPorres.Repositories
                     Nombre = nombre,
                     IdCarrera = idCarrera,
                     ImporteMatricula = importeMatrícula,
+                    DescuentoMatricula = descuentoMatrícula,
+                    FechaVencDescuento = descuentoHasta,
+                    Cuota1 = cuota1,
+                    Cuota2 = cuota2,
+                    Cuota3 = cuota3,
                     ImporteCuota = importeCuota,
-                    Modalidad = modalidad
+                    Modalidad = modalidad,
+                    Estado = (short)EstadoCurso.Activo //alta = estado activo
                 };
                 db.Cursos.Add(c);
                 db.SaveChanges();
@@ -49,7 +61,8 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void Actualizar(int id, string nombre, int idCarrera, decimal importeMatrícula, decimal importeCuota, int modalidad)
+        public static void Actualizar(int id, string nombre, int idCarrera, decimal importeMatrícula, decimal descuentoMatrícula, DateTime descuentoHasta,
+             decimal cuota1, decimal cuota2, decimal cuota3, decimal importeCuota, int modalidad, short estado)
         {
             using (var db = new SMPorresEntities())
             {
@@ -60,10 +73,31 @@ namespace SMPorres.Repositories
                 var c = db.Cursos.Find(id);
                 c.Nombre = nombre;
                 c.IdCarrera = idCarrera;
-                //c.Modalidad = modalidad;
+                //c.Estado = estado;    
+                //c.Modalidad = modalidad;  //la baja desde listado / botón eliminar
                 var trx = db.Database.BeginTransaction();
                 try
                 {
+                    if (c.DescuentoMatricula != descuentoMatrícula)
+                    {
+                        c.DescuentoMatricula = descuentoMatrícula;
+                    }
+                    if (c.FechaVencDescuento != descuentoHasta)
+                    {
+                        c.FechaVencDescuento = descuentoHasta;
+                    }
+                    if (c.Cuota1 != cuota1)
+                    {
+                        c.Cuota1 = cuota1;
+                    }
+                    if (c.Cuota2 != cuota2)
+                    {
+                        c.Cuota2 = cuota2;
+                    }
+                    if (c.Cuota3 != cuota3)
+                    {
+                        c.Cuota3 = cuota3;
+                    }
                     if (c.Modalidad != modalidad)
                     {
                         c.Modalidad = modalidad;
@@ -103,7 +137,8 @@ namespace SMPorres.Repositories
                 {
                     throw new Exception("No puede eliminar el curso porque tiene alumnos relacionados.");
                 }
-                db.Cursos.Remove(c);
+                c.Estado = (short)EstadoCurso.Baja;
+                //db.Cursos.Remove(c);
                 db.SaveChanges();
             }
         }
