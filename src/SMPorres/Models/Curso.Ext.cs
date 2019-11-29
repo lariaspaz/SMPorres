@@ -27,5 +27,20 @@ namespace SMPorres.Models
                 return "";
             }
         }
+
+        public string LeyendaEstado
+        {
+            get
+            {
+                switch ((EstadoCurso)Estado)
+                {
+                    case EstadoCurso.Activo:
+                        return "Activo";
+                    case EstadoCurso.Baja:
+                        return "Baja";
+                }
+                return "";
+            }
+        }
     }
 }

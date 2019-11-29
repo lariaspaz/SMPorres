@@ -13,7 +13,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from c in db.Cursos where c.IdCarrera == idCarrera && c.Estado == (short)EstadoCurso.Activo select c)
+                var query = (from c in db.Cursos where c.IdCarrera == idCarrera select c)
                                 .ToList()
                                 .Select(
                                     c => new Curso
@@ -28,7 +28,8 @@ namespace SMPorres.Repositories
                                         Cuota1 = c.Cuota1,
                                         Cuota2 = c.Cuota2,
                                         Cuota3 = c.Cuota3,
-                                        Modalidad = c.Modalidad
+                                        Modalidad = c.Modalidad,
+                                        Estado = c.Estado
                                     });
                 return query.OrderBy(c => c.Nombre).ToList();
             }

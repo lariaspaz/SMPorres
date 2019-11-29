@@ -41,7 +41,8 @@ namespace SMPorres.Forms.Cursos
                           c.Cuota2,
                           c.Cuota3,
                           c.ImporteCuota,
-                          c.LeyendaModalidad
+                          c.LeyendaModalidad,
+                          c.LeyendaEstado
                       };
             dgvDatos.SetDataSource(qry.ToList());
         }
@@ -102,6 +103,10 @@ namespace SMPorres.Forms.Cursos
             dgvDatos.Columns[10].HeaderText = "Modalidad";
             dgvDatos.Columns[10].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            dgvDatos.Columns[11].HeaderText = "Estado";
+            dgvDatos.Columns[11].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)
