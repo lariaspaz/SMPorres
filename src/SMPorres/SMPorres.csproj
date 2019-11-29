@@ -288,6 +288,9 @@
     <Compile Include="Lib\AppForms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Lib\Controls\Bevel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Lib\Security\Cryptography.cs" />
     <Compile Include="Lib\Security\StringCipher.cs" />
     <Compile Include="Lib\Session.cs" />
