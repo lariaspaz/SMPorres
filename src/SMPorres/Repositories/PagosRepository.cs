@@ -117,6 +117,13 @@ namespace SMPorres.Repositories
             if (pago.NroCuota == 0)
             {
                 pago.FechaVto = new DateTime(cc, 12, 31);
+                var curso = CursosRepository.ObtenerCursoPorId(pago.PlanPago.Curso.Id);
+                if (fechaCompromiso <= curso.FechaVencDescuento)
+                {
+                    decimal descuentoMatrícula = Convert.ToDecimal(curso.DescuentoMatricula);
+                    pago.ImportePagoTermino = descuentoMatrícula;
+                    pago.ImportePagado = impBase - descuentoMatrícula;
+                }                
                 return pago;
             }
 

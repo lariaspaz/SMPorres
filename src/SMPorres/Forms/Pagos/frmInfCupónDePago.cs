@@ -117,12 +117,35 @@ namespace SMPorres.Forms.Pagos
         {
             var p = PagosRepository.ObtenerDetallePago(_idPago, fechaCompromiso);
             var importe = String.Format("{0:$ 0,0.00}", p.ImporteCuota);
-            var total = String.Format("{0:$ 0,0.00}", p.ImporteCuota);
-            string codBarra = GenerarCódigoBarras(idPago, p.ImporteCuota);
             cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
-                carrera, curso, total, codBarra, "1", "Matrícula", importe);
+                carrera, curso, "", "", "1", "Matrícula", importe);
 
+            if (DescuentoMatrículaPagoTermino(p, fechaCompromiso))
+            {
+                importe = p.ImportePagoTermino.Value.ToString("$ -0,0.00");
+                string concepto = "Descuento por pago a término";
+                cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+                    carrera, curso, "", "", "2", concepto, importe);
+            }            
+                    
+            string codBarra = GenerarCódigoBarras(idPago, p.ImportePagado.Value);
+            foreach (dsImpresiones.CupónPagoRow row in cupón.Rows)
+            {
+                row.Total = String.Format("{0:$ 0,0.00}", p.ImportePagado.Value);
+                row.CódigoBarra = codBarra;
+            }
             return cupón;
+        }
+
+        private bool DescuentoMatrículaPagoTermino(Pago pago, DateTime fechaCompromiso)
+        {
+            bool pagoTermino = false;
+            var cur = CursosRepository.ObtenerCursoPorId(pago.PlanPago.IdCurso);
+            if (fechaCompromiso <= cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
+            {
+                pagoTermino = true;
+            }
+            return pagoTermino;
         }
 
         private DataTable GenerarDetalleCuota(dsImpresiones.CupónPagoDataTable cupón, string idPago, string fechaEmisión, 
