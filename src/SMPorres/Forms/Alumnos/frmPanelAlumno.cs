@@ -189,6 +189,11 @@ namespace SMPorres.Forms.Alumnos
 
         private void GenerarPlanDePagoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (AlumnoConDeuda(txtNroDocumento.DecValue))
+            {
+                MessageBox.Show("El alumno tiene cuotas impagas",
+                "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado, NombreCurso))
             {
                 if (f.ShowDialog() == DialogResult.OK)
@@ -205,6 +210,16 @@ namespace SMPorres.Forms.Alumnos
                     }
                 }
             }
+        }
+
+        private bool AlumnoConDeuda(decimal decValue)
+        {
+            bool debe = false;
+            if (PagosRepository.CuotasImpagasAlumno(decValue).Any())
+            {
+                debe = true;
+            }
+            return debe;
         }
 
         private void dgvPlanesPago_SelectionChanged(object sender, EventArgs e)

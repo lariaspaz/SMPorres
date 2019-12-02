@@ -123,7 +123,7 @@ namespace SMPorres.Repositories
                     decimal descuentoMatrícula = Convert.ToDecimal(curso.DescuentoMatricula);
                     pago.ImportePagoTermino = descuentoMatrícula;
                     pago.ImportePagado = impBase - descuentoMatrícula;
-                }                
+                }
                 return pago;
             }
 
@@ -259,9 +259,9 @@ namespace SMPorres.Repositories
                 {
                     throw new Exception("No existe la cuota generada " + nroCuota);
                 }
-                var cGen = db.Pagos.FirstOrDefault(x => 
-                        x.IdPlanPago == idPlanPago & 
-                        x.NroCuota == nroCuota & 
+                var cGen = db.Pagos.FirstOrDefault(x =>
+                        x.IdPlanPago == idPlanPago &
+                        x.NroCuota == nroCuota &
                         x.ImportePagado == null);
                 db.Pagos.Remove(cGen);
                 db.SaveChanges();
@@ -281,5 +281,34 @@ namespace SMPorres.Repositories
                 db.SaveChanges();
             }
         }
+
+        public static IList<Pago> CuotasImpagasAlumno(decimal nroDocumento)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var pagos = (from pp in db.PlanesPago
+                             join a in db.Alumnos on pp.IdAlumno equals a.Id
+                             join p in db.Pagos on pp.Id equals p.IdPlanPago
+                             join c in db.Cuotas on p.NroCuota equals c.NroCuota
+                             where
+                                 a.NroDocumento == nroDocumento &&
+                                 pp.Estado == (short)EstadoPlanPago.Vigente &&
+                                 c.VtoCuota <= Configuration.CurrentDate    &&
+                                 p.ImportePagado == null //Impago
+                             select p).ToList()
+                        .Select(
+                            pa => new Pago
+                            {
+                                Id = pa.Id,
+                                NroCuota = pa.NroCuota,
+                                ImporteCuota = pa.ImporteCuota,
+                                ImportePagado = pa.ImportePagado
+                            });
+                return pagos.ToList();
+            } 
+                       
+        }
+        
+
     }
 }
