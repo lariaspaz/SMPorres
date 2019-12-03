@@ -466,13 +466,35 @@ namespace SMPorres.Forms.Alumnos
             var p = PagoSeleccionado;
             if (p.NroCuota == 0 || p.Fecha.HasValue || Lib.Session.CurrentUser.Id > 3)
             {
-                e.Cancel = true;
+                //e.Cancel = true;
+                matrículaEn1CuotaToolStripMenuItem.Visible = matrículaEn1Cuota(p);
+                matrículaEn3CuotasToolStripMenuItem.Visible = matrículaEn3Cuotas(p);
+                AsignarBecaToolStripMenuItem.Visible = false;
+                EditarBecaToolStripMenuItem.Visible = false;
             }
             else
             {
                 AsignarBecaToolStripMenuItem.Visible = p.BecaAlumno == null;
                 EditarBecaToolStripMenuItem.Visible = p.BecaAlumno != null;
+                matrículaEn1CuotaToolStripMenuItem.Visible = false;
+                matrículaEn3CuotasToolStripMenuItem.Visible = false;
             }
+        }
+
+        private bool matrículaEn3Cuotas(Pago p)
+        {
+            bool r = false;
+            var cc = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago);
+            if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 1) r = true;
+            return r;
+        }
+
+        private bool matrículaEn1Cuota(Pago p)
+        {
+            bool r = false;
+            var cc = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago);
+            if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 3) r = true;
+            return r;
         }
 
         private void btnGenerarContraseñaWeb_Click(object sender, EventArgs e)
@@ -516,6 +538,55 @@ namespace SMPorres.Forms.Alumnos
                new EndpointAddress(Repositories.ConfiguracionRepository.ObtenerConfiguracion().EndpointAddress);
 
             return new ConsultasWeb.SMPSoapClient(binding, address);
+        }
+
+        private void matrículaEn1CuotaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var p = PagoSeleccionado;
+            int cuota = 0;
+            if (MessageBox.Show("¿Está seguro de que desea unificar la matrícula?",
+                "Matrícula", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                try
+                {
+                    PagosRepository.EliminarCuotasGeneradasMatrícula(cuota, p.IdPlanPago);
+
+                    PagosRepository.GeneraNuevaCuota(p.IdPlanPago, cuota, p.PlanPago.Curso);
+
+                    ConsultarPagos();
+                }
+                catch
+                {
+                    ShowError("Error al intentar intentar unificar la Matrícula\n");
+                }
+            }       
+        }
+
+        private void matrículaEn3CuotasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var p = PagoSeleccionado;
+            int cuota = 0;
+            if (MessageBox.Show("¿Está seguro de que desea dividir la matrícula en 3 cuotas?",
+                "Matrícula", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                try
+                {
+                    PagosRepository.EliminarCuotaGenerada(cuota, p.IdPlanPago);
+                    
+                    decimal cuota1 = (decimal)p.PlanPago.Curso.Cuota1;
+                    PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota, cuota1);
+                    decimal cuota2 = (decimal)p.PlanPago.Curso.Cuota2;
+                    PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota, cuota2);
+                    decimal cuota3 = (decimal)p.PlanPago.Curso.Cuota3;
+                    PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota, cuota3);
+
+                    ConsultarPagos();
+                }
+                catch
+                {
+                    ShowError("Error al intentar intentar unificar la Matrícula\n");
+                }
+            }
         }
     }
 }

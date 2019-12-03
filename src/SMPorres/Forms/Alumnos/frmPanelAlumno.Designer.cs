@@ -58,6 +58,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AsignarBecaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditarBecaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matrículaEn1CuotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matrículaEn3CuotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -351,7 +353,7 @@
             this.tpCuotas.Location = new System.Drawing.Point(4, 22);
             this.tpCuotas.Name = "tpCuotas";
             this.tpCuotas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCuotas.Size = new System.Drawing.Size(796, 254);
+            this.tpCuotas.Size = new System.Drawing.Size(796, 269);
             this.tpCuotas.TabIndex = 1;
             this.tpCuotas.Text = "Cuotas";
             this.tpCuotas.UseVisualStyleBackColor = true;
@@ -372,7 +374,7 @@
             this.dgvPagos.OddRowColor = System.Drawing.Color.AliceBlue;
             this.dgvPagos.ReadOnly = true;
             this.dgvPagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPagos.Size = new System.Drawing.Size(790, 248);
+            this.dgvPagos.Size = new System.Drawing.Size(790, 263);
             this.dgvPagos.TabIndex = 1;
             this.dgvPagos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPagos_DataBindingComplete);
             // 
@@ -380,25 +382,41 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AsignarBecaToolStripMenuItem,
-            this.EditarBecaToolStripMenuItem});
+            this.EditarBecaToolStripMenuItem,
+            this.matrículaEn1CuotaToolStripMenuItem,
+            this.matrículaEn3CuotasToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 114);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // AsignarBecaToolStripMenuItem
             // 
             this.AsignarBecaToolStripMenuItem.Name = "AsignarBecaToolStripMenuItem";
-            this.AsignarBecaToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.AsignarBecaToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.AsignarBecaToolStripMenuItem.Text = "Asignar beca";
             this.AsignarBecaToolStripMenuItem.Click += new System.EventHandler(this.AsignarBecaToolStripMenuItem_Click);
             // 
             // EditarBecaToolStripMenuItem
             // 
             this.EditarBecaToolStripMenuItem.Name = "EditarBecaToolStripMenuItem";
-            this.EditarBecaToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.EditarBecaToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.EditarBecaToolStripMenuItem.Text = "Editar beca";
             this.EditarBecaToolStripMenuItem.Click += new System.EventHandler(this.EditarBecaToolStripMenuItem_Click);
+            // 
+            // matrículaEn1CuotaToolStripMenuItem
+            // 
+            this.matrículaEn1CuotaToolStripMenuItem.Name = "matrículaEn1CuotaToolStripMenuItem";
+            this.matrículaEn1CuotaToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.matrículaEn1CuotaToolStripMenuItem.Text = "Matrícula en 1 cuota";
+            this.matrículaEn1CuotaToolStripMenuItem.Click += new System.EventHandler(this.matrículaEn1CuotaToolStripMenuItem_Click);
+            // 
+            // matrículaEn3CuotasToolStripMenuItem
+            // 
+            this.matrículaEn3CuotasToolStripMenuItem.Name = "matrículaEn3CuotasToolStripMenuItem";
+            this.matrículaEn3CuotasToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.matrículaEn3CuotasToolStripMenuItem.Text = "Matrícula en 3 cuotas";
+            this.matrículaEn3CuotasToolStripMenuItem.Click += new System.EventHandler(this.matrículaEn3CuotasToolStripMenuItem_Click);
             // 
             // frmPanelAlumno
             // 
@@ -463,5 +481,7 @@
         private System.Windows.Forms.ToolStripMenuItem EditarBecaToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton btnGenerarPlanDePago;
         private System.Windows.Forms.ToolStripButton btnGenerarContraseñaWeb;
+        private System.Windows.Forms.ToolStripMenuItem matrículaEn1CuotaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem matrículaEn3CuotasToolStripMenuItem;
     }
 }

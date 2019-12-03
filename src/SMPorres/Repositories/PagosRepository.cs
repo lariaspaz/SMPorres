@@ -219,6 +219,7 @@ namespace SMPorres.Repositories
                 p.FechaGrabacion = Configuration.CurrentDate;
                 p.Descripcion = pago.Descripcion;
                 p.IdArchivo = pago.IdArchivo;
+                p.Estado = (short)EstadoPago.Pagado;
                 db.SaveChanges();
                 if (p.NroCuota == Configuration.MaxCuotas)
                 {
@@ -245,6 +246,7 @@ namespace SMPorres.Repositories
             p.FechaGrabacion = Configuration.CurrentDate;
             p.Descripcion = pago.Descripcion;
             p.IdArchivo = pago.IdArchivo;
+            p.Estado = (short)EstadoPago.Pagado;
             if (p.NroCuota == Configuration.MaxCuotas)
             {
                 p.PlanPago.Estado = (short)EstadoPlanPago.Cancelado;
@@ -277,8 +279,45 @@ namespace SMPorres.Repositories
                 p.IdPlanPago = idPlanPago;
                 p.NroCuota = (short)i;
                 p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                p.Estado = (short)EstadoPago.Impago;
                 db.Pagos.Add(p);
                 db.SaveChanges();
+            }
+        }
+
+        internal static void GeneraNuevaCuotaDeMatricula(int idPlanPago, int i, decimal importeCuota) //, Curso curso)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var p = new Pago();
+                p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                p.IdPlanPago = idPlanPago;
+                p.NroCuota = (short)i;
+                p.ImporteCuota = importeCuota; //(i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                p.Estado = (short)EstadoPago.Impago;
+                db.Pagos.Add(p);
+                db.SaveChanges();
+            }
+        }
+
+        public static void EliminarCuotasGeneradasMatrícula(int nroCuota, int idPlanPago)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                if (!db.Pagos.Any(t => t.IdPlanPago == idPlanPago & t.NroCuota == nroCuota))
+                {
+                    throw new Exception("No existe la cuota generada " + nroCuota);
+                }
+                var cGen = db.Pagos.Where(x =>
+                        x.IdPlanPago == idPlanPago &
+                        x.NroCuota == nroCuota &
+                        x.ImportePagado == null).ToList();
+                foreach (var item in cGen)
+                {
+                    db.Pagos.Remove(item);
+                    db.SaveChanges();
+                }
+                
             }
         }
 
@@ -309,6 +348,16 @@ namespace SMPorres.Repositories
                        
         }
         
+        public static int CantidadCuotasMatrícula(decimal idPlanPago)
+        {
+            int cc = 0;
+            using (var db = new SMPorresEntities())
+            {
+                cc = db.Pagos.Where(x => x.NroCuota == 0 && x.Estado == (short)EstadoPago.Impago)
+                    .Count();                
+            }
+            return cc;
+        }
 
     }
 }
