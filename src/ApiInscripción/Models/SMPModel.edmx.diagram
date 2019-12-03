@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d61c105b105343f0bf196441432c4baa" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="SMPorres_DevModel.Alumno" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Carrera" Width="1.5" PointX="7.875" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Cuota" Width="1.5" PointX="7.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.CursosAlumno" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Pago" Width="1.5" PointX="5.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.PlanPago" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Alumnos" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Pagos" ManuallyRouted="false" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_PlanesPago" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Configuracion" Width="1.5" PointX="0.625" PointY="4.875" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Usuario" Width="1.5" PointX="3" PointY="8.25" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Usuarios" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Usuarios" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Usuarios1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
