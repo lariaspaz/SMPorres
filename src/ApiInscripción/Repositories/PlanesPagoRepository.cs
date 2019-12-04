@@ -10,8 +10,21 @@ namespace ApiInscripción.Repositories
 {
     class PlanesPagoRepository
     {
-        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca, int modalidad)
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public static PlanPago Insertar(int idAlumno, int idCurso)
         {
+            _log.Debug("Creando plan de pago");
+
+            if (idAlumno == 0)
+            {
+                throw new Exception("No se pudo determinar el alumno.");
+            }
+            if (idCurso == 0)
+            {
+                throw new Exception("No se pudo determinar el curso.");
+            }
+
             using (var db = new SMPorresEntities())
             {
                 if (db.PlanesPago.Any(pp => pp.IdAlumno == idAlumno && pp.IdCurso == idCurso & pp.Estado == (short)EstadoPlanPago.Vigente))
@@ -27,17 +40,18 @@ namespace ApiInscripción.Repositories
                     Id = id,
                     IdAlumno = idAlumno,
                     IdCurso = idCurso,
-                    CantidadCuotas = CursosRepository.ObtieneMaxCuota(modalidad),//Configuration.MaxCuotas,
-                    NroCuota = CursosRepository.ObtieneMinCuota(modalidad), //1,
+                    CantidadCuotas = CursosRepository.ObtieneMaxCuota(curso.Modalidad),//Configuration.MaxCuotas,
+                    NroCuota = CursosRepository.ObtieneMinCuota(curso.Modalidad), //1,
                     ImporteCuota = curso.ImporteCuota,
-                    PorcentajeBeca = porcentajeBeca,
+                    PorcentajeBeca = 0,
                     TipoBeca = (byte)TipoBeca.AplicaHastaVto,
                     Estado = (short)EstadoPlanPago.Vigente,
                     IdUsuarioEstado = Session.CurrentUser.Id,
                     FechaGrabacion = Configuration.CurrentDate,
                     IdUsuario = Session.CurrentUser.Id,
-                    Modalidad = modalidad //curso.Modalidad
+                    Modalidad = curso.Modalidad
                 };
+                _log.Debug("Generando pagos");
                 try
                 {
                     db.PlanesPago.Add(plan);
@@ -53,8 +67,8 @@ namespace ApiInscripción.Repositories
                     db.SaveChanges();
 
                     //leer modalidad y obtener minCuota y maxCuota
-                    short minC = CursosRepository.ObtieneMinCuota(modalidad);
-                    short maxC = CursosRepository.ObtieneMaxCuota(modalidad);
+                    short minC = CursosRepository.ObtieneMinCuota(curso.Modalidad);
+                    short maxC = CursosRepository.ObtieneMaxCuota(curso.Modalidad);
                     if(minC != maxC)
                     {
                     //for (short i = 0; i <= Configuration.MaxCuotas; i++)
@@ -72,8 +86,9 @@ namespace ApiInscripción.Repositories
                     }
                     trx.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    _log.Error(ex.Message, ex);
                     trx.Rollback();
                     throw;
                 }

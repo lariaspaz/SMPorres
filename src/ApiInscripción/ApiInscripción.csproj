@@ -161,6 +161,9 @@
       <DependentUpon>SMPModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoBeca.cs" />
+    <Compile Include="Models\TiposDocumento.cs">
+      <DependentUpon>SMPModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>
     </Compile>

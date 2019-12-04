@@ -15,6 +15,6 @@ namespace ApiInscripción.Models.ViewModels
         public string EMail { get; set; }
         public string Direccion { get; set; }
         public char Sexo { get; set; }
-        public int IdCurso { get; set; }
+        public int IdCarrera { get; set; }
     }
 }

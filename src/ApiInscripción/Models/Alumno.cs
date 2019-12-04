@@ -38,5 +38,6 @@ namespace ApiInscripción.Models
         public virtual ICollection<CursosAlumno> CursosAlumnos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanPago> PlanesPago { get; set; }
+        public virtual TiposDocumento TiposDocumento { get; set; }
     }
 }

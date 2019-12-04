@@ -1,5 +1,3 @@
-use SMPorres_Dev
-
 --El descuento que se agrega corresponde al pago adelantado de matrícula 2020
 -- Un alumno que pague la matrícula 2020 antes de fin de año, obtiene descuento de $1.100,00
 -->	Descuento	

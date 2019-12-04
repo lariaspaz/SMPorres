@@ -9,8 +9,11 @@ namespace ApiInscripción.Repositories
 {
     class CursosAlumnosRepository
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         internal static void Insertar(int idCurso, int idAlumno)
         {
+            _log.Debug("Insertando alumno en curso");
             using (var db = new SMPorresEntities())
             {
                 var id = db.CursosAlumnos.Any() ? db.CursosAlumnos.Max(c1 => c1.Id) + 1 : 1;

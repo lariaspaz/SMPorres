@@ -28,11 +28,12 @@ namespace ApiInscripción.Models
         public virtual DbSet<Alumno> Alumnos { get; set; }
         public virtual DbSet<Carrera> Carreras { get; set; }
         public virtual DbSet<Cuota> Cuotas { get; set; }
-        public virtual DbSet<Curso> Cursos { get; set; }
         public virtual DbSet<CursosAlumno> CursosAlumnos { get; set; }
         public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<PlanPago> PlanesPago { get; set; }
         public virtual DbSet<Configuracion> Configuraciones { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<TiposDocumento> TiposDocumento { get; set; }
+        public virtual DbSet<Curso> Cursos { get; set; }
     }
 }

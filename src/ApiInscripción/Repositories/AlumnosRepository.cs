@@ -13,10 +13,14 @@ namespace ApiInscripción.Repositories
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static Alumno Insertar(string nombre, string apellido, int idTipoDocumento, decimal nroDocumento,
-            DateTime fechaNacimiento, string email, string dirección, char sexo, int idCurso)
+            DateTime fechaNacimiento, string email, string dirección, char sexo, int idCarrera)
         {
+            _log.Debug("Insertando alumno");
             using (var db = new SMPorresEntities())
             {
+                ValidarDatos(db, nombre, apellido, idTipoDocumento, nroDocumento, fechaNacimiento,
+                    email, dirección, sexo, idCarrera);
+
                 var trx = db.Database.BeginTransaction();
                 try
                 {
@@ -33,11 +37,18 @@ namespace ApiInscripción.Repositories
                         Direccion = dirección,
                         IdDomicilio = null,
                         Estado = 1,
-                        Sexo = sexo.ToString()
+                        Sexo = sexo.ToString(),
+                        Contraseña = GenerarContraseña(id, nroDocumento)
                     };
                     db.Alumnos.Add(a);
                     db.SaveChanges();
+
+                    var idCurso = db.Cursos.Where(c => c.IdCarrera == idCarrera).First().Id;
+                    CursosAlumnosRepository.Insertar(idCarrera, id);
+                    PlanesPagoRepository.Insertar(id, idCurso);
+
                     trx.Commit();
+
                     return a;
                 }
                 catch (Exception ex)
@@ -49,17 +60,38 @@ namespace ApiInscripción.Repositories
             }
         }
 
-        public static string GenerarContraseña(int idAlumno, ref string pwdEncriptada)
+        private static void ValidarDatos(SMPorresEntities db, string nombre, string apellido,
+            int idTipoDocumento, decimal nroDocumento, DateTime fechaNacimiento, string email,
+            string dirección, char sexo, int idCarrera)
         {
-            using (var db = new SMPorresEntities())
+            _log.Debug("Validando datos");
+
+            if (String.IsNullOrEmpty(nombre.Trim()) || String.IsNullOrEmpty(apellido.Trim()))
             {
-                var a = db.Alumnos.Find(idAlumno);
-                var pwd = Lib.Security.Cryptography.GenerarContraseña();
-                pwdEncriptada = Lib.Security.Cryptography.CalcularSHA512(pwd);
-                a.Contraseña = pwdEncriptada;
-                db.SaveChanges();
-                return pwd;
+                throw new Exception("El nombre y el apellido son incorrectos.");
             }
+            if (db.Alumnos.Any(a => a.IdTipoDocumento == idTipoDocumento && a.NroDocumento == nroDocumento))
+            {
+                throw new Exception("Ya existe un alumno con este número de documento. "
+                    + $"[tipdoc = {idTipoDocumento}, nrodoc = {nroDocumento}]");
+            }
+            if (!db.TiposDocumento.Any(td => td.Id == idTipoDocumento))
+            {
+                throw new Exception("El tipo de documento es incorrecto.");
+            }
+            if (idCarrera == 0 || !db.Carreras.Any(c => c.Id == idCarrera))
+            {
+                throw new Exception("La carrera es incorrecta.");
+            }
+        }
+
+        public static string GenerarContraseña(int idAlumno, decimal nrodoc)
+        {
+            _log.Debug("Generando contraseña");
+
+            string pwd = String.Join("", nrodoc.ToString().ToCharArray().Reverse().Take(6).Reverse());
+            var pwdEncriptada = Lib.Security.Cryptography.CalcularSHA512(pwd);
+            return pwdEncriptada;
         }
     }
 }
