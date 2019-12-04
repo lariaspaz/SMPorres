@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace ApiInscripción.Repositories
 {
-    class AlumnosRepository
+    public class AlumnosRepository
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public static Alumno Insertar(string nombre, string apellido, int idTipoDocumento, decimal nroDocumento,
-            DateTime fechaNacimiento, string email, string dirección, char sexo)
+            DateTime fechaNacimiento, string email, string dirección, char sexo, int idCurso)
         {
             using (var db = new SMPorresEntities())
             {
@@ -38,8 +40,9 @@ namespace ApiInscripción.Repositories
                     trx.Commit();
                     return a;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    _log.Error(ex.Message);
                     trx.Rollback();
                     throw;
                 }
