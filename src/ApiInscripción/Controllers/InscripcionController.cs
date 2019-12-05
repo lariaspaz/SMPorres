@@ -12,7 +12,7 @@ using System.Web.Http.Description;
 
 namespace ApiInscripción.Controllers
 {
-    public class InscribirController : ApiController
+    public class InscripcionController : ApiController
     {
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

@@ -44,8 +44,8 @@ namespace ApiInscripción.Repositories
                     db.SaveChanges();
 
                     var idCurso = db.Cursos.Where(c => c.IdCarrera == idCarrera).First().Id;
-                    CursosAlumnosRepository.Insertar(idCarrera, id);
-                    PlanesPagoRepository.Insertar(id, idCurso);
+                    CursosAlumnosRepository.Insertar(db, idCurso, id);
+                    PlanesPagoRepository.Insertar(db, id, idCurso);
 
                     trx.Commit();
 
