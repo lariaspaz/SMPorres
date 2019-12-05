@@ -8,6 +8,9 @@ alter table cursos
 		FechaVencDescuento	datetime		null
 go
 
+update Cursos
+	set FechaVencDescuento = '20191231'
+
 -- Un alumno va a disponer de 3 cuotas para adelantar el pago de la matrícula, esas cuotas
 -- tendrán un único vencimiento y los montos se definirán para cada curso
 -->	Cuota1
