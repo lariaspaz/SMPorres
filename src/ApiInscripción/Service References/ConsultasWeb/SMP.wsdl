@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ActualizarDatos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="alumno" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Alumno">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Apellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocumento" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NroDocumento" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="CursosAlumnos" type="tns:ArrayOfCursoAlumno" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contraseña" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCursoAlumno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CursoAlumno" nillable="true" type="tns:CursoAlumno" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CursoAlumno">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdCurso" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Curso" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdCarrera" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Carrera" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pagos" type="tns:ArrayOfPago" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPago">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Pago" nillable="true" type="tns:Pago" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Pago">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdPlanPago" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NroCuota" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVto" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImporteCuota" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImportePagado" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImporteRecargo" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImporteBeca" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ImportePagoTérmino" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PorcentajeBeca" nillable="true" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVtoPagoTérmino" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoBeca" nillable="true" type="s:unsignedByte" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ActualizarDatosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarDatosResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarConfiguracion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="interésPorMora" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarConfiguracionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarConfiguracionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarPwd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idAlumno" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarPwdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarPwdResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestAlive">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestAliveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestAliveResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ActualizarDatosSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarDatos" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarDatosSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarDatosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarConfiguracionSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarConfiguracion" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarConfiguracionSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarConfiguracionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarPwdSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarPwd" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarPwdSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestAliveSoapIn">
+    <wsdl:part name="parameters" element="tns:TestAlive" />
+  </wsdl:message>
+  <wsdl:message name="TestAliveSoapOut">
+    <wsdl:part name="parameters" element="tns:TestAliveResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SMPSoap">
+    <wsdl:operation name="ActualizarDatos">
+      <wsdl:input message="tns:ActualizarDatosSoapIn" />
+      <wsdl:output message="tns:ActualizarDatosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarConfiguracion">
+      <wsdl:input message="tns:ActualizarConfiguracionSoapIn" />
+      <wsdl:output message="tns:ActualizarConfiguracionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarPwd">
+      <wsdl:input message="tns:ActualizarPwdSoapIn" />
+      <wsdl:output message="tns:ActualizarPwdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestAlive">
+      <wsdl:input message="tns:TestAliveSoapIn" />
+      <wsdl:output message="tns:TestAliveSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMPSoap" type="tns:SMPSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ActualizarDatos">
+      <soap:operation soapAction="http://tempuri.org/ActualizarDatos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarConfiguracion">
+      <soap:operation soapAction="http://tempuri.org/ActualizarConfiguracion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarPwd">
+      <soap:operation soapAction="http://tempuri.org/ActualizarPwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestAlive">
+      <soap:operation soapAction="http://tempuri.org/TestAlive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SMPSoap12" type="tns:SMPSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ActualizarDatos">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarDatos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarConfiguracion">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarConfiguracion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarPwd">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarPwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestAlive">
+      <soap12:operation soapAction="http://tempuri.org/TestAlive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMP">
+    <wsdl:port name="SMPSoap" binding="tns:SMPSoap">
+      <soap:address location="http://localhost:49963/Web_Services/SMP.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SMPSoap12" binding="tns:SMPSoap12">
+      <soap12:address location="http://localhost:49963/Web_Services/SMP.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

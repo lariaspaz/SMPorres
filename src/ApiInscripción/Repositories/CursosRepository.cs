@@ -9,29 +9,15 @@ namespace ApiInscripción.Repositories
 {
     class CursosRepository
     {
-        public static IList<Curso> ObtenerCursosPorIdCarrera(int idCarrera)
+        public static int ObtenerCursoInicial(int idCarrera)
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from c in db.Cursos where c.IdCarrera == idCarrera select c)
-                                .ToList()
-                                .Select(
-                                    c => new Curso
-                                    {
-                                        Id = c.Id,
-                                        Nombre = c.Nombre,
-                                        IdCarrera = c.IdCarrera,
-                                        ImporteCuota = c.ImporteCuota,
-                                        ImporteMatricula = c.ImporteMatricula,
-                                        DescuentoMatricula = c.DescuentoMatricula,
-                                        FechaVencDescuento = c.FechaVencDescuento,
-                                        Cuota1 = c.Cuota1,
-                                        Cuota2 = c.Cuota2,
-                                        Cuota3 = c.Cuota3,
-                                        Modalidad = c.Modalidad,
-                                        Estado = c.Estado
-                                    });
-                return query.OrderBy(c => c.Nombre).ToList();
+                var idCurso = (from c in db.Cursos
+                               where c.IdCarrera == idCarrera && c.Estado == (short)EstadoCurso.Activo
+                               orderby c.Id
+                               select c.Id).First();
+                return idCurso;
             }
         }
 
@@ -40,14 +26,6 @@ namespace ApiInscripción.Repositories
             using (var db = new SMPorresEntities())
             {
                 return db.Cursos.Find(id);
-            }
-        }
-
-        internal static Curso ObtenerCursoPorNombre(string curso)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                return db.Cursos.Where(x => x.Nombre == curso).FirstOrDefault();
             }
         }
 
@@ -71,26 +49,6 @@ namespace ApiInscripción.Repositories
             if (modalidad == 3) minCuota = 5;   // "Segundo cuatrimestre";
             if (modalidad == 4) minCuota = 0;   // "Sin cursado";
             return minCuota;
-        }
-
-        public static string ObtenerModalidadCurso(int curso)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                var c = db.Cursos.Where(x => x.Id == curso).FirstOrDefault();
-                string modalidad = ModalidadCurso(Convert.ToInt16(c.Modalidad));
-                return modalidad;
-            }
-        }
-
-        internal static string ModalidadCurso(int curso)
-        {
-            //Anual, Primer cuatrimestre, Segundo cuatrimestre y Sin cursado
-            if (curso == 1) return "Anual";
-            if (curso == 2) return "Primer cuatrimestre";
-            if (curso == 3) return "Segundo cuatrimestre";
-            if (curso == 4) return "Sin cursado";
-            return "";
         }
     }
 }

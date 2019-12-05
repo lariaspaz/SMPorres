@@ -34,11 +34,11 @@ namespace ApiInscripción.Models
         public Nullable<byte> TipoBeca { get; set; }
         public Nullable<int> Modalidad { get; set; }
     
-        public virtual Alumno Alumnos { get; set; }
+        public virtual Alumno Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pagos { get; set; }
         public virtual Usuario Usuarios { get; set; }
         public virtual Usuario Usuarios1 { get; set; }
-        public virtual Curso Cursos { get; set; }
+        public virtual Curso Curso { get; set; }
     }
 }

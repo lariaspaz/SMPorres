@@ -34,7 +34,7 @@ namespace ApiInscripción.Models
         public Nullable<decimal> Cuota3 { get; set; }
         public Nullable<short> Estado { get; set; }
     
-        public virtual Carrera Carreras { get; set; }
+        public virtual Carrera Carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CursosAlumno> CursosAlumnos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

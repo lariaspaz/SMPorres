@@ -12,14 +12,18 @@ namespace ApiInscripción.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CursosAlumno
+    public partial class TipoDocumento
     {
-        public int Id { get; set; }
-        public int IdCurso { get; set; }
-        public int IdAlumno { get; set; }
-        public short CicloLectivo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoDocumento()
+        {
+            this.Alumnos = new HashSet<Alumno>();
+        }
     
-        public virtual Alumno Alumno { get; set; }
-        public virtual Curso Curso { get; set; }
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alumno> Alumnos { get; set; }
     }
 }
