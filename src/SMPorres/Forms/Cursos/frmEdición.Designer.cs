@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.bevel3 = new SMPorres.Lib.Bevel();
+            this.bevel2 = new SMPorres.Lib.Bevel();
             this.dtPagoAdelantadoHasta = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
             this.txtCuota3 = new CustomLibrary.ComponentModel.NumericTextBox();
@@ -60,8 +62,6 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.bevel2 = new SMPorres.Lib.Bevel();
-            this.bevel3 = new SMPorres.Lib.Bevel();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -102,13 +102,29 @@
             this.panel2.Size = new System.Drawing.Size(441, 362);
             this.panel2.TabIndex = 1;
             // 
+            // bevel3
+            // 
+            this.bevel3.Location = new System.Drawing.Point(67, 268);
+            this.bevel3.Name = "bevel3";
+            this.bevel3.Size = new System.Drawing.Size(354, 23);
+            this.bevel3.TabIndex = 29;
+            this.bevel3.Text = "bevel3";
+            // 
+            // bevel2
+            // 
+            this.bevel2.Location = new System.Drawing.Point(100, 97);
+            this.bevel2.Name = "bevel2";
+            this.bevel2.Size = new System.Drawing.Size(321, 23);
+            this.bevel2.TabIndex = 28;
+            this.bevel2.Text = "bevel2";
+            // 
             // dtPagoAdelantadoHasta
             // 
             this.dtPagoAdelantadoHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtPagoAdelantadoHasta.Location = new System.Drawing.Point(322, 164);
             this.dtPagoAdelantadoHasta.Name = "dtPagoAdelantadoHasta";
             this.dtPagoAdelantadoHasta.Size = new System.Drawing.Size(99, 20);
-            this.dtPagoAdelantadoHasta.TabIndex = 27;
+            this.dtPagoAdelantadoHasta.TabIndex = 12;
             // 
             // label13
             // 
@@ -131,7 +147,7 @@
             this.txtCuota3.Location = new System.Drawing.Point(160, 242);
             this.txtCuota3.Name = "txtCuota3";
             this.txtCuota3.Size = new System.Drawing.Size(100, 20);
-            this.txtCuota3.TabIndex = 24;
+            this.txtCuota3.TabIndex = 18;
             this.txtCuota3.Text = "0,00";
             this.txtCuota3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -156,7 +172,7 @@
             this.txtCuota2.Location = new System.Drawing.Point(160, 216);
             this.txtCuota2.Name = "txtCuota2";
             this.txtCuota2.Size = new System.Drawing.Size(100, 20);
-            this.txtCuota2.TabIndex = 22;
+            this.txtCuota2.TabIndex = 16;
             this.txtCuota2.Text = "0,00";
             this.txtCuota2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -181,7 +197,7 @@
             this.txtCuota1.Location = new System.Drawing.Point(160, 190);
             this.txtCuota1.Name = "txtCuota1";
             this.txtCuota1.Size = new System.Drawing.Size(100, 20);
-            this.txtCuota1.TabIndex = 20;
+            this.txtCuota1.TabIndex = 14;
             this.txtCuota1.Text = "0,00";
             this.txtCuota1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -206,7 +222,7 @@
             this.txtDescuentoPagoAdelantado.Location = new System.Drawing.Point(160, 164);
             this.txtDescuentoPagoAdelantado.Name = "txtDescuentoPagoAdelantado";
             this.txtDescuentoPagoAdelantado.Size = new System.Drawing.Size(100, 20);
-            this.txtDescuentoPagoAdelantado.TabIndex = 18;
+            this.txtDescuentoPagoAdelantado.TabIndex = 10;
             this.txtDescuentoPagoAdelantado.Text = "0,00";
             this.txtDescuentoPagoAdelantado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -254,7 +270,7 @@
             this.ckEstado.Location = new System.Drawing.Point(160, 321);
             this.ckEstado.Name = "ckEstado";
             this.ckEstado.Size = new System.Drawing.Size(73, 17);
-            this.ckEstado.TabIndex = 14;
+            this.ckEstado.TabIndex = 22;
             this.ckEstado.Text = "Habilitado";
             this.ckEstado.UseVisualStyleBackColor = true;
             // 
@@ -313,7 +329,7 @@
             this.txtImporteCuota.Location = new System.Drawing.Point(160, 295);
             this.txtImporteCuota.Name = "txtImporteCuota";
             this.txtImporteCuota.Size = new System.Drawing.Size(100, 20);
-            this.txtImporteCuota.TabIndex = 5;
+            this.txtImporteCuota.TabIndex = 20;
             this.txtImporteCuota.Text = "0,00";
             this.txtImporteCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -393,7 +409,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(341, 7);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.TabIndex = 26;
             this.btnCancelar.Text = "&Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -402,7 +418,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(260, 7);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 0;
+            this.btnAceptar.TabIndex = 24;
             this.btnAceptar.Text = "&Grabar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -424,22 +440,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // bevel2
-            // 
-            this.bevel2.Location = new System.Drawing.Point(100, 97);
-            this.bevel2.Name = "bevel2";
-            this.bevel2.Size = new System.Drawing.Size(321, 23);
-            this.bevel2.TabIndex = 28;
-            this.bevel2.Text = "bevel2";
-            // 
-            // bevel3
-            // 
-            this.bevel3.Location = new System.Drawing.Point(67, 268);
-            this.bevel3.Name = "bevel3";
-            this.bevel3.Size = new System.Drawing.Size(354, 23);
-            this.bevel3.TabIndex = 29;
-            this.bevel3.Text = "bevel3";
             // 
             // frmEdición
             // 

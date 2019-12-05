@@ -235,7 +235,7 @@ namespace SMPorres.Forms.Alumnos
                         select new
                         {
                             Id = p.Id,
-                            Concepto = (p.NroCuota == 0) ? "Matrícula" : String.Format("Cuota Nº {0}", p.NroCuota),
+                            Concepto = ObtenerConcepto(id, p), // (p.NroCuota == 0) ? "Matrícula" : String.Format("Cuota Nº {0}", p.NroCuota),
                             FechaVto = p.FechaVto,
                             ImporteCuota = p.ImporteCuota,
                             Fecha = p.Fecha,
@@ -246,6 +246,13 @@ namespace SMPorres.Forms.Alumnos
                             Descripcion = p.Descripcion
                         };
             dgvPagos.SetDataSource(query);
+        }
+
+        private string ObtenerConcepto(Int32 idPlanPago, Pago p)
+        {
+            string concepto = (p.NroCuota == 0) ? PagosRepository.ObtenerConcepto(idPlanPago, p) 
+                : String.Format("Cuota Nº {0}", p.NroCuota);
+            return concepto;
         }
 
         private void dgvPagos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

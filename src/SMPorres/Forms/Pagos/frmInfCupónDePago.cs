@@ -118,7 +118,8 @@ namespace SMPorres.Forms.Pagos
             var p = PagosRepository.ObtenerDetallePago(_idPago, fechaCompromiso);
             var importe = String.Format("{0:$ 0,0.00}", p.ImporteCuota);
             cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
-                carrera, curso, "", "", "1", "Matrícula", importe);
+                //carrera, curso, "", "", "1", "Matrícula", importe);
+                carrera, curso, "", "", "1", PagosRepository.ObtenerConcepto(p.IdPlanPago, p), importe);
 
             if (DescuentoMatrículaPagoTermino(p, fechaCompromiso))
             {
@@ -140,8 +141,9 @@ namespace SMPorres.Forms.Pagos
         private bool DescuentoMatrículaPagoTermino(Pago pago, DateTime fechaCompromiso)
         {
             bool pagoTermino = false;
+            bool matrículaEnCuotas = PagosRepository.EsMatriculaEnCuotas(pago);
             var cur = CursosRepository.ObtenerCursoPorId(pago.PlanPago.IdCurso);
-            if (fechaCompromiso <= cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
+            if (!matrículaEnCuotas && fechaCompromiso <= cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
             {
                 pagoTermino = true;
             }
