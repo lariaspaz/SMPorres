@@ -31,6 +31,11 @@ namespace ApiInscripción.Repositories
             }
 
             var curso = CursosRepository.ObtenerCursoPorId(idCurso);
+            if (curso == null)
+            {
+                throw new Exception("No se encontró el curso " + idCurso);
+            }
+
             var id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1;
             //var trx = db.Database.BeginTransaction();
             var plan = new PlanPago

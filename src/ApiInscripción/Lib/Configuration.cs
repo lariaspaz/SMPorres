@@ -16,7 +16,7 @@ namespace ApiInscripción.Lib
                     if (_currentDate == DateTime.MinValue)
                     {
                         var dQuery = db.Database.SqlQuery<DateTime>("SELECT GETDATE()");
-                        _currentDate = dQuery.AsEnumerable().First();
+                        _currentDate = dQuery.First();
                     }
                     return _currentDate;
                 }

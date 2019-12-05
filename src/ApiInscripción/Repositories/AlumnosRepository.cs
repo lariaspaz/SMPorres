@@ -12,7 +12,7 @@ namespace ApiInscripción.Repositories
     {
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static Alumno Insertar(string nombre, string apellido, int idTipoDocumento, decimal nroDocumento,
+        public static void Insertar(string nombre, string apellido, int idTipoDocumento, decimal nroDocumento,
             DateTime fechaNacimiento, string email, string dirección, char sexo, int idCarrera)
         {
             _log.Debug("Insertando alumno");
@@ -31,12 +31,10 @@ namespace ApiInscripción.Repositories
                     PlanesPagoRepository.Insertar(db, a.Id, idCurso);
                     SubirAWeb(db, a.Id);
                     trx.Commit();
-
-                    return a;
+                    _log.Info($"Se ha insertado el alumno {a.Id} y se han subido sus datos a la web.");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    _log.Error(ex.Message);
                     trx.Rollback();
                     throw;
                 }

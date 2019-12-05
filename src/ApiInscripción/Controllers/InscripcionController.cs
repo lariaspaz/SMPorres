@@ -24,18 +24,17 @@ namespace ApiInscripción.Controllers
                 return BadRequest();
             }
 
+            _log.Debug("Insertando el alumno: \n" + JsonConvert.SerializeObject(alumno));
             try
             {
-                var a = AlumnosRepository.Insertar(alumno.Nombre, alumno.Apellido, alumno.IdTipoDocumento,
+                AlumnosRepository.Insertar(alumno.Nombre, alumno.Apellido, alumno.IdTipoDocumento,
                     alumno.NroDocumento, alumno.FechaNacimiento, alumno.EMail, alumno.Direccion,
                     alumno.Sexo, alumno.IdCarrera);
-                _log.Info($"Se creó el alumno ID {a.Id}");
                 return Ok();
             }
             catch (Exception ex)
             {
                 _log.Error(ex.Message, ex);
-                _log.Error(JsonConvert.SerializeObject(alumno));
                 return BadRequest();
             }
         }

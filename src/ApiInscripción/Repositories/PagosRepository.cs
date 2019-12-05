@@ -8,27 +8,31 @@ using System.Threading.Tasks;
 
 namespace ApiInscripción.Repositories
 {
-    class PagosRepository
+    internal class PagosRepository
     {
-        internal static Pago ObtenerPago(int idPago)
+        private SMPorresEntities _db;
+
+        internal PagosRepository(SMPorresEntities db)
         {
-            using (var db = new SMPorresEntities())
-            {
-                var p = db.Pagos.Find(idPago);
-                if (p != null)
-                {
-                    db.Entry(p).Reference(p1 => p1.PlanPago).Load();
-                    db.Entry(p).Reference(p1 => p1.BecaAlumno).Load();
-                    db.Entry(p.PlanPago).Reference(pp => pp.Alumno).Load();
-                    db.Entry(p.PlanPago.Alumno).Reference(a => a.TipoDocumento).Load();
-                    db.Entry(p.PlanPago).Reference(pp => pp.Curso).Load();
-                    db.Entry(p.PlanPago.Curso).Reference(c => c.Carrera).Load();
-                }
-                return p;
-            }
+            _db = db;
         }
 
-        public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
+        internal Pago ObtenerPago(int idPago)
+        {
+            var p = _db.Pagos.Find(idPago);
+            if (p != null)
+            {
+                _db.Entry(p).Reference(p1 => p1.PlanPago).Load();
+                _db.Entry(p).Reference(p1 => p1.BecaAlumno).Load();
+                _db.Entry(p.PlanPago).Reference(pp => pp.Alumno).Load();
+                _db.Entry(p.PlanPago.Alumno).Reference(a => a.TipoDocumento).Load();
+                _db.Entry(p.PlanPago).Reference(pp => pp.Curso).Load();
+                _db.Entry(p.PlanPago.Curso).Reference(c => c.Carrera).Load();
+            }
+            return p;
+        }
+
+        public Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
             Pago pago = ObtenerPago(idPago);
             if (pago == null) return null;
