@@ -118,7 +118,7 @@ namespace SMPorres.Repositories
             {
                 pago.FechaVto = new DateTime(cc, 12, 31);
                 var curso = CursosRepository.ObtenerCursoPorId(pago.PlanPago.Curso.Id);
-                if (fechaCompromiso <= curso.FechaVencDescuento)
+                if (fechaCompromiso <= curso.FechaVencDescuento && !EsMatriculaEnCuotas(pago))
                 {
                     decimal descuentoMatrícula = Convert.ToDecimal(curso.DescuentoMatricula);
                     pago.ImportePagoTermino = descuentoMatrícula;
@@ -359,5 +359,45 @@ namespace SMPorres.Repositories
             return cc;
         }
 
+        public static string ObtenerConcepto(Int32 idPlanPago, Pago pago)
+        {
+            string concepto = "";
+            using (var db = new SMPorresEntities())
+            {
+                var cuotas = db.Pagos.Where(x => x.IdPlanPago == idPlanPago && x.NroCuota == 0).OrderBy(x => x.Id);
+                if (cuotas.Count() == 1)
+                {
+                    concepto = "Matrícula";
+                }
+                else
+                {
+                    short orden = 0;
+                    foreach (var item in cuotas)
+                    {
+                        orden += 1;
+                        if (item.Id == pago.Id)
+                        {
+                            concepto = "Matrícula Cuota Nº " + orden.ToString();
+                        }
+                    }
+                }
+                
+            }
+            return concepto;
+        }
+
+        public static bool EsMatriculaEnCuotas(Pago pago)
+        {
+            bool r = false;
+            using (var db = new SMPorresEntities())
+            {
+                var cuotas = db.Pagos.Where(x => x.IdPlanPago == pago.IdPlanPago && x.NroCuota == 0).OrderBy(x => x.Id);
+                if (cuotas.Count() > 1)
+                {
+                    r = true;
+                }
+            }
+                return r;
+        }
     }
 }
