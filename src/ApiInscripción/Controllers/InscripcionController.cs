@@ -1,4 +1,5 @@
-﻿using ApiInscripción.Models.ViewModels;
+﻿using ApiInscripción.Filters.Jwt;
+using ApiInscripción.Models.ViewModels;
 using ApiInscripción.Repositories;
 using Newtonsoft.Json;
 using System;
@@ -16,7 +17,7 @@ namespace ApiInscripción.Controllers
     {
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        [ResponseType(typeof(Boolean))]
+        [JwtAuthentication]
         public IHttpActionResult PostAlumno(Alumno alumno)
         {
             if (!ModelState.IsValid)
