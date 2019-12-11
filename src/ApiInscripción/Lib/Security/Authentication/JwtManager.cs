@@ -2,11 +2,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace ApiInscripción.Lib.Security.Authentication
 {
     public static class JwtManager
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Use the below code to generate symmetric Secret Key
         ///     var hmac = new HMACSHA256();
@@ -24,14 +27,11 @@ namespace ApiInscripción.Lib.Security.Authentication
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Issuer = "ismp.edu.ar",
-                Subject = new ClaimsIdentity(new[]
-                        {
-                            new Claim(ClaimTypes.Name, username)
-                        }),
+                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) }),
                 IssuedAt = now,
                 Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(symmetricKey), 
-                    SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(
+                        new SymmetricSecurityKey(symmetricKey), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var stoken = tokenHandler.CreateToken(tokenDescriptor);
@@ -50,6 +50,10 @@ namespace ApiInscripción.Lib.Security.Authentication
                 if (jwtToken == null)
                     return null;
 
+                _log.Debug("JWT token: Válido desde: " + JsonConvert.SerializeObject(jwtToken.ValidFrom) + 
+                    " hasta " + JsonConvert.SerializeObject(jwtToken.ValidTo) +
+                    " - Now: " + DateTime.Now.ToUniversalTime());
+
                 var symmetricKey = Convert.FromBase64String(Secret);
 
                 var validationParameters = new TokenValidationParameters()
@@ -65,9 +69,14 @@ namespace ApiInscripción.Lib.Security.Authentication
 
                 return principal;
             }
-
-            catch (Exception)
+            catch (SecurityTokenExpiredException ex)
             {
+                _log.Error("Token expirado: " + ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
                 return null;
             }
         }

@@ -13,12 +13,15 @@ namespace ApiInscripción.Controllers
     [Authorize]
     public class TokenController : ApiController
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // This is naive endpoint for demo, it should use Basic authentication
         // to provide token or POST request
         [IdentityBasicAuthentication] // Enable Basic authentication for this action.
         //[BasicAuthenticationFilter]
         public string Post(string username, string password)
         {
+            _log.Debug("Entra");
             if (new UsuarioRepository().ExisteUsuario(username, password))
             {
                 return JwtManager.GenerateToken(username);

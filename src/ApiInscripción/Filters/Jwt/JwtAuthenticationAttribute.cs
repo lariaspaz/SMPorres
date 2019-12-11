@@ -11,11 +11,15 @@ namespace ApiInscripción.Filters.Jwt
 {
     public class JwtAuthenticationAttribute : Attribute, IAuthenticationFilter
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public string Realm { get; set; }
         public bool AllowMultiple => false;
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
+            _log.Debug("Autenticando");
+
             var request = context.Request;
             var authorization = request.Headers.Authorization;
 
@@ -38,8 +42,6 @@ namespace ApiInscripción.Filters.Jwt
                 context.Principal = principal;
         }
 
-
-
         private static bool ValidateToken(string token, out string username)
         {
             username = null;
@@ -57,12 +59,16 @@ namespace ApiInscripción.Filters.Jwt
             username = usernameClaim?.Value;
 
             var iss = identity.FindFirst("iss");
-            System.Diagnostics.Debug.Print("iss = " + iss.Value);
+            _log.Debug("iss = " + iss.Value);
 
             if (string.IsNullOrEmpty(username))
                 return false;
 
             // More validate to check whether username exists in system
+            if (username != Repositories.UsuarioRepository.Usuario)
+            {
+                return false;
+            }
 
             return true;
         }

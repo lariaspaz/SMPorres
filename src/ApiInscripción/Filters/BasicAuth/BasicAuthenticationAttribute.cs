@@ -15,6 +15,8 @@ namespace ApiInscripción.Filters.BasicAuth
 {
     public abstract class BasicAuthenticationAttribute : Attribute, IAuthenticationFilter
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public bool AllowMultiple
         {
             get { return false; }
@@ -22,6 +24,8 @@ namespace ApiInscripción.Filters.BasicAuth
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
+            _log.Debug("Autenticando");
+
             // 1. Look for credentials in the request.
             HttpRequestMessage request = context.Request;
             AuthenticationHeaderValue authorization = request.Headers.Authorization;
@@ -43,25 +47,29 @@ namespace ApiInscripción.Filters.BasicAuth
             // 5. If the credentials are bad, set the error result.
             if (String.IsNullOrEmpty(authorization.Parameter))
             {
-                context.ErrorResult = new AuthenticationFailureResult("Missing credentials", request);
+                //context.ErrorResult = new AuthenticationFailureResult("Missing credentials", request);
                 return;
             }
 
             Tuple<string, string> userNameAndPassword = ExtractUserNameAndPassword(authorization.Parameter);
             if (userNameAndPassword == null)
             {
-                context.ErrorResult = new AuthenticationFailureResult("Invalid credentials", request);
+                //context.ErrorResult = new AuthenticationFailureResult("Invalid credentials", request);
+                return;
             }
 
             string userName = userNameAndPassword.Item1;
             string password = userNameAndPassword.Item2;
+
+            _log.Debug($"[Usuario: {userName}] [Contraseña: {password}]");
 
             IPrincipal principal = await AuthenticateAsync(userName, password, cancellationToken);
             //var identity = new Lib.BasicAuthenticationIdentity(userName, password);
             //var principal = new GenericPrincipal(identity, null);
             if (principal == null)
             {
-                context.ErrorResult = new AuthenticationFailureResult("Invalid username or password", request);
+                //context.ErrorResult = new AuthenticationFailureResult("Invalid username or password", request);
+                return;
             }
 
             // 6. If the credentials are valid, set principal.
