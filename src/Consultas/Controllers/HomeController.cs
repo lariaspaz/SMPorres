@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Consultas.Models;
 
 namespace Consultas.Controllers
 {
@@ -34,13 +35,28 @@ namespace Consultas.Controllers
             if (result.PróximaCuota != null)
             {
                 result.PróximaCuota.Vencido = result.PróximaCuota.FechaVto < Lib.Configuration.CurrentDate.Date;
-                ViewBag.Cuotas = new SelectList(Enumerable.Range(result.PróximaCuota.NroCuota, 9 - result.PróximaCuota.NroCuota + 1));
+                //ViewBag.Cuotas = new SelectList(Enumerable.Range(result.PróximaCuota.NroCuota, 9 - result.PróximaCuota.NroCuota + 1));
+                ViewBag.Cuotas = new SelectList(Enumerable.Range(result.PróximaCuota.NroCuota, result.Pagos.Max(x=> x.NroCuota) + 1));   
             }
             else
             {
                 ViewBag.Cuotas = new SelectList(Enumerable.Range(1, 9));
             }
             return PartialView(result);
+        }
+
+        private string ObtenerDetalle(PagoWeb item)
+        {
+            string detalle = "";
+            if (item.NroCuota == 0)
+            {
+                PagosRepository.ObtenerConceptoMatrícula(item.IdPlanPago, item);
+            }
+            else
+            {
+                detalle = String.Format("Matrícula Cuota Nº {0}", item.NroCuota);
+            }
+            return detalle;
         }
 
         public ActionResult ImprimirCupon(int cuota, DateTime fechaCompromiso)

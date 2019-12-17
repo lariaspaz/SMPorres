@@ -51,6 +51,7 @@ namespace Consultas.Repositories
 
                     var caRepo = new CursosAlumnosRepository();
                     var pagosRepo = new PagosRepository();
+                    pagosRepo.EliminarPagosNoReferenciados(db, alumno.CursosAlumnos);
                     foreach (var ca in alumno.CursosAlumnos)
                     {
                         var id = caRepo.Actualizar(db, a.Id, ca).Id;

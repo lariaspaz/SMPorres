@@ -32,5 +32,7 @@ namespace Consultas.Models.WebServices
         public DateTime FechaVtoPagoTérmino { get; set; }
 
         public byte? TipoBeca { get; set; }
+
+        public byte? Estado { get; set; }
     }
 }

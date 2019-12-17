@@ -20,7 +20,23 @@
             <td class="text-left">
                 @if (item.NroCuota == 0)
                 {
-                    @:Matrícula
+                    if (Model.Where(x => x.NroCuota == 0 && x.Estado != 2).Count() == 1)
+                    {
+                        @:Matrícula
+                    }
+                    else
+                    {
+                        int x = 0;
+                        foreach (var i in Model)
+                        {
+                            x = x + 1;
+                            if (item.Id == i.Id)
+                            {
+                                @String.Format("Matrícula Cuota Nº {0}", x)
+                            }
+                        }
+
+                    }
                 }
                 else
                 {

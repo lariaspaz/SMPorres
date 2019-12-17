@@ -54,6 +54,7 @@
           <Property Name="PorcentajeBeca" Type="smallint" />
           <Property Name="FechaVtoPagoTermino" Type="smalldatetime" />
           <Property Name="TipoBeca" Type="tinyint" />
+          <Property Name="Estado" Type="tinyint" />
         </EntityType>
         <EntityType Name="RolesUsuariosWeb">
           <Key>
@@ -168,6 +169,7 @@
           <Property Name="PorcentajeBeca" Type="Int16" />
           <Property Name="FechaVtoPagoTermino" Type="DateTime" Precision="0" />
           <Property Name="TipoBeca" Type="Byte" />
+          <Property Name="Estado" Type="Byte" />
         </EntityType>
         <Association Name="FK_CursosAlumnosWeb_AlumnosWeb">
           <End Role="AlumnosWeb" Type="SMPorres.AlumnoWeb" Multiplicity="1" />
@@ -274,6 +276,7 @@
           <EntitySetMapping Name="PagosWeb">
             <EntityTypeMapping TypeName="SMPorres.PagoWeb">
               <MappingFragment StoreEntitySet="PagosWeb">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="TipoBeca" ColumnName="TipoBeca" />
                 <ScalarProperty Name="FechaVtoPagoTermino" ColumnName="FechaVtoPagoTermino" />
                 <ScalarProperty Name="PorcentajeBeca" ColumnName="PorcentajeBeca" />

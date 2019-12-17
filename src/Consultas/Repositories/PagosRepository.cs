@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Consultas.Models.WebServices;
+using System.Collections;
 
 namespace Consultas.Repositories
 {
@@ -32,6 +34,7 @@ namespace Consultas.Repositories
             p.PorcentajeBeca = pago.PorcentajeBeca;
             p.FechaVtoPagoTermino = pago.FechaVtoPagoTérmino;
             p.TipoBeca = pago.TipoBeca;
+            p.Estado = pago.Estado;
             if (insertar)
             {
                 db.PagosWeb.Add(p);
@@ -39,15 +42,40 @@ namespace Consultas.Repositories
             db.SaveChanges();
         }
 
+        public void Eliminar(SMPorresEntities db, Models.WebServices.Pago pago)
+        {
+            var p = db.PagosWeb.Find(pago.Id);
+            if (p.ImportePagado.Value == null | p.ImportePagado == 0 )
+            {
+                db.PagosWeb.Remove(p);
+            }
+            db.SaveChanges();
+        }
         public IEnumerable<PagoWeb> ObtenerPagos(int idCursoAlumno)
         {
             using (var db = new SMPorresEntities())
             {
                 var qry = from p in db.PagosWeb
                           where p.IdCursoAlumno == idCursoAlumno &&
-                                  p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId
+                                  p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId &&
+                                  p.Estado != (byte)EstadoPago.Baja
+                          orderby p.NroCuota, p.Id
                           select p;
                 return qry.ToList();
+            }
+        }
+
+        internal void EliminarPagosNoReferenciados(SMPorresEntities db, List<CursoAlumno> cursosAlumnos)
+        {
+            foreach (var item in cursosAlumnos) //--> cuotas recibidas desde web service
+            {
+                var pdb = db.PagosWeb.Where(x => x.IdCursoAlumno == item.Id);   //--> todas cuotas del alumno en db
+                foreach (var i in pdb)
+                {
+                    var EliminarPago = db.PagosWeb.Find(i.Id);
+                    db.PagosWeb.Remove(EliminarPago);
+                    db.SaveChanges();
+                }   
             }
         }
 
@@ -67,10 +95,26 @@ namespace Consultas.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var p2 = (from p in db.PagosWeb
+                PagoWeb p2 = new PagoWeb();
+
+                if (nroCuota > 0)
+                {
+                    p2 = (from p in db.PagosWeb
                           where p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId &&
-                                p.NroCuota == nroCuota
+                                p.NroCuota == nroCuota &&
+                                p.Estado != (byte) EstadoPago.Baja
                           select p).FirstOrDefault();
+                }
+                else
+                {
+                    p2 = (from p in db.PagosWeb
+                          where p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId &&
+                                p.NroCuota == nroCuota &&
+                                p.Estado != (byte)EstadoPago.Baja
+                          select p)
+                          .OrderBy(z => z.Id)
+                          .FirstOrDefault();
+                }
                 return (p2 == null) ? 0 : p2.Id;
             }
         }
@@ -89,7 +133,7 @@ namespace Consultas.Repositories
             }
         }
 
-        public PagoWeb ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
+        public static PagoWeb ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
             var pago = new PagosRepository().ObtenerPago(idPago);
 
@@ -131,6 +175,47 @@ namespace Consultas.Repositories
 
             pago.ImportePagado = totalAPagar;
             return pago;
+        }
+
+        public static string ObtenerConceptoMatrícula(Int32 idPlanPago, PagoWeb pago) //Pago pago)
+        {
+            string concepto = "";
+            using (var db = new SMPorresEntities())
+            {
+                var cuotas = db.PagosWeb.Where(x => x.IdPlanPago == idPlanPago
+                                            && x.NroCuota == 0
+                                            && x.Estado != (short)EstadoPago.Baja)
+                                            .OrderBy(x => x.Id);
+                if (cuotas.Count() == 1)
+                {
+                    concepto = "Matrícula";
+                }
+                else
+                {
+                    short orden = 0;
+                    foreach (var item in cuotas)
+                    {
+                        orden += 1;
+                        if (item.Id == pago.Id)
+                        {
+                            concepto = "Matrícula Cuota Nº " + orden.ToString();
+                        }
+                    }
+                }
+
+            }
+            return concepto;
+        }
+
+        public static int CantidadCuotasMatrícula(decimal idPlanPago)
+        {
+            int cc = 0;
+            using (var db = new SMPorresEntities())
+            {
+                cc = db.PagosWeb.Where(x => x.IdPlanPago == idPlanPago && x.NroCuota == 0 && x.Estado == (short)EstadoPago.Impago)
+                    .Count();
+            }
+            return cc;
         }
     }
 }

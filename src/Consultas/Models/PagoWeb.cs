@@ -28,6 +28,7 @@ namespace Consultas.Models
         public Nullable<short> PorcentajeBeca { get; set; }
         public Nullable<System.DateTime> FechaVtoPagoTermino { get; set; }
         public Nullable<byte> TipoBeca { get; set; }
+        public Nullable<byte> Estado { get; set; }
     
         public virtual CursoAlumnoWeb CursoAlumnoWeb { get; set; }
     }
