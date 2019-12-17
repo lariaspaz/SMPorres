@@ -160,6 +160,19 @@ namespace SMPorres.Repositories
             }
         }
 
+        internal static Curso ObtenerCurso(int idPlanPago)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var x = (from p in db.PlanesPago
+                         join c in db.Cursos on p.IdCurso equals c.Id
+                         where p.Id == idPlanPago
+                         select c
+                    ).FirstOrDefault();
+
+                return x;
+            }
+        }
         internal static short ObtieneMaxCuota(int? modalidad)
         {
             short maxCuota = 0;

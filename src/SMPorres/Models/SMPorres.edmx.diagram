@@ -46,14 +46,8 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_UsuariosItemsMenu_ItemsMenu" />
         <AssociationConnector Association="SMPorres_DevModel.FK_UsuariosItemsMenu_Usuarios" />
         <EntityTypeShape EntityType="SMPorres_DevModel.MedioPago" Width="1.5" PointX="11.75" PointY="10.625" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.Pago" Width="1.5" PointX="9.625" PointY="8.875" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_MediosPago" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Pagos" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_PlanesPago" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Usuarios" />
         <EntityTypeShape EntityType="SMPorres_DevModel.BecaAlumno" Width="1.5" PointX="9.625" PointY="6.25" />
         <AssociationConnector Association="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_BecasAlumnos" />
         <EntityTypeShape EntityType="SMPorres_DevModel.RendicionBSE" Width="1.5" PointX="9.625" PointY="16" />
         <EntityTypeShape EntityType="SMPorres_DevModel.CabeceraArchivo" Width="1.5" PointX="7.375" PointY="16" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios" />
@@ -62,6 +56,12 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Pago" Width="1.5" PointX="9.625" PointY="9" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_BecasAlumnos" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_MediosPago" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Pagos" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_PlanesPago" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Usuarios" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

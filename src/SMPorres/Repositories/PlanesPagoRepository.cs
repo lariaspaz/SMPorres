@@ -90,7 +90,7 @@ namespace SMPorres.Repositories
                     pm.IdPlanPago = id;
                     pm.NroCuota = 0;
                     pm.ImporteCuota = curso.ImporteMatricula;
-                    pm.Estado = (short) EstadoPago.Impago;
+                    pm.Estado = (byte) EstadoPago.Impago;
                     db.Pagos.Add(pm);
                     db.SaveChanges();
 
@@ -107,7 +107,7 @@ namespace SMPorres.Repositories
                             p.IdPlanPago = id;
                             p.NroCuota = i;
                             p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
-                            pm.Estado = (short)EstadoPago.Impago;
+                            pm.Estado = (byte)EstadoPago.Impago;
                             db.Pagos.Add(p);
                             db.SaveChanges();
                         }

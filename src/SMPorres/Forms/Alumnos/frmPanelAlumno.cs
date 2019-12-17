@@ -474,8 +474,8 @@ namespace SMPorres.Forms.Alumnos
             if (p.NroCuota == 0 || p.Fecha.HasValue || Lib.Session.CurrentUser.Id > 3)
             {
                 //e.Cancel = true;
-                matrículaEn1CuotaToolStripMenuItem.Visible = matrículaEn1Cuota(p);
-                matrículaEn3CuotasToolStripMenuItem.Visible = matrículaEn3Cuotas(p);
+                matrículaEn1CuotaToolStripMenuItem.Visible = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 3; //matrículaEn1Cuota(p);
+                matrículaEn3CuotasToolStripMenuItem.Visible = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 1; //matrículaEn3Cuotas(p);
                 AsignarBecaToolStripMenuItem.Visible = false;
                 EditarBecaToolStripMenuItem.Visible = false;
             }
@@ -486,22 +486,6 @@ namespace SMPorres.Forms.Alumnos
                 matrículaEn1CuotaToolStripMenuItem.Visible = false;
                 matrículaEn3CuotasToolStripMenuItem.Visible = false;
             }
-        }
-
-        private bool matrículaEn3Cuotas(Pago p)
-        {
-            bool r = false;
-            var cc = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago);
-            if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 1) r = true;
-            return r;
-        }
-
-        private bool matrículaEn1Cuota(Pago p)
-        {
-            bool r = false;
-            var cc = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago);
-            if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 3) r = true;
-            return r;
         }
 
         private void btnGenerarContraseñaWeb_Click(object sender, EventArgs e)
@@ -556,10 +540,16 @@ namespace SMPorres.Forms.Alumnos
             {
                 try
                 {
-                    PagosRepository.EliminarCuotasGeneradasMatrícula(cuota, p.IdPlanPago);
+                    if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) != 3)
+                    {
+                        MessageBox.Show("No se puede unificar cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        PagosRepository.EliminarCuotasGeneradasMatrícula(cuota, p.IdPlanPago);
 
-                    PagosRepository.GeneraNuevaCuota(p.IdPlanPago, cuota, p.PlanPago.Curso);
-
+                        PagosRepository.GeneraNuevaCuotaDeMatricula(p, p.PlanPago.Curso.ImporteMatricula);
+                    }
                     ConsultarPagos();
                 }
                 catch
@@ -578,20 +568,26 @@ namespace SMPorres.Forms.Alumnos
             {
                 try
                 {
-                    PagosRepository.EliminarCuotaGenerada(cuota, p.IdPlanPago);
-                    
-                    decimal cuota1 = (decimal)p.PlanPago.Curso.Cuota1;
-                    PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota, cuota1);
-                    decimal cuota2 = (decimal)p.PlanPago.Curso.Cuota2;
-                    PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota, cuota2);
-                    decimal cuota3 = (decimal)p.PlanPago.Curso.Cuota3;
-                    PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota, cuota3);
+                    if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) != 1)
+                    {
+                        MessageBox.Show("No se puede dividir cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        PagosRepository.EliminarCuotasGeneradasMatrícula(cuota, p.IdPlanPago);
 
+                        decimal cuota1 = (decimal)p.PlanPago.Curso.Cuota1;
+                        PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota1, 1);
+                        decimal cuota2 = (decimal)p.PlanPago.Curso.Cuota2;
+                        PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota2, 2);
+                        decimal cuota3 = (decimal)p.PlanPago.Curso.Cuota3;
+                        PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota3, 3);
+                    }
                     ConsultarPagos();
                 }
                 catch
                 {
-                    ShowError("Error al intentar intentar unificar la Matrícula\n");
+                    ShowError("Error al intentar intentar dividir la Matrícula\n");
                 }
             }
         }

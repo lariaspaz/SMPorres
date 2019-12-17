@@ -46,11 +46,11 @@ namespace SMPorres.Models
         public virtual DbSet<ItemsMenu> ItemsMenus { get; set; }
         public virtual DbSet<UsuariosItemsMenu> UsuariosItemsMenus { get; set; }
         public virtual DbSet<MedioPago> MediosPago { get; set; }
-        public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
         public virtual DbSet<RendicionBSE> RendicionesBSE { get; set; }
         public virtual DbSet<CabeceraArchivo> CabecerasArchivos { get; set; }
         public virtual DbSet<Curso> Cursos { get; set; }
+        public virtual DbSet<Pago> Pagos { get; set; }
     
         public virtual ObjectResult<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCarrera, Nullable<int> idCurso, Nullable<short> tipoBecado)
         {

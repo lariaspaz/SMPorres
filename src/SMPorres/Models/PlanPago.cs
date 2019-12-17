@@ -37,8 +37,8 @@ namespace SMPorres.Models
         public virtual Alumno Alumno { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Usuario UsuarioEstado { get; set; }
+        public virtual Curso Curso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pagos { get; set; }
-        public virtual Curso Curso { get; set; }
     }
 }

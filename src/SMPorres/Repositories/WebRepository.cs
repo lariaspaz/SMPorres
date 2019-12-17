@@ -68,7 +68,9 @@ namespace SMPorres.Repositories
                              p.ImporteBeca,
                              p.ImporteRecargo,
                              p.ImportePagado,
-                             pp.TipoBeca
+                             pp.TipoBeca,
+                             p.FechaVto,
+                             p.Estado
                          })
                          .ToList()
                          .Select(
@@ -83,7 +85,8 @@ namespace SMPorres.Repositories
                                 ImporteBeca = p.ImporteBeca ?? 0,
                                 ImporteRecargo = p.ImporteRecargo ?? 0,
                                 ImportePagado = p.ImportePagado ?? 0,
-                                TipoBeca = p.TipoBeca
+                                TipoBeca = p.TipoBeca,
+                                Estado = p.Estado                                
                             })
                          .ToArray();
 
@@ -97,6 +100,15 @@ namespace SMPorres.Repositories
                     p.ImporteBeca = pago.ImporteBeca;
                 }
                 p.FechaVtoPagoTérmino = p.FechaVto.AddDays(-díasVtoPagoTermino);
+
+                int cc = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago);
+                var curso = CursosRepository.ObtenerCurso(p.IdPlanPago);
+                if (p.NroCuota == 0)
+                {
+                    if (cc == 1) p.FechaVtoPagoTérmino = (DateTime)curso.FechaVencDescuento;
+                    if (cc == 3) p.FechaVtoPagoTérmino = p.FechaVto;
+                }
+                
             }
 
             return query;

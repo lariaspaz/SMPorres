@@ -324,6 +324,8 @@ namespace SMPorres.ConsultasWeb {
         
         private System.Nullable<byte> TipoBecaField;
         
+        private System.Nullable<byte> EstadoField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -499,6 +501,19 @@ namespace SMPorres.ConsultasWeb {
                 if ((this.TipoBecaField.Equals(value) != true)) {
                     this.TipoBecaField = value;
                     this.RaisePropertyChanged("TipoBeca");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
+        public System.Nullable<byte> Estado {
+            get {
+                return this.EstadoField;
+            }
+            set {
+                if ((this.EstadoField.Equals(value) != true)) {
+                    this.EstadoField = value;
+                    this.RaisePropertyChanged("Estado");
                 }
             }
         }

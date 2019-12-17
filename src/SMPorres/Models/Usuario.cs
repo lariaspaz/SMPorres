@@ -21,8 +21,8 @@ namespace SMPorres.Models
             this.PlanesPagos = new HashSet<PlanPago>();
             this.PlanesPagosEstado = new HashSet<PlanPago>();
             this.UsuariosItemsMenus = new HashSet<UsuariosItemsMenu>();
-            this.Pagos = new HashSet<Pago>();
             this.CabecerasArchivos = new HashSet<CabeceraArchivo>();
+            this.Pagos = new HashSet<Pago>();
         }
     
         public int Id { get; set; }
@@ -42,8 +42,8 @@ namespace SMPorres.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuariosItemsMenu> UsuariosItemsMenus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pagos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CabeceraArchivo> CabecerasArchivos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pago> Pagos { get; set; }
     }
 }

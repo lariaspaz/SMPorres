@@ -141,9 +141,11 @@ namespace SMPorres.Forms.Pagos
         private bool DescuentoMatrículaPagoTermino(Pago pago, DateTime fechaCompromiso)
         {
             bool pagoTermino = false;
-            bool matrículaEnCuotas = PagosRepository.EsMatriculaEnCuotas(pago);
+            int cc = PagosRepository.CantidadCuotasMatrícula(pago.IdPlanPago);
+            //bool matrículaEnCuotas = PagosRepository.EsMatriculaEnCuotas(pago);
             var cur = CursosRepository.ObtenerCursoPorId(pago.PlanPago.IdCurso);
-            if (!matrículaEnCuotas && fechaCompromiso <= cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
+            //if (!matrículaEnCuotas && fechaCompromiso <= cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
+            if (cc == 1  && fechaCompromiso <= cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
             {
                 pagoTermino = true;
             }
