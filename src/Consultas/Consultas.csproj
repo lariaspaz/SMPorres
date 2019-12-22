@@ -165,6 +165,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Models\EstadoPago.cs" />
     <Compile Include="Models\SMPorresEntities.Ext.cs" />
     <Compile Include="Models\TipoBeca.cs" />
     <Compile Include="Models\ViewModels\ChangePwd.cs" />
