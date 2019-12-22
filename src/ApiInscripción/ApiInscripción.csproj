@@ -131,6 +131,7 @@
     <Content Include="Service References\ConsultasWeb\ApiInscripción.ConsultasWeb.ActualizarPwdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Service References\ConsultasWeb\SMP.disco" />
     <None Include="Service References\ConsultasWeb\configuration91.svcinfo" />
     <None Include="Service References\ConsultasWeb\configuration.svcinfo" />

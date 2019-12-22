@@ -333,3 +333,4 @@ src/Consultas/datos.txt
 !src/BackupDB
 tmp/**/*
 deploy/**/*
+!src/ApiInscripción/Properties/PublishProfiles/Release.pubxml

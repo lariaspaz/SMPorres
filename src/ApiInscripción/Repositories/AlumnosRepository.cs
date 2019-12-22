@@ -43,11 +43,15 @@ namespace ApiInscripción.Repositories
 
         private static void SubirAWeb(SMPorresEntities db, int id)
         {
-            var alumnoWeb = new WebRepository().ObtenerAlumno(db, id);
-            var interés = ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora;
-            if (!new Lib.WebServices.Consultas().SubirAlumno(alumnoWeb, interés))
+            var uploadData = Boolean.Parse(System.Configuration.ConfigurationManager.AppSettings["UploadData"]);
+            if (uploadData)
             {
-                throw new Exception("No se pudo actualizar el alumno en la web");
+                var alumnoWeb = new WebRepository().ObtenerAlumno(db, id);
+                var interés = ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora;
+                if (!new Lib.WebServices.Consultas().SubirAlumno(alumnoWeb, interés))
+                {
+                    throw new Exception("No se pudo actualizar el alumno en la web");
+                }
             }
         }
 
