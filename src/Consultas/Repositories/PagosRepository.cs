@@ -45,7 +45,7 @@ namespace Consultas.Repositories
         public void Eliminar(SMPorresEntities db, Models.WebServices.Pago pago)
         {
             var p = db.PagosWeb.Find(pago.Id);
-            if (p.ImportePagado.Value == null | p.ImportePagado == 0 )
+            if ((p.ImportePagado ?? 0) == 0)
             {
                 db.PagosWeb.Remove(p);
             }
@@ -75,7 +75,7 @@ namespace Consultas.Repositories
                     var EliminarPago = db.PagosWeb.Find(i.Id);
                     db.PagosWeb.Remove(EliminarPago);
                     db.SaveChanges();
-                }   
+                }
             }
         }
 
@@ -102,7 +102,7 @@ namespace Consultas.Repositories
                     p2 = (from p in db.PagosWeb
                           where p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId &&
                                 p.NroCuota == nroCuota &&
-                                p.Estado != (byte) EstadoPago.Baja
+                                p.Estado != (byte)EstadoPago.Baja
                           select p).FirstOrDefault();
                 }
                 else
