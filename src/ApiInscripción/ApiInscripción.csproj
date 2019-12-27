@@ -144,6 +144,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\InscripcionController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Filters\BasicAuth\AddChallengeOnUnauthorizedResult.cs" />
     <Compile Include="Filters\BasicAuth\AuthenticationFailureResult.cs" />
