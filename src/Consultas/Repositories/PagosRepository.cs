@@ -42,15 +42,6 @@ namespace Consultas.Repositories
             db.SaveChanges();
         }
 
-        public void Eliminar(SMPorresEntities db, Models.WebServices.Pago pago)
-        {
-            var p = db.PagosWeb.Find(pago.Id);
-            if ((p.ImportePagado ?? 0) == 0)
-            {
-                db.PagosWeb.Remove(p);
-            }
-            db.SaveChanges();
-        }
         public IEnumerable<PagoWeb> ObtenerPagos(int idCursoAlumno)
         {
             using (var db = new SMPorresEntities())
@@ -76,18 +67,6 @@ namespace Consultas.Repositories
                     db.PagosWeb.Remove(EliminarPago);
                     db.SaveChanges();
                 }
-            }
-        }
-
-        public int ObtenerIdPrimeraCuotaImpaga()
-        {
-            using (var db = new SMPorresEntities())
-            {
-                var p2 = (from p in db.PagosWeb
-                          where p.CursoAlumnoWeb.AlumnoWeb.Id == Session.CurrentUserId &&
-                                p.Fecha == null
-                          select p).FirstOrDefault();
-                return (p2 == null) ? 0 : p2.Id;
             }
         }
 
