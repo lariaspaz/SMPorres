@@ -117,35 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>172, 17</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>31</value>
-  </metadata>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>504, 17</value>
-  </metadata>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>302, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnPermisoExámen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIdSURBVDhPrVNfSBNxHB8UFhi99hAEJRZFxXASGrS5eX+2
-        3HbaELLLbXf3u7tiNRG3mGEkBD70lJREkx56GEgOoSITTIkkshcJTfAhiMjIh3qorOjBPu332+1wNMqH
-        PvDhy/f7+cMdxzkoBEGEIPgtiuB5gU1KjuPBNXNslu6i6AcLroOrxIajx6CbZ+F2N4ErFB5vCaMnncEp
-        OUpDzOPxeP8osFHX6EOnlkB9gweNHh5NXBCJ7gzaZcUOuepclQtS3u01aV81bmo7kes5gpe5c3j9MINs
-        0gvlQJUd2le7t3JB6GD1DtVZBXweAd7fweqra1iZHcB0VgVxbl0foq9SEZs6D2+++3VhEF/mB/Fu5gqW
-        JnoxcUOGWr9l1PL8E7s+zFxeXnk+gKVHvZjLJzF5q2OB3ovyBnDJcBtvpi5ifqwLT2/HEOEPBSzp7xib
-        /dVx/8Xaan9fF57lDAz3B9AX3Q+DRDE+t/aN6pa1HISQ3Vrs5M+hKeD6Y4CoKh6MT4JiJH8PmhIH1Yam
-        gYJvWVGUPVa0CEMnSHcnkBr9jlT+ByLhFhi6yQo0YqJdCrI71amPaGr5ZzR0DUZcRlv2I04Mf0IkJEIK
-        SwgGw2iVJLbTO9WpTydaeUE8FkNboBnOq28ZW/0+hIIhVkAn3Usa9ZmFJ7aiRcRk+cl5ImPbhUXGJDmN
-        M6YO0zTZpHtJoz7qt6I2agq0f6gNkPr/BxyO36QMPiEpo8AEAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>407, 17</value>
-  </metadata>
 </root>

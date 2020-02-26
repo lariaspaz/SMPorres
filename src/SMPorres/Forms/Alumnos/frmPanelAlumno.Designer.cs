@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPanelAlumno));
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txtNroDocumento = new CustomLibrary.ComponentModel.NumericTextBox();
@@ -42,6 +43,7 @@
             this.btnEditarPlanPago = new System.Windows.Forms.ToolStripButton();
             this.btnAnularPlanPago = new System.Windows.Forms.ToolStripButton();
             this.btnImprimirCuota = new System.Windows.Forms.ToolStripButton();
+            this.btnPermisoExámen = new System.Windows.Forms.ToolStripButton();
             this.btnPagarCuota = new System.Windows.Forms.ToolStripButton();
             this.btnGenerarContraseñaWeb = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -163,6 +165,7 @@
             this.btnEditarPlanPago,
             this.btnAnularPlanPago,
             this.btnImprimirCuota,
+            this.btnPermisoExámen,
             this.btnPagarCuota,
             this.btnGenerarContraseñaWeb,
             this.toolStripSeparator1,
@@ -214,6 +217,16 @@
             this.btnImprimirCuota.Size = new System.Drawing.Size(23, 22);
             this.btnImprimirCuota.Text = "Imprimir cuota";
             this.btnImprimirCuota.Click += new System.EventHandler(this.btnImprimirCuota_Click);
+            // 
+            // btnPermisoExámen
+            // 
+            this.btnPermisoExámen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPermisoExámen.Image = ((System.Drawing.Image)(resources.GetObject("btnPermisoExámen.Image")));
+            this.btnPermisoExámen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPermisoExámen.Name = "btnPermisoExámen";
+            this.btnPermisoExámen.Size = new System.Drawing.Size(23, 22);
+            this.btnPermisoExámen.Text = "toolStripButton1";
+            this.btnPermisoExámen.Click += new System.EventHandler(this.btnPermisoExámen_Click);
             // 
             // btnPagarCuota
             // 
@@ -387,7 +400,7 @@
             this.matrículaEn3CuotasToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(163, 92);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // AsignarBecaToolStripMenuItem
@@ -483,5 +496,6 @@
         private System.Windows.Forms.ToolStripButton btnGenerarContraseñaWeb;
         private System.Windows.Forms.ToolStripMenuItem matrículaEn1CuotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem matrículaEn3CuotasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnPermisoExámen;
     }
 }

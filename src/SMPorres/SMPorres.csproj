@@ -118,6 +118,12 @@
     <Compile Include="Forms\Alumnos\frmPanelAlumno.Designer.cs">
       <DependentUpon>frmPanelAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Alumnos\frmPermisoDeExámen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Alumnos\frmPermisoDeExámen.Designer.cs">
+      <DependentUpon>frmPermisoDeExámen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Barrios\frmListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,6 +369,7 @@
     <Compile Include="Models\MedioPago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PermisoExamen.cs" />
     <Compile Include="Models\PlanPago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -408,6 +415,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Designs\InscripciónExamen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InscripciónExamen.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Designs\TotalesPago.cs">
       <AutoGen>True</AutoGen>
@@ -487,6 +500,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Alumnos\frmPanelAlumno.resx">
       <DependentUpon>frmPanelAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Alumnos\frmPermisoDeExámen.resx">
+      <DependentUpon>frmPermisoDeExámen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Barrios\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
@@ -568,6 +584,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Web\frmActualizarDatos.resx">
       <DependentUpon>frmActualizarDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Designs\InscripciónExamen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InscripciónExamen.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Designs\TotalesPago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

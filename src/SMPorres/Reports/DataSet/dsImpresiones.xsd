@@ -78,6 +78,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="PermisoExamen" msprop:Generator_TableClassName="PermisoExamenDataTable" msprop:Generator_TableVarName="tablePermisoExamen" msprop:Generator_RowChangedName="PermisoExamenRowChanged" msprop:Generator_TablePropName="PermisoExamen" msprop:Generator_RowDeletingName="PermisoExamenRowDeleting" msprop:Generator_RowChangingName="PermisoExamenRowChanging" msprop:Generator_RowEvHandlerName="PermisoExamenRowChangeEventHandler" msprop:Generator_RowDeletedName="PermisoExamenRowDeleted" msprop:Generator_RowClassName="PermisoExamenRow" msprop:Generator_UserTableName="PermisoExamen" msprop:Generator_RowEvArgName="PermisoExamenRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Línea_x0020_1" msprop:Generator_ColumnVarNameInTable="columnLínea_1" msprop:Generator_ColumnPropNameInRow="Línea_1" msprop:Generator_ColumnPropNameInTable="Línea_1Column" msprop:Generator_UserColumnName="Línea 1" type="xs:string" minOccurs="0" />
+              <xs:element name="Línea_x0020_2" msprop:Generator_ColumnVarNameInTable="columnLínea_2" msprop:Generator_ColumnPropNameInRow="Línea_2" msprop:Generator_ColumnPropNameInTable="Línea_2Column" msprop:Generator_UserColumnName="Línea 2" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

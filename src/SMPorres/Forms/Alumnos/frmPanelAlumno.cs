@@ -250,7 +250,7 @@ namespace SMPorres.Forms.Alumnos
 
         private string ObtenerConcepto(Int32 idPlanPago, Pago p)
         {
-            string concepto = (p.NroCuota == 0) ? PagosRepository.ObtenerConcepto(idPlanPago, p) 
+            string concepto = (p.NroCuota == 0) ? PagosRepository.ObtenerConcepto(idPlanPago, p)
                 : String.Format("Cuota Nº {0}", p.NroCuota);
             return concepto;
         }
@@ -556,7 +556,7 @@ namespace SMPorres.Forms.Alumnos
                 {
                     ShowError("Error al intentar intentar unificar la Matrícula\n");
                 }
-            }       
+            }
         }
 
         private void matrículaEn3CuotasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -590,6 +590,11 @@ namespace SMPorres.Forms.Alumnos
                     ShowError("Error al intentar intentar dividir la Matrícula\n");
                 }
             }
+        }
+
+        private void btnPermisoExámen_Click(object sender, EventArgs e)
+        {
+            using (var f = new frmPermisoDeExámen(_alumno, NombreCursoSeleccionado)) f.ShowDialog();
         }
     }
 }

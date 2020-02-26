@@ -80,5 +80,115 @@ namespace SMPorres.Repositories
             }
         }
 
+        public static short MáximaCuotaVencida
+        {
+            get
+            {
+                short c = 0;
+                using (var db = new SMPorresEntities())
+                {
+                    //if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota) > 0)
+                    if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).FirstOrDefault() != null )
+                    {
+                        c = db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota);
+                    }
+                    else
+                    {
+                        c = 1; //primer cuota
+                    }
+                }
+
+                return c;
+            }
+        }
+
+        public static Cuota PróximaCuota
+        {
+            get
+            {
+                DateTime hoy = DateTime.Today;
+                using (var db = new SMPorresEntities())
+                {
+
+                    //return db.Cuotas.Where(x => x.VtoCuota >= DateTime.Today).FirstOrDefault();
+                    var query = (from c in db.Cuotas
+                                 where c.VtoCuota >= DateTime.Today
+                                 orderby c.VtoCuota
+                                 select c)
+                                .FirstOrDefault();
+                    return query;
+                }
+            }
+        }
+
+        public static List<short> CuotasImpagas(Alumno alumno)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                List<short> c = new List<short>();
+                var query = (from pp in db.PlanesPago
+                             join p in db.Pagos on pp.Id equals p.IdPlanPago
+                             where pp.Estado == 1 && //Planes de pago activos
+                                 p.ImportePagado == null &&// Cuota impaga
+                                 p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
+                                 pp.IdAlumno == alumno.Id
+                             orderby p.NroCuota
+                             select p.NroCuota
+                             )
+                             .ToList();
+                foreach (var item in query)
+                {
+                    bool has = c.Any(x => x == item);
+                    if (!has)
+                    {
+                        c.Add(item);
+                    }
+                    
+                }
+                return c;
+            }
+        }
+
+        public static int CuotasVencidasImpagas(Alumno alumno)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                int c = 0;
+                var query = (from pp in db.PlanesPago
+                             join p in db.Pagos on pp.Id equals p.IdPlanPago
+                             where pp.Estado == 1 && //Planes de pago activos
+                                 p.ImportePagado == null &&// Cuota impaga
+                                 p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
+                                 //pp.Curso.Carrera.Id == idCarrera &&
+                                 pp.IdAlumno == alumno.Id
+                             orderby pp.Id
+                             select new PermisoExamen
+                             {
+                                 Situación = "s",
+                                 Texto = "t",
+                                 Cuotas = 0
+                             })
+                             .ToList();
+
+                var pexamen = (from t in query
+                               group t by new { t.Situación, t.Texto }
+                               into g
+                               select new PermisoExamen
+                               {
+                                   Situación = g.Key.Situación,
+                                   Texto = g.Key.Texto,
+                                   Cuotas = g.Count()
+                               });
+                foreach (var item in pexamen)
+                {
+                    c += item.Cuotas;
+                }
+                return c;
+
+            }
+        }
+
+
+
     }
 }
