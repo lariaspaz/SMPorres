@@ -594,7 +594,10 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnPermisoExámen_Click(object sender, EventArgs e)
         {
-            using (var f = new frmPermisoDeExámen(_alumno, NombreCursoSeleccionado)) f.ShowDialog();
+            if (dgvCursos.Rows.Count>0)
+            {
+                using (var f = new frmPermisoDeExámen(_alumno, NombreCursoSeleccionado)) f.ShowDialog();
+            }
         }
     }
 }

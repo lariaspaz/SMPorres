@@ -225,7 +225,7 @@
             this.btnPermisoExámen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPermisoExámen.Name = "btnPermisoExámen";
             this.btnPermisoExámen.Size = new System.Drawing.Size(23, 22);
-            this.btnPermisoExámen.Text = "toolStripButton1";
+            this.btnPermisoExámen.Text = "Permiso de Exámen";
             this.btnPermisoExámen.Click += new System.EventHandler(this.btnPermisoExámen_Click);
             // 
             // btnPagarCuota

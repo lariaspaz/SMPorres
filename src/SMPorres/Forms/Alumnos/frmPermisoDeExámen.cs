@@ -62,14 +62,14 @@ namespace SMPorres.Forms.Alumnos
         private string cargarPróxVencimiento()
         {
             string pv = "";
-            if (!string.IsNullOrEmpty(CuotasRepository.PróximaCuota.VtoCuota.ToShortDateString()))
+            if (CuotasRepository.PróximaCuota != null)
             {
                 pv += "El vencimiento de la siguiente cuota se realizará el día " +
                     CuotasRepository.PróximaCuota.VtoCuota.ToShortDateString().ToString() + ".";
             }
             else
             {
-                pv += "No tiene cuotas pendientes de abonar en este curso.";
+                pv += "No tiene cuotas próximas a vencer.";
             }
 
             return pv;
@@ -81,7 +81,10 @@ namespace SMPorres.Forms.Alumnos
             if (_cuotasimpagas <= 0) c = ", no registra cuotas adeudadas.";
             if (_cuotasimpagas > 0)
             {
-                c = ", se encuentra deudor en las cuotas ";
+                c = ", se encuentra deudor"; 
+                if (alumno.Sexo == "F") c += "a";
+                c += " en las cuotas ";
+
                 foreach (var item in CuotasRepository.CuotasImpagas(alumno))
                 {
                     c += item + ", ";

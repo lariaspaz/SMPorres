@@ -181,7 +181,7 @@ namespace SMPorres.Repositories
                                });
                 foreach (var item in pexamen)
                 {
-                    c += item.Cuotas;
+                    c += 1; // item.Cuotas;
                 }
                 return c;
 
