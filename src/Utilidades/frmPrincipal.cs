@@ -37,5 +37,14 @@ namespace Utilidades
                 f.ShowDialog();
             }
         }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (var f = new frmTestApiInscripción())
+            {
+                f.StartPosition = FormStartPosition.CenterScreen;
+                f.ShowDialog();
+            }
+        }
     }
 }
