@@ -134,15 +134,15 @@ namespace Utilidades
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var a = new Alumno
                 {
-                    IdTipoDocumento = 1,
-                    FechaNacimiento = new DateTime(2000, DateTime.Now.Month, DateTime.Now.Day),
-                    EMail = "test@gmail.com",
+                    IdTipoDocumento = (int) cbTipoDocumento.SelectedValue,
+                    FechaNacimiento = dateTimePicker1.Value.Date,
+                    EMail = txtEMail.Text,
                     NroDocumento = Int64.Parse(txtDocumento.Text),
                     Nombre = txtNombre.Text,
                     Apellido = txtApellido.Text,
-                    Direccion = "",
-                    Sexo = 'M',
-                    IdCarrera = 1
+                    Direccion = textBox1.Text,
+                    Sexo = (char) cbSexo.SelectedValue,
+                    IdCarrera = (int) cbCarrera.SelectedValue
                 };
                 var response = await _client.PostAsJsonAsync(qry, a);
                 var msg = response.EnsureSuccessStatusCode();
