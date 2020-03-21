@@ -39,16 +39,10 @@ namespace SMPorres.Forms.Pagos
 
         private void MostrarReporte(DataTable dt)
         {
-            //using (var reporte = new TotalPagos())
             using (var reporte = new InformeEconómico())
             {
                 string título = this.Text;
-                //string período = String.Format("Desde {0:dd/MM/yy} al {1:dd/MM/yy} ", dtDesde.Value.Date, dtHasta.Value.Date);
-                //string curso = cbCursos.Text;
-                //if (IdCurso == 0) curso = curso.Replace("(", "").Replace(")", "");
-                //string carrera = cbCarreras.Text;
-                //if (IdCarrera == 0) carrera = carrera.Replace("(", "").Replace(")", "");
-                var subTítulo = "Ciclo Lectivo " + cbCicloLectivo.Text; //período + " - " + curso + " - " + carrera;
+                var subTítulo = "Ciclo Lectivo " + cbCicloLectivo.Text;
                 reporte.Database.Tables["InformeEconómico"].SetDataSource(dt);
                 using (var f = new frmReporte(reporte, título, subTítulo)) f.ShowDialog();
             }
