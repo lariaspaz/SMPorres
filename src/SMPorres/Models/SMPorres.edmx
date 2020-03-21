@@ -637,6 +637,9 @@
           <Parameter Name="IdCurso" Type="int" Mode="In" />
           <Parameter Name="TipoBecado" Type="smallint" Mode="In" />
         </Function>
+        <Function Name="ConsInformeEconomico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CicloLectivo" Type="smallint" Mode="In" />
+        </Function>
         <Function Name="ConsTotalPagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Desde" Type="smalldatetime" Mode="In" />
           <Parameter Name="Hasta" Type="smalldatetime" Mode="In" />
@@ -953,6 +956,9 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
+          <FunctionImport Name="ConsInformeEconomico" ReturnType="Collection(SMPorres_DevModel.ConsInformeEconomico_Result)">
+            <Parameter Name="CicloLectivo" Mode="In" Type="Int16" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1664,6 +1670,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="ConsInformeEconomico_Result">
+          <Property Type="Int16" Name="nroCuota" Nullable="false" />
+          <Property Type="Decimal" Name="importeCuota" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="impCuotas" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="impPagoTer" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="impBeca" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="impRec" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="impPag" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="cantidadCuotas" Nullable="true" />
+          <Property Type="Int32" Name="cantidadCuotasPagadas" Nullable="false" />
+          <Property Type="Int32" Name="cantidadCuotasAdeudadas" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1992,6 +2010,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsInformeEconomico" FunctionName="SMPorres_DevModel.Store.ConsInformeEconomico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsInformeEconomico_Result">
+                <ScalarProperty Name="nroCuota" ColumnName="nroCuota" />
+                <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />
+                <ScalarProperty Name="impCuotas" ColumnName="impCuotas" />
+                <ScalarProperty Name="impPagoTer" ColumnName="impPagoTer" />
+                <ScalarProperty Name="impBeca" ColumnName="impBeca" />
+                <ScalarProperty Name="impRec" ColumnName="impRec" />
+                <ScalarProperty Name="impPag" ColumnName="impPag" />
+                <ScalarProperty Name="cantidadCuotas" ColumnName="cantidadCuotas" />
+                <ScalarProperty Name="cantidadCuotasPagadas" ColumnName="cantidadCuotasPagadas" />
+                <ScalarProperty Name="cantidadCuotasAdeudadas" ColumnName="cantidadCuotasAdeudadas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

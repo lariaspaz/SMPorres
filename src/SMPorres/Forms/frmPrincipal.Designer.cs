@@ -61,10 +61,12 @@
             this.asignarPermisosAGruposYUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblTerminal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblBaseDatos = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblExeVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblBaseDatos = new System.Windows.Forms.ToolStripStatusLabel();
+            this.económicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.financieroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -229,7 +231,9 @@
             this.informesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alumnosPorEstadoToolStripMenuItem,
             this.alumnosMorososToolStripMenuItem,
-            this.PagosTotalesToolStripMenuItem});
+            this.PagosTotalesToolStripMenuItem,
+            this.económicoToolStripMenuItem,
+            this.financieroToolStripMenuItem});
             this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
             this.informesToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.informesToolStripMenuItem.Text = "Informes";
@@ -328,6 +332,13 @@
             this.lblTerminal.Size = new System.Drawing.Size(122, 19);
             this.lblTerminal.Text = "toolStripStatusLabel1";
             // 
+            // lblBaseDatos
+            // 
+            this.lblBaseDatos.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.lblBaseDatos.Name = "lblBaseDatos";
+            this.lblBaseDatos.Size = new System.Drawing.Size(122, 19);
+            this.lblBaseDatos.Text = "toolStripStatusLabel1";
+            // 
             // lblUsuario
             // 
             this.lblUsuario.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
@@ -338,7 +349,7 @@
             // lblExeVersion
             // 
             this.lblExeVersion.Name = "lblExeVersion";
-            this.lblExeVersion.Size = new System.Drawing.Size(264, 19);
+            this.lblExeVersion.Size = new System.Drawing.Size(260, 19);
             this.lblExeVersion.Spring = true;
             this.lblExeVersion.Text = "toolStripStatusLabel2";
             this.lblExeVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -354,12 +365,18 @@
             this.label1.Size = new System.Drawing.Size(641, 122);
             this.label1.TabIndex = 5;
             // 
-            // lblBaseDatos
+            // económicoToolStripMenuItem
             // 
-            this.lblBaseDatos.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.lblBaseDatos.Name = "lblBaseDatos";
-            this.lblBaseDatos.Size = new System.Drawing.Size(122, 19);
-            this.lblBaseDatos.Text = "toolStripStatusLabel1";
+            this.económicoToolStripMenuItem.Name = "económicoToolStripMenuItem";
+            this.económicoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.económicoToolStripMenuItem.Text = "Económico";
+            this.económicoToolStripMenuItem.Click += new System.EventHandler(this.económicoToolStripMenuItem_Click);
+            // 
+            // financieroToolStripMenuItem
+            // 
+            this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
+            this.financieroToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.financieroToolStripMenuItem.Text = "Financiero";
             // 
             // frmPrincipal
             // 
@@ -422,6 +439,8 @@
         private System.Windows.Forms.ToolStripStatusLabel lblExeVersion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripStatusLabel lblBaseDatos;
+        private System.Windows.Forms.ToolStripMenuItem económicoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem financieroToolStripMenuItem;
     }
 }
 

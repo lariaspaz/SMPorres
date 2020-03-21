@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SMPorres.Forms;
 using SMPorres.Repositories;
 using SMPorres.Models;
+using SMPorres.Forms.Pagos;
 
 namespace SMPorres.Forms
 {
@@ -213,6 +214,11 @@ namespace SMPorres.Forms
         private void enviarEmailAAlumnosMorososToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //using (var f = new Alumnos.frmEmailAlumnosMorosos()) f.ShowDialog();
+        }
+
+        private void económicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new frmInfEconómico()) f.ShowDialog();
         }
     }
 }

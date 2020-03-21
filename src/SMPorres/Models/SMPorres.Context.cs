@@ -17,10 +17,10 @@ namespace SMPorres.Models
     
     public partial class SMPorresEntities : DbContext
     {
-        //public SMPorresEntities()
-        //    : base("name=SMPorresEntities")
-        //{
-        //}
+        public SMPorresEntities()
+            : base("name=SMPorresEntities")
+        {
+        }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -100,6 +100,15 @@ namespace SMPorres.Models
                 new ObjectParameter("MedPago", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsTotalPagos_Result>("ConsTotalPagos", desdeParameter, hastaParameter, idCarreraParameter, idCursoParameter, medPagoParameter);
+        }
+    
+        public virtual ObjectResult<ConsInformeEconomico_Result> ConsInformeEconomico(Nullable<short> cicloLectivo)
+        {
+            var cicloLectivoParameter = cicloLectivo.HasValue ?
+                new ObjectParameter("CicloLectivo", cicloLectivo) :
+                new ObjectParameter("CicloLectivo", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsInformeEconomico_Result>("ConsInformeEconomico", cicloLectivoParameter);
         }
     }
 }

@@ -37,5 +37,12 @@ namespace SMPorres.Repositories
             }
         }
 
+        public static List<ConsInformeEconomico_Result> ConsInformeEconómico(short CicloLectivo)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.ConsInformeEconomico(CicloLectivo).ToList();
+            }
+        }
     }
 }

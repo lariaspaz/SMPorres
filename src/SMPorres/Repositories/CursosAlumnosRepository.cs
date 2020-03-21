@@ -93,5 +93,16 @@ namespace SMPorres.Repositories
                 db.SaveChanges();
             }
         }
+
+        public static IEnumerable<short> ObtenerCiclosLectivos()
+        {
+            using (var db = new Models.SMPorresEntities())
+            {
+                var query = (from cc in db.CursosAlumnos
+                             select cc.CicloLectivo).Distinct();
+
+                return query.ToList();
+            }
+        }
     }
 }
