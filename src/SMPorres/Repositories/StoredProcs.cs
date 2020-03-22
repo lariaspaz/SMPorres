@@ -19,15 +19,6 @@ namespace SMPorres.Repositories
             }
         }
 
-        //public static List<ConsTotalPagos_Result> ConsTotalPagos(DateTime desde, DateTime hasta,
-        //    int idCarrera, int idCurso)
-        //{
-        //    using (var db = new SMPorresEntities())
-        //    {
-        //        return db.ConsTotalPagos(desde, hasta, idCarrera, idCurso).ToList();
-        //    }
-        //}
-
         public static List<ConsTotalPagos_Result> ConsTotalPagos(DateTime desde, DateTime hasta,
             int idCarrera, int idCurso, int IdMedioPago)
         {
@@ -42,6 +33,14 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 return db.ConsInformeEconomico(CicloLectivo).ToList();
+            }
+        }
+
+        public static List<ConsInformeFinanciero_Result> ConsInformeFinanciero(DateTime desde, DateTime hasta)
+        {
+            using (var db = new SMPorresEntities())
+            {
+                return db.ConsInformeFinanciero(desde, hasta).ToList();
             }
         }
     }

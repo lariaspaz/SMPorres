@@ -52,6 +52,8 @@
             this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PagosTotalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.económicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.financieroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,8 +67,6 @@
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblExeVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.económicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.financieroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -259,6 +259,20 @@
             this.PagosTotalesToolStripMenuItem.Text = "Totales de pagos";
             this.PagosTotalesToolStripMenuItem.Click += new System.EventHandler(this.PagosTotalesToolStripMenuItem_Click);
             // 
+            // económicoToolStripMenuItem
+            // 
+            this.económicoToolStripMenuItem.Name = "económicoToolStripMenuItem";
+            this.económicoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.económicoToolStripMenuItem.Text = "Económico";
+            this.económicoToolStripMenuItem.Click += new System.EventHandler(this.económicoToolStripMenuItem_Click);
+            // 
+            // financieroToolStripMenuItem
+            // 
+            this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
+            this.financieroToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.financieroToolStripMenuItem.Text = "Financiero";
+            this.financieroToolStripMenuItem.Click += new System.EventHandler(this.financieroToolStripMenuItem_Click);
+            // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -364,19 +378,6 @@
             this.label1.Padding = new System.Windows.Forms.Padding(0, 20, 20, 20);
             this.label1.Size = new System.Drawing.Size(641, 122);
             this.label1.TabIndex = 5;
-            // 
-            // económicoToolStripMenuItem
-            // 
-            this.económicoToolStripMenuItem.Name = "económicoToolStripMenuItem";
-            this.económicoToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.económicoToolStripMenuItem.Text = "Económico";
-            this.económicoToolStripMenuItem.Click += new System.EventHandler(this.económicoToolStripMenuItem_Click);
-            // 
-            // financieroToolStripMenuItem
-            // 
-            this.financieroToolStripMenuItem.Name = "financieroToolStripMenuItem";
-            this.financieroToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.financieroToolStripMenuItem.Text = "Financiero";
             // 
             // frmPrincipal
             // 

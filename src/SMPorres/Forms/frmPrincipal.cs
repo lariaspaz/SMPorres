@@ -220,5 +220,10 @@ namespace SMPorres.Forms
         {
             using (var f = new frmInfEconómico()) f.ShowDialog();
         }
+
+        private void financieroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new frmInfFinanciero()) f.ShowDialog();
+        }
     }
 }

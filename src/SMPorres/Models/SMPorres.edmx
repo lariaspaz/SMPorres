@@ -640,6 +640,10 @@
         <Function Name="ConsInformeEconomico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CicloLectivo" Type="smallint" Mode="In" />
         </Function>
+        <Function Name="ConsInformeFinanciero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="desde" Type="datetime" Mode="In" />
+          <Parameter Name="hasta" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="ConsTotalPagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Desde" Type="smalldatetime" Mode="In" />
           <Parameter Name="Hasta" Type="smalldatetime" Mode="In" />
@@ -957,7 +961,11 @@
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
           <FunctionImport Name="ConsInformeEconomico" ReturnType="Collection(SMPorres_DevModel.ConsInformeEconomico_Result)">
-            <Parameter Name="CicloLectivo" Mode="In" Type="Int16" />
+          <Parameter Name="CicloLectivo" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="ConsInformeFinanciero" ReturnType="Collection(SMPorres_DevModel.ConsInformeFinanciero_Result)">
+            <Parameter Name="desde" Mode="In" Type="DateTime" />
+            <Parameter Name="hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Usuario">
@@ -1682,6 +1690,16 @@
           <Property Type="Int32" Name="cantidadCuotasPagadas" Nullable="false" />
           <Property Type="Int32" Name="cantidadCuotasAdeudadas" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="ConsInformeFinanciero_Result">
+          <Property Type="String" Name="carrera" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="curso" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Cuotas" Nullable="true" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="pagoTermino" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Beca" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Recargo" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Pagado" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2023,6 +2041,20 @@
                 <ScalarProperty Name="cantidadCuotas" ColumnName="cantidadCuotas" />
                 <ScalarProperty Name="cantidadCuotasPagadas" ColumnName="cantidadCuotasPagadas" />
                 <ScalarProperty Name="cantidadCuotasAdeudadas" ColumnName="cantidadCuotasAdeudadas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsInformeFinanciero" FunctionName="SMPorres_DevModel.Store.ConsInformeFinanciero">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsInformeFinanciero_Result">
+                <ScalarProperty Name="carrera" ColumnName="carrera" />
+                <ScalarProperty Name="curso" ColumnName="curso" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="pagoTermino" ColumnName="pagoTermino" />
+                <ScalarProperty Name="Beca" ColumnName="Beca" />
+                <ScalarProperty Name="Recargo" ColumnName="Recargo" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

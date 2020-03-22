@@ -110,5 +110,18 @@ namespace SMPorres.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsInformeEconomico_Result>("ConsInformeEconomico", cicloLectivoParameter);
         }
+    
+        public virtual ObjectResult<ConsInformeFinanciero_Result> ConsInformeFinanciero(Nullable<System.DateTime> desde, Nullable<System.DateTime> hasta)
+        {
+            var desdeParameter = desde.HasValue ?
+                new ObjectParameter("desde", desde) :
+                new ObjectParameter("desde", typeof(System.DateTime));
+    
+            var hastaParameter = hasta.HasValue ?
+                new ObjectParameter("hasta", hasta) :
+                new ObjectParameter("hasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsInformeFinanciero_Result>("ConsInformeFinanciero", desdeParameter, hastaParameter);
+        }
     }
 }
