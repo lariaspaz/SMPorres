@@ -71,8 +71,7 @@ where
 			
 	ca.Id				=	c.IdCarrera		and
 	
-	cal.cicloLectivo	= 	2019
---(5245 filas afectadas)
+	cal.cicloLectivo	= 	@CicloLectivo
 
 update #pagos
 set medioPago = mp.Descripcion
@@ -84,7 +83,6 @@ where
 	po.Id			= p.pago	and
 
 	po.IdMedioPago	= mp.Id
---(4162 filas afectadas)
 
 select 
 	p.nroCuota,		
@@ -100,7 +98,7 @@ select
 into #temp
 from #pagos p
 where
-	cicloLectivo = 2019
+	cicloLectivo = @CicloLectivo
 group by nroCuota, importeCuota
 Order by nrocuota
 
