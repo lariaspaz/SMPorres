@@ -18,6 +18,7 @@ namespace EnvioEMail.Repositories
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
                                  p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
+                                 //p.FechaVto <= System.DateTime.Now  &&
                                  pp.Cursos.Carreras.Id == idCarrera
                              orderby pp.Id
                              select new AlumnoMoroso
