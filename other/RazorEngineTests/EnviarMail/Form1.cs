@@ -87,7 +87,7 @@ namespace EnviarMail
             {
                 var result = Engine.Razor.RunCompile(template, "deuda" + item.Id + DateTime.Now, typeof(Deuda), item, null);
                 //MessageBox.Show(result);
-                EnviarMailConZimbraBSE("Notificación de deuda - " + DateTime.Now, result, true);
+                //EnviarMailConZimbraBSE("Notificación de deuda - " + DateTime.Now, result, true);
                 MessageBox.Show("Mail enviado");
                 return;
             }

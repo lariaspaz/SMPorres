@@ -26,7 +26,7 @@ namespace BackupDB.Models
             var connStr = System.Configuration.ConfigurationManager.AppSettings["Connection"];
             if (String.IsNullOrEmpty(connStr))
             {
-                var model = "SMPorres";
+                //var model = "SMPorres";
                 string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\SMP\Cs";
                 string keyName = key.Substring(0, key.LastIndexOf("\\"));
                 string valueName = key.Substring(key.LastIndexOf("\\") + 1);

@@ -142,6 +142,18 @@
     <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pagos\frmInfEconómico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pagos\frmInfEconómico.Designer.cs">
+      <DependentUpon>frmInfEconómico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pagos\frmInfFinanciero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pagos\frmInfFinanciero.Designer.cs">
+      <DependentUpon>frmInfFinanciero.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pagos\frmInfPagosTotales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +319,12 @@
     <Compile Include="Models\ConsAlumnosMorosos_Result.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConsInformeEconomico_Result.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsInformeFinanciero_Result.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ConsTotalPagos_Result.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
@@ -416,6 +434,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsImpresiones.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Designs\InformeEconómico.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InformeEconómico.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Designs\InformeFinanciero.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InformeFinanciero.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Designs\InscripciónExamen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -513,6 +543,12 @@
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pagos\frmInfEconómico.resx">
+      <DependentUpon>frmInfEconómico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pagos\frmInfFinanciero.resx">
+      <DependentUpon>frmInfFinanciero.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagos\frmInfPagosTotales.resx">
       <DependentUpon>frmInfPagosTotales.cs</DependentUpon>
     </EmbeddedResource>
@@ -584,6 +620,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Web\frmActualizarDatos.resx">
       <DependentUpon>frmActualizarDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Designs\InformeEconómico.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InformeEconómico.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Designs\InformeFinanciero.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InformeFinanciero.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Designs\InscripciónExamen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
