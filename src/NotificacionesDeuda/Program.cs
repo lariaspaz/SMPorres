@@ -49,11 +49,12 @@ namespace NotificacionesDeuda
             DateTime hoy = System.DateTime.Now;
             Moroso AlumnoMoroso = new Moroso();
             AlumnoMoroso.Id = Convert.ToInt32(String.Format("{0:yy}{1:000}", hoy, hoy.DayOfYear)) + item.IdPago;
-            AlumnoMoroso.Nombre = item.Nombre + ", " + item.Nombre;
+            AlumnoMoroso.Nombre = item.Apellido + ", " + item.Nombre;
             AlumnoMoroso.Fecha = DateTime.Today.ToLongDateString();
             AlumnoMoroso.CantidadCuotas = item.CuotasAdeudadas;
             AlumnoMoroso.Carrera = item.Carrera;
-            AlumnoMoroso.Importe = item.ImporteDeuda.ToString();
+            //AlumnoMoroso.Importe = item.ImporteDeuda.ToString();
+            AlumnoMoroso.Importe = string.Format("{0:###,###.00}", item.ImporteDeuda);
             return AlumnoMoroso;
         }
     }

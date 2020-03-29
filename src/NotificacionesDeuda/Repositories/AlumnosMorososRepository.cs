@@ -15,11 +15,13 @@ namespace NotificacionesDeuda.Repositories
             {
                 var query = (from pp in db.PlanesPago
                              join p in db.Pagos on pp.Id equals p.IdPlanPago
+                             join ca in db.CursosAlumnos on new { pp.IdCurso, pp.IdAlumno } equals new { ca.IdCurso, ca.IdAlumno }  //Control que 
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
                                  p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
                                  //p.FechaVto <= System.DateTime.Now  &&
-                                 pp.Cursos.Carreras.Id == idCarrera
+                                 pp.Cursos.Carreras.Id == idCarrera &&
+                                 pp.Alumnos.EMail != ""
                              orderby pp.Id
                              select new AlumnoMoroso
                              {
