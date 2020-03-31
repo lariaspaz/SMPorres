@@ -30,7 +30,7 @@ namespace Consultas.Controllers
             var ca = new CursosAlumnosRepository().ObtenerCursoAlumnoPorId(id);
             result.Curso = String.Format("{0} de {1}", ca.Curso, ca.Carrera);
             result.Pagos = pagos;
-            result.PróximaCuota = pagos.FirstOrDefault(p => p.Fecha == null);
+            result.PróximaCuota = pagos.FirstOrDefault(p => p.Fecha == null) ?? null; //error Plan de pago c/ todas cuotas canceladas
             ViewBag.Cuotas = new object();
             if (result.PróximaCuota != null)
             {

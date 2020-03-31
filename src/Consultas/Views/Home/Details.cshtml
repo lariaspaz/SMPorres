@@ -9,10 +9,12 @@
             <mark class="p-2"><strong>Curso: @Model.Curso</strong></mark>
         </div>
     </div>
-
-    <div id="proxcuota" class="mt-4 col-7 border rounded p-3">
-        @{ Html.RenderPartial("MostrarPróximaCuota", Model.PróximaCuota); }
-    </div>
+    @if (Model.PróximaCuota != null)
+    {
+        <div id="proxcuota" class="mt-4 col-7 border rounded p-3">
+            @{ Html.RenderPartial("MostrarPróximaCuota", Model.PróximaCuota); }
+        </div>
+    }
 
     <div id="pagos" class="mt-4">
         <h3>Sus pagos</h3>
