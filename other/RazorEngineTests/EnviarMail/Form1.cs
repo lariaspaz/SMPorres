@@ -35,7 +35,9 @@ namespace EnviarMail
             using (SmtpClient client = new SmtpClient())
             {
                 client.Host = ConfigurationManager.AppSettings["host"];
-                client.Port = 25;
+                //client.Port = 25;
+                client.Port = 587;
+
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["user"],
@@ -46,6 +48,22 @@ namespace EnviarMail
                 mail.IsBodyHtml = isBodyHtml;
                 client.Send(mail);
             }
+
+            //using (MailMessage mail = new MailMessage("backupdb@smp.com.ar", "leoariaspaz@gmail.com"))
+            //using (SmtpClient client = new SmtpClient())
+            //{
+            //    //<network host = "smtpserver1" port = "25" userName = "username" password = "secret" defaultCredentials = "true" />
+            //    client.Host = "smtp.gmail.com";
+            //    client.Port = 587;
+            //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //    client.UseDefaultCredentials = false;
+            //    client.Credentials = new NetworkCredential("leoariaspaz@gmail.com", "mqxtcunruclxeszu");
+            //    client.EnableSsl = true;
+            //    mail.Subject = subject;
+            //    mail.Body = body;
+            //    mail.IsBodyHtml = isBodyHtml;
+            //    client.Send(mail);
+            //}
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -87,7 +105,7 @@ namespace EnviarMail
             {
                 var result = Engine.Razor.RunCompile(template, "deuda" + item.Id + DateTime.Now, typeof(Deuda), item, null);
                 //MessageBox.Show(result);
-                //EnviarMailConZimbraBSE("Notificación de deuda - " + DateTime.Now, result, true);
+                EnviarMailConZimbraBSE("Notificación de deuda - " + DateTime.Now, result, true);
                 MessageBox.Show("Mail enviado");
                 return;
             }
