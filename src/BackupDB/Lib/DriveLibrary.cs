@@ -33,7 +33,7 @@ namespace BackupDB.Lib
 
             string[] scopes = new[] {
                         DriveService.Scope.Drive,
-                        DriveService.Scope.DriveFile,
+                        DriveService.Scope.DriveFile
                 };
 
             string usr = "admin"; //debe ser usuario admin

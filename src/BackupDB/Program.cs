@@ -10,15 +10,6 @@ namespace BackupDB
     {
         static void Main(string[] args)
         {
-            //var c = new Controllers.DriveController();
-            //int i = 0;
-            //while (i < 3)
-            //{
-            //    if (i > 0) System.Threading.Thread.Sleep(TimeSpan.FromMinutes(1));
-            //    c.SubirDB();
-            //    i++;
-            //}
-
             new Controllers.DriveController().SubirDB();
         }
     }

@@ -37,7 +37,7 @@ namespace BackupDB.Lib
         private static string Comprimir(this string dbName)
         {
             var f = Path.GetFileName(dbName);
-            string archivo = Path.GetDirectoryName(dbName) + "\\" + 
+            string archivo = Path.GetDirectoryName(dbName) + "\\" +
                 Path.ChangeExtension(f, "zip");
             using (FileStream fs = new FileStream(archivo, FileMode.Create))
             using (ZipArchive arch = new ZipArchive(fs, ZipArchiveMode.Create))
@@ -47,11 +47,80 @@ namespace BackupDB.Lib
             return archivo;
         }
 
+        private static List<string> ObtenerRuta(DriveService svc)
+        {
+            var ruta = new List<string>();
+            var ids = BuscarCarpeta(svc, "name = 'Backup del sistema de Cobranzas' and trashed = false");
+            if (!ids.Any())
+            {
+                ids.Add(CrearCarpeta(svc, "Backup del sistema de Cobranzas", null));
+            }
+
+            string mes = "";
+            using (var db = new SMPorres())
+            {
+                DateTime fecha = db.Database.SqlQuery<DateTime>("select getdate()").FirstOrDefault();
+                mes = $"{fecha.Year}-{fecha.AddMonths(1).Month:00}";
+            }
+
+            var childs = new List<string>();
+            foreach (var item in ids)
+            {
+                childs = BuscarCarpeta(svc, $"'{item}' in parents and name = '{mes}'");
+            }
+
+            if (childs.Any())
+            {
+                ruta.Add(childs.FirstOrDefault());
+            }
+            else
+            {
+                ruta.Add(CrearCarpeta(svc, mes, ids));
+            }
+
+            return ruta;
+        }
+
+        private static List<string> BuscarCarpeta(DriveService svc, string filtro)
+        {
+            var result = new List<string>();
+            var reqList = svc.Files.List();
+            reqList.Q = "mimeType = 'application/vnd.google-apps.folder' and " + filtro;
+            do
+            {
+                var files = reqList.Execute();
+                foreach (var item in files.Files)
+                {
+                    result.Add(item.Id);
+                }
+                reqList.PageToken = files.NextPageToken;
+            } while (reqList.PageToken != null);
+            return result;
+        }
+
+        private static string CrearCarpeta(DriveService svc, string nombre, List<string> parents)
+        {
+            var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            {
+                Name = nombre,
+                MimeType = "application/vnd.google-apps.folder",
+                Parents = parents
+            };
+            var request = svc.Files.Create(fileMetadata);
+            request.Fields = "id";
+            var p1 = request.Execute();
+            return p1.Id;
+        }
+
         public static string UploadDB(DriveService svc)
         {
             var dbFile = DBFile;
             var zipFile = dbFile.Comprimir();
-            var fileMetadata = new Google.Apis.Drive.v3.Data.File() { Name = Path.GetFileName(zipFile) };
+            var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            {
+                Name = Path.GetFileName(zipFile),
+                Parents = ObtenerRuta(svc)
+            };
             FilesResource.CreateMediaUpload request;
             using (var stream = new FileStream(zipFile, FileMode.Open))
             {
