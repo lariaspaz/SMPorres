@@ -12,12 +12,18 @@ namespace SMPorres.Repositories
     {
         internal static void ActualizarCuotas(int idCurso, decimal importe, bool esMatrícula)
         {
+            var ciclo = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
             using (var db = new SMPorresEntities())
             {
                 var pagos = from p in db.Pagos
-                            where p.PlanPago.IdCurso == idCurso &&
-                                  !p.Fecha.HasValue
+                            join pp in db.PlanesPago on p.IdPlanPago equals pp.Id
+                            join ca in db.CursosAlumnos on
+                                new { pp.IdCurso, pp.IdAlumno } equals new { ca.IdCurso, ca.IdAlumno }
+                            where !p.Fecha.HasValue &&
+                                    pp.IdCurso == idCurso &&
+                                    ca.CicloLectivo == ciclo
                             select p;
+                db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
                 if (esMatrícula)
                 {
                     pagos = pagos.Where(m => m.NroCuota == 0);
@@ -45,7 +51,7 @@ namespace SMPorres.Repositories
                          from mp in pmp.DefaultIfEmpty()
                          join ba in db.BecasAlumnos on p.IdBecaAlumno equals ba.Id into pba
                          from ba in pba.DefaultIfEmpty()
-                         where p.IdPlanPago == idPlanPago   && p.Estado != (short)EstadoPago.Baja
+                         where p.IdPlanPago == idPlanPago && p.Estado != (short)EstadoPago.Baja
                          select new
                          {
                              p.Id,
@@ -119,7 +125,7 @@ namespace SMPorres.Repositories
                 pago.FechaVto = new DateTime(cc, 12, 31);
                 int c = PagosRepository.CantidadCuotasMatrícula(pago.IdPlanPago);
                 var curso = CursosRepository.ObtenerCursoPorId(pago.PlanPago.Curso.Id);
-                if (fechaCompromiso <= curso.FechaVencDescuento && c==1) //EsMatriculaSinCuotas(pago))
+                if (fechaCompromiso <= curso.FechaVencDescuento && c == 1) //EsMatriculaSinCuotas(pago))
                 {
                     decimal descuentoMatrícula = Convert.ToDecimal(curso.DescuentoMatricula);
                     pago.ImportePagoTermino = descuentoMatrícula;
@@ -344,7 +350,7 @@ namespace SMPorres.Repositories
                     //GeneraNuevaCuota(idPlanPago, 0, cGen.FirstOrDefault().PlanPago.Curso);
                     GeneraNuevaCuotaDeMatricula(idPlanPago, 0, importeCuota);
                 }
-                
+
             }
         }
 
@@ -367,7 +373,7 @@ namespace SMPorres.Repositories
                     pa.Estado = (byte)EstadoPago.Baja;
                     db.SaveChanges();
                 }
-                
+
             }
         }
 
@@ -382,7 +388,7 @@ namespace SMPorres.Repositories
                              where
                                  a.NroDocumento == nroDocumento &&
                                  pp.Estado == (short)EstadoPlanPago.Vigente &&
-                                 c.VtoCuota <= Configuration.CurrentDate    &&
+                                 c.VtoCuota <= Configuration.CurrentDate &&
                                  p.ImportePagado == null //Impago
                              select p).ToList()
                         .Select(
@@ -394,19 +400,19 @@ namespace SMPorres.Repositories
                                 ImportePagado = pa.ImportePagado
                             });
                 return pagos.ToList();
-            } 
-                       
+            }
+
         }
-        
+
         public static int CantidadCuotasMatrícula(decimal idPlanPago)
         {
             int cc = 0;
             using (var db = new SMPorresEntities())
             {
-                cc = db.Pagos.Where(x => x.IdPlanPago == idPlanPago && x.NroCuota == 0 
-                                    && x.Estado != (short)EstadoPago.Baja 
+                cc = db.Pagos.Where(x => x.IdPlanPago == idPlanPago && x.NroCuota == 0
+                                    && x.Estado != (short)EstadoPago.Baja
                                     && x.Estado != (short)EstadoPago.Pagado)
-                    .Count();                
+                    .Count();
             }
             return cc;
         }
@@ -416,9 +422,9 @@ namespace SMPorres.Repositories
             string concepto = "";
             using (var db = new SMPorresEntities())
             {
-                var cuotas = db.Pagos.Where(x => x.IdPlanPago == idPlanPago 
-                                            && x.NroCuota == 0 
-                                            && x.Estado !=(short)EstadoPago.Baja)
+                var cuotas = db.Pagos.Where(x => x.IdPlanPago == idPlanPago
+                                            && x.NroCuota == 0
+                                            && x.Estado != (short)EstadoPago.Baja)
                                             .OrderBy(x => x.Id);
                 if (cuotas.Count() == 1)
                 {
@@ -436,7 +442,7 @@ namespace SMPorres.Repositories
                         }
                     }
                 }
-                
+
             }
             return concepto;
         }

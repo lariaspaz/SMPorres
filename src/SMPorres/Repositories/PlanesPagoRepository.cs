@@ -90,16 +90,16 @@ namespace SMPorres.Repositories
                     pm.IdPlanPago = id;
                     pm.NroCuota = 0;
                     pm.ImporteCuota = curso.ImporteMatricula;
-                    pm.Estado = (byte) EstadoPago.Impago;
+                    pm.Estado = (byte)EstadoPago.Impago;
                     db.Pagos.Add(pm);
                     db.SaveChanges();
 
                     //leer modalidad y obtener minCuota y maxCuota
                     short minC = CursosRepository.ObtieneMinCuota(modalidad);
                     short maxC = CursosRepository.ObtieneMaxCuota(modalidad);
-                    if(minC != maxC)
+                    if (minC != maxC)
                     {
-                    //for (short i = 0; i <= Configuration.MaxCuotas; i++)
+                        //for (short i = 0; i <= Configuration.MaxCuotas; i++)
                         for (short i = minC; i <= maxC; i++)
                         {
                             var p = new Pago();
@@ -137,9 +137,16 @@ namespace SMPorres.Repositories
 
         public static void Actualizar(int idCurso, decimal importeCuota)
         {
+            var ciclo = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
             using (var db = new SMPorresEntities())
             {
-                var planes = from p in db.PlanesPago where p.IdCurso == idCurso && p.Estado == (short)EstadoPlanPago.Vigente select p;
+                var planes = from pp in db.PlanesPago
+                             join ca in db.CursosAlumnos on 
+                                new { pp.IdCurso, pp.IdAlumno } equals new { ca.IdCurso, ca.IdAlumno }
+                             where pp.IdCurso == idCurso &&
+                                    pp.Estado == (short)EstadoPlanPago.Vigente &&
+                                    ca.CicloLectivo == ciclo
+                             select pp;
                 foreach (var p in planes)
                 {
                     p.ImporteCuota = importeCuota;
@@ -180,17 +187,17 @@ namespace SMPorres.Repositories
 
                 if (modActual == anual)
                 {
-                    if(modalidad == primerCuatrimestre & !PagosRegistrados(idPlanPago, segundoCuatrimestre))
+                    if (modalidad == primerCuatrimestre & !PagosRegistrados(idPlanPago, segundoCuatrimestre))
                     {
                         EliminaCuotas(segundoCuatrimestre, idPlanPago);
                         actualizaCuotas = true;
                     }
-                    if(modalidad == segundoCuatrimestre & !PagosRegistrados(idPlanPago, primerCuatrimestre))
+                    if (modalidad == segundoCuatrimestre & !PagosRegistrados(idPlanPago, primerCuatrimestre))
                     {
                         EliminaCuotas(primerCuatrimestre, idPlanPago);
                         actualizaCuotas = true;
                     }
-                    if(modalidad == sinCursado & !PagosRegistrados(idPlanPago, anual))
+                    if (modalidad == sinCursado & !PagosRegistrados(idPlanPago, anual))
                     {
                         EliminaCuotas(anual, idPlanPago);
                         actualizaCuotas = true;
@@ -206,7 +213,7 @@ namespace SMPorres.Repositories
                     }
                     if (modalidad == segundoCuatrimestre & !PagosRegistrados(idPlanPago, primerCuatrimestre))
                     {
-                        EliminaCuotas(primerCuatrimestre, idPlanPago); 
+                        EliminaCuotas(primerCuatrimestre, idPlanPago);
                         GeneraCuotas(segundoCuatrimestre, idPlanPago, curso);
                         actualizaCuotas = true;
                     }
@@ -263,7 +270,7 @@ namespace SMPorres.Repositories
                     db.SaveChanges();
 
                     PlanesPagoRepository.ActualizarNroyCantidadCuotas(idPlanPago, modalidad);
-                }                
+                }
             }
         }
 

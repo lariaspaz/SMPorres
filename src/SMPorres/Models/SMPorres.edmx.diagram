@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0f3b513c0d05411285ef10c4b15716e2" Name="Diagram1" ZoomLevel="81" SnapToGrid="true">
+      <Diagram DiagramId="0f3b513c0d05411285ef10c4b15716e2" Name="Diagram1" ZoomLevel="114" SnapToGrid="true">
         <EntityTypeShape EntityType="SMPorres_DevModel.Usuario" Width="1.5" PointX="7.25" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Alumno" Width="1.625" PointX="7.5" PointY="0.5" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Barrio" Width="1.5" PointX="4.875" PointY="4.375" />
@@ -28,7 +28,7 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="SMPorres_DevModel.TipoDocumento" Width="1.5" PointX="5.25" PointY="0.5" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Alumnos_TiposDocumento" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.CursosAlumno" Width="1.5" PointX="9.625" PointY="0.5" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.CursosAlumno" Width="1.5" PointX="11.75" PointY="0.5" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Alumnos" />
         <EntityTypeShape EntityType="SMPorres_DevModel.PlanPago" Width="1.5" PointX="7.5" PointY="6" />
         <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Alumnos" ></AssociationConnector>
@@ -46,16 +46,17 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_UsuariosItemsMenu_ItemsMenu" />
         <AssociationConnector Association="SMPorres_DevModel.FK_UsuariosItemsMenu_Usuarios" />
         <EntityTypeShape EntityType="SMPorres_DevModel.MedioPago" Width="1.5" PointX="11.75" PointY="10.625" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.BecaAlumno" Width="1.5" PointX="9.625" PointY="6.25" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.BecaAlumno" Width="1.5" PointX="9.625" PointY="6.375" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_BecasAlumnos_Alumnos" ></AssociationConnector>
         <EntityTypeShape EntityType="SMPorres_DevModel.RendicionBSE" Width="1.5" PointX="9.625" PointY="16" />
         <EntityTypeShape EntityType="SMPorres_DevModel.CabeceraArchivo" Width="1.5" PointX="7.375" PointY="16" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CabecerasArchivos_Usuarios" />
         <AssociationConnector Association="SMPorres_DevModel.FK_RendicionesBSE_CabecerasArchivos" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="9.625" PointY="2.875" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Curso" Width="1.5" PointX="9.625" PointY="2.125" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Cursos_Carreras" />
         <AssociationConnector Association="SMPorres_DevModel.FK_CursosAlumnos_Cursos" />
-        <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" />
+        <AssociationConnector Association="SMPorres_DevModel.FK_PlanesPago_Cursos" ManuallyRouted="false" >
+        </AssociationConnector>
         <EntityTypeShape EntityType="SMPorres_DevModel.Pago" Width="1.5" PointX="9.625" PointY="9" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_BecasAlumnos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_MediosPago" />
