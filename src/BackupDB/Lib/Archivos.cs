@@ -60,7 +60,7 @@ namespace BackupDB.Lib
             using (var db = new SMPorres())
             {
                 DateTime fecha = db.Database.SqlQuery<DateTime>("select getdate()").FirstOrDefault();
-                mes = $"{fecha.Year}-{fecha.AddMonths(1).Month:00}";
+                mes = $"{fecha.Year}-{fecha.Month:00}";
             }
 
             var childs = new List<string>();
