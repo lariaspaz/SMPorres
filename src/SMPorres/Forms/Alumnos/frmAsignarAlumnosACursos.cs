@@ -87,26 +87,40 @@ namespace SMPorres.Forms.Alumnos
 
         private void ConsultarAlumnos()
         {
+            if (!this.Visible) return;
+
             var asignados = from a in CursosAlumnosRepository.ObtenerAlumnosPorCursoId(IdCurso)
-                            select new Alumno {
+                            select new Alumno
+                            {
                                 Id = a.Id,
-                                Nombre = String.Format("{0} {1} - {2} {3}", a.TipoDocumento.Descripcion, 
+                                Nombre = String.Format("{0} {1} - {2} {3}", a.TipoDocumento.Descripcion,
                                             a.NroDocumento, a.Nombre, a.Apellido)
                             };
-            lbAsignados.DataSource = asignados.ToList();
-            lbAsignados.ValueMember = "Id";
-            lbAsignados.DisplayMember = "Nombre";
+
+            lbAsignados.BeginUpdate();
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                lbAsignados.DataSource = asignados.ToList();
+                lbAsignados.ValueMember = "Id";
+                lbAsignados.DisplayMember = "Nombre";
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+                lbAsignados.EndUpdate();
+            }
             btnQuitar.Enabled = asignados.Any();
 
             _sinAsignar = from a in AlumnosRepository.ObtenerAlumnos()
-                              where a.Estado == (byte)EstadoAlumno.Activo &&
-                                    !asignados.Any(a2 => a2.Id == a.Id)
-                              select new Alumno
-                              {
-                                  Id = a.Id,
-                                  Nombre = String.Format("{0} {1} - {2} {3}", a.TipoDocumento.Descripcion,
-                                            a.NroDocumento, a.Nombre, a.Apellido)
-                              };
+                          where a.Estado == (byte)EstadoAlumno.Activo &&
+                                !asignados.Any(a2 => a2.Id == a.Id)
+                          select new Alumno
+                          {
+                              Id = a.Id,
+                              Nombre = String.Format("{0} {1} - {2} {3}", a.TipoDocumento.Descripcion,
+                                        a.NroDocumento, a.Nombre, a.Apellido)
+                          };
 
             //lbSinAsignar.DataSource = _sinAsignar.ToList();
             //lbSinAsignar.DisplayMember = "Nombre";
@@ -174,21 +188,36 @@ namespace SMPorres.Forms.Alumnos
 
         private void Filtrar()
         {
-            
+            if (_sinAsignar == null) return;
             var data = _sinAsignar;
             if (txtBuscar.Text != _leyenda)
             {
                 data = _sinAsignar.Where(t => t.Nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
             }
-            lbSinAsignar.DataSource = data.ToList();
-            lbSinAsignar.DisplayMember = "Nombre";
-            lbSinAsignar.ValueMember = "Id";
+            lbSinAsignar.BeginUpdate();
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                lbSinAsignar.DataSource = data.ToList();
+                lbSinAsignar.DisplayMember = "Nombre";
+                lbSinAsignar.ValueMember = "Id";
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+                lbSinAsignar.EndUpdate();
+            }
             btnAsignar.Enabled = data.Any();
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             Filtrar();
+        }
+
+        private void frmAsignarAlumnosACursos_Shown(object sender, EventArgs e)
+        {
+            ConsultarAlumnos();
         }
     }
 }

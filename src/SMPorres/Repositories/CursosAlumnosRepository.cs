@@ -11,11 +11,16 @@ namespace SMPorres.Repositories
     {
         internal static IList<Alumno> ObtenerAlumnosPorCursoId(int idCurso)
         {
+            var ciclo = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
             using (var db = new SMPorresEntities())
             {
+                db.Database.Log = s => System.Diagnostics.Debug.Print(s);
                 var query = (from a in db.Alumnos
                              join ca in db.CursosAlumnos on a.Id equals ca.IdAlumno
-                             where a.Estado == 1 && ca.IdCurso == idCurso
+                             where 
+                                a.Estado == 1 && 
+                                ca.IdCurso == idCurso &&
+                                ca.CicloLectivo == ciclo
                              select a)
                              .ToList()
                                 .Select(

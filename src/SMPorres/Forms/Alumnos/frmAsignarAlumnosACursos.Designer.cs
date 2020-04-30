@@ -302,6 +302,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmAsignarAlumnosACursos";
             this.Text = "Asignar alumnos a cursos";
+            this.Shown += new System.EventHandler(this.frmAsignarAlumnosACursos_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
