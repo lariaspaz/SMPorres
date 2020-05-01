@@ -225,5 +225,10 @@ namespace SMPorres.Forms
         {
             using (var f = new frmInfFinanciero()) f.ShowDialog();
         }
+
+        private void tasasPorMoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new TasasMora.frmListado()) f.ShowDialog();
+        }
     }
 }

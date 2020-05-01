@@ -47,7 +47,6 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.asignarAlumnosACursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.configuraciónGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosPorEstadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnosMorososToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +66,9 @@
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblExeVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
+            this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tasasPorMoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +79,8 @@
             this.archivoToolStripMenuItem,
             this.ediciónToolStripMenuItem,
             this.informesToolStripMenuItem,
-            this.seguridadToolStripMenuItem});
+            this.seguridadToolStripMenuItem,
+            this.configuraciónToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(641, 24);
@@ -142,8 +145,7 @@
             this.toolStripMenuItem6,
             this.toolStripMenuItem1,
             this.asignarAlumnosACursosToolStripMenuItem,
-            this.toolStripMenuItem3,
-            this.configuraciónGeneralToolStripMenuItem});
+            this.toolStripMenuItem3});
             this.ediciónToolStripMenuItem.Name = "ediciónToolStripMenuItem";
             this.ediciónToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.ediciónToolStripMenuItem.Text = "Edición";
@@ -218,13 +220,6 @@
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(206, 6);
-            // 
-            // configuraciónGeneralToolStripMenuItem
-            // 
-            this.configuraciónGeneralToolStripMenuItem.Name = "configuraciónGeneralToolStripMenuItem";
-            this.configuraciónGeneralToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.configuraciónGeneralToolStripMenuItem.Text = "Configuración general";
-            this.configuraciónGeneralToolStripMenuItem.Click += new System.EventHandler(this.configuraciónGeneralToolStripMenuItem_Click);
             // 
             // informesToolStripMenuItem
             // 
@@ -379,6 +374,29 @@
             this.label1.Size = new System.Drawing.Size(641, 122);
             this.label1.TabIndex = 5;
             // 
+            // configuraciónToolStripMenuItem
+            // 
+            this.configuraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tasasPorMoraToolStripMenuItem,
+            this.configuraciónGeneralToolStripMenuItem});
+            this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
+            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.configuraciónToolStripMenuItem.Text = "Configuración";
+            // 
+            // tasasPorMoraToolStripMenuItem
+            // 
+            this.tasasPorMoraToolStripMenuItem.Name = "tasasPorMoraToolStripMenuItem";
+            this.tasasPorMoraToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.tasasPorMoraToolStripMenuItem.Text = "Tasas por mora";
+            this.tasasPorMoraToolStripMenuItem.Click += new System.EventHandler(this.tasasPorMoraToolStripMenuItem_Click);
+            // 
+            // configuraciónGeneralToolStripMenuItem
+            // 
+            this.configuraciónGeneralToolStripMenuItem.Name = "configuraciónGeneralToolStripMenuItem";
+            this.configuraciónGeneralToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.configuraciónGeneralToolStripMenuItem.Text = "Configuración general";
+            this.configuraciónGeneralToolStripMenuItem.Click += new System.EventHandler(this.configuraciónGeneralToolStripMenuItem_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -419,7 +437,6 @@
         private System.Windows.Forms.ToolStripMenuItem asignarUsuariosAGruposToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem panelDeAlumnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cuotasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem configuraciónGeneralToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarPermisosAGruposYUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
@@ -442,6 +459,9 @@
         private System.Windows.Forms.ToolStripStatusLabel lblBaseDatos;
         private System.Windows.Forms.ToolStripMenuItem económicoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem financieroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónGeneralToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tasasPorMoraToolStripMenuItem;
     }
 }
 

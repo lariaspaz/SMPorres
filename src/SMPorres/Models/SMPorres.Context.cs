@@ -51,6 +51,7 @@ namespace SMPorres.Models
         public virtual DbSet<CabeceraArchivo> CabecerasArchivos { get; set; }
         public virtual DbSet<Curso> Cursos { get; set; }
         public virtual DbSet<Pago> Pagos { get; set; }
+        public virtual DbSet<TasaMora> TasasMora { get; set; }
     
         public virtual ObjectResult<ConsAlumnosMorosos_Result> ConsAlumnosMorosos(Nullable<System.DateTime> fecha, Nullable<short> tipo, Nullable<int> idCarrera, Nullable<int> idCurso, Nullable<short> tipoBecado)
         {

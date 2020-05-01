@@ -63,6 +63,7 @@
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Pagos" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_PlanesPago" />
         <AssociationConnector Association="SMPorres_DevModel.FK_Pagos_Usuarios" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.TasaMora" Width="1.5" PointX="11.75" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

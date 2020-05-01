@@ -142,6 +142,18 @@
     <Compile Include="Forms\Carreras\frmEdición.Designer.cs">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TasasMora\frmEdición.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TasasMora\frmEdición.Designer.cs">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TasasMora\frmListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TasasMora\frmListado.Designer.cs">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pagos\frmInfEconómico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +346,8 @@
     <Compile Include="Models\Curso.Ext.cs" />
     <Compile Include="Models\EstadoCurso.cs" />
     <Compile Include="Models\EstadoPago.cs" />
+    <Compile Include="Models\EstadoTasaMora.cs" />
+    <Compile Include="Models\TasaMora.Ext.cs" />
     <Compile Include="Models\ModalidadCursado.cs" />
     <Compile Include="Models\Pago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
@@ -415,6 +429,9 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SMPorres.Ext.cs" />
+    <Compile Include="Models\TasaMora.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoBeca.cs" />
     <Compile Include="Models\TipoDocumento.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
@@ -491,6 +508,7 @@
     <Compile Include="Repositories\PlanesPagoRepository.cs" />
     <Compile Include="Repositories\RendicionBSERepository.cs" />
     <Compile Include="Repositories\StoredProcs.cs" />
+    <Compile Include="Repositories\TasasMoraRepository.cs" />
     <Compile Include="Repositories\TiposDocumentoRepository.cs" />
     <Compile Include="Repositories\BarriosRepository.cs" />
     <Compile Include="Repositories\DepartamentosRepository.cs" />
@@ -542,6 +560,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Carreras\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TasasMora\frmEdición.resx">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TasasMora\frmListado.resx">
+      <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pagos\frmInfEconómico.resx">
       <DependentUpon>frmInfEconómico.cs</DependentUpon>
