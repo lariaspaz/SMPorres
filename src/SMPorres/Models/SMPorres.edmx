@@ -13,13 +13,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Apellido" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="NroDocumento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="smalldatetime" Nullable="false" />
+          <Property Name="NroDocumento" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
           <Property Name="EMail" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdDomicilio" Type="int" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
-          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Contraseña" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Barrios">
@@ -191,8 +191,8 @@
           <Property Name="IdPagoAsiento" Type="int" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="FechaGrabacion" Type="datetime" />
-          <Property Name="PorcRecargo" Type="float" />
           <Property Name="ImporteBeca" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PorcRecargo" Type="float" />
           <Property Name="FechaVto" Type="datetime" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
           <Property Name="Estado" Type="tinyint" />
@@ -647,6 +647,13 @@
           <Parameter Name="IdCurso" Type="int" Mode="In" />
           <Parameter Name="TipoBecado" Type="smallint" Mode="In" />
         </Function>
+        <Function Name="ConsInformeEconomico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CicloLectivo" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="ConsInformeFinanciero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="desde" Type="datetime" Mode="In" />
+          <Parameter Name="hasta" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="ConsTotalPagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Desde" Type="smalldatetime" Mode="In" />
           <Parameter Name="Hasta" Type="smalldatetime" Mode="In" />
@@ -964,14 +971,14 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Pago" EntitySet="Pagos" />
           </AssociationSet>
+          <EntitySet Name="TasasMora" EntityType="SMPorres_DevModel.TasaMora" />
           <FunctionImport Name="ConsInformeEconomico" ReturnType="Collection(SMPorres_DevModel.ConsInformeEconomico_Result)">
-          <Parameter Name="CicloLectivo" Mode="In" Type="Int16" />
+            <Parameter Name="CicloLectivo" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="ConsInformeFinanciero" ReturnType="Collection(SMPorres_DevModel.ConsInformeFinanciero_Result)">
             <Parameter Name="desde" Mode="In" Type="DateTime" />
             <Parameter Name="hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="TasasMora" EntityType="SMPorres_DevModel.TasaMora" />
           </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -1000,7 +1007,7 @@
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="NroDocumento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EMail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IdDomicilio" Type="Int32" Nullable="true" />
@@ -1683,15 +1690,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TasaMora">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Tasa" Type="Double" Nullable="false" />
+          <Property Name="Desde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="Int16" Nullable="false" />
+        </EntityType>
         <ComplexType Name="ConsInformeEconomico_Result">
+          <Property Type="String" Name="carrera" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="curso" Nullable="true" MaxLength="50" />
           <Property Type="Int16" Name="nroCuota" Nullable="false" />
           <Property Type="Decimal" Name="importeCuota" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="impCuotas" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="impPagoTer" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="impBeca" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="impRec" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="impPag" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Int32" Name="cantidadCuotas" Nullable="true" />
+          <Property Type="Decimal" Name="impCuotas" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="impPagoTer" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="impBeca" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="impRec" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="impPag" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="cantidadCuotas" Nullable="false" />
           <Property Type="Int32" Name="cantidadCuotasPagadas" Nullable="false" />
           <Property Type="Int32" Name="cantidadCuotasAdeudadas" Nullable="false" />
         </ComplexType>
@@ -1705,16 +1724,6 @@
           <Property Type="Decimal" Name="Recargo" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="Pagado" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
-        <EntityType Name="TasaMora">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Tasa" Type="Double" Nullable="false" />
-          <Property Name="Desde" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Hasta" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Estado" Type="Int16" Nullable="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2054,6 +2063,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsInformeEconomico" FunctionName="SMPorres_DevModel.Store.ConsInformeEconomico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsInformeEconomico_Result">
+                <ScalarProperty Name="carrera" ColumnName="carrera" />
+                <ScalarProperty Name="curso" ColumnName="curso" />
+                <ScalarProperty Name="nroCuota" ColumnName="nroCuota" />
+                <ScalarProperty Name="importeCuota" ColumnName="importeCuota" />
+                <ScalarProperty Name="impCuotas" ColumnName="impCuotas" />
+                <ScalarProperty Name="impPagoTer" ColumnName="impPagoTer" />
+                <ScalarProperty Name="impBeca" ColumnName="impBeca" />
+                <ScalarProperty Name="impRec" ColumnName="impRec" />
+                <ScalarProperty Name="impPag" ColumnName="impPag" />
+                <ScalarProperty Name="cantidadCuotas" ColumnName="cantidadCuotas" />
+                <ScalarProperty Name="cantidadCuotasPagadas" ColumnName="cantidadCuotasPagadas" />
+                <ScalarProperty Name="cantidadCuotasAdeudadas" ColumnName="cantidadCuotasAdeudadas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConsInformeFinanciero" FunctionName="SMPorres_DevModel.Store.ConsInformeFinanciero">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMPorres_DevModel.ConsInformeFinanciero_Result">
+                <ScalarProperty Name="carrera" ColumnName="carrera" />
+                <ScalarProperty Name="curso" ColumnName="curso" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="pagoTermino" ColumnName="pagoTermino" />
+                <ScalarProperty Name="Beca" ColumnName="Beca" />
+                <ScalarProperty Name="Recargo" ColumnName="Recargo" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

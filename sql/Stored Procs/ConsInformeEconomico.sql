@@ -1,7 +1,10 @@
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+--SET FMTONLY OFF
+--GO
 -- ==========================================================================================
 -- Author:		Joaquín Hernán Castillo
 -- Create date: 2020-03-15
@@ -16,20 +19,35 @@ SET NOCOUNT ON
 SET FMTONLY OFF
 
 create table #pagos(
-	planPago			int				not null,
-	pago				int				not null,
-	carrera				varchar(255)	not null,
-	curso				varchar(50)		not null,
-	nroCuota			smallint		not null,
-	importeCuota		numeric(18,2)	not null,
-	importePagoTermino	numeric(18,2)	not null,
-	importeBeca			numeric(18,2)	not null,
-	importeRecargo		numeric(18,2)	not null,
-	importePagado		numeric(18,2)	not null,
-	medioPago			varchar(50)		not null,
-	fechaVto			datetime		not null,
-	fechaPago			datetime		not null,
-	cicloLectivo		smallint		not null
+	planPago			int				null,
+	pago				int				null,
+	carrera				varchar(255)	null,
+	curso				varchar(50)		null,
+	nroCuota			smallint		null,
+	importeCuota		numeric(18,2)	null,
+	importePagoTermino	numeric(18,2)	null,
+	importeBeca			numeric(18,2)	null,
+	importeRecargo		numeric(18,2)	null,
+	importePagado		numeric(18,2)	null,
+	medioPago			varchar(50)		null,
+	fechaVto			datetime		null,
+	fechaPago			datetime		null,
+	cicloLectivo		smallint		null
+)
+
+create table #salida(
+	carrera					varchar(255)	null,
+	curso					varchar(50)		null,
+	nroCuota				smallint		not null,		
+	importeCuota			numeric(18,2)	not null,
+	impCuotas				numeric(18,2)	not null,
+	impPagoTer				numeric(18,2)	not null,
+	impBeca					numeric(18,2)	not null,
+	impRec					numeric(18,2)	not null,
+	impPag					numeric(18,2)	not null,
+	cantidadCuotas			int				not null,
+	cantidadCuotasPagadas	int				not null,
+	cantidadCuotasAdeudadas int				not null
 )
 
 insert into #pagos(
@@ -53,77 +71,122 @@ select
 	MedioPago = '',
 	convert(varchar, isnull(p.FechaVto,''),103),
 	FechaPago= convert(varchar, isnull(p.FechaGrabacion,''), 103),
-	cal.cicloLectivo
+	cicloLectivo = 2020
 from 
 	pagos p,
 	PlanesPago pp,
 	Cursos c,
-	Carreras ca,	
-	CursosAlumnos cal
+	Carreras ca--,	
+	--CursosAlumnos cal
 where
 	pp.Id				=	p.IdPlanPago	and
 	pp.Estado			<	3				and
 			
-	cal.IdCurso			=	pp.IdCurso		and
-	cal.IdAlumno		=	pp.IdAlumno		and
+	--cal.IdCurso		=	pp.IdCurso		and
+	--cal.IdAlumno		=	pp.IdAlumno		and
 			
-	c.Id				=	cal.IdCurso		and
+	--c.Id				=	cal.IdCurso		and
+	c.Id				=	pp.IdCurso		and
 			
-	ca.Id				=	c.IdCarrera		and
+	ca.Id				=	c.IdCarrera		--and
 	
-	cal.cicloLectivo	= 	@CicloLectivo
-
+	--cal.cicloLectivo	= 	@CicloLectivo
+--(10236 filas afectadas)
+--> Actualizar ciclo lectivo
 update #pagos
-set medioPago = mp.Descripcion
+set cicloLectivo = 2019
 from
-	#pagos		p,
-	Pagos		po,
-	MediosPago	mp
+	pagos p,
+	#pagos tp
 where
-	po.Id			= p.pago	and
+	p.IdPlanPago	= tp.planPago		and
+	p.NroCuota		= 0					and
+	p.ImporteCuota	= 4100
 
-	po.IdMedioPago	= mp.Id
+--select cicloLectivo, count(1) from #pagos group by cicloLectivo
+--> Control ciclo lectivo solicitado
+delete from #pagos
+where
+	cicloLectivo <> @CicloLectivo
 
+--> Actualiza medios de pago
+--update #pagos
+--set medioPago = mp.Descripcion
+--from
+--	#pagos		p,
+--	Pagos		po,
+--	MediosPago	mp
+--where
+--	po.Id			= p.pago	and
+--
+--	po.IdMedioPago	= mp.Id
+
+insert into #salida(
+	carrera,	curso,	nroCuota,		importeCuota,
+	impCuotas,
+	impPagoTer,
+	impBeca,
+	impRec,
+	impPag,
+	cantidadCuotas,
+	cantidadCuotasPagadas,
+	cantidadCuotasAdeudadas
+)
 select 
-	p.nroCuota,		
-	p.importeCuota,
+	p.carrera, p.curso, p.nroCuota,		p.importeCuota,
 	impCuotas=sum(p.importeCuota),	
 	impPagoTer=sum(p.importePagoTermino),	
 	impBeca=sum(p.importeBeca),	
 	impRec=sum(p.importeRecargo),	
 	impPag=sum(p.importePagado),	
 	cantidadCuotas=count(1),
-	cantidadCuotasPagadas=0,
-	cantidadCuotasAdeudadas=0
-into #temp
+	cantidadCuotasPagadas = 0,
+	cantidadCuotasAdeudadas = 0
 from #pagos p
-where
-	cicloLectivo = @CicloLectivo
-group by nroCuota, importeCuota
-Order by nrocuota
+--where
+--	cicloLectivo = @CicloLectivo
+group by carrera, curso, nroCuota, importeCuota
+Order by carrera, curso, nrocuota
 
-update #temp
+update #salida
 set cantidadCuotasPagadas = (
 	select count(1)
 	from
 		#pagos	p
 	where
+		p.carrera		=  t.carrera		and
+		p.curso			=  t.curso			and
 		p.nroCuota		=  t.nroCuota		and
 		p.importeCuota	= t.importeCuota	and
 		p.importePagado >	0)
-from #temp t
+from #salida t
 
 -->Cuotas impagas
-update #temp
+update #salida
 set cantidadCuotasAdeudadas = (
 	select count(1)
 	from
 		#pagos	p
 	where
+		p.carrera		=  t.carrera		and
+		p.curso			=  t.curso			and
 		p.nroCuota		=  t.nroCuota		and
 		p.importeCuota	= t.importeCuota	and
 		p.importePagado =	0)
-from #temp t
+from #salida t
 
-select * from #temp
-order by nroCuota
+select 
+	carrera,
+	curso,
+	nroCuota,		
+	importeCuota,
+	impCuotas,	
+	impPagoTer,	
+	impBeca,	
+	impRec,	
+	impPag,	
+	cantidadCuotas,
+	cantidadCuotasPagadas,
+	cantidadCuotasAdeudadas
+from #salida
+order by carrera, curso, nroCuota

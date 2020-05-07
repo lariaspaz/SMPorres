@@ -4,5 +4,8 @@
 
     public partial class dsImpresiones
     {
+        partial class InformeEconomicoDataTable
+        {
+        }
     }
 }

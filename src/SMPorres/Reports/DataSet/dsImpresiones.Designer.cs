@@ -34,9 +34,9 @@ namespace SMPorres.Reports.DataSet {
         
         private PermisoExamenDataTable tablePermisoExamen;
         
-        private InformeEconómicoDataTable tableInformeEconómico;
-        
         private InformeFinancieroDataTable tableInformeFinanciero;
+        
+        private InformeEconomicoDataTable tableInformeEconomico;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -81,11 +81,11 @@ namespace SMPorres.Reports.DataSet {
                 if ((ds.Tables["PermisoExamen"] != null)) {
                     base.Tables.Add(new PermisoExamenDataTable(ds.Tables["PermisoExamen"]));
                 }
-                if ((ds.Tables["InformeEconómico"] != null)) {
-                    base.Tables.Add(new InformeEconómicoDataTable(ds.Tables["InformeEconómico"]));
-                }
                 if ((ds.Tables["InformeFinanciero"] != null)) {
                     base.Tables.Add(new InformeFinancieroDataTable(ds.Tables["InformeFinanciero"]));
+                }
+                if ((ds.Tables["InformeEconomico"] != null)) {
+                    base.Tables.Add(new InformeEconomicoDataTable(ds.Tables["InformeEconomico"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -159,9 +159,9 @@ namespace SMPorres.Reports.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public InformeEconómicoDataTable InformeEconómico {
+        public InformeFinancieroDataTable InformeFinanciero {
             get {
-                return this.tableInformeEconómico;
+                return this.tableInformeFinanciero;
             }
         }
         
@@ -169,9 +169,9 @@ namespace SMPorres.Reports.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public InformeFinancieroDataTable InformeFinanciero {
+        public InformeEconomicoDataTable InformeEconomico {
             get {
-                return this.tableInformeFinanciero;
+                return this.tableInformeEconomico;
             }
         }
         
@@ -257,11 +257,11 @@ namespace SMPorres.Reports.DataSet {
                 if ((ds.Tables["PermisoExamen"] != null)) {
                     base.Tables.Add(new PermisoExamenDataTable(ds.Tables["PermisoExamen"]));
                 }
-                if ((ds.Tables["InformeEconómico"] != null)) {
-                    base.Tables.Add(new InformeEconómicoDataTable(ds.Tables["InformeEconómico"]));
-                }
                 if ((ds.Tables["InformeFinanciero"] != null)) {
                     base.Tables.Add(new InformeFinancieroDataTable(ds.Tables["InformeFinanciero"]));
+                }
+                if ((ds.Tables["InformeEconomico"] != null)) {
+                    base.Tables.Add(new InformeEconomicoDataTable(ds.Tables["InformeEconomico"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -326,16 +326,16 @@ namespace SMPorres.Reports.DataSet {
                     this.tablePermisoExamen.InitVars();
                 }
             }
-            this.tableInformeEconómico = ((InformeEconómicoDataTable)(base.Tables["InformeEconómico"]));
-            if ((initTable == true)) {
-                if ((this.tableInformeEconómico != null)) {
-                    this.tableInformeEconómico.InitVars();
-                }
-            }
             this.tableInformeFinanciero = ((InformeFinancieroDataTable)(base.Tables["InformeFinanciero"]));
             if ((initTable == true)) {
                 if ((this.tableInformeFinanciero != null)) {
                     this.tableInformeFinanciero.InitVars();
+                }
+            }
+            this.tableInformeEconomico = ((InformeEconomicoDataTable)(base.Tables["InformeEconomico"]));
+            if ((initTable == true)) {
+                if ((this.tableInformeEconomico != null)) {
+                    this.tableInformeEconomico.InitVars();
                 }
             }
         }
@@ -358,10 +358,10 @@ namespace SMPorres.Reports.DataSet {
             base.Tables.Add(this.tableTotalPago);
             this.tablePermisoExamen = new PermisoExamenDataTable();
             base.Tables.Add(this.tablePermisoExamen);
-            this.tableInformeEconómico = new InformeEconómicoDataTable();
-            base.Tables.Add(this.tableInformeEconómico);
             this.tableInformeFinanciero = new InformeFinancieroDataTable();
             base.Tables.Add(this.tableInformeFinanciero);
+            this.tableInformeEconomico = new InformeEconomicoDataTable();
+            base.Tables.Add(this.tableInformeEconomico);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -396,13 +396,13 @@ namespace SMPorres.Reports.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeInformeEconómico() {
+        private bool ShouldSerializeInformeFinanciero() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeInformeFinanciero() {
+        private bool ShouldSerializeInformeEconomico() {
             return false;
         }
         
@@ -477,10 +477,10 @@ namespace SMPorres.Reports.DataSet {
         public delegate void PermisoExamenRowChangeEventHandler(object sender, PermisoExamenRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void InformeEconómicoRowChangeEventHandler(object sender, InformeEconómicoRowChangeEvent e);
+        public delegate void InformeFinancieroRowChangeEventHandler(object sender, InformeFinancieroRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void InformeFinancieroRowChangeEventHandler(object sender, InformeFinancieroRowChangeEvent e);
+        public delegate void InformeEconomicoRowChangeEventHandler(object sender, InformeEconomicoRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2272,379 +2272,6 @@ namespace SMPorres.Reports.DataSet {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class InformeEconómicoDataTable : global::System.Data.TypedTableBase<InformeEconómicoRow> {
-            
-            private global::System.Data.DataColumn columnnroCuota;
-            
-            private global::System.Data.DataColumn columnimporteCuota;
-            
-            private global::System.Data.DataColumn columnimpCuotas;
-            
-            private global::System.Data.DataColumn columnimpPagoTermino;
-            
-            private global::System.Data.DataColumn columnimpBeca;
-            
-            private global::System.Data.DataColumn columnimpRecargo;
-            
-            private global::System.Data.DataColumn columnimpPagado;
-            
-            private global::System.Data.DataColumn columncantCuotas;
-            
-            private global::System.Data.DataColumn columncantCuotasPagadas;
-            
-            private global::System.Data.DataColumn columncantCuotasAdeudadas;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeEconómicoDataTable() {
-                this.TableName = "InformeEconómico";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal InformeEconómicoDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected InformeEconómicoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn nroCuotaColumn {
-                get {
-                    return this.columnnroCuota;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn importeCuotaColumn {
-                get {
-                    return this.columnimporteCuota;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn impCuotasColumn {
-                get {
-                    return this.columnimpCuotas;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn impPagoTerminoColumn {
-                get {
-                    return this.columnimpPagoTermino;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn impBecaColumn {
-                get {
-                    return this.columnimpBeca;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn impRecargoColumn {
-                get {
-                    return this.columnimpRecargo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn impPagadoColumn {
-                get {
-                    return this.columnimpPagado;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cantCuotasColumn {
-                get {
-                    return this.columncantCuotas;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cantCuotasPagadasColumn {
-                get {
-                    return this.columncantCuotasPagadas;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cantCuotasAdeudadasColumn {
-                get {
-                    return this.columncantCuotasAdeudadas;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeEconómicoRow this[int index] {
-                get {
-                    return ((InformeEconómicoRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event InformeEconómicoRowChangeEventHandler InformeEconómicoRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event InformeEconómicoRowChangeEventHandler InformeEconómicoRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event InformeEconómicoRowChangeEventHandler InformeEconómicoRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event InformeEconómicoRowChangeEventHandler InformeEconómicoRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddInformeEconómicoRow(InformeEconómicoRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeEconómicoRow AddInformeEconómicoRow(short nroCuota, decimal importeCuota, decimal impCuotas, decimal impPagoTermino, decimal impBeca, decimal impRecargo, decimal impPagado, short cantCuotas, short cantCuotasPagadas, short cantCuotasAdeudadas) {
-                InformeEconómicoRow rowInformeEconómicoRow = ((InformeEconómicoRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        nroCuota,
-                        importeCuota,
-                        impCuotas,
-                        impPagoTermino,
-                        impBeca,
-                        impRecargo,
-                        impPagado,
-                        cantCuotas,
-                        cantCuotasPagadas,
-                        cantCuotasAdeudadas};
-                rowInformeEconómicoRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowInformeEconómicoRow);
-                return rowInformeEconómicoRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                InformeEconómicoDataTable cln = ((InformeEconómicoDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new InformeEconómicoDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnnroCuota = base.Columns["nroCuota"];
-                this.columnimporteCuota = base.Columns["importeCuota"];
-                this.columnimpCuotas = base.Columns["impCuotas"];
-                this.columnimpPagoTermino = base.Columns["impPagoTermino"];
-                this.columnimpBeca = base.Columns["impBeca"];
-                this.columnimpRecargo = base.Columns["impRecargo"];
-                this.columnimpPagado = base.Columns["impPagado"];
-                this.columncantCuotas = base.Columns["cantCuotas"];
-                this.columncantCuotasPagadas = base.Columns["cantCuotasPagadas"];
-                this.columncantCuotasAdeudadas = base.Columns["cantCuotasAdeudadas"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnnroCuota = new global::System.Data.DataColumn("nroCuota", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnnroCuota);
-                this.columnimporteCuota = new global::System.Data.DataColumn("importeCuota", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimporteCuota);
-                this.columnimpCuotas = new global::System.Data.DataColumn("impCuotas", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimpCuotas);
-                this.columnimpPagoTermino = new global::System.Data.DataColumn("impPagoTermino", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimpPagoTermino);
-                this.columnimpBeca = new global::System.Data.DataColumn("impBeca", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimpBeca);
-                this.columnimpRecargo = new global::System.Data.DataColumn("impRecargo", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimpRecargo);
-                this.columnimpPagado = new global::System.Data.DataColumn("impPagado", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnimpPagado);
-                this.columncantCuotas = new global::System.Data.DataColumn("cantCuotas", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncantCuotas);
-                this.columncantCuotasPagadas = new global::System.Data.DataColumn("cantCuotasPagadas", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncantCuotasPagadas);
-                this.columncantCuotasAdeudadas = new global::System.Data.DataColumn("cantCuotasAdeudadas", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncantCuotasAdeudadas);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeEconómicoRow NewInformeEconómicoRow() {
-                return ((InformeEconómicoRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new InformeEconómicoRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(InformeEconómicoRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.InformeEconómicoRowChanged != null)) {
-                    this.InformeEconómicoRowChanged(this, new InformeEconómicoRowChangeEvent(((InformeEconómicoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.InformeEconómicoRowChanging != null)) {
-                    this.InformeEconómicoRowChanging(this, new InformeEconómicoRowChangeEvent(((InformeEconómicoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.InformeEconómicoRowDeleted != null)) {
-                    this.InformeEconómicoRowDeleted(this, new InformeEconómicoRowChangeEvent(((InformeEconómicoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.InformeEconómicoRowDeleting != null)) {
-                    this.InformeEconómicoRowDeleting(this, new InformeEconómicoRowChangeEvent(((InformeEconómicoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveInformeEconómicoRow(InformeEconómicoRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsImpresiones ds = new dsImpresiones();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "InformeEconómicoDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class InformeFinancieroDataTable : global::System.Data.TypedTableBase<InformeFinancieroRow> {
             
             private global::System.Data.DataColumn columnCarrera;
@@ -2945,6 +2572,407 @@ namespace SMPorres.Reports.DataSet {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "InformeFinancieroDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class InformeEconomicoDataTable : global::System.Data.TypedTableBase<InformeEconomicoRow> {
+            
+            private global::System.Data.DataColumn columnCarrera;
+            
+            private global::System.Data.DataColumn columnCurso;
+            
+            private global::System.Data.DataColumn columnNroCuota;
+            
+            private global::System.Data.DataColumn columnImporteCuota;
+            
+            private global::System.Data.DataColumn columnImpCuotas;
+            
+            private global::System.Data.DataColumn columnImpPagoTermino;
+            
+            private global::System.Data.DataColumn columnImpBeca;
+            
+            private global::System.Data.DataColumn columnImpRecargo;
+            
+            private global::System.Data.DataColumn columnImpPagado;
+            
+            private global::System.Data.DataColumn columnCantCuotas;
+            
+            private global::System.Data.DataColumn columnCantCuotasPagadas;
+            
+            private global::System.Data.DataColumn columnCantCuotasAdeudadas;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InformeEconomicoDataTable() {
+                this.TableName = "InformeEconomico";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal InformeEconomicoDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected InformeEconomicoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CarreraColumn {
+                get {
+                    return this.columnCarrera;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CursoColumn {
+                get {
+                    return this.columnCurso;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NroCuotaColumn {
+                get {
+                    return this.columnNroCuota;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImporteCuotaColumn {
+                get {
+                    return this.columnImporteCuota;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImpCuotasColumn {
+                get {
+                    return this.columnImpCuotas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImpPagoTerminoColumn {
+                get {
+                    return this.columnImpPagoTermino;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImpBecaColumn {
+                get {
+                    return this.columnImpBeca;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImpRecargoColumn {
+                get {
+                    return this.columnImpRecargo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImpPagadoColumn {
+                get {
+                    return this.columnImpPagado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CantCuotasColumn {
+                get {
+                    return this.columnCantCuotas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CantCuotasPagadasColumn {
+                get {
+                    return this.columnCantCuotasPagadas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CantCuotasAdeudadasColumn {
+                get {
+                    return this.columnCantCuotasAdeudadas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InformeEconomicoRow this[int index] {
+                get {
+                    return ((InformeEconomicoRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InformeEconomicoRowChangeEventHandler InformeEconomicoRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InformeEconomicoRowChangeEventHandler InformeEconomicoRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InformeEconomicoRowChangeEventHandler InformeEconomicoRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event InformeEconomicoRowChangeEventHandler InformeEconomicoRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddInformeEconomicoRow(InformeEconomicoRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InformeEconomicoRow AddInformeEconomicoRow(string Carrera, string Curso, short NroCuota, decimal ImporteCuota, decimal ImpCuotas, decimal ImpPagoTermino, decimal ImpBeca, decimal ImpRecargo, decimal ImpPagado, short CantCuotas, short CantCuotasPagadas, short CantCuotasAdeudadas) {
+                InformeEconomicoRow rowInformeEconomicoRow = ((InformeEconomicoRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Carrera,
+                        Curso,
+                        NroCuota,
+                        ImporteCuota,
+                        ImpCuotas,
+                        ImpPagoTermino,
+                        ImpBeca,
+                        ImpRecargo,
+                        ImpPagado,
+                        CantCuotas,
+                        CantCuotasPagadas,
+                        CantCuotasAdeudadas};
+                rowInformeEconomicoRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowInformeEconomicoRow);
+                return rowInformeEconomicoRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                InformeEconomicoDataTable cln = ((InformeEconomicoDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new InformeEconomicoDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnCarrera = base.Columns["Carrera"];
+                this.columnCurso = base.Columns["Curso"];
+                this.columnNroCuota = base.Columns["NroCuota"];
+                this.columnImporteCuota = base.Columns["ImporteCuota"];
+                this.columnImpCuotas = base.Columns["ImpCuotas"];
+                this.columnImpPagoTermino = base.Columns["ImpPagoTermino"];
+                this.columnImpBeca = base.Columns["ImpBeca"];
+                this.columnImpRecargo = base.Columns["ImpRecargo"];
+                this.columnImpPagado = base.Columns["ImpPagado"];
+                this.columnCantCuotas = base.Columns["CantCuotas"];
+                this.columnCantCuotasPagadas = base.Columns["CantCuotasPagadas"];
+                this.columnCantCuotasAdeudadas = base.Columns["CantCuotasAdeudadas"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnCarrera = new global::System.Data.DataColumn("Carrera", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCarrera);
+                this.columnCurso = new global::System.Data.DataColumn("Curso", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurso);
+                this.columnNroCuota = new global::System.Data.DataColumn("NroCuota", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNroCuota);
+                this.columnImporteCuota = new global::System.Data.DataColumn("ImporteCuota", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImporteCuota);
+                this.columnImpCuotas = new global::System.Data.DataColumn("ImpCuotas", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpCuotas);
+                this.columnImpPagoTermino = new global::System.Data.DataColumn("ImpPagoTermino", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpPagoTermino);
+                this.columnImpBeca = new global::System.Data.DataColumn("ImpBeca", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpBeca);
+                this.columnImpRecargo = new global::System.Data.DataColumn("ImpRecargo", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpRecargo);
+                this.columnImpPagado = new global::System.Data.DataColumn("ImpPagado", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpPagado);
+                this.columnCantCuotas = new global::System.Data.DataColumn("CantCuotas", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantCuotas);
+                this.columnCantCuotasPagadas = new global::System.Data.DataColumn("CantCuotasPagadas", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantCuotasPagadas);
+                this.columnCantCuotasAdeudadas = new global::System.Data.DataColumn("CantCuotasAdeudadas", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantCuotasAdeudadas);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public InformeEconomicoRow NewInformeEconomicoRow() {
+                return ((InformeEconomicoRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new InformeEconomicoRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(InformeEconomicoRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.InformeEconomicoRowChanged != null)) {
+                    this.InformeEconomicoRowChanged(this, new InformeEconomicoRowChangeEvent(((InformeEconomicoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.InformeEconomicoRowChanging != null)) {
+                    this.InformeEconomicoRowChanging(this, new InformeEconomicoRowChangeEvent(((InformeEconomicoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.InformeEconomicoRowDeleted != null)) {
+                    this.InformeEconomicoRowDeleted(this, new InformeEconomicoRowChangeEvent(((InformeEconomicoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.InformeEconomicoRowDeleting != null)) {
+                    this.InformeEconomicoRowDeleting(this, new InformeEconomicoRowChangeEvent(((InformeEconomicoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveInformeEconomicoRow(InformeEconomicoRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsImpresiones ds = new dsImpresiones();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "InformeEconomicoDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4227,304 +4255,6 @@ namespace SMPorres.Reports.DataSet {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class InformeEconómicoRow : global::System.Data.DataRow {
-            
-            private InformeEconómicoDataTable tableInformeEconómico;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal InformeEconómicoRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableInformeEconómico = ((InformeEconómicoDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public short nroCuota {
-                get {
-                    try {
-                        return ((short)(this[this.tableInformeEconómico.nroCuotaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'nroCuota\' de la tabla \'InformeEconómico\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.nroCuotaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal importeCuota {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableInformeEconómico.importeCuotaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'importeCuota\' de la tabla \'InformeEconómico\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.importeCuotaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal impCuotas {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableInformeEconómico.impCuotasColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'impCuotas\' de la tabla \'InformeEconómico\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.impCuotasColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal impPagoTermino {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableInformeEconómico.impPagoTerminoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'impPagoTermino\' de la tabla \'InformeEconómico\' es DBNull." +
-                                "", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.impPagoTerminoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal impBeca {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableInformeEconómico.impBecaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'impBeca\' de la tabla \'InformeEconómico\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.impBecaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal impRecargo {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableInformeEconómico.impRecargoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'impRecargo\' de la tabla \'InformeEconómico\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.impRecargoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal impPagado {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableInformeEconómico.impPagadoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'impPagado\' de la tabla \'InformeEconómico\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.impPagadoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public short cantCuotas {
-                get {
-                    try {
-                        return ((short)(this[this.tableInformeEconómico.cantCuotasColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantCuotas\' de la tabla \'InformeEconómico\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.cantCuotasColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public short cantCuotasPagadas {
-                get {
-                    try {
-                        return ((short)(this[this.tableInformeEconómico.cantCuotasPagadasColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantCuotasPagadas\' de la tabla \'InformeEconómico\' es DBNu" +
-                                "ll.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.cantCuotasPagadasColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public short cantCuotasAdeudadas {
-                get {
-                    try {
-                        return ((short)(this[this.tableInformeEconómico.cantCuotasAdeudadasColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantCuotasAdeudadas\' de la tabla \'InformeEconómico\' es DB" +
-                                "Null.", e);
-                    }
-                }
-                set {
-                    this[this.tableInformeEconómico.cantCuotasAdeudadasColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsnroCuotaNull() {
-                return this.IsNull(this.tableInformeEconómico.nroCuotaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetnroCuotaNull() {
-                this[this.tableInformeEconómico.nroCuotaColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsimporteCuotaNull() {
-                return this.IsNull(this.tableInformeEconómico.importeCuotaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetimporteCuotaNull() {
-                this[this.tableInformeEconómico.importeCuotaColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsimpCuotasNull() {
-                return this.IsNull(this.tableInformeEconómico.impCuotasColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetimpCuotasNull() {
-                this[this.tableInformeEconómico.impCuotasColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsimpPagoTerminoNull() {
-                return this.IsNull(this.tableInformeEconómico.impPagoTerminoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetimpPagoTerminoNull() {
-                this[this.tableInformeEconómico.impPagoTerminoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsimpBecaNull() {
-                return this.IsNull(this.tableInformeEconómico.impBecaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetimpBecaNull() {
-                this[this.tableInformeEconómico.impBecaColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsimpRecargoNull() {
-                return this.IsNull(this.tableInformeEconómico.impRecargoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetimpRecargoNull() {
-                this[this.tableInformeEconómico.impRecargoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsimpPagadoNull() {
-                return this.IsNull(this.tableInformeEconómico.impPagadoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetimpPagadoNull() {
-                this[this.tableInformeEconómico.impPagadoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IscantCuotasNull() {
-                return this.IsNull(this.tableInformeEconómico.cantCuotasColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetcantCuotasNull() {
-                this[this.tableInformeEconómico.cantCuotasColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IscantCuotasPagadasNull() {
-                return this.IsNull(this.tableInformeEconómico.cantCuotasPagadasColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetcantCuotasPagadasNull() {
-                this[this.tableInformeEconómico.cantCuotasPagadasColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IscantCuotasAdeudadasNull() {
-                return this.IsNull(this.tableInformeEconómico.cantCuotasAdeudadasColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetcantCuotasAdeudadasNull() {
-                this[this.tableInformeEconómico.cantCuotasAdeudadasColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class InformeFinancieroRow : global::System.Data.DataRow {
             
             private InformeFinancieroDataTable tableInformeFinanciero;
@@ -4762,6 +4492,360 @@ namespace SMPorres.Reports.DataSet {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class InformeEconomicoRow : global::System.Data.DataRow {
+            
+            private InformeEconomicoDataTable tableInformeEconomico;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal InformeEconomicoRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableInformeEconomico = ((InformeEconomicoDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Carrera {
+                get {
+                    try {
+                        return ((string)(this[this.tableInformeEconomico.CarreraColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Carrera\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.CarreraColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Curso {
+                get {
+                    try {
+                        return ((string)(this[this.tableInformeEconomico.CursoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Curso\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.CursoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short NroCuota {
+                get {
+                    try {
+                        return ((short)(this[this.tableInformeEconomico.NroCuotaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'NroCuota\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.NroCuotaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal ImporteCuota {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableInformeEconomico.ImporteCuotaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ImporteCuota\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.ImporteCuotaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal ImpCuotas {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableInformeEconomico.ImpCuotasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ImpCuotas\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.ImpCuotasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal ImpPagoTermino {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableInformeEconomico.ImpPagoTerminoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ImpPagoTermino\' de la tabla \'InformeEconomico\' es DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.ImpPagoTerminoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal ImpBeca {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableInformeEconomico.ImpBecaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ImpBeca\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.ImpBecaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal ImpRecargo {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableInformeEconomico.ImpRecargoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ImpRecargo\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.ImpRecargoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal ImpPagado {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableInformeEconomico.ImpPagadoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ImpPagado\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.ImpPagadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short CantCuotas {
+                get {
+                    try {
+                        return ((short)(this[this.tableInformeEconomico.CantCuotasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CantCuotas\' de la tabla \'InformeEconomico\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.CantCuotasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short CantCuotasPagadas {
+                get {
+                    try {
+                        return ((short)(this[this.tableInformeEconomico.CantCuotasPagadasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CantCuotasPagadas\' de la tabla \'InformeEconomico\' es DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.CantCuotasPagadasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short CantCuotasAdeudadas {
+                get {
+                    try {
+                        return ((short)(this[this.tableInformeEconomico.CantCuotasAdeudadasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CantCuotasAdeudadas\' de la tabla \'InformeEconomico\' es DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableInformeEconomico.CantCuotasAdeudadasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCarreraNull() {
+                return this.IsNull(this.tableInformeEconomico.CarreraColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCarreraNull() {
+                this[this.tableInformeEconomico.CarreraColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCursoNull() {
+                return this.IsNull(this.tableInformeEconomico.CursoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCursoNull() {
+                this[this.tableInformeEconomico.CursoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNroCuotaNull() {
+                return this.IsNull(this.tableInformeEconomico.NroCuotaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNroCuotaNull() {
+                this[this.tableInformeEconomico.NroCuotaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImporteCuotaNull() {
+                return this.IsNull(this.tableInformeEconomico.ImporteCuotaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImporteCuotaNull() {
+                this[this.tableInformeEconomico.ImporteCuotaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImpCuotasNull() {
+                return this.IsNull(this.tableInformeEconomico.ImpCuotasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImpCuotasNull() {
+                this[this.tableInformeEconomico.ImpCuotasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImpPagoTerminoNull() {
+                return this.IsNull(this.tableInformeEconomico.ImpPagoTerminoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImpPagoTerminoNull() {
+                this[this.tableInformeEconomico.ImpPagoTerminoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImpBecaNull() {
+                return this.IsNull(this.tableInformeEconomico.ImpBecaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImpBecaNull() {
+                this[this.tableInformeEconomico.ImpBecaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImpRecargoNull() {
+                return this.IsNull(this.tableInformeEconomico.ImpRecargoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImpRecargoNull() {
+                this[this.tableInformeEconomico.ImpRecargoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImpPagadoNull() {
+                return this.IsNull(this.tableInformeEconomico.ImpPagadoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImpPagadoNull() {
+                this[this.tableInformeEconomico.ImpPagadoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCantCuotasNull() {
+                return this.IsNull(this.tableInformeEconomico.CantCuotasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCantCuotasNull() {
+                this[this.tableInformeEconomico.CantCuotasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCantCuotasPagadasNull() {
+                return this.IsNull(this.tableInformeEconomico.CantCuotasPagadasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCantCuotasPagadasNull() {
+                this[this.tableInformeEconomico.CantCuotasPagadasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCantCuotasAdeudadasNull() {
+                return this.IsNull(this.tableInformeEconomico.CantCuotasAdeudadasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCantCuotasAdeudadasNull() {
+                this[this.tableInformeEconomico.CantCuotasAdeudadasColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -4935,22 +5019,22 @@ namespace SMPorres.Reports.DataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class InformeEconómicoRowChangeEvent : global::System.EventArgs {
+        public class InformeFinancieroRowChangeEvent : global::System.EventArgs {
             
-            private InformeEconómicoRow eventRow;
+            private InformeFinancieroRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeEconómicoRowChangeEvent(InformeEconómicoRow row, global::System.Data.DataRowAction action) {
+            public InformeFinancieroRowChangeEvent(InformeFinancieroRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeEconómicoRow Row {
+            public InformeFinancieroRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -4969,22 +5053,22 @@ namespace SMPorres.Reports.DataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class InformeFinancieroRowChangeEvent : global::System.EventArgs {
+        public class InformeEconomicoRowChangeEvent : global::System.EventArgs {
             
-            private InformeFinancieroRow eventRow;
+            private InformeEconomicoRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeFinancieroRowChangeEvent(InformeFinancieroRow row, global::System.Data.DataRowAction action) {
+            public InformeEconomicoRowChangeEvent(InformeEconomicoRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public InformeFinancieroRow Row {
+            public InformeEconomicoRow Row {
                 get {
                     return this.eventRow;
                 }

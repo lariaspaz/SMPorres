@@ -43,7 +43,7 @@ namespace SMPorres.Forms.Pagos
             {
                 string título = this.Text;
                 var subTítulo = "Ciclo Lectivo " + cbCicloLectivo.Text;
-                reporte.Database.Tables["InformeEconómico"].SetDataSource(dt);
+                reporte.Database.Tables["InformeEconomico"].SetDataSource(dt);
                 using (var f = new frmReporte(reporte, título, subTítulo)) f.ShowDialog();
             }
         }
@@ -58,11 +58,11 @@ namespace SMPorres.Forms.Pagos
 
         private DataTable ObtenerDatos()
         {
-            var tabla = new dsImpresiones.InformeEconómicoDataTable();
+            var tabla = new dsImpresiones.InformeEconomicoDataTable();
             var pagos = StoredProcs.ConsInformeEconómico(Convert.ToInt16(cbCicloLectivo.Text));
             foreach (var p in pagos)
             {
-                tabla.AddInformeEconómicoRow(p.nroCuota, p.importeCuota, Convert.ToDecimal(p.impCuotas), Convert.ToDecimal(p.impPagoTer),
+                tabla.AddInformeEconomicoRow(p.carrera, p.curso, p.nroCuota, p.importeCuota, Convert.ToDecimal(p.impCuotas), Convert.ToDecimal(p.impPagoTer),
                     Convert.ToDecimal(p.impBeca), Convert.ToDecimal(p.impRec), Convert.ToDecimal(p.impPag), Convert.ToInt16(p.cantidadCuotas),
                     Convert.ToInt16(p.cantidadCuotasPagadas), Convert.ToInt16(p.cantidadCuotasAdeudadas));
             }

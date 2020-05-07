@@ -13,14 +13,16 @@ namespace SMPorres.Models
     
     public partial class ConsInformeEconomico_Result
     {
+        public string carrera { get; set; }
+        public string curso { get; set; }
         public short nroCuota { get; set; }
         public decimal importeCuota { get; set; }
-        public Nullable<decimal> impCuotas { get; set; }
-        public Nullable<decimal> impPagoTer { get; set; }
-        public Nullable<decimal> impBeca { get; set; }
-        public Nullable<decimal> impRec { get; set; }
-        public Nullable<decimal> impPag { get; set; }
-        public Nullable<int> cantidadCuotas { get; set; }
+        public decimal impCuotas { get; set; }
+        public decimal impPagoTer { get; set; }
+        public decimal impBeca { get; set; }
+        public decimal impRec { get; set; }
+        public decimal impPag { get; set; }
+        public int cantidadCuotas { get; set; }
         public int cantidadCuotasPagadas { get; set; }
         public int cantidadCuotasAdeudadas { get; set; }
     }
