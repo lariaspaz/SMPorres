@@ -40,7 +40,8 @@ namespace SMPorres.Repositories
                     Id = id,
                     Tasa = tasa,
                     Desde = desde,
-                    Hasta = hasta
+                    Hasta = hasta,
+                    Estado = (byte) EstadoTasaMora.Activa
                 };
                 db.TasasMora.Add(t);
                 db.SaveChanges();
@@ -84,6 +85,21 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 return db.TasasMora.Find(id);
+            }
+        }
+
+        public static bool ValidarTasas()
+        {
+            using (var db = new SMPorresEntities())
+            {
+                //var list = db.TasasMora.ToList();
+                var errores = db.TasasMora.Except(
+                                    from t1 in db.TasasMora
+                                    join t2 in db.TasasMora on t1.Desde equals 
+                                        System.Data.Entity.DbFunctions.AddDays(t2.Hasta, 1)
+                                    select t1
+                                ).Count();
+                return errores == 1; //solamente no puede tener antecesor el primer rango
             }
         }
     }

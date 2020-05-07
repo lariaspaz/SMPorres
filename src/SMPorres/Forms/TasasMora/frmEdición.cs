@@ -78,7 +78,7 @@ namespace SMPorres.Forms.TasasMora
         private bool ValidarDatos()
         {
             return
-                _validator.Validar(txtTasa, txtTasa.DecValue > 0, "No puede estar vacío");
+                _validator.Validar(txtTasa, txtTasa.DecValue > 0, "No puede tener valor 0 (cero)");
         }        
     }
 }

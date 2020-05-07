@@ -35,10 +35,10 @@ namespace SMPorres.Forms.TasasMora
             dgvDatos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
-            dgvDatos.Columns[1].HeaderText = "Tasa (%)";
+            dgvDatos.Columns[1].HeaderText = "Tasa Mensual (%)";
             dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvDatos.Columns[1].DefaultCellStyle.Format = "0";
+            dgvDatos.Columns[1].DefaultCellStyle.Format = "0.0";
 
             dgvDatos.Columns[2].HeaderText = "Vigencia Desde";
             dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -146,6 +146,18 @@ namespace SMPorres.Forms.TasasMora
                 catch (Exception ex)
                 {
                     ShowError(ex.Message);
+                }
+            }
+        }
+
+        private void frmListado_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!TasasMoraRepository.ValidarTasas())
+            {
+                if (MessageBox.Show("¿Está seguro que desea cerrar el formulario?\nAparentemente los rangos de fechas no están configurados adecuadamente.", 
+                    "Precaución", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                {
+                    e.Cancel = true;
                 }
             }
         }

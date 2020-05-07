@@ -63,12 +63,12 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(307, 124);
+            this.panel2.Size = new System.Drawing.Size(316, 124);
             this.panel2.TabIndex = 1;
             // 
             // dtHasta
             // 
-            this.dtHasta.Location = new System.Drawing.Point(80, 61);
+            this.dtHasta.Location = new System.Drawing.Point(103, 61);
             this.dtHasta.Name = "dtHasta";
             this.dtHasta.Size = new System.Drawing.Size(200, 20);
             this.dtHasta.TabIndex = 2;
@@ -76,7 +76,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 67);
+            this.label3.Location = new System.Drawing.Point(56, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 16;
@@ -84,7 +84,7 @@
             // 
             // dtDesde
             // 
-            this.dtDesde.Location = new System.Drawing.Point(80, 35);
+            this.dtDesde.Location = new System.Drawing.Point(103, 35);
             this.dtDesde.Name = "dtDesde";
             this.dtDesde.Size = new System.Drawing.Size(200, 20);
             this.dtDesde.TabIndex = 1;
@@ -92,7 +92,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 41);
+            this.label1.Location = new System.Drawing.Point(56, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 14;
@@ -101,7 +101,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 88);
+            this.label8.Location = new System.Drawing.Point(51, 88);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(46, 13);
             this.label8.TabIndex = 13;
@@ -113,19 +113,20 @@
             0,
             0,
             0,
-            0});
+            65536});
+            this.txtTasa.Digits = 1;
             this.txtTasa.IntValue = ((long)(0));
-            this.txtTasa.Location = new System.Drawing.Point(80, 9);
+            this.txtTasa.Location = new System.Drawing.Point(103, 9);
             this.txtTasa.Name = "txtTasa";
             this.txtTasa.Size = new System.Drawing.Size(73, 20);
             this.txtTasa.TabIndex = 0;
-            this.txtTasa.Text = "0";
+            this.txtTasa.Text = "0,0";
             this.txtTasa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // ckEstado
             // 
             this.ckEstado.AutoSize = true;
-            this.ckEstado.Location = new System.Drawing.Point(80, 87);
+            this.ckEstado.Location = new System.Drawing.Point(103, 87);
             this.ckEstado.Name = "ckEstado";
             this.ckEstado.Size = new System.Drawing.Size(59, 17);
             this.ckEstado.TabIndex = 3;
@@ -135,11 +136,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 12);
+            this.label2.Location = new System.Drawing.Point(9, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Tasa: %";
+            this.label2.Text = "Tasa Mensual: %";
             // 
             // tableLayoutPanel1
             // 
@@ -153,7 +154,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(313, 165);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(322, 165);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -165,13 +166,13 @@
             this.panel1.Location = new System.Drawing.Point(0, 130);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(313, 35);
+            this.panel1.Size = new System.Drawing.Size(322, 35);
             this.panel1.TabIndex = 0;
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(208, 7);
+            this.btnCancelar.Location = new System.Drawing.Point(231, 7);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -180,7 +181,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(127, 7);
+            this.btnAceptar.Location = new System.Drawing.Point(150, 7);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -198,7 +199,7 @@
             this.bevel1.Margin = new System.Windows.Forms.Padding(0);
             this.bevel1.Name = "bevel1";
             this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bevel1.Size = new System.Drawing.Size(313, 23);
+            this.bevel1.Size = new System.Drawing.Size(322, 23);
             this.bevel1.TabIndex = 3;
             this.bevel1.Text = "bevel1";
             // 
@@ -212,7 +213,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(313, 165);
+            this.ClientSize = new System.Drawing.Size(322, 165);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";

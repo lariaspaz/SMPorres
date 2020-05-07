@@ -10,6 +10,8 @@ namespace SMPorres.Repositories
 {
     class PagosRepository
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         internal static void ActualizarCuotas(int idCurso, decimal importe, bool esMatrícula)
         {
             var ciclo = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
@@ -108,6 +110,7 @@ namespace SMPorres.Repositories
 
         public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
+            _log.Debug("Obteniendo detalle de pago");
             Pago pago = ObtenerPago(idPago);
             if (pago == null) return null;
             var impBase = pago.ImporteCuota;
@@ -123,26 +126,23 @@ namespace SMPorres.Repositories
             if (pago.NroCuota == 0)
             {
                 pago.FechaVto = new DateTime(cc, 12, 31);
-                int c = PagosRepository.CantidadCuotasMatrícula(pago.IdPlanPago);
-                var curso = CursosRepository.ObtenerCursoPorId(pago.PlanPago.Curso.Id);
-                if (fechaCompromiso <= curso.FechaVencDescuento && c == 1) //EsMatriculaSinCuotas(pago))
+                int cantCuotas = CantidadCuotasMatrícula(pago.IdPlanPago);
+                //var curso = CursosRepository.ObtenerCursoPorId(pago.PlanPago.Curso.Id);
+                var curso = pago.PlanPago.Curso;
+                if (fechaCompromiso <= curso.FechaVencDescuento && cantCuotas == 1) //EsMatriculaSinCuotas(pago))
                 {
-                    decimal descuentoMatrícula = Convert.ToDecimal(curso.DescuentoMatricula);
-                    pago.ImportePagoTermino = descuentoMatrícula;
-                    pago.ImportePagado = impBase - descuentoMatrícula;
+                    pago.ImportePagoTermino = curso.DescuentoMatricula;
+                    pago.ImportePagado = impBase - curso.DescuentoMatricula;
                 }
                 return pago;
             }
 
-            var descBeca = (decimal)0;
+            decimal descBeca = 0;
             if (pago.BecaAlumno == null)
-            {
-                descBeca = (decimal)pago.PlanPago.PorcentajeBeca;
-            }
+                descBeca = pago.PlanPago.PorcentajeBeca;
             else
-            {
                 descBeca = (decimal)pago.BecaAlumno.PorcentajeBeca;
-            }
+
             decimal beca = 0;
             if (descBeca > 0)
             {
@@ -155,7 +155,7 @@ namespace SMPorres.Repositories
                 return null;
             }
             pago.FechaVto = cuota.VtoCuota;
-            var totalAPagar = (decimal)0;
+            decimal totalAPagar = 0;
             var impBecado = impBase - beca;
             var conf = ConfiguracionRepository.ObtenerConfiguracion();
             if (fechaCompromiso <= pago.FechaVto)
@@ -169,30 +169,40 @@ namespace SMPorres.Repositories
                     descPagoTérmino = 0;
                 }
 
-                totalAPagar = impBase - beca - descPagoTérmino;
+                //totalAPagar = impBase - beca - descPagoTérmino;
+                totalAPagar = impBecado - descPagoTérmino;
 
-                pago.PorcDescPagoTermino = (double)Math.Truncate(dpt * 100);
+                //pago.PorcDescPagoTermino = (double)Math.Truncate(dpt * 100);
+                pago.PorcDescPagoTermino = conf.DescuentoPagoTermino;
                 pago.ImportePagoTermino = descPagoTérmino;
             }
             else
             {
-                var porcRecargo = (conf.InteresPorMora / 100) / 30.0;
-                var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto.Value).TotalDays);
-                var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
+                decimal recargoPorMora = 0;
+                double porcRecargo = 0;
+
+                #region Cálculo con tasa única, sin tipo de beca
                 //impBecado = impBase;
                 //var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
                 //totalAPagar = impBase - beca + recargoPorMora;
+                #endregion
+                
+                #region Cálculo con tasa única y tipo de beca
+                //var porcRecargo = (conf.InteresPorMora / 100) / 30.0;
+                //var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto.Value).TotalDays);
+                //var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
+                //if (pago.PlanPago.TipoBeca == (byte)TipoBeca.AplicaSiempre)
+                //{
+                //    recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
+                //}
+                //else
+                //{
+                //    recargoPorMora = Math.Round(pago.ImporteCuota * porcRecargoTotal, 2);
+                //    beca = 0;
+                //}
+                #endregion
 
-                decimal recargoPorMora = 0;
-                if (pago.PlanPago.TipoBeca == (byte)TipoBeca.AplicaSiempre)
-                {
-                    recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
-                }
-                else
-                {
-                    recargoPorMora = Math.Round(pago.ImporteCuota * porcRecargoTotal, 2);
-                    beca = 0;
-                }
+                recargoPorMora = CalcularMoraPorTramo(fechaCompromiso, pago, impBase, impBecado, ref beca);
                 totalAPagar = impBase - beca + recargoPorMora;
 
                 pago.PorcRecargo = porcRecargo;
@@ -201,11 +211,69 @@ namespace SMPorres.Repositories
 
             pago.PorcBeca = (double)descBeca;
             pago.ImporteBeca = beca;
-            pago.IdBecaAlumno = null;
+            //pago.IdBecaAlumno = null;
             pago.ImportePagado = totalAPagar;
 
             return pago;
         }
+
+        #region Cálculo de mora con tasas por tramo
+        private static decimal CalcularMoraPorTramo(DateTime fechaCompromiso, Pago pago, decimal impBase, 
+            decimal impBecado, ref decimal beca)
+        {
+            decimal recargoPorMora;
+            if (TasasMoraRepository.ValidarTasas())
+            {
+                var tasas = from t in TasasMoraRepository.ObtenerTasas()
+                            select new TasaMora
+                            {
+                                Tasa = (t.Tasa / 100) / 30,
+                                Desde = t.Desde < pago.FechaVto.Value ? pago.FechaVto.Value : t.Desde,
+                                Hasta = t.Hasta > fechaCompromiso ? fechaCompromiso : t.Hasta.AddDays(1)
+                            };
+                _log.Debug(String.Join("\n", tasas.Select(t => new { TasaDiaria = t.Tasa, t.Desde, t.Hasta })));
+                _log.Debug("Tipo de beca: " + (TipoBeca)pago.PlanPago.TipoBeca);
+
+                if (pago.PlanPago.TipoBeca == (byte)TipoBeca.AplicaSiempre)
+                {
+                    _log.Debug("Importe becado: " + impBecado);
+                    _log.Debug(String.Join("\n", tasas.Select(t => new
+                    {
+                        TotalDays = (t.Hasta - t.Desde).TotalDays,
+                        Tasa = t.Tasa,
+                        DaysXTasa = (t.Hasta - t.Desde).TotalDays * t.Tasa,
+                        Total = impBecado * (decimal)((t.Hasta - t.Desde).TotalDays * t.Tasa)
+                    })));
+
+                    recargoPorMora = tasas.Sum(
+                            t => Math.Round(impBecado * (decimal)((t.Hasta - t.Desde).TotalDays * t.Tasa), 2)
+                        );
+                }
+                else
+                {
+                    _log.Debug("Importe base: " + impBase);
+                    _log.Debug(String.Join("\n", tasas.Select(t => new
+                    {
+                        TotalDays = (t.Hasta - t.Desde).TotalDays,
+                        Tasa = t.Tasa,
+                        DaysXTasa = (t.Hasta - t.Desde).TotalDays * t.Tasa,
+                        Total = impBase * (decimal)((t.Hasta - t.Desde).TotalDays * t.Tasa)
+                    })));
+
+                    recargoPorMora = tasas.Sum(
+                            t => Math.Round(impBase * (decimal)((t.Hasta - t.Desde).TotalDays * t.Tasa), 2)
+                        );
+                    beca = 0;
+                }
+
+            }
+            else
+            {
+                recargoPorMora = 0;
+            }
+            return recargoPorMora;
+        }
+        #endregion
 
         public static bool PagarCuota(Pago pago)
         {

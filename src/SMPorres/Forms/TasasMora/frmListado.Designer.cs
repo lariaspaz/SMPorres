@@ -148,6 +148,7 @@
             this.KeyPreview = true;
             this.Name = "frmListado";
             this.Text = "Tasas por mora";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmListado_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmListado_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
