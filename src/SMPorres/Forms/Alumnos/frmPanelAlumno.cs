@@ -594,9 +594,13 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnPermisoExámen_Click(object sender, EventArgs e)
         {
-            if (dgvCursos.Rows.Count>0)
+            if (dgvCursos.Rows.Count > 0 && PlanDePagoSeleccionado.Estado == 1)
             {
                 using (var f = new frmPermisoDeExámen(_alumno, NombreCursoSeleccionado)) f.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un plan de pago Activo", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

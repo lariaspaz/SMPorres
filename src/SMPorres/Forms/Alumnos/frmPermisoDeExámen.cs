@@ -64,7 +64,7 @@ namespace SMPorres.Forms.Alumnos
             string pv = "";
             if (CuotasRepository.PróximaCuota != null)
             {
-                pv += "El vencimiento de la siguiente cuota se realizará el día " +
+                pv += "El próximo vencimiento de cuota es el día " +
                     CuotasRepository.PróximaCuota.VtoCuota.ToShortDateString().ToString() + ".";
             }
             else
@@ -109,8 +109,8 @@ namespace SMPorres.Forms.Alumnos
                 al += "la alumna ";
             }
 
-            if (!String.IsNullOrEmpty(alumno.Apellido)) al += alumno.Apellido + " ,";
-            if (!String.IsNullOrEmpty(alumno.Nombre)) al += alumno.Nombre;
+            if (!String.IsNullOrEmpty(alumno.Apellido.Trim())) al += alumno.Apellido + " ,";
+            if (!String.IsNullOrEmpty(alumno.Nombre.Trim())) al += alumno.Nombre;
 
             if (masculino)
             {

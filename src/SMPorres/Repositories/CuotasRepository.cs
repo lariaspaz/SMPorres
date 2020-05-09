@@ -80,27 +80,27 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static short MáximaCuotaVencida
-        {
-            get
-            {
-                short c = 0;
-                using (var db = new SMPorresEntities())
-                {
-                    //if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota) > 0)
-                    if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).FirstOrDefault() != null )
-                    {
-                        c = db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota);
-                    }
-                    else
-                    {
-                        c = 1; //primer cuota
-                    }
-                }
+        //public static short MáximaCuotaVencida
+        //{
+        //    get
+        //    {
+        //        short c = 0;
+        //        using (var db = new SMPorresEntities())
+        //        {
+        //            //if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota) > 0)
+        //            if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).FirstOrDefault() != null )
+        //            {
+        //                c = db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota);
+        //            }
+        //            else
+        //            {
+        //                c = 1; //primer cuota
+        //            }
+        //        }
 
-                return c;
-            }
-        }
+        //        return c;
+        //    }
+        //}
 
         public static Cuota PróximaCuota
         {
@@ -130,7 +130,8 @@ namespace SMPorres.Repositories
                              join p in db.Pagos on pp.Id equals p.IdPlanPago
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
-                                 p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
+                                //p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
+                                 p.FechaVto <= System.DateTime.Today &&
                                  pp.IdAlumno == alumno.Id
                              orderby p.NroCuota
                              select p.NroCuota
@@ -158,8 +159,8 @@ namespace SMPorres.Repositories
                              join p in db.Pagos on pp.Id equals p.IdPlanPago
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
-                                 p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
-                                 //pp.Curso.Carrera.Id == idCarrera &&
+                                 p.FechaVto <= System.DateTime.Today &&
+                                 //p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
                                  pp.IdAlumno == alumno.Id
                              orderby pp.Id
                              select new PermisoExamen
