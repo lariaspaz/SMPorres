@@ -17,7 +17,7 @@ namespace SMPorres.Forms.TasasMora
 
         private void ConsultarDatos()
         {
-            dgvDatos.SetDataSource(from t 
+            dgvDatos.SetDataSource(from t
                                    in TasasMoraRepository.ObtenerTasas()
                                    select new
                                    {
@@ -128,7 +128,7 @@ namespace SMPorres.Forms.TasasMora
             {
                 return null;
             }
-            
+
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -152,13 +152,26 @@ namespace SMPorres.Forms.TasasMora
 
         private void frmListado_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!TasasMoraRepository.ValidarTasas())
+            string msg = "";
+            switch (TasasMoraRepository.ValidarTasas())
             {
-                if (MessageBox.Show("¿Está seguro que desea cerrar el formulario?\nAparentemente los rangos de fechas no están configurados adecuadamente.", 
-                    "Precaución", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
+                default:
+                case TasasMoraRepository.ValidarTasasResult.Ok:
+                    return;
+                case TasasMoraRepository.ValidarTasasResult.HayRangosNoDefinidos:
+                    msg = "Hay rangos de fechas sin definir.";
+                    break;
+                case TasasMoraRepository.ValidarTasasResult.NoHayRangoPara2019:
+                    msg = "No hay un rango de fechas para el año 2019.";
+                    break;
+                case TasasMoraRepository.ValidarTasasResult.NoHayRangoParaHoy:
+                    msg = "No hay un rango de fechas que contenga al día de hoy.";
+                    break;
+            }
+            if (MessageBox.Show("¿Está seguro que desea cerrar el formulario?\n" + msg,
+                "Precaución", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
             }
         }
     }

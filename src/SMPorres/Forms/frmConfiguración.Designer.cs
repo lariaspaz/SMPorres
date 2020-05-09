@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtEndpointAddress = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDiasVtoPagoTermino = new CustomLibrary.ComponentModel.NumericTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,15 +40,13 @@
             this.txtInterésPorMora = new CustomLibrary.ComponentModel.NumericTextBox();
             this.txtDescPagoTérmino = new CustomLibrary.ComponentModel.NumericTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.bevel2 = new CustomLibrary.ComponentModel.Bevel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtEndpointAddress = new System.Windows.Forms.TextBox();
-            this.bevel2 = new CustomLibrary.ComponentModel.Bevel();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -71,6 +71,22 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(309, 189);
             this.panel2.TabIndex = 1;
+            // 
+            // txtEndpointAddress
+            // 
+            this.txtEndpointAddress.Location = new System.Drawing.Point(20, 152);
+            this.txtEndpointAddress.Name = "txtEndpointAddress";
+            this.txtEndpointAddress.Size = new System.Drawing.Size(272, 20);
+            this.txtEndpointAddress.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 136);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(235, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Dirección del servicio web del sitio de consultas:";
             // 
             // label4
             // 
@@ -134,12 +150,14 @@
             // 
             // txtInterésPorMora
             // 
+            this.txtInterésPorMora.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtInterésPorMora.DecValue = new decimal(new int[] {
             0,
             0,
             0,
             131072});
             this.txtInterésPorMora.Digits = 2;
+            this.txtInterésPorMora.Enabled = false;
             this.txtInterésPorMora.IntValue = ((long)(0));
             this.txtInterésPorMora.Location = new System.Drawing.Point(192, 37);
             this.txtInterésPorMora.Name = "txtInterésPorMora";
@@ -173,6 +191,18 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Descuento por Pago a Término: %";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // bevel2
+            // 
+            this.bevel2.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel2.BevelType = CustomLibrary.ComponentModel.BevelType.Frame;
+            this.bevel2.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel2.Location = new System.Drawing.Point(9, 128);
+            this.bevel2.Name = "bevel2";
+            this.bevel2.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel2.Size = new System.Drawing.Size(291, 53);
+            this.bevel2.TabIndex = 14;
+            this.bevel2.Text = "bevel2";
             // 
             // tableLayoutPanel1
             // 
@@ -238,34 +268,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 136);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(235, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Dirección del servicio web del sitio de consultas:";
-            // 
-            // txtEndpointAddress
-            // 
-            this.txtEndpointAddress.Location = new System.Drawing.Point(20, 152);
-            this.txtEndpointAddress.Name = "txtEndpointAddress";
-            this.txtEndpointAddress.Size = new System.Drawing.Size(272, 20);
-            this.txtEndpointAddress.TabIndex = 13;
-            // 
-            // bevel2
-            // 
-            this.bevel2.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
-            this.bevel2.BevelType = CustomLibrary.ComponentModel.BevelType.Frame;
-            this.bevel2.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bevel2.Location = new System.Drawing.Point(9, 128);
-            this.bevel2.Name = "bevel2";
-            this.bevel2.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bevel2.Size = new System.Drawing.Size(291, 53);
-            this.bevel2.TabIndex = 14;
-            this.bevel2.Text = "bevel2";
             // 
             // frmConfiguración
             // 

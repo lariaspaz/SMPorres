@@ -41,7 +41,7 @@ namespace SMPorres.Repositories
                     Tasa = tasa,
                     Desde = desde,
                     Hasta = hasta,
-                    Estado = (byte) EstadoTasaMora.Activa
+                    Estado = (byte)EstadoTasaMora.Activa
                 };
                 db.TasasMora.Add(t);
                 db.SaveChanges();
@@ -88,18 +88,74 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static bool ValidarTasas()
+        public enum ValidarTasasResult
+        {
+            //Ok
+            Ok,
+
+            //No hay un rango para el año 2019
+            NoHayRangoPara2019,
+
+            //No hay rango para la fecha de hoy
+            NoHayRangoParaHoy,
+
+            //Hay rangos no definidos
+            HayRangosNoDefinidos
+        }
+
+        public static ValidarTasasResult ValidarTasas()
         {
             using (var db = new SMPorresEntities())
             {
-                //var list = db.TasasMora.ToList();
-                var errores = db.TasasMora.Except(
-                                    from t1 in db.TasasMora
-                                    join t2 in db.TasasMora on t1.Desde equals 
-                                        System.Data.Entity.DbFunctions.AddDays(t2.Hasta, 1)
-                                    select t1
-                                ).Count();
-                return errores == 1; //solamente no puede tener antecesor el primer rango
+                //var tasas = db.TasasMora
+                //                .Where(t => t.Estado == (short)EstadoTasaMora.Activa)
+                //                .Except(
+                //                    from t1 in db.TasasMora
+                //                    join t2 in db.TasasMora on t1.Desde equals
+                //                        System.Data.Entity.DbFunctions.AddDays(t2.Hasta, 1)
+                //                    select t1
+                //                );
+                ////solamente no puede tener antecesor el primer rango
+                //if (tasas.Count() == 1)
+                //{
+                //    var hoy = Lib.Configuration.CurrentDate;
+                //    return tasas.Any(t => t.Desde <= hoy && hoy <= t.Hasta);
+                //}
+                //else
+                //{
+                //    return false;
+                //}
+                //DateTime.Today
+
+
+                var tasas = from t in db.TasasMora
+                            where t.Estado == (short) EstadoTasaMora.Activa
+                            select new
+                            {
+                                t.Id,
+                                t.Desde,
+                                t.Hasta,
+                                TieneSiguiente = db.TasasMora.Any(
+                                    t2 =>
+                                        t2.Estado == 1 &&
+                                        t2.Id != t.Id &&
+                                        t2.Desde == System.Data.Entity.DbFunctions.AddDays(t.Hasta, 1)
+                                        )
+                            };
+                if (tasas.Count(t => !t.TieneSiguiente) == 1)
+                    if (tasas.Any(t => t.Desde <= DateTime.Today && DateTime.Today <= t.Hasta))
+                        if (tasas.OrderBy(t => t.Desde).First().Desde > new DateTime(2019, 4, 1))
+                            //Console.WriteLine("No hay un rango para el año 2019");
+                            return ValidarTasasResult.NoHayRangoPara2019;
+                        else
+                            //Console.WriteLine("Ok");
+                            return ValidarTasasResult.Ok;
+                    else
+                        //Console.WriteLine("No hay rango para la fecha de hoy");
+                        return ValidarTasasResult.NoHayRangoParaHoy;
+                else
+                    //Console.WriteLine("Hay rangos no definidos.");
+                    return ValidarTasasResult.HayRangosNoDefinidos;
             }
         }
     }
