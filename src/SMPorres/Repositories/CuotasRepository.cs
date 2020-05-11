@@ -20,13 +20,14 @@ namespace SMPorres.Repositories
                                     {
                                         Id = c.Id,
                                         NroCuota = c.NroCuota,
-                                        VtoCuota = c.VtoCuota
+                                        VtoCuota = c.VtoCuota,
+                                        CicloLectivo = c.CicloLectivo
                                     });
-                return query.OrderBy(c => c.NroCuota).ToList();
+                return query.OrderBy(c => c.CicloLectivo).ThenBy(c => c.NroCuota).ToList();
             }
         }
 
-        public static Cuota Insertar(short nroCuota, DateTime vtoCuota)
+        public static Cuota Insertar(short nroCuota, DateTime vtoCuota, short cicloLectivo)
         {
             using (var db = new SMPorresEntities())
             {
@@ -35,7 +36,8 @@ namespace SMPorres.Repositories
                 {
                     Id = id,
                     NroCuota = nroCuota,
-                    VtoCuota = vtoCuota
+                    VtoCuota = vtoCuota,
+                    CicloLectivo = cicloLectivo
                 };
                 db.Cuotas.Add(c);
                 db.SaveChanges();
@@ -43,7 +45,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static void Actualizar(int id, short nroCuota, DateTime vtoCuota)
+        public static void Actualizar(int id, short nroCuota, DateTime vtoCuota, short cicloLectivo)
         {
             using (var db = new SMPorresEntities())
             {
@@ -54,6 +56,7 @@ namespace SMPorres.Repositories
                 var c = db.Cuotas.Find(id);
                 c.NroCuota = nroCuota;
                 c.VtoCuota = vtoCuota;
+                c.CicloLectivo = cicloLectivo;
                 db.SaveChanges();
             }
         }

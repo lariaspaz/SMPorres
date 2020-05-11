@@ -28,6 +28,7 @@ namespace SMPorres.Forms.Cuotas
             this.Text = "Edición de cuota";
             txtNroCuota.Text = cuota.NroCuota.ToString();
             dtVtoCuota.Value = cuota.VtoCuota;
+            txtPeríodo.Text = cuota.CicloLectivo.ToString();
         }
 
         public short NroCuota
@@ -46,6 +47,14 @@ namespace SMPorres.Forms.Cuotas
             }
         }
 
+        public short CicloLectivo
+        {
+            get
+            {
+                return (short) txtPeríodo.IntValue;
+            }
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
@@ -57,7 +66,10 @@ namespace SMPorres.Forms.Cuotas
 
         private bool ValidarDatos()
         {
-            return _validator.Validar(txtNroCuota, txtNroCuota.IntValue >= 0, "No puede ser menor o igual que cero");
+            return
+                _validator.Validar(txtNroCuota, NroCuota >= 0, "No puede ser menor o igual que cero") &&
+                _validator.Validar(txtPeríodo, VtoCuota.Year == CicloLectivo, "El vencimiento no coincide pertenece al ciclo lectivo ingresado.");
+
         }
     }
 }

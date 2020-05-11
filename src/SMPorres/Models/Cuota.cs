@@ -17,5 +17,6 @@ namespace SMPorres.Models
         public int Id { get; set; }
         public short NroCuota { get; set; }
         public System.DateTime VtoCuota { get; set; }
+        public Nullable<short> CicloLectivo { get; set; }
     }
 }

@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtPeríodo = new CustomLibrary.ComponentModel.NumericTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.dtVtoCuota = new System.Windows.Forms.DateTimePicker();
             this.lblVtoCuota = new System.Windows.Forms.Label();
             this.txtNroCuota = new CustomLibrary.ComponentModel.NumericTextBox();
@@ -48,6 +50,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtPeríodo);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.dtVtoCuota);
             this.panel2.Controls.Add(this.lblVtoCuota);
             this.panel2.Controls.Add(this.txtNroCuota);
@@ -55,20 +59,44 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(321, 71);
+            this.panel2.Size = new System.Drawing.Size(321, 100);
             this.panel2.TabIndex = 1;
+            // 
+            // txtPeríodo
+            // 
+            this.txtPeríodo.DecValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPeríodo.IntValue = ((long)(0));
+            this.txtPeríodo.Location = new System.Drawing.Point(111, 64);
+            this.txtPeríodo.Name = "txtPeríodo";
+            this.txtPeríodo.Size = new System.Drawing.Size(50, 20);
+            this.txtPeríodo.TabIndex = 2;
+            this.txtPeríodo.Text = "0";
+            this.txtPeríodo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(38, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Ciclo lectivo:";
             // 
             // dtVtoCuota
             // 
             this.dtVtoCuota.Location = new System.Drawing.Point(111, 38);
             this.dtVtoCuota.Name = "dtVtoCuota";
             this.dtVtoCuota.Size = new System.Drawing.Size(200, 20);
-            this.dtVtoCuota.TabIndex = 15;
+            this.dtVtoCuota.TabIndex = 1;
             // 
             // lblVtoCuota
             // 
             this.lblVtoCuota.AutoSize = true;
-            this.lblVtoCuota.Location = new System.Drawing.Point(45, 44);
+            this.lblVtoCuota.Location = new System.Drawing.Point(45, 45);
             this.lblVtoCuota.Name = "lblVtoCuota";
             this.lblVtoCuota.Size = new System.Drawing.Size(60, 13);
             this.lblVtoCuota.TabIndex = 13;
@@ -85,14 +113,14 @@
             this.txtNroCuota.Location = new System.Drawing.Point(111, 9);
             this.txtNroCuota.Name = "txtNroCuota";
             this.txtNroCuota.Size = new System.Drawing.Size(50, 20);
-            this.txtNroCuota.TabIndex = 1;
+            this.txtNroCuota.TabIndex = 0;
             this.txtNroCuota.Text = "0";
             this.txtNroCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 12);
+            this.label2.Location = new System.Drawing.Point(52, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
@@ -110,7 +138,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(327, 112);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(327, 141);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
@@ -119,7 +147,7 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 77);
+            this.panel1.Location = new System.Drawing.Point(0, 106);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(327, 35);
@@ -169,7 +197,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(327, 112);
+            this.ClientSize = new System.Drawing.Size(327, 141);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEdición";
             this.Text = "frmEdición";
@@ -195,5 +223,7 @@
         private CustomLibrary.ComponentModel.NumericTextBox txtNroCuota;
         private System.Windows.Forms.Label lblVtoCuota;
         private System.Windows.Forms.DateTimePicker dtVtoCuota;
+        private CustomLibrary.ComponentModel.NumericTextBox txtPeríodo;
+        private System.Windows.Forms.Label label1;
     }
 }

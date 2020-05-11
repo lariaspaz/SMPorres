@@ -32,13 +32,17 @@ namespace SMPorres.Forms.Cuotas
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
             dgvDatos.Columns[1].HeaderText = "Nº Cuota";
-            dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvDatos.Columns[2].HeaderText = "Vto. Cuota";
             dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dgvDatos.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            dgvDatos.Columns[3].HeaderText = "Ciclo lectivo";
+            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)
@@ -62,7 +66,7 @@ namespace SMPorres.Forms.Cuotas
                 {
                     try
                     {
-                        var c = CuotasRepository.Insertar(f.NroCuota, f.VtoCuota);
+                        var c = CuotasRepository.Insertar(f.NroCuota, f.VtoCuota, f.CicloLectivo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }
@@ -83,7 +87,7 @@ namespace SMPorres.Forms.Cuotas
                 {
                     try
                     {
-                        CuotasRepository.Actualizar(c.Id, f.NroCuota, f.VtoCuota);
+                        CuotasRepository.Actualizar(c.Id, f.NroCuota, f.VtoCuota, f.CicloLectivo);
                         ConsultarDatos();
                         dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == c.Id);
                     }
