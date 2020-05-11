@@ -29,37 +29,37 @@ namespace SMPorres.Forms.Alumnos
         public frmPermisoDeExámen(Alumno alumno, string cursoSeleccionado)
         {
             InitializeComponent();
-            cargarDatos(alumno, cursoSeleccionado);
+            CargarDatos(alumno, cursoSeleccionado);
         }
 
-        private void cargarDatos(Alumno alumno, string cursoyCarrera)
+        private void CargarDatos(Alumno alumno, string cursoyCarrera)
         {
-            obtenerDatos(alumno, cursoyCarrera);   // debe buscar situación del alumno (Al día, )
+            ObtenerDatos(alumno, cursoyCarrera);   // debe buscar situación del alumno (Al día, )
 
             txtTítulo.Text = _situación;
             txtLínea1.Text = _fecha + _alumno + _cursoyCarrera + _cuotas;
             txtLínea2.Text = _proxVencimiento;
         }
 
-        private void obtenerDatos(Alumno alumno, string cursoyCarrera)
+        private void ObtenerDatos(Alumno alumno, string cursoyCarrera)
         {
 
             _cuotasimpagas = CuotasRepository.CuotasVencidasImpagas(alumno);
 
-            _situación = cargarSituación(_cuotasimpagas);
+            _situación = CargarSituación(_cuotasimpagas);
 
-            _fecha = cargarFecha(DateTime.Today);
+            _fecha = CargarFecha(DateTime.Today);
 
-            _alumno = cargarAlumno(alumno);
+            _alumno = CargarAlumno(alumno);
 
             _cursoyCarrera = cursoyCarrera;
 
-            _cuotas = cargarCuotasImpagas(alumno, _cuotasimpagas);
+            _cuotas = CargarCuotasImpagas(alumno, _cuotasimpagas);
 
-            _proxVencimiento = cargarPróxVencimiento();
+            _proxVencimiento = CargarPróxVencimiento();
         }
 
-        private string cargarPróxVencimiento()
+        private string CargarPróxVencimiento()
         {
             string pv = "";
             if (CuotasRepository.PróximaCuota != null)
@@ -75,7 +75,7 @@ namespace SMPorres.Forms.Alumnos
             return pv;
         }
 
-        private string cargarCuotasImpagas(Alumno alumno, int _cuotasimpagas)
+        private string CargarCuotasImpagas(Alumno alumno, int _cuotasimpagas)
         {
             string c = "";
             if (_cuotasimpagas <= 0) c = ", no registra cuotas adeudadas.";
@@ -94,7 +94,7 @@ namespace SMPorres.Forms.Alumnos
             return c;
         }
 
-        private string cargarAlumno(Alumno alumno)
+        private string CargarAlumno(Alumno alumno)
         {
             bool masculino = true;
             if (alumno.Sexo == "F") masculino = false;
@@ -124,18 +124,18 @@ namespace SMPorres.Forms.Alumnos
             return al;
         }
 
-        private string cargarSituación(int _cuotasimpagas)
+        private string CargarSituación(int _cuotasimpagas)
         {
             string situacion = "Alumno al día";
             if (_cuotasimpagas > 0) situacion = "Alumno moroso";
             return situacion;
         }
 
-        private string cargarFecha(DateTime today)
+        private string CargarFecha(DateTime today)
         {
             DateTime hoy = DateTime.Today;
             string día = hoy.Day.ToString();
-            string mes = obtenerNombreMesNumero(hoy.Month);
+            string mes = ObtenerNombreMesNumero(hoy.Month);
             string año = hoy.Year.ToString();
             string fecha = "";
             if (hoy.Day > 1)
@@ -149,7 +149,7 @@ namespace SMPorres.Forms.Alumnos
             return fecha;
         }
 
-        private string obtenerNombreMesNumero(int numeroMes)
+        private string ObtenerNombreMesNumero(int numeroMes)
         {
             try
             {
