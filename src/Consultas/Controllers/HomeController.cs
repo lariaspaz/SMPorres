@@ -31,6 +31,8 @@ namespace Consultas.Controllers
             result.Curso = String.Format("{0} de {1}", ca.Curso, ca.Carrera);
             result.Pagos = pagos;
             result.PróximaCuota = pagos.FirstOrDefault(p => p.Fecha == null) ?? null; //error Plan de pago c/ todas cuotas canceladas
+            var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(id, result.PróximaCuota.FechaVto);
+            result.DatosPermiso = permisoExámen;
             ViewBag.Cuotas = new object();
             if (result.PróximaCuota != null)
             {
@@ -91,5 +93,41 @@ namespace Consultas.Controllers
                 return View();
             }
         }
-   }
+
+        public ActionResult ImprimirPermisoExamen(PermisoExámen permisoExámen)
+        {
+            //Response.ClearContent();
+            //Response.ClearHeaders();
+
+            //var pagos = new PagosRepository().ObtenerPagos(idCurso);
+            //var próximaCuota = pagos.FirstOrDefault(p => p.Fecha == null) ?? null; //error Plan de pago c/ todas cuotas canceladas
+            //var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(idCurso, próximaCuota.FechaVto);
+            
+            if (permisoExámen != null)
+            {
+                var repo = new PermisoExámenRepository();
+                using (var dt = repo.ObtenerDatos(permisoExámen))
+                {
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        using (var reporte = new Reports.PermisoExámen())
+                        {
+                            reporte.Database.Tables["PermisoExámen"].SetDataSource(dt);
+                            reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
+                                System.Web.HttpContext.Current.Response, false, "Permiso-de-exámen");
+                            return new EmptyResult();
+                        }
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+    }
 }

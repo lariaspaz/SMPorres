@@ -194,6 +194,7 @@
     <Compile Include="Models\ViewModels\Carrera.cs" />
     <Compile Include="Models\ViewModels\Curso.cs" />
     <Compile Include="Models\ViewModels\DetallePago.cs" />
+    <Compile Include="Models\ViewModels\PermisoExámen.cs" />
     <Compile Include="Models\WebServices\Alumno.cs" />
     <Compile Include="Models\WebServices\CursoAlumno.cs" />
     <Compile Include="Models\WebServices\Pago.cs" />
@@ -204,11 +205,18 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Reports\PermisoExámen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PermisoExámen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Repositories\AlumnosRepository.cs" />
     <Compile Include="Repositories\ConfiguracionRepository.cs" />
     <Compile Include="Repositories\CuponPagoRepository.cs" />
     <Compile Include="Repositories\CursosAlumnosRepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
+    <Compile Include="Repositories\PermisoExámenRepository.cs" />
     <Compile Include="Web_Services\SMP.asmx.cs">
       <DependentUpon>SMP.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -336,6 +344,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Account\ChangePwd.cshtml" />
+    <Content Include="Views\Home\PermisoExámen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -353,6 +362,10 @@
     <EmbeddedResource Include="Reports\CupónDePago.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CupónDePago.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PermisoExámen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PermisoExámen.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

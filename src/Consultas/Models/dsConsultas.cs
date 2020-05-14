@@ -14,3 +14,17 @@ namespace SMPorres.Reports.DataSet
     {
     }
 }
+namespace Consultas.Models
+{
+
+
+    public partial class dsConsultas
+    {
+    }
+}
+namespace Consultas.Models {
+    
+    
+    public partial class dsConsultas {
+    }
+}

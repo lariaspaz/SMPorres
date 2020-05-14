@@ -12,5 +12,7 @@ namespace Consultas.Models.ViewModels
         public PagoWeb PróximaCuota { get; set; }
 
         public IEnumerable<PagoWeb> Pagos { get; set; }
+
+        public PermisoExámen DatosPermiso { get; set; }
     }
 }

@@ -31,6 +31,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="PermisoExámen" msprop:Generator_TableClassName="PermisoExámenDataTable" msprop:Generator_TableVarName="tablePermisoExámen" msprop:Generator_RowChangedName="PermisoExámenRowChanged" msprop:Generator_TablePropName="PermisoExámen" msprop:Generator_RowDeletingName="PermisoExámenRowDeleting" msprop:Generator_RowChangingName="PermisoExámenRowChanging" msprop:Generator_RowEvHandlerName="PermisoExámenRowChangeEventHandler" msprop:Generator_RowDeletedName="PermisoExámenRowDeleted" msprop:Generator_RowClassName="PermisoExámenRow" msprop:Generator_UserTableName="PermisoExámen" msprop:Generator_RowEvArgName="PermisoExámenRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Línea1" msprop:Generator_ColumnVarNameInTable="columnLínea1" msprop:Generator_ColumnPropNameInRow="Línea1" msprop:Generator_ColumnPropNameInTable="Línea1Column" msprop:Generator_UserColumnName="Línea1" type="xs:string" minOccurs="0" />
+              <xs:element name="Línea2" msprop:Generator_ColumnVarNameInTable="columnLínea2" msprop:Generator_ColumnPropNameInRow="Línea2" msprop:Generator_ColumnPropNameInTable="Línea2Column" msprop:Generator_UserColumnName="Línea2" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
