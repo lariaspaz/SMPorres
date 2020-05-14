@@ -36,14 +36,6 @@ namespace SMPorres.Repositories
             }
         }
 
-        internal static PlanPago ObtenerPlanPago(int idPago)
-        {
-            using (var db = new SMPorresEntities())
-            {
-                return db.Pagos.Find(idPago).PlanPago;
-            }
-        }
-
         internal static PlanPago ObtenerPlanPagoPorId(int id)
         {
             using (var db = new SMPorresEntities())
@@ -52,7 +44,8 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca, int modalidad, TipoBeca tipoBeca)
+        public static PlanPago Insertar(int idAlumno, int idCurso, short porcentajeBeca, int modalidad,
+            TipoBeca tipoBeca)
         {
             using (var db = new SMPorresEntities())
             {
@@ -61,66 +54,47 @@ namespace SMPorres.Repositories
                     throw new Exception("El alumno ya tiene un plan de pago vigente en el curso seleccionado.");
                 }
 
-                var curso = CursosRepository.ObtenerCursoPorId(idCurso);
-                var id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1;
                 var trx = db.Database.BeginTransaction();
-                var plan = new PlanPago
-                {
-                    Id = id,
-                    IdAlumno = idAlumno,
-                    IdCurso = idCurso,
-                    CantidadCuotas = CursosRepository.ObtieneMaxCuota(modalidad),//Configuration.MaxCuotas,
-                    NroCuota = CursosRepository.ObtieneMinCuota(modalidad), //1,
-                    ImporteCuota = curso.ImporteCuota,
-                    PorcentajeBeca = porcentajeBeca,
-                    TipoBeca = (byte)tipoBeca,
-                    Estado = (short)EstadoPlanPago.Vigente,
-                    IdUsuarioEstado = Session.CurrentUser.Id,
-                    FechaGrabacion = Configuration.CurrentDate,
-                    IdUsuario = Session.CurrentUser.Id,
-                    Modalidad = modalidad //curso.Modalidad
-                };
                 try
                 {
-                    db.PlanesPago.Add(plan);
-                    db.SaveChanges();
-                    //carga cuota matricula
-                    var pm = new Pago();
-                    pm.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
-                    pm.IdPlanPago = id;
-                    pm.NroCuota = 0;
-                    pm.ImporteCuota = curso.ImporteMatricula;
-                    pm.Estado = (byte)EstadoPago.Impago;
-                    db.Pagos.Add(pm);
-                    db.SaveChanges();
-
-                    //leer modalidad y obtener minCuota y maxCuota
-                    short minC = CursosRepository.ObtieneMinCuota(modalidad);
-                    short maxC = CursosRepository.ObtieneMaxCuota(modalidad);
-                    if (minC != maxC)
-                    {
-                        //for (short i = 0; i <= Configuration.MaxCuotas; i++)
-                        for (short i = minC; i <= maxC; i++)
-                        {
-                            var p = new Pago();
-                            p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
-                            p.IdPlanPago = id;
-                            p.NroCuota = i;
-                            p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
-                            pm.Estado = (byte)EstadoPago.Impago;
-                            db.Pagos.Add(p);
-                            db.SaveChanges();
-                        }
-                    }
+                    var plan = CrearPlanPago(db, idAlumno, idCurso, porcentajeBeca, modalidad, tipoBeca);
+                    Pago mat = PagosRepository.CrearMatrícula(db, plan);
+                    PagosRepository.CrearCuotas(db, plan, modalidad);
                     trx.Commit();
+                    return plan;
                 }
                 catch (Exception)
                 {
                     trx.Rollback();
                     throw;
                 }
-                return plan;
             }
+        }
+
+        private static PlanPago CrearPlanPago(SMPorresEntities db, int idAlumno, int idCurso,
+            short porcentajeBeca, int modalidad, TipoBeca tipoBeca)
+        {
+            var curso = CursosRepository.ObtenerCursoPorId(idCurso);
+            var plan = new PlanPago
+            {
+                Id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1,
+                IdAlumno = idAlumno,
+                IdCurso = idCurso,
+                Curso = curso,
+                CantidadCuotas = CursosRepository.ObtieneMaxCuota(modalidad),//Configuration.MaxCuotas,
+                NroCuota = CursosRepository.ObtieneMinCuota(modalidad), //1,
+                ImporteCuota = curso.ImporteCuota,
+                PorcentajeBeca = porcentajeBeca,
+                TipoBeca = (byte)tipoBeca,
+                Estado = (short)EstadoPlanPago.Vigente,
+                IdUsuarioEstado = Session.CurrentUser.Id,
+                FechaGrabacion = Configuration.CurrentDate,
+                IdUsuario = Session.CurrentUser.Id,
+                Modalidad = modalidad //curso.Modalidad
+            };
+            db.PlanesPago.Add(plan);
+            db.SaveChanges();
+            return plan;
         }
 
         public static PlanPago Actualizar(int planDePagoId, short porcentajeBeca, TipoBeca tipoBeca)
@@ -141,7 +115,7 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var planes = from pp in db.PlanesPago
-                             join ca in db.CursosAlumnos on 
+                             join ca in db.CursosAlumnos on
                                 new { pp.IdCurso, pp.IdAlumno } equals new { ca.IdCurso, ca.IdAlumno }
                              where pp.IdCurso == idCurso &&
                                     pp.Estado == (short)EstadoPlanPago.Vigente &&

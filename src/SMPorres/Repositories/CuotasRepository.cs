@@ -9,21 +9,23 @@ namespace SMPorres.Repositories
 {
     public class CuotasRepository
     {
-        public static IList<Cuota> ObtenerCuotas()
+        public static IList<Cuota> ObtenerCuotas(int? cicloLectivo = null)
         {
             using (var db = new SMPorresEntities())
             {
-                var query = (from c in db.Cuotas select c)
-                                .ToList()
-                                .Select(
-                                    c => new Cuota
-                                    {
+                var query = from c in db.Cuotas select c;
+                if (cicloLectivo.HasValue)
+                {
+                    query = query.Where(c => c.CicloLectivo == cicloLectivo);
+                }
+                var query2 = query.ToList()
+                                .Select(c => new Cuota {
                                         Id = c.Id,
                                         NroCuota = c.NroCuota,
                                         VtoCuota = c.VtoCuota,
                                         CicloLectivo = c.CicloLectivo
                                     });
-                return query.OrderBy(c => c.CicloLectivo).ThenBy(c => c.NroCuota).ToList();
+                return query2.OrderBy(c => c.CicloLectivo).ThenBy(c => c.NroCuota).ToList();
             }
         }
 
@@ -81,29 +83,7 @@ namespace SMPorres.Repositories
             {
                 return db.Cuotas.FirstOrDefault(c => c.Id == id);
             }
-        }
-
-        //public static short MáximaCuotaVencida
-        //{
-        //    get
-        //    {
-        //        short c = 0;
-        //        using (var db = new SMPorresEntities())
-        //        {
-        //            //if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota) > 0)
-        //            if (db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).FirstOrDefault() != null )
-        //            {
-        //                c = db.Cuotas.Where(x => x.VtoCuota <= DateTime.Today).Max(x => x.NroCuota);
-        //            }
-        //            else
-        //            {
-        //                c = 1; //primer cuota
-        //            }
-        //        }
-
-        //        return c;
-        //    }
-        //}
+        }        
 
         public static Cuota PróximaCuota
         {
@@ -114,8 +94,11 @@ namespace SMPorres.Repositories
                 {
 
                     //return db.Cuotas.Where(x => x.VtoCuota >= DateTime.Today).FirstOrDefault();
+                    var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
                     var query = (from c in db.Cuotas
-                                 where c.VtoCuota >= DateTime.Today
+                                 where 
+                                    c.VtoCuota >= DateTime.Today &&
+                                    c.CicloLectivo == cl
                                  orderby c.VtoCuota
                                  select c)
                                 .FirstOrDefault();

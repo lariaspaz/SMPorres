@@ -46,14 +46,37 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                var q = (from p in db.Pagos
-                         join c in db.Cuotas on p.NroCuota equals c.NroCuota into pc
+                var pagos = from p in db.Pagos
+                            join pp in db.PlanesPago on p.IdPlanPago equals pp.Id
+                            join ca in db.CursosAlumnos on new { pp.IdCurso, pp.IdAlumno } equals 
+                                new { ca.IdCurso, ca.IdAlumno }
+                            select new
+                            {
+                                p.Id,
+                                p.NroCuota,
+                                p.IdMedioPago,
+                                p.IdBecaAlumno,
+                                p.IdPlanPago,
+                                p.Estado,
+                                p.ImporteCuota,
+                                p.Fecha,
+                                p.ImportePagado,
+                                p.EsContrasiento,
+                                p.Descripcion,
+                                ca.CicloLectivo
+                            };
+
+                var q = (from p in pagos
+                         join c in db.Cuotas on new { cl = p.CicloLectivo, c = p.NroCuota } equals 
+                            new { cl = c.CicloLectivo.Value, c = c.NroCuota } into pc
                          from c in pc.DefaultIfEmpty()
                          join mp in db.MediosPago on p.IdMedioPago equals mp.Id into pmp
                          from mp in pmp.DefaultIfEmpty()
                          join ba in db.BecasAlumnos on p.IdBecaAlumno equals ba.Id into pba
                          from ba in pba.DefaultIfEmpty()
-                         where p.IdPlanPago == idPlanPago && p.Estado != (short)EstadoPago.Baja
+                         where
+                            p.IdPlanPago == idPlanPago &&
+                            p.Estado != (short)EstadoPago.Baja
                          select new
                          {
                              p.Id,
@@ -88,6 +111,47 @@ namespace SMPorres.Repositories
                         .OrderBy(p => p.NroCuota);
                 return q.ToList();
             }
+        }
+
+        internal static void CrearCuotas(SMPorresEntities db, PlanPago planPago, int modalidad)
+        {
+            //leer modalidad y obtener minCuota y maxCuota
+            short minC = CursosRepository.ObtieneMinCuota(modalidad);
+            short maxC = CursosRepository.ObtieneMaxCuota(modalidad);
+            if (minC != maxC)
+            {
+                var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
+                var cuotas = CuotasRepository.ObtenerCuotas(cl).Select(c => new { c.NroCuota, c.VtoCuota });
+                //for (short i = 0; i <= Configuration.MaxCuotas; i++)
+                for (short i = minC; i <= maxC; i++)
+                {
+                    var p = new Pago();
+                    p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                    p.IdPlanPago = planPago.Id;
+                    p.NroCuota = i;
+                    p.ImporteCuota = (i == 0) ? planPago.Curso.ImporteMatricula : planPago.Curso.ImporteCuota;
+                    p.Estado = (byte)EstadoPago.Impago;
+                    p.FechaVto = cuotas.FirstOrDefault(c => c.NroCuota == i).VtoCuota;
+                    db.Pagos.Add(p);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        internal static Pago CrearMatrícula(SMPorresEntities db, PlanPago planPago)
+        {
+            var p = new Pago();
+            p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+            p.IdPlanPago = planPago.Id;
+            p.NroCuota = 0;
+            p.ImporteCuota = planPago.Curso.ImporteMatricula;
+            var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
+            var cuotas = CuotasRepository.ObtenerCuotas(cl).Select(c => new { c.NroCuota, c.VtoCuota });
+            p.FechaVto = cuotas.FirstOrDefault(c => c.NroCuota == 0).VtoCuota;
+            p.Estado = (byte)EstadoPago.Impago;
+            db.Pagos.Add(p);
+            db.SaveChanges();
+            return p;
         }
 
         internal static Pago ObtenerPago(int idPago)

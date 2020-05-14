@@ -187,7 +187,7 @@ namespace SMPorres.Forms.Alumnos
             dgvPlanesPago.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
-        private void GenerarPlanDePagoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnGenerarPlanDePago_Click(object sender, EventArgs e)
         {
             if (AlumnoConDeuda(txtNroDocumento.DecValue))
             {
@@ -200,7 +200,8 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca, f.Modalidad, f.TipoBeca);
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, 
+                            f.PorcentajeBeca, f.Modalidad, f.TipoBeca);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }

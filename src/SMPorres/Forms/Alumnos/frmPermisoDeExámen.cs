@@ -61,18 +61,15 @@ namespace SMPorres.Forms.Alumnos
 
         private string CargarPróxVencimiento()
         {
-            string pv = "";
             if (CuotasRepository.PróximaCuota != null)
             {
-                pv += "El próximo vencimiento de cuota es el día " +
+                return "El próximo vencimiento de cuota es el día " +
                     CuotasRepository.PróximaCuota.VtoCuota.ToShortDateString().ToString() + ".";
             }
             else
             {
-                pv += "No tiene cuotas próximas a vencer.";
+                return "No tiene cuotas próximas a vencer.";
             }
-
-            return pv;
         }
 
         private string CargarCuotasImpagas(Alumno alumno, int _cuotasimpagas)

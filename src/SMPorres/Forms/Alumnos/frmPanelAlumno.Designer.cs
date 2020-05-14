@@ -184,7 +184,7 @@
             this.btnGenerarPlanDePago.Name = "btnGenerarPlanDePago";
             this.btnGenerarPlanDePago.Size = new System.Drawing.Size(23, 22);
             this.btnGenerarPlanDePago.ToolTipText = "Generar plan de pago";
-            this.btnGenerarPlanDePago.Click += new System.EventHandler(this.GenerarPlanDePagoToolStripMenuItem_Click);
+            this.btnGenerarPlanDePago.Click += new System.EventHandler(this.btnGenerarPlanDePago_Click);
             // 
             // btnEditarPlanPago
             // 
