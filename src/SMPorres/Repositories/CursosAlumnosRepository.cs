@@ -46,9 +46,7 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
-                Func<string, Curso> crearCurso = (string s) => { return new Curso { Nombre = s }; };
                 var query = (from ca in db.CursosAlumnos
-                             //join c in db.Cursos on ca.IdCurso equals c.Id
                              where ca.IdAlumno == idAlumno
                              select new
                              {

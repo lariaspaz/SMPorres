@@ -52,10 +52,17 @@ namespace SMPorres.Repositories
         {
             var query = (from pp in db.PlanesPago
                          join p in db.Pagos on pp.Id equals p.IdPlanPago
-                         join c in db.Cuotas on p.NroCuota equals c.NroCuota into pc
-                         from c in pc.DefaultIfEmpty()
-                         join ca in db.CursosAlumnos on new { pp.IdAlumno, pp.IdCurso } equals new { ca.IdAlumno, ca.IdCurso } into ca2
-                         where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso //&& p.Fecha != null
+                         join ca in db.CursosAlumnos on 
+                            new { pp.IdAlumno, pp.IdCurso } equals new { ca.IdAlumno, ca.IdCurso } 
+                            into ca2
+                         join c in db.Cuotas on 
+                            new { cl = ca2.First().CicloLectivo, p.NroCuota } equals 
+                            new { cl = c.CicloLectivo.Value, c.NroCuota }  
+                            into pc
+                            from c in pc.DefaultIfEmpty()
+                         where 
+                            pp.IdAlumno == idAlumno && 
+                            pp.IdCurso == idCurso //&& p.Fecha != null
                          select new
                          {
                              p.Id,

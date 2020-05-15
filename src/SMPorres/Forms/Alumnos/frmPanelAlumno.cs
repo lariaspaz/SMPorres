@@ -187,12 +187,14 @@ namespace SMPorres.Forms.Alumnos
             dgvPlanesPago.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
-        private void GenerarPlanDePagoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnGenerarPlanDePago_Click(object sender, EventArgs e)
         {
-            if (AlumnoConDeuda(txtNroDocumento.DecValue))
+            var tieneDeuda = PagosRepository.ObtenerDeudaPorAlumno(txtNroDocumento.DecValue).Any();
+            if (tieneDeuda)
             {
-                MessageBox.Show("El alumno tiene cuotas impagas",
-                "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("El alumno registra cuotas impagas.", "Atención", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Warning);
+                return;
             }
             using (var f = new PlanesPago.frmEdición(txtNombre.Text, NombreCursoSeleccionado, NombreCurso))
             {
@@ -200,7 +202,8 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, f.PorcentajeBeca, f.Modalidad, f.TipoBeca);
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, 
+                            f.PorcentajeBeca, f.Modalidad, f.TipoBeca);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
                     }
@@ -210,16 +213,6 @@ namespace SMPorres.Forms.Alumnos
                     }
                 }
             }
-        }
-
-        private bool AlumnoConDeuda(decimal decValue)
-        {
-            bool debe = false;
-            if (PagosRepository.CuotasImpagasAlumno(decValue).Any())
-            {
-                debe = true;
-            }
-            return debe;
         }
 
         private void dgvPlanesPago_SelectionChanged(object sender, EventArgs e)

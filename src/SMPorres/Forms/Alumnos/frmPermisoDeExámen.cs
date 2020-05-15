@@ -13,6 +13,7 @@ using SMPorres.Repositories;
 using System.Globalization;
 using SMPorres.Reports.Designs;
 using SMPorres.Reports.DataSet;
+using SMPorres.Lib;
 
 namespace SMPorres.Forms.Alumnos
 {
@@ -61,18 +62,16 @@ namespace SMPorres.Forms.Alumnos
 
         private string CargarPróxVencimiento()
         {
-            string pv = "";
-            if (CuotasRepository.PróximaCuota != null)
+            var prox = CuotasRepository.ObtenerCuotasActuales()
+                            .FirstOrDefault(c => c.VtoCuota >= Configuration.CurrentDate.Date);
+            if (prox != null)
             {
-                pv += "El próximo vencimiento de cuota es el día " +
-                    CuotasRepository.PróximaCuota.VtoCuota.ToShortDateString().ToString() + ".";
+                return "El próximo vencimiento de cuota es el día " + prox.VtoCuota.ToShortDateString() + ".";
             }
             else
             {
-                pv += "No tiene cuotas próximas a vencer.";
+                return "No tiene cuotas próximas a vencer.";
             }
-
-            return pv;
         }
 
         private string CargarCuotasImpagas(Alumno alumno, int _cuotasimpagas)
