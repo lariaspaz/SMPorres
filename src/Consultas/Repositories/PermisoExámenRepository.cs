@@ -57,8 +57,7 @@ namespace Consultas.Repositories
             string pv = "";
             if (vencimiento != null)
             {
-                pv += "El próximo vencimiento de cuota es el día " +
-                    vencimiento.ToString() + ".";
+                pv += String.Format("El próximo vencimiento de cuota es el día {0:dd/MM/yyyy}.", vencimiento);
             }
             else
             {
@@ -71,8 +70,8 @@ namespace Consultas.Repositories
         private string CargarAlumno(string apellido, string nombre)
         {
             string al = ", se certifica que ";
-            if (!String.IsNullOrEmpty(apellido.Trim())) al += apellido + " ,";
-            if (!String.IsNullOrEmpty(nombre.Trim())) al += nombre;
+            if (!String.IsNullOrEmpty(apellido)) al += apellido + " ,";
+            if (!String.IsNullOrEmpty(nombre)) al += nombre;
             al += " inscripto en ";
             return al;
         }

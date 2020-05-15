@@ -9,24 +9,23 @@
             <mark class="p-2"><strong>Curso: @Model.Curso</strong></mark>
         </div>
     </div>
-
+    @if (!Model.Pagos.Any(x => x.FechaVto < Consultas.Lib.Configuration.CurrentDate.Date && x.ImportePagado == 0))
+    {
+        <div id="permisoExámen" class="mt-4">
+            @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen", Model.DatosPermiso,
+                        new { @class = "btn btn-primary", target = "_blank", role = "button", id = "lnkImprimir" })
+        </div>
+    }
     @if (Model.PróximaCuota != null)
     {
         <div id="proxcuota" class="mt-4 col-7 border rounded p-3">
             @{ Html.RenderPartial("MostrarPróximaCuota", Model.PróximaCuota); }
         </div>
     }
-
-    @if (!Model.Pagos.Any(x => x.FechaVto < Consultas.Lib.Configuration.CurrentDate.Date && x.ImportePagado == 0))
-    {
-        <div id="permisoExámen" class="mt-4">
-            @{ Html.RenderPartial("PermisoExámen", Model.DatosPermiso); }
-        </div>
-    }
-
+   
     <div id="pagos" class="mt-4">
         <h3>Sus pagos</h3>
-        @{ Html.RenderPartial("ListarPagos", Model.Pagos); }
+        @{ Html.RenderPartial("ListarPagos", Model.Pagos); }+
     </div>
     
 </div>
