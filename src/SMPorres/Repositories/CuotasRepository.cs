@@ -1,4 +1,5 @@
-﻿using SMPorres.Models;
+﻿using SMPorres.Lib;
+using SMPorres.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,15 @@ namespace SMPorres.Repositories
 {
     public class CuotasRepository
     {
-        public static IList<Cuota> ObtenerCuotas(int? cicloLectivo = null)
+        public static IList<Cuota> ObtenerCuotas()
         {
             using (var db = new SMPorresEntities())
             {
                 var query = from c in db.Cuotas select c;
-                if (cicloLectivo.HasValue)
-                {
-                    query = query.Where(c => c.CicloLectivo == cicloLectivo);
-                }
+                //if (cicloLectivo.HasValue)
+                //{
+                //    query = query.Where(c => c.CicloLectivo == cicloLectivo);
+                //}
                 var query2 = query.ToList()
                                 .Select(c => new Cuota {
                                         Id = c.Id,
@@ -27,6 +28,12 @@ namespace SMPorres.Repositories
                                     });
                 return query2.OrderBy(c => c.CicloLectivo).ThenBy(c => c.NroCuota).ToList();
             }
+        }
+
+        public static IList<Cuota> ObtenerCuotasActuales(int? cicloLectivo = null)
+        {
+            var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
+            return ObtenerCuotas().Where(c => c.CicloLectivo == cicloLectivo).ToList();
         }
 
         public static Cuota Insertar(short nroCuota, DateTime vtoCuota, short cicloLectivo)
@@ -84,28 +91,6 @@ namespace SMPorres.Repositories
                 return db.Cuotas.FirstOrDefault(c => c.Id == id);
             }
         }        
-
-        public static Cuota PróximaCuota
-        {
-            get
-            {
-                DateTime hoy = DateTime.Today;
-                using (var db = new SMPorresEntities())
-                {
-
-                    //return db.Cuotas.Where(x => x.VtoCuota >= DateTime.Today).FirstOrDefault();
-                    var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
-                    var query = (from c in db.Cuotas
-                                 where 
-                                    c.VtoCuota >= DateTime.Today &&
-                                    c.CicloLectivo == cl
-                                 orderby c.VtoCuota
-                                 select c)
-                                .FirstOrDefault();
-                    return query;
-                }
-            }
-        }
 
         public static List<short> CuotasImpagas(Alumno alumno)
         {

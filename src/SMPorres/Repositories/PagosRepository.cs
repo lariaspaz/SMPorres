@@ -48,7 +48,7 @@ namespace SMPorres.Repositories
             {
                 var pagos = from p in db.Pagos
                             join pp in db.PlanesPago on p.IdPlanPago equals pp.Id
-                            join ca in db.CursosAlumnos on new { pp.IdCurso, pp.IdAlumno } equals 
+                            join ca in db.CursosAlumnos on new { pp.IdCurso, pp.IdAlumno } equals
                                 new { ca.IdCurso, ca.IdAlumno }
                             select new
                             {
@@ -67,7 +67,7 @@ namespace SMPorres.Repositories
                             };
 
                 var q = (from p in pagos
-                         join c in db.Cuotas on new { cl = p.CicloLectivo, c = p.NroCuota } equals 
+                         join c in db.Cuotas on new { cl = p.CicloLectivo, c = p.NroCuota } equals
                             new { cl = c.CicloLectivo.Value, c = c.NroCuota } into pc
                          from c in pc.DefaultIfEmpty()
                          join mp in db.MediosPago on p.IdMedioPago equals mp.Id into pmp
@@ -120,8 +120,7 @@ namespace SMPorres.Repositories
             short maxC = CursosRepository.ObtieneMaxCuota(modalidad);
             if (minC != maxC)
             {
-                var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
-                var cuotas = CuotasRepository.ObtenerCuotas(cl).Select(c => new { c.NroCuota, c.VtoCuota });
+                var cuotas = CuotasRepository.ObtenerCuotasActuales().Select(c => new { c.NroCuota, c.VtoCuota });
                 //for (short i = 0; i <= Configuration.MaxCuotas; i++)
                 for (short i = minC; i <= maxC; i++)
                 {
@@ -145,8 +144,7 @@ namespace SMPorres.Repositories
             p.IdPlanPago = planPago.Id;
             p.NroCuota = 0;
             p.ImporteCuota = planPago.Curso.ImporteMatricula;
-            var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
-            var cuotas = CuotasRepository.ObtenerCuotas(cl).Select(c => new { c.NroCuota, c.VtoCuota });
+            var cuotas = CuotasRepository.ObtenerCuotasActuales().Select(c => new { c.NroCuota, c.VtoCuota });
             p.FechaVto = cuotas.FirstOrDefault(c => c.NroCuota == 0).VtoCuota;
             p.Estado = (byte)EstadoPago.Impago;
             db.Pagos.Add(p);
@@ -178,7 +176,6 @@ namespace SMPorres.Repositories
             Pago pago = ObtenerPago(idPago);
             if (pago == null) return null;
             var impBase = pago.ImporteCuota;
-            var cc = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
             pago.PorcBeca = 0;
             pago.ImporteBeca = 0;
             pago.PorcDescPagoTermino = 0;
@@ -189,6 +186,7 @@ namespace SMPorres.Repositories
 
             if (pago.NroCuota == 0)
             {
+                var cc = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
                 pago.FechaVto = new DateTime(cc, 12, 31);
                 int cantCuotas = CantidadCuotasMatrícula(pago.IdPlanPago);
                 //var curso = CursosRepository.ObtenerCursoPorId(pago.PlanPago.Curso.Id);
@@ -213,7 +211,12 @@ namespace SMPorres.Repositories
                 beca = Math.Round(impBase * (descBeca / 100));
             }
 
-            var cuota = CuotasRepository.ObtenerCuotas().Where(c => c.NroCuota == pago.NroCuota).FirstOrDefault();
+            var cl = CursosAlumnosRepository.ObtenerCursosPorAlumno(pago.PlanPago.IdAlumno)
+                        .First(ca => ca.IdCurso == pago.PlanPago.IdCurso)
+                        .CicloLectivo;
+            var cuota = CuotasRepository.ObtenerCuotas()
+                            .FirstOrDefault(c => c.CicloLectivo == cl &&
+                                                 c.NroCuota == pago.NroCuota);
             if (cuota == null)
             {
                 return null;
@@ -510,20 +513,23 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static IList<Pago> CuotasImpagasAlumno(decimal nroDocumento)
+        public static IList<Pago> ObtenerDeudaPorAlumno(decimal nroDocumento)
         {
             using (var db = new SMPorresEntities())
             {
-                var pagos = (from pp in db.PlanesPago
-                             join a in db.Alumnos on pp.IdAlumno equals a.Id
-                             join p in db.Pagos on pp.Id equals p.IdPlanPago
-                             join c in db.Cuotas on p.NroCuota equals c.NroCuota
-                             where
-                                 a.NroDocumento == nroDocumento &&
-                                 pp.Estado == (short)EstadoPlanPago.Vigente &&
-                                 c.VtoCuota <= Configuration.CurrentDate &&
-                                 p.ImportePagado == null //Impago
-                             select p).ToList()
+                var qry = (from pp in db.PlanesPago
+                           join a in db.Alumnos on pp.IdAlumno equals a.Id
+                           join p in db.Pagos on pp.Id equals p.IdPlanPago
+                           join ca in db.CursosAlumnos on new { pp.IdCurso, pp.IdAlumno } equals
+                             new { ca.IdCurso, ca.IdAlumno }
+                           join c in db.Cuotas on new { cl = ca.CicloLectivo, p.NroCuota } equals
+                              new { cl = c.CicloLectivo.Value, c.NroCuota }
+                           where
+                               a.NroDocumento == nroDocumento &&
+                               pp.Estado == (short)EstadoPlanPago.Vigente &&
+                               c.VtoCuota <= Configuration.CurrentDate &&
+                               p.ImportePagado == null //Impago
+                           select p).ToList()
                         .Select(
                             pa => new Pago
                             {
@@ -532,9 +538,8 @@ namespace SMPorres.Repositories
                                 ImporteCuota = pa.ImporteCuota,
                                 ImportePagado = pa.ImportePagado
                             });
-                return pagos.ToList();
+                return qry.ToList();
             }
-
         }
 
         public static int CantidadCuotasMatrícula(decimal idPlanPago)
