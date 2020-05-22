@@ -30,10 +30,10 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static IList<Cuota> ObtenerCuotasActuales(int? cicloLectivo = null)
+        public static IList<Cuota> ObtenerCuotasActuales()
         {
             var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
-            return ObtenerCuotas().Where(c => c.CicloLectivo == cicloLectivo).ToList();
+            return ObtenerCuotas().Where(c => c.CicloLectivo == cl).ToList();
         }
 
         public static Cuota Insertar(short nroCuota, DateTime vtoCuota, short cicloLectivo)

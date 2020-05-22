@@ -63,6 +63,7 @@ namespace SMPorres.Repositories
                                 p.ImportePagado,
                                 p.EsContrasiento,
                                 p.Descripcion,
+                                p.FechaVto,
                                 ca.CicloLectivo
                             };
 
@@ -83,7 +84,8 @@ namespace SMPorres.Repositories
                              p.NroCuota,
                              p.ImporteCuota,
                              p.Fecha,
-                             FechaVto = (c == null) ? default(DateTime) : c.VtoCuota,
+                             //FechaVto = (c == null) ? default(DateTime) : c.VtoCuota,
+                             p.FechaVto,
                              p.ImportePagado,
                              p.IdMedioPago,
                              MedioPago = mp,
@@ -99,7 +101,8 @@ namespace SMPorres.Repositories
                                 NroCuota = p.NroCuota,
                                 ImporteCuota = p.ImporteCuota,
                                 Fecha = p.Fecha,
-                                FechaVto = (p.FechaVto == default(DateTime)) ? new DateTime(ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo, 12, 31) : p.FechaVto,
+                                //FechaVto = (p.FechaVto == default(DateTime)) ? new DateTime(ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo, 12, 31) : p.FechaVto,
+                                FechaVto = p.FechaVto,
                                 ImportePagado = p.ImportePagado,
                                 IdMedioPago = p.IdMedioPago,
                                 MedioPago = p.MedioPago,
@@ -113,14 +116,17 @@ namespace SMPorres.Repositories
             }
         }
 
-        internal static void CrearCuotas(SMPorresEntities db, PlanPago planPago, int modalidad)
+        internal static List<Pago> CrearCuotas(SMPorresEntities db, PlanPago planPago, int modalidad)
         {
             //leer modalidad y obtener minCuota y maxCuota
             short minC = CursosRepository.ObtieneMinCuota(modalidad);
             short maxC = CursosRepository.ObtieneMaxCuota(modalidad);
+            var result = new List<Pago>();
             if (minC != maxC)
             {
-                var cuotas = CuotasRepository.ObtenerCuotasActuales().Select(c => new { c.NroCuota, c.VtoCuota });
+                var curso = CursosRepository.ObtenerCursoPorId(planPago.IdCurso);
+                var cuotas = from c in CuotasRepository.ObtenerCuotasActuales()
+                             select new { c.NroCuota, c.VtoCuota };
                 //for (short i = 0; i <= Configuration.MaxCuotas; i++)
                 for (short i = minC; i <= maxC; i++)
                 {
@@ -128,13 +134,16 @@ namespace SMPorres.Repositories
                     p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
                     p.IdPlanPago = planPago.Id;
                     p.NroCuota = i;
-                    p.ImporteCuota = (i == 0) ? planPago.Curso.ImporteMatricula : planPago.Curso.ImporteCuota;
+                    //p.ImporteCuota = (i == 0) ? planPago.Curso.ImporteMatricula : planPago.Curso.ImporteCuota;
+                    p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
                     p.Estado = (byte)EstadoPago.Impago;
-                    p.FechaVto = cuotas.FirstOrDefault(c => c.NroCuota == i).VtoCuota;
+                    p.FechaVto = cuotas.First(c => c.NroCuota == i).VtoCuota;
                     db.Pagos.Add(p);
                     db.SaveChanges();
+                    result.Add(p);
                 }
             }
+            return result;
         }
 
         internal static Pago CrearMatrícula(SMPorresEntities db, PlanPago planPago)
@@ -143,9 +152,13 @@ namespace SMPorres.Repositories
             p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
             p.IdPlanPago = planPago.Id;
             p.NroCuota = 0;
-            p.ImporteCuota = planPago.Curso.ImporteMatricula;
-            var cuotas = CuotasRepository.ObtenerCuotasActuales().Select(c => new { c.NroCuota, c.VtoCuota });
-            p.FechaVto = cuotas.FirstOrDefault(c => c.NroCuota == 0).VtoCuota;
+            var curso = CursosRepository.ObtenerCursoPorId(planPago.IdCurso);
+            //p.ImporteCuota = planPago.Curso.ImporteMatricula;
+            p.ImporteCuota = curso.ImporteMatricula;
+            var vto = (from c in CuotasRepository.ObtenerCuotasActuales()
+                       where c.NroCuota == 0
+                       select c.VtoCuota).First();
+            p.FechaVto = vto;
             p.Estado = (byte)EstadoPago.Impago;
             db.Pagos.Add(p);
             db.SaveChanges();
@@ -186,9 +199,11 @@ namespace SMPorres.Repositories
 
             if (pago.NroCuota == 0)
             {
-                var cc = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
-                pago.FechaVto = new DateTime(cc, 12, 31);
-                int cantCuotas = CantidadCuotasMatrícula(pago.IdPlanPago);
+                #region La fila del pago debe tener una fecha de vto
+                //var cc = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
+                //pago.FechaVto = new DateTime(cc, 12, 31);
+                #endregion
+                int cantCuotas = CantidadCuotasImpagasMatrícula(pago.IdPlanPago);
                 //var curso = CursosRepository.ObtenerCursoPorId(pago.PlanPago.Curso.Id);
                 var curso = pago.PlanPago.Curso;
                 if (fechaCompromiso <= curso.FechaVencDescuento && cantCuotas == 1) //EsMatriculaSinCuotas(pago))
@@ -211,17 +226,21 @@ namespace SMPorres.Repositories
                 beca = Math.Round(impBase * (descBeca / 100));
             }
 
-            var cl = CursosAlumnosRepository.ObtenerCursosPorAlumno(pago.PlanPago.IdAlumno)
-                        .First(ca => ca.IdCurso == pago.PlanPago.IdCurso)
-                        .CicloLectivo;
-            var cuota = CuotasRepository.ObtenerCuotas()
-                            .FirstOrDefault(c => c.CicloLectivo == cl &&
-                                                 c.NroCuota == pago.NroCuota);
-            if (cuota == null)
-            {
-                return null;
-            }
-            pago.FechaVto = cuota.VtoCuota;
+
+            #region La fila del pago debe tener una fecha de vto
+            //var cl = CursosAlumnosRepository.ObtenerCursosPorAlumno(pago.PlanPago.IdAlumno)
+            //            .First(ca => ca.IdCurso == pago.PlanPago.IdCurso)
+            //            .CicloLectivo;
+            //var cuota = CuotasRepository.ObtenerCuotas()
+            //                .FirstOrDefault(c => c.CicloLectivo == cl &&
+            //                                     c.NroCuota == pago.NroCuota);
+            //if (cuota == null)
+            //{
+            //    return null;
+            //}
+            //pago.FechaVto = cuota.VtoCuota;
+            #endregion
+
             decimal totalAPagar = 0;
             var impBecado = impBase - beca;
             var conf = ConfiguracionRepository.ObtenerConfiguracion();
@@ -248,13 +267,13 @@ namespace SMPorres.Repositories
                 decimal recargoPorMora = 0;
                 double porcRecargo = 0;
 
-                #region Cálculo con tasa única, sin tipo de beca
+                #region Cálculo con tasa única, sin tipo de beca (no se usa)
                 //impBecado = impBase;
                 //var recargoPorMora = Math.Round(impBecado * porcRecargoTotal, 2);
                 //totalAPagar = impBase - beca + recargoPorMora;
                 #endregion
 
-                #region Cálculo con tasa única y tipo de beca
+                #region Cálculo con tasa única y tipo de beca (no se usa)
                 //var porcRecargo = (conf.InteresPorMora / 100) / 30.0;
                 //var díasAtraso = Math.Truncate((fechaCompromiso - pago.FechaVto.Value).TotalDays);
                 //var porcRecargoTotal = (decimal)(porcRecargo * díasAtraso);
@@ -542,7 +561,7 @@ namespace SMPorres.Repositories
             }
         }
 
-        public static int CantidadCuotasMatrícula(decimal idPlanPago)
+        public static int CantidadCuotasImpagasMatrícula(decimal idPlanPago)
         {
             int cc = 0;
             using (var db = new SMPorresEntities())

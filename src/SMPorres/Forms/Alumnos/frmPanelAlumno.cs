@@ -254,7 +254,7 @@ namespace SMPorres.Forms.Alumnos
 
             dgvPagos.Columns[1].HeaderText = "Concepto";
             dgvPagos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvPagos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPagos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             dgvPagos.Columns[2].HeaderText = "Vencimiento";
             dgvPagos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -279,7 +279,7 @@ namespace SMPorres.Forms.Alumnos
 
             dgvPagos.Columns[6].HeaderText = "Medio Pago";
             dgvPagos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvPagos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvPagos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             dgvPagos.Columns[7].HeaderText = "Porc. Beca";
             dgvPagos.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -293,6 +293,7 @@ namespace SMPorres.Forms.Alumnos
 
             dgvPagos.Columns[8].HeaderText = "Descripción";
             dgvPagos.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPagos.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
 
             foreach (DataGridViewColumn c in dgvPagos.Columns)
@@ -467,8 +468,8 @@ namespace SMPorres.Forms.Alumnos
             if (p.NroCuota == 0 || p.Fecha.HasValue || Lib.Session.CurrentUser.Id > 3)
             {
                 //e.Cancel = true;
-                matrículaEn1CuotaToolStripMenuItem.Visible = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 3; //matrículaEn1Cuota(p);
-                matrículaEn3CuotasToolStripMenuItem.Visible = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) == 1; //matrículaEn3Cuotas(p);
+                matrículaEn1CuotaToolStripMenuItem.Visible = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 3; //matrículaEn1Cuota(p);
+                matrículaEn3CuotasToolStripMenuItem.Visible = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 1; //matrículaEn3Cuotas(p);
                 AsignarBecaToolStripMenuItem.Visible = false;
                 EditarBecaToolStripMenuItem.Visible = false;
             }
@@ -533,7 +534,7 @@ namespace SMPorres.Forms.Alumnos
             {
                 try
                 {
-                    if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) != 3)
+                    if (PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) != 3)
                     {
                         MessageBox.Show("No se puede unificar cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -561,7 +562,7 @@ namespace SMPorres.Forms.Alumnos
             {
                 try
                 {
-                    if (PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago) != 1)
+                    if (PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) != 1)
                     {
                         MessageBox.Show("No se puede dividir cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

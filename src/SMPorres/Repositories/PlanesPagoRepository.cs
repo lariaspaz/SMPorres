@@ -10,6 +10,8 @@ namespace SMPorres.Repositories
 {
     class PlanesPagoRepository
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         internal static List<PlanPago> ObtenerPlanesPago(int idAlumno, int idCurso)
         {
             using (var db = new SMPorresEntities())
@@ -54,19 +56,23 @@ namespace SMPorres.Repositories
                     throw new Exception("El alumno ya tiene un plan de pago vigente en el curso seleccionado.");
                 }
 
-                var trx = db.Database.BeginTransaction();
-                try
+                db.Database.Log = s => _log.Debug(s);
+                using (var trx = db.Database.BeginTransaction())
                 {
-                    var plan = CrearPlanPago(db, idAlumno, idCurso, porcentajeBeca, modalidad, tipoBeca);
-                    Pago mat = PagosRepository.CrearMatrícula(db, plan);
-                    PagosRepository.CrearCuotas(db, plan, modalidad);
-                    trx.Commit();
-                    return plan;
-                }
-                catch (Exception)
-                {
-                    trx.Rollback();
-                    throw;
+                    try
+                    {
+                        var plan = CrearPlanPago(db, idAlumno, idCurso, porcentajeBeca, modalidad, tipoBeca);
+                        PagosRepository.CrearMatrícula(db, plan);
+                        PagosRepository.CrearCuotas(db, plan, modalidad);
+                        trx.Commit();
+                        return plan;
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.Error(ex);
+                        trx.Rollback();
+                        throw;
+                    }
                 }
             }
         }
@@ -80,7 +86,7 @@ namespace SMPorres.Repositories
                 Id = db.PlanesPago.Any() ? db.PlanesPago.Max(c1 => c1.Id) + 1 : 1,
                 IdAlumno = idAlumno,
                 IdCurso = idCurso,
-                Curso = curso,
+                //Curso = curso,
                 CantidadCuotas = CursosRepository.ObtieneMaxCuota(modalidad),//Configuration.MaxCuotas,
                 NroCuota = CursosRepository.ObtieneMinCuota(modalidad), //1,
                 ImporteCuota = curso.ImporteCuota,

@@ -108,7 +108,7 @@ namespace SMPorres.Repositories
                 }
                 p.FechaVtoPagoTérmino = p.FechaVto.AddDays(-díasVtoPagoTermino);
 
-                int cc = PagosRepository.CantidadCuotasMatrícula(p.IdPlanPago);
+                int cc = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago);
                 var curso = CursosRepository.ObtenerCurso(p.IdPlanPago);
                 if (p.NroCuota == 0)
                 {
