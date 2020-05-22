@@ -116,6 +116,25 @@ namespace SMPorres.Repositories
             }
         }
 
+        internal static void ActualizarVencimientosCuotasImpagos(SMPorresEntities db, short nroCuota,
+            short cicloLectivo, DateTime vtoCuota)
+        {
+            var ids = from p in db.Pagos
+                      join pp in db.PlanesPago on p.IdPlanPago equals pp.Id
+                      join ca in db.CursosAlumnos on
+                        new { pp.IdCurso, pp.IdAlumno } equals new { ca.IdCurso, ca.IdAlumno }
+                      where
+                            p.NroCuota == nroCuota &&
+                            p.Fecha == null &&
+                            p.Estado == (short)EstadoPago.Impago &&
+                            pp.Estado == (short)EstadoPlanPago.Vigente &&
+                            ca.CicloLectivo == cicloLectivo
+                      select p.Id;
+            var sql = $"UPDATE Pagos SET FechaVto = @p0 WHERE Id IN ({ String.Join(",", ids.ToList()) })";
+            db.Database.ExecuteSqlCommand(sql, vtoCuota);
+
+        }
+
         internal static List<Pago> CrearCuotas(SMPorresEntities db, PlanPago planPago, int modalidad)
         {
             //leer modalidad y obtener minCuota y maxCuota
@@ -127,14 +146,12 @@ namespace SMPorres.Repositories
                 var curso = CursosRepository.ObtenerCursoPorId(planPago.IdCurso);
                 var cuotas = from c in CuotasRepository.ObtenerCuotasActuales()
                              select new { c.NroCuota, c.VtoCuota };
-                //for (short i = 0; i <= Configuration.MaxCuotas; i++)
                 for (short i = minC; i <= maxC; i++)
                 {
                     var p = new Pago();
                     p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
                     p.IdPlanPago = planPago.Id;
                     p.NroCuota = i;
-                    //p.ImporteCuota = (i == 0) ? planPago.Curso.ImporteMatricula : planPago.Curso.ImporteCuota;
                     p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
                     p.Estado = (byte)EstadoPago.Impago;
                     p.FechaVto = cuotas.First(c => c.NroCuota == i).VtoCuota;
@@ -153,7 +170,6 @@ namespace SMPorres.Repositories
             p.IdPlanPago = planPago.Id;
             p.NroCuota = 0;
             var curso = CursosRepository.ObtenerCursoPorId(planPago.IdCurso);
-            //p.ImporteCuota = planPago.Curso.ImporteMatricula;
             p.ImporteCuota = curso.ImporteMatricula;
             var vto = (from c in CuotasRepository.ObtenerCuotasActuales()
                        where c.NroCuota == 0

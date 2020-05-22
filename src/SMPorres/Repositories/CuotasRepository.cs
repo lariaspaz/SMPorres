@@ -10,6 +10,8 @@ namespace SMPorres.Repositories
 {
     public class CuotasRepository
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public static IList<Cuota> ObtenerCuotas()
         {
             using (var db = new SMPorresEntities())
@@ -20,12 +22,13 @@ namespace SMPorres.Repositories
                 //    query = query.Where(c => c.CicloLectivo == cicloLectivo);
                 //}
                 var query2 = query.ToList()
-                                .Select(c => new Cuota {
-                                        Id = c.Id,
-                                        NroCuota = c.NroCuota,
-                                        VtoCuota = c.VtoCuota,
-                                        CicloLectivo = c.CicloLectivo
-                                    });
+                                .Select(c => new Cuota
+                                {
+                                    Id = c.Id,
+                                    NroCuota = c.NroCuota,
+                                    VtoCuota = c.VtoCuota,
+                                    CicloLectivo = c.CicloLectivo
+                                });
                 return query2.OrderBy(c => c.CicloLectivo).ThenBy(c => c.NroCuota).ToList();
             }
         }
@@ -58,15 +61,33 @@ namespace SMPorres.Repositories
         {
             using (var db = new SMPorresEntities())
             {
+                db.Database.Log = s => _log.Debug(s);
                 if (!db.Cuotas.Any(t => t.Id == id))
                 {
                     throw new Exception(String.Format("No existe la cuota {0} - Id: {1}", nroCuota, id));
                 }
-                var c = db.Cuotas.Find(id);
-                c.NroCuota = nroCuota;
-                c.VtoCuota = vtoCuota;
-                c.CicloLectivo = cicloLectivo;
-                db.SaveChanges();
+                using (var trx = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var c = db.Cuotas.Find(id);
+                        c.NroCuota = nroCuota;
+                        if (c.VtoCuota != vtoCuota)
+                        {
+                            c.VtoCuota = vtoCuota;
+                            PagosRepository.ActualizarVencimientosCuotasImpagos(db, nroCuota, cicloLectivo, vtoCuota);
+                        }
+                        c.CicloLectivo = cicloLectivo;
+                        db.SaveChanges();
+                        trx.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        _log.Debug(ex);
+                        trx.Rollback();
+                        throw new Exception("Se produjo un error al intentar actualizar los datos.");
+                    }
+                }
             }
         }
 
@@ -90,7 +111,7 @@ namespace SMPorres.Repositories
             {
                 return db.Cuotas.FirstOrDefault(c => c.Id == id);
             }
-        }        
+        }
 
         public static List<short> CuotasImpagas(Alumno alumno)
         {
@@ -101,7 +122,7 @@ namespace SMPorres.Repositories
                              join p in db.Pagos on pp.Id equals p.IdPlanPago
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
-                                //p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
+                                                           //p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
                                  p.FechaVto <= System.DateTime.Today &&
                                  pp.IdAlumno == alumno.Id
                              orderby p.NroCuota
@@ -115,7 +136,7 @@ namespace SMPorres.Repositories
                     {
                         c.Add(item);
                     }
-                    
+
                 }
                 return c;
             }
