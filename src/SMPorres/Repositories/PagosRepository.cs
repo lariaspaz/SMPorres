@@ -265,6 +265,9 @@ namespace SMPorres.Repositories
                 var dpt = (decimal)(conf.DescuentoPagoTermino / 100);
                 var descPagoTérmino = Math.Round(impBecado * dpt, 2);
 
+                //Los becados no tienen descuento por pago a término
+                if (beca > 0) descPagoTérmino = 0;
+
                 if (fechaCompromiso > pago.FechaVto.Value.AddDays(-conf.DiasVtoPagoTermino ?? 0))
                 {
                     dpt = 0;
