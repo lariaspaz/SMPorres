@@ -9,11 +9,23 @@ namespace SMPorres.Repositories
 {
     public class WebRepository
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public IEnumerable<Alumno> ObtenerDatos()
         {
             using (var db = new Models.SMPorresEntities())
             {
-                var result = (from a in db.Alumnos select a).ToList()
+                var conf = ConfiguracionRepository.ObtenerConfiguracion();
+                var cicloLectivo = conf.CicloLectivo;
+                var díasVtoPagoTermino = conf.DiasVtoPagoTermino ?? 0;
+
+                var result = (from a in db.Alumnos
+                              join ca in db.CursosAlumnos on a.Id equals ca.IdAlumno
+                              where
+                                ca.CicloLectivo == cicloLectivo &&
+                                a.Contraseña != null
+                              select a
+                              ).ToList()
                             .Select(a => new Alumno
                             {
                                 Id = a.Id,
@@ -24,11 +36,9 @@ namespace SMPorres.Repositories
                                 Contraseña = a.Contraseña
                             })
                             .ToList();
-                var conf = ConfiguracionRepository.ObtenerConfiguracion();
-                var cicloLectivo = conf.CicloLectivo;
-                var díasVtoPagoTermino = conf.DiasVtoPagoTermino ?? 0;
                 foreach (var a in result)
                 {
+                    _log.Debug($"Procesando alumno {a.Id} - ciclo lectivo {cicloLectivo}");
                     a.CursosAlumnos = (from ca in db.CursosAlumnos
                                        where ca.IdAlumno == a.Id &&
                                                 ca.CicloLectivo == cicloLectivo
@@ -52,16 +62,16 @@ namespace SMPorres.Repositories
         {
             var query = (from pp in db.PlanesPago
                          join p in db.Pagos on pp.Id equals p.IdPlanPago
-                         join ca in db.CursosAlumnos on 
-                            new { pp.IdAlumno, pp.IdCurso } equals new { ca.IdAlumno, ca.IdCurso } 
+                         join ca in db.CursosAlumnos on
+                            new { pp.IdAlumno, pp.IdCurso } equals new { ca.IdAlumno, ca.IdCurso }
                             into ca2
-                         join c in db.Cuotas on 
-                            new { cl = ca2.First().CicloLectivo, p.NroCuota } equals 
-                            new { cl = c.CicloLectivo.Value, c.NroCuota }  
+                         join c in db.Cuotas on
+                            new { cl = ca2.FirstOrDefault().CicloLectivo, p.NroCuota } equals
+                            new { cl = c.CicloLectivo.Value, c.NroCuota }
                             into pc
-                            from c in pc.DefaultIfEmpty()
-                         where 
-                            pp.IdAlumno == idAlumno && 
+                         from c in pc.DefaultIfEmpty()
+                         where
+                            pp.IdAlumno == idAlumno &&
                             pp.IdCurso == idCurso //&& p.Fecha != null
                          select new
                          {
@@ -93,7 +103,7 @@ namespace SMPorres.Repositories
                                 ImporteRecargo = p.ImporteRecargo ?? 0,
                                 ImportePagado = p.ImportePagado ?? 0,
                                 TipoBeca = p.TipoBeca,
-                                Estado = p.Estado                                
+                                Estado = p.Estado
                             })
                          .ToArray();
 
@@ -115,7 +125,7 @@ namespace SMPorres.Repositories
                     if (cc == 1) p.FechaVtoPagoTérmino = (DateTime)curso.FechaVencDescuento;
                     if (cc == 3) p.FechaVtoPagoTérmino = p.FechaVto;
                 }
-                
+
             }
 
             return query;

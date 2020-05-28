@@ -201,7 +201,7 @@ namespace SMPorres.Repositories
 
         public static Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
-            _log.Debug("Obteniendo detalle de pago");
+            _log.Debug($"Obteniendo detalle de pago - idpago = {idPago}|fechaCompromiso = {fechaCompromiso}");
             Pago pago = ObtenerPago(idPago);
             if (pago == null) return null;
             var impBase = pago.ImporteCuota;
@@ -265,10 +265,10 @@ namespace SMPorres.Repositories
                 var dpt = (decimal)(conf.DescuentoPagoTermino / 100);
                 var descPagoTérmino = Math.Round(impBecado * dpt, 2);
 
-                //Los becados no tienen descuento por pago a término
-                if (beca > 0) descPagoTérmino = 0;
+                ////Los becados no tienen descuento por pago a término
+                //if (beca > 0) descPagoTérmino = 0;
 
-                if (fechaCompromiso > pago.FechaVto.Value.AddDays(-conf.DiasVtoPagoTermino ?? 0))
+                if (fechaCompromiso > pago.FechaVto.Value.AddDays(-conf.DiasVtoPagoTermino ?? 0) || beca > 0)
                 {
                     dpt = 0;
                     descPagoTérmino = 0;

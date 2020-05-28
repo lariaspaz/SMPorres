@@ -465,20 +465,22 @@ namespace SMPorres.Forms.Alumnos
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             var p = PagoSeleccionado;
-            if (p.NroCuota == 0 || p.Fecha.HasValue || Lib.Session.CurrentUser.Id > 3)
+            if (p.Fecha.HasValue || Lib.Session.CurrentUser.Id > 3)
             {
-                //e.Cancel = true;
-                matrículaEn1CuotaToolStripMenuItem.Visible = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 3; //matrículaEn1Cuota(p);
-                matrículaEn3CuotasToolStripMenuItem.Visible = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 1; //matrículaEn3Cuotas(p);
-                AsignarBecaToolStripMenuItem.Visible = false;
-                EditarBecaToolStripMenuItem.Visible = false;
+                AsignarBecaToolStripMenuItem.Enabled = false;
+                EditarBecaToolStripMenuItem.Enabled = false;
+                if (p.NroCuota == 0)
+                {
+                    matrículaEn1CuotaToolStripMenuItem.Enabled = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 3;
+                    matrículaEn3CuotasToolStripMenuItem.Enabled = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 1;
+                }
             }
             else
             {
-                AsignarBecaToolStripMenuItem.Visible = p.BecaAlumno == null;
-                EditarBecaToolStripMenuItem.Visible = p.BecaAlumno != null;
-                matrículaEn1CuotaToolStripMenuItem.Visible = false;
-                matrículaEn3CuotasToolStripMenuItem.Visible = false;
+                AsignarBecaToolStripMenuItem.Enabled = p.BecaAlumno == null;
+                EditarBecaToolStripMenuItem.Enabled = p.BecaAlumno != null;
+                matrículaEn1CuotaToolStripMenuItem.Enabled = false;
+                matrículaEn3CuotasToolStripMenuItem.Enabled = false;
             }
         }
 
