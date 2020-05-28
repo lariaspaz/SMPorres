@@ -13,6 +13,6 @@ namespace Consultas.Models.ViewModels
 
         public IEnumerable<PagoWeb> Pagos { get; set; }
 
-        public PermisoExámen DatosPermiso { get; set; }
+        public int Id { get; set; }
     }
 }

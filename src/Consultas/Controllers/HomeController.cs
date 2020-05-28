@@ -25,14 +25,15 @@ namespace Consultas.Controllers
 
         public ActionResult Details(int id)
         {
-            var result = new DetallePago();
-            var pagos = new PagosRepository().ObtenerPagos(id);
             var ca = new CursosAlumnosRepository().ObtenerCursoAlumnoPorId(id);
+            var pagos = new PagosRepository().ObtenerPagos(id);
+            var result = new DetallePago();
             result.Curso = String.Format("{0} de {1}", ca.Curso, ca.Carrera);
             result.Pagos = pagos;
             result.PróximaCuota = pagos.FirstOrDefault(p => p.Fecha == null) ?? null; //error Plan de pago c/ todas cuotas canceladas
-            var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(id, result.PróximaCuota.FechaVto);
-            result.DatosPermiso = permisoExámen;
+            //var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(id, result.PróximaCuota.FechaVto);
+            //result.DatosPermiso = permisoExámen;
+            result.Id = id;            
             ViewBag.Cuotas = new object();
             if (result.PróximaCuota != null)
             {
@@ -94,7 +95,7 @@ namespace Consultas.Controllers
             }
         }
 
-        public ActionResult ImprimirPermisoExamen(PermisoExámen permisoExámen)
+        public ActionResult ImprimirPermisoExamen(int id, DateTime vto)
         {
             //Response.ClearContent();
             //Response.ClearHeaders();
@@ -102,11 +103,13 @@ namespace Consultas.Controllers
             //var pagos = new PagosRepository().ObtenerPagos(idCurso);
             //var próximaCuota = pagos.FirstOrDefault(p => p.Fecha == null) ?? null; //error Plan de pago c/ todas cuotas canceladas
             //var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(idCurso, próximaCuota.FechaVto);
-            
-            if (permisoExámen != null)
+
+            var p = new PermisoExámenRepository().CargarPermisoExámen(id, vto);
+
+            if (p != null)
             {
                 var repo = new PermisoExámenRepository();
-                using (var dt = repo.ObtenerDatos(permisoExámen))
+                using (var dt = repo.ObtenerDatos(p))
                 {
                     if (dt != null && dt.Rows.Count > 0)
                     {

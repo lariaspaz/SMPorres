@@ -62,10 +62,10 @@ namespace Consultas.Repositories
                     }
                     trx.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trx.Rollback();
-                    throw;
+                    throw ex;
                 }
             }
         }

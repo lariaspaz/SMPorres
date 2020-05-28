@@ -5,27 +5,37 @@
     <hr />
 
     <div class="row">
-        <div class="col-sm-12">
-            <mark class="p-2"><strong>Curso: @Model.Curso</strong></mark>
+        <div class="col-sm-9">
+            <strong>>> Curso: @Model.Curso</strong>
+        </div>
+        <div class="col-sm-3">
+            @if (!Model.Pagos.Any(p => p.FechaVto < Consultas.Lib.Configuration.CurrentDate.Date && p.ImportePagado == 0))
+            {
+                @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen",
+                        new { id = Model.Id, vto = Model.PróximaCuota.FechaVto.ToString("yyyy-MM-dd") },
+                        new { @class = "btn btn-light small btn-sm border", target = "_blank", role = "button", id = "lnkImprimir" })
+            }
         </div>
     </div>
-    @if (!Model.Pagos.Any(x => x.FechaVto < Consultas.Lib.Configuration.CurrentDate.Date && x.ImportePagado == 0))
-    {
-        <div id="permisoExámen" class="mt-4">
-            @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen", Model.DatosPermiso,
-                        new { @class = "btn btn-primary", target = "_blank", role = "button", id = "lnkImprimir" })
-        </div>
-    }
     @if (Model.PróximaCuota != null)
     {
-        <div id="proxcuota" class="mt-4 col-7 border rounded p-3">
-            @{ Html.RenderPartial("MostrarPróximaCuota", Model.PróximaCuota); }
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="proxcuota" class="card mt-4">
+                    <div class="card-header">
+                        <span class="font-weight-bold">Próxima Cuota</span>                
+                    </div>
+                    <div class="card-body">
+                        @{ Html.RenderPartial("MostrarPróximaCuota", Model.PróximaCuota); }
+                    </div>
+                </div>
+            </div>
         </div>
     }
-   
+
     <div id="pagos" class="mt-4">
         <h3>Sus pagos</h3>
         @{ Html.RenderPartial("ListarPagos", Model.Pagos); }+
     </div>
-    
+
 </div>
