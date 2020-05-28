@@ -13,7 +13,7 @@
             {
                 @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen",
                         new { id = Model.Id, vto = Model.PróximaCuota.FechaVto.ToString("yyyy-MM-dd") },
-                        new { @class = "btn btn-light small btn-sm border", target = "_blank", role = "button", id = "lnkImprimir" })
+                        new { @class = "btn btn-light small btn-sm border", role = "button", id = "lnkImprimir" })
             }
         </div>
     </div>
