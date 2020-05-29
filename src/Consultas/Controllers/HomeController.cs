@@ -85,13 +85,13 @@ namespace Consultas.Controllers
                     }
                     else
                     {
-                        return View();
+                        return RedirectToAction("Index");
                     }
                 }
             }
             else
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
@@ -105,7 +105,6 @@ namespace Consultas.Controllers
             //var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(idCurso, próximaCuota.FechaVto);
 
             var p = new PermisoExámenRepository().CargarPermisoExámen(id, vto);
-
             if (p != null)
             {
                 var repo = new PermisoExámenRepository();
@@ -123,13 +122,13 @@ namespace Consultas.Controllers
                     }
                     else
                     {
-                        return View();
+                        return RedirectToAction("Index");
                     }
                 }
             }
             else
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
     }
