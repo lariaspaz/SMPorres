@@ -9,7 +9,7 @@
             <strong>>> Curso: @Model.Curso</strong>
         </div>
         <div class="col-sm-3">
-            @if (!Model.Pagos.Any(p => p.FechaVto < Consultas.Lib.Configuration.CurrentDate.Date && p.ImportePagado == 0))
+            @if (!Model.Pagos.Any(p => p.FechaVto < Consultas.Lib.Configuration.CurrentDate.Date && !p.Fecha.HasValue))
             {
                 @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen",
                         new { id = Model.Id, vto = Model.PróximaCuota.FechaVto.ToString("yyyy-MM-dd") },
@@ -35,7 +35,7 @@
 
     <div id="pagos" class="mt-4">
         <h3>Sus pagos</h3>
-        @{ Html.RenderPartial("ListarPagos", Model.Pagos); }+
+        @{ Html.RenderPartial("ListarPagos", Model.Pagos); }
     </div>
 
 </div>
