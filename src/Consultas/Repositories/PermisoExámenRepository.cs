@@ -35,7 +35,7 @@ namespace Consultas.Repositories
             //txtTítulo.Text = _situación;
             //txtLínea1.Text = _fecha + _alumno + _cursoyCarrera + _cuotas;
             //txtLínea2.Text = _proxVencimiento;
-            var fecha = CargarFecha(Consultas.Lib.Configuration.CurrentDate.Date);
+            var fecha = CargarFecha(Lib.Configuration.CurrentDate.Date);
             var alumno = CargarAlumno(permiso.AlumnoApellido, permiso.AlumnoNombre);
             var cursoyCarrera = permiso.Curso + " de " + permiso.Carrera;
             var cuotas = ", no registra cuotas adeudadas.";
