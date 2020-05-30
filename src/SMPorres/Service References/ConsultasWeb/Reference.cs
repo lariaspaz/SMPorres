@@ -528,6 +528,95 @@ namespace SMPorres.ConsultasWeb {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TasaMora", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class TasaMora : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private double TasaField;
+        
+        private System.DateTime DesdeField;
+        
+        private System.DateTime HastaField;
+        
+        private short EstadoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public double Tasa {
+            get {
+                return this.TasaField;
+            }
+            set {
+                if ((this.TasaField.Equals(value) != true)) {
+                    this.TasaField = value;
+                    this.RaisePropertyChanged("Tasa");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public System.DateTime Desde {
+            get {
+                return this.DesdeField;
+            }
+            set {
+                if ((this.DesdeField.Equals(value) != true)) {
+                    this.DesdeField = value;
+                    this.RaisePropertyChanged("Desde");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.DateTime Hasta {
+            get {
+                return this.HastaField;
+            }
+            set {
+                if ((this.HastaField.Equals(value) != true)) {
+                    this.HastaField = value;
+                    this.RaisePropertyChanged("Hasta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public short Estado {
+            get {
+                return this.EstadoField;
+            }
+            set {
+                if ((this.EstadoField.Equals(value) != true)) {
+                    this.EstadoField = value;
+                    this.RaisePropertyChanged("Estado");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConsultasWeb.SMPSoap")]
     public interface SMPSoap {
@@ -557,6 +646,13 @@ namespace SMPorres.ConsultasWeb {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TestAlive", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> TestAliveAsync();
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento tasasMora del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarTasasMora", ReplyAction="*")]
+        SMPorres.ConsultasWeb.ActualizarTasasMoraResponse ActualizarTasasMora(SMPorres.ConsultasWeb.ActualizarTasasMoraRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarTasasMora", ReplyAction="*")]
+        System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarTasasMoraResponse> ActualizarTasasMoraAsync(SMPorres.ConsultasWeb.ActualizarTasasMoraRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -699,6 +795,74 @@ namespace SMPorres.ConsultasWeb {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ActualizarTasasMoraRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ActualizarTasasMora", Namespace="http://tempuri.org/", Order=0)]
+        public SMPorres.ConsultasWeb.ActualizarTasasMoraRequestBody Body;
+        
+        public ActualizarTasasMoraRequest() {
+        }
+        
+        public ActualizarTasasMoraRequest(SMPorres.ConsultasWeb.ActualizarTasasMoraRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ActualizarTasasMoraRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public SMPorres.ConsultasWeb.TasaMora[] tasasMora;
+        
+        public ActualizarTasasMoraRequestBody() {
+        }
+        
+        public ActualizarTasasMoraRequestBody(SMPorres.ConsultasWeb.TasaMora[] tasasMora) {
+            this.tasasMora = tasasMora;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ActualizarTasasMoraResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ActualizarTasasMoraResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SMPorres.ConsultasWeb.ActualizarTasasMoraResponseBody Body;
+        
+        public ActualizarTasasMoraResponse() {
+        }
+        
+        public ActualizarTasasMoraResponse(SMPorres.ConsultasWeb.ActualizarTasasMoraResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ActualizarTasasMoraResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool ActualizarTasasMoraResult;
+        
+        public ActualizarTasasMoraResponseBody() {
+        }
+        
+        public ActualizarTasasMoraResponseBody(bool ActualizarTasasMoraResult) {
+            this.ActualizarTasasMoraResult = ActualizarTasasMoraResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface SMPSoapChannel : SMPorres.ConsultasWeb.SMPSoap, System.ServiceModel.IClientChannel {
     }
@@ -792,6 +956,31 @@ namespace SMPorres.ConsultasWeb {
         
         public System.Threading.Tasks.Task<bool> TestAliveAsync() {
             return base.Channel.TestAliveAsync();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SMPorres.ConsultasWeb.ActualizarTasasMoraResponse SMPorres.ConsultasWeb.SMPSoap.ActualizarTasasMora(SMPorres.ConsultasWeb.ActualizarTasasMoraRequest request) {
+            return base.Channel.ActualizarTasasMora(request);
+        }
+        
+        public bool ActualizarTasasMora(SMPorres.ConsultasWeb.TasaMora[] tasasMora) {
+            SMPorres.ConsultasWeb.ActualizarTasasMoraRequest inValue = new SMPorres.ConsultasWeb.ActualizarTasasMoraRequest();
+            inValue.Body = new SMPorres.ConsultasWeb.ActualizarTasasMoraRequestBody();
+            inValue.Body.tasasMora = tasasMora;
+            SMPorres.ConsultasWeb.ActualizarTasasMoraResponse retVal = ((SMPorres.ConsultasWeb.SMPSoap)(this)).ActualizarTasasMora(inValue);
+            return retVal.Body.ActualizarTasasMoraResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarTasasMoraResponse> SMPorres.ConsultasWeb.SMPSoap.ActualizarTasasMoraAsync(SMPorres.ConsultasWeb.ActualizarTasasMoraRequest request) {
+            return base.Channel.ActualizarTasasMoraAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SMPorres.ConsultasWeb.ActualizarTasasMoraResponse> ActualizarTasasMoraAsync(SMPorres.ConsultasWeb.TasaMora[] tasasMora) {
+            SMPorres.ConsultasWeb.ActualizarTasasMoraRequest inValue = new SMPorres.ConsultasWeb.ActualizarTasasMoraRequest();
+            inValue.Body = new SMPorres.ConsultasWeb.ActualizarTasasMoraRequestBody();
+            inValue.Body.tasasMora = tasasMora;
+            return ((SMPorres.ConsultasWeb.SMPSoap)(this)).ActualizarTasasMoraAsync(inValue);
         }
     }
 }

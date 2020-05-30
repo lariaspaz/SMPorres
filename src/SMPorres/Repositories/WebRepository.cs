@@ -131,5 +131,20 @@ namespace SMPorres.Repositories
 
             return query;
         }
+
+        public static IEnumerable<TasaMora> ObtenerTasasMora()
+        {
+            using (var db = new Models.SMPorresEntities())
+            {
+                return from t in db.TasasMora.ToList()
+                       select new TasaMora
+                       {
+                           Desde = t.Desde,
+                           Hasta = t.Hasta,
+                           Tasa = t.Tasa,
+                           Estado = t.Estado
+                       };
+            }
+        }
     }
 }

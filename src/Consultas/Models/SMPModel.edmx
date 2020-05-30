@@ -63,6 +63,16 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="TasasMoraWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Tasa" Type="float" Nullable="false" />
+          <Property Name="Desde" Type="smalldatetime" Nullable="false" />
+          <Property Name="Hasta" Type="smalldatetime" Nullable="false" />
+          <Property Name="Estado" Type="smallint" Nullable="false" />
+        </EntityType>
         <Association Name="FK_AlumnosWeb_RolesUsuariosWeb">
           <End Role="RolesUsuariosWeb" Type="Self.RolesUsuariosWeb" Multiplicity="1" />
           <End Role="AlumnosWeb" Type="Self.AlumnosWeb" Multiplicity="*" />
@@ -105,6 +115,7 @@
           <EntitySet Name="CursosAlumnosWeb" EntityType="Self.CursosAlumnosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PagosWeb" EntityType="Self.PagosWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesUsuariosWeb" EntityType="Self.RolesUsuariosWeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TasasMoraWeb" EntityType="Self.TasasMoraWeb" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AlumnosWeb_RolesUsuariosWeb" Association="Self.FK_AlumnosWeb_RolesUsuariosWeb">
             <End Role="RolesUsuariosWeb" EntitySet="RolesUsuariosWeb" />
             <End Role="AlumnosWeb" EntitySet="AlumnosWeb" />
@@ -213,6 +224,7 @@
             <End Role="AlumnoWeb" EntitySet="AlumnosWeb" />
           </AssociationSet>
           <EntitySet Name="ConfiguracionesWeb" EntityType="SMPorres.ConfiguracionWeb" />
+          <EntitySet Name="TasasMoraWebs" EntityType="SMPorres.TasasMoraWeb" />
         </EntityContainer>
         <EntityType Name="RolUsuarioWeb">
           <Key>
@@ -240,6 +252,16 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="InteresPorMora" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TasasMoraWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Tasa" Type="Double" Nullable="false" />
+          <Property Name="Desde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="Int16" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -306,6 +328,17 @@
             <EntityTypeMapping TypeName="SMPorres.ConfiguracionWeb">
               <MappingFragment StoreEntitySet="ConfiguracionWeb">
                 <ScalarProperty Name="InteresPorMora" ColumnName="InteresPorMora" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TasasMoraWebs">
+            <EntityTypeMapping TypeName="SMPorres.TasasMoraWeb">
+              <MappingFragment StoreEntitySet="TasasMoraWeb">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Tasa" ColumnName="Tasa" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

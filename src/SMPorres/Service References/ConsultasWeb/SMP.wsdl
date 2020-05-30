@@ -105,6 +105,33 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ActualizarTasasMora">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tasasMora" type="tns:ArrayOfTasaMora" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTasaMora">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TasaMora" nillable="true" type="tns:TasaMora" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TasaMora">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Tasa" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Desde" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Hasta" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="s:short" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ActualizarTasasMoraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarTasasMoraResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ActualizarDatosSoapIn">
@@ -131,6 +158,12 @@
   <wsdl:message name="TestAliveSoapOut">
     <wsdl:part name="parameters" element="tns:TestAliveResponse" />
   </wsdl:message>
+  <wsdl:message name="ActualizarTasasMoraSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarTasasMora" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarTasasMoraSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarTasasMoraResponse" />
+  </wsdl:message>
   <wsdl:portType name="SMPSoap">
     <wsdl:operation name="ActualizarDatos">
       <wsdl:input message="tns:ActualizarDatosSoapIn" />
@@ -147,6 +180,10 @@
     <wsdl:operation name="TestAlive">
       <wsdl:input message="tns:TestAliveSoapIn" />
       <wsdl:output message="tns:TestAliveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarTasasMora">
+      <wsdl:input message="tns:ActualizarTasasMoraSoapIn" />
+      <wsdl:output message="tns:ActualizarTasasMoraSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SMPSoap" type="tns:SMPSoap">
@@ -187,6 +224,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ActualizarTasasMora">
+      <soap:operation soapAction="http://tempuri.org/ActualizarTasasMora" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="SMPSoap12" type="tns:SMPSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -219,6 +265,15 @@
     </wsdl:operation>
     <wsdl:operation name="TestAlive">
       <soap12:operation soapAction="http://tempuri.org/TestAlive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarTasasMora">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarTasasMora" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

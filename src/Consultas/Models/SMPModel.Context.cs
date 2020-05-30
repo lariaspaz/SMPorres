@@ -30,5 +30,6 @@ namespace Consultas.Models
         public virtual DbSet<PagoWeb> PagosWeb { get; set; }
         public virtual DbSet<RolUsuarioWeb> RolesUsuariosWeb { get; set; }
         public virtual DbSet<ConfiguracionWeb> ConfiguracionesWeb { get; set; }
+        public virtual DbSet<TasasMoraWeb> TasasMoraWebs { get; set; }
     }
 }

@@ -57,7 +57,7 @@ namespace Consultas.Web_Services
                         JsonConvert.SerializeObject(interésPorMora, Formatting.Indented);
                 System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
                 return false;
-                throw;
+                throw ex;
             }
         }
 
@@ -75,7 +75,7 @@ namespace Consultas.Web_Services
                         JsonConvert.SerializeObject(new { IdAlumno = idAlumno, Pwd = pwd }, Formatting.Indented);
                 System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
                 return false;
-                throw;
+                throw ex;
             }
         }
 
@@ -84,5 +84,24 @@ namespace Consultas.Web_Services
         {
             return true;
         }
+
+        [WebMethod]
+        public bool ActualizarTasasMora(List<TasaMora> tasasMora)
+        {
+            try
+            {
+                new TasasMoraRepository().Actualizar(tasasMora);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                        "Datos ========================" + Environment.NewLine +
+                        JsonConvert.SerializeObject(tasasMora, Formatting.Indented);
+                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                return false;
+                throw ex;
+            }
+       }
     }
 }

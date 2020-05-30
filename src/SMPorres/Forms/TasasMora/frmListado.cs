@@ -3,6 +3,7 @@ using SMPorres.Repositories;
 using System;
 using System.Data;
 using System.Linq;
+using System.ServiceModel;
 using System.Windows.Forms;
 
 namespace SMPorres.Forms.TasasMora
@@ -157,6 +158,8 @@ namespace SMPorres.Forms.TasasMora
             {
                 default:
                 case TasasMoraRepository.ValidarTasasResult.Ok:
+                    if (!ActualizarWeb())
+                        e.Cancel = true;
                     return;
                 case TasasMoraRepository.ValidarTasasResult.HayRangosNoDefinidos:
                     msg = "Hay rangos de fechas sin definir.";
@@ -172,6 +175,32 @@ namespace SMPorres.Forms.TasasMora
                 "Precaución", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 e.Cancel = true;
+            }
+
+            if (!ActualizarWeb())
+                e.Cancel = true;
+        }
+
+        private bool ActualizarWeb()
+        {
+            var binding = new BasicHttpBinding();
+            var address = new EndpointAddress(ConfiguracionRepository.ObtenerConfiguracion().EndpointAddress);
+            var cliente = new ConsultasWeb.SMPSoapClient(binding, address);
+            try
+            {
+                cliente.ActualizarTasasMora(WebRepository.ObtenerTasasMora().ToArray());
+                return true;
+            }
+            catch (Exception ex)
+            {
+                var msg = "No se pudieron actualizar las tasas en la web: \n" + ex.Message;
+                msg += "\n\n" + "¿Desea cerrar de todos modos el formulario?";
+                return (MessageBox.Show(msg, "Error", MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Error) == DialogResult.Yes);
+            }
+            finally
+            {
+                cliente.Close();
             }
         }
     }

@@ -739,6 +739,9 @@
     <None Include="Service References\ConsultasWeb\SMPorres.ConsultasWeb.ActualizarPwdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ConsultasWeb\SMPorres.ConsultasWeb.ActualizarTasasMoraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

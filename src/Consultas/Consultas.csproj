@@ -204,7 +204,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Models\EstadoPago.cs" />
+    <Compile Include="Models\EstadoTasaMora.cs" />
     <Compile Include="Models\SMPorresEntities.Ext.cs" />
+    <Compile Include="Models\TasasMoraWeb.cs">
+      <DependentUpon>SMPModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoBeca.cs" />
     <Compile Include="Models\ViewModels\ChangePwd.cs" />
     <Compile Include="Models\ViewModels\Login.cs" />
@@ -236,6 +240,7 @@
     <Compile Include="Models\WebServices\Alumno.cs" />
     <Compile Include="Models\WebServices\CursoAlumno.cs" />
     <Compile Include="Models\WebServices\Pago.cs" />
+    <Compile Include="Models\WebServices\TasaMora.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\CupónDePago.cs">
       <DependentUpon>CupónDePago.rpt</DependentUpon>
@@ -255,6 +260,7 @@
     <Compile Include="Repositories\CursosAlumnosRepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
     <Compile Include="Repositories\PermisoExámenRepository.cs" />
+    <Compile Include="Repositories\TasasMoraRepository.cs" />
     <Compile Include="Web_Services\SMP.asmx.cs">
       <DependentUpon>SMP.asmx</DependentUpon>
       <SubType>Component</SubType>
