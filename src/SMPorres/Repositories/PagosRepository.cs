@@ -265,9 +265,7 @@ namespace SMPorres.Repositories
                 var dpt = (decimal)(conf.DescuentoPagoTermino / 100);
                 var descPagoTérmino = Math.Round(impBecado * dpt, 2);
 
-                ////Los becados no tienen descuento por pago a término
-                //if (beca > 0) descPagoTérmino = 0;
-
+                //Los becados no tienen descuento por pago a término
                 if (fechaCompromiso > pago.FechaVto.Value.AddDays(-conf.DiasVtoPagoTermino ?? 0) || beca > 0)
                 {
                     dpt = 0;
@@ -337,6 +335,7 @@ namespace SMPorres.Repositories
                                 Desde = t.Desde < pago.FechaVto.Value ? pago.FechaVto.Value : t.Desde,
                                 Hasta = t.Hasta > fechaCompromiso ? fechaCompromiso : t.Hasta.AddDays(1)
                             };
+                tasas = tasas.Where(t => t.Desde <= t.Hasta);
                 _log.Debug(String.Join("\n", tasas.Select(t => new { TasaDiaria = t.Tasa, t.Desde, t.Hasta })));
                 _log.Debug("Tipo de beca: " + (TipoBeca)pago.PlanPago.TipoBeca);
 

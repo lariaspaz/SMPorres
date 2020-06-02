@@ -110,14 +110,14 @@ namespace SMPorres.Repositories
 
             foreach (var p in query)
             {
+                p.FechaVtoPagoTérmino = p.FechaVto.AddDays(-díasVtoPagoTermino);
                 if (p.Fecha == default(DateTime))
                 {
-                    var pago = PagosRepository.ObtenerDetallePago(p.Id, p.FechaVto.AddDays(-díasVtoPagoTermino));
+                    var pago = PagosRepository.ObtenerDetallePago(p.Id, p.FechaVtoPagoTérmino);
                     p.ImportePagoTérmino = pago.ImportePagoTermino;
                     p.PorcentajeBeca = (short)Math.Round(pago.PorcBeca ?? 0 * 100);
                     p.ImporteBeca = pago.ImporteBeca;
                 }
-                p.FechaVtoPagoTérmino = p.FechaVto.AddDays(-díasVtoPagoTermino);
 
                 int cc = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago);
                 var curso = CursosRepository.ObtenerCurso(p.IdPlanPago);
@@ -136,7 +136,8 @@ namespace SMPorres.Repositories
         {
             using (var db = new Models.SMPorresEntities())
             {
-                return from t in db.TasasMora.ToList()
+                var tasas = db.TasasMora.Where(t => t.Estado == (short)Models.EstadoTasaMora.Activa).ToList();
+                return from t in tasas
                        select new TasaMora
                        {
                            Desde = t.Desde,
