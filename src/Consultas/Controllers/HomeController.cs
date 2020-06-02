@@ -28,23 +28,23 @@ namespace Consultas.Controllers
             var ca = new CursosAlumnosRepository().ObtenerCursoAlumnoPorId(id);
             var pagos = new PagosRepository().ObtenerPagos(id);
             var result = new DetallePago();
+            var prox = pagos.FirstOrDefault(p => p.Fecha == null);
             result.Curso = String.Format("{0} de {1}", ca.Curso, ca.Carrera);
             result.Pagos = pagos;
-            result.PróximaCuota = pagos.FirstOrDefault(p => p.Fecha == null) ?? null; //error Plan de pago c/ todas cuotas canceladas
-            //var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(id, result.PróximaCuota.FechaVto);
-            //result.DatosPermiso = permisoExámen;
+            result.PróximaCuota = prox;
             result.Id = id;            
             ViewBag.Cuotas = new object();
-            if (result.PróximaCuota != null)
+            if (prox != null)
             {
-                result.PróximaCuota.Vencido = result.PróximaCuota.FechaVto < Lib.Configuration.CurrentDate.Date;
-                //ViewBag.Cuotas = new SelectList(Enumerable.Range(result.PróximaCuota.NroCuota, 9 - result.PróximaCuota.NroCuota + 1));
-                ViewBag.Cuotas = new SelectList(Enumerable.Range(result.PróximaCuota.NroCuota, result.Pagos.Max(x=> x.NroCuota) + 1));   
+                prox.Vencido = result.PróximaCuota.FechaVto < Lib.Configuration.CurrentDate.Date;
+                prox.AplicaBeca = (prox.PorcentajeBeca > 0 && prox.TipoBeca == (byte)TipoBeca.AplicaSiempre) ||
+                                 (prox.PorcentajeBeca > 0 && !prox.Vencido);
+                prox.PagaATérmino = prox.ImportePagoTermino > 0 && !result.PróximaCuota.Vencido;
             }
-            else
-            {
-                ViewBag.Cuotas = new SelectList(Enumerable.Range(1, 9));
-            }
+            var cuotas = from p in pagos
+                         where p.Fecha == null
+                         select p.NroCuota;
+            ViewBag.Cuotas = new SelectList(cuotas);
             return PartialView(result);
         }
 
