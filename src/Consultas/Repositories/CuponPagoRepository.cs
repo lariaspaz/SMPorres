@@ -207,10 +207,13 @@ namespace Consultas.Repositories
             }
             else
             {
-                importe = p.ImporteRecargo.Value.ToString("$ 0,0.00");
-                concepto = String.Format("Recargo por mora - Vencida el {0:dd/MM/yyyy}", p.FechaVto);
-                cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
-                    carrera, curso, "", "", "3", concepto, importe);
+                if (p.ImporteRecargo > 0)
+                {
+                    importe = p.ImporteRecargo.Value.ToString("$ 0,0.00");
+                    concepto = String.Format("Recargo por mora - Vencida el {0:dd/MM/yyyy}", p.FechaVto);
+                    cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+                        carrera, curso, "", "", "3", concepto, importe);
+                }
             }
 
             var codBarra = GenerarCódigoBarras(idPago, p.ImportePagado.Value, fechaCompromiso);

@@ -181,6 +181,11 @@ namespace Consultas.Repositories
         private static decimal CalcularMoraPorTramo(DateTime fechaCompromiso, PagoWeb pago, decimal impBase,
            decimal impBecado)
         {
+            if (pago.FechaVto.Month == DateTime.Now.Month && pago.FechaVto.Year == DateTime.Now.Year)
+            {
+                return 0;
+            }
+
             decimal recargoPorMora;
             var tasas = from t in TasasMoraRepository.ObtenerTasas()
                         select new TasaMora

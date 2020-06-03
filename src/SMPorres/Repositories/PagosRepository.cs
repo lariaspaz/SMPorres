@@ -305,7 +305,11 @@ namespace SMPorres.Repositories
                 //}
                 #endregion
 
-                recargoPorMora = CalcularMoraPorTramo(fechaCompromiso, pago, impBase, impBecado, ref beca);
+                if (pago.PlanPago.TipoBeca == (byte)TipoBeca.AplicaHastaVto)
+                {
+                    beca = 0;
+                }
+                recargoPorMora = CalcularMoraPorTramo(fechaCompromiso, pago, impBase, impBecado);
                 totalAPagar = impBase - beca + recargoPorMora;
 
                 pago.PorcRecargo = porcRecargo;
@@ -322,8 +326,17 @@ namespace SMPorres.Repositories
 
         #region Cálculo de mora con tasas por tramo
         private static decimal CalcularMoraPorTramo(DateTime fechaCompromiso, Pago pago, decimal impBase,
-            decimal impBecado, ref decimal beca)
+            decimal impBecado)
         {
+            if (pago.FechaVto.HasValue)
+            {
+                var vto = pago.FechaVto.Value;
+                if (vto.Month == DateTime.Now.Month && vto.Year == DateTime.Now.Year)
+                {
+                    return 0;
+                }
+            }
+
             decimal recargoPorMora;
             if (TasasMoraRepository.ValidarTasas() == TasasMoraRepository.ValidarTasasResult.Ok)
             {
@@ -368,7 +381,6 @@ namespace SMPorres.Repositories
                     recargoPorMora = tasas.Sum(
                             t => Math.Round(impBase * (decimal)((t.Hasta - t.Desde).TotalDays * t.Tasa), 2)
                         );
-                    beca = 0;
                 }
 
             }
