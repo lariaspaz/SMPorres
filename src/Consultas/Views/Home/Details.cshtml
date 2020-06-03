@@ -11,26 +11,28 @@
         <div class="col-sm-3">
             @if (!Model.Pagos.Any(p => p.FechaVto < Consultas.Lib.Configuration.CurrentDate.Date && !p.Fecha.HasValue))
             {
-                @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen",
-                        new { id = Model.Id, vto = Model.PróximaCuota.FechaVto.ToString("yyyy-MM-dd") },
-                        new { @class = "btn btn-light small btn-sm border", role = "button", id = "imprimir-permiso-examen" })
+                if (Model.PróximaCuota != null)
+                {
+                    @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen",
+                            new { id = Model.Id, vto = Model.PróximaCuota.FechaVto.ToString("yyyy-MM-dd") },
+                            new { @class = "btn btn-light small btn-sm border", role = "button", id = "imprimir-permiso-examen" })
+                }
+                else
+                {
+                    @Html.ActionLink("Imprimir Permiso de Exámen", "ImprimirPermisoExamen",
+                            new { id = Model.Id },
+                            new { @class = "btn btn-light small btn-sm border", role = "button", id = "imprimir-permiso-examen" })
+                }
             }
         </div>
     </div>
     @if (Model.PróximaCuota != null)
     {
-        <div class="row">
-            <div class="col-sm-6">
-                <div id="proxcuota" class="card mt-4">
-                    <div class="card-header">
-                        <span class="font-weight-bold">Próxima Cuota</span>                
-                    </div>
-                    <div class="card-body">
-                        @{ Html.RenderPartial("MostrarPróximaCuota", Model.PróximaCuota); }
-                    </div>
-                </div>
-            </div>
-        </div>
+        Html.RenderPartial("MostrarPróximaCuota", Model.PróximaCuota);
+    }
+    else
+    {
+        <span class="mt-3 d-block text-center w-50 ml-auto mr-auto border rounded p-1 alert-success alert small">Usted no tiene cuotas pendientes de pago.</span>
     }
 
     <div class="modal" tabindex="-1" role="dialog" id="reporte">

@@ -15,6 +15,6 @@ namespace Consultas.Models.ViewModels
 
         public string Carrera { get; set; }
 
-        public DateTime PróximaCuota { get; set; }
+        public DateTime? PróximoVencimiento { get; set; }
     }
 }

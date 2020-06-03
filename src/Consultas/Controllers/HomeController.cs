@@ -95,19 +95,12 @@ namespace Consultas.Controllers
             }
         }
 
-        public ActionResult ImprimirPermisoExamen(int id, DateTime vto)
+        public ActionResult ImprimirPermisoExamen(int id, DateTime? vto)
         {
-            //Response.ClearContent();
-            //Response.ClearHeaders();
-
-            //var pagos = new PagosRepository().ObtenerPagos(idCurso);
-            //var próximaCuota = pagos.FirstOrDefault(p => p.Fecha == null) ?? null; //error Plan de pago c/ todas cuotas canceladas
-            //var permisoExámen = new PermisoExámenRepository().CargarPermisoExámen(idCurso, próximaCuota.FechaVto);
-
-            var p = new PermisoExámenRepository().CargarPermisoExámen(id, vto);
+            var repo = new PermisoExámenRepository();
+            var p = repo.CargarPermisoExámen(id, vto);
             if (p != null)
             {
-                var repo = new PermisoExámenRepository();
                 using (var dt = repo.ObtenerDatos(p))
                 {
                     if (dt != null && dt.Rows.Count > 0)

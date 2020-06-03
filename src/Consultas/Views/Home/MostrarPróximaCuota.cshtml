@@ -7,83 +7,93 @@
 else
 {
     <div class="row">
-        <div class="col-sm-2">
-            Nº: @((Model.NroCuota == 0) ? "Matrícula" : Model.NroCuota.ToString())
-        </div>
-        <div class="col-sm-5 text-left">
-            Importe: @Model.ImporteCuota.ToString("C2")
-        </div>
-        <div class="col-sm-5">
-            Vence el: @Model.FechaVto.ToString("dd/MM/yyyy")
-        </div>
-    </div>
-    if (Model.PagaATérmino)
-    {
-        <div class="row mt-3 text-justify">
-            <div class="col">
-                Si paga hasta el <strong>@String.Format("{0:dd 'de' MMMM}", Model.FechaVtoPagoTermino)</strong>
-                tendrá una bonificación de <strong>@((Model.ImportePagoTermino ?? 0).ToString("C2"))</strong>.
-            </div>
-        </div>
-    }            
-    if (Model.AplicaBeca)
-    {
-        <div class="row mt-3">
-            <div class="col">
-                Usted tiene una beca de <strong>%@Model.PorcentajeBeca.Value.ToString("0")</strong>
-                equivalente a <strong>@((Model.ImporteBeca ?? 0).ToString("C2"))</strong>.
-            </div>
-        </div>
-    }
-    if (Model.Vencido)
-    {
-        <div class="row mt-3">
-            <div class="col">
-                <div class="alert alert-danger text-center" role="alert" style="padding: 0 1.25em;">
-                    Esta cuota se encuentra vencida.
+        <div class="col-sm-6">
+            <div id="proxcuota" class="card mt-4">
+                <div class="card-header">
+                    <span class="font-weight-bold">
+                        Próxima Cuota: @((Model.NroCuota > 0) ? Model.NroCuota.ToString() : "Matrícula")
+                    </span>
                 </div>
-            </div>
-        </div>
-    }
-
-    <div class="row">
-        <div class="text-right mt-3 col">
-            <button type="button" class="btn btn-light border small btn-sm" data-toggle="modal" data-target="#modSelFechaCompromiso">
-                Imprimir Cupón de Pago
-            </button>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modSelFechaCompromiso" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-light">
-                    <h5 class="modal-title font-weight-bolder" id="exampleModalCenterTitle">Imprimir Cupón de Pago</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-7 offset-3">
-                            <span>Cuota: </span>
-                            @Html.DropDownList("cuota", (SelectList)ViewBag.Cuotas, new { id = "cuota" })
+                        <div class="col-sm-5 text-left">
+                            Importe: @Model.ImporteCuota.ToString("C2")
+                        </div>
+                        <div class="col-sm-5">
+                            Vence el: @Model.FechaVto.ToString("dd/MM/yyyy")
                         </div>
                     </div>
+                    @if (Model.PagaATérmino)
+                    {
+                        <div class="row mt-3 text-justify">
+                            <div class="col">
+                                Si paga hasta el <strong>@String.Format("{0:dd 'de' MMMM}", Model.FechaVtoPagoTermino)</strong>
+                                tendrá una bonificación de <strong>@((Model.ImportePagoTermino ?? 0).ToString("C2"))</strong>.
+                            </div>
+                        </div>
+                    }
+                    @if (Model.AplicaBeca)
+                    {
+                        <div class="row mt-3">
+                            <div class="col">
+                                Usted tiene una beca de <strong>%@Model.PorcentajeBeca.Value.ToString("0")</strong>
+                                equivalente a <strong>@((Model.ImporteBeca ?? 0).ToString("C2"))</strong>.
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Vencido)
+                    {
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="alert alert-danger text-center" role="alert" style="padding: 0 1.25em;">
+                                    Esta cuota se encuentra vencida.
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                     <div class="row">
-                        <div class="col-7 offset-3">
-                            <span>Fecha de Pago: </span>
-                            @Html.TextBox("fechaCompromiso",
-                                Consultas.Lib.Configuration.CurrentDate.Date.ToString("yyyy-MM-dd"),
-                                new { type = "date", id = "fechaCompromiso" })
+                        <div class="text-right mt-3 col">
+                            <button type="button" class="btn btn-light border small btn-sm" data-toggle="modal" data-target="#modSelFechaCompromiso">
+                                Imprimir Cupón de Pago
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    @Html.ActionLink("Imprimir", "ImprimirCupon", null,
-                        new { @class = "btn btn-primary", target = "_blank", role = "button", id = "lnkImprimir" })
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                    <div class="modal fade" id="modSelFechaCompromiso" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                    <h5 class="modal-title font-weight-bolder" id="exampleModalCenterTitle">Imprimir Cupón de Pago</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-7 offset-3">
+                                            <span>Cuota: </span>
+                                            @Html.DropDownList("cuota", (SelectList)ViewBag.Cuotas, new { id = "cuota" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-7 offset-3">
+                                            <span>Fecha de Pago: </span>
+                                            @Html.TextBox("fechaCompromiso",
+                                                Consultas.Lib.Configuration.CurrentDate.Date.ToString("yyyy-MM-dd"),
+                                                new { type = "date", id = "fechaCompromiso" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    @Html.ActionLink("Imprimir", "ImprimirCupon", null,
+                                        new { @class = "btn btn-primary", target = "_blank", role = "button", id = "lnkImprimir" })
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
