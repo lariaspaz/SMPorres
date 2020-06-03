@@ -1,5 +1,6 @@
 ﻿using Consultas.Models;
 using System;
+using System.Configuration;
 using System.Linq;
 
 namespace Consultas.Lib
@@ -29,6 +30,15 @@ namespace Consultas.Lib
             {
                 return 9;
             }
+        }
+
+        public static bool Debug
+        {
+            get
+            {
+                return Convert.ToBoolean(ConfigurationManager.AppSettings["debug"]);
+            }
+
         }
     }
 }
