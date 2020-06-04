@@ -492,14 +492,25 @@ namespace SMPorres.Forms.Alumnos
                     string msg = "La contraseña generada para el alumno es:\n" + pwd;
                     //var cliente = new ConsultasWeb.SMPSoapClient();
                     var cliente = CrearCliente();
-                    if (cliente.ActualizarPwd(_alumno.Id, pwdEncriptada))
+                    var act = false;
+                    var error = "";
+                    try
+                    {
+                        act = cliente.ActualizarPwd(_alumno.Id, pwdEncriptada);
+                    }
+                    catch (Exception ex)
+                    {
+                        error = ex.Message;
+                    }
+                    if (act)
                     {
                         msg += "\nSe actualizó la contraseña del alumno en la web.";
                     }
                     else
                     {
-                        msg += "\nNo se pudo actualizar la contraseña del alumno en la web." +
-                               "\nSe actualizará cuando se suban los datos de todos los alumnos.";
+                        msg += "\n\nNo se pudo actualizar la contraseña del alumno en la web." +
+                               "\nSe actualizará cuando se suban los datos de todos los alumnos." +
+                               "\n\n" + error;
                     }
                     MessageBox.Show(msg, "Generar contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
