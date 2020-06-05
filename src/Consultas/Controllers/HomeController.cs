@@ -32,7 +32,7 @@ namespace Consultas.Controllers
             result.Curso = String.Format("{0} de {1}", ca.Curso, ca.Carrera);
             result.Pagos = pagos;
             result.PróximaCuota = prox;
-            result.Id = id;            
+            result.Id = id;
             ViewBag.Cuotas = new object();
             if (prox != null)
             {
@@ -62,11 +62,10 @@ namespace Consultas.Controllers
             return detalle;
         }
 
-        public ActionResult ImprimirCupon(int cuota, DateTime fechaCompromiso)
+        public ActionResult ImprimirCupon(int cuota, DateTime fechaCompromiso, bool? descargar)
         {
             Response.ClearContent();
             Response.ClearHeaders();
-            //var id = new PagosRepository().ObtenerIdPrimeraCuotaImpaga();
             var id = new PagosRepository().ObtenerIdCuota(cuota);
             if (id > 0)
             {
@@ -78,8 +77,16 @@ namespace Consultas.Controllers
                         using (var reporte = new Reports.CupónDePago())
                         {
                             reporte.Database.Tables["CupónPago"].SetDataSource(dt);
-                            reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
-                                System.Web.HttpContext.Current.Response, false, "Cupon-de-pago");
+                            if (descargar == true) //puede ser true, false o null
+                            {
+                                reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
+                                    System.Web.HttpContext.Current.Response, true, "cupon-de-pago");
+                            }
+                            else
+                            {
+                                reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
+                                    System.Web.HttpContext.Current.Response, false, "cupon-de-pago");
+                            }
                             return new EmptyResult();
                         }
                     }
@@ -95,7 +102,7 @@ namespace Consultas.Controllers
             }
         }
 
-        public ActionResult ImprimirPermisoExamen(int id, DateTime? vto)
+        public ActionResult ImprimirPermisoExamen(int id, DateTime? vto, bool? descargar)
         {
             var repo = new PermisoExámenRepository();
             var p = repo.CargarPermisoExámen(id, vto);
@@ -108,8 +115,16 @@ namespace Consultas.Controllers
                         using (var reporte = new Reports.PermisoExámen())
                         {
                             reporte.Database.Tables["PermisoExámen"].SetDataSource(dt);
-                            reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
-                                System.Web.HttpContext.Current.Response, false, "Permiso-de-exámen");
+                            if (descargar == true) //puede ser true, false o null
+                            {
+                                reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
+                                    System.Web.HttpContext.Current.Response, true, "permiso-de-examen");
+                            }
+                            else
+                            {
+                                reporte.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat,
+                                    System.Web.HttpContext.Current.Response, false, "permiso-de-examen");
+                            }
                             return new EmptyResult();
                         }
                     }

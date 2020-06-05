@@ -35,8 +35,11 @@
                 var fc = $('#modSelFechaCompromiso #fechaCompromiso').val();
                 var c = $('#modSelFechaCompromiso #cuota').val();
                 var url = $('#modSelFechaCompromiso #lnkImprimir').attr('href');
+                var path = url + '?fechaCompromiso=' + fc + '&cuota=' + c;
                 $("#reporte .modal-body").html('');
-                PDFObject.embed(url + '?fechaCompromiso=' + fc + '&cuota=' + c, "#reporte .modal-body");
+                $('#reporte .modal-title').text('Cupón de pago');
+                $('#reporte .modal-header a').attr('href', path + '&descargar=true');
+                PDFObject.embed(path, "#reporte .modal-body");
                 $('#modSelFechaCompromiso').modal('hide');
                 $('#reporte').on('shown.bs.modal', function (e) {
                     var h = $('#reporte').height() * 0.95;
@@ -49,6 +52,9 @@
                 e.preventDefault();
                 var url = $('#imprimir-permiso-examen').attr('href');
                 $("#reporte .modal-body").html('');
+                $('#reporte .modal-title').text('Permiso de examen');
+                console.log('Asignando URL ' + url + '&descargar=true');
+                $('#reporte .modal-header a').attr('href', url + '&descargar=true');
                 PDFObject.embed(url, "#reporte .modal-body");
                 $('#reporte').on('shown.bs.modal', function (e) {
                     var h = $('#reporte').height() * 0.95;
