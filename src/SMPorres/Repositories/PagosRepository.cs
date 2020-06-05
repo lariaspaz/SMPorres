@@ -265,9 +265,7 @@ namespace SMPorres.Repositories
                 var dpt = (decimal)(conf.DescuentoPagoTermino / 100);
                 var descPagoTérmino = Math.Round(impBecado * dpt, 2);
 
-                ////Los becados no tienen descuento por pago a término
-                //if (beca > 0) descPagoTérmino = 0;
-
+                //Los becados no tienen descuento por pago a término
                 if (fechaCompromiso > pago.FechaVto.Value.AddDays(-conf.DiasVtoPagoTermino ?? 0) || beca > 0)
                 {
                     dpt = 0;
@@ -307,7 +305,11 @@ namespace SMPorres.Repositories
                 //}
                 #endregion
 
-                recargoPorMora = CalcularMoraPorTramo(fechaCompromiso, pago, impBase, impBecado, ref beca);
+                if (pago.PlanPago.TipoBeca == (byte)TipoBeca.AplicaHastaVto)
+                {
+                    beca = 0;
+                }
+                recargoPorMora = CalcularMoraPorTramo(fechaCompromiso, pago, impBase, impBecado);
                 totalAPagar = impBase - beca + recargoPorMora;
 
                 pago.PorcRecargo = porcRecargo;
@@ -324,8 +326,17 @@ namespace SMPorres.Repositories
 
         #region Cálculo de mora con tasas por tramo
         private static decimal CalcularMoraPorTramo(DateTime fechaCompromiso, Pago pago, decimal impBase,
-            decimal impBecado, ref decimal beca)
+            decimal impBecado)
         {
+            if (pago.FechaVto.HasValue)
+            {
+                var vto = pago.FechaVto.Value;
+                if (vto.Month == DateTime.Now.Month && vto.Year == DateTime.Now.Year)
+                {
+                    return 0;
+                }
+            }
+
             decimal recargoPorMora;
             if (TasasMoraRepository.ValidarTasas() == TasasMoraRepository.ValidarTasasResult.Ok)
             {
@@ -337,6 +348,7 @@ namespace SMPorres.Repositories
                                 Desde = t.Desde < pago.FechaVto.Value ? pago.FechaVto.Value : t.Desde,
                                 Hasta = t.Hasta > fechaCompromiso ? fechaCompromiso : t.Hasta.AddDays(1)
                             };
+                tasas = tasas.Where(t => t.Desde <= t.Hasta);
                 _log.Debug(String.Join("\n", tasas.Select(t => new { TasaDiaria = t.Tasa, t.Desde, t.Hasta })));
                 _log.Debug("Tipo de beca: " + (TipoBeca)pago.PlanPago.TipoBeca);
 
@@ -369,7 +381,6 @@ namespace SMPorres.Repositories
                     recargoPorMora = tasas.Sum(
                             t => Math.Round(impBase * (decimal)((t.Hasta - t.Desde).TotalDays * t.Tasa), 2)
                         );
-                    beca = 0;
                 }
 
             }
@@ -401,11 +412,18 @@ namespace SMPorres.Repositories
                 p.Descripcion = pago.Descripcion;
                 p.IdArchivo = pago.IdArchivo;
                 p.Estado = (byte)EstadoPago.Pagado;
-                db.SaveChanges();
-                if (p.NroCuota == Configuration.MaxCuotas)
+                var cuotas = p.PlanPago.Pagos.Where(p1 => p1.Fecha == null);
+                if (cuotas.Any())
+                    p.PlanPago.NroCuota = cuotas.Min(p1 => p1.NroCuota);
+                else
+                    p.PlanPago.NroCuota = p.PlanPago.CantidadCuotas;
+                if (p.NroCuota == p.PlanPago.CantidadCuotas)
                 {
                     p.PlanPago.Estado = (short)EstadoPlanPago.Cancelado;
                 }
+                db.SaveChanges();
+                //var pp = db.PlanesPago.Find(pago.IdPlanPago);
+                //if (p.NroCuota == Configuration.MaxCuotas)
             }
             return true;
         }

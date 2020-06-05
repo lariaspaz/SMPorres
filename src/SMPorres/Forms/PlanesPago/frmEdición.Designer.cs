@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cbModalidad = new System.Windows.Forms.ComboBox();
+            this.cbTipoBeca = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPorcentajeBeca = new CustomLibrary.ComponentModel.NumericTextBox();
@@ -48,7 +49,6 @@
             this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label7 = new System.Windows.Forms.Label();
-            this.cbTipoBeca = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -72,8 +72,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(374, 148);
-            this.panel2.Size = new System.Drawing.Size(307, 149);
+            this.panel2.Size = new System.Drawing.Size(374, 149);
             this.panel2.TabIndex = 1;
             // 
             // cbModalidad
@@ -85,6 +84,15 @@
             this.cbModalidad.Size = new System.Drawing.Size(261, 21);
             this.cbModalidad.TabIndex = 9;
             this.cbModalidad.SelectedValueChanged += new System.EventHandler(this.cbModalidad_SelectedValueChanged);
+            // 
+            // cbTipoBeca
+            // 
+            this.cbTipoBeca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoBeca.FormattingEnabled = true;
+            this.cbTipoBeca.Location = new System.Drawing.Point(165, 118);
+            this.cbTipoBeca.Name = "cbTipoBeca";
+            this.cbTipoBeca.Size = new System.Drawing.Size(191, 21);
+            this.cbTipoBeca.TabIndex = 9;
             // 
             // label6
             // 
@@ -98,7 +106,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(201, 121);
+            this.label5.Location = new System.Drawing.Point(148, 121);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(15, 13);
             this.label5.TabIndex = 7;
@@ -114,7 +122,7 @@
             this.txtPorcentajeBeca.IntValue = ((long)(0));
             this.txtPorcentajeBeca.Location = new System.Drawing.Point(95, 117);
             this.txtPorcentajeBeca.Name = "txtPorcentajeBeca";
-            this.txtPorcentajeBeca.Size = new System.Drawing.Size(100, 20);
+            this.txtPorcentajeBeca.Size = new System.Drawing.Size(47, 20);
             this.txtPorcentajeBeca.TabIndex = 6;
             this.txtPorcentajeBeca.Text = "0";
             this.txtPorcentajeBeca.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -124,7 +132,7 @@
             this.txtCuota.Location = new System.Drawing.Point(95, 90);
             this.txtCuota.Name = "txtCuota";
             this.txtCuota.ReadOnly = true;
-            this.txtCuota.Size = new System.Drawing.Size(100, 20);
+            this.txtCuota.Size = new System.Drawing.Size(47, 20);
             this.txtCuota.TabIndex = 5;
             // 
             // txtCurso
@@ -252,15 +260,6 @@
             this.label7.Size = new System.Drawing.Size(73, 13);
             this.label7.TabIndex = 8;
             this.label7.Text = "Tipo de beca:";
-            // 
-            // cbTipoBeca
-            // 
-            this.cbTipoBeca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipoBeca.FormattingEnabled = true;
-            this.cbTipoBeca.Location = new System.Drawing.Point(95, 116);
-            this.cbTipoBeca.Name = "cbTipoBeca";
-            this.cbTipoBeca.Size = new System.Drawing.Size(200, 21);
-            this.cbTipoBeca.TabIndex = 9;
             // 
             // frmEdición
             // 

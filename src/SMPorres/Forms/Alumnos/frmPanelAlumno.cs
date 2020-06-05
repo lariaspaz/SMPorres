@@ -1,20 +1,15 @@
-﻿using CustomLibrary.Extensions.Controls;
-using CustomLibrary.Lib.Extensions;
+﻿using CustomLibrary.Lib.Extensions;
+using SMPorres.Forms.BecasAlumnos;
 using SMPorres.Lib.AppForms;
 using SMPorres.Lib.Validations;
+using SMPorres.Models;
 using SMPorres.Repositories;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SMPorres.Models;
-using SMPorres.Forms.BecasAlumnos;
 using System.ServiceModel;
+using System.Windows.Forms;
 
 namespace SMPorres.Forms.Alumnos
 {
@@ -89,7 +84,7 @@ namespace SMPorres.Forms.Alumnos
                         select new
                         {
                             Id = pp.Id,
-                            ProximaCuota = String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
+                            ProximaCuota = pp.Estado == (short)EstadoPlanPago.Cancelado ? "-" : String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
                             ImporteCuota = pp.ImporteCuota,
                             PorcentajeBeca = pp.PorcentajeBeca,
                             TipoBeca = pp.LeyendaTipoBeca,
@@ -192,7 +187,7 @@ namespace SMPorres.Forms.Alumnos
             var tieneDeuda = PagosRepository.ObtenerDeudaPorAlumno(txtNroDocumento.DecValue).Any();
             if (tieneDeuda)
             {
-                MessageBox.Show("El alumno registra cuotas impagas.", "Atención", MessageBoxButtons.OK, 
+                MessageBox.Show("El alumno registra cuotas impagas.", "Atención", MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
             }
@@ -202,7 +197,7 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, 
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id,
                             f.PorcentajeBeca, f.Modalidad, f.TipoBeca);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
@@ -362,6 +357,7 @@ namespace SMPorres.Forms.Alumnos
             else
             {
                 using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
+                ConsultarPlanesPago();
                 ConsultarPagos();
             }
         }
@@ -497,14 +493,25 @@ namespace SMPorres.Forms.Alumnos
                     string msg = "La contraseña generada para el alumno es:\n" + pwd;
                     //var cliente = new ConsultasWeb.SMPSoapClient();
                     var cliente = CrearCliente();
-                    if (cliente.ActualizarPwd(_alumno.Id, pwdEncriptada))
+                    var act = false;
+                    var error = "";
+                    try
+                    {
+                        act = cliente.ActualizarPwd(_alumno.Id, pwdEncriptada);
+                    }
+                    catch (Exception ex)
+                    {
+                        error = ex.Message;
+                    }
+                    if (act)
                     {
                         msg += "\nSe actualizó la contraseña del alumno en la web.";
                     }
                     else
                     {
-                        msg += "\nNo se pudo actualizar la contraseña del alumno en la web." +
-                               "\nSe actualizará cuando se suban los datos de todos los alumnos.";
+                        msg += "\n\nNo se pudo actualizar la contraseña del alumno en la web." +
+                               "\nSe actualizará cuando se suban los datos de todos los alumnos." +
+                               "\n\n" + error;
                     }
                     MessageBox.Show(msg, "Generar contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

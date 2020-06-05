@@ -11,7 +11,7 @@ namespace Consultas.Repositories
 {
     public class PermisoExámenRepository
     {
-        public PermisoExámen CargarPermisoExámen(int idCursoAlumno, DateTime próximoVencimiento)
+        public PermisoExámen CargarPermisoExámen(int idCursoAlumno, DateTime? próximoVencimiento)
         {
             using (var db = new SMPorresEntities())
             {
@@ -23,7 +23,7 @@ namespace Consultas.Repositories
                 pe.Curso = ca.Curso;
                 pe.AlumnoApellido = alumno.Apellido;
                 pe.AlumnoNombre = alumno.Nombre;
-                pe.PróximaCuota = próximoVencimiento;
+                pe.PróximoVencimiento = próximoVencimiento;
 
                 return pe;
             }
@@ -32,42 +32,22 @@ namespace Consultas.Repositories
         public DataTable ObtenerDatos(PermisoExámen permiso)
         {
             var p = new dsConsultas.PermisoExámenDataTable();
-            //txtTítulo.Text = _situación;
-            //txtLínea1.Text = _fecha + _alumno + _cursoyCarrera + _cuotas;
-            //txtLínea2.Text = _proxVencimiento;
-            var fecha = CargarFecha(Lib.Configuration.CurrentDate.Date);
-            var alumno = CargarAlumno(permiso.AlumnoApellido, permiso.AlumnoNombre);
-            var cursoyCarrera = permiso.Curso + " de " + permiso.Carrera;
+            var fecha = ObtenerFecha(Lib.Configuration.CurrentDate.Date);
+            var alumno = ObtenerFAlumno(permiso.AlumnoApellido, permiso.AlumnoNombre);
+            var cursoyCarrera = $"{permiso.Curso} de {permiso.Carrera}";
             var cuotas = ", no registra cuotas adeudadas.";
-            var txtL1 = fecha + alumno + cursoyCarrera + cuotas;
+            var línea1 = fecha + alumno + cursoyCarrera + cuotas;
 
-            var txtL2 = CargarPróxVencimiento(permiso.PróximaCuota);
+            var línea2 = "No tiene cuotas próximas a vencer.";
+            if (permiso.PróximoVencimiento.HasValue)
+                línea2 = String.Format("El próximo vencimiento de cuota es el día {0:dd/MM/yyyy}.", 
+                    permiso.PróximoVencimiento);
 
-            return GenerarPermisoExámen(p, txtL1, txtL2);
-        }
-
-        private DataTable GenerarPermisoExámen(dsConsultas.PermisoExámenDataTable p, string txtL1, string txtL2)
-        {
-            p.AddPermisoExámenRow(txtL1, txtL2);
+            p.AddPermisoExámenRow(línea1, línea2);
             return p;
         }
 
-        private string CargarPróxVencimiento(DateTime vencimiento)
-        {
-            string pv = "";
-            if (vencimiento != null)
-            {
-                pv += String.Format("El próximo vencimiento de cuota es el día {0:dd/MM/yyyy}.", vencimiento);
-            }
-            else
-            {
-                pv += "No tiene cuotas próximas a vencer.";
-            }
-
-            return pv;
-        }
-
-        private string CargarAlumno(string apellido, string nombre)
+        private string ObtenerFAlumno(string apellido, string nombre)
         {
             string al = ", se certifica que ";
             if (!String.IsNullOrEmpty(apellido)) al += apellido + " ,";
@@ -76,7 +56,7 @@ namespace Consultas.Repositories
             return al;
         }
 
-        private string CargarFecha(DateTime today)
+        private string ObtenerFecha(DateTime today)
         {
             DateTime hoy = DateTime.Today;
             string día = hoy.Day.ToString();

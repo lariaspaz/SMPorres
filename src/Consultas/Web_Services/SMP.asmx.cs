@@ -20,6 +20,7 @@ namespace Consultas.Web_Services
     // [System.Web.Script.Services.ScriptService]
     public class SMP : System.Web.Services.WebService
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         [WebMethod]
         public bool ActualizarDatos(Alumno alumno)
@@ -31,12 +32,14 @@ namespace Consultas.Web_Services
             }
             catch (Exception ex)
             {
-                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
-                        ex.StackTrace + Environment.NewLine +
-                        "Datos ========================" + Environment.NewLine +
-                        JsonConvert.SerializeObject(alumno, Formatting.Indented) + 
-                        Environment.NewLine;
-                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                //        ex.StackTrace + Environment.NewLine +
+                //        "Datos ========================" + Environment.NewLine +
+                //        JsonConvert.SerializeObject(alumno, Formatting.Indented) + 
+                //        Environment.NewLine;
+                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                _log.Error(ex);
+                _log.Info("Datos: " + JsonConvert.SerializeObject(alumno, Formatting.Indented));
                 return false;
                 throw ex;
             }
@@ -52,10 +55,12 @@ namespace Consultas.Web_Services
             }
             catch (Exception ex)
             {
-                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
-                        "Datos ========================" + Environment.NewLine +
-                        JsonConvert.SerializeObject(interésPorMora, Formatting.Indented);
-                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                //        "Datos ========================" + Environment.NewLine +
+                //        JsonConvert.SerializeObject(interésPorMora, Formatting.Indented);
+                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                _log.Error(ex);
+                _log.Info("interésPorMora = " + interésPorMora);
                 return false;
                 throw ex;
             }
@@ -70,10 +75,12 @@ namespace Consultas.Web_Services
             }
             catch (Exception ex)
             {
-                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
-                        "Datos ========================" + Environment.NewLine +
-                        JsonConvert.SerializeObject(new { IdAlumno = idAlumno, Pwd = pwd }, Formatting.Indented);
-                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                //        "Datos ========================" + Environment.NewLine +
+                //        JsonConvert.SerializeObject(new { IdAlumno = idAlumno, Pwd = pwd }, Formatting.Indented);
+                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                _log.Error(ex);
+                _log.Info("Datos = " + JsonConvert.SerializeObject(new { IdAlumno = idAlumno, Pwd = pwd }, Formatting.Indented));
                 return false;
                 throw ex;
             }
@@ -95,10 +102,12 @@ namespace Consultas.Web_Services
             }
             catch (Exception ex)
             {
-                var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
-                        "Datos ========================" + Environment.NewLine +
-                        JsonConvert.SerializeObject(tasasMora, Formatting.Indented);
-                System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
+                //        "Datos ========================" + Environment.NewLine +
+                //        JsonConvert.SerializeObject(tasasMora, Formatting.Indented);
+                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
+                _log.Error(ex);
+                _log.Info("Datos = " + JsonConvert.SerializeObject(tasasMora, Formatting.Indented));
                 return false;
                 throw ex;
             }

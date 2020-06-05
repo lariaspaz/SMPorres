@@ -15,8 +15,6 @@ namespace Consultas.Repositories
             var idPagoStr = String.Format("{0:0000000}", idPago);
             var fechaEmisión = String.Format("{0:dd/MM/yyyy}", Lib.Configuration.CurrentDate);
             var fechaVencimiento = String.Format("{0:dd/MM/yyyy}", fechaCompromiso);
-            //var pago = new PagosRepository().ObtenerPago(idPago);
-            //var pago = new PagosRepository().ObtenerDetallePago(idPago, fechaCompromiso);
             var pago = PagosRepository.ObtenerDetallePago(idPago, fechaCompromiso);
             var nombre = String.Format("{0} {1}", pago.CursoAlumnoWeb.AlumnoWeb.Nombre, pago.CursoAlumnoWeb.AlumnoWeb.Apellido);
             var tipoDocumento = pago.CursoAlumnoWeb.AlumnoWeb.TipoDocumento;
@@ -166,25 +164,13 @@ namespace Consultas.Repositories
                 row.CódigoBarra = codBarra;
             }
             return cupón;
-
-            //var importe = String.Format("{0:$ 0,0.00}", pago.ImporteCuota);
-            //var total = String.Format("{0:$ 0,0.00}", pago.ImporteCuota);
-            //string codBarra = GenerarCódigoBarras(idPago, pago.ImporteCuota, fechaCompromiso);
-            //cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
-            //    carrera, curso, Total, codBarra, "1", "Matrícula", importe);
-
-            //return cupón;
         }
 
         private bool DescuentoMatrículaPagoTermino(PagoWeb pago, DateTime fechaCompromiso)
         {
             bool pagoTermino = false;
             int cc = PagosRepository.CantidadCuotasMatrícula(pago.IdPlanPago);
-            //bool matrículaEnCuotas = PagosRepository.EsMatriculaEnCuotas(pago);
-            //var cur = CursosRepository.ObtenerCursoPorId(pago.PlanPago.IdCurso);
-            //if (!matrículaEnCuotas && fechaCompromiso <= cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
             if (cc == 1 && fechaCompromiso <= pago.FechaVtoPagoTermino && pago.ImportePagoTermino > 0)
-                //cur.FechaVencDescuento && pago.ImportePagoTermino > 0)
             {
                 pagoTermino = true;
             }
@@ -211,7 +197,7 @@ namespace Consultas.Repositories
 
             if (fechaCompromiso <= p.FechaVto)
             {
-                if (fechaCompromiso <= p.FechaVtoPagoTermino)
+                if (p.ImportePagoTermino > 0)
                 {
                     importe = p.ImportePagoTermino.Value.ToString("$ -0,0.00");
                     concepto = "Descuento por pago a término";
@@ -221,10 +207,13 @@ namespace Consultas.Repositories
             }
             else
             {
-                importe = p.ImporteRecargo.Value.ToString("$ 0,0.00");
-                concepto = String.Format("Recargo por mora - Vencida el {0:dd/MM/yyyy}", p.FechaVto);
-                cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
-                    carrera, curso, "", "", "3", concepto, importe);
+                if (p.ImporteRecargo > 0)
+                {
+                    importe = p.ImporteRecargo.Value.ToString("$ 0,0.00");
+                    concepto = String.Format("Recargo por mora - Vencida el {0:dd/MM/yyyy}", p.FechaVto);
+                    cupón.AddCupónPagoRow(idPago, fechaEmisión, fechaVencimiento, nombre, tipoDocumento, documento,
+                        carrera, curso, "", "", "3", concepto, importe);
+                }
             }
 
             var codBarra = GenerarCódigoBarras(idPago, p.ImportePagado.Value, fechaCompromiso);

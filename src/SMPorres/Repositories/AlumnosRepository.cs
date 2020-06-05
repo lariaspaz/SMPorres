@@ -274,7 +274,14 @@ namespace SMPorres.Repositories
             using (var db = new SMPorresEntities())
             {
                 var a = db.Alumnos.Find(idAlumno);
-                var pwd = Lib.Security.Cryptography.GenerarContraseña();
+                var nombre = String.Join("", a.Nombre.Where(c => System.Text.RegularExpressions.Regex.IsMatch(c.ToString(), "^[a-zA-Z]$")));
+                var fechaNac = (a.FechaNacimiento == new DateTime(1900, 1, 1) ? $"{DateTime.Now:fff}" : $"{a.FechaNacimiento:ddMMyyyy}"); 
+
+                //var pwd = Lib.Security.Cryptography.GenerarContraseña();
+                var pwd = String.Join("", 
+                            nombre.Select(
+                                (t, i) => (i == 0) ? Char.ToUpper(t) : Char.ToLower(t))).Substring(0, 5) +
+                            fechaNac.Substring(fechaNac.Length - 3);
                 pwdEncriptada = Lib.Security.Cryptography.CalcularSHA512(pwd);
                 a.Contraseña = pwdEncriptada;
                 db.SaveChanges();

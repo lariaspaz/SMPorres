@@ -40,5 +40,27 @@ namespace Consultas.Repositories
 
             }
         }
+
+        internal static IList<TasasMoraWeb> ObtenerTasas()
+        {
+            using (var db = new SMPorresEntities())
+            {
+                var query = (from t in db.TasasMoraWebs select t)
+                                .ToList()
+                                .Select(
+                                    t => new TasasMoraWeb
+                                    {
+                                        Id = t.Id,
+                                        Tasa = t.Tasa,
+                                        Desde = t.Desde,
+                                        Hasta = t.Hasta,
+                                        Estado = t.Estado
+                                    });
+                return (from t in query
+                        orderby t.Desde ascending, t.Hasta descending, t.Tasa ascending
+                        select t).ToList();
+
+            }
+        }
     }
 }
