@@ -412,11 +412,18 @@ namespace SMPorres.Repositories
                 p.Descripcion = pago.Descripcion;
                 p.IdArchivo = pago.IdArchivo;
                 p.Estado = (byte)EstadoPago.Pagado;
-                db.SaveChanges();
-                if (p.NroCuota == Configuration.MaxCuotas)
+                var cuotas = p.PlanPago.Pagos.Where(p1 => p1.Fecha == null);
+                if (cuotas.Any())
+                    p.PlanPago.NroCuota = cuotas.Min(p1 => p1.NroCuota);
+                else
+                    p.PlanPago.NroCuota = p.PlanPago.CantidadCuotas;
+                if (p.NroCuota == p.PlanPago.CantidadCuotas)
                 {
                     p.PlanPago.Estado = (short)EstadoPlanPago.Cancelado;
                 }
+                db.SaveChanges();
+                //var pp = db.PlanesPago.Find(pago.IdPlanPago);
+                //if (p.NroCuota == Configuration.MaxCuotas)
             }
             return true;
         }

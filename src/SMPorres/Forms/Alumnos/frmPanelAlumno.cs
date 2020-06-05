@@ -84,7 +84,7 @@ namespace SMPorres.Forms.Alumnos
                         select new
                         {
                             Id = pp.Id,
-                            ProximaCuota = String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
+                            ProximaCuota = pp.Estado == (short)EstadoPlanPago.Cancelado ? "-" : String.Format("{0} de {1}", pp.NroCuota, pp.CantidadCuotas),
                             ImporteCuota = pp.ImporteCuota,
                             PorcentajeBeca = pp.PorcentajeBeca,
                             TipoBeca = pp.LeyendaTipoBeca,
@@ -187,7 +187,7 @@ namespace SMPorres.Forms.Alumnos
             var tieneDeuda = PagosRepository.ObtenerDeudaPorAlumno(txtNroDocumento.DecValue).Any();
             if (tieneDeuda)
             {
-                MessageBox.Show("El alumno registra cuotas impagas.", "Atención", MessageBoxButtons.OK, 
+                MessageBox.Show("El alumno registra cuotas impagas.", "Atención", MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
             }
@@ -197,7 +197,7 @@ namespace SMPorres.Forms.Alumnos
                 {
                     try
                     {
-                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id, 
+                        var c = PlanesPagoRepository.Insertar(_alumno.Id, CursoSeleccionado.Id,
                             f.PorcentajeBeca, f.Modalidad, f.TipoBeca);
                         ConsultarPlanesPago();
                         dgvPlanesPago.SetRow(r => Convert.ToInt32(r.Cells[0].Value) == c.Id);
@@ -357,6 +357,7 @@ namespace SMPorres.Forms.Alumnos
             else
             {
                 using (var f = new Pagos.frmPagarCuota(PagoSeleccionado.Id)) f.ShowDialog();
+                ConsultarPlanesPago();
                 ConsultarPagos();
             }
         }
