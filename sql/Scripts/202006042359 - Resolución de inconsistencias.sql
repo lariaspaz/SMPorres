@@ -45,6 +45,7 @@ from
 
 -- actualiza el próximo nro de cuota para los planes de pago Cancelados
 update PlanesPago set NroCuota = CantidadCuotas where Estado = 2
+-- 364
 
 -- commit tran lap
 -- rollback tran lap
