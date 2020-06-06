@@ -461,22 +461,28 @@ namespace SMPorres.Forms.Alumnos
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             var p = PagoSeleccionado;
-            if (p.Fecha.HasValue || Lib.Session.CurrentUser.Id > 3)
+            matrículaEn1CuotaToolStripMenuItem.Enabled = false;
+            matrículaEn3CuotasToolStripMenuItem.Enabled = false;
+            if (p.Fecha.HasValue)
             {
                 AsignarBecaToolStripMenuItem.Enabled = false;
                 EditarBecaToolStripMenuItem.Enabled = false;
-                if (p.NroCuota == 0)
-                {
-                    matrículaEn1CuotaToolStripMenuItem.Enabled = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 3;
-                    matrículaEn3CuotasToolStripMenuItem.Enabled = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 1;
-                }
             }
             else
             {
                 AsignarBecaToolStripMenuItem.Enabled = p.BecaAlumno == null;
                 EditarBecaToolStripMenuItem.Enabled = p.BecaAlumno != null;
-                matrículaEn1CuotaToolStripMenuItem.Enabled = false;
-                matrículaEn3CuotasToolStripMenuItem.Enabled = false;
+            }
+            // Verifica Matrícula
+            if (p.NroCuota == 0)
+            {
+                // Existen 3 cuotas de Matrícula impagas, puede unificar nuevamente.
+                matrículaEn1CuotaToolStripMenuItem.Enabled = PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 3;
+
+                // Existe 1 cuota de Matrícula impaga, puede partir la cuota en 3
+                matrículaEn3CuotasToolStripMenuItem.Enabled =
+                    PagosRepository.ObtenerPagos(p.IdPlanPago).Where(x => x.NroCuota == 0).Count() == 1 &&
+                    PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) == 1;
             }
         }
 
@@ -543,16 +549,16 @@ namespace SMPorres.Forms.Alumnos
             {
                 try
                 {
-                    if (PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) != 3)
-                    {
-                        MessageBox.Show("No se puede unificar cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
+                   // if (PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) != 3)
+                   // {
+                   //     MessageBox.Show("No se puede unificar cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   // }
+                   // else
+                   // {
                         PagosRepository.EliminarCuotasGeneradasMatrícula(cuota, p.IdPlanPago);
 
                         PagosRepository.GeneraNuevaCuotaDeMatricula(p, p.PlanPago.Curso.ImporteMatricula);
-                    }
+                  //  }
                     ConsultarPagos();
                 }
                 catch
@@ -571,12 +577,12 @@ namespace SMPorres.Forms.Alumnos
             {
                 try
                 {
-                    if (PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) != 1)
-                    {
-                        MessageBox.Show("No se puede dividir cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
+                    //if (PagosRepository.CantidadCuotasImpagasMatrícula(p.IdPlanPago) != 1)
+                    //{
+                    //    MessageBox.Show("No se puede dividir cuotas, el alumno ya pagó una cuota", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //}
+                    //else
+                    //{
                         PagosRepository.EliminarCuotasGeneradasMatrícula(cuota, p.IdPlanPago);
 
                         decimal cuota1 = (decimal)p.PlanPago.Curso.Cuota1;
@@ -585,7 +591,7 @@ namespace SMPorres.Forms.Alumnos
                         PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota2, 2);
                         decimal cuota3 = (decimal)p.PlanPago.Curso.Cuota3;
                         PagosRepository.GeneraNuevaCuotaDeMatricula(p.IdPlanPago, cuota3, 3);
-                    }
+                    //}
                     ConsultarPagos();
                 }
                 catch

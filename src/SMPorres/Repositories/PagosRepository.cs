@@ -506,6 +506,9 @@ namespace SMPorres.Repositories
                 p.NroCuota = (short)i;
                 p.ImporteCuota = importeCuota;
                 p.Estado = (byte)EstadoPago.Impago;
+                p.FechaVto = (from c in CuotasRepository.ObtenerCuotasActuales()
+                              where c.NroCuota == 0
+                              select c.VtoCuota).First();
                 db.Pagos.Add(p);
                 db.SaveChanges();
             }
