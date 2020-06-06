@@ -84,7 +84,8 @@ namespace SMPorres.Repositories
 
         public static IList<Alumno> BuscarAlumnosPorNombre(string nombre)
         {
-            var query = ObtenerAlumnos().Where(a => (a.Nombre + a.Apellido).Contains(nombre))
+            var query = ObtenerAlumnos()
+                        .Where(a => (a.Nombre + a.Apellido).ToLower().Contains(nombre.ToLower()))
                         .Select(
                             a => new Alumno
                             {
