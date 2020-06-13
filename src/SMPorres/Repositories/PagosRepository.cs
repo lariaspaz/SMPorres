@@ -68,9 +68,6 @@ namespace SMPorres.Repositories
                             };
 
                 var q = (from p in pagos
-                         join c in db.Cuotas on new { cl = p.CicloLectivo, c = p.NroCuota } equals
-                            new { cl = c.CicloLectivo.Value, c = c.NroCuota } into pc
-                         from c in pc.DefaultIfEmpty()
                          join mp in db.MediosPago on p.IdMedioPago equals mp.Id into pmp
                          from mp in pmp.DefaultIfEmpty()
                          join ba in db.BecasAlumnos on p.IdBecaAlumno equals ba.Id into pba
@@ -84,7 +81,6 @@ namespace SMPorres.Repositories
                              p.NroCuota,
                              p.ImporteCuota,
                              p.Fecha,
-                             //FechaVto = (c == null) ? default(DateTime) : c.VtoCuota,
                              p.FechaVto,
                              p.ImportePagado,
                              p.IdMedioPago,
