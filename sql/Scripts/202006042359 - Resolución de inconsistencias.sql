@@ -47,5 +47,16 @@ from
 update PlanesPago set NroCuota = CantidadCuotas where Estado = 2
 -- 364
 
+-- inserta alumnos en cursos que no estaban dados de alta
+declare @maxid int
+select @maxid = max(id) from CursosAlumnos
+insert into CursosAlumnos(Id, IdCurso, IdAlumno, CicloLectivo)
+select row# = @maxid + ROW_NUMBER() over (order by pp.IdCurso, pp.IdAlumno),  pp.IdCurso, pp.IdAlumno, CicloLectivo = case when pp.FechaGrabacion < '2019/12/01' then 2019 else 2020 end
+from PlanesPago pp where IdAlumno not in (
+	select IdAlumno from CursosAlumnos ca where ca.IdCurso = pp.IdCurso
+)
+order by row#
+-- 30
+
 -- commit tran lap
 -- rollback tran lap
