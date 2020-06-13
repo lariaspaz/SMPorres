@@ -19,26 +19,25 @@ namespace NotificacionesDeuda.Repositories
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
                                  p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
-                                 //p.FechaVto <= System.DateTime.Now  &&
-                                 pp.Cursos.Carreras.Id == idCarrera &&
-                                 pp.Alumnos.EMail != ""
+                                 p.FechaVto <= DateTime.Now  &&
+                                 pp.Curso.Carreras.Id == idCarrera &&
+                                 pp.Alumno.EMail != ""
                              orderby pp.Id
                              select new AlumnoMoroso
                              {
                                  IdPlanPago = pp.Id,
-                                 Carrera = pp.Cursos.Carreras.Nombre,
-                                 Curso = pp.Cursos.Nombre,
-                                 Nombre = pp.Alumnos.Nombre,
-                                 Apellido = pp.Alumnos.Apellido,
-                                 Documento = pp.Alumnos.NroDocumento.ToString(),
-                                 EMail = pp.Alumnos.EMail, //a.EMail,
+                                 Carrera = pp.Curso.Carreras.Nombre,
+                                 Curso = pp.Curso.Nombre,
+                                 Nombre = pp.Alumno.Nombre,
+                                 Apellido = pp.Alumno.Apellido,
+                                 NroDocumento = pp.Alumno.NroDocumento,
+                                 EMail = pp.Alumno.EMail, //a.EMail,
                                  IdPago = p.Id,
                                  NroCuota = p.NroCuota,
                                  ImporteDeuda = 0,
                                  //ImporteDeuda = PagosRepository.ObtenerDetallePago(p.Id, DateTime.Today).ImportePagado,
                                  CuotasAdeudadas = 1
                              }).ToList();
-                //return query.OrderBy(s => s.IdPlanPago).ToList();
 
                 foreach (var item in query)
                 {
@@ -46,7 +45,7 @@ namespace NotificacionesDeuda.Repositories
                 }
 
                 var morosos = (from t in query
-                               group t by new { t.IdPlanPago, t.Carrera, t.Curso, t.Apellido, t.Nombre, t.Documento, t.EMail }
+                               group t by new { t.IdPlanPago, t.Carrera, t.Curso, t.Apellido, t.Nombre, t.NroDocumento, t.EMail }
                                into g
                                select new AlumnoMoroso
                                {
@@ -55,7 +54,7 @@ namespace NotificacionesDeuda.Repositories
                                    Curso = g.Key.Curso,
                                    Apellido = g.Key.Apellido,
                                    Nombre = g.Key.Nombre,
-                                   Documento = g.Key.Documento,
+                                   NroDocumento = g.Key.NroDocumento,
                                    EMail = g.Key.EMail,
                                    ImporteDeuda = g.Sum(s => s.ImporteDeuda),
                                    CuotasAdeudadas = g.Count()
@@ -65,7 +64,7 @@ namespace NotificacionesDeuda.Repositories
             }
         }
 
-        internal static IList<Pagos> ObtenerCuotasAdeudadas(int idPlanPago, Int16 cuotaReferencia)
+        internal static IList<Pago> ObtenerCuotasAdeudadas(int idPlanPago, Int16 cuotaReferencia)
         {
             using (var db = new SMPorresEntities())
             {

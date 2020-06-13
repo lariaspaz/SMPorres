@@ -12,12 +12,12 @@ namespace NotificacionesDeuda.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pagos
+    public partial class Pago
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pagos()
+        public Pago()
         {
-            this.Pagos1 = new HashSet<Pagos>();
+            this.Pagos1 = new HashSet<Pago>();
         }
     
         public int Id { get; set; }
@@ -43,10 +43,10 @@ namespace NotificacionesDeuda.Models
         public string Descripcion { get; set; }
         public Nullable<byte> Estado { get; set; }
     
-        public virtual BecasAlumnos BecasAlumnos { get; set; }
+        public virtual BecaAlumno BecaAlumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pagos> Pagos1 { get; set; }
-        public virtual Pagos Pagos2 { get; set; }
-        public virtual PlanesPago PlanesPago { get; set; }
+        public virtual ICollection<Pago> Pagos1 { get; set; }
+        public virtual Pago Pagos2 { get; set; }
+        public virtual PlanPago PlanPago { get; set; }
     }
 }

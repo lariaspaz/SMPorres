@@ -12,14 +12,14 @@ namespace NotificacionesDeuda.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Alumnos
+    public partial class Alumno
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Alumnos()
+        public Alumno()
         {
-            this.BecasAlumnos = new HashSet<BecasAlumnos>();
-            this.CursosAlumnos = new HashSet<CursosAlumnos>();
-            this.PlanesPago = new HashSet<PlanesPago>();
+            this.BecasAlumno = new HashSet<BecaAlumno>();
+            this.CursosAlumno = new HashSet<CursoAlumno>();
+            this.PlanesPago = new HashSet<PlanPago>();
         }
     
         public int Id { get; set; }
@@ -35,12 +35,12 @@ namespace NotificacionesDeuda.Models
         public byte Estado { get; set; }
         public string Contraseña { get; set; }
     
-        public virtual TiposDocumento TiposDocumento { get; set; }
+        public virtual TipoDocumento TiposDocumento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BecasAlumnos> BecasAlumnos { get; set; }
+        public virtual ICollection<BecaAlumno> BecasAlumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CursosAlumnos> CursosAlumnos { get; set; }
+        public virtual ICollection<CursoAlumno> CursosAlumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanesPago> PlanesPago { get; set; }
+        public virtual ICollection<PlanPago> PlanesPago { get; set; }
     }
 }

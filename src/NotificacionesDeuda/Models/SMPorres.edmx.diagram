@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bdbb93f23a494a64b6266aab21e16809" Name="Diagram1">
-        <EntityTypeShape EntityType="SMPorresModel.Alumnos" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.BecasAlumnos" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.Carreras" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.Configuracion" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.Cuotas" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.Cursos" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.CursosAlumnos" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.Alumno" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.BecaAlumno" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.Carrera" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.Configuracion" Width="1.5" PointX="0.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.Cuotas" Width="1.5" PointX="0.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.Curso" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.CursoAlumno" Width="1.5" PointX="2.875" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPorresModel.GruposUsuarios" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.Pagos" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.PlanesPago" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorresModel.TiposDocumento" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.Pago" Width="1.5" PointX="7.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.PlanPago" Width="1.5" PointX="5.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorresModel.TipoDocumento" Width="1.5" PointX="2.875" PointY="8" IsExpanded="true" />
         <AssociationConnector Association="SMPorresModel.FK_Alumnos_TiposDocumento" ManuallyRouted="false" />
         <AssociationConnector Association="SMPorresModel.FK_BecasAlumnos_Alumnos" ManuallyRouted="false" />
         <AssociationConnector Association="SMPorresModel.FK_CursosAlumnos_Alumnos" ManuallyRouted="false" />
@@ -26,6 +26,7 @@
         <AssociationConnector Association="SMPorresModel.FK_PlanesPago_Cursos" ManuallyRouted="false" />
         <AssociationConnector Association="SMPorresModel.FK_Pagos_Pagos" ManuallyRouted="false" />
         <AssociationConnector Association="SMPorresModel.FK_Pagos_PlanesPago" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SMPorresModel.TasaMora" Width="1.5" PointX="0.5" PointY="7.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

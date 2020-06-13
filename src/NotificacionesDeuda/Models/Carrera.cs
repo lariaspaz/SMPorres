@@ -12,18 +12,21 @@ namespace NotificacionesDeuda.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TiposDocumento
+    public partial class Carrera
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TiposDocumento()
+        public Carrera()
         {
-            this.Alumnos = new HashSet<Alumnos>();
+            this.Cursos = new HashSet<Curso>();
         }
     
         public int Id { get; set; }
-        public string Descripcion { get; set; }
+        public string Nombre { get; set; }
+        public short Duracion { get; set; }
+        public short Estado { get; set; }
+        public System.DateTime FechaEstado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alumnos> Alumnos { get; set; }
+        public virtual ICollection<Curso> Cursos { get; set; }
     }
 }

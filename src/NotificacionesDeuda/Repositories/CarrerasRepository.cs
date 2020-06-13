@@ -9,14 +9,14 @@ namespace NotificacionesDeuda.Repositories
 {
     class CarrerasRepository
     {
-        public static IList<Carreras> ObtenerCarreras()
+        public static List<Carrera> ObtenerCarreras()
         {
             using (var db = new SMPorresEntities())
             {
                 var query = (from c in db.Carreras select c)
                                 .ToList()
                                 .Select(
-                                    c => new Carreras
+                                    c => new Carrera
                                     {
                                         Id = c.Id,
                                         Nombre = c.Nombre,

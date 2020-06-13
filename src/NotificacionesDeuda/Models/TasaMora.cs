@@ -12,14 +12,12 @@ namespace NotificacionesDeuda.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CursosAlumnos
+    public partial class TasaMora
     {
         public int Id { get; set; }
-        public int IdCurso { get; set; }
-        public int IdAlumno { get; set; }
-        public short CicloLectivo { get; set; }
-    
-        public virtual Alumnos Alumnos { get; set; }
-        public virtual Cursos Cursos { get; set; }
+        public double Tasa { get; set; }
+        public System.DateTime Desde { get; set; }
+        public System.DateTime Hasta { get; set; }
+        public short Estado { get; set; }
     }
 }

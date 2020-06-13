@@ -8,7 +8,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F70E52FA-E9A0-4751-8DE2-9EB3904086CE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NotificacionesDeuda</RootNamespace>
     <AssemblyName>NotificacionesDeuda</AssemblyName>
@@ -36,7 +36,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LAP|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\LAP\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -46,6 +56,10 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
@@ -70,15 +84,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\EmailController.cs" />
+    <Compile Include="Controller\NotificacionDeudaController.cs" />
+    <Compile Include="Lib\Configuration.cs" />
     <Compile Include="Lib\Security\StringCipher.cs" />
+    <Compile Include="Models\Alumno.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AlumnoMoroso.cs" />
-    <Compile Include="Models\Alumnos.cs">
+    <Compile Include="Models\BecaAlumno.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BecasAlumnos.cs">
-      <DependentUpon>SMPorres.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Carreras.cs">
+    <Compile Include="Models\Carrera.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Configuracion.cs">
@@ -87,20 +103,22 @@
     <Compile Include="Models\Cuotas.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cursos.cs">
+    <Compile Include="Models\Curso.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CursosAlumnos.cs">
+    <Compile Include="Models\CursoAlumno.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EstadoPago.cs" />
+    <Compile Include="Models\EstadoTasaMora.cs" />
     <Compile Include="Models\GruposUsuarios.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Moroso.cs" />
-    <Compile Include="Models\Pagos.cs">
+    <Compile Include="Models\Pago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlanesPago.cs">
+    <Compile Include="Models\PlanPago.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SMPorres.Context.cs">
@@ -119,8 +137,11 @@
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SMPorres.Ext.cs" />
+    <Compile Include="Models\TasaMora.cs">
+      <DependentUpon>SMPorres.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoBeca.cs" />
-    <Compile Include="Models\TiposDocumento.cs">
+    <Compile Include="Models\TipoDocumento.cs">
       <DependentUpon>SMPorres.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -130,6 +151,7 @@
     <Compile Include="Repositories\ConfiguracionRepository.cs" />
     <Compile Include="Repositories\CuotasRepository.cs" />
     <Compile Include="Repositories\PagosRepository.cs" />
+    <Compile Include="Repositories\TasasMoraRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -138,6 +160,9 @@
       <LastGenOutput>SMPorres.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="App.LAP.config" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Models\SMPorres.edmx.diagram">
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </None>

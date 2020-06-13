@@ -12,13 +12,13 @@ namespace NotificacionesDeuda.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cursos
+    public partial class Curso
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cursos()
+        public Curso()
         {
-            this.CursosAlumnos = new HashSet<CursosAlumnos>();
-            this.PlanesPago = new HashSet<PlanesPago>();
+            this.CursosAlumnos = new HashSet<CursoAlumno>();
+            this.PlanesPago = new HashSet<PlanPago>();
         }
     
         public int Id { get; set; }
@@ -34,10 +34,10 @@ namespace NotificacionesDeuda.Models
         public Nullable<decimal> Cuota3 { get; set; }
         public Nullable<short> Estado { get; set; }
     
-        public virtual Carreras Carreras { get; set; }
+        public virtual Carrera Carreras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CursosAlumnos> CursosAlumnos { get; set; }
+        public virtual ICollection<CursoAlumno> CursosAlumnos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanesPago> PlanesPago { get; set; }
+        public virtual ICollection<PlanPago> PlanesPago { get; set; }
     }
 }

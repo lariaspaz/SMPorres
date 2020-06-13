@@ -12,20 +12,14 @@ namespace NotificacionesDeuda.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BecasAlumnos
+    public partial class CursoAlumno
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BecasAlumnos()
-        {
-            this.Pagos = new HashSet<Pagos>();
-        }
-    
         public int Id { get; set; }
+        public int IdCurso { get; set; }
         public int IdAlumno { get; set; }
-        public Nullable<short> PorcentajeBeca { get; set; }
+        public short CicloLectivo { get; set; }
     
-        public virtual Alumnos Alumnos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pagos> Pagos { get; set; }
+        public virtual Alumno Alumno { get; set; }
+        public virtual Curso Curso { get; set; }
     }
 }

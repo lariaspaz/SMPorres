@@ -17,5 +17,6 @@ namespace NotificacionesDeuda.Models
         public int Id { get; set; }
         public short Cuota { get; set; }
         public System.DateTime VtoCuota { get; set; }
+        public Nullable<short> CicloLectivo { get; set; }
     }
 }

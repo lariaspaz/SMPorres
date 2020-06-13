@@ -15,26 +15,27 @@ namespace NotificacionesDeuda.Models
     
     public partial class SMPorresEntities : DbContext
     {
-        //public SMPorresEntities()
-        //    : base("name=SMPorresEntities")
-        //{
-        //}
+        public SMPorresEntities()
+            : base("name=SMPorresEntities")
+        {
+        }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Alumnos> Alumnos { get; set; }
-        public virtual DbSet<BecasAlumnos> BecasAlumnos { get; set; }
-        public virtual DbSet<Carreras> Carreras { get; set; }
+        public virtual DbSet<Alumno> Alumnos { get; set; }
+        public virtual DbSet<BecaAlumno> BecasAlumnos { get; set; }
+        public virtual DbSet<Carrera> Carreras { get; set; }
         public virtual DbSet<Configuracion> Configuracion { get; set; }
         public virtual DbSet<Cuotas> Cuotas { get; set; }
-        public virtual DbSet<Cursos> Cursos { get; set; }
-        public virtual DbSet<CursosAlumnos> CursosAlumnos { get; set; }
+        public virtual DbSet<Curso> Cursos { get; set; }
+        public virtual DbSet<CursoAlumno> CursosAlumnos { get; set; }
         public virtual DbSet<GruposUsuarios> GruposUsuarios { get; set; }
-        public virtual DbSet<Pagos> Pagos { get; set; }
-        public virtual DbSet<PlanesPago> PlanesPago { get; set; }
-        public virtual DbSet<TiposDocumento> TiposDocumento { get; set; }
+        public virtual DbSet<Pago> Pagos { get; set; }
+        public virtual DbSet<PlanPago> PlanesPago { get; set; }
+        public virtual DbSet<TipoDocumento> TiposDocumento { get; set; }
+        public virtual DbSet<TasaMora> TasasMora { get; set; }
     }
 }

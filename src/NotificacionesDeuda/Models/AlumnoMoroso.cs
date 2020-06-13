@@ -18,7 +18,7 @@ namespace NotificacionesDeuda.Models
 
         public string Nombre { get; set; }
 
-        public string Documento { get; set; }
+        public decimal NroDocumento { get; set; }
 
         public string EMail { get; set; }
 

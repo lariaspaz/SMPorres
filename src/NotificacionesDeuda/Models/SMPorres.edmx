@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SMPorresModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMPorresModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alumnos">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,6 +58,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Cuota" Type="smallint" Nullable="false" />
           <Property Name="VtoCuota" Type="smalldatetime" Nullable="false" />
+          <Property Name="CicloLectivo" Type="smallint" />
         </EntityType>
         <EntityType Name="Cursos">
           <Key>
@@ -137,6 +138,16 @@
           <Property Name="IdUsuarioEstado" Type="int" Nullable="false" />
           <Property Name="TipoBeca" Type="tinyint" />
           <Property Name="Modalidad" Type="int" />
+        </EntityType>
+        <EntityType Name="TasasMora">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Tasa" Type="float" Nullable="false" />
+          <Property Name="Desde" Type="smalldatetime" Nullable="false" />
+          <Property Name="Hasta" Type="smalldatetime" Nullable="false" />
+          <Property Name="Estado" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposDocumento">
           <Key>
@@ -276,6 +287,7 @@
           <EntitySet Name="GruposUsuarios" EntityType="Self.GruposUsuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlanesPago" EntityType="Self.PlanesPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TasasMora" EntityType="Self.TasasMora" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="Self.FK_Alumnos_TiposDocumento">
             <End Role="TiposDocumento" EntitySet="TiposDocumento" />
@@ -318,12 +330,11 @@
             <End Role="PlanesPago" EntitySet="PlanesPago" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SMPorresModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Alumnos">
+        <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -340,11 +351,11 @@
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TiposDocumento" Relationship="Self.FK_Alumnos_TiposDocumento" FromRole="Alumnos" ToRole="TiposDocumento" />
-          <NavigationProperty Name="BecasAlumnos" Relationship="Self.FK_BecasAlumnos_Alumnos" FromRole="Alumnos" ToRole="BecasAlumnos" />
-          <NavigationProperty Name="CursosAlumnos" Relationship="Self.FK_CursosAlumnos_Alumnos" FromRole="Alumnos" ToRole="CursosAlumnos" />
+          <NavigationProperty Name="BecasAlumno" Relationship="Self.FK_BecasAlumnos_Alumnos" FromRole="Alumnos" ToRole="BecasAlumnos" />
+          <NavigationProperty Name="CursosAlumno" Relationship="Self.FK_CursosAlumnos_Alumnos" FromRole="Alumnos" ToRole="CursosAlumnos" />
           <NavigationProperty Name="PlanesPago" Relationship="Self.FK_PlanesPago_Alumnos" FromRole="Alumnos" ToRole="PlanesPago" />
         </EntityType>
-        <EntityType Name="BecasAlumnos">
+        <EntityType Name="BecaAlumno">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -354,7 +365,7 @@
           <NavigationProperty Name="Alumnos" Relationship="Self.FK_BecasAlumnos_Alumnos" FromRole="BecasAlumnos" ToRole="Alumnos" />
           <NavigationProperty Name="Pagos" Relationship="Self.FK_Pagos_BecasAlumnos" FromRole="BecasAlumnos" ToRole="Pagos" />
         </EntityType>
-        <EntityType Name="Carreras">
+        <EntityType Name="Carrera">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -383,8 +394,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Cuota" Type="Int16" Nullable="false" />
           <Property Name="VtoCuota" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CicloLectivo" Type="Int16" />
         </EntityType>
-        <EntityType Name="Cursos">
+        <EntityType Name="Curso">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -404,7 +416,7 @@
           <NavigationProperty Name="CursosAlumnos" Relationship="Self.FK_CursosAlumnos_Cursos" FromRole="Cursos" ToRole="CursosAlumnos" />
           <NavigationProperty Name="PlanesPago" Relationship="Self.FK_PlanesPago_Cursos" FromRole="Cursos" ToRole="PlanesPago" />
         </EntityType>
-        <EntityType Name="CursosAlumnos">
+        <EntityType Name="CursoAlumno">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -412,8 +424,8 @@
           <Property Name="IdCurso" Type="Int32" Nullable="false" />
           <Property Name="IdAlumno" Type="Int32" Nullable="false" />
           <Property Name="CicloLectivo" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Alumnos" Relationship="Self.FK_CursosAlumnos_Alumnos" FromRole="CursosAlumnos" ToRole="Alumnos" />
-          <NavigationProperty Name="Cursos" Relationship="Self.FK_CursosAlumnos_Cursos" FromRole="CursosAlumnos" ToRole="Cursos" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK_CursosAlumnos_Alumnos" FromRole="CursosAlumnos" ToRole="Alumnos" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK_CursosAlumnos_Cursos" FromRole="CursosAlumnos" ToRole="Cursos" />
         </EntityType>
         <EntityType Name="GruposUsuarios">
           <Key>
@@ -423,7 +435,7 @@
           <Property Name="IdGrupo" Type="Int32" Nullable="false" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Pagos">
+        <EntityType Name="Pago">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -449,12 +461,12 @@
           <Property Name="FechaVto" Type="DateTime" Precision="3" />
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="Byte" />
-          <NavigationProperty Name="BecasAlumnos" Relationship="Self.FK_Pagos_BecasAlumnos" FromRole="Pagos" ToRole="BecasAlumnos" />
+          <NavigationProperty Name="BecaAlumno" Relationship="Self.FK_Pagos_BecasAlumnos" FromRole="Pagos" ToRole="BecasAlumnos" />
           <NavigationProperty Name="Pagos1" Relationship="Self.FK_Pagos_Pagos" FromRole="Pagos" ToRole="Pagos1" />
           <NavigationProperty Name="Pagos2" Relationship="Self.FK_Pagos_Pagos" FromRole="Pagos1" ToRole="Pagos" />
-          <NavigationProperty Name="PlanesPago" Relationship="Self.FK_Pagos_PlanesPago" FromRole="Pagos" ToRole="PlanesPago" />
+          <NavigationProperty Name="PlanPago" Relationship="Self.FK_Pagos_PlanesPago" FromRole="Pagos" ToRole="PlanesPago" />
         </EntityType>
-        <EntityType Name="PlanesPago">
+        <EntityType Name="PlanPago">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -471,11 +483,11 @@
           <Property Name="IdUsuarioEstado" Type="Int32" Nullable="false" />
           <Property Name="TipoBeca" Type="Byte" />
           <Property Name="Modalidad" Type="Int32" />
-          <NavigationProperty Name="Alumnos" Relationship="Self.FK_PlanesPago_Alumnos" FromRole="PlanesPago" ToRole="Alumnos" />
-          <NavigationProperty Name="Cursos" Relationship="Self.FK_PlanesPago_Cursos" FromRole="PlanesPago" ToRole="Cursos" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK_PlanesPago_Alumnos" FromRole="PlanesPago" ToRole="Alumnos" />
+          <NavigationProperty Name="Curso" Relationship="Self.FK_PlanesPago_Cursos" FromRole="PlanesPago" ToRole="Cursos" />
           <NavigationProperty Name="Pagos" Relationship="Self.FK_Pagos_PlanesPago" FromRole="PlanesPago" ToRole="Pagos" />
         </EntityType>
-        <EntityType Name="TiposDocumento">
+        <EntityType Name="TipoDocumento">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -484,8 +496,8 @@
           <NavigationProperty Name="Alumnos" Relationship="Self.FK_Alumnos_TiposDocumento" FromRole="TiposDocumento" ToRole="Alumnos" />
         </EntityType>
         <Association Name="FK_Alumnos_TiposDocumento">
-          <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
+          <End Role="TiposDocumento" Type="SMPorresModel.TipoDocumento" Multiplicity="1" />
+          <End Role="Alumnos" Type="SMPorresModel.Alumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposDocumento">
               <PropertyRef Name="Id" />
@@ -496,8 +508,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BecasAlumnos_Alumnos">
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
-          <End Role="BecasAlumnos" Type="Self.BecasAlumnos" Multiplicity="*" />
+          <End Role="Alumnos" Type="SMPorresModel.Alumno" Multiplicity="1" />
+          <End Role="BecasAlumnos" Type="SMPorresModel.BecaAlumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumnos">
               <PropertyRef Name="Id" />
@@ -508,8 +520,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CursosAlumnos_Alumnos">
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
-          <End Role="CursosAlumnos" Type="Self.CursosAlumnos" Multiplicity="*" />
+          <End Role="Alumnos" Type="SMPorresModel.Alumno" Multiplicity="1" />
+          <End Role="CursosAlumnos" Type="SMPorresModel.CursoAlumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumnos">
               <PropertyRef Name="Id" />
@@ -520,8 +532,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PlanesPago_Alumnos">
-          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
-          <End Role="PlanesPago" Type="Self.PlanesPago" Multiplicity="*" />
+          <End Role="Alumnos" Type="SMPorresModel.Alumno" Multiplicity="1" />
+          <End Role="PlanesPago" Type="SMPorresModel.PlanPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumnos">
               <PropertyRef Name="Id" />
@@ -532,8 +544,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pagos_BecasAlumnos">
-          <End Role="BecasAlumnos" Type="Self.BecasAlumnos" Multiplicity="0..1" />
-          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <End Role="BecasAlumnos" Type="SMPorresModel.BecaAlumno" Multiplicity="0..1" />
+          <End Role="Pagos" Type="SMPorresModel.Pago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BecasAlumnos">
               <PropertyRef Name="Id" />
@@ -544,8 +556,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cursos_Carreras">
-          <End Role="Carreras" Type="Self.Carreras" Multiplicity="1" />
-          <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+          <End Role="Carreras" Type="SMPorresModel.Carrera" Multiplicity="1" />
+          <End Role="Cursos" Type="SMPorresModel.Curso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Carreras">
               <PropertyRef Name="Id" />
@@ -556,8 +568,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CursosAlumnos_Cursos">
-          <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
-          <End Role="CursosAlumnos" Type="Self.CursosAlumnos" Multiplicity="*" />
+          <End Role="Cursos" Type="SMPorresModel.Curso" Multiplicity="1" />
+          <End Role="CursosAlumnos" Type="SMPorresModel.CursoAlumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cursos">
               <PropertyRef Name="Id" />
@@ -568,8 +580,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PlanesPago_Cursos">
-          <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
-          <End Role="PlanesPago" Type="Self.PlanesPago" Multiplicity="*" />
+          <End Role="Cursos" Type="SMPorresModel.Curso" Multiplicity="1" />
+          <End Role="PlanesPago" Type="SMPorresModel.PlanPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cursos">
               <PropertyRef Name="Id" />
@@ -580,8 +592,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pagos_Pagos">
-          <End Role="Pagos" Type="Self.Pagos" Multiplicity="0..1" />
-          <End Role="Pagos1" Type="Self.Pagos" Multiplicity="*" />
+          <End Role="Pagos" Type="SMPorresModel.Pago" Multiplicity="0..1" />
+          <End Role="Pagos1" Type="SMPorresModel.Pago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pagos">
               <PropertyRef Name="Id" />
@@ -592,8 +604,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pagos_PlanesPago">
-          <End Role="PlanesPago" Type="Self.PlanesPago" Multiplicity="1" />
-          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <End Role="PlanesPago" Type="SMPorresModel.PlanPago" Multiplicity="1" />
+          <End Role="Pagos" Type="SMPorresModel.Pago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PlanesPago">
               <PropertyRef Name="Id" />
@@ -604,17 +616,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SMPorresEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" />
-          <EntitySet Name="BecasAlumnos" EntityType="Self.BecasAlumnos" />
-          <EntitySet Name="Carreras" EntityType="Self.Carreras" />
+          <EntitySet Name="Alumnos" EntityType="SMPorresModel.Alumno" />
+          <EntitySet Name="BecasAlumnos" EntityType="SMPorresModel.BecaAlumno" />
+          <EntitySet Name="Carreras" EntityType="SMPorresModel.Carrera" />
           <EntitySet Name="Configuracion" EntityType="Self.Configuracion" />
           <EntitySet Name="Cuotas" EntityType="Self.Cuotas" />
-          <EntitySet Name="Cursos" EntityType="Self.Cursos" />
-          <EntitySet Name="CursosAlumnos" EntityType="Self.CursosAlumnos" />
+          <EntitySet Name="Cursos" EntityType="SMPorresModel.Curso" />
+          <EntitySet Name="CursosAlumnos" EntityType="SMPorresModel.CursoAlumno" />
           <EntitySet Name="GruposUsuarios" EntityType="Self.GruposUsuarios" />
-          <EntitySet Name="Pagos" EntityType="Self.Pagos" />
-          <EntitySet Name="PlanesPago" EntityType="Self.PlanesPago" />
-          <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" />
+          <EntitySet Name="Pagos" EntityType="SMPorresModel.Pago" />
+          <EntitySet Name="PlanesPago" EntityType="SMPorresModel.PlanPago" />
+          <EntitySet Name="TiposDocumento" EntityType="SMPorresModel.TipoDocumento" />
           <AssociationSet Name="FK_Alumnos_TiposDocumento" Association="Self.FK_Alumnos_TiposDocumento">
             <End Role="TiposDocumento" EntitySet="TiposDocumento" />
             <End Role="Alumnos" EntitySet="Alumnos" />
@@ -655,7 +667,18 @@
             <End Role="PlanesPago" EntitySet="PlanesPago" />
             <End Role="Pagos" EntitySet="Pagos" />
           </AssociationSet>
+          <EntitySet Name="TasasMora" EntityType="SMPorresModel.TasaMora" />
         </EntityContainer>
+        <EntityType Name="TasaMora">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Tasa" Type="Double" Nullable="false" />
+          <Property Name="Desde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="Int16" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -663,7 +686,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SMPorresModelStoreContainer" CdmEntityContainer="SMPorresEntities">
           <EntitySetMapping Name="Alumnos">
-            <EntityTypeMapping TypeName="SMPorresModel.Alumnos">
+            <EntityTypeMapping TypeName="SMPorresModel.Alumno">
               <MappingFragment StoreEntitySet="Alumnos">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -681,7 +704,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BecasAlumnos">
-            <EntityTypeMapping TypeName="SMPorresModel.BecasAlumnos">
+            <EntityTypeMapping TypeName="SMPorresModel.BecaAlumno">
               <MappingFragment StoreEntitySet="BecasAlumnos">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
@@ -690,7 +713,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Carreras">
-            <EntityTypeMapping TypeName="SMPorresModel.Carreras">
+            <EntityTypeMapping TypeName="SMPorresModel.Carrera">
               <MappingFragment StoreEntitySet="Carreras">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -715,6 +738,7 @@
           <EntitySetMapping Name="Cuotas">
             <EntityTypeMapping TypeName="SMPorresModel.Cuotas">
               <MappingFragment StoreEntitySet="Cuotas">
+                <ScalarProperty Name="CicloLectivo" ColumnName="CicloLectivo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Cuota" ColumnName="Cuota" />
                 <ScalarProperty Name="VtoCuota" ColumnName="VtoCuota" />
@@ -722,7 +746,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cursos">
-            <EntityTypeMapping TypeName="SMPorresModel.Cursos">
+            <EntityTypeMapping TypeName="SMPorresModel.Curso">
               <MappingFragment StoreEntitySet="Cursos">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -740,7 +764,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CursosAlumnos">
-            <EntityTypeMapping TypeName="SMPorresModel.CursosAlumnos">
+            <EntityTypeMapping TypeName="SMPorresModel.CursoAlumno">
               <MappingFragment StoreEntitySet="CursosAlumnos">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
@@ -759,7 +783,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pagos">
-            <EntityTypeMapping TypeName="SMPorresModel.Pagos">
+            <EntityTypeMapping TypeName="SMPorresModel.Pago">
               <MappingFragment StoreEntitySet="Pagos">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdPlanPago" ColumnName="IdPlanPago" />
@@ -787,7 +811,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PlanesPago">
-            <EntityTypeMapping TypeName="SMPorresModel.PlanesPago">
+            <EntityTypeMapping TypeName="SMPorresModel.PlanPago">
               <MappingFragment StoreEntitySet="PlanesPago">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
@@ -806,10 +830,21 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposDocumento">
-            <EntityTypeMapping TypeName="SMPorresModel.TiposDocumento">
+            <EntityTypeMapping TypeName="SMPorresModel.TipoDocumento">
               <MappingFragment StoreEntitySet="TiposDocumento">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TasasMora">
+            <EntityTypeMapping TypeName="SMPorresModel.TasaMora">
+              <MappingFragment StoreEntitySet="TasasMora">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Tasa" ColumnName="Tasa" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
