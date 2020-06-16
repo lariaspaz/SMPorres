@@ -2,15 +2,15 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "ISMP"
-#define MyAppVersion "1.3.0.57"
+#define MyAppVersion "1.4.0.0"
 #define MyAppPublisher "Instituto San Martín de Porres"
 #define MyAppURL "http://www.ismp.edu.ar"
 #define MyAppExeName "SMPorres.exe"
 #define MyAppId "4176C0F8-3F7C-4BD4-B2A1-99D8E74C4057"
-#define MyAppSource "D:\Proyectos\SMPorres\src\SMPorres\bin\JHC"
+#define MyAppSource "D:\Proyectos\SMPorres\src\SMPorres\bin\Release"
 #define MyAppDestino "C:\Program Files\ISMP"
 
-
+                                    
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
@@ -41,7 +41,7 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 //[Tasks]
 //Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; 
-
+         
 [Files]
 ;Source: "D:\Proyectos\SMPorres\src\SMPorres\bin\Debug\SMPorres.exe"; DestDir: "C:\Program Files\ISMP"; Flags: ignoreversion
 ;Source: "{#MyAppSource}\SMPorres.exe"; DestDir: "C:\Program Files\ISMP"; Flags: ignoreversion
@@ -82,10 +82,10 @@ Source: "{#MyAppSource}\SMPorres.vshost.exe.config"; DestDir: "{#MyAppDestino}";
 Source: "{#MyAppSource}\stdole.dll"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
-[Icons]
+//[Icons]
 ;Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{#MyAppDestino}\{#MyAppExeName}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{#MyAppDestino}\{#MyAppExeName}"; 
+;Name: "{autoprograms}\{#MyAppName}"; Filename: "{#MyAppDestino}\{#MyAppExeName}"
+;Name: "{autodesktop}\{#MyAppName}"; Filename: "{#MyAppDestino}\{#MyAppExeName}"; 
 //Tasks: desktopicon
 
 [Code]
