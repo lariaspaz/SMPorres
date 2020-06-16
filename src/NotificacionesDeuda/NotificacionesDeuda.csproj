@@ -48,6 +48,16 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'JHC|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\JHC\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -154,6 +164,9 @@
     <Compile Include="Repositories\TasasMoraRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Debug.config" />
+    <None Include="App.JHC.config" />
+    <None Include="App.Release.config" />
     <None Include="App.config" />
     <EntityDeploy Include="Models\SMPorres.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

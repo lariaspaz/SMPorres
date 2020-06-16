@@ -18,8 +18,7 @@ namespace NotificacionesDeuda.Repositories
                              join ca in db.CursosAlumnos on new { pp.IdCurso, pp.IdAlumno } equals new { ca.IdCurso, ca.IdAlumno }  //Control que 
                              where pp.Estado == 1 && //Planes de pago activos
                                  p.ImportePagado == null &&// Cuota impaga
-                                 p.NroCuota <= CuotasRepository.MáximaCuotaVencida &&
-                                 p.FechaVto <= DateTime.Now  &&
+                                 p.FechaVto < DateTime.Now  &&
                                  pp.Curso.Carreras.Id == idCarrera &&
                                  pp.Alumno.EMail != ""
                              orderby pp.Id
