@@ -41,7 +41,7 @@ namespace Consultas
 
                     HttpContext.Current.User = principal;
                 }
-                catch (System.Security.Cryptography.CryptographicException cex)
+                catch (System.Security.Cryptography.CryptographicException)
                 {
                     FormsAuthentication.SignOut();
                 }
