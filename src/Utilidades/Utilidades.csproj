@@ -160,6 +160,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.Release.config" />
+    <None Include="App.Debug.config" />
     <None Include="App.JHC.config" />
     <None Include="App.LAP.config" />
     <None Include="packages.config" />
