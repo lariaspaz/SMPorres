@@ -188,7 +188,7 @@ namespace SMPorres.Forms.TasasMora
             var cliente = new ConsultasWeb.SMPSoapClient(binding, address);
             try
             {
-                cliente.ActualizarTasasMora(WebRepository.ObtenerTasasMora().ToArray());
+                cliente.ActualizarTasasMora(new WebRepository().ObtenerTasasMora());
                 return true;
             }
             catch (Exception ex)

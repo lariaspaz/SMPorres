@@ -10,19 +10,20 @@ namespace SMPorres.Repositories
     public class WebRepository
     {
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static short _cicloLectivo = 0;
+        private static short _díasVtoPagoTermino = 0;
 
         public IEnumerable<Alumno> ObtenerDatos()
         {
+            var conf = ConfiguracionRepository.ObtenerConfiguracion();
+            _cicloLectivo = conf.CicloLectivo;
+            _díasVtoPagoTermino = conf.DiasVtoPagoTermino ?? 0;
             using (var db = new Models.SMPorresEntities())
             {
-                var conf = ConfiguracionRepository.ObtenerConfiguracion();
-                var cicloLectivo = conf.CicloLectivo;
-                var díasVtoPagoTermino = conf.DiasVtoPagoTermino ?? 0;
-
                 var result = (from a in db.Alumnos
                               join ca in db.CursosAlumnos on a.Id equals ca.IdAlumno
                               where
-                                ca.CicloLectivo == cicloLectivo &&
+                                ca.CicloLectivo == _cicloLectivo &&
                                 a.Contraseña != null
                               select a
                               ).ToList()
@@ -36,25 +37,30 @@ namespace SMPorres.Repositories
                                 Contraseña = a.Contraseña
                             })
                             .ToList();
-                foreach (var a in result)
-                {
-                    _log.Debug($"Procesando alumno {a.Id} - ciclo lectivo {cicloLectivo}");
-                    a.CursosAlumnos = (from ca in db.CursosAlumnos
-                                       where ca.IdAlumno == a.Id &&
-                                                ca.CicloLectivo == cicloLectivo
-                                       select ca).ToList()
-                                        .Select(ca => new CursoAlumno
-                                        {
-                                            Id = ca.Id,
-                                            IdCurso = ca.IdCurso,
-                                            Curso = ca.Curso.Nombre,
-                                            IdCarrera = ca.Curso.Carrera.Id,
-                                            Carrera = ca.Curso.Carrera.Nombre,
-                                            Pagos = ObtenerPagos(db, a.Id, ca.IdCurso, díasVtoPagoTermino)
-                                        })
-                                        .ToArray();
-                }
                 return result;
+            }
+        }
+
+        public CursoAlumno[] ObtenerCursosAlumnos(Alumno a)
+        {
+            using (var db = new Models.SMPorresEntities())
+            {
+                _log.Debug($"Procesando alumno {a.Id} - ciclo lectivo {_cicloLectivo}");
+                return (from ca in db.CursosAlumnos
+                        where ca.IdAlumno == a.Id &&
+                                 ca.CicloLectivo == _cicloLectivo
+                        select ca)
+                        .ToList()
+                        .Select(ca => new CursoAlumno
+                        {
+                            Id = ca.Id,
+                            IdCurso = ca.IdCurso,
+                            Curso = ca.Curso.Nombre,
+                            IdCarrera = ca.Curso.Carrera.Id,
+                            Carrera = ca.Curso.Carrera.Nombre,
+                            Pagos = ObtenerPagos(db, a.Id, ca.IdCurso, _díasVtoPagoTermino)
+                        })
+                        .ToArray();
             }
         }
 
@@ -132,19 +138,19 @@ namespace SMPorres.Repositories
             return query;
         }
 
-        public static IEnumerable<TasaMora> ObtenerTasasMora()
+        public TasaMora[] ObtenerTasasMora()
         {
             using (var db = new Models.SMPorresEntities())
             {
                 var tasas = db.TasasMora.Where(t => t.Estado == (short)Models.EstadoTasaMora.Activa).ToList();
-                return from t in tasas
+                return (from t in tasas
                        select new TasaMora
                        {
                            Desde = t.Desde,
                            Hasta = t.Hasta,
                            Tasa = t.Tasa,
                            Estado = t.Estado
-                       };
+                       }).ToArray();
             }
         }
     }

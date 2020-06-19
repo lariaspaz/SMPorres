@@ -18,6 +18,7 @@ namespace SMPorres.Forms.Web
 {
     public partial class frmActualizarDatos : FormBase
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Thread _thread;
         private volatile bool _stop = true;
 
@@ -76,19 +77,21 @@ namespace SMPorres.Forms.Web
                         {
                             break;
                         }
+                        alumno.CursosAlumnos = repo.ObtenerCursosAlumnos(alumno);
+                        _log.Debug($"Subiendo alumno {alumno.Id}");
                         if (!cliente.ActualizarDatos(alumno))
                         {
-                            XmlSerializer xsSubmit = new XmlSerializer(typeof(ConsultasWeb.Alumno));
-                            var xml = "";
-                            using (var sww = new StringWriter())
-                            {
-                                using (XmlWriter writer = XmlWriter.Create(sww))
-                                {
-                                    xsSubmit.Serialize(writer, alumno);
-                                    xml = sww.ToString(); // Your XML
-                                    File.WriteAllText(Path.ChangeExtension(Application.ExecutablePath, ".upload.xml"), xml);
-                                }
-                            }
+                            //XmlSerializer xsSubmit = new XmlSerializer(typeof(ConsultasWeb.Alumno));
+                            //var xml = "";
+                            //using (var sww = new StringWriter())
+                            //{
+                            //    using (XmlWriter writer = XmlWriter.Create(sww))
+                            //    {
+                            //        xsSubmit.Serialize(writer, alumno);
+                            //        xml = sww.ToString(); // Your XML
+                            //        File.WriteAllText(Path.ChangeExtension(Application.ExecutablePath, ".upload.xml"), xml);
+                            //    }
+                            //}
                             string s = String.Format("No se pudieron subir los datos del alumno: " +
                                 "\nNº Documento:{0}\nNombre: {1}, {2}\nID: {3}", alumno.NroDocumento,
                                 alumno.Apellido, alumno.Nombre, alumno.Id);
@@ -100,6 +103,7 @@ namespace SMPorres.Forms.Web
                     }
                     var conf = Repositories.ConfiguracionRepository.ObtenerConfiguracion();
                     cliente.ActualizarConfiguracion(conf.InteresPorMora);
+                    cliente.ActualizarTasasMora(repo.ObtenerTasasMora());
                 }
                 //catch (Exception)
                 //{
@@ -120,6 +124,7 @@ namespace SMPorres.Forms.Web
             }
             catch (Exception ex)
             {
+                _log.Error("Error al subir los datos: ", ex);
                 ShowError("Error al subir los datos:\n", ex);
             }
             finally
