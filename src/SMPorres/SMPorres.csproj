@@ -37,7 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>app2.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LAP|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -768,10 +769,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
-    <Content Include="app2.ico" />
-    <Content Include="Images\Header.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Images\Header.png" />
     <Content Include="Models\SMPorres.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SMPorres.edmx</DependentUpon>
