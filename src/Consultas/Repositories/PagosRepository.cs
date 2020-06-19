@@ -67,8 +67,8 @@ namespace Consultas.Repositories
                 {
                     var p = db.PagosWeb.Find(i.Id);
                     db.PagosWeb.Remove(p);
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
             }
         }
 

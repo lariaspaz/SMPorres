@@ -8,6 +8,8 @@ namespace Consultas.Repositories
 {
     public class AlumnosRepository
     {
+        private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public void Actualizar(Models.WebServices.Alumno alumno)
         {
             //"38F73513-C569-4C08-B9DD-BDA2A0367605"
@@ -64,6 +66,7 @@ namespace Consultas.Repositories
                 }
                 catch (Exception ex)
                 {
+                    _log.Error("Error al intentar actualizar los datos:", ex);
                     trx.Rollback();
                     throw ex;
                 }
