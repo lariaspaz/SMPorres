@@ -310,6 +310,11 @@ namespace SMPorres.Forms.Alumnos
 
         private void btnImprimirCuota_Click(object sender, EventArgs e)
         {
+            if (EsBajaPlanPago())
+            {
+                ShowError("No puede editar un plan de pago dado de baja.");
+                return;
+            }
             using (var f = new Pagos.frmInfCupónDePago(PagoSeleccionado.Id)) f.ShowDialog();
         }
 
@@ -350,6 +355,11 @@ namespace SMPorres.Forms.Alumnos
         private void btnPagarCuota_Click(object sender, EventArgs e)
         {
             var p = PagoSeleccionado;
+            if (EsBajaPlanPago())
+            {
+                ShowError("No puede editar un plan de pago dado de baja.");
+                return;
+            }
             if (p.Fecha != null)
             {
                 ShowError("La cuota ya está pagada.");
@@ -360,6 +370,13 @@ namespace SMPorres.Forms.Alumnos
                 ConsultarPlanesPago();
                 ConsultarPagos();
             }
+        }
+
+        private bool EsBajaPlanPago()
+        {
+            bool b = false;
+            b = PlanDePagoSeleccionado.Estado == (short)EstadoPlanPago.Baja;
+            return b;
         }
 
         private PlanPago PlanDePagoSeleccionado

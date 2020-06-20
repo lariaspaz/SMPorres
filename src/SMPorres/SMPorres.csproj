@@ -37,8 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>app2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LAP|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -719,6 +718,7 @@
       <LastGenOutput>SMPorres.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Compile Include="Models\Alumno.Ext.cs" />
+    <Content Include="app2.ico" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
