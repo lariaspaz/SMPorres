@@ -1,6 +1,7 @@
 ﻿using ApiInscripción.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,6 @@ namespace ApiInscripción.Repositories
         public static void Insertar(string nombre, string apellido, int idTipoDocumento, decimal nroDocumento,
             DateTime fechaNacimiento, string email, string dirección, char sexo, int idCarrera)
         {
-            _log.Debug("Insertando alumno");
             using (var db = new SMPorresEntities())
             {
                 ValidarDatos(db, nombre, apellido, idTipoDocumento, nroDocumento, fechaNacimiento,
@@ -29,9 +29,10 @@ namespace ApiInscripción.Repositories
                         email, dirección, sexo);
                     CursosAlumnosRepository.Insertar(db, idCurso, a.Id);
                     PlanesPagoRepository.Insertar(db, a.Id, idCurso);
-                    SubirAWeb(db, a.Id);
                     trx.Commit();
-                    _log.Info($"Se ha insertado el alumno {a.Id} y se han subido sus datos a la web.");
+                    _log.Info($"Se ha insertado el alumno {a.Id}.");
+                    SubirAWeb(db, a.Id);
+                    _log.Info("Se han subido los datos del alumno a la web.");
                 }
                 catch (Exception)
                 {
@@ -50,7 +51,7 @@ namespace ApiInscripción.Repositories
                 var interés = ConfiguracionRepository.ObtenerConfiguracion().InteresPorMora;
                 if (!new Lib.WebServices.Consultas().SubirAlumno(alumnoWeb, interés))
                 {
-                    throw new Exception("No se pudo actualizar el alumno en la web");
+                    throw new System.Web.HttpException("Se grabaron los datos del alumno pero no se pudo actualizar sus datos en la web.");
                 }
             }
         }
@@ -88,20 +89,19 @@ namespace ApiInscripción.Repositories
 
             if (String.IsNullOrEmpty(nombre.Trim()) || String.IsNullOrEmpty(apellido.Trim()))
             {
-                throw new Exception("El nombre y el apellido son incorrectos.");
+                throw new ValidationException("El nombre y el apellido son incorrectos.");
             }
             if (db.Alumnos.Any(a => a.IdTipoDocumento == idTipoDocumento && a.NroDocumento == nroDocumento))
             {
-                throw new Exception("Ya existe un alumno con este número de documento. "
-                    + $"[tipdoc = {idTipoDocumento}, nrodoc = {nroDocumento}]");
+                throw new ValidationException("Ya existe un alumno con este número de documento.");
             }
             if (!db.TiposDocumento.Any(td => td.Id == idTipoDocumento))
             {
-                throw new Exception("El tipo de documento es incorrecto.");
+                throw new ValidationException("El tipo de documento es incorrecto.");
             }
             if (idCarrera == 0 || !db.Carreras.Any(c => c.Id == idCarrera))
             {
-                throw new Exception("La carrera es incorrecta.");
+                throw new ValidationException("La carrera es incorrecta.");
             }
         }
 
