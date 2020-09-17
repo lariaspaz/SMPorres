@@ -554,8 +554,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <None Include="App.Debug.config" />
-    <None Include="App.JHC.config" />
     <None Include="App.Release.config" />
     <None Include="Resources\report_user.png" />
     <EmbeddedResource Include="Forms\Alumnos\frmAsignarAlumnosACursos.resx">
@@ -722,7 +720,6 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="App.LAP.config" />
     <None Include="Models\SMPorres.edmx.diagram">
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </None>

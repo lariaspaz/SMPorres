@@ -107,19 +107,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Release.config" />
     <None Include="App.config" />
-    <None Include="App.LAP.config" />
-    <None Include="Files\backup-de-base-de-datos-7a63bd05a0be.json" />
-    <None Include="Files\SMPorres.7z">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Files\IMG_20180125_113129789_HDR.jpg" />
+    <Folder Include="Files\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

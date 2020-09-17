@@ -164,18 +164,15 @@
     <Compile Include="Repositories\TasasMoraRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Debug.config" />
-    <None Include="App.JHC.config" />
-    <None Include="App.Release.config" />
     <None Include="App.config" />
     <EntityDeploy Include="Models\SMPorres.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SMPorres.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.LAP.config" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="App.Release.config" />
     <None Include="Models\SMPorres.edmx.diagram">
       <DependentUpon>SMPorres.edmx</DependentUpon>
     </None>
