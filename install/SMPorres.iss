@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "ISMP"
-#define MyAppVersion "1.4.0.0"
+#define MyAppVersion "1.4.0.1"
 #define MyAppPublisher "Instituto San Martín de Porres"
 #define MyAppURL "http://www.ismp.edu.ar"
 #define MyAppExeName "SMPorres.exe"
@@ -10,7 +10,6 @@
 #define MyAppSource "D:\Proyectos\SMPorres\src\SMPorres\bin\Release"
 #define MyAppDestino "C:\Program Files\ISMP"
 
-                                    
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
@@ -29,7 +28,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 OutputDir=D:\Proyectos\SMPorres\install\SMPorres
 OutputBaseFilename=Setup
-SetupIconFile=D:\Proyectos\SMPorres\src\SMPorres\app2.ico
+SetupIconFile=D:\Proyectos\SMPorres\img\app.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -39,12 +38,14 @@ DisableFinishedPage=yes
 [Languages]
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
-//[Tasks]
-//Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; 
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+
+[Icons]
+Name: "{autoprograms}\{#MyAppName} "; Filename: "{#MyAppDestino}\{#MyAppExeName}"
+Name: "{userdesktop}\{#MyAppName}"; Filename: "{#MyAppDestino}\{#MyAppExeName}"; Tasks: desktopicon
          
 [Files]
-;Source: "D:\Proyectos\SMPorres\src\SMPorres\bin\Debug\SMPorres.exe"; DestDir: "C:\Program Files\ISMP"; Flags: ignoreversion
-;Source: "{#MyAppSource}\SMPorres.exe"; DestDir: "C:\Program Files\ISMP"; Flags: ignoreversion
 Source: "{#MyAppSource}\SMPorres.exe"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
 Source: "{#MyAppSource}\CrystalDecisions.CrystalReports.Engine.dll"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
 Source: "{#MyAppSource}\CrystalDecisions.ReportAppServer.ClientDoc.dll"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
@@ -74,19 +75,7 @@ Source: "{#MyAppSource}\log4net.xml"; DestDir: "{#MyAppDestino}"; Flags: ignorev
 Source: "{#MyAppSource}\ShockwaveFlashObjects.dll"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
 Source: "{#MyAppSource}\SMPorres.exe"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
 Source: "{#MyAppSource}\SMPorres.exe.config"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
-Source: "{#MyAppSource}\SMPorres.pdb"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
-;Source: "{#MyAppSource}\SMPorres.upload.xml"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
-Source: "{#MyAppSource}\SMPorres.vshost.exe"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
-Source: "{#MyAppSource}\SMPorres.vshost.exe.config"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
-;Source: "{#MyAppSource}\SMPorres.vshost.exe.manifest"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
 Source: "{#MyAppSource}\stdole.dll"; DestDir: "{#MyAppDestino}"; Flags: ignoreversion
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-
-//[Icons]
-;Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-;Name: "{autoprograms}\{#MyAppName}"; Filename: "{#MyAppDestino}\{#MyAppExeName}"
-;Name: "{autodesktop}\{#MyAppName}"; Filename: "{#MyAppDestino}\{#MyAppExeName}"; 
-//Tasks: desktopicon
 
 [Code]
 function GetNumber(var temp: String): Integer;
@@ -191,6 +180,6 @@ begin
  end;  
 end;
 
-//[Registry]
-//Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "Mi_Programa"; ValueData: "{app}\Programa.exe";
-//Root: HKLM; Subkey: "HKEY_LOCAL_MACHINE\\SOFTWARE\\SMP"; ValueType: string; ValueName: "Cs"; ValueData: "tg9zuyIT7AfhuZ5AyFPzCsQHjYPeBmAsCVy4FD6OAmQ1Qhvbj3To8pXb07VdoF3mt0QHrfzmPB+VUL72vXwnZ3gJbJYlf7yn7QWZipifM7vuMP60ZyBuLU+3AWzgcnIUUFi6VA5HIYDuN3LTeqBp6UdXgLQavmOeCqrP+DoVq1odSH6ZGoWk4SaG+/eYFQ4iGuTekj2B+1wAk2sLSym/1L0sBGqSEaX8E1MBHmkbGywbdUe9sJvXnQPt9uVefU8K";
+[Registry]
+;instituto
+Root: HKLM; Subkey: "Software\SMP"; ValueType: string; ValueName: "Cs"; ValueData: "8/Q+w70dFzrQGTDXyJJocSyIpxlE8HNEBI6f2e41akPSEwzOlfrFnjEXwuRi0y0rOGEU4ve6+qR0Ag39fwDEQQYXusKtp1L9W539Dz/KvDILD8rvVoCxDffQi/bdngTD0mDmG7UmDl9DESfC6XCnLcAQj1uL8QWIf0wd813YZ7TsiZ5FJc54KeGBQR4W/f6cVOlUoI5jMgIkJToqiOedGB5yqo+j17yPKAZRsJwKNUIvnXFFhNVtojeflA4g3tXQzT6194Eqdh+gVQD2ay4c+DubeTCAgUtSw/LFD+Fbp7M=";
