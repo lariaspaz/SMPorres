@@ -474,6 +474,10 @@ namespace SMPorres.Repositories
                 p.IdPlanPago = idPlanPago;
                 p.NroCuota = (short)i;
                 p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                var vto = (from c in CuotasRepository.ObtenerCuotasActuales()
+                           where c.NroCuota == Convert.ToInt16(i)
+                           select c.VtoCuota).First();
+                p.FechaVto = vto;
                 p.Estado = (byte)EstadoPago.Impago;
                 db.Pagos.Add(p);
                 db.SaveChanges();
