@@ -25,5 +25,11 @@ namespace ApiInscripción.Repositories
                 return query.OrderBy(c => c.NroCuota).ToList();
             }
         }
+
+        public static IList<Cuota> ObtenerCuotasActuales()
+        {
+            var cl = ConfiguracionRepository.ObtenerConfiguracion().CicloLectivo;
+            return ObtenerCuotas().Where(c => c.CicloLectivo == cl).ToList();
+        }
     }
 }

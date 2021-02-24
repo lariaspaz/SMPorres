@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d61c105b105343f0bf196441432c4baa" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="SMPorres_DevModel.Alumno" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SMPorres_DevModel.Carrera" Width="1.5" PointX="7.875" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMPorres_DevModel.Carrera" Width="1.5" PointX="7.875" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Cuota" Width="1.5" PointX="7.875" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPorres_DevModel.CursosAlumno" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SMPorres_DevModel.Pago" Width="1.5" PointX="5.5" PointY="5.125" IsExpanded="true" />

@@ -72,6 +72,10 @@ namespace ApiInscripción.Repositories
                 //leer modalidad y obtener minCuota y maxCuota
                 short minC = CursosRepository.ObtieneMinCuota(curso.Modalidad);
                 short maxC = CursosRepository.ObtieneMaxCuota(curso.Modalidad);
+
+                var cuotas = from c in CuotasRepository.ObtenerCuotasActuales()
+                             select new { c.NroCuota, c.VtoCuota };
+
                 if (minC != maxC)
                 {
                     //for (short i = 0; i <= Configuration.MaxCuotas; i++)
@@ -83,6 +87,7 @@ namespace ApiInscripción.Repositories
                         p.NroCuota = i;
                         p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
                         pm.Estado = (short)EstadoPago.Impago;
+                        p.FechaVto = cuotas.First(c => c.NroCuota == i).VtoCuota;
                         db.Pagos.Add(p);
                         db.SaveChanges();
                     }
