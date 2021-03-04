@@ -452,7 +452,7 @@
           <Property Name="ImporteBeca" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaVto" Type="DateTime" Precision="3" />
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Int16" Nullable="true" />
+          <Property Name="Estado" Type="Byte" Nullable="true" />
           <NavigationProperty Name="Pagos1" Relationship="Self.FK_Pagos_Pagos" FromRole="Pagos" ToRole="Pagos1" />
           <NavigationProperty Name="Pagos2" Relationship="Self.FK_Pagos_Pagos" FromRole="Pagos1" ToRole="Pagos" />
           <NavigationProperty Name="PlanPago" Relationship="Self.FK_Pagos_PlanesPago" FromRole="Pagos" ToRole="PlanesPago" />

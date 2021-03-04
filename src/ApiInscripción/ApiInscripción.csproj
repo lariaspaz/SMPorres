@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -163,6 +164,7 @@
     <Compile Include="Lib\Security\Authentication\BasicAuthenticationIdentity.cs" />
     <Compile Include="Lib\Security\Authentication\JwtManager.cs" />
     <Compile Include="Lib\Security\Cryptography.cs" />
+    <Compile Include="Lib\Security\StringCipher.cs" />
     <Compile Include="Lib\Session.cs" />
     <Compile Include="Lib\WebServices\Consultas.cs" />
     <Compile Include="Models\Alumno.cs">
@@ -211,6 +213,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SMPModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SMPorres.Ext.cs" />
     <Compile Include="Models\TipoBeca.cs" />
     <Compile Include="Models\TipoDocumento.cs">
       <DependentUpon>SMPModel.tt</DependentUpon>

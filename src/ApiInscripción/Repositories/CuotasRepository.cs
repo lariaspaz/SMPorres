@@ -20,7 +20,8 @@ namespace ApiInscripción.Repositories
                                     {
                                         Id = c.Id,
                                         NroCuota = c.NroCuota,
-                                        VtoCuota = c.VtoCuota
+                                        VtoCuota = c.VtoCuota,
+                                        CicloLectivo = c.CicloLectivo
                                     });
                 return query.OrderBy(c => c.NroCuota).ToList();
             }

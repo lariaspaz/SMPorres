@@ -65,7 +65,8 @@ namespace ApiInscripción.Repositories
                 pm.IdPlanPago = id;
                 pm.NroCuota = 0;
                 pm.ImporteCuota = curso.ImporteMatricula;
-                pm.Estado = (short)EstadoPago.Impago;
+                pm.Estado = (byte)EstadoPago.Impago;
+                pm.FechaVto = DateTime.Now.AddDays(7).Date;
                 db.Pagos.Add(pm);
                 db.SaveChanges();
 
@@ -75,7 +76,7 @@ namespace ApiInscripción.Repositories
 
                 var cuotas = from c in CuotasRepository.ObtenerCuotasActuales()
                              select new { c.NroCuota, c.VtoCuota };
-
+                
                 if (minC != maxC)
                 {
                     //for (short i = 0; i <= Configuration.MaxCuotas; i++)
@@ -86,7 +87,7 @@ namespace ApiInscripción.Repositories
                         p.IdPlanPago = id;
                         p.NroCuota = i;
                         p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
-                        pm.Estado = (short)EstadoPago.Impago;
+                        pm.Estado = (byte)EstadoPago.Impago;
                         p.FechaVto = cuotas.First(c => c.NroCuota == i).VtoCuota;
                         db.Pagos.Add(p);
                         db.SaveChanges();
