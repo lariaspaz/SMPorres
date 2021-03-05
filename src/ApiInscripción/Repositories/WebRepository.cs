@@ -65,10 +65,11 @@ namespace ApiInscripción.Repositories
         private ConsultasWeb.Pago[] ObtenerPagos(SMPorresEntities db, int idAlumno, int idCurso, int díasVtoPagoTermino)
         {
             _log.Debug("Obteniendo pagos");
+            var cuotasActuales = CuotasRepository.ObtenerCuotasActuales();
             var query = (from pp in db.PlanesPago
                          join p in db.Pagos on pp.Id equals p.IdPlanPago
-                         join c in db.Cuotas on p.NroCuota equals c.NroCuota into pc
-                         from c in pc.DefaultIfEmpty()
+                         //join c in cuotasActuales on p.NroCuota equals c.NroCuota into pc
+                         //from c in pc.DefaultIfEmpty()
                          join ca in db.CursosAlumnos on new { pp.IdAlumno, pp.IdCurso } equals new { ca.IdAlumno, ca.IdCurso } into ca2
                          where pp.IdAlumno == idAlumno && pp.IdCurso == idCurso //&& p.Fecha != null
                          select new
@@ -76,8 +77,9 @@ namespace ApiInscripción.Repositories
                              p.Id,
                              p.IdPlanPago,
                              p.NroCuota,
-                             Cuota = c,
+                             //Cuota = c,
                              CursoAlumno = ca2.FirstOrDefault(),
+                             p.FechaVto,
                              p.Fecha,
                              p.ImporteCuota,
                              p.ImporteBeca,
@@ -92,7 +94,8 @@ namespace ApiInscripción.Repositories
                                 Id = p.Id,
                                 IdPlanPago = p.IdPlanPago,
                                 NroCuota = p.NroCuota,
-                                FechaVto = (p.Cuota == null) ? new DateTime(p.CursoAlumno.CicloLectivo, 12, 31) : p.Cuota.VtoCuota,
+                                //FechaVto = (p.Cuota == null) ? new DateTime(p.CursoAlumno.CicloLectivo, 12, 31) : p.Cuota.VtoCuota,
+                                FechaVto = p.FechaVto ?? default(DateTime),
                                 Fecha = p.Fecha ?? default(DateTime),
                                 ImporteCuota = p.ImporteCuota,
                                 ImporteBeca = p.ImporteBeca ?? 0,
