@@ -41,7 +41,7 @@ namespace ApiInscripción.Models
         public Nullable<decimal> ImporteBeca { get; set; }
         public Nullable<System.DateTime> FechaVto { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<short> Estado { get; set; }
+        public Nullable<byte> Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pagos1 { get; set; }

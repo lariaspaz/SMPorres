@@ -59,35 +59,10 @@ namespace ApiInscripción.Repositories
             {
                 db.PlanesPago.Add(plan);
                 db.SaveChanges();
-                //carga cuota matricula
-                var pm = new Pago();
-                pm.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
-                pm.IdPlanPago = id;
-                pm.NroCuota = 0;
-                pm.ImporteCuota = curso.ImporteMatricula;
-                pm.Estado = (short)EstadoPago.Impago;
-                db.Pagos.Add(pm);
-                db.SaveChanges();
 
-                //leer modalidad y obtener minCuota y maxCuota
-                short minC = CursosRepository.ObtieneMinCuota(curso.Modalidad);
-                short maxC = CursosRepository.ObtieneMaxCuota(curso.Modalidad);
-                if (minC != maxC)
-                {
-                    //for (short i = 0; i <= Configuration.MaxCuotas; i++)
-                    for (short i = minC; i <= maxC; i++)
-                    {
-                        var p = new Pago();
-                        p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
-                        p.IdPlanPago = id;
-                        p.NroCuota = i;
-                        p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
-                        pm.Estado = (short)EstadoPago.Impago;
-                        db.Pagos.Add(p);
-                        db.SaveChanges();
-                    }
-                }
-                //trx.Commit();
+                PagosRepository.InsertarMatricula(db, curso, id);
+                
+                PagosRepository.InsertarPagosCuotas(db, curso, id);
             }
             catch (Exception ex)
             {
@@ -97,5 +72,7 @@ namespace ApiInscripción.Repositories
             }
             return plan;
         }
+
+        
     }
 }

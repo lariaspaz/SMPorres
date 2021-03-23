@@ -32,6 +32,7 @@ namespace ApiInscripción.Repositories
             return p;
         }
 
+       
         public Pago ObtenerDetallePago(int idPago, DateTime fechaCompromiso)
         {
             Pago pago = ObtenerPago(idPago);
@@ -132,5 +133,44 @@ namespace ApiInscripción.Repositories
             return pago;
         }
 
+        internal static void InsertarMatricula(SMPorresEntities db, Curso curso, int idPlanPago)
+        {
+            //carga cuota matricula
+            var pm = new Pago();
+            pm.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+            pm.IdPlanPago = idPlanPago;
+            pm.NroCuota = 0;
+            pm.ImporteCuota = curso.ImporteMatricula;
+            pm.Estado = (byte)EstadoPago.Impago;
+            pm.FechaVto = DateTime.Now.AddDays(1).Date;
+            db.Pagos.Add(pm);
+            db.SaveChanges();
+        }
+
+        public static void InsertarPagosCuotas(SMPorresEntities db, Curso curso, int id)
+        {
+            short minC = CursosRepository.ObtieneMinCuota(curso.Modalidad);
+            short maxC = CursosRepository.ObtieneMaxCuota(curso.Modalidad);
+
+            var cuotas = from c in CuotasRepository.ObtenerCuotasActuales()
+                         select new { c.NroCuota, c.VtoCuota };
+
+            if (minC != maxC)
+            {
+                //for (short i = 0; i <= Configuration.MaxCuotas; i++)
+                for (short i = minC; i <= maxC; i++)
+                {
+                    var p = new Pago();
+                    p.Id = db.Pagos.Any() ? db.Pagos.Max(p1 => p1.Id) + 1 : 1;
+                    p.IdPlanPago = id;
+                    p.NroCuota = i;
+                    p.ImporteCuota = (i == 0) ? curso.ImporteMatricula : curso.ImporteCuota;
+                    p.Estado = (byte)EstadoPago.Impago;
+                    p.FechaVto = cuotas.First(c => c.NroCuota == i).VtoCuota;
+                    db.Pagos.Add(p);
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }
