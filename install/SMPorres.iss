@@ -184,4 +184,6 @@ end;
 
 [Registry]
 ;instituto
-Root: HKLM; Subkey: "Software\SMP"; ValueType: string; ValueName: "Cs"; ValueData: "8/Q+w70dFzrQGTDXyJJocSyIpxlE8HNEBI6f2e41akPSEwzOlfrFnjEXwuRi0y0rOGEU4ve6+qR0Ag39fwDEQQYXusKtp1L9W539Dz/KvDILD8rvVoCxDffQi/bdngTD0mDmG7UmDl9DESfC6XCnLcAQj1uL8QWIf0wd813YZ7TsiZ5FJc54KeGBQR4W/f6cVOlUoI5jMgIkJToqiOedGB5yqo+j17yPKAZRsJwKNUIvnXFFhNVtojeflA4g3tXQzT6194Eqdh+gVQD2ay4c+DubeTCAgUtSw/LFD+Fbp7M=";
+;Root: HKLM; Subkey: "Software\SMP"; ValueType: string; ValueName: "Cs"; ValueData: "8/Q+w70dFzrQGTDXyJJocSyIpxlE8HNEBI6f2e41akPSEwzOlfrFnjEXwuRi0y0rOGEU4ve6+qR0Ag39fwDEQQYXusKtp1L9W539Dz/KvDILD8rvVoCxDffQi/bdngTD0mDmG7UmDl9DESfC6XCnLcAQj1uL8QWIf0wd813YZ7TsiZ5FJc54KeGBQR4W/f6cVOlUoI5jMgIkJToqiOedGB5yqo+j17yPKAZRsJwKNUIvnXFFhNVtojeflA4g3tXQzT6194Eqdh+gVQD2ay4c+DubeTCAgUtSw/LFD+Fbp7M=";
+;LatinCloud
+Root: HKLM; Subkey: "Software\SMP"; ValueType: string; ValueName: "Cs"; ValueData: "2ROHZ1ESbmrxG/dQKvTeQ3lpoT9+E9NCxFp4/t+VhwKwg1r2mYAhr/yr/W2+cE+dDCWpNwItMZIOfZjZc0ZPGrV5GrcDpHd+ovJI0Atd0s9F6/dMFJ1SVI3ZFXHOBc/0RPtj24supgGFkj+h3uo99LASMO2awHch815QJhwPZtH1VaQyURMlUo+1ckCa5jFDyXXjDWY3285gN/D1qhaemZ0HB77PMxdVkOerrwyuBNaXzh/AY0gF/2wwtip/ofn1P+RycF6bp2W7i09vmYKEupo0cyzBeP611+/9KrRFtXc=";
