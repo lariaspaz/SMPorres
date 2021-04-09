@@ -27,19 +27,13 @@ namespace Consultas.Web_Services
         {
             try
             {
+                _log.Info("Datos: " + JsonConvert.SerializeObject(alumno, Formatting.Indented));
                 new AlumnosRepository().Actualizar(alumno);
                 return true;
             }
             catch (Exception ex)
             {
-                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
-                //        ex.StackTrace + Environment.NewLine +
-                //        "Datos ========================" + Environment.NewLine +
-                //        JsonConvert.SerializeObject(alumno, Formatting.Indented) + 
-                //        Environment.NewLine;
-                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
                 _log.Error(ex);
-                _log.Info("Datos: " + JsonConvert.SerializeObject(alumno, Formatting.Indented));
                 return false;
                 throw ex;
             }
@@ -55,10 +49,6 @@ namespace Consultas.Web_Services
             }
             catch (Exception ex)
             {
-                //var s = DateTime.Now.ToString() + " - " + ex.ToString() + Environment.NewLine +
-                //        "Datos ========================" + Environment.NewLine +
-                //        JsonConvert.SerializeObject(interésPorMora, Formatting.Indented);
-                //System.IO.File.AppendAllText(Server.MapPath("~") + @"\datos.txt", s);
                 _log.Error(ex);
                 _log.Info("interésPorMora = " + interésPorMora);
                 return false;
