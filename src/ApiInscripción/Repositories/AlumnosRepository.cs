@@ -21,23 +21,31 @@ namespace ApiInscripción.Repositories
                 ValidarDatos(db, nombre, apellido, idTipoDocumento, nroDocumento, fechaNacimiento,
                     email, dirección, sexo, idCarrera);
                 var idCurso = CursosRepository.ObtenerCursoInicial(idCarrera);
-
+                Alumno a;
                 var trx = db.Database.BeginTransaction();
                 try
                 {
-                    Alumno a = GrabarAlumno(db, nombre, apellido, idTipoDocumento, nroDocumento, fechaNacimiento,
+                    a = GrabarAlumno(db, nombre, apellido, idTipoDocumento, nroDocumento, fechaNacimiento,
                         email, dirección, sexo);
                     CursosAlumnosRepository.Insertar(db, idCurso, a.Id);
                     PlanesPagoRepository.Insertar(db, a.Id, idCurso);
                     trx.Commit();
                     _log.Info($"Se ha insertado el alumno {a.Id}.");
+                }
+                catch (Exception ex)
+                {
+                    trx.Rollback();
+                    throw new Exception("Error al grabar la inscripción.", ex);
+                }
+
+                try
+                {
                     SubirAWeb(db, a.Id);
                     _log.Info("Se han subido los datos del alumno a la web.");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    trx.Rollback();
-                    throw;
+                    throw new Exception("Error al subir los datos a la web.", ex);
                 }
             }
         }
